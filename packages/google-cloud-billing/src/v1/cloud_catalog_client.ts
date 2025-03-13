@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class CloudCatalogClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('billing');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class CloudCatalogClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -487,11 +490,37 @@ export class CloudCatalogClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListServicesRequest,
+          | protos.google.cloud.billing.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.billing.v1.IService[],
+          protos.google.cloud.billing.v1.IListServicesRequest | null,
+          protos.google.cloud.billing.v1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listServices`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
@@ -522,6 +551,7 @@ export class CloudCatalogClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -564,6 +594,7 @@ export class CloudCatalogClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -678,11 +709,35 @@ export class CloudCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSkus(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListSkusRequest,
+          protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+          protos.google.cloud.billing.v1.ISku
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSkus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSkus request %j', request);
+    return this.innerApiCalls
+      .listSkus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.billing.v1.ISku[],
+          protos.google.cloud.billing.v1.IListSkusRequest | null,
+          protos.google.cloud.billing.v1.IListSkusResponse,
+        ]) => {
+          this._log.info('listSkus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSkus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -738,6 +793,7 @@ export class CloudCatalogClient {
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkus stream %j', request);
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as GaxCall,
       request,
@@ -805,6 +861,7 @@ export class CloudCatalogClient {
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkus iterate %j', request);
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
       request as {},
@@ -977,6 +1034,7 @@ export class CloudCatalogClient {
   close(): Promise<void> {
     if (this.cloudCatalogStub && !this._terminated) {
       return this.cloudCatalogStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

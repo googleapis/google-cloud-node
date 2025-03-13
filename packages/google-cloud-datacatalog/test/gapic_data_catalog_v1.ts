@@ -350,7 +350,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryGroup()
       );
@@ -381,7 +381,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryGroup()
       );
@@ -428,7 +428,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntryGroup = stubSimpleCall(
         undefined,
@@ -480,7 +480,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryGroup()
       );
@@ -511,7 +511,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryGroup()
       );
@@ -558,7 +558,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntryGroup = stubSimpleCall(
         undefined,
@@ -611,7 +611,7 @@ describe('v1.DataCatalogClient', () => {
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryGroup()
       );
@@ -643,7 +643,7 @@ describe('v1.DataCatalogClient', () => {
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryGroup()
       );
@@ -691,7 +691,7 @@ describe('v1.DataCatalogClient', () => {
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
-      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntryGroup = stubSimpleCall(
         undefined,
@@ -744,7 +744,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -775,7 +775,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -822,7 +822,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntryGroup = stubSimpleCall(
         undefined,
@@ -874,7 +874,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Entry()
       );
@@ -905,7 +905,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Entry()
       );
@@ -952,7 +952,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntry = stubSimpleCall(
         undefined,
@@ -1005,7 +1005,7 @@ describe('v1.DataCatalogClient', () => {
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
-      const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Entry()
       );
@@ -1037,7 +1037,7 @@ describe('v1.DataCatalogClient', () => {
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
-      const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Entry()
       );
@@ -1085,7 +1085,7 @@ describe('v1.DataCatalogClient', () => {
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
-      const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entry.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntry = stubSimpleCall(
         undefined,
@@ -1138,7 +1138,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1169,7 +1169,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1216,7 +1216,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntry = stubSimpleCall(
         undefined,
@@ -1268,7 +1268,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Entry()
       );
@@ -1299,7 +1299,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Entry()
       );
@@ -1346,7 +1346,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntry = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getEntry(request), expectedError);
@@ -1478,7 +1478,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryOverview()
       );
@@ -1510,7 +1510,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.EntryOverview()
       );
@@ -1557,7 +1557,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.modifyEntryOverview = stubSimpleCall(
         undefined,
@@ -1609,7 +1609,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Contacts()
       );
@@ -1641,7 +1641,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Contacts()
       );
@@ -1688,7 +1688,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.modifyEntryContacts = stubSimpleCall(
         undefined,
@@ -1740,7 +1740,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplate()
       );
@@ -1771,7 +1771,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplate()
       );
@@ -1818,7 +1818,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagTemplate = stubSimpleCall(
         undefined,
@@ -1870,7 +1870,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplate()
       );
@@ -1901,7 +1901,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplate()
       );
@@ -1948,7 +1948,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTagTemplate = stubSimpleCall(
         undefined,
@@ -2001,7 +2001,7 @@ describe('v1.DataCatalogClient', () => {
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplate()
       );
@@ -2033,7 +2033,7 @@ describe('v1.DataCatalogClient', () => {
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplate()
       );
@@ -2081,7 +2081,7 @@ describe('v1.DataCatalogClient', () => {
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTagTemplate = stubSimpleCall(
         undefined,
@@ -2134,7 +2134,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2165,7 +2165,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2212,7 +2212,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTagTemplate = stubSimpleCall(
         undefined,
@@ -2264,7 +2264,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2296,7 +2296,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2343,7 +2343,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagTemplateField = stubSimpleCall(
         undefined,
@@ -2401,7 +2401,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2433,7 +2433,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2480,7 +2480,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTagTemplateField = stubSimpleCall(
         undefined,
@@ -2538,7 +2538,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2570,7 +2570,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2617,7 +2617,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameTagTemplateField = stubSimpleCall(
         undefined,
@@ -2675,7 +2675,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2707,7 +2707,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.TagTemplateField()
       );
@@ -2754,7 +2754,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameTagTemplateFieldEnumValue = stubSimpleCall(
         undefined,
@@ -2812,7 +2812,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2844,7 +2844,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2891,7 +2891,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTagTemplateField = stubSimpleCall(
         undefined,
@@ -2949,7 +2949,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Tag()
       );
@@ -2980,7 +2980,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Tag()
       );
@@ -3027,7 +3027,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createTag(request), expectedError);
@@ -3077,7 +3077,7 @@ describe('v1.DataCatalogClient', () => {
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Tag()
       );
@@ -3109,7 +3109,7 @@ describe('v1.DataCatalogClient', () => {
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.Tag()
       );
@@ -3157,7 +3157,7 @@ describe('v1.DataCatalogClient', () => {
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
-      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateTag(request), expectedError);
@@ -3207,7 +3207,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3238,7 +3238,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3285,7 +3285,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteTag(request), expectedError);
@@ -3334,7 +3334,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.StarEntryResponse()
       );
@@ -3365,7 +3365,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.StarEntryResponse()
       );
@@ -3412,7 +3412,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.starEntry = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.starEntry(request), expectedError);
@@ -3461,7 +3461,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.UnstarEntryResponse()
       );
@@ -3492,7 +3492,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.UnstarEntryResponse()
       );
@@ -3539,7 +3539,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unstarEntry = stubSimpleCall(
         undefined,
@@ -3591,7 +3591,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3622,7 +3622,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3669,7 +3669,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -3721,7 +3721,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3752,7 +3752,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -3799,7 +3799,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -3851,7 +3851,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3883,7 +3883,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3930,7 +3930,7 @@ describe('v1.DataCatalogClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -3982,7 +3982,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.MigrationConfig()
       );
@@ -4013,7 +4013,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.MigrationConfig()
       );
@@ -4060,7 +4060,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setConfig = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setConfig(request), expectedError);
@@ -4109,7 +4109,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.OrganizationConfig()
       );
@@ -4140,7 +4140,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.OrganizationConfig()
       );
@@ -4187,7 +4187,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveConfig = stubSimpleCall(
         undefined,
@@ -4239,7 +4239,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.MigrationConfig()
       );
@@ -4271,7 +4271,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.MigrationConfig()
       );
@@ -4318,7 +4318,7 @@ describe('v1.DataCatalogClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retrieveEffectiveConfig = stubSimpleCall(
         undefined,
@@ -4376,7 +4376,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4409,7 +4409,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4463,7 +4463,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconcileTags = stubLongRunningCall(
         undefined,
@@ -4494,7 +4494,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconcileTags = stubLongRunningCall(
         undefined,
@@ -4570,7 +4570,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4603,7 +4603,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4657,7 +4657,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importEntries = stubLongRunningCall(
         undefined,
@@ -4688,7 +4688,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importEntries = stubLongRunningCall(
         undefined,
@@ -5005,7 +5005,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1.EntryGroup()
@@ -5044,7 +5044,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1.EntryGroup()
@@ -5099,7 +5099,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntryGroups = stubSimpleCall(
         undefined,
@@ -5130,7 +5130,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1.EntryGroup()
@@ -5190,7 +5190,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntryGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5239,7 +5239,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1.EntryGroup()
@@ -5288,7 +5288,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntryGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5330,7 +5330,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
@@ -5363,7 +5363,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
@@ -5412,7 +5412,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntries = stubSimpleCall(
         undefined,
@@ -5443,7 +5443,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
@@ -5497,7 +5497,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntries.createStream = stubPageStreamingCall(
         undefined,
@@ -5548,7 +5548,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
@@ -5591,7 +5591,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntries.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5635,7 +5635,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
@@ -5668,7 +5668,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
@@ -5717,7 +5717,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTags = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTags(request), expectedError);
@@ -5745,7 +5745,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
@@ -5799,7 +5799,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTags.createStream = stubPageStreamingCall(
         undefined,
@@ -5850,7 +5850,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
         generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
@@ -5892,7 +5892,7 @@ describe('v1.DataCatalogClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTags.asyncIterate = stubAsyncIterationCall(
         undefined,

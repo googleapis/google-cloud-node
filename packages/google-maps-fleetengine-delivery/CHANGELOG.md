@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-delivery-v0.2.0...fleetengine-delivery-v0.3.0) (2025-02-28)
+
+
+### Features
+
+* [fleetengine-delivery] A new field `past_locations` is added to message `.maps.fleetengine.delivery.v1.DeliveryVehicle` ([#6064](https://github.com/googleapis/google-cloud-node/issues/6064)) ([48190a2](https://github.com/googleapis/google-cloud-node/commit/48190a2219978f1ddf29776a40f069fc235e0476))
+* [fleetengine-delivery] Added Fleet Engine Delete APIs ([#6081](https://github.com/googleapis/google-cloud-node/issues/6081)) ([07a6a9a](https://github.com/googleapis/google-cloud-node/commit/07a6a9a97c625ab8aeeccd991e45d4c8ac6abf0f))
+* A new field `past_locations` is added to message `.maps.fleetengine.v1.Vehicle` ([48190a2](https://github.com/googleapis/google-cloud-node/commit/48190a2219978f1ddf29776a40f069fc235e0476))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-delivery-v0.1.0...fleetengine-delivery-v0.2.0) (2025-01-16)
 
 

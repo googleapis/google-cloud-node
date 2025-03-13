@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -783,4 +783,49 @@ message DataQualityScanRuleResult {
   // The number of rows returned by the SQL statement in a SQL assertion rule.
   // This field is only valid for SQL assertion rules.
   int64 assertion_row_count = 13;
+}
+
+// Payload associated with Business Glossary related log events.
+message BusinessGlossaryEvent {
+  // Type of glossary log event.
+  enum EventType {
+    // An unspecified event type.
+    EVENT_TYPE_UNSPECIFIED = 0;
+
+    // Glossary create event.
+    GLOSSARY_CREATE = 1;
+
+    // Glossary update event.
+    GLOSSARY_UPDATE = 2;
+
+    // Glossary delete event.
+    GLOSSARY_DELETE = 3;
+
+    // Glossary category create event.
+    GLOSSARY_CATEGORY_CREATE = 4;
+
+    // Glossary category update event.
+    GLOSSARY_CATEGORY_UPDATE = 5;
+
+    // Glossary category delete event.
+    GLOSSARY_CATEGORY_DELETE = 6;
+
+    // Glossary term create event.
+    GLOSSARY_TERM_CREATE = 7;
+
+    // Glossary term update event.
+    GLOSSARY_TERM_UPDATE = 8;
+
+    // Glossary term delete event.
+    GLOSSARY_TERM_DELETE = 9;
+  }
+
+  // The log message.
+  string message = 1;
+
+  // The type of the event.
+  EventType event_type = 2;
+
+  // Name of the resource.
+  string resource = 3;
 }

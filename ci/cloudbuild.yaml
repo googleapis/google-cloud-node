@@ -18,7 +18,7 @@ options:
 substitutions:
   _BUILD_TYPE: "presubmit"
   _TEST_TYPE: "system"
-  _NODE_VERSION: "16"
+  _NODE_VERSION: "18"
   _REPO_OWNER: "googleapis"
   _REPO_NAME: "google-cloud-node"
 

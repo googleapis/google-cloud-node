@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class GatewayControlClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gke-connect-gateway');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -84,7 +87,7 @@ export class GatewayControlClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -133,6 +136,12 @@ export class GatewayControlClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
+    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
+    if (!opts) {
+      opts = {fallback: true};
+    } else {
+      opts.fallback = opts.fallback ?? true;
+    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -467,7 +476,36 @@ export class GatewayControlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateCredentials(request, options, callback);
+    this._log.info('generateCredentials request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+          | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateCredentials response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateCredentials(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse,
+          (
+            | protos.google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateCredentials response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -479,6 +517,7 @@ export class GatewayControlClient {
   close(): Promise<void> {
     if (this.gatewayControlStub && !this._terminated) {
       return this.gatewayControlStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

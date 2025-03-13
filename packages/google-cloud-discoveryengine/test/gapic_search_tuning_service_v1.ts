@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -339,7 +339,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListCustomModelsResponse()
       );
@@ -372,7 +372,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1.ListCustomModelsResponse()
       );
@@ -421,7 +421,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomModels = stubSimpleCall(
         undefined,
@@ -477,7 +477,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -512,7 +512,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -568,7 +568,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.trainCustomModel = stubLongRunningCall(
         undefined,
@@ -601,7 +601,7 @@ describe('v1.SearchTuningServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.trainCustomModel = stubLongRunningCall(
         undefined,

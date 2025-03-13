@@ -5,7 +5,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-dns",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js",

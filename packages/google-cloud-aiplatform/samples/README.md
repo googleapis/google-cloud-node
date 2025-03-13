@@ -97,6 +97,11 @@
   * [Featurestore_service.update_entity_type](#featurestore_service.update_entity_type)
   * [Featurestore_service.update_feature](#featurestore_service.update_feature)
   * [Featurestore_service.update_featurestore](#featurestore_service.update_featurestore)
+  * [Gen_ai_cache_service.create_cached_content](#gen_ai_cache_service.create_cached_content)
+  * [Gen_ai_cache_service.delete_cached_content](#gen_ai_cache_service.delete_cached_content)
+  * [Gen_ai_cache_service.get_cached_content](#gen_ai_cache_service.get_cached_content)
+  * [Gen_ai_cache_service.list_cached_contents](#gen_ai_cache_service.list_cached_contents)
+  * [Gen_ai_cache_service.update_cached_content](#gen_ai_cache_service.update_cached_content)
   * [Gen_ai_tuning_service.cancel_tuning_job](#gen_ai_tuning_service.cancel_tuning_job)
   * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
   * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
@@ -203,6 +208,7 @@
   * [Model_service.import_model_evaluation](#model_service.import_model_evaluation)
   * [Model_service.list_model_evaluation_slices](#model_service.list_model_evaluation_slices)
   * [Model_service.list_model_evaluations](#model_service.list_model_evaluations)
+  * [Model_service.list_model_version_checkpoints](#model_service.list_model_version_checkpoints)
   * [Model_service.list_model_versions](#model_service.list_model_versions)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
@@ -256,6 +262,13 @@
   * [Prediction_service.stream_raw_predict](#prediction_service.stream_raw_predict)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
+  * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
+  * [Reasoning_engine_execution_service.stream_query_reasoning_engine](#reasoning_engine_execution_service.stream_query_reasoning_engine)
+  * [Reasoning_engine_service.create_reasoning_engine](#reasoning_engine_service.create_reasoning_engine)
+  * [Reasoning_engine_service.delete_reasoning_engine](#reasoning_engine_service.delete_reasoning_engine)
+  * [Reasoning_engine_service.get_reasoning_engine](#reasoning_engine_service.get_reasoning_engine)
+  * [Reasoning_engine_service.list_reasoning_engines](#reasoning_engine_service.list_reasoning_engines)
+  * [Reasoning_engine_service.update_reasoning_engine](#reasoning_engine_service.update_reasoning_engine)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
   * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
   * [Schedule_service.get_schedule](#schedule_service.get_schedule)
@@ -298,6 +311,19 @@
   * [Tensorboard_service.update_tensorboard_time_series](#tensorboard_service.update_tensorboard_time_series)
   * [Tensorboard_service.write_tensorboard_experiment_data](#tensorboard_service.write_tensorboard_experiment_data)
   * [Tensorboard_service.write_tensorboard_run_data](#tensorboard_service.write_tensorboard_run_data)
+  * [Vertex_rag_data_service.create_rag_corpus](#vertex_rag_data_service.create_rag_corpus)
+  * [Vertex_rag_data_service.delete_rag_corpus](#vertex_rag_data_service.delete_rag_corpus)
+  * [Vertex_rag_data_service.delete_rag_file](#vertex_rag_data_service.delete_rag_file)
+  * [Vertex_rag_data_service.get_rag_corpus](#vertex_rag_data_service.get_rag_corpus)
+  * [Vertex_rag_data_service.get_rag_file](#vertex_rag_data_service.get_rag_file)
+  * [Vertex_rag_data_service.import_rag_files](#vertex_rag_data_service.import_rag_files)
+  * [Vertex_rag_data_service.list_rag_corpora](#vertex_rag_data_service.list_rag_corpora)
+  * [Vertex_rag_data_service.list_rag_files](#vertex_rag_data_service.list_rag_files)
+  * [Vertex_rag_data_service.update_rag_corpus](#vertex_rag_data_service.update_rag_corpus)
+  * [Vertex_rag_data_service.upload_rag_file](#vertex_rag_data_service.upload_rag_file)
+  * [Vertex_rag_service.augment_prompt](#vertex_rag_service.augment_prompt)
+  * [Vertex_rag_service.corroborate_content](#vertex_rag_service.corroborate_content)
+  * [Vertex_rag_service.retrieve_contexts](#vertex_rag_service.retrieve_contexts)
   * [Vizier_service.add_trial_measurement](#vizier_service.add_trial_measurement)
   * [Vizier_service.check_trial_early_stopping_state](#vizier_service.check_trial_early_stopping_state)
   * [Vizier_service.complete_trial](#vizier_service.complete_trial)
@@ -347,6 +373,7 @@
   * [Endpoint_service.undeploy_model](#endpoint_service.undeploy_model)
   * [Endpoint_service.update_endpoint](#endpoint_service.update_endpoint)
   * [Endpoint_service.update_endpoint_long_running](#endpoint_service.update_endpoint_long_running)
+  * [Evaluation_service.evaluate_dataset](#evaluation_service.evaluate_dataset)
   * [Evaluation_service.evaluate_instances](#evaluation_service.evaluate_instances)
   * [Extension_execution_service.execute_extension](#extension_execution_service.execute_extension)
   * [Extension_execution_service.query_extension](#extension_execution_service.query_extension)
@@ -389,6 +416,7 @@
   * [Feature_registry_service.list_features](#feature_registry_service.list_features)
   * [Feature_registry_service.update_feature](#feature_registry_service.update_feature)
   * [Feature_registry_service.update_feature_group](#feature_registry_service.update_feature_group)
+  * [Feature_registry_service.update_feature_monitor](#feature_registry_service.update_feature_monitor)
   * [Featurestore_online_serving_service.read_feature_values](#featurestore_online_serving_service.read_feature_values)
   * [Featurestore_online_serving_service.streaming_read_feature_values](#featurestore_online_serving_service.streaming_read_feature_values)
   * [Featurestore_online_serving_service.write_feature_values](#featurestore_online_serving_service.write_feature_values)
@@ -511,6 +539,8 @@
   * [Metadata_service.update_execution](#metadata_service.update_execution)
   * [Migration_service.batch_migrate_resources](#migration_service.batch_migrate_resources)
   * [Migration_service.search_migratable_resources](#migration_service.search_migratable_resources)
+  * [Model_garden_service.deploy](#model_garden_service.deploy)
+  * [Model_garden_service.deploy_publisher_model](#model_garden_service.deploy_publisher_model)
   * [Model_garden_service.get_publisher_model](#model_garden_service.get_publisher_model)
   * [Model_garden_service.list_publisher_models](#model_garden_service.list_publisher_models)
   * [Model_monitoring_service.create_model_monitor](#model_monitoring_service.create_model_monitor)
@@ -536,6 +566,7 @@
   * [Model_service.import_model_evaluation](#model_service.import_model_evaluation)
   * [Model_service.list_model_evaluation_slices](#model_service.list_model_evaluation_slices)
   * [Model_service.list_model_evaluations](#model_service.list_model_evaluations)
+  * [Model_service.list_model_version_checkpoints](#model_service.list_model_version_checkpoints)
   * [Model_service.list_model_versions](#model_service.list_model_versions)
   * [Model_service.list_models](#model_service.list_models)
   * [Model_service.merge_version_aliases](#model_service.merge_version_aliases)
@@ -592,6 +623,7 @@
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
+  * [Reasoning_engine_execution_service.stream_query_reasoning_engine](#reasoning_engine_execution_service.stream_query_reasoning_engine)
   * [Reasoning_engine_service.create_reasoning_engine](#reasoning_engine_service.create_reasoning_engine)
   * [Reasoning_engine_service.delete_reasoning_engine](#reasoning_engine_service.delete_reasoning_engine)
   * [Reasoning_engine_service.get_reasoning_engine](#reasoning_engine_service.get_reasoning_engine)
@@ -649,6 +681,8 @@
   * [Vertex_rag_data_service.list_rag_files](#vertex_rag_data_service.list_rag_files)
   * [Vertex_rag_data_service.update_rag_corpus](#vertex_rag_data_service.update_rag_corpus)
   * [Vertex_rag_data_service.upload_rag_file](#vertex_rag_data_service.upload_rag_file)
+  * [Vertex_rag_service.augment_prompt](#vertex_rag_service.augment_prompt)
+  * [Vertex_rag_service.corroborate_content](#vertex_rag_service.corroborate_content)
   * [Vertex_rag_service.retrieve_contexts](#vertex_rag_service.retrieve_contexts)
   * [Vizier_service.add_trial_measurement](#vizier_service.add_trial_measurement)
   * [Vizier_service.check_trial_early_stopping_state](#vizier_service.check_trial_early_stopping_state)
@@ -2120,6 +2154,91 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/featurestore_service.update_featurestore.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.create_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.create_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.create_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.create_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.delete_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.delete_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.delete_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.delete_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.get_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.get_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.get_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.get_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.list_cached_contents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.list_cached_contents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.list_cached_contents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.list_cached_contents.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.update_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.update_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.update_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_cache_service.update_cached_content.js`
 
 
 -----
@@ -3929,6 +4048,23 @@ __Usage:__
 
 
 
+### Model_service.list_model_version_checkpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_version_checkpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_version_checkpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_version_checkpoints.js`
+
+
+-----
+
+
+
+
 ### Model_service.list_model_versions
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/model_service.list_model_versions.js).
@@ -4830,6 +4966,125 @@ __Usage:__
 
 
 
+### Reasoning_engine_execution_service.query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_execution_service.stream_query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_execution_service.stream_query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.create_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.create_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.delete_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.delete_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.delete_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.delete_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.get_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.get_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.get_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.get_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.list_reasoning_engines
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.list_reasoning_engines.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.list_reasoning_engines.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.list_reasoning_engines.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.update_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.update_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.update_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/reasoning_engine_service.update_reasoning_engine.js`
+
+
+-----
+
+
+
+
 ### Schedule_service.create_schedule
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js).
@@ -5537,6 +5792,227 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.write_tensorboard_run_data.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.create_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.create_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.create_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.create_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.delete_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.delete_rag_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.delete_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.get_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.get_rag_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.get_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.import_rag_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.import_rag_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.import_rag_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.import_rag_files.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.list_rag_corpora
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_corpora.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_corpora.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_corpora.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.list_rag_files
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_files.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_files.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.list_rag_files.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.update_rag_corpus
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.update_rag_corpus.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_data_service.upload_rag_file
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_data_service.upload_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.augment_prompt
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.augment_prompt.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.corroborate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.corroborate_content.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.retrieve_contexts
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/vertex_rag_service.retrieve_contexts.js`
 
 
 -----
@@ -6377,6 +6853,23 @@ __Usage:__
 
 
 
+### Evaluation_service.evaluate_dataset
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_dataset.js`
+
+
+-----
+
+
+
+
 ### Evaluation_service.evaluate_instances
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/evaluation_service.evaluate_instances.js).
@@ -7084,6 +7577,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_group.js`
+
+
+-----
+
+
+
+
+### Feature_registry_service.update_feature_monitor
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js`
 
 
 -----
@@ -9165,6 +9675,40 @@ __Usage:__
 
 
 
+### Model_garden_service.deploy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy.js`
+
+
+-----
+
+
+
+
+### Model_garden_service.deploy_publisher_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js`
+
+
+-----
+
+
+
+
 ### Model_garden_service.get_publisher_model
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_garden_service.get_publisher_model.js).
@@ -9583,6 +10127,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_evaluations.js`
+
+
+-----
+
+
+
+
+### Model_service.list_model_version_checkpoints
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_version_checkpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_version_checkpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/model_service.list_model_version_checkpoints.js`
 
 
 -----
@@ -10535,6 +11096,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.query_reasoning_engine.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_execution_service.stream_query_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js`
 
 
 -----
@@ -11504,6 +12082,40 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_data_service.upload_rag_file.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.augment_prompt
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.augment_prompt.js`
+
+
+-----
+
+
+
+
+### Vertex_rag_service.corroborate_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/vertex_rag_service.corroborate_content.js`
 
 
 -----

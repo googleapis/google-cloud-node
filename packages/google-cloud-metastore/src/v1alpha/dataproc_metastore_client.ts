@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -75,6 +76,8 @@ export class DataprocMetastoreClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataproc-metastore');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -112,7 +115,7 @@ export class DataprocMetastoreClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -800,7 +803,33 @@ export class DataprocMetastoreClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getService(request, options, callback);
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.metastore.v1alpha.IService,
+          | protos.google.cloud.metastore.v1alpha.IGetServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.metastore.v1alpha.IService,
+          protos.google.cloud.metastore.v1alpha.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single import.
@@ -899,7 +928,36 @@ export class DataprocMetastoreClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMetadataImport(request, options, callback);
+    this._log.info('getMetadataImport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.metastore.v1alpha.IMetadataImport,
+          | protos.google.cloud.metastore.v1alpha.IGetMetadataImportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMetadataImport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMetadataImport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.metastore.v1alpha.IMetadataImport,
+          (
+            | protos.google.cloud.metastore.v1alpha.IGetMetadataImportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMetadataImport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single backup.
@@ -992,7 +1050,33 @@ export class DataprocMetastoreClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBackup(request, options, callback);
+    this._log.info('getBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.metastore.v1alpha.IBackup,
+          | protos.google.cloud.metastore.v1alpha.IGetBackupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.metastore.v1alpha.IBackup,
+          protos.google.cloud.metastore.v1alpha.IGetBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes the attached IAM policies for a resource
@@ -1090,7 +1174,36 @@ export class DataprocMetastoreClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeIamPolicy(request, options, callback);
+    this._log.info('removeIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.metastore.v1alpha.IRemoveIamPolicyResponse,
+          | protos.google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.metastore.v1alpha.IRemoveIamPolicyResponse,
+          (
+            | protos.google.cloud.metastore.v1alpha.IRemoveIamPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1220,7 +1333,37 @@ export class DataprocMetastoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IService,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createService request %j', request);
+    return this.innerApiCalls
+      .createService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IService,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createService()`.
@@ -1241,6 +1384,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1378,7 +1522,37 @@ export class DataprocMetastoreClient {
         'service.name': request.service!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IService,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateService request %j', request);
+    return this.innerApiCalls
+      .updateService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IService,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateService()`.
@@ -1399,6 +1573,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1530,7 +1705,37 @@ export class DataprocMetastoreClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteService request %j', request);
+    return this.innerApiCalls
+      .deleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteService()`.
@@ -1551,6 +1756,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1693,7 +1899,37 @@ export class DataprocMetastoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMetadataImport(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMetadataImport,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMetadataImport response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMetadataImport request %j', request);
+    return this.innerApiCalls
+      .createMetadataImport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMetadataImport,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMetadataImport response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createMetadataImport()`.
@@ -1714,6 +1950,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createMetadataImport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1852,7 +2089,37 @@ export class DataprocMetastoreClient {
         'metadata_import.name': request.metadataImport!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateMetadataImport(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMetadataImport,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMetadataImport response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMetadataImport request %j', request);
+    return this.innerApiCalls
+      .updateMetadataImport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMetadataImport,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMetadataImport response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateMetadataImport()`.
@@ -1873,6 +2140,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateMetadataImport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2011,7 +2279,37 @@ export class DataprocMetastoreClient {
         service: request.service ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportMetadata(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMetadataExport,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportMetadata response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportMetadata request %j', request);
+    return this.innerApiCalls
+      .exportMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMetadataExport,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportMetadata response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportMetadata()`.
@@ -2032,6 +2330,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('exportMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2170,7 +2469,37 @@ export class DataprocMetastoreClient {
         service: request.service ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IRestore,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreService request %j', request);
+    return this.innerApiCalls
+      .restoreService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IRestore,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restoreService()`.
@@ -2191,6 +2520,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('restoreService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2332,7 +2662,37 @@ export class DataprocMetastoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IBackup,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackup request %j', request);
+    return this.innerApiCalls
+      .createBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IBackup,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackup()`.
@@ -2353,6 +2713,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2484,7 +2845,37 @@ export class DataprocMetastoreClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackup request %j', request);
+    return this.innerApiCalls
+      .deleteBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackup()`.
@@ -2505,6 +2896,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2626,7 +3018,37 @@ export class DataprocMetastoreClient {
         service: request.service ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryMetadata(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IQueryMetadataResponse,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('queryMetadata response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('queryMetadata request %j', request);
+    return this.innerApiCalls
+      .queryMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IQueryMetadataResponse,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('queryMetadata response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `queryMetadata()`.
@@ -2647,6 +3069,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('queryMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2771,7 +3194,37 @@ export class DataprocMetastoreClient {
         service: request.service ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.moveTableToDatabase(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMoveTableToDatabaseResponse,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('moveTableToDatabase response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('moveTableToDatabase request %j', request);
+    return this.innerApiCalls
+      .moveTableToDatabase(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IMoveTableToDatabaseResponse,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('moveTableToDatabase response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `moveTableToDatabase()`.
@@ -2792,6 +3245,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('moveTableToDatabase long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2923,11 +3377,43 @@ export class DataprocMetastoreClient {
         service: request.service ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.alterMetadataResourceLocation(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationResponse,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'alterMetadataResourceLocation response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('alterMetadataResourceLocation request %j', request);
+    return this.innerApiCalls
+      .alterMetadataResourceLocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IAlterMetadataResourceLocationResponse,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'alterMetadataResourceLocation response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `alterMetadataResourceLocation()`.
@@ -2948,6 +3434,7 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('alterMetadataResourceLocation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3078,7 +3565,33 @@ export class DataprocMetastoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.metastore.v1alpha.IListServicesRequest,
+          | protos.google.cloud.metastore.v1alpha.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.metastore.v1alpha.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.metastore.v1alpha.IService[],
+          protos.google.cloud.metastore.v1alpha.IListServicesRequest | null,
+          protos.google.cloud.metastore.v1alpha.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3137,6 +3650,7 @@ export class DataprocMetastoreClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -3203,6 +3717,7 @@ export class DataprocMetastoreClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -3323,7 +3838,33 @@ export class DataprocMetastoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMetadataImports(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.metastore.v1alpha.IListMetadataImportsRequest,
+          | protos.google.cloud.metastore.v1alpha.IListMetadataImportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.metastore.v1alpha.IMetadataImport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMetadataImports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMetadataImports request %j', request);
+    return this.innerApiCalls
+      .listMetadataImports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.metastore.v1alpha.IMetadataImport[],
+          protos.google.cloud.metastore.v1alpha.IListMetadataImportsRequest | null,
+          protos.google.cloud.metastore.v1alpha.IListMetadataImportsResponse,
+        ]) => {
+          this._log.info('listMetadataImports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3381,6 +3922,7 @@ export class DataprocMetastoreClient {
     const defaultCallSettings = this._defaults['listMetadataImports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMetadataImports stream %j', request);
     return this.descriptors.page.listMetadataImports.createStream(
       this.innerApiCalls.listMetadataImports as GaxCall,
       request,
@@ -3446,6 +3988,7 @@ export class DataprocMetastoreClient {
     const defaultCallSettings = this._defaults['listMetadataImports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMetadataImports iterate %j', request);
     return this.descriptors.page.listMetadataImports.asyncIterate(
       this.innerApiCalls['listMetadataImports'] as GaxCall,
       request as {},
@@ -3566,7 +4109,33 @@ export class DataprocMetastoreClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBackups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.metastore.v1alpha.IListBackupsRequest,
+          | protos.google.cloud.metastore.v1alpha.IListBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.metastore.v1alpha.IBackup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackups request %j', request);
+    return this.innerApiCalls
+      .listBackups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.metastore.v1alpha.IBackup[],
+          protos.google.cloud.metastore.v1alpha.IListBackupsRequest | null,
+          protos.google.cloud.metastore.v1alpha.IListBackupsResponse,
+        ]) => {
+          this._log.info('listBackups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3624,6 +4193,7 @@ export class DataprocMetastoreClient {
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -3689,6 +4259,7 @@ export class DataprocMetastoreClient {
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
@@ -4535,6 +5106,7 @@ export class DataprocMetastoreClient {
   close(): Promise<void> {
     if (this.dataprocMetastoreStub && !this._terminated) {
       return this.dataprocMetastoreStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

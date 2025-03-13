@@ -37,6 +37,11 @@ function main(workspace, path) {
    *  workspace root.
    */
   // const path = 'abc123'
+  /**
+   *  Optional. The Git revision of the file to return. If left empty, the
+   *  current contents of `path` will be returned.
+   */
+  // const revision = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;

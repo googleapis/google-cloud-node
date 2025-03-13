@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -481,6 +481,9 @@ export class FeatureRegistryServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -503,6 +506,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
             },
           ],
         },
@@ -536,6 +542,10 @@ export class FeatureRegistryServiceClient {
               body: '*',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
               body: '*',
             },
@@ -561,6 +571,10 @@ export class FeatureRegistryServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -589,6 +603,9 @@ export class FeatureRegistryServiceClient {
               post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
             },
             {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
             },
             {
@@ -608,6 +625,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -1074,6 +1094,10 @@ export class FeatureRegistryServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
@@ -1287,6 +1311,10 @@ export class FeatureRegistryServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
           ],
@@ -1425,6 +1453,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
@@ -1584,6 +1615,9 @@ export class FeatureRegistryServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
           ],
         },
         {
@@ -1709,6 +1743,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
             {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
@@ -1864,6 +1901,9 @@ export class FeatureRegistryServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
             },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
+            },
           ],
         },
         {
@@ -2013,6 +2053,9 @@ export class FeatureRegistryServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
@@ -2171,6 +2214,9 @@ export class FeatureRegistryServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
           ],
         },
       ];
@@ -2226,6 +2272,12 @@ export class FeatureRegistryServiceClient {
     const createFeatureMonitorMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateFeatureMonitorOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateFeatureMonitorResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.FeatureMonitor'
+    ) as gax.protobuf.Type;
+    const updateFeatureMonitorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteFeatureMonitorResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -2273,6 +2325,11 @@ export class FeatureRegistryServiceClient {
         this.operationsClient,
         createFeatureMonitorResponse.decode.bind(createFeatureMonitorResponse),
         createFeatureMonitorMetadata.decode.bind(createFeatureMonitorMetadata)
+      ),
+      updateFeatureMonitor: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateFeatureMonitorResponse.decode.bind(updateFeatureMonitorResponse),
+        updateFeatureMonitorMetadata.decode.bind(updateFeatureMonitorMetadata)
       ),
       deleteFeatureMonitor: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2346,6 +2403,7 @@ export class FeatureRegistryServiceClient {
       'createFeatureMonitor',
       'getFeatureMonitor',
       'listFeatureMonitors',
+      'updateFeatureMonitor',
       'deleteFeatureMonitor',
       'createFeatureMonitorJob',
       'getFeatureMonitorJob',
@@ -4143,6 +4201,156 @@ export class FeatureRegistryServiceClient {
     >;
   }
   /**
+   * Updates the parameters of a single FeatureMonitor.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.FeatureMonitor} request.featureMonitor
+   *   Required. The FeatureMonitor's `name` field is used to identify the
+   *   FeatureMonitor to be updated. Format:
+   *   `projects/{project}/locations/{location}/featureGroups/{feature_group}/featureMonitors/{feature_monitor}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   FeatureMonitor resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then only the non-empty fields present in the
+   *   request will be overwritten. Set the update_mask to `*` to override all
+   *   fields.
+   *
+   *   Updatable fields:
+   *
+   *     * `labels`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeatureMonitor_async
+   */
+  updateFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFeatureMonitor(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFeatureMonitor(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IFeatureMonitor,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateFeatureMonitorOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'feature_monitor.name': request.featureMonitor!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateFeatureMonitor(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateFeatureMonitor()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/feature_registry_service.update_feature_monitor.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeatureMonitor_async
+   */
+  async checkUpdateFeatureMonitorProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.FeatureMonitor,
+      protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateFeatureMonitor,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.FeatureMonitor,
+      protos.google.cloud.aiplatform.v1beta1.UpdateFeatureMonitorOperationMetadata
+    >;
+  }
+  /**
    * Deletes a single FeatureMonitor.
    *
    * @param {Object} request
@@ -4415,7 +4623,7 @@ export class FeatureRegistryServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFeatureGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4730,7 +4938,7 @@ export class FeatureRegistryServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFeatures`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5065,7 +5273,7 @@ export class FeatureRegistryServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFeatureMonitors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5352,7 +5560,7 @@ export class FeatureRegistryServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFeatureMonitorJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5741,7 +5949,7 @@ export class FeatureRegistryServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5754,6 +5962,20 @@ export class FeatureRegistryServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5790,6 +6012,13 @@ export class FeatureRegistryServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5825,11 +6054,11 @@ export class FeatureRegistryServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5838,6 +6067,20 @@ export class FeatureRegistryServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5868,7 +6111,7 @@ export class FeatureRegistryServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5881,6 +6124,20 @@ export class FeatureRegistryServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 

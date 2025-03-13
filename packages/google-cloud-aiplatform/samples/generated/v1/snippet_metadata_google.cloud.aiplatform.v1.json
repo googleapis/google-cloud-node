@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.34.0",
+        "version": "3.35.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -4179,6 +4179,222 @@
                     "service": {
                         "shortName": "FeaturestoreService",
                         "fullName": "google.cloud.aiplatform.v1.FeaturestoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_GenAiCacheService_CreateCachedContent_async",
+            "title": "DatasetService createCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates cached content, this call will initialize the cached content in the data storage, and users need to pay for the cache data storage.",
+            "canonical": true,
+            "file": "gen_ai_cache_service.create_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateCachedContent",
+                "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.CreateCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cached_content",
+                        "type": ".google.cloud.aiplatform.v1.CachedContent"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.CachedContent",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.CreateCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_GenAiCacheService_GetCachedContent_async",
+            "title": "DatasetService getCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets cached content configurations",
+            "canonical": true,
+            "file": "gen_ai_cache_service.get_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetCachedContent",
+                "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.GetCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.CachedContent",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "GetCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.GetCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_GenAiCacheService_UpdateCachedContent_async",
+            "title": "DatasetService updateCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates cached content configurations",
+            "canonical": true,
+            "file": "gen_ai_cache_service.update_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateCachedContent",
+                "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.UpdateCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "cached_content",
+                        "type": ".google.cloud.aiplatform.v1.CachedContent"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.CachedContent",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.UpdateCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_GenAiCacheService_DeleteCachedContent_async",
+            "title": "DatasetService deleteCachedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes cached content",
+            "canonical": true,
+            "file": "gen_ai_cache_service.delete_cached_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteCachedContent",
+                "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.DeleteCachedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteCachedContent",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.DeleteCachedContent",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1.GenAiCacheService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_GenAiCacheService_ListCachedContents_async",
+            "title": "DatasetService listCachedContents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists cached contents in a project",
+            "canonical": true,
+            "file": "gen_ai_cache_service.list_cached_contents.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListCachedContents",
+                "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.ListCachedContents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListCachedContentsResponse",
+                "client": {
+                    "shortName": "GenAiCacheServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheServiceClient"
+                },
+                "method": {
+                    "shortName": "ListCachedContents",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiCacheService.ListCachedContents",
+                    "service": {
+                        "shortName": "GenAiCacheService",
+                        "fullName": "google.cloud.aiplatform.v1.GenAiCacheService"
                     }
                 }
             }
@@ -8720,6 +8936,54 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_ModelService_ListModelVersionCheckpoints_async",
+            "title": "DatasetService listModelVersionCheckpoints Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists checkpoints of the specified model version.",
+            "canonical": true,
+            "file": "model_service.list_model_version_checkpoints.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListModelVersionCheckpoints",
+                "fullName": "google.cloud.aiplatform.v1.ModelService.ListModelVersionCheckpoints",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListModelVersionCheckpointsResponse",
+                "client": {
+                    "shortName": "ModelServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ModelServiceClient"
+                },
+                "method": {
+                    "shortName": "ListModelVersionCheckpoints",
+                    "fullName": "google.cloud.aiplatform.v1.ModelService.ListModelVersionCheckpoints",
+                    "service": {
+                        "shortName": "ModelService",
+                        "fullName": "google.cloud.aiplatform.v1.ModelService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_ModelService_UpdateModel_async",
             "title": "DatasetService updateModel Sample",
             "origin": "API_DEFINITION",
@@ -9454,7 +9718,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 104,
+                    "end": 108,
                     "type": "FULL"
                 }
             ],
@@ -9690,7 +9954,7 @@
             "segments": [
                 {
                     "start": 53,
-                    "end": 118,
+                    "end": 122,
                     "type": "FULL"
                 }
             ],
@@ -11426,7 +11690,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 103,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -11446,6 +11710,10 @@
                     {
                         "name": "system_instruction",
                         "type": ".google.cloud.aiplatform.v1.Content"
+                    },
+                    {
+                        "name": "cached_content",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "tools",
@@ -11494,7 +11762,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 105,
+                    "end": 113,
                     "type": "FULL"
                 }
             ],
@@ -11514,6 +11782,10 @@
                     {
                         "name": "system_instruction",
                         "type": ".google.cloud.aiplatform.v1.Content"
+                    },
+                    {
+                        "name": "cached_content",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "tools",
@@ -11547,6 +11819,322 @@
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.cloud.aiplatform.v1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineExecutionService_QueryReasoningEngine_async",
+            "title": "DatasetService queryReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Queries using a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_execution_service.query_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.QueryReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input",
+                        "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "class_method",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.QueryReasoningEngineResponse",
+                "client": {
+                    "shortName": "ReasoningEngineExecutionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.QueryReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineExecutionService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineExecutionService_StreamQueryReasoningEngine_async",
+            "title": "DatasetService streamQueryReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Streams queries using a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_execution_service.stream_query_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamQueryReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.StreamQueryReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "input",
+                        "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "class_method",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.api.HttpBody",
+                "client": {
+                    "shortName": "ReasoningEngineExecutionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamQueryReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.StreamQueryReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineExecutionService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineService_CreateReasoningEngine_async",
+            "title": "DatasetService createReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.create_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.CreateReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "reasoning_engine",
+                        "type": ".google.cloud.aiplatform.v1.ReasoningEngine"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.CreateReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineService_GetReasoningEngine_async",
+            "title": "DatasetService getReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.get_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.GetReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ReasoningEngine",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "GetReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.GetReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineService_ListReasoningEngines_async",
+            "title": "DatasetService listReasoningEngines Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists reasoning engines in a location.",
+            "canonical": true,
+            "file": "reasoning_engine_service.list_reasoning_engines.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListReasoningEngines",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.ListReasoningEngines",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListReasoningEnginesResponse",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "ListReasoningEngines",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.ListReasoningEngines",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineService_UpdateReasoningEngine_async",
+            "title": "DatasetService updateReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.update_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.UpdateReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "reasoning_engine",
+                        "type": ".google.cloud.aiplatform.v1.ReasoningEngine"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.UpdateReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_ReasoningEngineService_DeleteReasoningEngine_async",
+            "title": "DatasetService deleteReasoningEngine Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a reasoning engine.",
+            "canonical": true,
+            "file": "reasoning_engine_service.delete_reasoning_engine.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteReasoningEngine",
+                "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.DeleteReasoningEngine",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ReasoningEngineServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteReasoningEngine",
+                    "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService.DeleteReasoningEngine",
+                    "service": {
+                        "shortName": "ReasoningEngineService",
+                        "fullName": "google.cloud.aiplatform.v1.ReasoningEngineService"
                     }
                 }
             }
@@ -13451,6 +14039,594 @@
                     "service": {
                         "shortName": "TensorboardService",
                         "fullName": "google.cloud.aiplatform.v1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_CreateRagCorpus_async",
+            "title": "DatasetService createRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.create_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.CreateRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "rag_corpus",
+                        "type": ".google.cloud.aiplatform.v1.RagCorpus"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.CreateRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_UpdateRagCorpus_async",
+            "title": "DatasetService updateRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.update_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "rag_corpus",
+                        "type": ".google.cloud.aiplatform.v1.RagCorpus"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_GetRagCorpus_async",
+            "title": "DatasetService getRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.get_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.RagCorpus",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_ListRagCorpora_async",
+            "title": "DatasetService listRagCorpora Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists RagCorpora in a Location.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.list_rag_corpora.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRagCorpora",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.ListRagCorpora",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListRagCorporaResponse",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "ListRagCorpora",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.ListRagCorpora",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_DeleteRagCorpus_async",
+            "title": "DatasetService deleteRagCorpus Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.delete_rag_corpus.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteRagCorpus",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagCorpus",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteRagCorpus",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagCorpus",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_UploadRagFile_async",
+            "title": "DatasetService uploadRagFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Upload a file into a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.upload_rag_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UploadRagFile",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.UploadRagFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "rag_file",
+                        "type": ".google.cloud.aiplatform.v1.RagFile"
+                    },
+                    {
+                        "name": "upload_rag_file_config",
+                        "type": ".google.cloud.aiplatform.v1.UploadRagFileConfig"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.UploadRagFileResponse",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "UploadRagFile",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.UploadRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_ImportRagFiles_async",
+            "title": "DatasetService importRagFiles Sample",
+            "origin": "API_DEFINITION",
+            "description": " Import files from Google Cloud Storage or Google Drive into a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.import_rag_files.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportRagFiles",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.ImportRagFiles",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "import_rag_files_config",
+                        "type": ".google.cloud.aiplatform.v1.ImportRagFilesConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportRagFiles",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.ImportRagFiles",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_GetRagFile_async",
+            "title": "DatasetService getRagFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a RagFile.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.get_rag_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetRagFile",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.RagFile",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "GetRagFile",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_ListRagFiles_async",
+            "title": "DatasetService listRagFiles Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists RagFiles in a RagCorpus.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.list_rag_files.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListRagFiles",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.ListRagFiles",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ListRagFilesResponse",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "ListRagFiles",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.ListRagFiles",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagDataService_DeleteRagFile_async",
+            "title": "DatasetService deleteRagFile Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a RagFile.",
+            "canonical": true,
+            "file": "vertex_rag_data_service.delete_rag_file.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteRagFile",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagFile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "VertexRagDataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteRagFile",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagFile",
+                    "service": {
+                        "shortName": "VertexRagDataService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagDataService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagService_RetrieveContexts_async",
+            "title": "DatasetService retrieveContexts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves relevant contexts for a query.",
+            "canonical": true,
+            "file": "vertex_rag_service.retrieve_contexts.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 65,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RetrieveContexts",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagService.RetrieveContexts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "vertex_rag_store",
+                        "type": ".google.cloud.aiplatform.v1.RetrieveContextsRequest.VertexRagStore"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.aiplatform.v1.RagQuery"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.RetrieveContextsResponse",
+                "client": {
+                    "shortName": "VertexRagServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagServiceClient"
+                },
+                "method": {
+                    "shortName": "RetrieveContexts",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagService.RetrieveContexts",
+                    "service": {
+                        "shortName": "VertexRagService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagService_AugmentPrompt_async",
+            "title": "DatasetService augmentPrompt Sample",
+            "origin": "API_DEFINITION",
+            "description": " Given an input prompt, it returns augmented prompt from vertex rag store  to guide LLM towards generating grounded responses.",
+            "canonical": true,
+            "file": "vertex_rag_service.augment_prompt.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AugmentPrompt",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagService.AugmentPrompt",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "vertex_rag_store",
+                        "type": ".google.cloud.aiplatform.v1.VertexRagStore"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "model",
+                        "type": ".google.cloud.aiplatform.v1.AugmentPromptRequest.Model"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.AugmentPromptResponse",
+                "client": {
+                    "shortName": "VertexRagServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagServiceClient"
+                },
+                "method": {
+                    "shortName": "AugmentPrompt",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagService.AugmentPrompt",
+                    "service": {
+                        "shortName": "VertexRagService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_VertexRagService_CorroborateContent_async",
+            "title": "DatasetService corroborateContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Given an input text, it returns a score that evaluates the factuality of the text. It also extracts and returns claims from the text and provides supporting facts.",
+            "canonical": true,
+            "file": "vertex_rag_service.corroborate_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CorroborateContent",
+                "fullName": "google.cloud.aiplatform.v1.VertexRagService.CorroborateContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "content",
+                        "type": ".google.cloud.aiplatform.v1.Content"
+                    },
+                    {
+                        "name": "facts",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.cloud.aiplatform.v1.CorroborateContentRequest.Parameters"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.CorroborateContentResponse",
+                "client": {
+                    "shortName": "VertexRagServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagServiceClient"
+                },
+                "method": {
+                    "shortName": "CorroborateContent",
+                    "fullName": "google.cloud.aiplatform.v1.VertexRagService.CorroborateContent",
+                    "service": {
+                        "shortName": "VertexRagService",
+                        "fullName": "google.cloud.aiplatform.v1.VertexRagService"
                     }
                 }
             }

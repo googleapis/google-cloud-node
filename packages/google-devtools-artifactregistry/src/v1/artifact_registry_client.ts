@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -69,6 +70,8 @@ export class ArtifactRegistryClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('artifact-registry');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -105,7 +108,7 @@ export class ArtifactRegistryClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -788,7 +791,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDockerImage(request, options, callback);
+    this._log.info('getDockerImage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IDockerImage,
+          | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDockerImage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDockerImage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IDockerImage,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetDockerImageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDockerImage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a maven artifact.
@@ -884,7 +916,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMavenArtifact(request, options, callback);
+    this._log.info('getMavenArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+          | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMavenArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMavenArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetMavenArtifactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMavenArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a npm package.
@@ -980,7 +1041,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNpmPackage(request, options, callback);
+    this._log.info('getNpmPackage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.INpmPackage,
+          | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNpmPackage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNpmPackage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.INpmPackage,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetNpmPackageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNpmPackage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a python package.
@@ -1076,7 +1166,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPythonPackage(request, options, callback);
+    this._log.info('getPythonPackage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IPythonPackage,
+          | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPythonPackage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPythonPackage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IPythonPackage,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetPythonPackageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPythonPackage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a repository.
@@ -1172,7 +1291,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRepository(request, options, callback);
+    this._log.info('getRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a repository.
@@ -1272,7 +1420,36 @@ export class ArtifactRegistryClient {
         'repository.name': request.repository!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRepository(request, options, callback);
+    this._log.info('updateRepository request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRepository response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IRepository,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRepository response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a package.
@@ -1362,7 +1539,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPackage(request, options, callback);
+    this._log.info('getPackage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPackage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPackage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetPackageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPackage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a version
@@ -1454,7 +1660,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVersion(request, options, callback);
+    this._log.info('getVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a version.
@@ -1554,7 +1789,36 @@ export class ArtifactRegistryClient {
         'version.name': request.version!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVersion(request, options, callback);
+    this._log.info('updateVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IVersion,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a file.
@@ -1644,7 +1908,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFile(request, options, callback);
+    this._log.info('getFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          | protos.google.devtools.artifactregistry.v1.IGetFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IFile,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a file.
@@ -1738,7 +2031,36 @@ export class ArtifactRegistryClient {
         'file.name': request.file!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFile(request, options, callback);
+    this._log.info('updateFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IFile,
+          | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IFile,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a tag.
@@ -1828,7 +2150,33 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTag(request, options, callback);
+    this._log.info('getTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          | protos.google.devtools.artifactregistry.v1.IGetTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.ITag,
+          protos.google.devtools.artifactregistry.v1.IGetTagRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a tag.
@@ -1922,7 +2270,36 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTag(request, options, callback);
+    this._log.info('createTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.ITag,
+          (
+            | protos.google.devtools.artifactregistry.v1.ICreateTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a tag.
@@ -2016,7 +2393,36 @@ export class ArtifactRegistryClient {
         'tag.name': request.tag!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTag(request, options, callback);
+    this._log.info('updateTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.ITag,
+          | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.ITag,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a tag.
@@ -2106,7 +2512,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTag(request, options, callback);
+    this._log.info('deleteTag request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTag response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTag(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.devtools.artifactregistry.v1.IDeleteTagRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTag response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a rule.
@@ -2200,7 +2635,36 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRule(request, options, callback);
+    this._log.info('createRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IRule,
+          (
+            | protos.google.devtools.artifactregistry.v1.ICreateRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a rule.
@@ -2290,7 +2754,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRule(request, options, callback);
+    this._log.info('getRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IRule,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a rule.
@@ -2384,7 +2877,36 @@ export class ArtifactRegistryClient {
         'rule.name': request.rule!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRule(request, options, callback);
+    this._log.info('updateRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IRule,
+          | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IRule,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a rule.
@@ -2474,7 +2996,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRule(request, options, callback);
+    this._log.info('deleteRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.devtools.artifactregistry.v1.IDeleteRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the IAM policy for a given resource.
@@ -2568,7 +3119,31 @@ export class ArtifactRegistryClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM policy for a given resource.
@@ -2654,7 +3229,31 @@ export class ArtifactRegistryClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Tests if the caller has a list of permissions on a resource.
@@ -2742,7 +3341,31 @@ export class ArtifactRegistryClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the Settings for the Project.
@@ -2838,7 +3461,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProjectSettings(request, options, callback);
+    this._log.info('getProjectSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProjectSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProjectSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetProjectSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProjectSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the Settings for the Project.
@@ -2936,7 +3588,36 @@ export class ArtifactRegistryClient {
         'project_settings.name': request.projectSettings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateProjectSettings(request, options, callback);
+    this._log.info('updateProjectSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProjectSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProjectSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IProjectSettings,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateProjectSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProjectSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the VPCSC Config for the Project.
@@ -3032,7 +3713,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVpcscConfig(request, options, callback);
+    this._log.info('getVPCSCConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVPCSCConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVpcscConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetVPCSCConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVPCSCConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the VPCSC Config for the Project.
@@ -3130,7 +3840,36 @@ export class ArtifactRegistryClient {
         'vpcsc_config.name': request.vpcscConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVpcscConfig(request, options, callback);
+    this._log.info('updateVPCSCConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateVPCSCConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateVpcscConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IVPCSCConfig,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVPCSCConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a package.
@@ -3230,7 +3969,36 @@ export class ArtifactRegistryClient {
         'package.name': request.package!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePackage(request, options, callback);
+    this._log.info('updatePackage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePackage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePackage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IPackage,
+          (
+            | protos.google.devtools.artifactregistry.v1.IUpdatePackageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePackage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an attachment.
@@ -3326,7 +4094,36 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAttachment(request, options, callback);
+    this._log.info('getAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.artifactregistry.v1.IAttachment,
+          | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttachment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.artifactregistry.v1.IAttachment,
+          (
+            | protos.google.devtools.artifactregistry.v1.IGetAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttachment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3434,7 +4231,37 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importAptArtifacts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
+            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importAptArtifacts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importAptArtifacts request %j', request);
+    return this.innerApiCalls
+      .importAptArtifacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsResponse,
+            protos.google.devtools.artifactregistry.v1.IImportAptArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importAptArtifacts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importAptArtifacts()`.
@@ -3455,6 +4282,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.ImportAptArtifactsMetadata
     >
   > {
+    this._log.info('importAptArtifacts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3575,7 +4403,37 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importYumArtifacts(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
+            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importYumArtifacts response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importYumArtifacts request %j', request);
+    return this.innerApiCalls
+      .importYumArtifacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsResponse,
+            protos.google.devtools.artifactregistry.v1.IImportYumArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importYumArtifacts response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importYumArtifacts()`.
@@ -3596,6 +4454,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.ImportYumArtifactsMetadata
     >
   > {
+    this._log.info('importYumArtifacts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3717,7 +4576,37 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRepository(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IRepository,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRepository response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRepository request %j', request);
+    return this.innerApiCalls
+      .createRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IRepository,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRepository()`.
@@ -3738,6 +4627,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('createRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3855,7 +4745,37 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRepository(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRepository response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRepository request %j', request);
+    return this.innerApiCalls
+      .deleteRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRepository()`.
@@ -3876,6 +4796,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3992,7 +4913,37 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePackage(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePackage response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePackage request %j', request);
+    return this.innerApiCalls
+      .deletePackage(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePackage response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePackage()`.
@@ -4013,6 +4964,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePackage long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4132,7 +5084,37 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteVersion(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteVersion request %j', request);
+    return this.innerApiCalls
+      .deleteVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteVersion()`.
@@ -4153,6 +5135,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4274,7 +5257,37 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchDeleteVersions(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchDeleteVersions response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchDeleteVersions request %j', request);
+    return this.innerApiCalls
+      .batchDeleteVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IBatchDeleteVersionsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteVersions response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchDeleteVersions()`.
@@ -4295,6 +5308,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.BatchDeleteVersionsMetadata
     >
   > {
+    this._log.info('batchDeleteVersions long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4412,7 +5426,37 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFile(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFile request %j', request);
+    return this.innerApiCalls
+      .deleteFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFile()`.
@@ -4433,6 +5477,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteFile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4554,7 +5599,37 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAttachment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IAttachment,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAttachment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAttachment request %j', request);
+    return this.innerApiCalls
+      .createAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.devtools.artifactregistry.v1.IAttachment,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAttachment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAttachment()`.
@@ -4575,6 +5650,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('createAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4692,7 +5768,37 @@ export class ArtifactRegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAttachment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAttachment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAttachment request %j', request);
+    return this.innerApiCalls
+      .deleteAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.artifactregistry.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAttachment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAttachment()`.
@@ -4713,6 +5819,7 @@ export class ArtifactRegistryClient {
       protos.google.devtools.artifactregistry.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAttachment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4826,7 +5933,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDockerImages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IDockerImage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDockerImages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDockerImages request %j', request);
+    return this.innerApiCalls
+      .listDockerImages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IDockerImage[],
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListDockerImagesResponse,
+        ]) => {
+          this._log.info('listDockerImages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4868,6 +6001,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listDockerImages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDockerImages stream %j', request);
     return this.descriptors.page.listDockerImages.createStream(
       this.innerApiCalls.listDockerImages as GaxCall,
       request,
@@ -4917,6 +6051,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listDockerImages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDockerImages iterate %j', request);
     return this.descriptors.page.listDockerImages.asyncIterate(
       this.innerApiCalls['listDockerImages'] as GaxCall,
       request as {},
@@ -5019,7 +6154,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMavenArtifacts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
+          | protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMavenArtifacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMavenArtifacts request %j', request);
+    return this.innerApiCalls
+      .listMavenArtifacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IMavenArtifact[],
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListMavenArtifactsResponse,
+        ]) => {
+          this._log.info('listMavenArtifacts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5059,6 +6220,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listMavenArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMavenArtifacts stream %j', request);
     return this.descriptors.page.listMavenArtifacts.createStream(
       this.innerApiCalls.listMavenArtifacts as GaxCall,
       request,
@@ -5106,6 +6268,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listMavenArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMavenArtifacts iterate %j', request);
     return this.descriptors.page.listMavenArtifacts.asyncIterate(
       this.innerApiCalls['listMavenArtifacts'] as GaxCall,
       request as {},
@@ -5208,7 +6371,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNpmPackages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.INpmPackage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNpmPackages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNpmPackages request %j', request);
+    return this.innerApiCalls
+      .listNpmPackages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.INpmPackage[],
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListNpmPackagesResponse,
+        ]) => {
+          this._log.info('listNpmPackages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5248,6 +6437,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listNpmPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNpmPackages stream %j', request);
     return this.descriptors.page.listNpmPackages.createStream(
       this.innerApiCalls.listNpmPackages as GaxCall,
       request,
@@ -5295,6 +6485,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listNpmPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNpmPackages iterate %j', request);
     return this.descriptors.page.listNpmPackages.asyncIterate(
       this.innerApiCalls['listNpmPackages'] as GaxCall,
       request as {},
@@ -5397,7 +6588,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPythonPackages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IPythonPackage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPythonPackages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPythonPackages request %j', request);
+    return this.innerApiCalls
+      .listPythonPackages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IPythonPackage[],
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListPythonPackagesResponse,
+        ]) => {
+          this._log.info('listPythonPackages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5437,6 +6654,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listPythonPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPythonPackages stream %j', request);
     return this.descriptors.page.listPythonPackages.createStream(
       this.innerApiCalls.listPythonPackages as GaxCall,
       request,
@@ -5484,6 +6702,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listPythonPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPythonPackages iterate %j', request);
     return this.descriptors.page.listPythonPackages.asyncIterate(
       this.innerApiCalls['listPythonPackages'] as GaxCall,
       request as {},
@@ -5608,7 +6827,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRepositories(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IRepository
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRepositories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRepositories request %j', request);
+    return this.innerApiCalls
+      .listRepositories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IRepository[],
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListRepositoriesResponse,
+        ]) => {
+          this._log.info('listRepositories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5670,6 +6915,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
@@ -5739,6 +6985,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
@@ -5888,7 +7135,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPackages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListPackagesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IPackage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPackages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPackages request %j', request);
+    return this.innerApiCalls
+      .listPackages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IPackage[],
+          protos.google.devtools.artifactregistry.v1.IListPackagesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListPackagesResponse,
+        ]) => {
+          this._log.info('listPackages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5975,6 +7248,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPackages stream %j', request);
     return this.descriptors.page.listPackages.createStream(
       this.innerApiCalls.listPackages as GaxCall,
       request,
@@ -6069,6 +7343,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPackages iterate %j', request);
     return this.descriptors.page.listPackages.asyncIterate(
       this.innerApiCalls['listPackages'] as GaxCall,
       request as {},
@@ -6220,7 +7495,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
+          | protos.google.devtools.artifactregistry.v1.IListVersionsResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVersions request %j', request);
+    return this.innerApiCalls
+      .listVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IVersion[],
+          protos.google.devtools.artifactregistry.v1.IListVersionsRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListVersionsResponse,
+        ]) => {
+          this._log.info('listVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6309,6 +7610,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
       request,
@@ -6405,6 +7707,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
       request as {},
@@ -6560,7 +7863,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFiles(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListFilesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListFilesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IFile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFiles request %j', request);
+    return this.innerApiCalls
+      .listFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IFile[],
+          protos.google.devtools.artifactregistry.v1.IListFilesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListFilesResponse,
+        ]) => {
+          this._log.info('listFiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6653,6 +7982,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
       request,
@@ -6753,6 +8083,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
       request as {},
@@ -6884,7 +8215,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTags(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListTagsRequest,
+          | protos.google.devtools.artifactregistry.v1.IListTagsResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.ITag
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTags values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTags request %j', request);
+    return this.innerApiCalls
+      .listTags(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.ITag[],
+          protos.google.devtools.artifactregistry.v1.IListTagsRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListTagsResponse,
+        ]) => {
+          this._log.info('listTags values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6953,6 +8310,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTags stream %j', request);
     return this.descriptors.page.listTags.createStream(
       this.innerApiCalls.listTags as GaxCall,
       request,
@@ -7029,6 +8387,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTags iterate %j', request);
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
       request as {},
@@ -7132,7 +8491,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRules(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListRulesRequest,
+          | protos.google.devtools.artifactregistry.v1.IListRulesResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRules request %j', request);
+    return this.innerApiCalls
+      .listRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IRule[],
+          protos.google.devtools.artifactregistry.v1.IListRulesRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListRulesResponse,
+        ]) => {
+          this._log.info('listRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7173,6 +8558,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRules stream %j', request);
     return this.descriptors.page.listRules.createStream(
       this.innerApiCalls.listRules as GaxCall,
       request,
@@ -7221,6 +8607,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRules iterate %j', request);
     return this.descriptors.page.listRules.asyncIterate(
       this.innerApiCalls['listRules'] as GaxCall,
       request as {},
@@ -7329,7 +8716,33 @@ export class ArtifactRegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAttachments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
+          | protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.devtools.artifactregistry.v1.IAttachment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAttachments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAttachments request %j', request);
+    return this.innerApiCalls
+      .listAttachments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.devtools.artifactregistry.v1.IAttachment[],
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest | null,
+          protos.google.devtools.artifactregistry.v1.IListAttachmentsResponse,
+        ]) => {
+          this._log.info('listAttachments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7375,6 +8788,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAttachments stream %j', request);
     return this.descriptors.page.listAttachments.createStream(
       this.innerApiCalls.listAttachments as GaxCall,
       request,
@@ -7428,6 +8842,7 @@ export class ArtifactRegistryClient {
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAttachments iterate %j', request);
     return this.descriptors.page.listAttachments.asyncIterate(
       this.innerApiCalls['listAttachments'] as GaxCall,
       request as {},
@@ -8799,6 +10214,7 @@ export class ArtifactRegistryClient {
   close(): Promise<void> {
     if (this.artifactRegistryStub && !this._terminated) {
       return this.artifactRegistryStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

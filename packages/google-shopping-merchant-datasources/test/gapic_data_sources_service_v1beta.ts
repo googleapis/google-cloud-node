@@ -335,7 +335,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DataSource()
       );
@@ -367,7 +367,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DataSource()
       );
@@ -415,7 +415,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataSource = stubSimpleCall(
         undefined,
@@ -469,7 +469,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DataSource()
       );
@@ -501,7 +501,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DataSource()
       );
@@ -549,7 +549,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataSource = stubSimpleCall(
         undefined,
@@ -604,7 +604,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['dataSource', 'name']
       );
       request.dataSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DataSource()
       );
@@ -637,7 +637,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['dataSource', 'name']
       );
       request.dataSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_source.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DataSource()
       );
@@ -686,7 +686,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['dataSource', 'name']
       );
       request.dataSource.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_source.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_source.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataSource = stubSimpleCall(
         undefined,
@@ -741,7 +741,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -773,7 +773,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -821,7 +821,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataSource = stubSimpleCall(
         undefined,
@@ -875,7 +875,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -907,7 +907,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -955,7 +955,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchDataSource = stubSimpleCall(
         undefined,
@@ -1009,7 +1009,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.datasources.v1beta.DataSource()
@@ -1049,7 +1049,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.datasources.v1beta.DataSource()
@@ -1107,7 +1107,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataSources = stubSimpleCall(
         undefined,
@@ -1139,7 +1139,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.datasources.v1beta.DataSource()
@@ -1203,7 +1203,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataSources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1256,7 +1256,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.shopping.merchant.datasources.v1beta.DataSource()
@@ -1307,7 +1307,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataSources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

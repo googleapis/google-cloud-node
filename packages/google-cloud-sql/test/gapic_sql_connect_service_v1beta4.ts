@@ -299,7 +299,7 @@ describe('v1beta4.SqlConnectServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.ConnectSettings()
       );
@@ -337,7 +337,7 @@ describe('v1beta4.SqlConnectServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.ConnectSettings()
       );
@@ -390,7 +390,7 @@ describe('v1beta4.SqlConnectServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectSettings = stubSimpleCall(
         undefined,
@@ -454,7 +454,7 @@ describe('v1beta4.SqlConnectServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.GenerateEphemeralCertResponse()
       );
@@ -492,7 +492,7 @@ describe('v1beta4.SqlConnectServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.GenerateEphemeralCertResponse()
       );
@@ -545,7 +545,7 @@ describe('v1beta4.SqlConnectServiceClient', () => {
         ['instance']
       );
       request.instance = defaultValue2;
-      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&instance=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateEphemeralCert = stubSimpleCall(
         undefined,

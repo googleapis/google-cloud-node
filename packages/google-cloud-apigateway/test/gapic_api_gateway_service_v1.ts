@@ -353,7 +353,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
@@ -384,7 +384,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Gateway()
       );
@@ -431,7 +431,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGateway = stubSimpleCall(
         undefined,
@@ -483,7 +483,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
@@ -514,7 +514,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.Api()
       );
@@ -561,7 +561,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApi = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getApi(request), expectedError);
@@ -610,7 +610,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
@@ -641,7 +641,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.apigateway.v1.ApiConfig()
       );
@@ -688,7 +688,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getApiConfig = stubSimpleCall(
         undefined,
@@ -740,7 +740,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -773,7 +773,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -827,7 +827,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -858,7 +858,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGateway = stubLongRunningCall(
         undefined,
@@ -935,7 +935,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -969,7 +969,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1024,7 +1024,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -1056,7 +1056,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['gateway', 'name']
       );
       request.gateway.name = defaultValue1;
-      const expectedHeaderRequestParams = `gateway.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `gateway.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGateway = stubLongRunningCall(
         undefined,
@@ -1132,7 +1132,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1165,7 +1165,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1219,7 +1219,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -1250,7 +1250,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGateway = stubLongRunningCall(
         undefined,
@@ -1326,7 +1326,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1358,7 +1358,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1412,7 +1412,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubLongRunningCall(
         undefined,
@@ -1443,7 +1443,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApi = stubLongRunningCall(
         undefined,
@@ -1517,7 +1517,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1550,7 +1550,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1605,7 +1605,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubLongRunningCall(
         undefined,
@@ -1637,7 +1637,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['api', 'name']
       );
       request.api.name = defaultValue1;
-      const expectedHeaderRequestParams = `api.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApi = stubLongRunningCall(
         undefined,
@@ -1710,7 +1710,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1742,7 +1742,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1796,7 +1796,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubLongRunningCall(
         undefined,
@@ -1827,7 +1827,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApi = stubLongRunningCall(
         undefined,
@@ -1900,7 +1900,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1933,7 +1933,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1987,7 +1987,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApiConfig = stubLongRunningCall(
         undefined,
@@ -2018,7 +2018,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createApiConfig = stubLongRunningCall(
         undefined,
@@ -2095,7 +2095,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2129,7 +2129,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2184,7 +2184,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApiConfig = stubLongRunningCall(
         undefined,
@@ -2216,7 +2216,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['apiConfig', 'name']
       );
       request.apiConfig.name = defaultValue1;
-      const expectedHeaderRequestParams = `api_config.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `api_config.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateApiConfig = stubLongRunningCall(
         undefined,
@@ -2292,7 +2292,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2325,7 +2325,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2379,7 +2379,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
         undefined,
@@ -2410,7 +2410,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteApiConfig = stubLongRunningCall(
         undefined,
@@ -2486,7 +2486,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2519,7 +2519,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2568,7 +2568,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGateways = stubSimpleCall(
         undefined,
@@ -2599,7 +2599,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2653,7 +2653,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.createStream = stubPageStreamingCall(
         undefined,
@@ -2704,7 +2704,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Gateway()),
@@ -2747,7 +2747,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGateways.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2789,7 +2789,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2822,7 +2822,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2871,7 +2871,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApis = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listApis(request), expectedError);
@@ -2899,7 +2899,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -2950,7 +2950,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.createStream = stubPageStreamingCall(
         undefined,
@@ -2998,7 +2998,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
         generateSampleMessage(new protos.google.cloud.apigateway.v1.Api()),
@@ -3040,7 +3040,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApis.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3083,7 +3083,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3122,7 +3122,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3177,7 +3177,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listApiConfigs = stubSimpleCall(
         undefined,
@@ -3208,7 +3208,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3268,7 +3268,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3317,7 +3317,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.apigateway.v1.ApiConfig()
@@ -3366,7 +3366,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listApiConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class ChunkServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class ChunkServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -623,7 +626,36 @@ export class ChunkServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getChunk(request, options, callback);
+    this._log.info('getChunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IChunk,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetChunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1alpha.IChunk,
+          (
+            | protos.google.cloud.discoveryengine.v1alpha.IGetChunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -740,11 +772,37 @@ export class ChunkServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listChunks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1alpha.IListChunksRequest,
+          | protos.google.cloud.discoveryengine.v1alpha.IListChunksResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1alpha.IChunk
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChunks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChunks request %j', request);
+    return this.innerApiCalls
+      .listChunks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1alpha.IChunk[],
+          protos.google.cloud.discoveryengine.v1alpha.IListChunksRequest | null,
+          protos.google.cloud.discoveryengine.v1alpha.IListChunksResponse,
+        ]) => {
+          this._log.info('listChunks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChunks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -798,6 +856,7 @@ export class ChunkServiceClient {
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
       request,
@@ -863,6 +922,7 @@ export class ChunkServiceClient {
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,
       request as {},
@@ -4281,6 +4341,7 @@ export class ChunkServiceClient {
   close(): Promise<void> {
     if (this.chunkServiceStub && !this._terminated) {
       return this.chunkServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

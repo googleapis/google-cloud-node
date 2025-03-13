@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,14 +20,15 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/cloud/dialogflow/cx/v3beta1/advanced_settings.proto";
 import "google/cloud/dialogflow/cx/v3beta1/example.proto";
+import "google/cloud/dialogflow/cx/v3beta1/fulfillment.proto";
 import "google/cloud/dialogflow/cx/v3beta1/generative_settings.proto";
 import "google/cloud/dialogflow/cx/v3beta1/parameter_definition.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.Cx.V3Beta1";
 option go_package = "cloud.google.com/go/dialogflow/cx/apiv3beta1/cxpb;cxpb";
 option java_multiple_files = true;
@@ -237,6 +238,11 @@ message Playbook {
 
   // Message of the Instruction of the playbook.
   message Instruction {
+    // General guidelines for the playbook. These are unstructured instructions
+    // that are not directly part of the goal, e.g. "Always be polite". It's
+    // valid for this text to be long and used instead of steps altogether.
+    string guidelines = 1;
+
     // Ordered list of step by step execution instructions to accomplish
     // target goal.
     repeated Step steps = 2;
@@ -251,7 +257,8 @@ message Playbook {
   string display_name = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Required. High level description of the goal the playbook intend to
-  // accomplish.
+  // accomplish. A goal should be concise since it's visible to other playbooks
+  // that may reference this playbook.
   string goal = 3 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Defined structured input parameters for this playbook.
@@ -304,6 +311,14 @@ message Playbook {
   // Optional. Llm model settings for the playbook.
   LlmModelSettings llm_model_settings = 14
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Playbook level Settings for speech to text detection.
+  AdvancedSettings.SpeechSettings speech_settings = 20
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A list of registered handlers to execute based on the specified
+  // triggers.
+  repeated Handler handlers = 16 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request message for
@@ -411,4 +426,48 @@ message DeletePlaybookVersionRequest {
       type: "dialogflow.googleapis.com/PlaybookVersion"
     }
   ];
+}
+
+// Handler can be used to define custom logic to be executed based on the
+// user-specified triggers.
+message Handler {
+  // A handler that is triggered by the specified
+  // [event][google.cloud.dialogflow.cx.v3beta1.Handler.EventHandler.event].
+  message EventHandler {
+    // Required. The name of the event that triggers this handler.
+    string event = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. The condition that must be satisfied to trigger this handler.
+    string condition = 3 [(google.api.field_behavior) = OPTIONAL];
+
+    // Required. The fulfillment to call when the event occurs.
+    Fulfillment fulfillment = 2 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  // A handler that is triggered on the specific
+  // [lifecycle_stage][google.cloud.dialogflow.cx.v3beta1.Handler.LifecycleHandler.lifecycle_stage]
+  // of the playbook execution.
+  message LifecycleHandler {
+    // Required. The name of the lifecycle stage that triggers this handler.
+    // Supported values:
+    // * `playbook-start`
+    // * `pre-action-selection`
+    // * `pre-action-execution`
+    string lifecycle_stage = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. The condition that must be satisfied to trigger this handler.
+    string condition = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // Required. The fulfillment to call when this handler is triggered.
+    Fulfillment fulfillment = 3 [(google.api.field_behavior) = REQUIRED];
+  }
+
+  // Specifies the type of handler to invoke.
+  oneof handler {
+    // A handler triggered by event.
+    EventHandler event_handler = 1;
+
+    // A handler triggered during specific lifecycle of the playbook execution.
+    LifecycleHandler lifecycle_handler = 3;
+  }
 }

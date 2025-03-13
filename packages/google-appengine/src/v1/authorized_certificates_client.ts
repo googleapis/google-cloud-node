@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class AuthorizedCertificatesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('appengine-admin');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class AuthorizedCertificatesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -481,11 +484,36 @@ export class AuthorizedCertificatesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAuthorizedCertificate(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getAuthorizedCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuthorizedCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          (
+            | protos.google.appengine.v1.IGetAuthorizedCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAuthorizedCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Uploads the specified SSL certificate.
@@ -583,11 +611,36 @@ export class AuthorizedCertificatesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAuthorizedCertificate(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createAuthorizedCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAuthorizedCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          (
+            | protos.google.appengine.v1.ICreateAuthorizedCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAuthorizedCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified SSL certificate. To renew a certificate and maintain
@@ -694,11 +747,36 @@ export class AuthorizedCertificatesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAuthorizedCertificate(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateAuthorizedCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAuthorizedCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IAuthorizedCertificate,
+          (
+            | protos.google.appengine.v1.IUpdateAuthorizedCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAuthorizedCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified SSL certificate.
@@ -795,11 +873,36 @@ export class AuthorizedCertificatesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAuthorizedCertificate(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteAuthorizedCertificate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAuthorizedCertificate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAuthorizedCertificate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.appengine.v1.IDeleteAuthorizedCertificateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAuthorizedCertificate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -899,15 +1002,37 @@ export class AuthorizedCertificatesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAuthorizedCertificates(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
+          | protos.google.appengine.v1.IListAuthorizedCertificatesResponse
+          | null
+          | undefined,
+          protos.google.appengine.v1.IAuthorizedCertificate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuthorizedCertificates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuthorizedCertificates request %j', request);
+    return this.innerApiCalls
+      .listAuthorizedCertificates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.appengine.v1.IAuthorizedCertificate[],
+          protos.google.appengine.v1.IListAuthorizedCertificatesRequest | null,
+          protos.google.appengine.v1.IListAuthorizedCertificatesResponse,
+        ]) => {
+          this._log.info('listAuthorizedCertificates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAuthorizedCertificates`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -944,6 +1069,7 @@ export class AuthorizedCertificatesClient {
     const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAuthorizedCertificates stream %j', request);
     return this.descriptors.page.listAuthorizedCertificates.createStream(
       this.innerApiCalls.listAuthorizedCertificates as GaxCall,
       request,
@@ -992,6 +1118,7 @@ export class AuthorizedCertificatesClient {
     const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAuthorizedCertificates iterate %j', request);
     return this.descriptors.page.listAuthorizedCertificates.asyncIterate(
       this.innerApiCalls['listAuthorizedCertificates'] as GaxCall,
       request as {},
@@ -1078,6 +1205,7 @@ export class AuthorizedCertificatesClient {
   close(): Promise<void> {
     if (this.authorizedCertificatesStub && !this._terminated) {
       return this.authorizedCertificatesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

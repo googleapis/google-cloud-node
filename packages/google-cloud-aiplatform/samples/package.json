@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"
@@ -13,7 +13,7 @@
     "test": "mocha --timeout 1200000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/aiplatform": "^3.34.0"
+    "@google-cloud/aiplatform": "^3.35.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

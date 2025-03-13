@@ -27,6 +27,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class TetherClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apigee-connect');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -86,7 +89,7 @@ export class TetherClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -260,7 +263,7 @@ export class TetherClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -402,6 +405,7 @@ export class TetherClient {
    */
   egress(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('egress stream %j', options);
     return this.innerApiCalls.egress(null, options);
   }
 
@@ -414,6 +418,7 @@ export class TetherClient {
   close(): Promise<void> {
     if (this.tetherStub && !this._terminated) {
       return this.tetherStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

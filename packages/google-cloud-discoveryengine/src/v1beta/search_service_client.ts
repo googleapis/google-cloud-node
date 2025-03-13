@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SearchServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class SearchServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -212,6 +215,9 @@ export class SearchServiceClient {
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/evaluations/{evaluation}'
       ),
+      groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -266,6 +272,10 @@ export class SearchServiceClient {
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -342,6 +352,10 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
         ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+        ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
@@ -359,6 +373,11 @@ export class SearchServiceClient {
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
       search: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results'
+      ),
+      searchLite: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'results'
@@ -415,7 +434,7 @@ export class SearchServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const searchServiceStubMethods = ['search'];
+    const searchServiceStubMethods = ['search', 'searchLite'];
     for (const methodName of searchServiceStubMethods) {
       const callPromise = this.searchServiceStub.then(
         stub =>
@@ -580,6 +599,10 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
    *   Specs defining dataStores to filter on in a search call and configurations
    *   for those dataStores. This is only considered for engines with multiple
@@ -794,6 +817,17 @@ export class SearchServiceClient {
    *   Default to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set,
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -878,11 +912,37 @@ export class SearchServiceClient {
         serving_config: request.servingConfig ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.search(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+          | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('search values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('search request %j', request);
+    return this.innerApiCalls
+      .search(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
+          protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.ISearchResponse,
+        ]) => {
+          this._log.info('search values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `search`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.servingConfig
@@ -930,6 +990,10 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
    *   Specs defining dataStores to filter on in a search call and configurations
    *   for those dataStores. This is only considered for engines with multiple
@@ -1144,6 +1208,17 @@ export class SearchServiceClient {
    *   Default to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set,
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1170,6 +1245,7 @@ export class SearchServiceClient {
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
       request,
@@ -1228,6 +1304,10 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
    *   Specs defining dataStores to filter on in a search call and configurations
    *   for those dataStores. This is only considered for engines with multiple
@@ -1442,6 +1522,17 @@ export class SearchServiceClient {
    *   Default to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set,
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1469,8 +1560,1039 @@ export class SearchServiceClient {
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>;
+  }
+  /**
+   * Performs a search. Similar to the
+   * {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   * method, but a lite version that allows API key for authentication, where
+   * OAuth and IAM checks are not required.
+   *
+   * Only public website search is supported by this method. If data stores and
+   * engines not associated with public website search are specified, a
+   * `FAILED_PRECONDITION` error is returned.
+   *
+   * This method can be used for easy onboarding without having to implement an
+   * authentication backend. However, it is strongly recommended to use
+   * {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   * instead with required OAuth and IAM checks to provide better data security.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
+   *   or
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {string} request.branch
+   *   The branch resource name, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
+   *
+   *   Use `default_branch` as the branch ID or leave this field empty, to search
+   *   documents under the default branch.
+   * @param {string} request.query
+   *   Raw search query.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
+   *   Raw image query.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s
+   *   to return. The maximum allowed value depends on the data type. Values above
+   *   the maximum value are coerced to the maximum value.
+   *
+   *   * Websites with basic indexing: Default `10`, Maximum `25`.
+   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *   * Other: Default `50`, Maximum `100`.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   must match the call that provided the page token. Otherwise, an
+   *    `INVALID_ARGUMENT`  error is returned.
+   * @param {number} request.offset
+   *   A 0-indexed integer that specifies the current offset (that is, starting
+   *   result location, amongst the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
+   *   as relevant) in search results. This field is only considered if
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
+   *   is unset.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
+   * @param {number[]} request.dataStoreSpecs
+   *   Specs defining dataStores to filter on in a search call and configurations
+   *   for those dataStores. This is only considered for engines with multiple
+   *   dataStores use case. For single dataStore within an engine, they should
+   *   use the specs at the top level.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+   *   key property defined in the Vertex AI Search backend -- this mapping is
+   *   defined by the customer in their schema. For example a media customer might
+   *   have a field 'name' in their schema. In this case the filter would look
+   *   like this: filter --> name:'ANY("king kong")'
+   *
+   *   For more information about filtering including syntax and filter
+   *   operators, see
+   *   [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+   * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
+   *   The filter applied to every search request when quality improvement such as
+   *   query expansion is needed. In the case a query does not have a sufficient
+   *   amount of results this filter will be used to determine whether or not to
+   *   enable the query expansion flow. The original filter will still be used for
+   *   the query expanded search.
+   *   This field is strongly recommended to achieve high search quality.
+   *
+   *   For more information about filter syntax, see
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.filter|SearchRequest.filter}.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Documents can be ordered by
+   *   a field in an {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}
+   *   object. Leave it unset if ordered by relevance. `order_by` expression is
+   *   case-sensitive.
+   *
+   *   For more information on ordering the website search results, see
+   *   [Order web search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *   For more information on ordering the healthcare search results, see
+   *   [Order healthcare search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
+   *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   *   Information about the end user.
+   *   Highly recommended for analytics.
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
+   *   is used to deduce `device_type` for analytics.
+   * @param {string} request.languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). This field
+   *   helps to better interpret the query. If a value isn't specified, the query
+   *   language code is automatically detected, which may not be accurate.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of a location, such as "US" and
+   *   "419". For more information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). If set,
+   *   then results will be boosted based on the region_code provided.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
+   *   For more information on boosting, see
+   *   [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+   * @param {number[]} request.params
+   *   Additional search parameters.
+   *
+   *   For public website search only, supported values are:
+   *
+   *   * `user_country_code`: string. Default empty. If set to non-empty, results
+   *      are restricted or boosted based on the location provided.
+   *      For example, `user_country_code: "au"`
+   *
+   *      For available codes see [Country
+   *      Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+   *
+   *   * `search_type`: double. Default empty. Enables non-webpage searching
+   *      depending on the value. The only valid non-default value is 1,
+   *      which enables image searching.
+   *      For example, `search_type: 1`
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   *   The query expansion specification that specifies the conditions under which
+   *   query expansion occurs.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction takes effect.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   *   A specification for configuring the behavior of content search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec} request.embeddingSpec
+   *   Uses the provided embedding to do additional semantic document retrieval.
+   *   The retrieval is based on the dot product of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.vector|SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+   *   and the document embedding that is provided in
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
+   *
+   *   If
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+   *   is not provided, it will use
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
+   * @param {string} request.rankingExpression
+   *   The ranking expression controls the customized ranking on retrieval
+   *   documents. This overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
+   *   The ranking expression is a single function or multiple functions that are
+   *   joined by "+".
+   *
+   *     * ranking_expression = function, { " + ", function };
+   *
+   *   Supported functions:
+   *
+   *     * double * relevance_score
+   *     * double * dotProduct(embedding_field_path)
+   *
+   *   Function variables:
+   *
+   *     * `relevance_score`: pre-defined keywords, used for measure relevance
+   *     between query and document.
+   *     * `embedding_field_path`: the document embedding field
+   *     used with query embedding vector.
+   *     * `dotProduct`: embedding function between embedding_field_path and query
+   *     embedding vector.
+   *
+   *    Example ranking expression:
+   *
+   *      If document has an embedding field doc_embedding, the ranking expression
+   *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search. This is only supported for
+   *   website search.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *   natural language query understanding will be done.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+   *   Search as you type configuration. Only supported for the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+   *   vertical.
+   * @param {string} request.session
+   *   The session resource name. Optional.
+   *
+   *   Session allows users to do multi-turn /search API calls or coordination
+   *   between /search API calls and /answer API calls.
+   *
+   *   Example #1 (multi-turn /search API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /search API with the session ID generated in the first call.
+   *        Here, the previous search query gets considered in query
+   *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *        and the current query is "How about 2023?", the current query will
+   *        be interpreted as "How did Alphabet do in 2023?".
+   *
+   *   Example #2 (coordination between /search API calls and /answer API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /answer API with the session ID generated in the first call.
+   *        Here, the answer generation happens in the context of the search
+   *        results from the first search call.
+   *
+   *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *   gets automatically created. Otherwise, users can use the create-session API
+   *   to create a session manually.
+   *
+   *   Multi-turn Search feature is currently at private GA stage. Please use
+   *   v1alpha or v1beta version instead before we launch this feature to public
+   *   GA. Or ask for allowlisting through Google Support team.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
+   *   Session specification.
+   *
+   *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set,
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult|SearchResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchLiteAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchLite(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.ISearchResponse,
+    ]
+  >;
+  searchLite(
+    request: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+    >
+  ): void;
+  searchLite(
+    request: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+    >
+  ): void;
+  searchLite(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+          | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+      | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+      | null
+      | undefined,
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
+      protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
+      protos.google.cloud.discoveryengine.v1beta.ISearchResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    this.initialize();
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+          | protos.google.cloud.discoveryengine.v1beta.ISearchResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchLite values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchLite request %j', request);
+    return this.innerApiCalls
+      .searchLite(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult[],
+          protos.google.cloud.discoveryengine.v1beta.ISearchRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.ISearchResponse,
+        ]) => {
+          this._log.info('searchLite values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `searchLite`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
+   *   or
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {string} request.branch
+   *   The branch resource name, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
+   *
+   *   Use `default_branch` as the branch ID or leave this field empty, to search
+   *   documents under the default branch.
+   * @param {string} request.query
+   *   Raw search query.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
+   *   Raw image query.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s
+   *   to return. The maximum allowed value depends on the data type. Values above
+   *   the maximum value are coerced to the maximum value.
+   *
+   *   * Websites with basic indexing: Default `10`, Maximum `25`.
+   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *   * Other: Default `50`, Maximum `100`.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   must match the call that provided the page token. Otherwise, an
+   *    `INVALID_ARGUMENT`  error is returned.
+   * @param {number} request.offset
+   *   A 0-indexed integer that specifies the current offset (that is, starting
+   *   result location, amongst the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
+   *   as relevant) in search results. This field is only considered if
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
+   *   is unset.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
+   * @param {number[]} request.dataStoreSpecs
+   *   Specs defining dataStores to filter on in a search call and configurations
+   *   for those dataStores. This is only considered for engines with multiple
+   *   dataStores use case. For single dataStore within an engine, they should
+   *   use the specs at the top level.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+   *   key property defined in the Vertex AI Search backend -- this mapping is
+   *   defined by the customer in their schema. For example a media customer might
+   *   have a field 'name' in their schema. In this case the filter would look
+   *   like this: filter --> name:'ANY("king kong")'
+   *
+   *   For more information about filtering including syntax and filter
+   *   operators, see
+   *   [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+   * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
+   *   The filter applied to every search request when quality improvement such as
+   *   query expansion is needed. In the case a query does not have a sufficient
+   *   amount of results this filter will be used to determine whether or not to
+   *   enable the query expansion flow. The original filter will still be used for
+   *   the query expanded search.
+   *   This field is strongly recommended to achieve high search quality.
+   *
+   *   For more information about filter syntax, see
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.filter|SearchRequest.filter}.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Documents can be ordered by
+   *   a field in an {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}
+   *   object. Leave it unset if ordered by relevance. `order_by` expression is
+   *   case-sensitive.
+   *
+   *   For more information on ordering the website search results, see
+   *   [Order web search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *   For more information on ordering the healthcare search results, see
+   *   [Order healthcare search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
+   *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   *   Information about the end user.
+   *   Highly recommended for analytics.
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
+   *   is used to deduce `device_type` for analytics.
+   * @param {string} request.languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). This field
+   *   helps to better interpret the query. If a value isn't specified, the query
+   *   language code is automatically detected, which may not be accurate.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of a location, such as "US" and
+   *   "419". For more information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). If set,
+   *   then results will be boosted based on the region_code provided.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
+   *   For more information on boosting, see
+   *   [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+   * @param {number[]} request.params
+   *   Additional search parameters.
+   *
+   *   For public website search only, supported values are:
+   *
+   *   * `user_country_code`: string. Default empty. If set to non-empty, results
+   *      are restricted or boosted based on the location provided.
+   *      For example, `user_country_code: "au"`
+   *
+   *      For available codes see [Country
+   *      Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+   *
+   *   * `search_type`: double. Default empty. Enables non-webpage searching
+   *      depending on the value. The only valid non-default value is 1,
+   *      which enables image searching.
+   *      For example, `search_type: 1`
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   *   The query expansion specification that specifies the conditions under which
+   *   query expansion occurs.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction takes effect.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   *   A specification for configuring the behavior of content search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec} request.embeddingSpec
+   *   Uses the provided embedding to do additional semantic document retrieval.
+   *   The retrieval is based on the dot product of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.vector|SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+   *   and the document embedding that is provided in
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
+   *
+   *   If
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+   *   is not provided, it will use
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
+   * @param {string} request.rankingExpression
+   *   The ranking expression controls the customized ranking on retrieval
+   *   documents. This overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
+   *   The ranking expression is a single function or multiple functions that are
+   *   joined by "+".
+   *
+   *     * ranking_expression = function, { " + ", function };
+   *
+   *   Supported functions:
+   *
+   *     * double * relevance_score
+   *     * double * dotProduct(embedding_field_path)
+   *
+   *   Function variables:
+   *
+   *     * `relevance_score`: pre-defined keywords, used for measure relevance
+   *     between query and document.
+   *     * `embedding_field_path`: the document embedding field
+   *     used with query embedding vector.
+   *     * `dotProduct`: embedding function between embedding_field_path and query
+   *     embedding vector.
+   *
+   *    Example ranking expression:
+   *
+   *      If document has an embedding field doc_embedding, the ranking expression
+   *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search. This is only supported for
+   *   website search.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *   natural language query understanding will be done.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+   *   Search as you type configuration. Only supported for the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+   *   vertical.
+   * @param {string} request.session
+   *   The session resource name. Optional.
+   *
+   *   Session allows users to do multi-turn /search API calls or coordination
+   *   between /search API calls and /answer API calls.
+   *
+   *   Example #1 (multi-turn /search API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /search API with the session ID generated in the first call.
+   *        Here, the previous search query gets considered in query
+   *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *        and the current query is "How about 2023?", the current query will
+   *        be interpreted as "How did Alphabet do in 2023?".
+   *
+   *   Example #2 (coordination between /search API calls and /answer API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /answer API with the session ID generated in the first call.
+   *        Here, the answer generation happens in the context of the search
+   *        results from the first search call.
+   *
+   *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *   gets automatically created. Otherwise, users can use the create-session API
+   *   to create a session manually.
+   *
+   *   Multi-turn Search feature is currently at private GA stage. Please use
+   *   v1alpha or v1beta version instead before we launch this feature to public
+   *   GA. Or ask for allowlisting through Google Support team.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
+   *   Session specification.
+   *
+   *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set,
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult|SearchResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchLiteAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchLiteStream(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchLite'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    this._log.info('searchLite stream %j', request);
+    return this.descriptors.page.searchLite.createStream(
+      this.innerApiCalls.searchLite as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchLite`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
+   *   or
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {string} request.branch
+   *   The branch resource name, such as
+   *   `projects/* /locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
+   *
+   *   Use `default_branch` as the branch ID or leave this field empty, to search
+   *   documents under the default branch.
+   * @param {string} request.query
+   *   Raw search query.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
+   *   Raw image query.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s
+   *   to return. The maximum allowed value depends on the data type. Values above
+   *   the maximum value are coerced to the maximum value.
+   *
+   *   * Websites with basic indexing: Default `10`, Maximum `25`.
+   *   * Websites with advanced indexing: Default `25`, Maximum `50`.
+   *   * Other: Default `50`, Maximum `100`.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT` is returned.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchService.Search|SearchService.Search}
+   *   must match the call that provided the page token. Otherwise, an
+   *    `INVALID_ARGUMENT`  error is returned.
+   * @param {number} request.offset
+   *   A 0-indexed integer that specifies the current offset (that is, starting
+   *   result location, amongst the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s deemed by the API
+   *   as relevant) in search results. This field is only considered if
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.page_token|page_token}
+   *   is unset.
+   *
+   *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
+   * @param {number[]} request.dataStoreSpecs
+   *   Specs defining dataStores to filter on in a search call and configurations
+   *   for those dataStores. This is only considered for engines with multiple
+   *   dataStores use case. For single dataStore within an engine, they should
+   *   use the specs at the top level.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+   *   key property defined in the Vertex AI Search backend -- this mapping is
+   *   defined by the customer in their schema. For example a media customer might
+   *   have a field 'name' in their schema. In this case the filter would look
+   *   like this: filter --> name:'ANY("king kong")'
+   *
+   *   For more information about filtering including syntax and filter
+   *   operators, see
+   *   [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+   * @param {string} request.canonicalFilter
+   *   The default filter that is applied when a user performs a search without
+   *   checking any filters on the search page.
+   *
+   *   The filter applied to every search request when quality improvement such as
+   *   query expansion is needed. In the case a query does not have a sufficient
+   *   amount of results this filter will be used to determine whether or not to
+   *   enable the query expansion flow. The original filter will still be used for
+   *   the query expanded search.
+   *   This field is strongly recommended to achieve high search quality.
+   *
+   *   For more information about filter syntax, see
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.filter|SearchRequest.filter}.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Documents can be ordered by
+   *   a field in an {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}
+   *   object. Leave it unset if ordered by relevance. `order_by` expression is
+   *   case-sensitive.
+   *
+   *   For more information on ordering the website search results, see
+   *   [Order web search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *   For more information on ordering the healthcare search results, see
+   *   [Order healthcare search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
+   *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+   * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
+   *   Information about the end user.
+   *   Highly recommended for analytics.
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
+   *   is used to deduce `device_type` for analytics.
+   * @param {string} request.languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). This field
+   *   helps to better interpret the query. If a value isn't specified, the query
+   *   language code is automatically detected, which may not be accurate.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of a location, such as "US" and
+   *   "419". For more information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). If set,
+   *   then results will be boosted based on the region_code provided.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
+   *   For more information on boosting, see
+   *   [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+   * @param {number[]} request.params
+   *   Additional search parameters.
+   *
+   *   For public website search only, supported values are:
+   *
+   *   * `user_country_code`: string. Default empty. If set to non-empty, results
+   *      are restricted or boosted based on the location provided.
+   *      For example, `user_country_code: "au"`
+   *
+   *      For available codes see [Country
+   *      Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+   *
+   *   * `search_type`: double. Default empty. Enables non-webpage searching
+   *      depending on the value. The only valid non-default value is 1,
+   *      which enables image searching.
+   *      For example, `search_type: 1`
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
+   *   The query expansion specification that specifies the conditions under which
+   *   query expansion occurs.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
+   *   The spell correction specification that specifies the mode under
+   *   which spell correction takes effect.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   This should be the same identifier as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id|UserEvent.user_pseudo_id}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.CompleteQueryRequest.user_pseudo_id|CompleteQueryRequest.user_pseudo_id}
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
+   *   A specification for configuring the behavior of content search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec} request.embeddingSpec
+   *   Uses the provided embedding to do additional semantic document retrieval.
+   *   The retrieval is based on the dot product of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.vector|SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+   *   and the document embedding that is provided in
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
+   *
+   *   If
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+   *   is not provided, it will use
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
+   * @param {string} request.rankingExpression
+   *   The ranking expression controls the customized ranking on retrieval
+   *   documents. This overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
+   *   The ranking expression is a single function or multiple functions that are
+   *   joined by "+".
+   *
+   *     * ranking_expression = function, { " + ", function };
+   *
+   *   Supported functions:
+   *
+   *     * double * relevance_score
+   *     * double * dotProduct(embedding_field_path)
+   *
+   *   Function variables:
+   *
+   *     * `relevance_score`: pre-defined keywords, used for measure relevance
+   *     between query and document.
+   *     * `embedding_field_path`: the document embedding field
+   *     used with query embedding vector.
+   *     * `dotProduct`: embedding function between embedding_field_path and query
+   *     embedding vector.
+   *
+   *    Example ranking expression:
+   *
+   *      If document has an embedding field doc_embedding, the ranking expression
+   *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+   * @param {boolean} request.safeSearch
+   *   Whether to turn on safe search. This is only supported for
+   *   website search.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *   natural language query understanding will be done.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+   *   Search as you type configuration. Only supported for the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+   *   vertical.
+   * @param {string} request.session
+   *   The session resource name. Optional.
+   *
+   *   Session allows users to do multi-turn /search API calls or coordination
+   *   between /search API calls and /answer API calls.
+   *
+   *   Example #1 (multi-turn /search API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /search API with the session ID generated in the first call.
+   *        Here, the previous search query gets considered in query
+   *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *        and the current query is "How about 2023?", the current query will
+   *        be interpreted as "How did Alphabet do in 2023?".
+   *
+   *   Example #2 (coordination between /search API calls and /answer API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /answer API with the session ID generated in the first call.
+   *        Here, the answer generation happens in the context of the search
+   *        results from the first search call.
+   *
+   *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *   gets automatically created. Otherwise, users can use the create-session API
+   *   to create a session manually.
+   *
+   *   Multi-turn Search feature is currently at private GA stage. Please use
+   *   v1alpha or v1beta version instead before we launch this feature to public
+   *   GA. Or ask for allowlisting through Google Support team.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
+   *   Session specification.
+   *
+   *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
+   *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set,
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   overrides
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchResponse.SearchResult|SearchResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/search_service.search_lite.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_SearchService_SearchLite_async
+   */
+  searchLiteAsync(
+    request?: protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchLite'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    this._log.info('searchLite iterate %j', request);
+    return this.descriptors.page.searchLite.asyncIterate(
+      this.innerApiCalls['searchLite'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>;
@@ -1674,6 +2796,65 @@ export class SearchServiceClient {
   matchEvaluationFromEvaluationName(evaluationName: string) {
     return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
       .evaluation;
+  }
+
+  /**
+   * Return a fully-qualified groundingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} grounding_config
+   * @returns {string} Resource name string.
+   */
+  groundingConfigPath(
+    project: string,
+    location: string,
+    groundingConfig: string
+  ) {
+    return this.pathTemplates.groundingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      grounding_config: groundingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the grounding_config from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the grounding_config.
+   */
+  matchGroundingConfigFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).grounding_config;
   }
 
   /**
@@ -3054,6 +4235,109 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
@@ -4814,6 +6098,91 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSiteSearchEngineTargetSite resource name string.
    *
    * @param {string} project
@@ -5037,6 +6406,7 @@ export class SearchServiceClient {
   close(): Promise<void> {
     if (this.searchServiceStub && !this._terminated) {
       return this.searchServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

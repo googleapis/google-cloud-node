@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -339,7 +339,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CompleteQueryResponse()
       );
@@ -372,7 +372,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.discoveryengine.v1beta.CompleteQueryResponse()
       );
@@ -421,7 +421,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['dataStore']
       );
       request.dataStore = defaultValue1;
-      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeQuery = stubSimpleCall(
         undefined,
@@ -460,6 +460,151 @@ describe('v1beta.CompletionServiceClient', () => {
     });
   });
 
+  describe('advancedCompleteQuery', () => {
+    it('invokes advancedCompleteQuery without error', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest',
+        ['completionConfig']
+      );
+      request.completionConfig = defaultValue1;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse()
+      );
+      client.innerApiCalls.advancedCompleteQuery =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.advancedCompleteQuery(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.advancedCompleteQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.advancedCompleteQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes advancedCompleteQuery without error using callback', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest',
+        ['completionConfig']
+      );
+      request.completionConfig = defaultValue1;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse()
+      );
+      client.innerApiCalls.advancedCompleteQuery =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.advancedCompleteQuery(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.IAdvancedCompleteQueryResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.advancedCompleteQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.advancedCompleteQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes advancedCompleteQuery with error', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest',
+        ['completionConfig']
+      );
+      request.completionConfig = defaultValue1;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.advancedCompleteQuery = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.advancedCompleteQuery(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.advancedCompleteQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.advancedCompleteQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes advancedCompleteQuery with closed client', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryRequest',
+        ['completionConfig']
+      );
+      request.completionConfig = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.advancedCompleteQuery(request),
+        expectedError
+      );
+    });
+  });
+
   describe('importSuggestionDenyListEntries', () => {
     it('invokes importSuggestionDenyListEntries without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
@@ -477,7 +622,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -512,7 +657,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -568,7 +713,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importSuggestionDenyListEntries =
         stubLongRunningCall(undefined, expectedError);
@@ -602,7 +747,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importSuggestionDenyListEntries =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -682,7 +827,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -717,7 +862,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -773,7 +918,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeSuggestionDenyListEntries = stubLongRunningCall(
         undefined,
@@ -809,7 +954,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeSuggestionDenyListEntries = stubLongRunningCall(
         undefined,
@@ -892,7 +1037,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -927,7 +1072,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -983,7 +1128,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1019,7 +1164,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1102,7 +1247,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1137,7 +1282,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1193,7 +1338,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1229,7 +1374,7 @@ describe('v1beta.CompletionServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeCompletionSuggestions = stubLongRunningCall(
         undefined,
@@ -1975,6 +2120,73 @@ describe('v1beta.CompletionServiceClient', () => {
       });
     });
 
+    describe('groundingConfig', () => {
+      const fakePath = '/rendered/path/groundingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        grounding_config: 'groundingConfigValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.groundingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groundingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groundingConfigPath', () => {
+        const result = client.groundingConfigPath(
+          'projectValue',
+          'locationValue',
+          'groundingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroundingConfigName', () => {
+        const result = client.matchProjectFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromGroundingConfigName', () => {
+        const result = client.matchLocationFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroundingConfigFromGroundingConfigName', () => {
+        const result =
+          client.matchGroundingConfigFromGroundingConfigName(fakePath);
+        assert.strictEqual(result, 'groundingConfigValue');
+        assert(
+          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -2425,6 +2637,116 @@ describe('v1beta.CompletionServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionDataStoreCompletionConfig', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreCompletionConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreCompletionConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreCompletionConfigPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreCompletionConfigPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreCompletionConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreCompletionConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -3572,6 +3894,135 @@ describe('v1beta.CompletionServiceClient', () => {
       });
     });
 
+    describe('projectLocationCollectionDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStoreSiteSearchEngineTargetSite', () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionDataStoreSiteSearchEngineTargetSite';
@@ -3693,6 +4144,116 @@ describe('v1beta.CompletionServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationCollectionEngineCompletionConfig', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineCompletionConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineCompletionConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineCompletionConfigPath', () => {
+        const result =
+          client.projectLocationCollectionEngineCompletionConfigPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'engineValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCompletionConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineCompletionConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineCompletionConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineCompletionConfigName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineCompletionConfigName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCompletionConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -4713,6 +5274,96 @@ describe('v1beta.CompletionServiceClient', () => {
       });
     });
 
+    describe('projectLocationDataStoreCompletionConfig', () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreCompletionConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreCompletionConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreCompletionConfigPath', () => {
+        const result = client.projectLocationDataStoreCompletionConfigPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreCompletionConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreCompletionConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreCompletionConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreCompletionConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationDataStoreControl', () => {
       const fakePath = '/rendered/path/projectLocationDataStoreControl';
       const expectedParameters = {
@@ -5627,6 +6278,116 @@ describe('v1beta.CompletionServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationDataStoreSiteSearchEnginePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreSiteSearchEngineSitemap', () => {
+      const fakePath =
+        '/rendered/path/projectLocationDataStoreSiteSearchEngineSitemap';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        sitemap: 'sitemapValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreSiteSearchEngineSitemapPath', () => {
+        const result =
+          client.projectLocationDataStoreSiteSearchEngineSitemapPath(
+            'projectValue',
+            'locationValue',
+            'dataStoreValue',
+            'sitemapValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName', () => {
+        const result =
+          client.matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+            fakePath
+          );
+        assert.strictEqual(result, 'sitemapValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreSiteSearchEngineSitemapPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

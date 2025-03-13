@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -226,6 +226,9 @@ export class ModelServiceClient {
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
       ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
+      ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
@@ -338,6 +341,15 @@ export class ModelServiceClient {
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}'
       ),
+      ragCorpusPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}'
+      ),
+      ragFilePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/ragCorpora/{rag_corpus}/ragFiles/{rag_file}'
+      ),
+      reasoningEnginePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}'
+      ),
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
@@ -386,6 +398,11 @@ export class ModelServiceClient {
         'pageToken',
         'nextPageToken',
         'models'
+      ),
+      listModelVersionCheckpoints: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'checkpoints'
       ),
       listModelEvaluations: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -463,6 +480,9 @@ export class ModelServiceClient {
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -518,6 +538,10 @@ export class ModelServiceClient {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -559,6 +583,9 @@ export class ModelServiceClient {
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
             },
           ],
         },
@@ -784,6 +811,15 @@ export class ModelServiceClient {
               post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -996,6 +1032,10 @@ export class ModelServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
@@ -1099,6 +1139,18 @@ export class ModelServiceClient {
             {
               delete:
                 '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {
               delete:
@@ -1297,6 +1349,9 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
@@ -1370,6 +1425,15 @@ export class ModelServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
@@ -1538,6 +1602,9 @@ export class ModelServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
@@ -1608,6 +1675,9 @@ export class ModelServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
+            },
             {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1620,6 +1690,10 @@ export class ModelServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
@@ -1799,6 +1873,9 @@ export class ModelServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
             {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
@@ -1877,6 +1954,15 @@ export class ModelServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
@@ -2058,6 +2144,7 @@ export class ModelServiceClient {
       'getModel',
       'listModels',
       'listModelVersions',
+      'listModelVersionCheckpoints',
       'updateModel',
       'updateExplanationDataset',
       'deleteModel',
@@ -4016,7 +4103,7 @@ export class ModelServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModels`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4306,7 +4393,7 @@ export class ModelServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModelVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -4450,6 +4537,229 @@ export class ModelServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModel>;
   }
   /**
+   * Lists checkpoints of the specified model version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model version to list checkpoints for.
+   *   `projects/{project}/locations/{location}/models/{model}@{version}`
+   *   Example: `projects/{project}/locations/{location}/models/{model}@2`
+   *   or
+   *   `projects/{project}/locations/{location}/models/{model}@golden`
+   *   If no version ID or alias is specified, the latest version will be
+   *   used.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelVersionCheckpointsResponse.next_page_token|next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelVersionCheckpoints|ListModelVersionCheckpoints}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.ModelVersionCheckpoint|ModelVersionCheckpoint}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelVersionCheckpointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listModelVersionCheckpoints(
+    request?: protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint[],
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsResponse,
+    ]
+  >;
+  listModelVersionCheckpoints(
+    request: protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint
+    >
+  ): void;
+  listModelVersionCheckpoints(
+    request: protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint
+    >
+  ): void;
+  listModelVersionCheckpoints(
+    request?: protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+          | protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint[],
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listModelVersionCheckpoints(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `listModelVersionCheckpoints`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model version to list checkpoints for.
+   *   `projects/{project}/locations/{location}/models/{model}@{version}`
+   *   Example: `projects/{project}/locations/{location}/models/{model}@2`
+   *   or
+   *   `projects/{project}/locations/{location}/models/{model}@golden`
+   *   If no version ID or alias is specified, the latest version will be
+   *   used.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelVersionCheckpointsResponse.next_page_token|next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelVersionCheckpoints|ListModelVersionCheckpoints}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.ModelVersionCheckpoint|ModelVersionCheckpoint} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelVersionCheckpointsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listModelVersionCheckpointsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModelVersionCheckpoints.createStream(
+      this.innerApiCalls.listModelVersionCheckpoints as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listModelVersionCheckpoints`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model version to list checkpoints for.
+   *   `projects/{project}/locations/{location}/models/{model}@{version}`
+   *   Example: `projects/{project}/locations/{location}/models/{model}@2`
+   *   or
+   *   `projects/{project}/locations/{location}/models/{model}@golden`
+   *   If no version ID or alias is specified, the latest version will be
+   *   used.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   *   Typically obtained via
+   *   {@link protos.google.cloud.aiplatform.v1.ListModelVersionCheckpointsResponse.next_page_token|next_page_token}
+   *   of the previous
+   *   {@link protos.google.cloud.aiplatform.v1.ModelService.ListModelVersionCheckpoints|ListModelVersionCheckpoints}
+   *   call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.ModelVersionCheckpoint|ModelVersionCheckpoint}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/model_service.list_model_version_checkpoints.js</caption>
+   * region_tag:aiplatform_v1_generated_ModelService_ListModelVersionCheckpoints_async
+   */
+  listModelVersionCheckpointsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModelVersionCheckpoints.asyncIterate(
+      this.innerApiCalls['listModelVersionCheckpoints'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelVersionCheckpoint>;
+  }
+  /**
    * Lists ModelEvaluations in a Model.
    *
    * @param {Object} request
@@ -4558,7 +4868,7 @@ export class ModelServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModelEvaluations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4781,7 +5091,7 @@ export class ModelServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModelEvaluationSlices`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5142,7 +5452,7 @@ export class ModelServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -5155,6 +5465,20 @@ export class ModelServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -5191,6 +5515,13 @@ export class ModelServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -5226,11 +5557,11 @@ export class ModelServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -5239,6 +5570,20 @@ export class ModelServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -5269,7 +5614,7 @@ export class ModelServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -5282,6 +5627,20 @@ export class ModelServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -5577,6 +5936,58 @@ export class ModelServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**
@@ -7875,6 +8286,184 @@ export class ModelServiceClient {
     return this.pathTemplates.publisherModelPathTemplate.match(
       publisherModelName
     ).model;
+  }
+
+  /**
+   * Return a fully-qualified ragCorpus resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @returns {string} Resource name string.
+   */
+  ragCorpusPath(project: string, location: string, ragCorpus: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+    });
+  }
+
+  /**
+   * Parse the project from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .project;
+  }
+
+  /**
+   * Parse the location from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagCorpus resource.
+   *
+   * @param {string} ragCorpusName
+   *   A fully-qualified path representing RagCorpus resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagCorpusName(ragCorpusName: string) {
+    return this.pathTemplates.ragCorpusPathTemplate.match(ragCorpusName)
+      .rag_corpus;
+  }
+
+  /**
+   * Return a fully-qualified ragFile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} rag_corpus
+   * @param {string} rag_file
+   * @returns {string} Resource name string.
+   */
+  ragFilePath(
+    project: string,
+    location: string,
+    ragCorpus: string,
+    ragFile: string
+  ) {
+    return this.pathTemplates.ragFilePathTemplate.render({
+      project: project,
+      location: location,
+      rag_corpus: ragCorpus,
+      rag_file: ragFile,
+    });
+  }
+
+  /**
+   * Parse the project from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).project;
+  }
+
+  /**
+   * Parse the location from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).location;
+  }
+
+  /**
+   * Parse the rag_corpus from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_corpus.
+   */
+  matchRagCorpusFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_corpus;
+  }
+
+  /**
+   * Parse the rag_file from RagFile resource.
+   *
+   * @param {string} ragFileName
+   *   A fully-qualified path representing RagFile resource.
+   * @returns {string} A string representing the rag_file.
+   */
+  matchRagFileFromRagFileName(ragFileName: string) {
+    return this.pathTemplates.ragFilePathTemplate.match(ragFileName).rag_file;
+  }
+
+  /**
+   * Return a fully-qualified reasoningEngine resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @returns {string} Resource name string.
+   */
+  reasoningEnginePath(
+    project: string,
+    location: string,
+    reasoningEngine: string
+  ) {
+    return this.pathTemplates.reasoningEnginePathTemplate.render({
+      project: project,
+      location: location,
+      reasoning_engine: reasoningEngine,
+    });
+  }
+
+  /**
+   * Parse the project from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ReasoningEngine resource.
+   *
+   * @param {string} reasoningEngineName
+   *   A fully-qualified path representing ReasoningEngine resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromReasoningEngineName(reasoningEngineName: string) {
+    return this.pathTemplates.reasoningEnginePathTemplate.match(
+      reasoningEngineName
+    ).reasoning_engine;
   }
 
   /**

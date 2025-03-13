@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
   IamClient,
@@ -69,6 +71,7 @@ export class ModelGardenServiceClient {
   iamClient: IamClient;
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   modelGardenServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -286,6 +289,9 @@ export class ModelGardenServiceClient {
       indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
       ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
       metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
       ),
@@ -405,6 +411,1825 @@ export class ModelGardenServiceClient {
       ),
     };
 
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/ui/{name=projects/*/locations/*}',
+          additional_bindings: [
+            {get: '/v1beta1/{name=projects/*/locations/*}'},
+          ],
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/ui/{name=projects/*}/locations',
+          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/publishers/*/models/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:getIamPolicy',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/v1beta1/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/models/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/endpoints/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:testIamPermissions',
+            },
+            {
+              post: '/ui/{resource=projects/*/locations/*/featureGroups/*}:testIamPermissions',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
+          additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/ui/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/ui/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
+            {
+              get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/ui/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
+            {
+              get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/exampleStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/customJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/solvers/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.WaitOperation',
+          post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
+          additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/edgeDevices/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/evaluationTasks/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/exampleStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/customJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/artifacts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/contexts/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/metadataStores/*/executions/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/modelMonitors/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/migratableResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
+            },
+          ],
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const deployResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeployResponse'
+    ) as gax.protobuf.Type;
+    const deployMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeployOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deployPublisherModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeployPublisherModelResponse'
+    ) as gax.protobuf.Type;
+    const deployPublisherModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeployPublisherModelOperationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      deploy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deployResponse.decode.bind(deployResponse),
+        deployMetadata.decode.bind(deployMetadata)
+      ),
+      deployPublisherModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deployPublisherModelResponse.decode.bind(deployPublisherModelResponse),
+        deployPublisherModelMetadata.decode.bind(deployPublisherModelMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.aiplatform.v1beta1.ModelGardenService',
@@ -458,6 +2283,8 @@ export class ModelGardenServiceClient {
     const modelGardenServiceStubMethods = [
       'getPublisherModel',
       'listPublisherModels',
+      'deploy',
+      'deployPublisherModel',
     ];
     for (const methodName of modelGardenServiceStubMethods) {
       const callPromise = this.modelGardenServiceStub.then(
@@ -474,7 +2301,10 @@ export class ModelGardenServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -682,6 +2512,318 @@ export class ModelGardenServiceClient {
   }
 
   /**
+   * Deploys a model to a new endpoint.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.publisherModelName
+   *   The Model Garden model to deploy.
+   *   Format:
+   *   `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+   *   `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
+   * @param {string} request.huggingFaceModelId
+   *   The Hugging Face model to deploy.
+   *   Format: Hugging Face model ID like `google/gemma-2-2b-it`.
+   * @param {string} request.destination
+   *   Required. The resource name of the Location to deploy the model in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.DeployRequest.ModelConfig} [request.modelConfig]
+   *   Optional. The model config to use for the deployment.
+   *   If not specified, the default model config will be used.
+   * @param {google.cloud.aiplatform.v1beta1.DeployRequest.EndpointConfig} [request.endpointConfig]
+   *   Optional. The endpoint config to use for the deployment.
+   *   If not specified, the default endpoint config will be used.
+   * @param {google.cloud.aiplatform.v1beta1.DeployRequest.DeployConfig} [request.deployConfig]
+   *   Optional. The deploy config to use for the deployment.
+   *   If not specified, the default deploy config will be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_Deploy_async
+   */
+  deploy(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deploy(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deploy(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deploy(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+            protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        destination: request.destination ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deploy(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deploy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_Deploy_async
+   */
+  async checkDeployProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeployResponse,
+      protos.google.cloud.aiplatform.v1beta1.DeployOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deploy,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeployResponse,
+      protos.google.cloud.aiplatform.v1beta1.DeployOperationMetadata
+    >;
+  }
+  /**
+   * Deploys publisher models.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.model
+   *   Required. The name of the PublisherModel resource.
+   *   Format:
+   *   `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+   *   `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`
+   *   or Hugging Face model ID like `google/gemma-2-2b-it`.
+   * @param {string} request.destination
+   *   Required. The resource name of the Location to deploy the model in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.endpointDisplayName]
+   *   Optional. The user-specified display name of the endpoint. If not set, a
+   *   default name will be used.
+   * @param {google.cloud.aiplatform.v1beta1.DedicatedResources} [request.dedicatedResources]
+   *   Optional. The dedicated resources to use for the endpoint. If not set, the
+   *   default resources will be used.
+   * @param {string} [request.modelDisplayName]
+   *   Optional. The user-specified display name of the uploaded model. If not
+   *   set, a default name will be used.
+   * @param {string} [request.huggingFaceAccessToken]
+   *   Optional. The Hugging Face read access token used to access the model
+   *   artifacts of gated models.
+   * @param {boolean} [request.acceptEula]
+   *   Optional. Whether the user accepts the End User License Agreement (EULA)
+   *   for the model.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_DeployPublisherModel_async
+   */
+  deployPublisherModel(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deployPublisherModel(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployPublisherModel(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployPublisherModel(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelResponse,
+            protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelResponse,
+        protos.google.cloud.aiplatform.v1beta1.IDeployPublisherModelOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        destination: request.destination ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deployPublisherModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deployPublisherModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_garden_service.deploy_publisher_model.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelGardenService_DeployPublisherModel_async
+   */
+  async checkDeployPublisherModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelResponse,
+      protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deployPublisherModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelResponse,
+      protos.google.cloud.aiplatform.v1beta1.DeployPublisherModelOperationMetadata
+    >;
+  }
+  /**
    * Lists publisher models in Model Garden.
    *
    * @param {Object} request
@@ -709,6 +2851,8 @@ export class ModelGardenServiceClient {
    *   Optional. The IETF BCP-47 language code representing the language in which
    *   the publisher models' text information should be written in. If not set, by
    *   default English (en).
+   * @param {boolean} [request.listAllVersions]
+   *   Optional. List all publisher model versions if the flag is set to true.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -797,7 +2941,7 @@ export class ModelGardenServiceClient {
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPublisherModels`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -823,6 +2967,8 @@ export class ModelGardenServiceClient {
    *   Optional. The IETF BCP-47 language code representing the language in which
    *   the publisher models' text information should be written in. If not set, by
    *   default English (en).
+   * @param {boolean} [request.listAllVersions]
+   *   Optional. List all publisher model versions if the flag is set to true.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -885,6 +3031,8 @@ export class ModelGardenServiceClient {
    *   Optional. The IETF BCP-47 language code representing the language in which
    *   the publisher models' text information should be written in. If not set, by
    *   default English (en).
+   * @param {boolean} [request.listAllVersions]
+   *   Optional. List all publisher model versions if the flag is set to true.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1132,6 +3280,230 @@ export class ModelGardenServiceClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -2753,6 +5125,42 @@ export class ModelGardenServiceClient {
   matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
     return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
       .index_endpoint;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -5022,6 +7430,7 @@ export class ModelGardenServiceClient {
         stub.close();
         this.iamClient.close();
         this.locationsClient.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

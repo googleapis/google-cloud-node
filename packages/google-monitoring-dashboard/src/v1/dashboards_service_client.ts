@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class DashboardsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('monitoring-dashboards');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class DashboardsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -499,7 +502,36 @@ export class DashboardsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDashboard(request, options, callback);
+    this._log.info('createDashboard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          | protos.google.monitoring.dashboard.v1.ICreateDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDashboard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          (
+            | protos.google.monitoring.dashboard.v1.ICreateDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDashboard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches a specific dashboard.
@@ -597,7 +629,36 @@ export class DashboardsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDashboard(request, options, callback);
+    this._log.info('getDashboard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          | protos.google.monitoring.dashboard.v1.IGetDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDashboard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          (
+            | protos.google.monitoring.dashboard.v1.IGetDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDashboard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing custom dashboard.
@@ -693,7 +754,36 @@ export class DashboardsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDashboard(request, options, callback);
+    this._log.info('deleteDashboard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDashboard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDashboard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Replaces an existing custom dashboard with a new definition.
@@ -790,7 +880,36 @@ export class DashboardsServiceClient {
         'dashboard.name': request.dashboard!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDashboard(request, options, callback);
+    this._log.info('updateDashboard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          | protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDashboard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.dashboard.v1.IDashboard,
+          (
+            | protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDashboard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -898,11 +1017,37 @@ export class DashboardsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDashboards(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+          | protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+          | null
+          | undefined,
+          protos.google.monitoring.dashboard.v1.IDashboard
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDashboards values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDashboards request %j', request);
+    return this.innerApiCalls
+      .listDashboards(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.dashboard.v1.IDashboard[],
+          protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
+          protos.google.monitoring.dashboard.v1.IListDashboardsResponse,
+        ]) => {
+          this._log.info('listDashboards values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDashboards`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -943,6 +1088,7 @@ export class DashboardsServiceClient {
     const defaultCallSettings = this._defaults['listDashboards'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDashboards stream %j', request);
     return this.descriptors.page.listDashboards.createStream(
       this.innerApiCalls.listDashboards as GaxCall,
       request,
@@ -995,6 +1141,7 @@ export class DashboardsServiceClient {
     const defaultCallSettings = this._defaults['listDashboards'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDashboards iterate %j', request);
     return this.descriptors.page.listDashboards.asyncIterate(
       this.innerApiCalls['listDashboards'] as GaxCall,
       request as {},
@@ -1113,6 +1260,7 @@ export class DashboardsServiceClient {
   close(): Promise<void> {
     if (this.dashboardsServiceStub && !this._terminated) {
       return this.dashboardsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

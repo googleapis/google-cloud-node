@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -1950,16 +1947,30 @@
                             },
                             "label": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             },
                             "countries": {
                               "rule": "repeated",
                               "type": "string",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
                             },
                             "policy": {
                               "type": "Policy",
                               "id": 5
+                            },
+                            "seasonalOverrides": {
+                              "rule": "repeated",
+                              "type": "SeasonalOverride",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "restockingFee": {
                               "type": "RestockingFee",
@@ -1981,7 +1992,10 @@
                             },
                             "returnPolicyUri": {
                               "type": "string",
-                              "id": 10
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "acceptDefectiveOnly": {
                               "type": "bool",
@@ -2010,7 +2024,10 @@
                               "fields": {
                                 "type": {
                                   "type": "Type",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
                                 },
                                 "fixedFee": {
                                   "type": "google.shopping.type.Price",
@@ -2065,6 +2082,47 @@
                                     "NUMBER_OF_DAYS_AFTER_DELIVERY": 1,
                                     "NO_RETURNS": 2,
                                     "LIFETIME_RETURNS": 3
+                                  }
+                                }
+                              }
+                            },
+                            "SeasonalOverride": {
+                              "oneofs": {
+                                "returnWindow": {
+                                  "oneof": [
+                                    "returnDays",
+                                    "returnUntilDate"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "returnDays": {
+                                  "type": "int32",
+                                  "id": 5
+                                },
+                                "returnUntilDate": {
+                                  "type": "google.type.Date",
+                                  "id": 6
+                                },
+                                "label": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "startDate": {
+                                  "type": "google.type.Date",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "endDate": {
+                                  "type": "google.type.Date",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }

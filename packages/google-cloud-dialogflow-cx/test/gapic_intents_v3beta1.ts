@@ -355,7 +355,7 @@ describe('v3beta1.IntentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
       );
@@ -386,7 +386,7 @@ describe('v3beta1.IntentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
       );
@@ -433,7 +433,7 @@ describe('v3beta1.IntentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIntent = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getIntent(request), expectedError);
@@ -482,7 +482,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
       );
@@ -513,7 +513,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
       );
@@ -560,7 +560,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIntent = stubSimpleCall(
         undefined,
@@ -613,7 +613,7 @@ describe('v3beta1.IntentsClient', () => {
         ['intent', 'name']
       );
       request.intent.name = defaultValue1;
-      const expectedHeaderRequestParams = `intent.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `intent.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
       );
@@ -645,7 +645,7 @@ describe('v3beta1.IntentsClient', () => {
         ['intent', 'name']
       );
       request.intent.name = defaultValue1;
-      const expectedHeaderRequestParams = `intent.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `intent.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
       );
@@ -693,7 +693,7 @@ describe('v3beta1.IntentsClient', () => {
         ['intent', 'name']
       );
       request.intent.name = defaultValue1;
-      const expectedHeaderRequestParams = `intent.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `intent.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIntent = stubSimpleCall(
         undefined,
@@ -746,7 +746,7 @@ describe('v3beta1.IntentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -777,7 +777,7 @@ describe('v3beta1.IntentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -824,7 +824,7 @@ describe('v3beta1.IntentsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIntent = stubSimpleCall(
         undefined,
@@ -876,7 +876,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -909,7 +909,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -963,7 +963,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importIntents = stubLongRunningCall(
         undefined,
@@ -994,7 +994,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importIntents = stubLongRunningCall(
         undefined,
@@ -1070,7 +1070,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1103,7 +1103,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1157,7 +1157,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportIntents = stubLongRunningCall(
         undefined,
@@ -1188,7 +1188,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportIntents = stubLongRunningCall(
         undefined,
@@ -1264,7 +1264,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
@@ -1303,7 +1303,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
@@ -1358,7 +1358,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIntents = stubSimpleCall(
         undefined,
@@ -1389,7 +1389,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
@@ -1450,7 +1450,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIntents.createStream = stubPageStreamingCall(
         undefined,
@@ -1502,7 +1502,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Intent()
@@ -1551,7 +1551,7 @@ describe('v3beta1.IntentsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIntents.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4452,6 +4452,94 @@ describe('v3beta1.IntentsClient', () => {
         assert.strictEqual(result, 'toolValue');
         assert(
           (client.pathTemplates.toolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('toolVersion', () => {
+      const fakePath = '/rendered/path/toolVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        tool: 'toolValue',
+        version: 'versionValue',
+      };
+      const client = new intentsModule.v3beta1.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.toolVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.toolVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('toolVersionPath', () => {
+        const result = client.toolVersionPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'toolValue',
+          'versionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromToolVersionName', () => {
+        const result = client.matchProjectFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromToolVersionName', () => {
+        const result = client.matchLocationFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromToolVersionName', () => {
+        const result = client.matchAgentFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchToolFromToolVersionName', () => {
+        const result = client.matchToolFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'toolValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchVersionFromToolVersionName', () => {
+        const result = client.matchVersionFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'versionValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

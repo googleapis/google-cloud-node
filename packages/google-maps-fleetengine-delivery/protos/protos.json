@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "maps": {
       "nested": {
@@ -333,6 +330,34 @@
                             }
                           ]
                         },
+                        "DeleteDeliveryVehicle": {
+                          "requestType": "DeleteDeliveryVehicleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=providers/*/deliveryVehicles/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=providers/*/deliveryVehicles/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{provider_id=providers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "UpdateDeliveryVehicle": {
                           "requestType": "UpdateDeliveryVehicleRequest",
                           "responseType": "DeliveryVehicle",
@@ -432,6 +457,34 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=providers/*/tasks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "{provider_id=providers/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteTask": {
+                          "requestType": "DeleteTaskRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=providers/*/tasks/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=providers/*/tasks/*}"
                               }
                             },
                             {
@@ -607,6 +660,25 @@
                         "name": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "fleetengine.googleapis.com/DeliveryVehicle"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDeliveryVehicleRequest": {
+                      "fields": {
+                        "header": {
+                          "type": "DeliveryRequestHeader",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "fleetengine.googleapis.com/DeliveryVehicle"
@@ -790,6 +862,25 @@
                         }
                       }
                     },
+                    "DeleteTaskRequest": {
+                      "fields": {
+                        "header": {
+                          "type": "DeliveryRequestHeader",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "fleetengine.googleapis.com/Task"
+                          }
+                        }
+                      }
+                    },
                     "UpdateTaskRequest": {
                       "fields": {
                         "header": {
@@ -904,6 +995,14 @@
                         "lastLocation": {
                           "type": "DeliveryVehicleLocation",
                           "id": 2
+                        },
+                        "pastLocations": {
+                          "rule": "repeated",
+                          "type": "DeliveryVehicleLocation",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         },
                         "navigationStatus": {
                           "type": "DeliveryVehicleNavigationStatus",
@@ -3338,6 +3437,9 @@
                   "id": 2
                 }
               }
+            },
+            "Empty": {
+              "fields": {}
             },
             "FieldMask": {
               "fields": {
