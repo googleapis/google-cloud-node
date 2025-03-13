@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class TextServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class TextServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -555,7 +558,36 @@ export class TextServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateText(request, options, callback);
+    this._log.info('generateText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+          | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IGenerateTextResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGenerateTextRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates an embedding from the model given an input message.
@@ -648,7 +680,36 @@ export class TextServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.embedText(request, options, callback);
+    this._log.info('embedText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+          | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('embedText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .embedText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IEmbedTextResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IEmbedTextRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('embedText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates multiple embeddings from the model given input text in a
@@ -754,7 +815,36 @@ export class TextServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchEmbedText(request, options, callback);
+    this._log.info('batchEmbedText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+          | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchEmbedText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchEmbedText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IBatchEmbedTextRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchEmbedText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Runs a model's tokenizer on a text and returns the token count.
@@ -857,7 +947,36 @@ export class TextServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.countTextTokens(request, options, callback);
+    this._log.info('countTextTokens request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+          | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('countTextTokens response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .countTextTokens(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICountTextTokensResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.ICountTextTokensRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('countTextTokens response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1159,6 +1278,7 @@ export class TextServiceClient {
   close(): Promise<void> {
     if (this.textServiceStub && !this._terminated) {
       return this.textServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

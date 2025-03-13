@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class DataSourcesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datasources');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class DataSourcesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -489,7 +492,36 @@ export class DataSourcesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataSource(request, options, callback);
+    this._log.info('getDataSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource,
+          | protos.google.shopping.merchant.datasources.v1beta.IGetDataSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource,
+          (
+            | protos.google.shopping.merchant.datasources.v1beta.IGetDataSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates the new data source configuration for the given account.
@@ -588,7 +620,36 @@ export class DataSourcesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataSource(request, options, callback);
+    this._log.info('createDataSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource,
+          | protos.google.shopping.merchant.datasources.v1beta.ICreateDataSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource,
+          (
+            | protos.google.shopping.merchant.datasources.v1beta.ICreateDataSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the existing data source configuration. The fields that are
@@ -693,7 +754,36 @@ export class DataSourcesServiceClient {
         'data_source.name': request.dataSource!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataSource(request, options, callback);
+    this._log.info('updateDataSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource,
+          | protos.google.shopping.merchant.datasources.v1beta.IUpdateDataSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource,
+          (
+            | protos.google.shopping.merchant.datasources.v1beta.IUpdateDataSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a data source from your Merchant Center account.
@@ -790,7 +880,36 @@ export class DataSourcesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataSource(request, options, callback);
+    this._log.info('deleteDataSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.datasources.v1beta.IDeleteDataSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDataSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDataSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.datasources.v1beta.IDeleteDataSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Performs the data fetch immediately (even outside fetch schedule) on a
@@ -891,7 +1010,36 @@ export class DataSourcesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchDataSource(request, options, callback);
+    this._log.info('fetchDataSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.datasources.v1beta.IFetchDataSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchDataSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchDataSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.datasources.v1beta.IFetchDataSourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchDataSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -997,7 +1145,33 @@ export class DataSourcesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDataSources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.datasources.v1beta.IListDataSourcesRequest,
+          | protos.google.shopping.merchant.datasources.v1beta.IListDataSourcesResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataSources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataSources request %j', request);
+    return this.innerApiCalls
+      .listDataSources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.datasources.v1beta.IDataSource[],
+          protos.google.shopping.merchant.datasources.v1beta.IListDataSourcesRequest | null,
+          protos.google.shopping.merchant.datasources.v1beta.IListDataSourcesResponse,
+        ]) => {
+          this._log.info('listDataSources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1044,6 +1218,7 @@ export class DataSourcesServiceClient {
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataSources stream %j', request);
     return this.descriptors.page.listDataSources.createStream(
       this.innerApiCalls.listDataSources as GaxCall,
       request,
@@ -1098,6 +1273,7 @@ export class DataSourcesServiceClient {
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataSources iterate %j', request);
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,
       request as {},
@@ -1230,6 +1406,7 @@ export class DataSourcesServiceClient {
   close(): Promise<void> {
     if (this.dataSourcesServiceStub && !this._terminated) {
       return this.dataSourcesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class DeviceManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('iot');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class DeviceManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -505,7 +508,33 @@ export class DeviceManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDeviceRegistry(request, options, callback);
+    this._log.info('createDeviceRegistry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          | protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDeviceRegistry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDeviceRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDeviceRegistry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a device registry configuration.
@@ -590,7 +619,33 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDeviceRegistry(request, options, callback);
+    this._log.info('getDeviceRegistry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          | protos.google.cloud.iot.v1.IGetDeviceRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeviceRegistry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDeviceRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IGetDeviceRegistryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeviceRegistry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a device registry configuration.
@@ -688,7 +743,33 @@ export class DeviceManagerClient {
         'device_registry.name': request.deviceRegistry!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDeviceRegistry(request, options, callback);
+    this._log.info('updateDeviceRegistry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          | protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDeviceRegistry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDeviceRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDeviceRegistry,
+          protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDeviceRegistry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a device registry configuration.
@@ -779,7 +860,33 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDeviceRegistry(request, options, callback);
+    this._log.info('deleteDeviceRegistry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDeviceRegistry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDeviceRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDeviceRegistry response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a device in a device registry.
@@ -867,7 +974,31 @@ export class DeviceManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDevice(request, options, callback);
+    this._log.info('createDevice request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.ICreateDeviceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDevice response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDevice(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.ICreateDeviceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDevice response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a device.
@@ -955,7 +1086,31 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDevice(request, options, callback);
+    this._log.info('getDevice request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IGetDeviceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDevice response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDevice(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IGetDeviceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDevice response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a device.
@@ -1045,7 +1200,31 @@ export class DeviceManagerClient {
         'device.name': request.device!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDevice(request, options, callback);
+    this._log.info('updateDevice request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IUpdateDeviceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDevice response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDevice(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDevice,
+          protos.google.cloud.iot.v1.IUpdateDeviceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDevice response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a device.
@@ -1129,7 +1308,31 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDevice(request, options, callback);
+    this._log.info('deleteDevice request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDevice response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDevice(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iot.v1.IDeleteDeviceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDevice response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Modifies the configuration for the device, which is eventually sent from
@@ -1231,11 +1434,36 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.modifyCloudToDeviceConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('modifyCloudToDeviceConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IDeviceConfig,
+          | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('modifyCloudToDeviceConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .modifyCloudToDeviceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IDeviceConfig,
+          (
+            | protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('modifyCloudToDeviceConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists the last few versions of the device configuration in descending
@@ -1332,11 +1560,36 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeviceConfigVersions(
-      request,
-      options,
-      callback
-    );
+    this._log.info('listDeviceConfigVersions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+          | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listDeviceConfigVersions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listDeviceConfigVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IListDeviceConfigVersionsResponse,
+          (
+            | protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listDeviceConfigVersions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists the last few versions of the device state in descending order (i.e.:
@@ -1427,7 +1680,33 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeviceStates(request, options, callback);
+    this._log.info('listDeviceStates request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+          | protos.google.cloud.iot.v1.IListDeviceStatesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listDeviceStates response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listDeviceStates(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IListDeviceStatesResponse,
+          protos.google.cloud.iot.v1.IListDeviceStatesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listDeviceStates response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
@@ -1522,7 +1801,31 @@ export class DeviceManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a resource.
@@ -1610,7 +1913,31 @@ export class DeviceManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has on the specified resource.
@@ -1700,7 +2027,31 @@ export class DeviceManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sends a command to the specified device. In order for a device to be able
@@ -1806,7 +2157,33 @@ export class DeviceManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.sendCommandToDevice(request, options, callback);
+    this._log.info('sendCommandToDevice request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+          | protos.google.cloud.iot.v1.ISendCommandToDeviceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('sendCommandToDevice response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .sendCommandToDevice(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.ISendCommandToDeviceResponse,
+          protos.google.cloud.iot.v1.ISendCommandToDeviceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('sendCommandToDevice response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Associates the device with the gateway.
@@ -1898,7 +2275,33 @@ export class DeviceManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.bindDeviceToGateway(request, options, callback);
+    this._log.info('bindDeviceToGateway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+          | protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('bindDeviceToGateway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .bindDeviceToGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayResponse,
+          protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('bindDeviceToGateway response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the association between the device and the gateway.
@@ -1996,11 +2399,36 @@ export class DeviceManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.unbindDeviceFromGateway(
-      request,
-      options,
-      callback
-    );
+    this._log.info('unbindDeviceFromGateway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+          | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('unbindDeviceFromGateway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .unbindDeviceFromGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayResponse,
+          (
+            | protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('unbindDeviceFromGateway response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2104,7 +2532,33 @@ export class DeviceManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeviceRegistries(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+          | protos.google.cloud.iot.v1.IListDeviceRegistriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.iot.v1.IDeviceRegistry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeviceRegistries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeviceRegistries request %j', request);
+    return this.innerApiCalls
+      .listDeviceRegistries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.iot.v1.IDeviceRegistry[],
+          protos.google.cloud.iot.v1.IListDeviceRegistriesRequest | null,
+          protos.google.cloud.iot.v1.IListDeviceRegistriesResponse,
+        ]) => {
+          this._log.info('listDeviceRegistries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2149,6 +2603,7 @@ export class DeviceManagerClient {
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeviceRegistries stream %j', request);
     return this.descriptors.page.listDeviceRegistries.createStream(
       this.innerApiCalls.listDeviceRegistries as GaxCall,
       request,
@@ -2201,6 +2656,7 @@ export class DeviceManagerClient {
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeviceRegistries iterate %j', request);
     return this.descriptors.page.listDeviceRegistries.asyncIterate(
       this.innerApiCalls['listDeviceRegistries'] as GaxCall,
       request as {},
@@ -2313,7 +2769,31 @@ export class DeviceManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDevices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.iot.v1.IListDevicesRequest,
+          protos.google.cloud.iot.v1.IListDevicesResponse | null | undefined,
+          protos.google.cloud.iot.v1.IDevice
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDevices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDevices request %j', request);
+    return this.innerApiCalls
+      .listDevices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.iot.v1.IDevice[],
+          protos.google.cloud.iot.v1.IListDevicesRequest | null,
+          protos.google.cloud.iot.v1.IListDevicesResponse,
+        ]) => {
+          this._log.info('listDevices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2371,6 +2851,7 @@ export class DeviceManagerClient {
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDevices stream %j', request);
     return this.descriptors.page.listDevices.createStream(
       this.innerApiCalls.listDevices as GaxCall,
       request,
@@ -2436,6 +2917,7 @@ export class DeviceManagerClient {
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDevices iterate %j', request);
     return this.descriptors.page.listDevices.asyncIterate(
       this.innerApiCalls['listDevices'] as GaxCall,
       request as {},
@@ -2607,6 +3089,7 @@ export class DeviceManagerClient {
   close(): Promise<void> {
     if (this.deviceManagerStub && !this._terminated) {
       return this.deviceManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

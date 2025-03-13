@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class VmwareEngineClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('vmwareengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class VmwareEngineClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -1279,7 +1282,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPrivateCloud(request, options, callback);
+    this._log.info('getPrivateCloud request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+          | protos.google.cloud.vmwareengine.v1.IGetPrivateCloudRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPrivateCloud response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPrivateCloud(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetPrivateCloudRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPrivateCloud response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a `Cluster` resource by its resource name.
@@ -1367,7 +1399,33 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCluster(request, options, callback);
+    this._log.info('getCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ICluster,
+          | protos.google.cloud.vmwareengine.v1.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.ICluster,
+          protos.google.cloud.vmwareengine.v1.IGetClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single node.
@@ -1453,7 +1511,33 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNode(request, options, callback);
+    this._log.info('getNode request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.INode,
+          | protos.google.cloud.vmwareengine.v1.IGetNodeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNode response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.INode,
+          protos.google.cloud.vmwareengine.v1.IGetNodeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNode response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single external IP address.
@@ -1553,7 +1637,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getExternalAddress(request, options, callback);
+    this._log.info('getExternalAddress request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IExternalAddress,
+          | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExternalAddress response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExternalAddress(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IExternalAddress,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetExternalAddressRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExternalAddress response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single subnet.
@@ -1641,7 +1754,33 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSubnet(request, options, callback);
+    this._log.info('getSubnet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ISubnet,
+          | protos.google.cloud.vmwareengine.v1.IGetSubnetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSubnet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSubnet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.ISubnet,
+          protos.google.cloud.vmwareengine.v1.IGetSubnetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSubnet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single external access rule.
@@ -1741,7 +1880,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getExternalAccessRule(request, options, callback);
+    this._log.info('getExternalAccessRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+          | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExternalAccessRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExternalAccessRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetExternalAccessRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExternalAccessRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a logging server.
@@ -1835,7 +2003,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLoggingServer(request, options, callback);
+    this._log.info('getLoggingServer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ILoggingServer,
+          | protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLoggingServer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLoggingServer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.ILoggingServer,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetLoggingServerRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLoggingServer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single `NodeType`.
@@ -1929,7 +2126,33 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNodeType(request, options, callback);
+    this._log.info('getNodeType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.INodeType,
+          | protos.google.cloud.vmwareengine.v1.IGetNodeTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNodeType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNodeType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.INodeType,
+          protos.google.cloud.vmwareengine.v1.IGetNodeTypeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNodeType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of credentials for NSX appliance.
@@ -2030,7 +2253,36 @@ export class VmwareEngineClient {
         private_cloud: request.privateCloud ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.showNsxCredentials(request, options, callback);
+    this._log.info('showNsxCredentials request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ICredentials,
+          | protos.google.cloud.vmwareengine.v1.IShowNsxCredentialsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('showNsxCredentials response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .showNsxCredentials(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.ICredentials,
+          (
+            | protos.google.cloud.vmwareengine.v1.IShowNsxCredentialsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('showNsxCredentials response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of credentials for Vcenter appliance.
@@ -2142,11 +2394,36 @@ export class VmwareEngineClient {
         private_cloud: request.privateCloud ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.showVcenterCredentials(
-      request,
-      options,
-      callback
-    );
+    this._log.info('showVcenterCredentials request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.ICredentials,
+          | protos.google.cloud.vmwareengine.v1.IShowVcenterCredentialsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('showVcenterCredentials response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .showVcenterCredentials(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.ICredentials,
+          (
+            | protos.google.cloud.vmwareengine.v1.IShowVcenterCredentialsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('showVcenterCredentials response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of the `DnsForwarding` config.
@@ -2240,7 +2517,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDnsForwarding(request, options, callback);
+    this._log.info('getDnsForwarding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+          | protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDnsForwarding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDnsForwarding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetDnsForwardingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDnsForwarding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a `NetworkPeering` resource by its resource name. The resource
@@ -2337,7 +2643,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNetworkPeering(request, options, callback);
+    this._log.info('getNetworkPeering request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.INetworkPeering,
+          | protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNetworkPeering response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNetworkPeering(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.INetworkPeering,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetNetworkPeeringRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNetworkPeering response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a `HcxActivationKey` resource by its resource name.
@@ -2437,7 +2772,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getHcxActivationKey(request, options, callback);
+    this._log.info('getHcxActivationKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IHcxActivationKey,
+          | protos.google.cloud.vmwareengine.v1.IGetHcxActivationKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHcxActivationKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHcxActivationKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IHcxActivationKey,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetHcxActivationKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHcxActivationKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a `NetworkPolicy` resource by its resource name.
@@ -2531,7 +2895,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNetworkPolicy(request, options, callback);
+    this._log.info('getNetworkPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.INetworkPolicy,
+          | protos.google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNetworkPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNetworkPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.INetworkPolicy,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetNetworkPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNetworkPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a 'ManagementDnsZoneBinding' resource by its resource name.
@@ -2631,11 +3024,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getManagementDnsZoneBinding(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getManagementDnsZoneBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+          | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getManagementDnsZoneBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getManagementDnsZoneBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetManagementDnsZoneBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getManagementDnsZoneBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a `VmwareEngineNetwork` resource by its resource name. The
@@ -2738,11 +3156,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVmwareEngineNetwork(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getVmwareEngineNetwork request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork,
+          | protos.google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVmwareEngineNetwork response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVmwareEngineNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetVmwareEngineNetworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVmwareEngineNetwork response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a `PrivateConnection` resource by its resource name. The resource
@@ -2844,7 +3287,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPrivateConnection(request, options, callback);
+    this._log.info('getPrivateConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+          | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPrivateConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetPrivateConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPrivateConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets all the principals having bind permission on the intranet VPC
@@ -2947,7 +3419,36 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDnsBindPermission(request, options, callback);
+    this._log.info('getDnsBindPermission request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+          | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDnsBindPermission response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDnsBindPermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+          (
+            | protos.google.cloud.vmwareengine.v1.IGetDnsBindPermissionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDnsBindPermission response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3080,7 +3581,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPrivateCloud(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPrivateCloud response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPrivateCloud request %j', request);
+    return this.innerApiCalls
+      .createPrivateCloud(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPrivateCloud response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPrivateCloud()`.
@@ -3101,6 +3632,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createPrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3232,7 +3764,37 @@ export class VmwareEngineClient {
         'private_cloud.name': request.privateCloud!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePrivateCloud(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePrivateCloud response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePrivateCloud request %j', request);
+    return this.innerApiCalls
+      .updatePrivateCloud(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePrivateCloud response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePrivateCloud()`.
@@ -3253,6 +3815,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updatePrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3404,7 +3967,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePrivateCloud(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePrivateCloud response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePrivateCloud request %j', request);
+    return this.innerApiCalls
+      .deletePrivateCloud(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePrivateCloud response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePrivateCloud()`.
@@ -3425,6 +4018,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3550,7 +4144,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeletePrivateCloud(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeletePrivateCloud response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeletePrivateCloud request %j', request);
+    return this.innerApiCalls
+      .undeletePrivateCloud(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeletePrivateCloud response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeletePrivateCloud()`.
@@ -3571,6 +4195,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('undeletePrivateCloud long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3713,7 +4338,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCluster(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ICluster,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCluster request %j', request);
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ICluster,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCluster()`.
@@ -3734,6 +4389,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3867,7 +4523,37 @@ export class VmwareEngineClient {
         'cluster.name': request.cluster!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCluster(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ICluster,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCluster request %j', request);
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ICluster,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCluster()`.
@@ -3888,6 +4574,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4013,7 +4700,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCluster(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCluster request %j', request);
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCluster()`.
@@ -4034,6 +4751,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4185,7 +4903,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createExternalAddress(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAddress,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createExternalAddress response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createExternalAddress request %j', request);
+    return this.innerApiCalls
+      .createExternalAddress(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAddress,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExternalAddress response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createExternalAddress()`.
@@ -4206,6 +4954,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createExternalAddress long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4348,7 +5097,37 @@ export class VmwareEngineClient {
         'external_address.name': request.externalAddress!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateExternalAddress(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAddress,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateExternalAddress response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateExternalAddress request %j', request);
+    return this.innerApiCalls
+      .updateExternalAddress(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAddress,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExternalAddress response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateExternalAddress()`.
@@ -4369,6 +5148,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateExternalAddress long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4505,7 +5285,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteExternalAddress(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteExternalAddress response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteExternalAddress request %j', request);
+    return this.innerApiCalls
+      .deleteExternalAddress(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExternalAddress response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteExternalAddress()`.
@@ -4526,6 +5336,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteExternalAddress long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4652,7 +5463,37 @@ export class VmwareEngineClient {
         'subnet.name': request.subnet!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSubnet(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ISubnet,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSubnet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSubnet request %j', request);
+    return this.innerApiCalls
+      .updateSubnet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ISubnet,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSubnet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSubnet()`.
@@ -4673,6 +5514,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateSubnet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4822,11 +5664,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createExternalAccessRule(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createExternalAccessRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createExternalAccessRule request %j', request);
+    return this.innerApiCalls
+      .createExternalAccessRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExternalAccessRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createExternalAccessRule()`.
@@ -4847,6 +5715,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createExternalAccessRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4984,11 +5853,37 @@ export class VmwareEngineClient {
         'external_access_rule.name': request.externalAccessRule!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateExternalAccessRule(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateExternalAccessRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateExternalAccessRule request %j', request);
+    return this.innerApiCalls
+      .updateExternalAccessRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IExternalAccessRule,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExternalAccessRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateExternalAccessRule()`.
@@ -5009,6 +5904,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateExternalAccessRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5143,11 +6039,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteExternalAccessRule(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteExternalAccessRule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteExternalAccessRule request %j', request);
+    return this.innerApiCalls
+      .deleteExternalAccessRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExternalAccessRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteExternalAccessRule()`.
@@ -5168,6 +6090,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteExternalAccessRule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5317,7 +6240,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createLoggingServer(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ILoggingServer,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createLoggingServer response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createLoggingServer request %j', request);
+    return this.innerApiCalls
+      .createLoggingServer(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ILoggingServer,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLoggingServer response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createLoggingServer()`.
@@ -5338,6 +6291,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createLoggingServer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5475,7 +6429,37 @@ export class VmwareEngineClient {
         'logging_server.name': request.loggingServer!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateLoggingServer(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ILoggingServer,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateLoggingServer response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateLoggingServer request %j', request);
+    return this.innerApiCalls
+      .updateLoggingServer(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.ILoggingServer,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLoggingServer response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateLoggingServer()`.
@@ -5496,6 +6480,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateLoggingServer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5630,7 +6615,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteLoggingServer(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteLoggingServer response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteLoggingServer request %j', request);
+    return this.innerApiCalls
+      .deleteLoggingServer(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLoggingServer response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteLoggingServer()`.
@@ -5651,6 +6666,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteLoggingServer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5786,7 +6802,37 @@ export class VmwareEngineClient {
         private_cloud: request.privateCloud ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resetNsxCredentials(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resetNsxCredentials response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resetNsxCredentials request %j', request);
+    return this.innerApiCalls
+      .resetNsxCredentials(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resetNsxCredentials response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resetNsxCredentials()`.
@@ -5807,6 +6853,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('resetNsxCredentials long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5952,11 +6999,37 @@ export class VmwareEngineClient {
         private_cloud: request.privateCloud ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resetVcenterCredentials(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resetVcenterCredentials response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resetVcenterCredentials request %j', request);
+    return this.innerApiCalls
+      .resetVcenterCredentials(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateCloud,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resetVcenterCredentials response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resetVcenterCredentials()`.
@@ -5977,6 +7050,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('resetVcenterCredentials long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6114,7 +7188,37 @@ export class VmwareEngineClient {
         'dns_forwarding.name': request.dnsForwarding!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDnsForwarding(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDnsForwarding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDnsForwarding request %j', request);
+    return this.innerApiCalls
+      .updateDnsForwarding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsForwarding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDnsForwarding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDnsForwarding()`.
@@ -6135,6 +7239,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateDnsForwarding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6285,7 +7390,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNetworkPeering(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPeering,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNetworkPeering response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNetworkPeering request %j', request);
+    return this.innerApiCalls
+      .createNetworkPeering(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPeering,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNetworkPeering response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNetworkPeering()`.
@@ -6306,6 +7441,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createNetworkPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6443,7 +7579,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNetworkPeering(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNetworkPeering response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNetworkPeering request %j', request);
+    return this.innerApiCalls
+      .deleteNetworkPeering(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNetworkPeering response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNetworkPeering()`.
@@ -6464,6 +7630,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteNetworkPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6602,7 +7769,37 @@ export class VmwareEngineClient {
         'network_peering.name': request.networkPeering!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNetworkPeering(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPeering,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateNetworkPeering response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateNetworkPeering request %j', request);
+    return this.innerApiCalls
+      .updateNetworkPeering(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPeering,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNetworkPeering response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateNetworkPeering()`.
@@ -6623,6 +7820,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateNetworkPeering long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6772,11 +7970,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createHcxActivationKey(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IHcxActivationKey,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createHcxActivationKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createHcxActivationKey request %j', request);
+    return this.innerApiCalls
+      .createHcxActivationKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IHcxActivationKey,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createHcxActivationKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createHcxActivationKey()`.
@@ -6797,6 +8021,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createHcxActivationKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6949,7 +8174,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNetworkPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPolicy,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNetworkPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNetworkPolicy request %j', request);
+    return this.innerApiCalls
+      .createNetworkPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPolicy,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNetworkPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNetworkPolicy()`.
@@ -6970,6 +8225,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createNetworkPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7117,7 +8373,37 @@ export class VmwareEngineClient {
         'network_policy.name': request.networkPolicy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNetworkPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPolicy,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateNetworkPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateNetworkPolicy request %j', request);
+    return this.innerApiCalls
+      .updateNetworkPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.INetworkPolicy,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNetworkPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateNetworkPolicy()`.
@@ -7138,6 +8424,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateNetworkPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7274,7 +8561,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNetworkPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNetworkPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNetworkPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteNetworkPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNetworkPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNetworkPolicy()`.
@@ -7295,6 +8612,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteNetworkPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7451,11 +8769,43 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createManagementDnsZoneBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'createManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createManagementDnsZoneBinding request %j', request);
+    return this.innerApiCalls
+      .createManagementDnsZoneBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createManagementDnsZoneBinding()`.
@@ -7476,6 +8826,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7614,11 +8965,43 @@ export class VmwareEngineClient {
           request.managementDnsZoneBinding!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateManagementDnsZoneBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'updateManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateManagementDnsZoneBinding request %j', request);
+    return this.innerApiCalls
+      .updateManagementDnsZoneBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateManagementDnsZoneBinding()`.
@@ -7639,6 +9022,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7775,11 +9159,43 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteManagementDnsZoneBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteManagementDnsZoneBinding request %j', request);
+    return this.innerApiCalls
+      .deleteManagementDnsZoneBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteManagementDnsZoneBinding()`.
@@ -7800,6 +9216,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -7935,11 +9352,43 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.repairManagementDnsZoneBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'repairManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('repairManagementDnsZoneBinding request %j', request);
+    return this.innerApiCalls
+      .repairManagementDnsZoneBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'repairManagementDnsZoneBinding response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `repairManagementDnsZoneBinding()`.
@@ -7960,6 +9409,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('repairManagementDnsZoneBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8113,11 +9563,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createVmwareEngineNetwork(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createVmwareEngineNetwork response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createVmwareEngineNetwork request %j', request);
+    return this.innerApiCalls
+      .createVmwareEngineNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVmwareEngineNetwork response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createVmwareEngineNetwork()`.
@@ -8138,6 +9614,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createVmwareEngineNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8277,11 +9754,37 @@ export class VmwareEngineClient {
         'vmware_engine_network.name': request.vmwareEngineNetwork!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVmwareEngineNetwork(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateVmwareEngineNetwork response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateVmwareEngineNetwork request %j', request);
+    return this.innerApiCalls
+      .updateVmwareEngineNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVmwareEngineNetwork response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateVmwareEngineNetwork()`.
@@ -8302,6 +9805,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updateVmwareEngineNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8444,11 +9948,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteVmwareEngineNetwork(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteVmwareEngineNetwork response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteVmwareEngineNetwork request %j', request);
+    return this.innerApiCalls
+      .deleteVmwareEngineNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVmwareEngineNetwork response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteVmwareEngineNetwork()`.
@@ -8469,6 +9999,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteVmwareEngineNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8618,11 +10149,37 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPrivateConnection(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPrivateConnection request %j', request);
+    return this.innerApiCalls
+      .createPrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPrivateConnection()`.
@@ -8643,6 +10200,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('createPrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8781,11 +10339,37 @@ export class VmwareEngineClient {
         'private_connection.name': request.privateConnection!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePrivateConnection(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePrivateConnection request %j', request);
+    return this.innerApiCalls
+      .updatePrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IPrivateConnection,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePrivateConnection()`.
@@ -8806,6 +10390,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('updatePrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -8942,11 +10527,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePrivateConnection(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePrivateConnection request %j', request);
+    return this.innerApiCalls
+      .deletePrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePrivateConnection()`.
@@ -8967,6 +10578,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -9109,11 +10721,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.grantDnsBindPermission(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('grantDnsBindPermission response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('grantDnsBindPermission request %j', request);
+    return this.innerApiCalls
+      .grantDnsBindPermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('grantDnsBindPermission response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `grantDnsBindPermission()`.
@@ -9134,6 +10772,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('grantDnsBindPermission long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -9275,11 +10914,37 @@ export class VmwareEngineClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.revokeDnsBindPermission(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('revokeDnsBindPermission response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('revokeDnsBindPermission request %j', request);
+    return this.innerApiCalls
+      .revokeDnsBindPermission(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.vmwareengine.v1.IDnsBindPermission,
+            protos.google.cloud.vmwareengine.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('revokeDnsBindPermission response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `revokeDnsBindPermission()`.
@@ -9300,6 +10965,7 @@ export class VmwareEngineClient {
       protos.google.cloud.vmwareengine.v1.OperationMetadata
     >
   > {
+    this._log.info('revokeDnsBindPermission long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -9454,7 +11120,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPrivateClouds(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPrivateCloudsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPrivateCloudsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPrivateCloud
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPrivateClouds values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPrivateClouds request %j', request);
+    return this.innerApiCalls
+      .listPrivateClouds(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IPrivateCloud[],
+          protos.google.cloud.vmwareengine.v1.IListPrivateCloudsRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListPrivateCloudsResponse,
+        ]) => {
+          this._log.info('listPrivateClouds values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9537,6 +11229,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listPrivateClouds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateClouds stream %j', request);
     return this.descriptors.page.listPrivateClouds.createStream(
       this.innerApiCalls.listPrivateClouds as GaxCall,
       request,
@@ -9627,6 +11320,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listPrivateClouds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateClouds iterate %j', request);
     return this.descriptors.page.listPrivateClouds.asyncIterate(
       this.innerApiCalls['listPrivateClouds'] as GaxCall,
       request as {},
@@ -9760,7 +11454,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listClusters(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListClustersRequest,
+          | protos.google.cloud.vmwareengine.v1.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.ICluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listClusters request %j', request);
+    return this.innerApiCalls
+      .listClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.ICluster[],
+          protos.google.cloud.vmwareengine.v1.IListClustersRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListClustersResponse,
+        ]) => {
+          this._log.info('listClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -9831,6 +11551,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
@@ -9909,6 +11630,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
@@ -10016,7 +11738,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNodes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListNodesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListNodesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.INode
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNodes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNodes request %j', request);
+    return this.innerApiCalls
+      .listNodes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.INode[],
+          protos.google.cloud.vmwareengine.v1.IListNodesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListNodesResponse,
+        ]) => {
+          this._log.info('listNodes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10067,6 +11815,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNodes stream %j', request);
     return this.descriptors.page.listNodes.createStream(
       this.innerApiCalls.listNodes as GaxCall,
       request,
@@ -10125,6 +11874,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNodes iterate %j', request);
     return this.descriptors.page.listNodes.asyncIterate(
       this.innerApiCalls['listNodes'] as GaxCall,
       request as {},
@@ -10271,7 +12021,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listExternalAddresses(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IExternalAddress
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExternalAddresses values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExternalAddresses request %j', request);
+    return this.innerApiCalls
+      .listExternalAddresses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IExternalAddress[],
+          protos.google.cloud.vmwareengine.v1.IListExternalAddressesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListExternalAddressesResponse,
+        ]) => {
+          this._log.info('listExternalAddresses values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10354,6 +12130,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExternalAddresses stream %j', request);
     return this.descriptors.page.listExternalAddresses.createStream(
       this.innerApiCalls.listExternalAddresses as GaxCall,
       request,
@@ -10444,6 +12221,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExternalAddresses iterate %j', request);
     return this.descriptors.page.listExternalAddresses.asyncIterate(
       this.innerApiCalls['listExternalAddresses'] as GaxCall,
       request as {},
@@ -10559,11 +12337,39 @@ export class VmwareEngineClient {
         network_policy: request.networkPolicy ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchNetworkPolicyExternalAddresses(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest,
+          | protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IExternalAddress
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'fetchNetworkPolicyExternalAddresses values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchNetworkPolicyExternalAddresses request %j', request);
+    return this.innerApiCalls
+      .fetchNetworkPolicyExternalAddresses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IExternalAddress[],
+          protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IFetchNetworkPolicyExternalAddressesResponse,
+        ]) => {
+          this._log.info(
+            'fetchNetworkPolicyExternalAddresses values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10616,6 +12422,7 @@ export class VmwareEngineClient {
       this._defaults['fetchNetworkPolicyExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchNetworkPolicyExternalAddresses stream %j', request);
     return this.descriptors.page.fetchNetworkPolicyExternalAddresses.createStream(
       this.innerApiCalls.fetchNetworkPolicyExternalAddresses as GaxCall,
       request,
@@ -10676,6 +12483,7 @@ export class VmwareEngineClient {
       this._defaults['fetchNetworkPolicyExternalAddresses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchNetworkPolicyExternalAddresses iterate %j', request);
     return this.descriptors.page.fetchNetworkPolicyExternalAddresses.asyncIterate(
       this.innerApiCalls['fetchNetworkPolicyExternalAddresses'] as GaxCall,
       request as {},
@@ -10789,7 +12597,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSubnets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListSubnetsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListSubnetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.ISubnet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubnets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubnets request %j', request);
+    return this.innerApiCalls
+      .listSubnets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.ISubnet[],
+          protos.google.cloud.vmwareengine.v1.IListSubnetsRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListSubnetsResponse,
+        ]) => {
+          this._log.info('listSubnets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -10840,6 +12674,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSubnets stream %j', request);
     return this.descriptors.page.listSubnets.createStream(
       this.innerApiCalls.listSubnets as GaxCall,
       request,
@@ -10898,6 +12733,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSubnets iterate %j', request);
     return this.descriptors.page.listSubnets.asyncIterate(
       this.innerApiCalls['listSubnets'] as GaxCall,
       request as {},
@@ -11043,11 +12879,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listExternalAccessRules(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IExternalAccessRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExternalAccessRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExternalAccessRules request %j', request);
+    return this.innerApiCalls
+      .listExternalAccessRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IExternalAccessRule[],
+          protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListExternalAccessRulesResponse,
+        ]) => {
+          this._log.info('listExternalAccessRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -11130,6 +12988,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listExternalAccessRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExternalAccessRules stream %j', request);
     return this.descriptors.page.listExternalAccessRules.createStream(
       this.innerApiCalls.listExternalAccessRules as GaxCall,
       request,
@@ -11220,6 +13079,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listExternalAccessRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listExternalAccessRules iterate %j', request);
     return this.descriptors.page.listExternalAccessRules.asyncIterate(
       this.innerApiCalls['listExternalAccessRules'] as GaxCall,
       request as {},
@@ -11367,7 +13227,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLoggingServers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest,
+          | protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.ILoggingServer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLoggingServers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLoggingServers request %j', request);
+    return this.innerApiCalls
+      .listLoggingServers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.ILoggingServer[],
+          protos.google.cloud.vmwareengine.v1.IListLoggingServersRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListLoggingServersResponse,
+        ]) => {
+          this._log.info('listLoggingServers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -11451,6 +13337,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listLoggingServers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLoggingServers stream %j', request);
     return this.descriptors.page.listLoggingServers.createStream(
       this.innerApiCalls.listLoggingServers as GaxCall,
       request,
@@ -11542,6 +13429,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listLoggingServers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLoggingServers iterate %j', request);
     return this.descriptors.page.listLoggingServers.asyncIterate(
       this.innerApiCalls['listLoggingServers'] as GaxCall,
       request as {},
@@ -11680,7 +13568,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNodeTypes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListNodeTypesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListNodeTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.INodeType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNodeTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNodeTypes request %j', request);
+    return this.innerApiCalls
+      .listNodeTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.INodeType[],
+          protos.google.cloud.vmwareengine.v1.IListNodeTypesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListNodeTypesResponse,
+        ]) => {
+          this._log.info('listNodeTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -11756,6 +13670,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNodeTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNodeTypes stream %j', request);
     return this.descriptors.page.listNodeTypes.createStream(
       this.innerApiCalls.listNodeTypes as GaxCall,
       request,
@@ -11839,6 +13754,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNodeTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNodeTypes iterate %j', request);
     return this.descriptors.page.listNodeTypes.asyncIterate(
       this.innerApiCalls['listNodeTypes'] as GaxCall,
       request as {},
@@ -11983,7 +13899,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNetworkPeerings(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.INetworkPeering
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNetworkPeerings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNetworkPeerings request %j', request);
+    return this.innerApiCalls
+      .listNetworkPeerings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.INetworkPeering[],
+          protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListNetworkPeeringsResponse,
+        ]) => {
+          this._log.info('listNetworkPeerings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -12064,6 +14006,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNetworkPeerings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworkPeerings stream %j', request);
     return this.descriptors.page.listNetworkPeerings.createStream(
       this.innerApiCalls.listNetworkPeerings as GaxCall,
       request,
@@ -12152,6 +14095,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNetworkPeerings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworkPeerings iterate %j', request);
     return this.descriptors.page.listNetworkPeerings.asyncIterate(
       this.innerApiCalls['listNetworkPeerings'] as GaxCall,
       request as {},
@@ -12269,7 +14213,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPeeringRoutes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPeeringRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPeeringRoutes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPeeringRoutes request %j', request);
+    return this.innerApiCalls
+      .listPeeringRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
+          protos.google.cloud.vmwareengine.v1.IListPeeringRoutesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListPeeringRoutesResponse,
+        ]) => {
+          this._log.info('listPeeringRoutes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -12323,6 +14293,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPeeringRoutes stream %j', request);
     return this.descriptors.page.listPeeringRoutes.createStream(
       this.innerApiCalls.listPeeringRoutes as GaxCall,
       request,
@@ -12384,6 +14355,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPeeringRoutes iterate %j', request);
     return this.descriptors.page.listPeeringRoutes.asyncIterate(
       this.innerApiCalls['listPeeringRoutes'] as GaxCall,
       request as {},
@@ -12498,7 +14470,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listHcxActivationKeys(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysRequest,
+          | protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IHcxActivationKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHcxActivationKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHcxActivationKeys request %j', request);
+    return this.innerApiCalls
+      .listHcxActivationKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IHcxActivationKey[],
+          protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListHcxActivationKeysResponse,
+        ]) => {
+          this._log.info('listHcxActivationKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -12550,6 +14548,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listHcxActivationKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listHcxActivationKeys stream %j', request);
     return this.descriptors.page.listHcxActivationKeys.createStream(
       this.innerApiCalls.listHcxActivationKeys as GaxCall,
       request,
@@ -12609,6 +14608,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listHcxActivationKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listHcxActivationKeys iterate %j', request);
     return this.descriptors.page.listHcxActivationKeys.asyncIterate(
       this.innerApiCalls['listHcxActivationKeys'] as GaxCall,
       request as {},
@@ -12753,7 +14753,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNetworkPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.INetworkPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNetworkPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNetworkPolicies request %j', request);
+    return this.innerApiCalls
+      .listNetworkPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.INetworkPolicy[],
+          protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListNetworkPoliciesResponse,
+        ]) => {
+          this._log.info('listNetworkPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -12835,6 +14861,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNetworkPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworkPolicies stream %j', request);
     return this.descriptors.page.listNetworkPolicies.createStream(
       this.innerApiCalls.listNetworkPolicies as GaxCall,
       request,
@@ -12924,6 +14951,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listNetworkPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworkPolicies iterate %j', request);
     return this.descriptors.page.listNetworkPolicies.asyncIterate(
       this.innerApiCalls['listNetworkPolicies'] as GaxCall,
       request as {},
@@ -13070,11 +15098,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listManagementDnsZoneBindings(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listManagementDnsZoneBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listManagementDnsZoneBindings request %j', request);
+    return this.innerApiCalls
+      .listManagementDnsZoneBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IManagementDnsZoneBinding[],
+          protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListManagementDnsZoneBindingsResponse,
+        ]) => {
+          this._log.info('listManagementDnsZoneBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -13158,6 +15208,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listManagementDnsZoneBindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listManagementDnsZoneBindings stream %j', request);
     return this.descriptors.page.listManagementDnsZoneBindings.createStream(
       this.innerApiCalls.listManagementDnsZoneBindings as GaxCall,
       request,
@@ -13249,6 +15300,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listManagementDnsZoneBindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listManagementDnsZoneBindings iterate %j', request);
     return this.descriptors.page.listManagementDnsZoneBindings.asyncIterate(
       this.innerApiCalls['listManagementDnsZoneBindings'] as GaxCall,
       request as {},
@@ -13392,11 +15444,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVmwareEngineNetworks(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest,
+          | protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVmwareEngineNetworks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVmwareEngineNetworks request %j', request);
+    return this.innerApiCalls
+      .listVmwareEngineNetworks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IVmwareEngineNetwork[],
+          protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListVmwareEngineNetworksResponse,
+        ]) => {
+          this._log.info('listVmwareEngineNetworks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -13477,6 +15551,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listVmwareEngineNetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVmwareEngineNetworks stream %j', request);
     return this.descriptors.page.listVmwareEngineNetworks.createStream(
       this.innerApiCalls.listVmwareEngineNetworks as GaxCall,
       request,
@@ -13565,6 +15640,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listVmwareEngineNetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVmwareEngineNetworks iterate %j', request);
     return this.descriptors.page.listVmwareEngineNetworks.asyncIterate(
       this.innerApiCalls['listVmwareEngineNetworks'] as GaxCall,
       request as {},
@@ -13708,11 +15784,33 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPrivateConnections(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPrivateConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPrivateConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPrivateConnections request %j', request);
+    return this.innerApiCalls
+      .listPrivateConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IPrivateConnection[],
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionsResponse,
+        ]) => {
+          this._log.info('listPrivateConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -13793,6 +15891,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
       request,
@@ -13881,6 +15980,7 @@ export class VmwareEngineClient {
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
       request as {},
@@ -13991,11 +16091,39 @@ export class VmwareEngineClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPrivateConnectionPeeringRoutes(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest,
+          | protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.vmwareengine.v1.IPeeringRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listPrivateConnectionPeeringRoutes values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPrivateConnectionPeeringRoutes request %j', request);
+    return this.innerApiCalls
+      .listPrivateConnectionPeeringRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.vmwareengine.v1.IPeeringRoute[],
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesRequest | null,
+          protos.google.cloud.vmwareengine.v1.IListPrivateConnectionPeeringRoutesResponse,
+        ]) => {
+          this._log.info(
+            'listPrivateConnectionPeeringRoutes values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -14044,6 +16172,7 @@ export class VmwareEngineClient {
       this._defaults['listPrivateConnectionPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateConnectionPeeringRoutes stream %j', request);
     return this.descriptors.page.listPrivateConnectionPeeringRoutes.createStream(
       this.innerApiCalls.listPrivateConnectionPeeringRoutes as GaxCall,
       request,
@@ -14100,6 +16229,7 @@ export class VmwareEngineClient {
       this._defaults['listPrivateConnectionPeeringRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateConnectionPeeringRoutes iterate %j', request);
     return this.descriptors.page.listPrivateConnectionPeeringRoutes.asyncIterate(
       this.innerApiCalls['listPrivateConnectionPeeringRoutes'] as GaxCall,
       request as {},
@@ -15643,6 +17773,7 @@ export class VmwareEngineClient {
   close(): Promise<void> {
     if (this.vmwareEngineStub && !this._terminated) {
       return this.vmwareEngineStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

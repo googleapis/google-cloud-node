@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class DataStoreServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class DataStoreServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -793,7 +796,36 @@ export class DataStoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataStore(request, options, callback);
+    this._log.info('getDataStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IDataStore,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1alpha.IDataStore,
+          (
+            | protos.google.cloud.discoveryengine.v1alpha.IGetDataStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a {@link protos.google.cloud.discoveryengine.v1alpha.DataStore|DataStore}
@@ -903,7 +935,36 @@ export class DataStoreServiceClient {
         'data_store.name': request.dataStore!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataStore(request, options, callback);
+    this._log.info('updateDataStore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IDataStore,
+          | protos.google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataStore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1alpha.IDataStore,
+          (
+            | protos.google.cloud.discoveryengine.v1alpha.IUpdateDataStoreRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataStore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a
@@ -1001,11 +1062,36 @@ export class DataStoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDocumentProcessingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getDocumentProcessingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IDocumentProcessingConfig,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetDocumentProcessingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDocumentProcessingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDocumentProcessingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1alpha.IDocumentProcessingConfig,
+          (
+            | protos.google.cloud.discoveryengine.v1alpha.IGetDocumentProcessingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDocumentProcessingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the
@@ -1127,11 +1213,42 @@ export class DataStoreServiceClient {
           request.documentProcessingConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDocumentProcessingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateDocumentProcessingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IDocumentProcessingConfig,
+          | protos.google.cloud.discoveryengine.v1alpha.IUpdateDocumentProcessingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateDocumentProcessingConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDocumentProcessingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1alpha.IDocumentProcessingConfig,
+          (
+            | protos.google.cloud.discoveryengine.v1alpha.IUpdateDocumentProcessingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateDocumentProcessingConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1269,7 +1386,37 @@ export class DataStoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataStore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IDataStore,
+            protos.google.cloud.discoveryengine.v1alpha.ICreateDataStoreMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataStore request %j', request);
+    return this.innerApiCalls
+      .createDataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IDataStore,
+            protos.google.cloud.discoveryengine.v1alpha.ICreateDataStoreMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataStore()`.
@@ -1290,6 +1437,7 @@ export class DataStoreServiceClient {
       protos.google.cloud.discoveryengine.v1alpha.CreateDataStoreMetadata
     >
   > {
+    this._log.info('createDataStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1414,7 +1562,37 @@ export class DataStoreServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataStore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1alpha.IDeleteDataStoreMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataStore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataStore request %j', request);
+    return this.innerApiCalls
+      .deleteDataStore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1alpha.IDeleteDataStoreMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataStore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataStore()`.
@@ -1435,6 +1613,7 @@ export class DataStoreServiceClient {
       protos.google.cloud.discoveryengine.v1alpha.DeleteDataStoreMetadata
     >
   > {
+    this._log.info('deleteDataStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1569,7 +1748,33 @@ export class DataStoreServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDataStores(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1alpha.IListDataStoresRequest,
+          | protos.google.cloud.discoveryengine.v1alpha.IListDataStoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1alpha.IDataStore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataStores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataStores request %j', request);
+    return this.innerApiCalls
+      .listDataStores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1alpha.IDataStore[],
+          protos.google.cloud.discoveryengine.v1alpha.IListDataStoresRequest | null,
+          protos.google.cloud.discoveryengine.v1alpha.IListDataStoresResponse,
+        ]) => {
+          this._log.info('listDataStores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1631,6 +1836,7 @@ export class DataStoreServiceClient {
     const defaultCallSettings = this._defaults['listDataStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataStores stream %j', request);
     return this.descriptors.page.listDataStores.createStream(
       this.innerApiCalls.listDataStores as GaxCall,
       request,
@@ -1700,6 +1906,7 @@ export class DataStoreServiceClient {
     const defaultCallSettings = this._defaults['listDataStores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataStores iterate %j', request);
     return this.descriptors.page.listDataStores.asyncIterate(
       this.innerApiCalls['listDataStores'] as GaxCall,
       request as {},
@@ -5394,6 +5601,7 @@ export class DataStoreServiceClient {
   close(): Promise<void> {
     if (this.dataStoreServiceStub && !this._terminated) {
       return this.dataStoreServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

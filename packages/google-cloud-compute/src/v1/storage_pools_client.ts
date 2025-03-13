@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class StoragePoolsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class StoragePoolsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -494,9 +497,24 @@ export class StoragePoolsClient {
         storage_pool: request.storagePool ?? '',
       });
     this.initialize();
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('delete response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
+      .delete(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -604,7 +622,33 @@ export class StoragePoolsClient {
         storage_pool: request.storagePool ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IStoragePool,
+          | protos.google.cloud.compute.v1.IGetStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IStoragePool,
+          protos.google.cloud.compute.v1.IGetStoragePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -708,7 +752,36 @@ export class StoragePoolsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IPolicy,
+          (
+            | protos.google.cloud.compute.v1.IGetIamPolicyStoragePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a storage pool in the specified project using the data in the request.
@@ -810,9 +883,24 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
       });
     this.initialize();
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IInsertStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('insert response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
+      .insert(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -934,7 +1022,36 @@ export class StoragePoolsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IPolicy,
+          (
+            | protos.google.cloud.compute.v1.ISetIamPolicyStoragePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has on the specified resource.
@@ -1038,7 +1155,36 @@ export class StoragePoolsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          (
+            | protos.google.cloud.compute.v1.ITestIamPermissionsStoragePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified storagePool with the data included in the request. The update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: pool_provisioned_capacity_gb, pool_provisioned_iops and pool_provisioned_throughput.
@@ -1145,9 +1291,24 @@ export class StoragePoolsClient {
         storage_pool: request.storagePool ?? '',
       });
     this.initialize();
+    this._log.info('update request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdateStoragePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('update response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .update(request, options, callback)
-      .then(
+      .update(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1219,6 +1380,7 @@ export class StoragePoolsClient {
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
@@ -1323,7 +1485,31 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListStoragePoolsRequest,
+          protos.google.cloud.compute.v1.IStoragePoolList | null | undefined,
+          protos.google.cloud.compute.v1.IStoragePool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('list values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('list request %j', request);
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IStoragePool[],
+          protos.google.cloud.compute.v1.IListStoragePoolsRequest | null,
+          protos.google.cloud.compute.v1.IStoragePoolList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1371,6 +1557,7 @@ export class StoragePoolsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -1426,6 +1613,7 @@ export class StoragePoolsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -1533,7 +1721,33 @@ export class StoragePoolsClient {
         storage_pool: request.storagePool ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDisks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
+          | protos.google.cloud.compute.v1.IStoragePoolListDisks
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IStoragePoolDisk
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDisks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDisks request %j', request);
+    return this.innerApiCalls
+      .listDisks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IStoragePoolDisk[],
+          protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest | null,
+          protos.google.cloud.compute.v1.IStoragePoolListDisks,
+        ]) => {
+          this._log.info('listDisks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1584,6 +1798,7 @@ export class StoragePoolsClient {
     const defaultCallSettings = this._defaults['listDisks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDisks stream %j', request);
     return this.descriptors.page.listDisks.createStream(
       this.innerApiCalls.listDisks as GaxCall,
       request,
@@ -1642,6 +1857,7 @@ export class StoragePoolsClient {
     const defaultCallSettings = this._defaults['listDisks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDisks iterate %j', request);
     return this.descriptors.page.listDisks.asyncIterate(
       this.innerApiCalls['listDisks'] as GaxCall,
       request as {},
@@ -1658,6 +1874,7 @@ export class StoragePoolsClient {
   close(): Promise<void> {
     if (this.storagePoolsStub && !this._terminated) {
       return this.storagePoolsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

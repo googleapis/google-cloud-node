@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class NetworkEndpointGroupsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class NetworkEndpointGroupsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -496,9 +499,24 @@ export class NetworkEndpointGroupsClient {
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
     this.initialize();
+    this._log.info('attachNetworkEndpoints request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IAttachNetworkEndpointsNetworkEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('attachNetworkEndpoints response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .attachNetworkEndpoints(request, options, callback)
-      .then(
+      .attachNetworkEndpoints(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -619,9 +637,24 @@ export class NetworkEndpointGroupsClient {
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
     this.initialize();
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteNetworkEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('delete response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
+      .delete(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -744,9 +777,24 @@ export class NetworkEndpointGroupsClient {
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
     this.initialize();
+    this._log.info('detachNetworkEndpoints request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDetachNetworkEndpointsNetworkEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('detachNetworkEndpoints response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .detachNetworkEndpoints(request, options, callback)
-      .then(
+      .detachNetworkEndpoints(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -866,7 +914,36 @@ export class NetworkEndpointGroupsClient {
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.INetworkEndpointGroup,
+          | protos.google.cloud.compute.v1.IGetNetworkEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.INetworkEndpointGroup,
+          (
+            | protos.google.cloud.compute.v1.IGetNetworkEndpointGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a network endpoint group in the specified project using the parameters that are included in the request.
@@ -968,9 +1045,24 @@ export class NetworkEndpointGroupsClient {
         zone: request.zone ?? '',
       });
     this.initialize();
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IInsertNetworkEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('insert response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
+      .insert(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1092,7 +1184,36 @@ export class NetworkEndpointGroupsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          | protos.google.cloud.compute.v1.ITestIamPermissionsNetworkEndpointGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          (
+            | protos.google.cloud.compute.v1.ITestIamPermissionsNetworkEndpointGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1146,6 +1267,7 @@ export class NetworkEndpointGroupsClient {
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
@@ -1258,7 +1380,33 @@ export class NetworkEndpointGroupsClient {
         zone: request.zone ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListNetworkEndpointGroupsRequest,
+          | protos.google.cloud.compute.v1.INetworkEndpointGroupList
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.INetworkEndpointGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('list values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('list request %j', request);
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.INetworkEndpointGroup[],
+          protos.google.cloud.compute.v1.IListNetworkEndpointGroupsRequest | null,
+          protos.google.cloud.compute.v1.INetworkEndpointGroupList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1306,6 +1454,7 @@ export class NetworkEndpointGroupsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -1361,6 +1510,7 @@ export class NetworkEndpointGroupsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -1476,7 +1626,33 @@ export class NetworkEndpointGroupsClient {
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNetworkEndpoints(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListNetworkEndpointsNetworkEndpointGroupsRequest,
+          | protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNetworkEndpoints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNetworkEndpoints request %j', request);
+    return this.innerApiCalls
+      .listNetworkEndpoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.INetworkEndpointWithHealthStatus[],
+          protos.google.cloud.compute.v1.IListNetworkEndpointsNetworkEndpointGroupsRequest | null,
+          protos.google.cloud.compute.v1.INetworkEndpointGroupsListNetworkEndpoints,
+        ]) => {
+          this._log.info('listNetworkEndpoints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1529,6 +1705,7 @@ export class NetworkEndpointGroupsClient {
     const defaultCallSettings = this._defaults['listNetworkEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworkEndpoints stream %j', request);
     return this.descriptors.page.listNetworkEndpoints.createStream(
       this.innerApiCalls.listNetworkEndpoints as GaxCall,
       request,
@@ -1589,6 +1766,7 @@ export class NetworkEndpointGroupsClient {
     const defaultCallSettings = this._defaults['listNetworkEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworkEndpoints iterate %j', request);
     return this.descriptors.page.listNetworkEndpoints.asyncIterate(
       this.innerApiCalls['listNetworkEndpoints'] as GaxCall,
       request as {},
@@ -1605,6 +1783,7 @@ export class NetworkEndpointGroupsClient {
   close(): Promise<void> {
     if (this.networkEndpointGroupsStub && !this._terminated) {
       return this.networkEndpointGroupsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

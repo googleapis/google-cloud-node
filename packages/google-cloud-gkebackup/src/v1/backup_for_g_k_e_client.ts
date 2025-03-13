@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class BackupForGKEClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('gke-backup');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class BackupForGKEClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -801,7 +804,33 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBackupPlan(request, options, callback);
+    this._log.info('getBackupPlan request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IBackupPlan,
+          | protos.google.cloud.gkebackup.v1.IGetBackupPlanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackupPlan response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackupPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IBackupPlan,
+          protos.google.cloud.gkebackup.v1.IGetBackupPlanRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackupPlan response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieve the details of a single Backup.
@@ -884,7 +913,31 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBackup(request, options, callback);
+    this._log.info('getBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IBackup,
+          protos.google.cloud.gkebackup.v1.IGetBackupRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IBackup,
+          protos.google.cloud.gkebackup.v1.IGetBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieve the details of a single VolumeBackup.
@@ -975,7 +1028,33 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVolumeBackup(request, options, callback);
+    this._log.info('getVolumeBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IVolumeBackup,
+          | protos.google.cloud.gkebackup.v1.IGetVolumeBackupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVolumeBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVolumeBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IVolumeBackup,
+          protos.google.cloud.gkebackup.v1.IGetVolumeBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getVolumeBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieve the details of a single RestorePlan.
@@ -1066,7 +1145,33 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRestorePlan(request, options, callback);
+    this._log.info('getRestorePlan request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IRestorePlan,
+          | protos.google.cloud.gkebackup.v1.IGetRestorePlanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRestorePlan response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRestorePlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IRestorePlan,
+          protos.google.cloud.gkebackup.v1.IGetRestorePlanRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRestorePlan response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the details of a single Restore.
@@ -1151,7 +1256,33 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRestore(request, options, callback);
+    this._log.info('getRestore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IRestore,
+          | protos.google.cloud.gkebackup.v1.IGetRestoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRestore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IRestore,
+          protos.google.cloud.gkebackup.v1.IGetRestoreRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRestore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieve the details of a single VolumeRestore.
@@ -1242,7 +1373,33 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVolumeRestore(request, options, callback);
+    this._log.info('getVolumeRestore request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IVolumeRestore,
+          | protos.google.cloud.gkebackup.v1.IGetVolumeRestoreRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVolumeRestore response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVolumeRestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IVolumeRestore,
+          protos.google.cloud.gkebackup.v1.IGetVolumeRestoreRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getVolumeRestore response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieve the link to the backupIndex.
@@ -1340,11 +1497,36 @@ export class BackupForGKEClient {
         backup: request.backup ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBackupIndexDownloadUrl(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getBackupIndexDownloadUrl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+          | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackupIndexDownloadUrl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackupIndexDownloadUrl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlResponse,
+          (
+            | protos.google.cloud.gkebackup.v1.IGetBackupIndexDownloadUrlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackupIndexDownloadUrl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1459,7 +1641,37 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBackupPlan(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackupPlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackupPlan response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackupPlan request %j', request);
+    return this.innerApiCalls
+      .createBackupPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackupPlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackupPlan response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackupPlan()`.
@@ -1480,6 +1692,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('createBackupPlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1606,7 +1819,37 @@ export class BackupForGKEClient {
         'backup_plan.name': request.backupPlan!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBackupPlan(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackupPlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackupPlan response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackupPlan request %j', request);
+    return this.innerApiCalls
+      .updateBackupPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackupPlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackupPlan response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackupPlan()`.
@@ -1627,6 +1870,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('updateBackupPlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1747,7 +1991,37 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBackupPlan(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackupPlan response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackupPlan request %j', request);
+    return this.innerApiCalls
+      .deleteBackupPlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackupPlan response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackupPlan()`.
@@ -1768,6 +2042,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteBackupPlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1895,7 +2170,37 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackup,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackup request %j', request);
+    return this.innerApiCalls
+      .createBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackup,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackup()`.
@@ -1916,6 +2221,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2041,7 +2347,37 @@ export class BackupForGKEClient {
         'backup.name': request.backup!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackup,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackup request %j', request);
+    return this.innerApiCalls
+      .updateBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IBackup,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackup()`.
@@ -2062,6 +2398,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('updateBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2186,7 +2523,37 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackup request %j', request);
+    return this.innerApiCalls
+      .deleteBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackup()`.
@@ -2207,6 +2574,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2334,7 +2702,37 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRestorePlan(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestorePlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRestorePlan response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRestorePlan request %j', request);
+    return this.innerApiCalls
+      .createRestorePlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestorePlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRestorePlan response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRestorePlan()`.
@@ -2355,6 +2753,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('createRestorePlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2480,7 +2879,37 @@ export class BackupForGKEClient {
         'restore_plan.name': request.restorePlan!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRestorePlan(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestorePlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRestorePlan response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRestorePlan request %j', request);
+    return this.innerApiCalls
+      .updateRestorePlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestorePlan,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRestorePlan response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateRestorePlan()`.
@@ -2501,6 +2930,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('updateRestorePlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2625,7 +3055,37 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRestorePlan(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRestorePlan response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRestorePlan request %j', request);
+    return this.innerApiCalls
+      .deleteRestorePlan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRestorePlan response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRestorePlan()`.
@@ -2646,6 +3106,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteRestorePlan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2773,7 +3234,37 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRestore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestore,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRestore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRestore request %j', request);
+    return this.innerApiCalls
+      .createRestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestore,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRestore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRestore()`.
@@ -2794,6 +3285,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('createRestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2919,7 +3411,37 @@ export class BackupForGKEClient {
         'restore.name': request.restore!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRestore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestore,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateRestore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateRestore request %j', request);
+    return this.innerApiCalls
+      .updateRestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.gkebackup.v1.IRestore,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRestore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateRestore()`.
@@ -2940,6 +3462,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('updateRestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3064,7 +3587,37 @@ export class BackupForGKEClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRestore(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRestore response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRestore request %j', request);
+    return this.innerApiCalls
+      .deleteRestore(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.gkebackup.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRestore response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRestore()`.
@@ -3085,6 +3638,7 @@ export class BackupForGKEClient {
       protos.google.cloud.gkebackup.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteRestore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3210,7 +3764,33 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBackupPlans(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkebackup.v1.IListBackupPlansRequest,
+          | protos.google.cloud.gkebackup.v1.IListBackupPlansResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkebackup.v1.IBackupPlan
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackupPlans values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackupPlans request %j', request);
+    return this.innerApiCalls
+      .listBackupPlans(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkebackup.v1.IBackupPlan[],
+          protos.google.cloud.gkebackup.v1.IListBackupPlansRequest | null,
+          protos.google.cloud.gkebackup.v1.IListBackupPlansResponse,
+        ]) => {
+          this._log.info('listBackupPlans values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3264,6 +3844,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackupPlans stream %j', request);
     return this.descriptors.page.listBackupPlans.createStream(
       this.innerApiCalls.listBackupPlans as GaxCall,
       request,
@@ -3325,6 +3906,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackupPlans iterate %j', request);
     return this.descriptors.page.listBackupPlans.asyncIterate(
       this.innerApiCalls['listBackupPlans'] as GaxCall,
       request as {},
@@ -3435,7 +4017,33 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBackups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkebackup.v1.IListBackupsRequest,
+          | protos.google.cloud.gkebackup.v1.IListBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkebackup.v1.IBackup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackups request %j', request);
+    return this.innerApiCalls
+      .listBackups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkebackup.v1.IBackup[],
+          protos.google.cloud.gkebackup.v1.IListBackupsRequest | null,
+          protos.google.cloud.gkebackup.v1.IListBackupsResponse,
+        ]) => {
+          this._log.info('listBackups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3489,6 +4097,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -3550,6 +4159,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
@@ -3666,7 +4276,33 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVolumeBackups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest,
+          | protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkebackup.v1.IVolumeBackup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVolumeBackups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVolumeBackups request %j', request);
+    return this.innerApiCalls
+      .listVolumeBackups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkebackup.v1.IVolumeBackup[],
+          protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest | null,
+          protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse,
+        ]) => {
+          this._log.info('listVolumeBackups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3720,6 +4356,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listVolumeBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumeBackups stream %j', request);
     return this.descriptors.page.listVolumeBackups.createStream(
       this.innerApiCalls.listVolumeBackups as GaxCall,
       request,
@@ -3781,6 +4418,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listVolumeBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumeBackups iterate %j', request);
     return this.descriptors.page.listVolumeBackups.asyncIterate(
       this.innerApiCalls['listVolumeBackups'] as GaxCall,
       request as {},
@@ -3897,7 +4535,33 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRestorePlans(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkebackup.v1.IListRestorePlansRequest,
+          | protos.google.cloud.gkebackup.v1.IListRestorePlansResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkebackup.v1.IRestorePlan
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRestorePlans values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRestorePlans request %j', request);
+    return this.innerApiCalls
+      .listRestorePlans(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkebackup.v1.IRestorePlan[],
+          protos.google.cloud.gkebackup.v1.IListRestorePlansRequest | null,
+          protos.google.cloud.gkebackup.v1.IListRestorePlansResponse,
+        ]) => {
+          this._log.info('listRestorePlans values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3951,6 +4615,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listRestorePlans'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRestorePlans stream %j', request);
     return this.descriptors.page.listRestorePlans.createStream(
       this.innerApiCalls.listRestorePlans as GaxCall,
       request,
@@ -4012,6 +4677,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listRestorePlans'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRestorePlans iterate %j', request);
     return this.descriptors.page.listRestorePlans.asyncIterate(
       this.innerApiCalls['listRestorePlans'] as GaxCall,
       request as {},
@@ -4122,7 +4788,33 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRestores(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkebackup.v1.IListRestoresRequest,
+          | protos.google.cloud.gkebackup.v1.IListRestoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkebackup.v1.IRestore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRestores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRestores request %j', request);
+    return this.innerApiCalls
+      .listRestores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkebackup.v1.IRestore[],
+          protos.google.cloud.gkebackup.v1.IListRestoresRequest | null,
+          protos.google.cloud.gkebackup.v1.IListRestoresResponse,
+        ]) => {
+          this._log.info('listRestores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4176,6 +4868,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listRestores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRestores stream %j', request);
     return this.descriptors.page.listRestores.createStream(
       this.innerApiCalls.listRestores as GaxCall,
       request,
@@ -4237,6 +4930,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listRestores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRestores iterate %j', request);
     return this.descriptors.page.listRestores.asyncIterate(
       this.innerApiCalls['listRestores'] as GaxCall,
       request as {},
@@ -4353,7 +5047,33 @@ export class BackupForGKEClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVolumeRestores(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest,
+          | protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse
+          | null
+          | undefined,
+          protos.google.cloud.gkebackup.v1.IVolumeRestore
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVolumeRestores values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVolumeRestores request %j', request);
+    return this.innerApiCalls
+      .listVolumeRestores(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.gkebackup.v1.IVolumeRestore[],
+          protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest | null,
+          protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse,
+        ]) => {
+          this._log.info('listVolumeRestores values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4407,6 +5127,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listVolumeRestores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumeRestores stream %j', request);
     return this.descriptors.page.listVolumeRestores.createStream(
       this.innerApiCalls.listVolumeRestores as GaxCall,
       request,
@@ -4468,6 +5189,7 @@ export class BackupForGKEClient {
     const defaultCallSettings = this._defaults['listVolumeRestores'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumeRestores iterate %j', request);
     return this.descriptors.page.listVolumeRestores.asyncIterate(
       this.innerApiCalls['listVolumeRestores'] as GaxCall,
       request as {},
@@ -5374,6 +6096,7 @@ export class BackupForGKEClient {
   close(): Promise<void> {
     if (this.backupForGKEStub && !this._terminated) {
       return this.backupForGKEStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

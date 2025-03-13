@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class SiteSearchEngineServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class SiteSearchEngineServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -907,7 +910,36 @@ export class SiteSearchEngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSiteSearchEngine(request, options, callback);
+    this._log.info('getSiteSearchEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.ISiteSearchEngine,
+          | protos.google.cloud.discoveryengine.v1beta.IGetSiteSearchEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSiteSearchEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSiteSearchEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.ISiteSearchEngine,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetSiteSearchEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSiteSearchEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a {@link protos.google.cloud.discoveryengine.v1beta.TargetSite|TargetSite}.
@@ -1013,7 +1045,36 @@ export class SiteSearchEngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTargetSite(request, options, callback);
+    this._log.info('getTargetSite request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.ITargetSite,
+          | protos.google.cloud.discoveryengine.v1beta.IGetTargetSiteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTargetSite response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTargetSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.ITargetSite,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetTargetSiteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTargetSite response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetch {@link protos.google.cloud.discoveryengine.v1beta.Sitemap|Sitemap}s in a
@@ -1118,7 +1179,36 @@ export class SiteSearchEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchSitemaps(request, options, callback);
+    this._log.info('fetchSitemaps request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IFetchSitemapsResponse,
+          | protos.google.cloud.discoveryengine.v1beta.IFetchSitemapsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchSitemaps response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchSitemaps(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IFetchSitemapsResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IFetchSitemapsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchSitemaps response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1226,7 +1316,37 @@ export class SiteSearchEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTargetSite(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ITargetSite,
+            protos.google.cloud.discoveryengine.v1beta.ICreateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTargetSite response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTargetSite request %j', request);
+    return this.innerApiCalls
+      .createTargetSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ITargetSite,
+            protos.google.cloud.discoveryengine.v1beta.ICreateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTargetSite response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTargetSite()`.
@@ -1247,6 +1367,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.CreateTargetSiteMetadata
     >
   > {
+    this._log.info('createTargetSite long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1369,11 +1490,37 @@ export class SiteSearchEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateTargetSites(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IBatchCreateTargetSitesResponse,
+            protos.google.cloud.discoveryengine.v1beta.IBatchCreateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateTargetSites response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchCreateTargetSites request %j', request);
+    return this.innerApiCalls
+      .batchCreateTargetSites(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IBatchCreateTargetSitesResponse,
+            protos.google.cloud.discoveryengine.v1beta.IBatchCreateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateTargetSites response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchCreateTargetSites()`.
@@ -1394,6 +1541,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.BatchCreateTargetSiteMetadata
     >
   > {
+    this._log.info('batchCreateTargetSites long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1515,7 +1663,37 @@ export class SiteSearchEngineServiceClient {
         'target_site.name': request.targetSite!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTargetSite(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ITargetSite,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTargetSite response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTargetSite request %j', request);
+    return this.innerApiCalls
+      .updateTargetSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ITargetSite,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTargetSite response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateTargetSite()`.
@@ -1536,6 +1714,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.UpdateTargetSiteMetadata
     >
   > {
+    this._log.info('updateTargetSite long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1661,7 +1840,37 @@ export class SiteSearchEngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTargetSite(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTargetSite response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTargetSite request %j', request);
+    return this.innerApiCalls
+      .deleteTargetSite(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteTargetSiteMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTargetSite response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTargetSite()`.
@@ -1682,6 +1891,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.DeleteTargetSiteMetadata
     >
   > {
+    this._log.info('deleteTargetSite long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1803,7 +2013,37 @@ export class SiteSearchEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSitemap(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISitemap,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSitemapMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSitemap response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSitemap request %j', request);
+    return this.innerApiCalls
+      .createSitemap(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISitemap,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSitemapMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSitemap response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSitemap()`.
@@ -1824,6 +2064,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.CreateSitemapMetadata
     >
   > {
+    this._log.info('createSitemap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1948,7 +2189,37 @@ export class SiteSearchEngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSitemap(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSitemapMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSitemap response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSitemap request %j', request);
+    return this.innerApiCalls
+      .deleteSitemap(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSitemapMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSitemap response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSitemap()`.
@@ -1969,6 +2240,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.DeleteSitemapMetadata
     >
   > {
+    this._log.info('deleteSitemap long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2087,11 +2359,37 @@ export class SiteSearchEngineServiceClient {
         site_search_engine: request.siteSearchEngine ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.enableAdvancedSiteSearch(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IEnableAdvancedSiteSearchResponse,
+            protos.google.cloud.discoveryengine.v1beta.IEnableAdvancedSiteSearchMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enableAdvancedSiteSearch response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enableAdvancedSiteSearch request %j', request);
+    return this.innerApiCalls
+      .enableAdvancedSiteSearch(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IEnableAdvancedSiteSearchResponse,
+            protos.google.cloud.discoveryengine.v1beta.IEnableAdvancedSiteSearchMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enableAdvancedSiteSearch response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enableAdvancedSiteSearch()`.
@@ -2112,6 +2410,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.EnableAdvancedSiteSearchMetadata
     >
   > {
+    this._log.info('enableAdvancedSiteSearch long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2230,11 +2529,37 @@ export class SiteSearchEngineServiceClient {
         site_search_engine: request.siteSearchEngine ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.disableAdvancedSiteSearch(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IDisableAdvancedSiteSearchResponse,
+            protos.google.cloud.discoveryengine.v1beta.IDisableAdvancedSiteSearchMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('disableAdvancedSiteSearch response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disableAdvancedSiteSearch request %j', request);
+    return this.innerApiCalls
+      .disableAdvancedSiteSearch(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IDisableAdvancedSiteSearchResponse,
+            protos.google.cloud.discoveryengine.v1beta.IDisableAdvancedSiteSearchMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('disableAdvancedSiteSearch response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `disableAdvancedSiteSearch()`.
@@ -2255,6 +2580,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.DisableAdvancedSiteSearchMetadata
     >
   > {
+    this._log.info('disableAdvancedSiteSearch long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2382,7 +2708,37 @@ export class SiteSearchEngineServiceClient {
         site_search_engine: request.siteSearchEngine ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.recrawlUris(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IRecrawlUrisResponse,
+            protos.google.cloud.discoveryengine.v1beta.IRecrawlUrisMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('recrawlUris response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('recrawlUris request %j', request);
+    return this.innerApiCalls
+      .recrawlUris(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IRecrawlUrisResponse,
+            protos.google.cloud.discoveryengine.v1beta.IRecrawlUrisMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('recrawlUris response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `recrawlUris()`.
@@ -2403,6 +2759,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.RecrawlUrisMetadata
     >
   > {
+    this._log.info('recrawlUris long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2521,11 +2878,37 @@ export class SiteSearchEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchVerifyTargetSites(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IBatchVerifyTargetSitesResponse,
+            protos.google.cloud.discoveryengine.v1beta.IBatchVerifyTargetSitesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchVerifyTargetSites response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchVerifyTargetSites request %j', request);
+    return this.innerApiCalls
+      .batchVerifyTargetSites(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IBatchVerifyTargetSitesResponse,
+            protos.google.cloud.discoveryengine.v1beta.IBatchVerifyTargetSitesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchVerifyTargetSites response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchVerifyTargetSites()`.
@@ -2546,6 +2929,7 @@ export class SiteSearchEngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.BatchVerifyTargetSitesMetadata
     >
   > {
+    this._log.info('batchVerifyTargetSites long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2671,7 +3055,33 @@ export class SiteSearchEngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTargetSites(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListTargetSitesRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListTargetSitesResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.ITargetSite
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTargetSites values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTargetSites request %j', request);
+    return this.innerApiCalls
+      .listTargetSites(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.ITargetSite[],
+          protos.google.cloud.discoveryengine.v1beta.IListTargetSitesRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListTargetSitesResponse,
+        ]) => {
+          this._log.info('listTargetSites values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2724,6 +3134,7 @@ export class SiteSearchEngineServiceClient {
     const defaultCallSettings = this._defaults['listTargetSites'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTargetSites stream %j', request);
     return this.descriptors.page.listTargetSites.createStream(
       this.innerApiCalls.listTargetSites as GaxCall,
       request,
@@ -2784,6 +3195,7 @@ export class SiteSearchEngineServiceClient {
     const defaultCallSettings = this._defaults['listTargetSites'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTargetSites iterate %j', request);
     return this.descriptors.page.listTargetSites.asyncIterate(
       this.innerApiCalls['listTargetSites'] as GaxCall,
       request as {},
@@ -2898,11 +3310,33 @@ export class SiteSearchEngineServiceClient {
         site_search_engine: request.siteSearchEngine ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchDomainVerificationStatus(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IFetchDomainVerificationStatusRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IFetchDomainVerificationStatusResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.ITargetSite
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchDomainVerificationStatus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchDomainVerificationStatus request %j', request);
+    return this.innerApiCalls
+      .fetchDomainVerificationStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.ITargetSite[],
+          protos.google.cloud.discoveryengine.v1beta.IFetchDomainVerificationStatusRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IFetchDomainVerificationStatusResponse,
+        ]) => {
+          this._log.info('fetchDomainVerificationStatus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2952,6 +3386,7 @@ export class SiteSearchEngineServiceClient {
     const defaultCallSettings = this._defaults['fetchDomainVerificationStatus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchDomainVerificationStatus stream %j', request);
     return this.descriptors.page.fetchDomainVerificationStatus.createStream(
       this.innerApiCalls.fetchDomainVerificationStatus as GaxCall,
       request,
@@ -3009,6 +3444,7 @@ export class SiteSearchEngineServiceClient {
     const defaultCallSettings = this._defaults['fetchDomainVerificationStatus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchDomainVerificationStatus iterate %j', request);
     return this.descriptors.page.fetchDomainVerificationStatus.asyncIterate(
       this.innerApiCalls['fetchDomainVerificationStatus'] as GaxCall,
       request as {},
@@ -6860,6 +7296,7 @@ export class SiteSearchEngineServiceClient {
   close(): Promise<void> {
     if (this.siteSearchEngineServiceStub && !this._terminated) {
       return this.siteSearchEngineServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

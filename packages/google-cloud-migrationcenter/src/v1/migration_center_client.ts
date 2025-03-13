@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class MigrationCenterClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('migrationcenter');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class MigrationCenterClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -903,7 +906,33 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAsset(request, options, callback);
+    this._log.info('getAsset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          | protos.google.cloud.migrationcenter.v1.IGetAssetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAsset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          protos.google.cloud.migrationcenter.v1.IGetAssetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAsset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of an asset.
@@ -1014,7 +1043,36 @@ export class MigrationCenterClient {
         'asset.name': request.asset!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAsset(request, options, callback);
+    this._log.info('updateAsset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAsset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IAsset,
+          (
+            | protos.google.cloud.migrationcenter.v1.IUpdateAssetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAsset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a list of assets.
@@ -1113,7 +1171,36 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchUpdateAssets(request, options, callback);
+    this._log.info('batchUpdateAssets request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+          | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateAssets response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsResponse,
+          (
+            | protos.google.cloud.migrationcenter.v1.IBatchUpdateAssetsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateAssets response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an asset.
@@ -1217,7 +1304,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAsset(request, options, callback);
+    this._log.info('deleteAsset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAsset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.migrationcenter.v1.IDeleteAssetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAsset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes list of Assets.
@@ -1321,7 +1437,36 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchDeleteAssets(request, options, callback);
+    this._log.info('batchDeleteAssets request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteAssets response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.migrationcenter.v1.IBatchDeleteAssetsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteAssets response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reports a set of frames.
@@ -1421,7 +1566,36 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.reportAssetFrames(request, options, callback);
+    this._log.info('reportAssetFrames request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+          | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('reportAssetFrames response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .reportAssetFrames(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IReportAssetFramesResponse,
+          (
+            | protos.google.cloud.migrationcenter.v1.IReportAssetFramesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('reportAssetFrames response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Aggregates the requested fields based on provided function.
@@ -1522,7 +1696,36 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.aggregateAssetsValues(request, options, callback);
+    this._log.info('aggregateAssetsValues request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+          | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('aggregateAssetsValues response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .aggregateAssetsValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesResponse,
+          (
+            | protos.google.cloud.migrationcenter.v1.IAggregateAssetsValuesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('aggregateAssetsValues response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of an import job.
@@ -1615,7 +1818,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getImportJob(request, options, callback);
+    this._log.info('getImportJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IImportJob,
+          | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getImportJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IImportJob,
+          (
+            | protos.google.cloud.migrationcenter.v1.IGetImportJobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getImportJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an import data file.
@@ -1711,7 +1943,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getImportDataFile(request, options, callback);
+    this._log.info('getImportDataFile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IImportDataFile,
+          | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getImportDataFile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getImportDataFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IImportDataFile,
+          (
+            | protos.google.cloud.migrationcenter.v1.IGetImportDataFileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getImportDataFile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a group.
@@ -1801,7 +2062,33 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getGroup(request, options, callback);
+    this._log.info('getGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IGroup,
+          | protos.google.cloud.migrationcenter.v1.IGetGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IGroup,
+          protos.google.cloud.migrationcenter.v1.IGetGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of an error frame.
@@ -1896,7 +2183,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getErrorFrame(request, options, callback);
+    this._log.info('getErrorFrame request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IErrorFrame,
+          | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getErrorFrame response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getErrorFrame(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IErrorFrame,
+          (
+            | protos.google.cloud.migrationcenter.v1.IGetErrorFrameRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getErrorFrame response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a source.
@@ -1986,7 +2302,33 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSource(request, options, callback);
+    this._log.info('getSource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.ISource,
+          | protos.google.cloud.migrationcenter.v1.IGetSourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.ISource,
+          protos.google.cloud.migrationcenter.v1.IGetSourceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a preference set.
@@ -2082,7 +2424,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPreferenceSet(request, options, callback);
+    this._log.info('getPreferenceSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+          | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPreferenceSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPreferenceSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+          (
+            | protos.google.cloud.migrationcenter.v1.IGetPreferenceSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPreferenceSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of regional settings.
@@ -2172,7 +2543,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSettings(request, options, callback);
+    this._log.info('getSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.ISettings,
+          | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.ISettings,
+          (
+            | protos.google.cloud.migrationcenter.v1.IGetSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ReportConfig.
@@ -2268,7 +2668,36 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReportConfig(request, options, callback);
+    this._log.info('getReportConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IReportConfig,
+          | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReportConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IReportConfig,
+          (
+            | protos.google.cloud.migrationcenter.v1.IGetReportConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReportConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Report.
@@ -2360,7 +2789,33 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReport(request, options, callback);
+    this._log.info('getReport request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.migrationcenter.v1.IReport,
+          | protos.google.cloud.migrationcenter.v1.IGetReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReport response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.migrationcenter.v1.IReport,
+          protos.google.cloud.migrationcenter.v1.IGetReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getReport response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2481,7 +2936,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createImportJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IImportJob,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createImportJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createImportJob request %j', request);
+    return this.innerApiCalls
+      .createImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IImportJob,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createImportJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createImportJob()`.
@@ -2502,6 +2987,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2635,7 +3121,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteImportJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteImportJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteImportJob request %j', request);
+    return this.innerApiCalls
+      .deleteImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteImportJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteImportJob()`.
@@ -2656,6 +3172,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2792,7 +3309,37 @@ export class MigrationCenterClient {
         'import_job.name': request.importJob!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateImportJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IImportJob,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateImportJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateImportJob request %j', request);
+    return this.innerApiCalls
+      .updateImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IImportJob,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateImportJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateImportJob()`.
@@ -2813,6 +3360,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('updateImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2942,7 +3490,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.validateImportJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('validateImportJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('validateImportJob request %j', request);
+    return this.innerApiCalls
+      .validateImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('validateImportJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `validateImportJob()`.
@@ -2963,6 +3541,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('validateImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3092,7 +3671,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.runImportJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runImportJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runImportJob request %j', request);
+    return this.innerApiCalls
+      .runImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runImportJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `runImportJob()`.
@@ -3113,6 +3722,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('runImportJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3246,7 +3856,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createImportDataFile(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IImportDataFile,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createImportDataFile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createImportDataFile request %j', request);
+    return this.innerApiCalls
+      .createImportDataFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IImportDataFile,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createImportDataFile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createImportDataFile()`.
@@ -3267,6 +3907,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createImportDataFile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3396,7 +4037,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteImportDataFile(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteImportDataFile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteImportDataFile request %j', request);
+    return this.innerApiCalls
+      .deleteImportDataFile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteImportDataFile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteImportDataFile()`.
@@ -3417,6 +4088,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteImportDataFile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3554,7 +4226,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGroup request %j', request);
+    return this.innerApiCalls
+      .createGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGroup()`.
@@ -3575,6 +4277,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3710,7 +4413,37 @@ export class MigrationCenterClient {
         'group.name': request.group!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGroup request %j', request);
+    return this.innerApiCalls
+      .updateGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGroup()`.
@@ -3731,6 +4464,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('updateGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3860,7 +4594,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGroup request %j', request);
+    return this.innerApiCalls
+      .deleteGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGroup()`.
@@ -3881,6 +4645,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4021,7 +4786,37 @@ export class MigrationCenterClient {
         group: request.group ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.addAssetsToGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('addAssetsToGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('addAssetsToGroup request %j', request);
+    return this.innerApiCalls
+      .addAssetsToGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addAssetsToGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `addAssetsToGroup()`.
@@ -4042,6 +4837,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('addAssetsToGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4181,7 +4977,37 @@ export class MigrationCenterClient {
         group: request.group ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeAssetsFromGroup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('removeAssetsFromGroup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('removeAssetsFromGroup request %j', request);
+    return this.innerApiCalls
+      .removeAssetsFromGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IGroup,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeAssetsFromGroup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `removeAssetsFromGroup()`.
@@ -4202,6 +5028,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('removeAssetsFromGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4339,7 +5166,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.ISource,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSource request %j', request);
+    return this.innerApiCalls
+      .createSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.ISource,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSource()`.
@@ -4360,6 +5217,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4496,7 +5354,37 @@ export class MigrationCenterClient {
         'source.name': request.source!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.ISource,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSource request %j', request);
+    return this.innerApiCalls
+      .updateSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.ISource,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSource()`.
@@ -4517,6 +5405,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('updateSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4646,7 +5535,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSource request %j', request);
+    return this.innerApiCalls
+      .deleteSource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSource()`.
@@ -4667,6 +5586,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4805,7 +5725,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPreferenceSet(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPreferenceSet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPreferenceSet request %j', request);
+    return this.innerApiCalls
+      .createPreferenceSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPreferenceSet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPreferenceSet()`.
@@ -4826,6 +5776,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createPreferenceSet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4962,7 +5913,37 @@ export class MigrationCenterClient {
         'preference_set.name': request.preferenceSet!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePreferenceSet(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePreferenceSet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePreferenceSet request %j', request);
+    return this.innerApiCalls
+      .updatePreferenceSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IPreferenceSet,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePreferenceSet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePreferenceSet()`.
@@ -4983,6 +5964,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('updatePreferenceSet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5112,7 +6094,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePreferenceSet(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePreferenceSet response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePreferenceSet request %j', request);
+    return this.innerApiCalls
+      .deletePreferenceSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePreferenceSet response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePreferenceSet()`.
@@ -5133,6 +6145,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePreferenceSet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5269,7 +6282,37 @@ export class MigrationCenterClient {
         'settings.name': request.settings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSettings(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.ISettings,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSettings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSettings request %j', request);
+    return this.innerApiCalls
+      .updateSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.ISettings,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSettings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSettings()`.
@@ -5290,6 +6333,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('updateSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5427,7 +6471,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReportConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IReportConfig,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createReportConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createReportConfig request %j', request);
+    return this.innerApiCalls
+      .createReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IReportConfig,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReportConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createReportConfig()`.
@@ -5448,6 +6522,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createReportConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5581,7 +6656,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteReportConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteReportConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteReportConfig request %j', request);
+    return this.innerApiCalls
+      .deleteReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReportConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteReportConfig()`.
@@ -5602,6 +6707,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteReportConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5739,7 +6845,37 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReport(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IReport,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createReport response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createReport request %j', request);
+    return this.innerApiCalls
+      .createReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.migrationcenter.v1.IReport,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReport response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createReport()`.
@@ -5760,6 +6896,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('createReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5889,7 +7026,37 @@ export class MigrationCenterClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteReport(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteReport response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteReport request %j', request);
+    return this.innerApiCalls
+      .deleteReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.migrationcenter.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReport response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteReport()`.
@@ -5910,6 +7077,7 @@ export class MigrationCenterClient {
       protos.google.cloud.migrationcenter.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteReport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -6027,7 +7195,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAssets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
+          | protos.google.cloud.migrationcenter.v1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IAsset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAssets request %j', request);
+    return this.innerApiCalls
+      .listAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IAsset[],
+          protos.google.cloud.migrationcenter.v1.IListAssetsRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListAssetsResponse,
+        ]) => {
+          this._log.info('listAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6073,6 +7267,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -6126,6 +7321,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
@@ -6235,7 +7431,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listImportJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
+          | protos.google.cloud.migrationcenter.v1.IListImportJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IImportJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listImportJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listImportJobs request %j', request);
+    return this.innerApiCalls
+      .listImportJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IImportJob[],
+          protos.google.cloud.migrationcenter.v1.IListImportJobsRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListImportJobsResponse,
+        ]) => {
+          this._log.info('listImportJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6282,6 +7504,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImportJobs stream %j', request);
     return this.descriptors.page.listImportJobs.createStream(
       this.innerApiCalls.listImportJobs as GaxCall,
       request,
@@ -6336,6 +7559,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImportJobs iterate %j', request);
     return this.descriptors.page.listImportJobs.asyncIterate(
       this.innerApiCalls['listImportJobs'] as GaxCall,
       request as {},
@@ -6448,7 +7672,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listImportDataFiles(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
+          | protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IImportDataFile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listImportDataFiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listImportDataFiles request %j', request);
+    return this.innerApiCalls
+      .listImportDataFiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IImportDataFile[],
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListImportDataFilesResponse,
+        ]) => {
+          this._log.info('listImportDataFiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6498,6 +7748,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImportDataFiles stream %j', request);
     return this.descriptors.page.listImportDataFiles.createStream(
       this.innerApiCalls.listImportDataFiles as GaxCall,
       request,
@@ -6555,6 +7806,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImportDataFiles iterate %j', request);
     return this.descriptors.page.listImportDataFiles.asyncIterate(
       this.innerApiCalls['listImportDataFiles'] as GaxCall,
       request as {},
@@ -6661,7 +7913,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listGroups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
+          | protos.google.cloud.migrationcenter.v1.IListGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGroups request %j', request);
+    return this.innerApiCalls
+      .listGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IGroup[],
+          protos.google.cloud.migrationcenter.v1.IListGroupsRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListGroupsResponse,
+        ]) => {
+          this._log.info('listGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6705,6 +7983,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listGroups stream %j', request);
     return this.descriptors.page.listGroups.createStream(
       this.innerApiCalls.listGroups as GaxCall,
       request,
@@ -6756,6 +8035,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listGroups iterate %j', request);
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
       request as {},
@@ -6861,7 +8141,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listErrorFrames(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
+          | protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IErrorFrame
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listErrorFrames values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listErrorFrames request %j', request);
+    return this.innerApiCalls
+      .listErrorFrames(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IErrorFrame[],
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListErrorFramesResponse,
+        ]) => {
+          this._log.info('listErrorFrames values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6904,6 +8210,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listErrorFrames stream %j', request);
     return this.descriptors.page.listErrorFrames.createStream(
       this.innerApiCalls.listErrorFrames as GaxCall,
       request,
@@ -6954,6 +8261,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listErrorFrames iterate %j', request);
     return this.descriptors.page.listErrorFrames.asyncIterate(
       this.innerApiCalls['listErrorFrames'] as GaxCall,
       request as {},
@@ -7060,7 +8368,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
+          | protos.google.cloud.migrationcenter.v1.IListSourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.ISource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSources request %j', request);
+    return this.innerApiCalls
+      .listSources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.ISource[],
+          protos.google.cloud.migrationcenter.v1.IListSourcesRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListSourcesResponse,
+        ]) => {
+          this._log.info('listSources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7104,6 +8438,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
       request,
@@ -7155,6 +8490,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
       request as {},
@@ -7260,7 +8596,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPreferenceSets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
+          | protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPreferenceSets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPreferenceSets request %j', request);
+    return this.innerApiCalls
+      .listPreferenceSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IPreferenceSet[],
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListPreferenceSetsResponse,
+        ]) => {
+          this._log.info('listPreferenceSets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7303,6 +8665,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPreferenceSets stream %j', request);
     return this.descriptors.page.listPreferenceSets.createStream(
       this.innerApiCalls.listPreferenceSets as GaxCall,
       request,
@@ -7353,6 +8716,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPreferenceSets iterate %j', request);
     return this.descriptors.page.listPreferenceSets.asyncIterate(
       this.innerApiCalls['listPreferenceSets'] as GaxCall,
       request as {},
@@ -7459,7 +8823,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReportConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
+          | protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IReportConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReportConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReportConfigs request %j', request);
+    return this.innerApiCalls
+      .listReportConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IReportConfig[],
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListReportConfigsResponse,
+        ]) => {
+          this._log.info('listReportConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7503,6 +8893,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportConfigs stream %j', request);
     return this.descriptors.page.listReportConfigs.createStream(
       this.innerApiCalls.listReportConfigs as GaxCall,
       request,
@@ -7554,6 +8945,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportConfigs iterate %j', request);
     return this.descriptors.page.listReportConfigs.asyncIterate(
       this.innerApiCalls['listReportConfigs'] as GaxCall,
       request as {},
@@ -7662,7 +9054,33 @@ export class MigrationCenterClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReports(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.migrationcenter.v1.IListReportsRequest,
+          | protos.google.cloud.migrationcenter.v1.IListReportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.migrationcenter.v1.IReport
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReports values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReports request %j', request);
+    return this.innerApiCalls
+      .listReports(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.migrationcenter.v1.IReport[],
+          protos.google.cloud.migrationcenter.v1.IListReportsRequest | null,
+          protos.google.cloud.migrationcenter.v1.IListReportsResponse,
+        ]) => {
+          this._log.info('listReports values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -7708,6 +9126,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
       request,
@@ -7761,6 +9180,7 @@ export class MigrationCenterClient {
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
       request as {},
@@ -8694,6 +10114,7 @@ export class MigrationCenterClient {
   close(): Promise<void> {
     if (this.migrationCenterStub && !this._terminated) {
       return this.migrationCenterStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

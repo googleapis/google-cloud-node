@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class RegionInstanceGroupsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RegionInstanceGroupsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -476,7 +479,36 @@ export class RegionInstanceGroupsClient {
         instance_group: request.instanceGroup ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IInstanceGroup,
+          | protos.google.cloud.compute.v1.IGetRegionInstanceGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IInstanceGroup,
+          (
+            | protos.google.cloud.compute.v1.IGetRegionInstanceGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the named ports for the specified regional instance group.
@@ -581,9 +613,24 @@ export class RegionInstanceGroupsClient {
         instance_group: request.instanceGroup ?? '',
       });
     this.initialize();
+    this._log.info('setNamedPorts request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetNamedPortsRegionInstanceGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setNamedPorts response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setNamedPorts(request, options, callback)
-      .then(
+      .setNamedPorts(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -708,7 +755,33 @@ export class RegionInstanceGroupsClient {
         region: request.region ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupsRequest,
+          | protos.google.cloud.compute.v1.IRegionInstanceGroupList
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IInstanceGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('list values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('list request %j', request);
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IInstanceGroup[],
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupsRequest | null,
+          protos.google.cloud.compute.v1.IRegionInstanceGroupList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -756,6 +829,7 @@ export class RegionInstanceGroupsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -811,6 +885,7 @@ export class RegionInstanceGroupsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -926,7 +1001,33 @@ export class RegionInstanceGroupsClient {
         instance_group: request.instanceGroup ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListInstancesRegionInstanceGroupsRequest,
+          | protos.google.cloud.compute.v1.IRegionInstanceGroupsListInstances
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IInstanceWithNamedPorts
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
+          protos.google.cloud.compute.v1.IListInstancesRegionInstanceGroupsRequest | null,
+          protos.google.cloud.compute.v1.IRegionInstanceGroupsListInstances,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -979,6 +1080,7 @@ export class RegionInstanceGroupsClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -1039,6 +1141,7 @@ export class RegionInstanceGroupsClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -1055,6 +1158,7 @@ export class RegionInstanceGroupsClient {
   close(): Promise<void> {
     if (this.regionInstanceGroupsStub && !this._terminated) {
       return this.regionInstanceGroupsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

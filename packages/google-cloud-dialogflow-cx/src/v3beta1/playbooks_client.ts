@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class PlaybooksClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class PlaybooksClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -595,7 +598,36 @@ export class PlaybooksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPlaybook(request, options, callback);
+    this._log.info('createPlaybook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreatePlaybookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPlaybook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPlaybook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreatePlaybookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPlaybook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a specified playbook.
@@ -693,7 +725,36 @@ export class PlaybooksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePlaybook(request, options, callback);
+    this._log.info('deletePlaybook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeletePlaybookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePlaybook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePlaybook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeletePlaybookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePlaybook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified Playbook.
@@ -785,7 +846,36 @@ export class PlaybooksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPlaybook(request, options, callback);
+    this._log.info('getPlaybook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetPlaybookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPlaybook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPlaybook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetPlaybookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPlaybook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified Playbook.
@@ -884,7 +974,36 @@ export class PlaybooksClient {
         'playbook.name': request.playbook!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePlaybook(request, options, callback);
+    this._log.info('updatePlaybook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePlaybookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePlaybook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePlaybook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePlaybookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePlaybook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a version for the specified Playbook.
@@ -984,7 +1103,36 @@ export class PlaybooksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPlaybookVersion(request, options, callback);
+    this._log.info('createPlaybookVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreatePlaybookVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPlaybookVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPlaybookVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreatePlaybookVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPlaybookVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified version of the Playbook.
@@ -1082,7 +1230,36 @@ export class PlaybooksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPlaybookVersion(request, options, callback);
+    this._log.info('getPlaybookVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetPlaybookVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPlaybookVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPlaybookVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetPlaybookVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPlaybookVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified version of the Playbook.
@@ -1180,7 +1357,36 @@ export class PlaybooksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePlaybookVersion(request, options, callback);
+    this._log.info('deletePlaybookVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeletePlaybookVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePlaybookVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePlaybookVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeletePlaybookVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePlaybookVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1280,7 +1486,33 @@ export class PlaybooksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPlaybooks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybooksRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybooksResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPlaybooks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPlaybooks request %j', request);
+    return this.innerApiCalls
+      .listPlaybooks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybook[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybooksRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybooksResponse,
+        ]) => {
+          this._log.info('listPlaybooks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1321,6 +1553,7 @@ export class PlaybooksClient {
     const defaultCallSettings = this._defaults['listPlaybooks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPlaybooks stream %j', request);
     return this.descriptors.page.listPlaybooks.createStream(
       this.innerApiCalls.listPlaybooks as GaxCall,
       request,
@@ -1369,6 +1602,7 @@ export class PlaybooksClient {
     const defaultCallSettings = this._defaults['listPlaybooks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPlaybooks iterate %j', request);
     return this.descriptors.page.listPlaybooks.asyncIterate(
       this.innerApiCalls['listPlaybooks'] as GaxCall,
       request as {},
@@ -1473,7 +1707,33 @@ export class PlaybooksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPlaybookVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybookVersionsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybookVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPlaybookVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPlaybookVersions request %j', request);
+    return this.innerApiCalls
+      .listPlaybookVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IPlaybookVersion[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybookVersionsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybookVersionsResponse,
+        ]) => {
+          this._log.info('listPlaybookVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1515,6 +1775,7 @@ export class PlaybooksClient {
     const defaultCallSettings = this._defaults['listPlaybookVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPlaybookVersions stream %j', request);
     return this.descriptors.page.listPlaybookVersions.createStream(
       this.innerApiCalls.listPlaybookVersions as GaxCall,
       request,
@@ -1564,6 +1825,7 @@ export class PlaybooksClient {
     const defaultCallSettings = this._defaults['listPlaybookVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPlaybookVersions iterate %j', request);
     return this.descriptors.page.listPlaybookVersions.asyncIterate(
       this.innerApiCalls['listPlaybookVersions'] as GaxCall,
       request as {},
@@ -3956,6 +4218,7 @@ export class PlaybooksClient {
   close(): Promise<void> {
     if (this.playbooksStub && !this._terminated) {
       return this.playbooksStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

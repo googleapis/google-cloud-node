@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class ProjectsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class ProjectsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -487,9 +490,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('disableXpnHost request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDisableXpnHostProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('disableXpnHost response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .disableXpnHost(request, options, callback)
-      .then(
+      .disableXpnHost(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -606,9 +624,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('disableXpnResource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDisableXpnResourceProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('disableXpnResource response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .disableXpnResource(request, options, callback)
-      .then(
+      .disableXpnResource(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -723,9 +756,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('enableXpnHost request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IEnableXpnHostProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('enableXpnHost response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .enableXpnHost(request, options, callback)
-      .then(
+      .enableXpnHost(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -842,9 +890,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('enableXpnResource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IEnableXpnResourceProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('enableXpnResource response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .enableXpnResource(request, options, callback)
-      .then(
+      .enableXpnResource(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -944,7 +1007,31 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IProject,
+          protos.google.cloud.compute.v1.IGetProjectRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IProject,
+          protos.google.cloud.compute.v1.IGetProjectRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the shared VPC host project that this project links to. May be empty if no link exists.
@@ -1034,7 +1121,33 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getXpnHost(request, options, callback);
+    this._log.info('getXpnHost request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IProject,
+          | protos.google.cloud.compute.v1.IGetXpnHostProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getXpnHost response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getXpnHost(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IProject,
+          protos.google.cloud.compute.v1.IGetXpnHostProjectRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getXpnHost response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Moves a persistent disk from one zone to another.
@@ -1127,9 +1240,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('moveDisk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IMoveDiskProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('moveDisk response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .moveDisk(request, options, callback)
-      .then(
+      .moveDisk(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1246,9 +1374,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('moveInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IMoveInstanceProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('moveInstance response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .moveInstance(request, options, callback)
-      .then(
+      .moveInstance(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1365,9 +1508,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('setCloudArmorTier request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetCloudArmorTierProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setCloudArmorTier response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setCloudArmorTier(request, options, callback)
-      .then(
+      .setCloudArmorTier(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1484,9 +1642,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('setCommonInstanceMetadata request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetCommonInstanceMetadataProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setCommonInstanceMetadata response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setCommonInstanceMetadata(request, options, callback)
-      .then(
+      .setCommonInstanceMetadata(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1603,9 +1776,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('setDefaultNetworkTier request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetDefaultNetworkTierProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setDefaultNetworkTier response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setDefaultNetworkTier(request, options, callback)
-      .then(
+      .setDefaultNetworkTier(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1722,9 +1910,24 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
+    this._log.info('setUsageExportBucket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetUsageExportBucketProjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setUsageExportBucket response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setUsageExportBucket(request, options, callback)
-      .then(
+      .setUsageExportBucket(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1846,7 +2049,33 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getXpnResources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
+          | protos.google.cloud.compute.v1.IProjectsGetXpnResources
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IXpnResourceId
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('getXpnResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('getXpnResources request %j', request);
+    return this.innerApiCalls
+      .getXpnResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IXpnResourceId[],
+          protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest | null,
+          protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+        ]) => {
+          this._log.info('getXpnResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1891,6 +2120,7 @@ export class ProjectsClient {
     const defaultCallSettings = this._defaults['getXpnResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('getXpnResources stream %j', request);
     return this.descriptors.page.getXpnResources.createStream(
       this.innerApiCalls.getXpnResources as GaxCall,
       request,
@@ -1943,6 +2173,7 @@ export class ProjectsClient {
     const defaultCallSettings = this._defaults['getXpnResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('getXpnResources iterate %j', request);
     return this.descriptors.page.getXpnResources.asyncIterate(
       this.innerApiCalls['getXpnResources'] as GaxCall,
       request as {},
@@ -2044,7 +2275,31 @@ export class ProjectsClient {
         project: request.project ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listXpnHosts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
+          protos.google.cloud.compute.v1.IXpnHostList | null | undefined,
+          protos.google.cloud.compute.v1.IProject
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listXpnHosts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listXpnHosts request %j', request);
+    return this.innerApiCalls
+      .listXpnHosts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IProject[],
+          protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | null,
+          protos.google.cloud.compute.v1.IXpnHostList,
+        ]) => {
+          this._log.info('listXpnHosts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2091,6 +2346,7 @@ export class ProjectsClient {
     const defaultCallSettings = this._defaults['listXpnHosts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listXpnHosts stream %j', request);
     return this.descriptors.page.listXpnHosts.createStream(
       this.innerApiCalls.listXpnHosts as GaxCall,
       request,
@@ -2145,6 +2401,7 @@ export class ProjectsClient {
     const defaultCallSettings = this._defaults['listXpnHosts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listXpnHosts iterate %j', request);
     return this.descriptors.page.listXpnHosts.asyncIterate(
       this.innerApiCalls['listXpnHosts'] as GaxCall,
       request as {},
@@ -2161,6 +2418,7 @@ export class ProjectsClient {
   close(): Promise<void> {
     if (this.projectsStub && !this._terminated) {
       return this.projectsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

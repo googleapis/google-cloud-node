@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -62,6 +63,8 @@ export class AutokeyAdminClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class AutokeyAdminClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -511,7 +514,33 @@ export class AutokeyAdminClient {
         'autokey_config.name': request.autokeyConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAutokeyConfig(request, options, callback);
+    this._log.info('updateAutokeyConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IAutokeyConfig,
+          | protos.google.cloud.kms.v1.IUpdateAutokeyConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAutokeyConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAutokeyConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IAutokeyConfig,
+          protos.google.cloud.kms.v1.IUpdateAutokeyConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAutokeyConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the {@link protos.google.cloud.kms.v1.AutokeyConfig|AutokeyConfig} for a
@@ -597,7 +626,33 @@ export class AutokeyAdminClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAutokeyConfig(request, options, callback);
+    this._log.info('getAutokeyConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IAutokeyConfig,
+          | protos.google.cloud.kms.v1.IGetAutokeyConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAutokeyConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAutokeyConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IAutokeyConfig,
+          protos.google.cloud.kms.v1.IGetAutokeyConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAutokeyConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the effective Cloud KMS Autokey configuration for a given project.
@@ -689,11 +744,36 @@ export class AutokeyAdminClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.showEffectiveAutokeyConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('showEffectiveAutokeyConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse,
+          | protos.google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('showEffectiveAutokeyConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .showEffectiveAutokeyConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IShowEffectiveAutokeyConfigResponse,
+          (
+            | protos.google.cloud.kms.v1.IShowEffectiveAutokeyConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('showEffectiveAutokeyConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1482,6 +1562,7 @@ export class AutokeyAdminClient {
   close(): Promise<void> {
     if (this.autokeyAdminStub && !this._terminated) {
       return this.autokeyAdminStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

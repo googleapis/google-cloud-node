@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class WorkflowsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('workflows');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class WorkflowsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -557,7 +560,33 @@ export class WorkflowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getWorkflow(request, options, callback);
+    this._log.info('getWorkflow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workflows.v1beta.IWorkflow,
+          | protos.google.cloud.workflows.v1beta.IGetWorkflowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkflow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkflow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workflows.v1beta.IWorkflow,
+          protos.google.cloud.workflows.v1beta.IGetWorkflowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkflow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -674,7 +703,37 @@ export class WorkflowsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createWorkflow(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workflows.v1beta.IWorkflow,
+            protos.google.cloud.workflows.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWorkflow response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWorkflow request %j', request);
+    return this.innerApiCalls
+      .createWorkflow(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workflows.v1beta.IWorkflow,
+            protos.google.cloud.workflows.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkflow response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createWorkflow()`.
@@ -695,6 +754,7 @@ export class WorkflowsClient {
       protos.google.cloud.workflows.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createWorkflow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -813,7 +873,37 @@ export class WorkflowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteWorkflow(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workflows.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWorkflow response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWorkflow request %j', request);
+    return this.innerApiCalls
+      .deleteWorkflow(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.workflows.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkflow response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteWorkflow()`.
@@ -834,6 +924,7 @@ export class WorkflowsClient {
       protos.google.cloud.workflows.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteWorkflow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -956,7 +1047,37 @@ export class WorkflowsClient {
         'workflow.name': request.workflow!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateWorkflow(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workflows.v1beta.IWorkflow,
+            protos.google.cloud.workflows.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWorkflow response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWorkflow request %j', request);
+    return this.innerApiCalls
+      .updateWorkflow(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workflows.v1beta.IWorkflow,
+            protos.google.cloud.workflows.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkflow response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateWorkflow()`.
@@ -977,6 +1098,7 @@ export class WorkflowsClient {
       protos.google.cloud.workflows.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateWorkflow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1103,7 +1225,33 @@ export class WorkflowsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWorkflows(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workflows.v1beta.IListWorkflowsRequest,
+          | protos.google.cloud.workflows.v1beta.IListWorkflowsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workflows.v1beta.IWorkflow
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkflows values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkflows request %j', request);
+    return this.innerApiCalls
+      .listWorkflows(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workflows.v1beta.IWorkflow[],
+          protos.google.cloud.workflows.v1beta.IListWorkflowsRequest | null,
+          protos.google.cloud.workflows.v1beta.IListWorkflowsResponse,
+        ]) => {
+          this._log.info('listWorkflows values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1157,6 +1305,7 @@ export class WorkflowsClient {
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkflows stream %j', request);
     return this.descriptors.page.listWorkflows.createStream(
       this.innerApiCalls.listWorkflows as GaxCall,
       request,
@@ -1218,6 +1367,7 @@ export class WorkflowsClient {
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkflows iterate %j', request);
     return this.descriptors.page.listWorkflows.asyncIterate(
       this.innerApiCalls['listWorkflows'] as GaxCall,
       request as {},
@@ -1322,6 +1472,7 @@ export class WorkflowsClient {
   close(): Promise<void> {
     if (this.workflowsStub && !this._terminated) {
       return this.workflowsStub.then((stub) => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

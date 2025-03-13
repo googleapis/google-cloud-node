@@ -30,6 +30,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class ProjectServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('retail');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ProjectServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -523,7 +526,33 @@ export class ProjectServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAlertConfig(request, options, callback);
+    this._log.info('getAlertConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          | protos.google.cloud.retail.v2beta.IGetAlertConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAlertConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAlertConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          protos.google.cloud.retail.v2beta.IGetAlertConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAlertConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the alert config of the requested project.
@@ -625,7 +654,36 @@ export class ProjectServiceClient {
         'alert_config.name': request.alertConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAlertConfig(request, options, callback);
+    this._log.info('updateAlertConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAlertConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAlertConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2beta.IAlertConfig,
+          (
+            | protos.google.cloud.retail.v2beta.IUpdateAlertConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAlertConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1407,6 +1465,7 @@ export class ProjectServiceClient {
   close(): Promise<void> {
     if (this.projectServiceStub && !this._terminated) {
       return this.projectServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

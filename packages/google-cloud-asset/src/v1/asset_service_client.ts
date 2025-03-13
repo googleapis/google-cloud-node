@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class AssetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('asset');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class AssetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -649,7 +652,36 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchGetAssetsHistory(request, options, callback);
+    this._log.info('batchGetAssetsHistory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+          | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchGetAssetsHistory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchGetAssetsHistory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IBatchGetAssetsHistoryResponse,
+          (
+            | protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchGetAssetsHistory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a feed in a parent project/folder/organization to listen to its
@@ -744,7 +776,31 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFeed(request, options, callback);
+    this._log.info('createFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.ICreateFeedRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.ICreateFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about an asset feed.
@@ -829,7 +885,31 @@ export class AssetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFeed(request, options, callback);
+    this._log.info('getFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IGetFeedRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IGetFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists all asset feeds in a parent project/folder/organization.
@@ -913,7 +993,31 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFeeds(request, options, callback);
+    this._log.info('listFeeds request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IListFeedsResponse,
+          protos.google.cloud.asset.v1.IListFeedsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listFeeds response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listFeeds(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IListFeedsResponse,
+          protos.google.cloud.asset.v1.IListFeedsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listFeeds response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an asset feed configuration.
@@ -1003,7 +1107,31 @@ export class AssetServiceClient {
         'feed.name': request.feed!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFeed(request, options, callback);
+    this._log.info('updateFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IUpdateFeedRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IFeed,
+          protos.google.cloud.asset.v1.IUpdateFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an asset feed.
@@ -1088,7 +1216,31 @@ export class AssetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFeed(request, options, callback);
+    this._log.info('deleteFeed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteFeedRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFeed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFeed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteFeedRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFeed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Analyzes IAM policies to answer which identities have what accesses on
@@ -1202,7 +1354,33 @@ export class AssetServiceClient {
         'analysis_query.scope': request.analysisQuery!.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeIamPolicy(request, options, callback);
+    this._log.info('analyzeIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+          | protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyResponse,
+          protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Analyze moving a resource to a specified destination without kicking off
@@ -1300,7 +1478,31 @@ export class AssetServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeMove(request, options, callback);
+    this._log.info('analyzeMove request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeMove response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeMove(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeMove response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Issue a job that queries assets using a SQL statement compatible with
@@ -1447,7 +1649,31 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryAssets(request, options, callback);
+    this._log.info('queryAssets request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IQueryAssetsResponse,
+          protos.google.cloud.asset.v1.IQueryAssetsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryAssets response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IQueryAssetsResponse,
+          protos.google.cloud.asset.v1.IQueryAssetsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('queryAssets response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a saved query in a parent project/folder/organization.
@@ -1548,7 +1774,33 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSavedQuery(request, options, callback);
+    this._log.info('createSavedQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          | protos.google.cloud.asset.v1.ICreateSavedQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSavedQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSavedQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.ICreateSavedQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSavedQuery response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a saved query.
@@ -1634,7 +1886,31 @@ export class AssetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSavedQuery(request, options, callback);
+    this._log.info('getSavedQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IGetSavedQueryRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSavedQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSavedQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IGetSavedQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSavedQuery response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a saved query.
@@ -1727,7 +2003,33 @@ export class AssetServiceClient {
         'saved_query.name': request.savedQuery!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSavedQuery(request, options, callback);
+    this._log.info('updateSavedQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.ISavedQuery,
+          | protos.google.cloud.asset.v1.IUpdateSavedQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSavedQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSavedQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.ISavedQuery,
+          protos.google.cloud.asset.v1.IUpdateSavedQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSavedQuery response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a saved query.
@@ -1816,7 +2118,33 @@ export class AssetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSavedQuery(request, options, callback);
+    this._log.info('deleteSavedQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.asset.v1.IDeleteSavedQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSavedQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSavedQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.asset.v1.IDeleteSavedQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSavedQuery response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets effective IAM policies for a batch of resources.
@@ -1928,11 +2256,36 @@ export class AssetServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchGetEffectiveIamPolicies(
-      request,
-      options,
-      callback
-    );
+    this._log.info('batchGetEffectiveIamPolicies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+          | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchGetEffectiveIamPolicies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchGetEffectiveIamPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesResponse,
+          (
+            | protos.google.cloud.asset.v1.IBatchGetEffectiveIamPoliciesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchGetEffectiveIamPolicies response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2095,7 +2448,37 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportAssets(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.asset.v1.IExportAssetsResponse,
+            protos.google.cloud.asset.v1.IExportAssetsRequest
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportAssets response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportAssets request %j', request);
+    return this.innerApiCalls
+      .exportAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.asset.v1.IExportAssetsResponse,
+            protos.google.cloud.asset.v1.IExportAssetsRequest
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportAssets response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportAssets()`.
@@ -2116,6 +2499,7 @@ export class AssetServiceClient {
       protos.google.cloud.asset.v1.ExportAssetsRequest
     >
   > {
+    this._log.info('exportAssets long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2260,11 +2644,43 @@ export class AssetServiceClient {
         'analysis_query.scope': request.analysisQuery!.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeIamPolicyLongrunning(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
+            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'analyzeIamPolicyLongrunning response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('analyzeIamPolicyLongrunning request %j', request);
+    return this.innerApiCalls
+      .analyzeIamPolicyLongrunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
+            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'analyzeIamPolicyLongrunning response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `analyzeIamPolicyLongrunning()`.
@@ -2285,6 +2701,7 @@ export class AssetServiceClient {
       protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
     >
   > {
+    this._log.info('analyzeIamPolicyLongrunning long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2439,7 +2856,31 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAssets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.IListAssetsRequest,
+          protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
+          protos.google.cloud.asset.v1.IAsset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAssets request %j', request);
+    return this.innerApiCalls
+      .listAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.IAsset[],
+          protos.google.cloud.asset.v1.IListAssetsRequest | null,
+          protos.google.cloud.asset.v1.IListAssetsResponse,
+        ]) => {
+          this._log.info('listAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2529,6 +2970,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -2626,6 +3068,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
@@ -2894,7 +3337,33 @@ export class AssetServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchAllResources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+          | protos.google.cloud.asset.v1.ISearchAllResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.IResourceSearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchAllResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchAllResources request %j', request);
+    return this.innerApiCalls
+      .searchAllResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.IResourceSearchResult[],
+          protos.google.cloud.asset.v1.ISearchAllResourcesRequest | null,
+          protos.google.cloud.asset.v1.ISearchAllResourcesResponse,
+        ]) => {
+          this._log.info('searchAllResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3097,6 +3566,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchAllResources stream %j', request);
     return this.descriptors.page.searchAllResources.createStream(
       this.innerApiCalls.searchAllResources as GaxCall,
       request,
@@ -3307,6 +3777,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchAllResources iterate %j', request);
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
       request as {},
@@ -3501,7 +3972,33 @@ export class AssetServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchAllIamPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+          | protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.IIamPolicySearchResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchAllIamPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchAllIamPolicies request %j', request);
+    return this.innerApiCalls
+      .searchAllIamPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.IIamPolicySearchResult[],
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest | null,
+          protos.google.cloud.asset.v1.ISearchAllIamPoliciesResponse,
+        ]) => {
+          this._log.info('searchAllIamPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3630,6 +4127,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchAllIamPolicies stream %j', request);
     return this.descriptors.page.searchAllIamPolicies.createStream(
       this.innerApiCalls.searchAllIamPolicies as GaxCall,
       request,
@@ -3766,6 +4264,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchAllIamPolicies iterate %j', request);
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
       request as {},
@@ -3878,7 +4377,33 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSavedQueries(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.IListSavedQueriesRequest,
+          | protos.google.cloud.asset.v1.IListSavedQueriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.ISavedQuery
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSavedQueries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSavedQueries request %j', request);
+    return this.innerApiCalls
+      .listSavedQueries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.ISavedQuery[],
+          protos.google.cloud.asset.v1.IListSavedQueriesRequest | null,
+          protos.google.cloud.asset.v1.IListSavedQueriesResponse,
+        ]) => {
+          this._log.info('listSavedQueries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3934,6 +4459,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSavedQueries stream %j', request);
     return this.descriptors.page.listSavedQueries.createStream(
       this.innerApiCalls.listSavedQueries as GaxCall,
       request,
@@ -3997,6 +4523,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSavedQueries iterate %j', request);
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
       request as {},
@@ -4119,7 +4646,33 @@ export class AssetServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeOrgPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
+          | protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('analyzeOrgPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('analyzeOrgPolicies request %j', request);
+    return this.innerApiCalls
+      .analyzeOrgPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.IOrgPolicyResult[],
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest | null,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesResponse,
+        ]) => {
+          this._log.info('analyzeOrgPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4179,6 +4732,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['analyzeOrgPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('analyzeOrgPolicies stream %j', request);
     return this.descriptors.page.analyzeOrgPolicies.createStream(
       this.innerApiCalls.analyzeOrgPolicies as GaxCall,
       request,
@@ -4246,6 +4800,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['analyzeOrgPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('analyzeOrgPolicies iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicies.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicies'] as GaxCall,
       request as {},
@@ -4371,11 +4926,39 @@ export class AssetServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeOrgPolicyGovernedContainers(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
+          | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'analyzeOrgPolicyGovernedContainers values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('analyzeOrgPolicyGovernedContainers request %j', request);
+    return this.innerApiCalls
+      .analyzeOrgPolicyGovernedContainers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.IGovernedContainer[],
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest | null,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersResponse,
+        ]) => {
+          this._log.info(
+            'analyzeOrgPolicyGovernedContainers values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4438,6 +5021,7 @@ export class AssetServiceClient {
       this._defaults['analyzeOrgPolicyGovernedContainers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('analyzeOrgPolicyGovernedContainers stream %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedContainers.createStream(
       this.innerApiCalls.analyzeOrgPolicyGovernedContainers as GaxCall,
       request,
@@ -4508,6 +5092,7 @@ export class AssetServiceClient {
       this._defaults['analyzeOrgPolicyGovernedContainers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('analyzeOrgPolicyGovernedContainers iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedContainers.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicyGovernedContainers'] as GaxCall,
       request as {},
@@ -4696,11 +5281,33 @@ export class AssetServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeOrgPolicyGovernedAssets(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
+          | protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('analyzeOrgPolicyGovernedAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('analyzeOrgPolicyGovernedAssets request %j', request);
+    return this.innerApiCalls
+      .analyzeOrgPolicyGovernedAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsResponse.IGovernedAsset[],
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest | null,
+          protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsResponse,
+        ]) => {
+          this._log.info('analyzeOrgPolicyGovernedAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4779,6 +5386,7 @@ export class AssetServiceClient {
       this._defaults['analyzeOrgPolicyGovernedAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('analyzeOrgPolicyGovernedAssets stream %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedAssets.createStream(
       this.innerApiCalls.analyzeOrgPolicyGovernedAssets as GaxCall,
       request,
@@ -4865,6 +5473,7 @@ export class AssetServiceClient {
       this._defaults['analyzeOrgPolicyGovernedAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('analyzeOrgPolicyGovernedAssets iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedAssets.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicyGovernedAssets'] as GaxCall,
       request as {},
@@ -5524,6 +6133,7 @@ export class AssetServiceClient {
   close(): Promise<void> {
     if (this.assetServiceStub && !this._terminated) {
       return this.assetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class SpacesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('meet');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class SpacesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -491,7 +494,31 @@ export class SpacesServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.createSpace(request, options, callback);
+    this._log.info('createSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.ISpace,
+          protos.google.apps.meet.v2beta.ICreateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.ISpace,
+          protos.google.apps.meet.v2beta.ICreateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a meeting space.
@@ -594,7 +621,31 @@ export class SpacesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSpace(request, options, callback);
+    this._log.info('getSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.ISpace,
+          protos.google.apps.meet.v2beta.IGetSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.ISpace,
+          protos.google.apps.meet.v2beta.IGetSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates details about a meeting space.
@@ -686,7 +737,31 @@ export class SpacesServiceClient {
         'space.name': request.space!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSpace(request, options, callback);
+    this._log.info('updateSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.ISpace,
+          protos.google.apps.meet.v2beta.IUpdateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.ISpace,
+          protos.google.apps.meet.v2beta.IUpdateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * [Developer Preview](https://developers.google.com/workspace/preview):
@@ -800,11 +875,36 @@ export class SpacesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.connectActiveConference(
-      request,
-      options,
-      callback
-    );
+    this._log.info('connectActiveConference request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.IConnectActiveConferenceResponse,
+          | protos.google.apps.meet.v2beta.IConnectActiveConferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('connectActiveConference response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .connectActiveConference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.IConnectActiveConferenceResponse,
+          (
+            | protos.google.apps.meet.v2beta.IConnectActiveConferenceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('connectActiveConference response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Ends an active conference (if there's one).
@@ -905,7 +1005,36 @@ export class SpacesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.endActiveConference(request, options, callback);
+    this._log.info('endActiveConference request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.apps.meet.v2beta.IEndActiveConferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('endActiveConference response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .endActiveConference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.apps.meet.v2beta.IEndActiveConferenceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('endActiveConference response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * [Developer Preview](https://developers.google.com/workspace/preview):
@@ -997,7 +1126,33 @@ export class SpacesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMember(request, options, callback);
+    this._log.info('createMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.IMember,
+          | protos.google.apps.meet.v2beta.ICreateMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.IMember,
+          protos.google.apps.meet.v2beta.ICreateMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMember response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * [Developer Preview](https://developers.google.com/workspace/preview):
@@ -1085,7 +1240,31 @@ export class SpacesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMember(request, options, callback);
+    this._log.info('getMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2beta.IMember,
+          protos.google.apps.meet.v2beta.IGetMemberRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2beta.IMember,
+          protos.google.apps.meet.v2beta.IGetMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMember response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * [Developer Preview](https://developers.google.com/workspace/preview):
@@ -1170,7 +1349,33 @@ export class SpacesServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteMember(request, options, callback);
+    this._log.info('deleteMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.apps.meet.v2beta.IDeleteMemberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.apps.meet.v2beta.IDeleteMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMember response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1271,7 +1476,33 @@ export class SpacesServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMembers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2beta.IListMembersRequest,
+          | protos.google.apps.meet.v2beta.IListMembersResponse
+          | null
+          | undefined,
+          protos.google.apps.meet.v2beta.IMember
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMembers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMembers request %j', request);
+    return this.innerApiCalls
+      .listMembers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2beta.IMember[],
+          protos.google.apps.meet.v2beta.IListMembersRequest | null,
+          protos.google.apps.meet.v2beta.IListMembersResponse,
+        ]) => {
+          this._log.info('listMembers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1313,6 +1544,7 @@ export class SpacesServiceClient {
     const defaultCallSettings = this._defaults['listMembers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMembers stream %j', request);
     return this.descriptors.page.listMembers.createStream(
       this.innerApiCalls.listMembers as GaxCall,
       request,
@@ -1362,6 +1594,7 @@ export class SpacesServiceClient {
     const defaultCallSettings = this._defaults['listMembers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMembers iterate %j', request);
     return this.descriptors.page.listMembers.asyncIterate(
       this.innerApiCalls['listMembers'] as GaxCall,
       request as {},
@@ -1701,6 +1934,7 @@ export class SpacesServiceClient {
   close(): Promise<void> {
     if (this.spacesServiceStub && !this._terminated) {
       return this.spacesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

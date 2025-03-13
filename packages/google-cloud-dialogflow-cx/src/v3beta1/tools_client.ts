@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class ToolsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class ToolsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -659,7 +662,36 @@ export class ToolsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTool(request, options, callback);
+    this._log.info('createTool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateToolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreateToolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified {@link protos.google.cloud.dialogflow.cx.v3beta1.Tool|Tool}.
@@ -751,7 +783,33 @@ export class ToolsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTool(request, options, callback);
+    this._log.info('getTool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetToolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool,
+          protos.google.cloud.dialogflow.cx.v3beta1.IGetToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the specified {@link protos.google.cloud.dialogflow.cx.v3beta1.Tool|Tool}.
@@ -844,7 +902,36 @@ export class ToolsClient {
         'tool.name': request.tool!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTool(request, options, callback);
+    this._log.info('updateTool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateToolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateToolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a specified {@link protos.google.cloud.dialogflow.cx.v3beta1.Tool|Tool}.
@@ -944,7 +1031,36 @@ export class ToolsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTool(request, options, callback);
+    this._log.info('deleteTool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteToolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteToolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a version for the specified
@@ -1045,7 +1161,36 @@ export class ToolsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createToolVersion(request, options, callback);
+    this._log.info('createToolVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateToolVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createToolVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createToolVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreateToolVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createToolVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified version of the
@@ -1144,7 +1289,36 @@ export class ToolsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getToolVersion(request, options, callback);
+    this._log.info('getToolVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetToolVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getToolVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getToolVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetToolVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getToolVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified version of the
@@ -1251,7 +1425,36 @@ export class ToolsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteToolVersion(request, options, callback);
+    this._log.info('deleteToolVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteToolVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteToolVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteToolVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteToolVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteToolVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified version of the Tool and stores it as the
@@ -1350,7 +1553,36 @@ export class ToolsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreToolVersion(request, options, callback);
+    this._log.info('restoreToolVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestoreToolVersionResponse,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IRestoreToolVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('restoreToolVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .restoreToolVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestoreToolVersionResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IRestoreToolVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreToolVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1473,7 +1705,37 @@ export class ToolsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportTools(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportToolsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportToolsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportTools response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportTools request %j', request);
+    return this.innerApiCalls
+      .exportTools(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportToolsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportToolsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportTools response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportTools()`.
@@ -1494,6 +1756,7 @@ export class ToolsClient {
       protos.google.cloud.dialogflow.cx.v3beta1.ExportToolsMetadata
     >
   > {
+    this._log.info('exportTools long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1607,7 +1870,33 @@ export class ToolsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTools(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListToolsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListToolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTools values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTools request %j', request);
+    return this.innerApiCalls
+      .listTools(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ITool[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListToolsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListToolsResponse,
+        ]) => {
+          this._log.info('listTools values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1648,6 +1937,7 @@ export class ToolsClient {
     const defaultCallSettings = this._defaults['listTools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTools stream %j', request);
     return this.descriptors.page.listTools.createStream(
       this.innerApiCalls.listTools as GaxCall,
       request,
@@ -1696,6 +1986,7 @@ export class ToolsClient {
     const defaultCallSettings = this._defaults['listTools'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTools iterate %j', request);
     return this.descriptors.page.listTools.asyncIterate(
       this.innerApiCalls['listTools'] as GaxCall,
       request as {},
@@ -1801,7 +2092,33 @@ export class ToolsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listToolVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListToolVersionsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListToolVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listToolVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listToolVersions request %j', request);
+    return this.innerApiCalls
+      .listToolVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IToolVersion[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListToolVersionsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListToolVersionsResponse,
+        ]) => {
+          this._log.info('listToolVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1843,6 +2160,7 @@ export class ToolsClient {
     const defaultCallSettings = this._defaults['listToolVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listToolVersions stream %j', request);
     return this.descriptors.page.listToolVersions.createStream(
       this.innerApiCalls.listToolVersions as GaxCall,
       request,
@@ -1892,6 +2210,7 @@ export class ToolsClient {
     const defaultCallSettings = this._defaults['listToolVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listToolVersions iterate %j', request);
     return this.descriptors.page.listToolVersions.asyncIterate(
       this.innerApiCalls['listToolVersions'] as GaxCall,
       request as {},
@@ -4508,6 +4827,7 @@ export class ToolsClient {
   close(): Promise<void> {
     if (this.toolsStub && !this._terminated) {
       return this.toolsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

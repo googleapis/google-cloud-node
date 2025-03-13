@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class JobsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('run');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class JobsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -593,7 +596,31 @@ export class JobsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
-    return this.innerApiCalls.getJob(request, options, callback);
+    this._log.info('getJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.run.v2.IJob,
+          protos.google.cloud.run.v2.IGetJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.run.v2.IJob,
+          protos.google.cloud.run.v2.IGetJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM Access Control policy currently in effect for the given Job.
@@ -680,7 +707,31 @@ export class JobsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the IAM Access control policy for the specified Job. Overwrites
@@ -775,7 +826,31 @@ export class JobsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has on the specified Project.
@@ -865,7 +940,31 @@ export class JobsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -989,7 +1088,37 @@ export class JobsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
-    return this.innerApiCalls.createJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IJob,
+            protos.google.cloud.run.v2.IJob
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createJob request %j', request);
+    return this.innerApiCalls
+      .createJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.run.v2.IJob,
+            protos.google.cloud.run.v2.IJob
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createJob()`.
@@ -1007,6 +1136,7 @@ export class JobsClient {
   ): Promise<
     LROperation<protos.google.cloud.run.v2.Job, protos.google.cloud.run.v2.Job>
   > {
+    this._log.info('createJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1140,7 +1270,37 @@ export class JobsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
-    return this.innerApiCalls.updateJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IJob,
+            protos.google.cloud.run.v2.IJob
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateJob request %j', request);
+    return this.innerApiCalls
+      .updateJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.run.v2.IJob,
+            protos.google.cloud.run.v2.IJob
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateJob()`.
@@ -1158,6 +1318,7 @@ export class JobsClient {
   ): Promise<
     LROperation<protos.google.cloud.run.v2.Job, protos.google.cloud.run.v2.Job>
   > {
+    this._log.info('updateJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1292,7 +1453,37 @@ export class JobsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
-    return this.innerApiCalls.deleteJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IJob,
+            protos.google.cloud.run.v2.IJob
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteJob request %j', request);
+    return this.innerApiCalls
+      .deleteJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.run.v2.IJob,
+            protos.google.cloud.run.v2.IJob
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteJob()`.
@@ -1310,6 +1501,7 @@ export class JobsClient {
   ): Promise<
     LROperation<protos.google.cloud.run.v2.Job, protos.google.cloud.run.v2.Job>
   > {
+    this._log.info('deleteJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1447,7 +1639,37 @@ export class JobsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
-    return this.innerApiCalls.runJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IExecution,
+            protos.google.cloud.run.v2.IExecution
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runJob request %j', request);
+    return this.innerApiCalls
+      .runJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.run.v2.IExecution,
+            protos.google.cloud.run.v2.IExecution
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `runJob()`.
@@ -1468,6 +1690,7 @@ export class JobsClient {
       protos.google.cloud.run.v2.Execution
     >
   > {
+    this._log.info('runJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1586,7 +1809,31 @@ export class JobsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
     this.initialize();
-    return this.innerApiCalls.listJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.run.v2.IListJobsRequest,
+          protos.google.cloud.run.v2.IListJobsResponse | null | undefined,
+          protos.google.cloud.run.v2.IJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listJobs request %j', request);
+    return this.innerApiCalls
+      .listJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.run.v2.IJob[],
+          protos.google.cloud.run.v2.IListJobsRequest | null,
+          protos.google.cloud.run.v2.IListJobsResponse,
+        ]) => {
+          this._log.info('listJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1641,6 +1888,7 @@ export class JobsClient {
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
@@ -1703,6 +1951,7 @@ export class JobsClient {
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
@@ -2399,6 +2648,7 @@ export class JobsClient {
   close(): Promise<void> {
     if (this.jobsStub && !this._terminated) {
       return this.jobsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

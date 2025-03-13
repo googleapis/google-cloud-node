@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class AgentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class AgentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -721,7 +724,31 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAgent(request, options, callback);
+    this._log.info('getAgent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.IGetAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAgent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.IGetAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAgent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates/updates the specified agent.
@@ -809,7 +836,31 @@ export class AgentsClient {
         'agent.parent': request.agent!.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setAgent(request, options, callback);
+    this._log.info('setAgent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.ISetAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setAgent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.ISetAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setAgent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified agent.
@@ -894,7 +945,33 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAgent(request, options, callback);
+    this._log.info('deleteAgent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAgent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAgent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets agent validation result. Agent validation is performed during
@@ -992,7 +1069,36 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getValidationResult(request, options, callback);
+    this._log.info('getValidationResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IValidationResult,
+          | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getValidationResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getValidationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IValidationResult,
+          (
+            | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getValidationResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1109,7 +1215,37 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.trainAgent(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('trainAgent response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('trainAgent request %j', request);
+    return this.innerApiCalls
+      .trainAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('trainAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `trainAgent()`.
@@ -1127,6 +1263,7 @@ export class AgentsClient {
   ): Promise<
     LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
   > {
+    this._log.info('trainAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1263,7 +1400,37 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportAgent(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportAgent response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportAgent request %j', request);
+    return this.innerApiCalls
+      .exportAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportAgent()`.
@@ -1284,6 +1451,7 @@ export class AgentsClient {
       protos.google.protobuf.Struct
     >
   > {
+    this._log.info('exportAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1437,7 +1605,37 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importAgent(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importAgent response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importAgent request %j', request);
+    return this.innerApiCalls
+      .importAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importAgent()`.
@@ -1455,6 +1653,7 @@ export class AgentsClient {
   ): Promise<
     LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
   > {
+    this._log.info('importAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1606,7 +1805,37 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreAgent(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreAgent response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreAgent request %j', request);
+    return this.innerApiCalls
+      .restoreAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restoreAgent()`.
@@ -1624,6 +1853,7 @@ export class AgentsClient {
   ): Promise<
     LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
   > {
+    this._log.info('restoreAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1742,7 +1972,33 @@ export class AgentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchAgents(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+          | protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IAgent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchAgents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchAgents request %j', request);
+    return this.innerApiCalls
+      .searchAgents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.IAgent[],
+          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest | null,
+          protos.google.cloud.dialogflow.v2.ISearchAgentsResponse,
+        ]) => {
+          this._log.info('searchAgents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1783,6 +2039,7 @@ export class AgentsClient {
     const defaultCallSettings = this._defaults['searchAgents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchAgents stream %j', request);
     return this.descriptors.page.searchAgents.createStream(
       this.innerApiCalls.searchAgents as GaxCall,
       request,
@@ -1831,6 +2088,7 @@ export class AgentsClient {
     const defaultCallSettings = this._defaults['searchAgents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchAgents iterate %j', request);
     return this.descriptors.page.searchAgents.asyncIterate(
       this.innerApiCalls['searchAgents'] as GaxCall,
       request as {},
@@ -4792,6 +5050,7 @@ export class AgentsClient {
   close(): Promise<void> {
     if (this.agentsStub && !this._terminated) {
       return this.agentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

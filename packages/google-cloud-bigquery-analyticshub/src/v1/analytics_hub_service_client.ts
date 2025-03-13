@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class AnalyticsHubServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('bigquery-analyticshub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -95,7 +98,7 @@ export class AnalyticsHubServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -594,7 +597,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataExchange(request, options, callback);
+    this._log.info('getDataExchange request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange,
+          | protos.google.cloud.bigquery.analyticshub.v1.IGetDataExchangeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataExchange response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataExchange(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IGetDataExchangeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataExchange response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new data exchange.
@@ -699,7 +731,36 @@ export class AnalyticsHubServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataExchange(request, options, callback);
+    this._log.info('createDataExchange request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange,
+          | protos.google.cloud.bigquery.analyticshub.v1.ICreateDataExchangeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataExchange response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataExchange(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.ICreateDataExchangeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataExchange response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing data exchange.
@@ -799,7 +860,36 @@ export class AnalyticsHubServiceClient {
         'data_exchange.name': request.dataExchange!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataExchange(request, options, callback);
+    this._log.info('updateDataExchange request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange,
+          | protos.google.cloud.bigquery.analyticshub.v1.IUpdateDataExchangeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataExchange response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataExchange(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IUpdateDataExchangeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataExchange response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing data exchange.
@@ -896,7 +986,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataExchange(request, options, callback);
+    this._log.info('deleteDataExchange request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.analyticshub.v1.IDeleteDataExchangeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDataExchange response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDataExchange(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IDeleteDataExchangeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataExchange response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a listing.
@@ -993,7 +1112,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getListing(request, options, callback);
+    this._log.info('getListing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListing,
+          | protos.google.cloud.bigquery.analyticshub.v1.IGetListingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getListing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getListing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IListing,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IGetListingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getListing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new listing.
@@ -1098,7 +1246,36 @@ export class AnalyticsHubServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createListing(request, options, callback);
+    this._log.info('createListing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListing,
+          | protos.google.cloud.bigquery.analyticshub.v1.ICreateListingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createListing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createListing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IListing,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.ICreateListingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createListing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing listing.
@@ -1198,7 +1375,36 @@ export class AnalyticsHubServiceClient {
         'listing.name': request.listing!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateListing(request, options, callback);
+    this._log.info('updateListing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListing,
+          | protos.google.cloud.bigquery.analyticshub.v1.IUpdateListingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateListing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateListing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IListing,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IUpdateListingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateListing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a listing.
@@ -1295,7 +1501,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteListing(request, options, callback);
+    this._log.info('deleteListing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.bigquery.analyticshub.v1.IDeleteListingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteListing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteListing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IDeleteListingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteListing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Subscribes to a listing.
@@ -1399,7 +1634,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.subscribeListing(request, options, callback);
+    this._log.info('subscribeListing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingResponse,
+          | protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('subscribeListing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .subscribeListing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingResponse,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('subscribeListing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a Subscription.
@@ -1496,7 +1760,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSubscription(request, options, callback);
+    this._log.info('getSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+          | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSubscription response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSubscription response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Revokes a given subscription.
@@ -1593,7 +1886,36 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.revokeSubscription(request, options, callback);
+    this._log.info('revokeSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+          | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('revokeSubscription response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .revokeSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+          (
+            | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('revokeSubscription response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM policy.
@@ -1679,7 +2001,31 @@ export class AnalyticsHubServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the IAM policy.
@@ -1773,7 +2119,31 @@ export class AnalyticsHubServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the permissions that a caller has.
@@ -1861,7 +2231,31 @@ export class AnalyticsHubServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1974,7 +2368,37 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.subscribeDataExchange(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('subscribeDataExchange response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('subscribeDataExchange request %j', request);
+    return this.innerApiCalls
+      .subscribeDataExchange(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('subscribeDataExchange response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `subscribeDataExchange()`.
@@ -1995,6 +2419,7 @@ export class AnalyticsHubServiceClient {
       protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
     >
   > {
+    this._log.info('subscribeDataExchange long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2113,7 +2538,37 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.refreshSubscription(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('refreshSubscription response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('refreshSubscription request %j', request);
+    return this.innerApiCalls
+      .refreshSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('refreshSubscription response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `refreshSubscription()`.
@@ -2134,6 +2589,7 @@ export class AnalyticsHubServiceClient {
       protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
     >
   > {
+    this._log.info('refreshSubscription long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2250,7 +2706,37 @@ export class AnalyticsHubServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSubscription(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSubscription response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSubscription request %j', request);
+    return this.innerApiCalls
+      .deleteSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSubscription response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSubscription()`.
@@ -2271,6 +2757,7 @@ export class AnalyticsHubServiceClient {
       protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteSubscription long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2384,7 +2871,33 @@ export class AnalyticsHubServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDataExchanges(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataExchanges values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataExchanges request %j', request);
+    return this.innerApiCalls
+      .listDataExchanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
+          protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesRequest | null,
+          protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse,
+        ]) => {
+          this._log.info('listDataExchanges values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2426,6 +2939,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataExchanges stream %j', request);
     return this.descriptors.page.listDataExchanges.createStream(
       this.innerApiCalls.listDataExchanges as GaxCall,
       request,
@@ -2475,6 +2989,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataExchanges iterate %j', request);
     return this.descriptors.page.listDataExchanges.asyncIterate(
       this.innerApiCalls['listDataExchanges'] as GaxCall,
       request as {},
@@ -2580,7 +3095,33 @@ export class AnalyticsHubServiceClient {
         organization: request.organization ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOrgDataExchanges(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrgDataExchanges values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrgDataExchanges request %j', request);
+    return this.innerApiCalls
+      .listOrgDataExchanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
+          protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesRequest | null,
+          protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse,
+        ]) => {
+          this._log.info('listOrgDataExchanges values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2622,6 +3163,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOrgDataExchanges stream %j', request);
     return this.descriptors.page.listOrgDataExchanges.createStream(
       this.innerApiCalls.listOrgDataExchanges as GaxCall,
       request,
@@ -2671,6 +3213,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOrgDataExchanges iterate %j', request);
     return this.descriptors.page.listOrgDataExchanges.asyncIterate(
       this.innerApiCalls['listOrgDataExchanges'] as GaxCall,
       request as {},
@@ -2775,7 +3318,33 @@ export class AnalyticsHubServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listListings(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListListingsRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.IListing
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listListings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listListings request %j', request);
+    return this.innerApiCalls
+      .listListings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.bigquery.analyticshub.v1.IListing[],
+          protos.google.cloud.bigquery.analyticshub.v1.IListListingsRequest | null,
+          protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse,
+        ]) => {
+          this._log.info('listListings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2817,6 +3386,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listListings stream %j', request);
     return this.descriptors.page.listListings.createStream(
       this.innerApiCalls.listListings as GaxCall,
       request,
@@ -2866,6 +3436,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listListings iterate %j', request);
     return this.descriptors.page.listListings.asyncIterate(
       this.innerApiCalls['listListings'] as GaxCall,
       request as {},
@@ -2984,7 +3555,33 @@ export class AnalyticsHubServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSubscriptions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubscriptions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubscriptions request %j', request);
+    return this.innerApiCalls
+      .listSubscriptions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription[],
+          protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest | null,
+          protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse,
+        ]) => {
+          this._log.info('listSubscriptions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3040,6 +3637,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSubscriptions stream %j', request);
     return this.descriptors.page.listSubscriptions.createStream(
       this.innerApiCalls.listSubscriptions as GaxCall,
       request,
@@ -3103,6 +3701,7 @@ export class AnalyticsHubServiceClient {
     const defaultCallSettings = this._defaults['listSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSubscriptions iterate %j', request);
     return this.descriptors.page.listSubscriptions.asyncIterate(
       this.innerApiCalls['listSubscriptions'] as GaxCall,
       request as {},
@@ -3210,11 +3809,33 @@ export class AnalyticsHubServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSharedResourceSubscriptions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSharedResourceSubscriptions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSharedResourceSubscriptions request %j', request);
+    return this.innerApiCalls
+      .listSharedResourceSubscriptions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription[],
+          protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest | null,
+          protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse,
+        ]) => {
+          this._log.info('listSharedResourceSubscriptions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3260,6 +3881,7 @@ export class AnalyticsHubServiceClient {
       this._defaults['listSharedResourceSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSharedResourceSubscriptions stream %j', request);
     return this.descriptors.page.listSharedResourceSubscriptions.createStream(
       this.innerApiCalls.listSharedResourceSubscriptions as GaxCall,
       request,
@@ -3313,6 +3935,7 @@ export class AnalyticsHubServiceClient {
       this._defaults['listSharedResourceSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSharedResourceSubscriptions iterate %j', request);
     return this.descriptors.page.listSharedResourceSubscriptions.asyncIterate(
       this.innerApiCalls['listSharedResourceSubscriptions'] as GaxCall,
       request as {},
@@ -3787,6 +4410,7 @@ export class AnalyticsHubServiceClient {
   close(): Promise<void> {
     if (this.analyticsHubServiceStub && !this._terminated) {
       return this.analyticsHubServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

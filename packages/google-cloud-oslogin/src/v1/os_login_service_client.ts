@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class OsLoginServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('os-login');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class OsLoginServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -475,7 +478,33 @@ export class OsLoginServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSshPublicKey(request, options, callback);
+    this._log.info('createSshPublicKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          | protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSshPublicKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSshPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.ICreateSshPublicKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSshPublicKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a POSIX account.
@@ -567,7 +596,33 @@ export class OsLoginServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePosixAccount(request, options, callback);
+    this._log.info('deletePosixAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePosixAccount response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePosixAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeletePosixAccountRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePosixAccount response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an SSH public key.
@@ -659,7 +714,33 @@ export class OsLoginServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSshPublicKey(request, options, callback);
+    this._log.info('deleteSshPublicKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSshPublicKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSshPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.oslogin.v1.IDeleteSshPublicKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSshPublicKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the profile information used for logging in to a virtual machine
@@ -748,7 +829,33 @@ export class OsLoginServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLoginProfile(request, options, callback);
+    this._log.info('getLoginProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oslogin.v1.ILoginProfile,
+          | protos.google.cloud.oslogin.v1.IGetLoginProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLoginProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLoginProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oslogin.v1.ILoginProfile,
+          protos.google.cloud.oslogin.v1.IGetLoginProfileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getLoginProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves an SSH public key.
@@ -834,7 +941,33 @@ export class OsLoginServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSshPublicKey(request, options, callback);
+    this._log.info('getSshPublicKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          | protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSshPublicKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSshPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IGetSshPublicKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSshPublicKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds an SSH public key and returns the profile information. Default POSIX
@@ -934,7 +1067,33 @@ export class OsLoginServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importSshPublicKey(request, options, callback);
+    this._log.info('importSshPublicKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+          | protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('importSshPublicKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importSshPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyResponse,
+          protos.google.cloud.oslogin.v1.IImportSshPublicKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importSshPublicKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an SSH public key and returns the profile information. This method
@@ -1031,7 +1190,33 @@ export class OsLoginServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSshPublicKey(request, options, callback);
+    this._log.info('updateSshPublicKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          | protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSshPublicKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSshPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oslogin.common.ISshPublicKey,
+          protos.google.cloud.oslogin.v1.IUpdateSshPublicKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSshPublicKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1146,6 +1331,7 @@ export class OsLoginServiceClient {
   close(): Promise<void> {
     if (this.osLoginServiceStub && !this._terminated) {
       return this.osLoginServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

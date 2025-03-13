@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class SessionControllerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataproc');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class SessionControllerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -679,7 +682,31 @@ export class SessionControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSession(request, options, callback);
+    this._log.info('getSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.ISession,
+          protos.google.cloud.dataproc.v1.IGetSessionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.ISession,
+          protos.google.cloud.dataproc.v1.IGetSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -803,7 +830,37 @@ export class SessionControllerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSession(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSession response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSession request %j', request);
+    return this.innerApiCalls
+      .createSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSession()`.
@@ -824,6 +881,7 @@ export class SessionControllerClient {
       protos.google.cloud.dataproc.v1.SessionOperationMetadata
     >
   > {
+    this._log.info('createSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -950,7 +1008,37 @@ export class SessionControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.terminateSession(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('terminateSession response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('terminateSession request %j', request);
+    return this.innerApiCalls
+      .terminateSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('terminateSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `terminateSession()`.
@@ -971,6 +1059,7 @@ export class SessionControllerClient {
       protos.google.cloud.dataproc.v1.SessionOperationMetadata
     >
   > {
+    this._log.info('terminateSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1098,7 +1187,37 @@ export class SessionControllerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSession(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSession response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSession request %j', request);
+    return this.innerApiCalls
+      .deleteSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSession()`.
@@ -1119,6 +1238,7 @@ export class SessionControllerClient {
       protos.google.cloud.dataproc.v1.SessionOperationMetadata
     >
   > {
+    this._log.info('deleteSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1241,7 +1361,33 @@ export class SessionControllerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSessions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListSessionsRequest,
+          | protos.google.cloud.dataproc.v1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1.ISession
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSessions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSessions request %j', request);
+    return this.innerApiCalls
+      .listSessions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataproc.v1.ISession[],
+          protos.google.cloud.dataproc.v1.IListSessionsRequest | null,
+          protos.google.cloud.dataproc.v1.IListSessionsResponse,
+        ]) => {
+          this._log.info('listSessions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1298,6 +1444,7 @@ export class SessionControllerClient {
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
@@ -1362,6 +1509,7 @@ export class SessionControllerClient {
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},
@@ -2291,6 +2439,7 @@ export class SessionControllerClient {
   close(): Promise<void> {
     if (this.sessionControllerStub && !this._terminated) {
       return this.sessionControllerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class EssentialContactsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('essential-contacts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class EssentialContactsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -501,7 +504,36 @@ export class EssentialContactsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createContact(request, options, callback);
+    this._log.info('createContact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createContact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createContact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          (
+            | protos.google.cloud.essentialcontacts.v1.ICreateContactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createContact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a contact.
@@ -603,7 +635,36 @@ export class EssentialContactsServiceClient {
         'contact.name': request.contact!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateContact(request, options, callback);
+    this._log.info('updateContact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateContact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateContact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          (
+            | protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateContact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a single contact.
@@ -696,7 +757,36 @@ export class EssentialContactsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getContact(request, options, callback);
+    this._log.info('getContact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getContact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getContact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.essentialcontacts.v1.IContact,
+          (
+            | protos.google.cloud.essentialcontacts.v1.IGetContactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getContact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a contact.
@@ -795,7 +885,36 @@ export class EssentialContactsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteContact(request, options, callback);
+    this._log.info('deleteContact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteContact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteContact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteContact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Allows a contact admin to send a test message to contact to verify that it
@@ -904,7 +1023,36 @@ export class EssentialContactsServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.sendTestMessage(request, options, callback);
+    this._log.info('sendTestMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('sendTestMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .sendTestMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('sendTestMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1010,7 +1158,33 @@ export class EssentialContactsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listContacts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+          | protos.google.cloud.essentialcontacts.v1.IListContactsResponse
+          | null
+          | undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listContacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listContacts request %j', request);
+    return this.innerApiCalls
+      .listContacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.essentialcontacts.v1.IContact[],
+          protos.google.cloud.essentialcontacts.v1.IListContactsRequest | null,
+          protos.google.cloud.essentialcontacts.v1.IListContactsResponse,
+        ]) => {
+          this._log.info('listContacts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1057,6 +1231,7 @@ export class EssentialContactsServiceClient {
     const defaultCallSettings = this._defaults['listContacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listContacts stream %j', request);
     return this.descriptors.page.listContacts.createStream(
       this.innerApiCalls.listContacts as GaxCall,
       request,
@@ -1111,6 +1286,7 @@ export class EssentialContactsServiceClient {
     const defaultCallSettings = this._defaults['listContacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listContacts iterate %j', request);
     return this.descriptors.page.listContacts.asyncIterate(
       this.innerApiCalls['listContacts'] as GaxCall,
       request as {},
@@ -1226,7 +1402,33 @@ export class EssentialContactsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.computeContacts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+          | protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse
+          | null
+          | undefined,
+          protos.google.cloud.essentialcontacts.v1.IContact
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('computeContacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('computeContacts request %j', request);
+    return this.innerApiCalls
+      .computeContacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.essentialcontacts.v1.IContact[],
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest | null,
+          protos.google.cloud.essentialcontacts.v1.IComputeContactsResponse,
+        ]) => {
+          this._log.info('computeContacts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1277,6 +1479,7 @@ export class EssentialContactsServiceClient {
     const defaultCallSettings = this._defaults['computeContacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('computeContacts stream %j', request);
     return this.descriptors.page.computeContacts.createStream(
       this.innerApiCalls.computeContacts as GaxCall,
       request,
@@ -1335,6 +1538,7 @@ export class EssentialContactsServiceClient {
     const defaultCallSettings = this._defaults['computeContacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('computeContacts iterate %j', request);
     return this.descriptors.page.computeContacts.asyncIterate(
       this.innerApiCalls['computeContacts'] as GaxCall,
       request as {},
@@ -1497,6 +1701,7 @@ export class EssentialContactsServiceClient {
   close(): Promise<void> {
     if (this.essentialContactsServiceStub && !this._terminated) {
       return this.essentialContactsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

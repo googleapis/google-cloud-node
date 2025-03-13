@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class RegionCommitmentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RegionCommitmentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -477,7 +480,36 @@ export class RegionCommitmentsClient {
         commitment: request.commitment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.ICommitment,
+          | protos.google.cloud.compute.v1.IGetRegionCommitmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.ICommitment,
+          (
+            | protos.google.cloud.compute.v1.IGetRegionCommitmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a commitment in the specified project using the data included in the request.
@@ -579,9 +611,24 @@ export class RegionCommitmentsClient {
         region: request.region ?? '',
       });
     this.initialize();
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IInsertRegionCommitmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('insert response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
+      .insert(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -707,9 +754,24 @@ export class RegionCommitmentsClient {
         commitment: request.commitment ?? '',
       });
     this.initialize();
+    this._log.info('update request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdateRegionCommitmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('update response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .update(request, options, callback)
-      .then(
+      .update(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -781,6 +843,7 @@ export class RegionCommitmentsClient {
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
@@ -885,7 +948,31 @@ export class RegionCommitmentsClient {
         region: request.region ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListRegionCommitmentsRequest,
+          protos.google.cloud.compute.v1.ICommitmentList | null | undefined,
+          protos.google.cloud.compute.v1.ICommitment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('list values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('list request %j', request);
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.ICommitment[],
+          protos.google.cloud.compute.v1.IListRegionCommitmentsRequest | null,
+          protos.google.cloud.compute.v1.ICommitmentList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -933,6 +1020,7 @@ export class RegionCommitmentsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -988,6 +1076,7 @@ export class RegionCommitmentsClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -1004,6 +1093,7 @@ export class RegionCommitmentsClient {
   close(): Promise<void> {
     if (this.regionCommitmentsStub && !this._terminated) {
       return this.regionCommitmentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class CssProductsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('css');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class CssProductsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -472,7 +475,33 @@ export class CssProductsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCssProduct(request, options, callback);
+    this._log.info('getCssProduct request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.css.v1.ICssProduct,
+          | protos.google.shopping.css.v1.IGetCssProductRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCssProduct response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCssProduct(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.css.v1.ICssProduct,
+          protos.google.shopping.css.v1.IGetCssProductRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCssProduct response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -578,7 +607,33 @@ export class CssProductsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCssProducts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.css.v1.IListCssProductsRequest,
+          | protos.google.shopping.css.v1.IListCssProductsResponse
+          | null
+          | undefined,
+          protos.google.shopping.css.v1.ICssProduct
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCssProducts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCssProducts request %j', request);
+    return this.innerApiCalls
+      .listCssProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.css.v1.ICssProduct[],
+          protos.google.shopping.css.v1.IListCssProductsRequest | null,
+          protos.google.shopping.css.v1.IListCssProductsResponse,
+        ]) => {
+          this._log.info('listCssProducts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -625,6 +680,7 @@ export class CssProductsServiceClient {
     const defaultCallSettings = this._defaults['listCssProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCssProducts stream %j', request);
     return this.descriptors.page.listCssProducts.createStream(
       this.innerApiCalls.listCssProducts as GaxCall,
       request,
@@ -679,6 +735,7 @@ export class CssProductsServiceClient {
     const defaultCallSettings = this._defaults['listCssProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCssProducts iterate %j', request);
     return this.descriptors.page.listCssProducts.asyncIterate(
       this.innerApiCalls['listCssProducts'] as GaxCall,
       request as {},
@@ -837,6 +894,7 @@ export class CssProductsServiceClient {
   close(): Promise<void> {
     if (this.cssProductsServiceStub && !this._terminated) {
       return this.cssProductsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

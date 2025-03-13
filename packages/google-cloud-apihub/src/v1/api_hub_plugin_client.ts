@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ApiHubPluginClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apihub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class ApiHubPluginClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -502,7 +505,31 @@ export class ApiHubPluginClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPlugin(request, options, callback);
+    this._log.info('getPlugin request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPlugin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPlugin(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IGetPluginRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPlugin response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Enables a plugin.
@@ -586,7 +613,31 @@ export class ApiHubPluginClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.enablePlugin(request, options, callback);
+    this._log.info('enablePlugin request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('enablePlugin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .enablePlugin(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IEnablePluginRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enablePlugin response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Disables a plugin.
@@ -672,7 +723,33 @@ export class ApiHubPluginClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.disablePlugin(request, options, callback);
+    this._log.info('disablePlugin request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IPlugin,
+          | protos.google.cloud.apihub.v1.IDisablePluginRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('disablePlugin response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .disablePlugin(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IPlugin,
+          protos.google.cloud.apihub.v1.IDisablePluginRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('disablePlugin response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1627,6 +1704,7 @@ export class ApiHubPluginClient {
   close(): Promise<void> {
     if (this.apiHubPluginStub && !this._terminated) {
       return this.apiHubPluginStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

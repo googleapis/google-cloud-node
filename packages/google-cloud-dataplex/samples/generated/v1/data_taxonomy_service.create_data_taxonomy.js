@@ -29,9 +29,6 @@ function main(parent, dataTaxonomyId, dataTaxonomy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the data taxonomy location, of the form:
-   *  projects/{project_number}/locations/{location_id}
-   *  where `location_id` refers to a GCP region.
    */
   // const parent = 'abc123'
   /**

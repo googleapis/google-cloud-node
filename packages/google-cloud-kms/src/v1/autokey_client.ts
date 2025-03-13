@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -76,6 +77,8 @@ export class AutokeyClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -113,7 +116,7 @@ export class AutokeyClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -636,7 +639,31 @@ export class AutokeyClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getKeyHandle(request, options, callback);
+    this._log.info('getKeyHandle request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IKeyHandle,
+          protos.google.cloud.kms.v1.IGetKeyHandleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKeyHandle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKeyHandle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IKeyHandle,
+          protos.google.cloud.kms.v1.IGetKeyHandleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKeyHandle response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -753,7 +780,37 @@ export class AutokeyClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createKeyHandle(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.kms.v1.IKeyHandle,
+            protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createKeyHandle response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createKeyHandle request %j', request);
+    return this.innerApiCalls
+      .createKeyHandle(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.kms.v1.IKeyHandle,
+            protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createKeyHandle response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createKeyHandle()`.
@@ -774,6 +831,7 @@ export class AutokeyClient {
       protos.google.cloud.kms.v1.CreateKeyHandleMetadata
     >
   > {
+    this._log.info('createKeyHandle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -890,7 +948,31 @@ export class AutokeyClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listKeyHandles(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+          protos.google.cloud.kms.v1.IListKeyHandlesResponse | null | undefined,
+          protos.google.cloud.kms.v1.IKeyHandle
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKeyHandles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKeyHandles request %j', request);
+    return this.innerApiCalls
+      .listKeyHandles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.IKeyHandle[],
+          protos.google.cloud.kms.v1.IListKeyHandlesRequest | null,
+          protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+        ]) => {
+          this._log.info('listKeyHandles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -943,6 +1025,7 @@ export class AutokeyClient {
     const defaultCallSettings = this._defaults['listKeyHandles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listKeyHandles stream %j', request);
     return this.descriptors.page.listKeyHandles.createStream(
       this.innerApiCalls.listKeyHandles as GaxCall,
       request,
@@ -1003,6 +1086,7 @@ export class AutokeyClient {
     const defaultCallSettings = this._defaults['listKeyHandles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listKeyHandles iterate %j', request);
     return this.descriptors.page.listKeyHandles.asyncIterate(
       this.innerApiCalls['listKeyHandles'] as GaxCall,
       request as {},
@@ -2032,6 +2116,7 @@ export class AutokeyClient {
   close(): Promise<void> {
     if (this.autokeyStub && !this._terminated) {
       return this.autokeyStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

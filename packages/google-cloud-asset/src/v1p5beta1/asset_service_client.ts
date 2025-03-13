@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AssetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('asset');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class AssetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -515,7 +518,33 @@ export class AssetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAssets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+          | protos.google.cloud.asset.v1p5beta1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.asset.v1p5beta1.IAsset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAssets request %j', request);
+    return this.innerApiCalls
+      .listAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.asset.v1p5beta1.IAsset[],
+          protos.google.cloud.asset.v1p5beta1.IListAssetsRequest | null,
+          protos.google.cloud.asset.v1p5beta1.IListAssetsResponse,
+        ]) => {
+          this._log.info('listAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -588,6 +617,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -668,6 +698,7 @@ export class AssetServiceClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
@@ -789,6 +820,7 @@ export class AssetServiceClient {
   close(): Promise<void> {
     if (this.assetServiceStub && !this._terminated) {
       return this.assetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

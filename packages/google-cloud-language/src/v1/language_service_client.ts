@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,6 +53,8 @@ export class LanguageServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('language');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class LanguageServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -453,7 +456,33 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.analyzeSentiment(request, options, callback);
+    this._log.info('analyzeSentiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+          | protos.google.cloud.language.v1.IAnalyzeSentimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeSentiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeSentiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
+          protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeSentiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Finds named entities (currently proper names and common nouns) in the text
@@ -543,7 +572,33 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.analyzeEntities(request, options, callback);
+    this._log.info('analyzeEntities request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+          | protos.google.cloud.language.v1.IAnalyzeEntitiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeEntities response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeEntities(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
+          protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeEntities response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Finds entities, similar to
@@ -640,11 +695,36 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.analyzeEntitySentiment(
-      request,
-      options,
-      callback
-    );
+    this._log.info('analyzeEntitySentiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+          | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeEntitySentiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeEntitySentiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IAnalyzeEntitySentimentResponse,
+          (
+            | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeEntitySentiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Analyzes the syntax of the text and provides sentence boundaries and
@@ -728,7 +808,33 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.analyzeSyntax(request, options, callback);
+    this._log.info('analyzeSyntax request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+          | protos.google.cloud.language.v1.IAnalyzeSyntaxRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeSyntax response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeSyntax(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
+          protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeSyntax response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Classifies a document into categories.
@@ -811,7 +917,33 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.classifyText(request, options, callback);
+    this._log.info('classifyText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IClassifyTextResponse,
+          | protos.google.cloud.language.v1.IClassifyTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('classifyText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .classifyText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IClassifyTextResponse,
+          protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('classifyText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Moderates a document for harmful and sensitive categories.
@@ -891,7 +1023,33 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.moderateText(request, options, callback);
+    this._log.info('moderateText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IModerateTextResponse,
+          | protos.google.cloud.language.v1.IModerateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('moderateText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .moderateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IModerateTextResponse,
+          protos.google.cloud.language.v1.IModerateTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('moderateText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * A convenience method that provides all the features that analyzeSentiment,
@@ -976,7 +1134,33 @@ export class LanguageServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.annotateText(request, options, callback);
+    this._log.info('annotateText request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.language.v1.IAnnotateTextResponse,
+          | protos.google.cloud.language.v1.IAnnotateTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('annotateText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .annotateText(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.language.v1.IAnnotateTextResponse,
+          protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('annotateText response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -988,6 +1172,7 @@ export class LanguageServiceClient {
   close(): Promise<void> {
     if (this.languageServiceStub && !this._terminated) {
       return this.languageServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

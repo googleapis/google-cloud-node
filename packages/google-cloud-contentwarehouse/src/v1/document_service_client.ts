@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class DocumentServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('contentwarehouse');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class DocumentServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -520,7 +523,36 @@ export class DocumentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDocument(request, options, callback);
+    this._log.info('createDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.ICreateDocumentResponse,
+          | protos.google.cloud.contentwarehouse.v1.ICreateDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.ICreateDocumentResponse,
+          (
+            | protos.google.cloud.contentwarehouse.v1.ICreateDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a document. Returns NOT_FOUND if the document does not exist.
@@ -616,7 +648,36 @@ export class DocumentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDocument(request, options, callback);
+    this._log.info('getDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocument,
+          | protos.google.cloud.contentwarehouse.v1.IGetDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IDocument,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IGetDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a document. Returns INVALID_ARGUMENT if the name of the document
@@ -729,7 +790,36 @@ export class DocumentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDocument(request, options, callback);
+    this._log.info('updateDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IUpdateDocumentResponse,
+          | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IUpdateDocumentResponse,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a document. Returns NOT_FOUND if the document does not exist.
@@ -832,7 +922,36 @@ export class DocumentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDocument(request, options, callback);
+    this._log.info('deleteDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lock the document so the document cannot be updated by other users.
@@ -928,7 +1047,36 @@ export class DocumentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.lockDocument(request, options, callback);
+    this._log.info('lockDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IDocument,
+          | protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lockDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lockDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IDocument,
+          (
+            | protos.google.cloud.contentwarehouse.v1.ILockDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lockDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a resource. Returns NOT_FOUND error if
@@ -1031,7 +1179,33 @@ export class DocumentServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchAcl(request, options, callback);
+    this._log.info('fetchAcl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IFetchAclResponse,
+          | protos.google.cloud.contentwarehouse.v1.IFetchAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchAcl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchAcl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IFetchAclResponse,
+          protos.google.cloud.contentwarehouse.v1.IFetchAclRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchAcl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy for a resource. Replaces any existing
@@ -1147,7 +1321,33 @@ export class DocumentServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setAcl(request, options, callback);
+    this._log.info('setAcl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.ISetAclResponse,
+          | protos.google.cloud.contentwarehouse.v1.ISetAclRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setAcl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setAcl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.ISetAclResponse,
+          protos.google.cloud.contentwarehouse.v1.ISetAclRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setAcl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1338,7 +1538,33 @@ export class DocumentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchDocuments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.ISearchDocumentsRequest,
+          | protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contentwarehouse.v1.SearchDocumentsResponse.IMatchingDocument
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchDocuments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchDocuments request %j', request);
+    return this.innerApiCalls
+      .searchDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contentwarehouse.v1.SearchDocumentsResponse.IMatchingDocument[],
+          protos.google.cloud.contentwarehouse.v1.ISearchDocumentsRequest | null,
+          protos.google.cloud.contentwarehouse.v1.ISearchDocumentsResponse,
+        ]) => {
+          this._log.info('searchDocuments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1467,6 +1693,7 @@ export class DocumentServiceClient {
     const defaultCallSettings = this._defaults['searchDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchDocuments stream %j', request);
     return this.descriptors.page.searchDocuments.createStream(
       this.innerApiCalls.searchDocuments as GaxCall,
       request,
@@ -1603,6 +1830,7 @@ export class DocumentServiceClient {
     const defaultCallSettings = this._defaults['searchDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchDocuments iterate %j', request);
     return this.descriptors.page.searchDocuments.asyncIterate(
       this.innerApiCalls['searchDocuments'] as GaxCall,
       request as {},
@@ -1985,6 +2213,7 @@ export class DocumentServiceClient {
   close(): Promise<void> {
     if (this.documentServiceStub && !this._terminated) {
       return this.documentServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

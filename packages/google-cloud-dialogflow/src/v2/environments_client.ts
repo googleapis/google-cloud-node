@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class EnvironmentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class EnvironmentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -638,7 +641,33 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEnvironment(request, options, callback);
+    this._log.info('getEnvironment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          | protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEnvironment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEnvironment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an agent environment.
@@ -736,7 +765,36 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEnvironment(request, options, callback);
+    this._log.info('createEnvironment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          | protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEnvironment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          (
+            | protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEnvironment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified agent environment.
@@ -844,7 +902,36 @@ export class EnvironmentsClient {
         'environment.name': request.environment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEnvironment(request, options, callback);
+    this._log.info('updateEnvironment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEnvironment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          (
+            | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEnvironment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified agent environment.
@@ -941,7 +1028,36 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEnvironment(request, options, callback);
+    this._log.info('deleteEnvironment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEnvironment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEnvironment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1044,7 +1160,33 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEnvironments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
+          | protos.google.cloud.dialogflow.v2.IListEnvironmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IEnvironment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEnvironments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEnvironments request %j', request);
+    return this.innerApiCalls
+      .listEnvironments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.IEnvironment[],
+          protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest | null,
+          protos.google.cloud.dialogflow.v2.IListEnvironmentsResponse,
+        ]) => {
+          this._log.info('listEnvironments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1088,6 +1230,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEnvironments stream %j', request);
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as GaxCall,
       request,
@@ -1139,6 +1282,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEnvironments iterate %j', request);
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
       request as {},
@@ -1242,7 +1386,33 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEnvironmentHistory(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+          | protos.google.cloud.dialogflow.v2.IEnvironmentHistory
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('getEnvironmentHistory values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('getEnvironmentHistory request %j', request);
+    return this.innerApiCalls
+      .getEnvironmentHistory(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry[],
+          protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest | null,
+          protos.google.cloud.dialogflow.v2.IEnvironmentHistory,
+        ]) => {
+          this._log.info('getEnvironmentHistory values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1289,6 +1459,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['getEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('getEnvironmentHistory stream %j', request);
     return this.descriptors.page.getEnvironmentHistory.createStream(
       this.innerApiCalls.getEnvironmentHistory as GaxCall,
       request,
@@ -1343,6 +1514,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['getEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('getEnvironmentHistory iterate %j', request);
     return this.descriptors.page.getEnvironmentHistory.asyncIterate(
       this.innerApiCalls['getEnvironmentHistory'] as GaxCall,
       request as {},
@@ -4080,6 +4252,7 @@ export class EnvironmentsClient {
   close(): Promise<void> {
     if (this.environmentsStub && !this._terminated) {
       return this.environmentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

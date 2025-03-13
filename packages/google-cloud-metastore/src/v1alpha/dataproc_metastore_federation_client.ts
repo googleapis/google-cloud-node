@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -71,6 +72,8 @@ export class DataprocMetastoreFederationClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataproc-metastore');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -108,7 +111,7 @@ export class DataprocMetastoreFederationClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -664,7 +667,36 @@ export class DataprocMetastoreFederationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFederation(request, options, callback);
+    this._log.info('getFederation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.metastore.v1alpha.IFederation,
+          | protos.google.cloud.metastore.v1alpha.IGetFederationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFederation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFederation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.metastore.v1alpha.IFederation,
+          (
+            | protos.google.cloud.metastore.v1alpha.IGetFederationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFederation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -794,7 +826,37 @@ export class DataprocMetastoreFederationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFederation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IFederation,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createFederation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createFederation request %j', request);
+    return this.innerApiCalls
+      .createFederation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IFederation,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFederation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createFederation()`.
@@ -815,6 +877,7 @@ export class DataprocMetastoreFederationClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('createFederation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -952,7 +1015,37 @@ export class DataprocMetastoreFederationClient {
         'federation.name': request.federation!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFederation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IFederation,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateFederation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateFederation request %j', request);
+    return this.innerApiCalls
+      .updateFederation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.metastore.v1alpha.IFederation,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFederation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateFederation()`.
@@ -973,6 +1066,7 @@ export class DataprocMetastoreFederationClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('updateFederation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1104,7 +1198,37 @@ export class DataprocMetastoreFederationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFederation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFederation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFederation request %j', request);
+    return this.innerApiCalls
+      .deleteFederation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFederation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteFederation()`.
@@ -1125,6 +1249,7 @@ export class DataprocMetastoreFederationClient {
       protos.google.cloud.metastore.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteFederation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1253,7 +1378,33 @@ export class DataprocMetastoreFederationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFederations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.metastore.v1alpha.IListFederationsRequest,
+          | protos.google.cloud.metastore.v1alpha.IListFederationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.metastore.v1alpha.IFederation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFederations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFederations request %j', request);
+    return this.innerApiCalls
+      .listFederations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.metastore.v1alpha.IFederation[],
+          protos.google.cloud.metastore.v1alpha.IListFederationsRequest | null,
+          protos.google.cloud.metastore.v1alpha.IListFederationsResponse,
+        ]) => {
+          this._log.info('listFederations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1310,6 +1461,7 @@ export class DataprocMetastoreFederationClient {
     const defaultCallSettings = this._defaults['listFederations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFederations stream %j', request);
     return this.descriptors.page.listFederations.createStream(
       this.innerApiCalls.listFederations as GaxCall,
       request,
@@ -1374,6 +1526,7 @@ export class DataprocMetastoreFederationClient {
     const defaultCallSettings = this._defaults['listFederations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFederations iterate %j', request);
     return this.descriptors.page.listFederations.asyncIterate(
       this.innerApiCalls['listFederations'] as GaxCall,
       request as {},
@@ -2135,6 +2288,7 @@ export class DataprocMetastoreFederationClient {
   close(): Promise<void> {
     if (this.dataprocMetastoreFederationStub && !this._terminated) {
       return this.dataprocMetastoreFederationStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

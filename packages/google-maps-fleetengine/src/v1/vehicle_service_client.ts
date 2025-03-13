@@ -22,6 +22,7 @@ import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallba
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,6 +47,8 @@ export class VehicleServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('fleetengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -80,7 +83,7 @@ export class VehicleServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -484,7 +487,25 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.createVehicle(request, options, callback);
+    this._log.info('createVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.v1.IVehicle,
+        protos.maps.fleetengine.v1.ICreateVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.v1.IVehicle,
+        protos.maps.fleetengine.v1.ICreateVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Returns a vehicle from the Fleet Engine.
@@ -582,7 +603,25 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.getVehicle(request, options, callback);
+    this._log.info('getVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.v1.IVehicle,
+        protos.maps.fleetengine.v1.IGetVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.v1.IVehicle,
+        protos.maps.fleetengine.v1.IGetVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Deletes a Vehicle from the Fleet Engine.
@@ -672,7 +711,25 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.deleteVehicle(request, options, callback);
+    this._log.info('deleteVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.maps.fleetengine.v1.IDeleteVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Writes updated vehicle data to the Fleet Engine.
@@ -795,7 +852,25 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.updateVehicle(request, options, callback);
+    this._log.info('updateVehicle request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.v1.IVehicle,
+        protos.maps.fleetengine.v1.IUpdateVehicleRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateVehicle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateVehicle(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.v1.IVehicle,
+        protos.maps.fleetengine.v1.IUpdateVehicleRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateVehicle response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Partially updates a vehicle's attributes.
@@ -888,7 +963,25 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.updateVehicleAttributes(request, options, callback);
+    this._log.info('updateVehicleAttributes request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+        protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateVehicleAttributes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.updateVehicleAttributes(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+        protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('updateVehicleAttributes response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 /**
  * Returns a list of vehicles that match the request options.
@@ -1100,7 +1193,25 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.searchVehicles(request, options, callback);
+    this._log.info('searchVehicles request %j', request);
+    const wrappedCallback: Callback<
+        protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+        protos.maps.fleetengine.v1.ISearchVehiclesRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('searchVehicles response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.searchVehicles(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+        protos.maps.fleetengine.v1.ISearchVehiclesRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('searchVehicles response %j', response);
+        return [response, options, rawResponse];
+      });
   }
 
  /**
@@ -1304,7 +1415,26 @@ export class VehicleServiceClient {
       routingParameter
     );
     this.initialize();
-    return this.innerApiCalls.listVehicles(request, options, callback);
+    const wrappedCallback: PaginationCallback<
+      protos.maps.fleetengine.v1.IListVehiclesRequest,
+      protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
+      protos.maps.fleetengine.v1.IVehicle>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVehicles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVehicles request %j', request);
+    return this.innerApiCalls
+      .listVehicles(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.maps.fleetengine.v1.IVehicle[],
+        protos.maps.fleetengine.v1.IListVehiclesRequest|null,
+        protos.maps.fleetengine.v1.IListVehiclesResponse
+      ]) => {
+        this._log.info('listVehicles values %j', response);
+        return [response, input, output];
+      });
   }
 
 /**
@@ -1467,6 +1597,7 @@ export class VehicleServiceClient {
     const defaultCallSettings = this._defaults['listVehicles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVehicles stream %j', request);
     return this.descriptors.page.listVehicles.createStream(
       this.innerApiCalls.listVehicles as GaxCall,
       request,
@@ -1637,6 +1768,7 @@ export class VehicleServiceClient {
     const defaultCallSettings = this._defaults['listVehicles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVehicles iterate %j', request);
     return this.descriptors.page.listVehicles.asyncIterate(
       this.innerApiCalls['listVehicles'] as GaxCall,
       request as {},
@@ -1728,6 +1860,7 @@ export class VehicleServiceClient {
   close(): Promise<void> {
     if (this.vehicleServiceStub && !this._terminated) {
       return this.vehicleServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

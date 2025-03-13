@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ApiHubDependenciesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apihub');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ApiHubDependenciesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -537,7 +540,33 @@ export class ApiHubDependenciesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDependency(request, options, callback);
+    this._log.info('createDependency request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDependency,
+          | protos.google.cloud.apihub.v1.ICreateDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDependency response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDependency,
+          protos.google.cloud.apihub.v1.ICreateDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDependency response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details about a dependency resource in the API hub.
@@ -622,7 +651,33 @@ export class ApiHubDependenciesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDependency(request, options, callback);
+    this._log.info('getDependency request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDependency,
+          | protos.google.cloud.apihub.v1.IGetDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDependency response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDependency,
+          protos.google.cloud.apihub.v1.IGetDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDependency response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a dependency based on the
@@ -717,7 +772,33 @@ export class ApiHubDependenciesClient {
         'dependency.name': request.dependency!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDependency(request, options, callback);
+    this._log.info('updateDependency request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDependency,
+          | protos.google.cloud.apihub.v1.IUpdateDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDependency response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDependency,
+          protos.google.cloud.apihub.v1.IUpdateDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDependency response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete the dependency resource.
@@ -802,7 +883,33 @@ export class ApiHubDependenciesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDependency(request, options, callback);
+    this._log.info('deleteDependency request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteDependency response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDependency response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -943,7 +1050,33 @@ export class ApiHubDependenciesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDependencies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListDependenciesRequest,
+          | protos.google.cloud.apihub.v1.IListDependenciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDependency
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDependencies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDependencies request %j', request);
+    return this.innerApiCalls
+      .listDependencies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IDependency[],
+          protos.google.cloud.apihub.v1.IListDependenciesRequest | null,
+          protos.google.cloud.apihub.v1.IListDependenciesResponse,
+        ]) => {
+          this._log.info('listDependencies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1025,6 +1158,7 @@ export class ApiHubDependenciesClient {
     const defaultCallSettings = this._defaults['listDependencies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDependencies stream %j', request);
     return this.descriptors.page.listDependencies.createStream(
       this.innerApiCalls.listDependencies as GaxCall,
       request,
@@ -1114,6 +1248,7 @@ export class ApiHubDependenciesClient {
     const defaultCallSettings = this._defaults['listDependencies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDependencies iterate %j', request);
     return this.descriptors.page.listDependencies.asyncIterate(
       this.innerApiCalls['listDependencies'] as GaxCall,
       request as {},
@@ -2131,6 +2266,7 @@ export class ApiHubDependenciesClient {
   close(): Promise<void> {
     if (this.apiHubDependenciesStub && !this._terminated) {
       return this.apiHubDependenciesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

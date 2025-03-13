@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class CompletionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class CompletionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -813,7 +816,36 @@ export class CompletionServiceClient {
         data_store: request.dataStore ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.completeQuery(request, options, callback);
+    this._log.info('completeQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+          | protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.ICompleteQueryResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.ICompleteQueryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('completeQuery response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -930,11 +962,43 @@ export class CompletionServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importSuggestionDenyListEntries(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportSuggestionDenyListEntriesResponse,
+            protos.google.cloud.discoveryengine.v1.IImportSuggestionDenyListEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'importSuggestionDenyListEntries response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importSuggestionDenyListEntries request %j', request);
+    return this.innerApiCalls
+      .importSuggestionDenyListEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportSuggestionDenyListEntriesResponse,
+            protos.google.cloud.discoveryengine.v1.IImportSuggestionDenyListEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'importSuggestionDenyListEntries response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importSuggestionDenyListEntries()`.
@@ -955,6 +1019,7 @@ export class CompletionServiceClient {
       protos.google.cloud.discoveryengine.v1.ImportSuggestionDenyListEntriesMetadata
     >
   > {
+    this._log.info('importSuggestionDenyListEntries long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1073,11 +1138,43 @@ export class CompletionServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeSuggestionDenyListEntries(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IPurgeSuggestionDenyListEntriesResponse,
+            protos.google.cloud.discoveryengine.v1.IPurgeSuggestionDenyListEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'purgeSuggestionDenyListEntries response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeSuggestionDenyListEntries request %j', request);
+    return this.innerApiCalls
+      .purgeSuggestionDenyListEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IPurgeSuggestionDenyListEntriesResponse,
+            protos.google.cloud.discoveryengine.v1.IPurgeSuggestionDenyListEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'purgeSuggestionDenyListEntries response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeSuggestionDenyListEntries()`.
@@ -1098,6 +1195,7 @@ export class CompletionServiceClient {
       protos.google.cloud.discoveryengine.v1.PurgeSuggestionDenyListEntriesMetadata
     >
   > {
+    this._log.info('purgeSuggestionDenyListEntries long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1226,11 +1324,43 @@ export class CompletionServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importCompletionSuggestions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+            protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'importCompletionSuggestions response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importCompletionSuggestions request %j', request);
+    return this.innerApiCalls
+      .importCompletionSuggestions(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+            protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'importCompletionSuggestions response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importCompletionSuggestions()`.
@@ -1251,6 +1381,7 @@ export class CompletionServiceClient {
       protos.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsMetadata
     >
   > {
+    this._log.info('importCompletionSuggestions long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1370,11 +1501,37 @@ export class CompletionServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.purgeCompletionSuggestions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+            protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('purgeCompletionSuggestions response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('purgeCompletionSuggestions request %j', request);
+    return this.innerApiCalls
+      .purgeCompletionSuggestions(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+            protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('purgeCompletionSuggestions response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `purgeCompletionSuggestions()`.
@@ -1395,6 +1552,7 @@ export class CompletionServiceClient {
       protos.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsMetadata
     >
   > {
+    this._log.info('purgeCompletionSuggestions long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4535,6 +4693,7 @@ export class CompletionServiceClient {
   close(): Promise<void> {
     if (this.completionServiceStub && !this._terminated) {
       return this.completionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

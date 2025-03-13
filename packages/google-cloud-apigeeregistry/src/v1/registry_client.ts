@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class RegistryClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('apigee-registry');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class RegistryClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -575,7 +578,33 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApi(request, options, callback);
+    this._log.info('getApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApi,
+          | protos.google.cloud.apigeeregistry.v1.IGetApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApi,
+          protos.google.cloud.apigeeregistry.v1.IGetApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a specified API.
@@ -676,7 +705,33 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createApi(request, options, callback);
+    this._log.info('createApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApi,
+          | protos.google.cloud.apigeeregistry.v1.ICreateApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApi,
+          protos.google.cloud.apigeeregistry.v1.ICreateApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Used to modify a specified API.
@@ -777,7 +832,33 @@ export class RegistryClient {
         'api.name': request.api!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateApi(request, options, callback);
+    this._log.info('updateApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApi,
+          | protos.google.cloud.apigeeregistry.v1.IUpdateApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApi,
+          protos.google.cloud.apigeeregistry.v1.IUpdateApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes a specified API and all of the resources that it
@@ -872,7 +953,33 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApi(request, options, callback);
+    this._log.info('deleteApi request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteApiRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApi response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApi(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apigeeregistry.v1.IDeleteApiRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApi response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a specified version.
@@ -963,7 +1070,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApiVersion(request, options, callback);
+    this._log.info('getApiVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiVersion,
+          | protos.google.cloud.apigeeregistry.v1.IGetApiVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApiVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApiVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiVersion,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IGetApiVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getApiVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a specified version.
@@ -1070,7 +1206,36 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createApiVersion(request, options, callback);
+    this._log.info('createApiVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiVersion,
+          | protos.google.cloud.apigeeregistry.v1.ICreateApiVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApiVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createApiVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiVersion,
+          (
+            | protos.google.cloud.apigeeregistry.v1.ICreateApiVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createApiVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Used to modify a specified version.
@@ -1177,7 +1342,36 @@ export class RegistryClient {
         'api_version.name': request.apiVersion!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateApiVersion(request, options, callback);
+    this._log.info('updateApiVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiVersion,
+          | protos.google.cloud.apigeeregistry.v1.IUpdateApiVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApiVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateApiVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiVersion,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IUpdateApiVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApiVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes a specified version and all of the resources that
@@ -1278,7 +1472,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApiVersion(request, options, callback);
+    this._log.info('deleteApiVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteApiVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApiVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApiVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IDeleteApiVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApiVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a specified spec.
@@ -1369,7 +1592,33 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApiSpec(request, options, callback);
+    this._log.info('getApiSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          | protos.google.cloud.apigeeregistry.v1.IGetApiSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApiSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApiSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          protos.google.cloud.apigeeregistry.v1.IGetApiSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApiSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the contents of a specified spec.
@@ -1469,7 +1718,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApiSpecContents(request, options, callback);
+    this._log.info('getApiSpecContents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.apigeeregistry.v1.IGetApiSpecContentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApiSpecContents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApiSpecContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IGetApiSpecContentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getApiSpecContents response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a specified spec.
@@ -1570,7 +1848,36 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createApiSpec(request, options, callback);
+    this._log.info('createApiSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          | protos.google.cloud.apigeeregistry.v1.ICreateApiSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApiSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createApiSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          (
+            | protos.google.cloud.apigeeregistry.v1.ICreateApiSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createApiSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Used to modify a specified spec.
@@ -1671,7 +1978,36 @@ export class RegistryClient {
         'api_spec.name': request.apiSpec!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateApiSpec(request, options, callback);
+    this._log.info('updateApiSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          | protos.google.cloud.apigeeregistry.v1.IUpdateApiSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApiSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateApiSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IUpdateApiSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApiSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes a specified spec, all revisions, and all child
@@ -1766,7 +2102,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApiSpec(request, options, callback);
+    this._log.info('deleteApiSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApiSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApiSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApiSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a tag to a specified revision of a spec.
@@ -1865,7 +2230,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.tagApiSpecRevision(request, options, callback);
+    this._log.info('tagApiSpecRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          | protos.google.cloud.apigeeregistry.v1.ITagApiSpecRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('tagApiSpecRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .tagApiSpecRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          (
+            | protos.google.cloud.apigeeregistry.v1.ITagApiSpecRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('tagApiSpecRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the current revision to a specified prior revision.
@@ -1961,7 +2355,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rollbackApiSpec(request, options, callback);
+    this._log.info('rollbackApiSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          | protos.google.cloud.apigeeregistry.v1.IRollbackApiSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rollbackApiSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rollbackApiSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IRollbackApiSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackApiSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a revision of a spec.
@@ -2061,7 +2484,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApiSpecRevision(request, options, callback);
+    this._log.info('deleteApiSpecRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApiSpecRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApiSpecRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApiSpecRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a specified deployment.
@@ -2158,7 +2610,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApiDeployment(request, options, callback);
+    this._log.info('getApiDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          | protos.google.cloud.apigeeregistry.v1.IGetApiDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApiDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApiDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IGetApiDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getApiDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a specified deployment.
@@ -2265,7 +2746,36 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createApiDeployment(request, options, callback);
+    this._log.info('createApiDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          | protos.google.cloud.apigeeregistry.v1.ICreateApiDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createApiDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createApiDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          (
+            | protos.google.cloud.apigeeregistry.v1.ICreateApiDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createApiDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Used to modify a specified deployment.
@@ -2372,7 +2882,36 @@ export class RegistryClient {
         'api_deployment.name': request.apiDeployment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateApiDeployment(request, options, callback);
+    this._log.info('updateApiDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          | protos.google.cloud.apigeeregistry.v1.IUpdateApiDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateApiDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateApiDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IUpdateApiDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApiDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes a specified deployment, all revisions, and all
@@ -2473,7 +3012,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApiDeployment(request, options, callback);
+    this._log.info('deleteApiDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApiDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApiDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApiDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a tag to a specified revision of a
@@ -2573,11 +3141,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.tagApiDeploymentRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('tagApiDeploymentRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          | protos.google.cloud.apigeeregistry.v1.ITagApiDeploymentRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('tagApiDeploymentRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .tagApiDeploymentRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          (
+            | protos.google.cloud.apigeeregistry.v1.ITagApiDeploymentRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('tagApiDeploymentRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the current revision to a specified prior
@@ -2679,7 +3272,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rollbackApiDeployment(request, options, callback);
+    this._log.info('rollbackApiDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          | protos.google.cloud.apigeeregistry.v1.IRollbackApiDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rollbackApiDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rollbackApiDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IRollbackApiDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackApiDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a revision of a deployment.
@@ -2779,11 +3401,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteApiDeploymentRevision(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteApiDeploymentRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteApiDeploymentRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteApiDeploymentRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApiDeploymentRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a specified artifact.
@@ -2874,7 +3521,33 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getArtifact(request, options, callback);
+    this._log.info('getArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IArtifact,
+          | protos.google.cloud.apigeeregistry.v1.IGetArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IArtifact,
+          protos.google.cloud.apigeeregistry.v1.IGetArtifactRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the contents of a specified artifact.
@@ -2974,7 +3647,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getArtifactContents(request, options, callback);
+    this._log.info('getArtifactContents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.apigeeregistry.v1.IGetArtifactContentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getArtifactContents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getArtifactContents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IGetArtifactContentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getArtifactContents response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a specified artifact.
@@ -3075,7 +3777,36 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createArtifact(request, options, callback);
+    this._log.info('createArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IArtifact,
+          | protos.google.cloud.apigeeregistry.v1.ICreateArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IArtifact,
+          (
+            | protos.google.cloud.apigeeregistry.v1.ICreateArtifactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Used to replace a specified artifact.
@@ -3168,7 +3899,36 @@ export class RegistryClient {
         'artifact.name': request.artifact!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.replaceArtifact(request, options, callback);
+    this._log.info('replaceArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apigeeregistry.v1.IArtifact,
+          | protos.google.cloud.apigeeregistry.v1.IReplaceArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('replaceArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .replaceArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apigeeregistry.v1.IArtifact,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IReplaceArtifactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('replaceArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes a specified artifact.
@@ -3259,7 +4019,36 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteArtifact(request, options, callback);
+    this._log.info('deleteArtifact request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apigeeregistry.v1.IDeleteArtifactRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteArtifact response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteArtifact(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.apigeeregistry.v1.IDeleteArtifactRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteArtifact response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3368,7 +4157,33 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApis(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListApisRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListApisResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IApi
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApis values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApis request %j', request);
+    return this.innerApiCalls
+      .listApis(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IApi[],
+          protos.google.cloud.apigeeregistry.v1.IListApisRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListApisResponse,
+        ]) => {
+          this._log.info('listApis values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3418,6 +4233,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApis stream %j', request);
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as GaxCall,
       request,
@@ -3475,6 +4291,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApis iterate %j', request);
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
       request as {},
@@ -3587,7 +4404,33 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApiVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListApiVersionsRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListApiVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IApiVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiVersions request %j', request);
+    return this.innerApiCalls
+      .listApiVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IApiVersion[],
+          protos.google.cloud.apigeeregistry.v1.IListApiVersionsRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListApiVersionsResponse,
+        ]) => {
+          this._log.info('listApiVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3637,6 +4480,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiVersions stream %j', request);
     return this.descriptors.page.listApiVersions.createStream(
       this.innerApiCalls.listApiVersions as GaxCall,
       request,
@@ -3694,6 +4538,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiVersions iterate %j', request);
     return this.descriptors.page.listApiVersions.asyncIterate(
       this.innerApiCalls['listApiVersions'] as GaxCall,
       request as {},
@@ -3806,7 +4651,33 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApiSpecs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListApiSpecsRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListApiSpecsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IApiSpec
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiSpecs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiSpecs request %j', request);
+    return this.innerApiCalls
+      .listApiSpecs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec[],
+          protos.google.cloud.apigeeregistry.v1.IListApiSpecsRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListApiSpecsResponse,
+        ]) => {
+          this._log.info('listApiSpecs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3856,6 +4727,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiSpecs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiSpecs stream %j', request);
     return this.descriptors.page.listApiSpecs.createStream(
       this.innerApiCalls.listApiSpecs as GaxCall,
       request,
@@ -3913,6 +4785,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiSpecs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiSpecs iterate %j', request);
     return this.descriptors.page.listApiSpecs.asyncIterate(
       this.innerApiCalls['listApiSpecs'] as GaxCall,
       request as {},
@@ -4016,7 +4889,33 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApiSpecRevisions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IApiSpec
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiSpecRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiSpecRevisions request %j', request);
+    return this.innerApiCalls
+      .listApiSpecRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IApiSpec[],
+          protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsResponse,
+        ]) => {
+          this._log.info('listApiSpecRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4056,6 +4955,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiSpecRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiSpecRevisions stream %j', request);
     return this.descriptors.page.listApiSpecRevisions.createStream(
       this.innerApiCalls.listApiSpecRevisions as GaxCall,
       request,
@@ -4103,6 +5003,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiSpecRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiSpecRevisions iterate %j', request);
     return this.descriptors.page.listApiSpecRevisions.asyncIterate(
       this.innerApiCalls['listApiSpecRevisions'] as GaxCall,
       request as {},
@@ -4215,7 +5116,33 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApiDeployments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiDeployments request %j', request);
+    return this.innerApiCalls
+      .listApiDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment[],
+          protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsResponse,
+        ]) => {
+          this._log.info('listApiDeployments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4265,6 +5192,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiDeployments stream %j', request);
     return this.descriptors.page.listApiDeployments.createStream(
       this.innerApiCalls.listApiDeployments as GaxCall,
       request,
@@ -4322,6 +5250,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiDeployments iterate %j', request);
     return this.descriptors.page.listApiDeployments.asyncIterate(
       this.innerApiCalls['listApiDeployments'] as GaxCall,
       request as {},
@@ -4425,11 +5354,33 @@ export class RegistryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApiDeploymentRevisions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApiDeploymentRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApiDeploymentRevisions request %j', request);
+    return this.innerApiCalls
+      .listApiDeploymentRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IApiDeployment[],
+          protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsResponse,
+        ]) => {
+          this._log.info('listApiDeploymentRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4469,6 +5420,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiDeploymentRevisions stream %j', request);
     return this.descriptors.page.listApiDeploymentRevisions.createStream(
       this.innerApiCalls.listApiDeploymentRevisions as GaxCall,
       request,
@@ -4516,6 +5468,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listApiDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApiDeploymentRevisions iterate %j', request);
     return this.descriptors.page.listApiDeploymentRevisions.asyncIterate(
       this.innerApiCalls['listApiDeploymentRevisions'] as GaxCall,
       request as {},
@@ -4628,7 +5581,33 @@ export class RegistryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listArtifacts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apigeeregistry.v1.IListArtifactsRequest,
+          | protos.google.cloud.apigeeregistry.v1.IListArtifactsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apigeeregistry.v1.IArtifact
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listArtifacts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listArtifacts request %j', request);
+    return this.innerApiCalls
+      .listArtifacts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apigeeregistry.v1.IArtifact[],
+          protos.google.cloud.apigeeregistry.v1.IListArtifactsRequest | null,
+          protos.google.cloud.apigeeregistry.v1.IListArtifactsResponse,
+        ]) => {
+          this._log.info('listArtifacts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4678,6 +5657,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listArtifacts stream %j', request);
     return this.descriptors.page.listArtifacts.createStream(
       this.innerApiCalls.listArtifacts as GaxCall,
       request,
@@ -4735,6 +5715,7 @@ export class RegistryClient {
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listArtifacts iterate %j', request);
     return this.descriptors.page.listArtifacts.asyncIterate(
       this.innerApiCalls['listArtifacts'] as GaxCall,
       request as {},
@@ -5824,6 +6805,7 @@ export class RegistryClient {
   close(): Promise<void> {
     if (this.registryStub && !this._terminated) {
       return this.registryStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

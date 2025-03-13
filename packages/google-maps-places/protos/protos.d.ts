@@ -554,6 +554,414 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+
+        /** Properties of a DateTime. */
+        interface IDateTime {
+
+            /** DateTime year */
+            year?: (number|null);
+
+            /** DateTime month */
+            month?: (number|null);
+
+            /** DateTime day */
+            day?: (number|null);
+
+            /** DateTime hours */
+            hours?: (number|null);
+
+            /** DateTime minutes */
+            minutes?: (number|null);
+
+            /** DateTime seconds */
+            seconds?: (number|null);
+
+            /** DateTime nanos */
+            nanos?: (number|null);
+
+            /** DateTime utcOffset */
+            utcOffset?: (google.protobuf.IDuration|null);
+
+            /** DateTime timeZone */
+            timeZone?: (google.type.ITimeZone|null);
+        }
+
+        /** Represents a DateTime. */
+        class DateTime implements IDateTime {
+
+            /**
+             * Constructs a new DateTime.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDateTime);
+
+            /** DateTime year. */
+            public year: number;
+
+            /** DateTime month. */
+            public month: number;
+
+            /** DateTime day. */
+            public day: number;
+
+            /** DateTime hours. */
+            public hours: number;
+
+            /** DateTime minutes. */
+            public minutes: number;
+
+            /** DateTime seconds. */
+            public seconds: number;
+
+            /** DateTime nanos. */
+            public nanos: number;
+
+            /** DateTime utcOffset. */
+            public utcOffset?: (google.protobuf.IDuration|null);
+
+            /** DateTime timeZone. */
+            public timeZone?: (google.type.ITimeZone|null);
+
+            /** DateTime timeOffset. */
+            public timeOffset?: ("utcOffset"|"timeZone");
+
+            /**
+             * Creates a new DateTime instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DateTime instance
+             */
+            public static create(properties?: google.type.IDateTime): google.type.DateTime;
+
+            /**
+             * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+             * @param message DateTime message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+             * @param message DateTime message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DateTime message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DateTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.DateTime;
+
+            /**
+             * Decodes a DateTime message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DateTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.DateTime;
+
+            /**
+             * Verifies a DateTime message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DateTime
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.DateTime;
+
+            /**
+             * Creates a plain object from a DateTime message. Also converts values to other types if specified.
+             * @param message DateTime
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.DateTime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DateTime to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DateTime
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a TimeZone. */
+        interface ITimeZone {
+
+            /** TimeZone id */
+            id?: (string|null);
+
+            /** TimeZone version */
+            version?: (string|null);
+        }
+
+        /** Represents a TimeZone. */
+        class TimeZone implements ITimeZone {
+
+            /**
+             * Constructs a new TimeZone.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeZone);
+
+            /** TimeZone id. */
+            public id: string;
+
+            /** TimeZone version. */
+            public version: string;
+
+            /**
+             * Creates a new TimeZone instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeZone instance
+             */
+            public static create(properties?: google.type.ITimeZone): google.type.TimeZone;
+
+            /**
+             * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+             * @param message TimeZone message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+             * @param message TimeZone message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeZone message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeZone
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeZone;
+
+            /**
+             * Decodes a TimeZone message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeZone
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeZone;
+
+            /**
+             * Verifies a TimeZone message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeZone
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeZone;
+
+            /**
+             * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
+             * @param message TimeZone
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeZone, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeZone to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeZone
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a PostalAddress. */
+        interface IPostalAddress {
+
+            /** PostalAddress revision */
+            revision?: (number|null);
+
+            /** PostalAddress regionCode */
+            regionCode?: (string|null);
+
+            /** PostalAddress languageCode */
+            languageCode?: (string|null);
+
+            /** PostalAddress postalCode */
+            postalCode?: (string|null);
+
+            /** PostalAddress sortingCode */
+            sortingCode?: (string|null);
+
+            /** PostalAddress administrativeArea */
+            administrativeArea?: (string|null);
+
+            /** PostalAddress locality */
+            locality?: (string|null);
+
+            /** PostalAddress sublocality */
+            sublocality?: (string|null);
+
+            /** PostalAddress addressLines */
+            addressLines?: (string[]|null);
+
+            /** PostalAddress recipients */
+            recipients?: (string[]|null);
+
+            /** PostalAddress organization */
+            organization?: (string|null);
+        }
+
+        /** Represents a PostalAddress. */
+        class PostalAddress implements IPostalAddress {
+
+            /**
+             * Constructs a new PostalAddress.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IPostalAddress);
+
+            /** PostalAddress revision. */
+            public revision: number;
+
+            /** PostalAddress regionCode. */
+            public regionCode: string;
+
+            /** PostalAddress languageCode. */
+            public languageCode: string;
+
+            /** PostalAddress postalCode. */
+            public postalCode: string;
+
+            /** PostalAddress sortingCode. */
+            public sortingCode: string;
+
+            /** PostalAddress administrativeArea. */
+            public administrativeArea: string;
+
+            /** PostalAddress locality. */
+            public locality: string;
+
+            /** PostalAddress sublocality. */
+            public sublocality: string;
+
+            /** PostalAddress addressLines. */
+            public addressLines: string[];
+
+            /** PostalAddress recipients. */
+            public recipients: string[];
+
+            /** PostalAddress organization. */
+            public organization: string;
+
+            /**
+             * Creates a new PostalAddress instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PostalAddress instance
+             */
+            public static create(properties?: google.type.IPostalAddress): google.type.PostalAddress;
+
+            /**
+             * Encodes the specified PostalAddress message. Does not implicitly {@link google.type.PostalAddress.verify|verify} messages.
+             * @param message PostalAddress message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IPostalAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PostalAddress message, length delimited. Does not implicitly {@link google.type.PostalAddress.verify|verify} messages.
+             * @param message PostalAddress message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IPostalAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a PostalAddress message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns PostalAddress
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.PostalAddress;
+
+            /**
+             * Decodes a PostalAddress message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PostalAddress
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.PostalAddress;
+
+            /**
+             * Verifies a PostalAddress message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PostalAddress message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PostalAddress
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.PostalAddress;
+
+            /**
+             * Creates a plain object from a PostalAddress message. Also converts values to other types if specified.
+             * @param message PostalAddress
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.PostalAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PostalAddress to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PostalAddress
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace maps. */
@@ -2406,6 +2814,9 @@ export namespace google {
                     /** Place shortFormattedAddress */
                     shortFormattedAddress?: (string|null);
 
+                    /** Place postalAddress */
+                    postalAddress?: (google.type.IPostalAddress|null);
+
                     /** Place addressComponents */
                     addressComponents?: (google.maps.places.v1.Place.IAddressComponent[]|null);
 
@@ -2435,6 +2846,9 @@ export namespace google {
 
                     /** Place utcOffsetMinutes */
                     utcOffsetMinutes?: (number|null);
+
+                    /** Place timeZone */
+                    timeZone?: (google.type.ITimeZone|null);
 
                     /** Place photos */
                     photos?: (google.maps.places.v1.IPhoto[]|null);
@@ -2614,6 +3028,9 @@ export namespace google {
                     /** Place shortFormattedAddress. */
                     public shortFormattedAddress: string;
 
+                    /** Place postalAddress. */
+                    public postalAddress?: (google.type.IPostalAddress|null);
+
                     /** Place addressComponents. */
                     public addressComponents: google.maps.places.v1.Place.IAddressComponent[];
 
@@ -2643,6 +3060,9 @@ export namespace google {
 
                     /** Place utcOffsetMinutes. */
                     public utcOffsetMinutes?: (number|null);
+
+                    /** Place timeZone. */
+                    public timeZone?: (google.type.ITimeZone|null);
 
                     /** Place photos. */
                     public photos: google.maps.places.v1.IPhoto[];

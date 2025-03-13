@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class DatastreamClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('datastream');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class DatastreamClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -721,7 +724,36 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConnectionProfile(request, options, callback);
+    this._log.info('getConnectionProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+          | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConnectionProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+          (
+            | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConnectionProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Use this method to discover a connection profile.
@@ -834,11 +866,36 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.discoverConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('discoverConnectionProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+          | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('discoverConnectionProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .discoverConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileResponse,
+          (
+            | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('discoverConnectionProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Use this method to get details about a stream.
@@ -928,7 +985,33 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getStream(request, options, callback);
+    this._log.info('getStream request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datastream.v1alpha1.IStream,
+          | protos.google.cloud.datastream.v1alpha1.IGetStreamRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStream response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datastream.v1alpha1.IStream,
+          protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getStream response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Use this method to get details about a private connectivity configuration.
@@ -1024,7 +1107,36 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPrivateConnection(request, options, callback);
+    this._log.info('getPrivateConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+          | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPrivateConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+          (
+            | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPrivateConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Use this method to get details about a route.
@@ -1114,7 +1226,33 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRoute(request, options, callback);
+    this._log.info('getRoute request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.datastream.v1alpha1.IRoute,
+          | protos.google.cloud.datastream.v1alpha1.IGetRouteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRoute response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.datastream.v1alpha1.IRoute,
+          protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRoute response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1235,11 +1373,37 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createConnectionProfile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createConnectionProfile request %j', request);
+    return this.innerApiCalls
+      .createConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createConnectionProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createConnectionProfile()`.
@@ -1260,6 +1424,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('createConnectionProfile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1395,11 +1560,37 @@ export class DatastreamClient {
         'connection_profile.name': request.connectionProfile!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConnectionProfile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConnectionProfile request %j', request);
+    return this.innerApiCalls
+      .updateConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IConnectionProfile,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnectionProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateConnectionProfile()`.
@@ -1420,6 +1611,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('updateConnectionProfile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1549,11 +1741,37 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConnectionProfile(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteConnectionProfile response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteConnectionProfile request %j', request);
+    return this.innerApiCalls
+      .deleteConnectionProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnectionProfile response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteConnectionProfile()`.
@@ -1574,6 +1792,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('deleteConnectionProfile long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1712,7 +1931,37 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createStream(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IStream,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createStream response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createStream request %j', request);
+    return this.innerApiCalls
+      .createStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IStream,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createStream response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createStream()`.
@@ -1733,6 +1982,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('createStream long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1873,7 +2123,37 @@ export class DatastreamClient {
         'stream.name': request.stream!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateStream(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IStream,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateStream response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateStream request %j', request);
+    return this.innerApiCalls
+      .updateStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IStream,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateStream response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateStream()`.
@@ -1894,6 +2174,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('updateStream long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2023,7 +2304,37 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteStream(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteStream response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteStream request %j', request);
+    return this.innerApiCalls
+      .deleteStream(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteStream response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteStream()`.
@@ -2044,6 +2355,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('deleteStream long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2159,7 +2471,37 @@ export class DatastreamClient {
         stream: request.stream ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchErrors(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('fetchErrors response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchErrors request %j', request);
+    return this.innerApiCalls
+      .fetchErrors(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IFetchErrorsResponse,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchErrors response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `fetchErrors()`.
@@ -2180,6 +2522,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('fetchErrors long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2313,11 +2656,37 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPrivateConnection(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPrivateConnection request %j', request);
+    return this.innerApiCalls
+      .createPrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IPrivateConnection,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPrivateConnection()`.
@@ -2338,6 +2707,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('createPrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2470,11 +2840,37 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePrivateConnection(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePrivateConnection response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePrivateConnection request %j', request);
+    return this.innerApiCalls
+      .deletePrivateConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePrivateConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePrivateConnection()`.
@@ -2495,6 +2891,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('deletePrivateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2629,7 +3026,37 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRoute(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IRoute,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createRoute request %j', request);
+    return this.innerApiCalls
+      .createRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.datastream.v1alpha1.IRoute,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createRoute()`.
@@ -2650,6 +3077,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('createRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2779,7 +3207,37 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRoute(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteRoute response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRoute request %j', request);
+    return this.innerApiCalls
+      .deleteRoute(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.datastream.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRoute response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteRoute()`.
@@ -2800,6 +3258,7 @@ export class DatastreamClient {
       protos.google.cloud.datastream.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('deleteRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2921,11 +3380,33 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConnectionProfiles(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
+          | protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConnectionProfiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConnectionProfiles request %j', request);
+    return this.innerApiCalls
+      .listConnectionProfiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
+          protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
+        ]) => {
+          this._log.info('listConnectionProfiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2974,6 +3455,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConnectionProfiles stream %j', request);
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as GaxCall,
       request,
@@ -3030,6 +3512,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConnectionProfiles iterate %j', request);
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
       request as {},
@@ -3141,7 +3624,33 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listStreams(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
+          | protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datastream.v1alpha1.IStream
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listStreams values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listStreams request %j', request);
+    return this.innerApiCalls
+      .listStreams(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datastream.v1alpha1.IStream[],
+          protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
+          protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
+        ]) => {
+          this._log.info('listStreams values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3190,6 +3699,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listStreams stream %j', request);
     return this.descriptors.page.listStreams.createStream(
       this.innerApiCalls.listStreams as GaxCall,
       request,
@@ -3246,6 +3756,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listStreams iterate %j', request);
     return this.descriptors.page.listStreams.asyncIterate(
       this.innerApiCalls['listStreams'] as GaxCall,
       request as {},
@@ -3351,7 +3862,33 @@ export class DatastreamClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchStaticIps(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
+          | protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+          | null
+          | undefined,
+          string
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchStaticIps values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchStaticIps request %j', request);
+    return this.innerApiCalls
+      .fetchStaticIps(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          string[],
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
+          protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
+        ]) => {
+          this._log.info('fetchStaticIps values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3392,6 +3929,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchStaticIps stream %j', request);
     return this.descriptors.page.fetchStaticIps.createStream(
       this.innerApiCalls.fetchStaticIps as GaxCall,
       request,
@@ -3440,6 +3978,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('fetchStaticIps iterate %j', request);
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
       request as {},
@@ -3554,11 +4093,33 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPrivateConnections(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
+          | protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPrivateConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPrivateConnections request %j', request);
+    return this.innerApiCalls
+      .listPrivateConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
+          protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
+        ]) => {
+          this._log.info('listPrivateConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3609,6 +4170,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
       request,
@@ -3667,6 +4229,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
       request as {},
@@ -3781,7 +4344,33 @@ export class DatastreamClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRoutes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
+          | protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+          | null
+          | undefined,
+          protos.google.cloud.datastream.v1alpha1.IRoute
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRoutes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRoutes request %j', request);
+    return this.innerApiCalls
+      .listRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.datastream.v1alpha1.IRoute[],
+          protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
+          protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
+        ]) => {
+          this._log.info('listRoutes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3832,6 +4421,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRoutes stream %j', request);
     return this.descriptors.page.listRoutes.createStream(
       this.innerApiCalls.listRoutes as GaxCall,
       request,
@@ -3890,6 +4480,7 @@ export class DatastreamClient {
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRoutes iterate %j', request);
     return this.descriptors.page.listRoutes.asyncIterate(
       this.innerApiCalls['listRoutes'] as GaxCall,
       request as {},
@@ -4207,6 +4798,7 @@ export class DatastreamClient {
   close(): Promise<void> {
     if (this.datastreamStub && !this._terminated) {
       return this.datastreamStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

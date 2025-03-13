@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class EngineServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class EngineServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -811,7 +814,36 @@ export class EngineServiceClient {
         'engine.name': request.engine!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEngine(request, options, callback);
+    this._log.info('updateEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          | protos.google.cloud.discoveryengine.v1beta.IUpdateEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IUpdateEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
@@ -903,7 +935,36 @@ export class EngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEngine(request, options, callback);
+    this._log.info('getEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          | protos.google.cloud.discoveryengine.v1beta.IGetEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pauses the training of an existing engine. Only applicable if
@@ -1003,7 +1064,36 @@ export class EngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.pauseEngine(request, options, callback);
+    this._log.info('pauseEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          | protos.google.cloud.discoveryengine.v1beta.IPauseEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pauseEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IPauseEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resumes the training of an existing engine. Only applicable if
@@ -1103,7 +1193,36 @@ export class EngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resumeEngine(request, options, callback);
+    this._log.info('resumeEngine request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          | protos.google.cloud.discoveryengine.v1beta.IResumeEngineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumeEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IEngine,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IResumeEngineRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeEngine response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1219,7 +1338,37 @@ export class EngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEngine(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IEngine,
+            protos.google.cloud.discoveryengine.v1beta.ICreateEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEngine response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEngine request %j', request);
+    return this.innerApiCalls
+      .createEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IEngine,
+            protos.google.cloud.discoveryengine.v1beta.ICreateEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEngine response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEngine()`.
@@ -1240,6 +1389,7 @@ export class EngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.CreateEngineMetadata
     >
   > {
+    this._log.info('createEngine long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1364,7 +1514,37 @@ export class EngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEngine(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEngine response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEngine request %j', request);
+    return this.innerApiCalls
+      .deleteEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEngine response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEngine()`.
@@ -1385,6 +1565,7 @@ export class EngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.DeleteEngineMetadata
     >
   > {
+    this._log.info('deleteEngine long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1504,7 +1685,37 @@ export class EngineServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.tuneEngine(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ITuneEngineResponse,
+            protos.google.cloud.discoveryengine.v1beta.ITuneEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('tuneEngine response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('tuneEngine request %j', request);
+    return this.innerApiCalls
+      .tuneEngine(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ITuneEngineResponse,
+            protos.google.cloud.discoveryengine.v1beta.ITuneEngineMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('tuneEngine response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `tuneEngine()`.
@@ -1525,6 +1736,7 @@ export class EngineServiceClient {
       protos.google.cloud.discoveryengine.v1beta.TuneEngineMetadata
     >
   > {
+    this._log.info('tuneEngine long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1640,7 +1852,33 @@ export class EngineServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEngines(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListEnginesRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListEnginesResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.IEngine
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEngines values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEngines request %j', request);
+    return this.innerApiCalls
+      .listEngines(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.IEngine[],
+          protos.google.cloud.discoveryengine.v1beta.IListEnginesRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListEnginesResponse,
+        ]) => {
+          this._log.info('listEngines values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1683,6 +1921,7 @@ export class EngineServiceClient {
     const defaultCallSettings = this._defaults['listEngines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEngines stream %j', request);
     return this.descriptors.page.listEngines.createStream(
       this.innerApiCalls.listEngines as GaxCall,
       request,
@@ -1733,6 +1972,7 @@ export class EngineServiceClient {
     const defaultCallSettings = this._defaults['listEngines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEngines iterate %j', request);
     return this.descriptors.page.listEngines.asyncIterate(
       this.innerApiCalls['listEngines'] as GaxCall,
       request as {},
@@ -5636,6 +5876,7 @@ export class EngineServiceClient {
   close(): Promise<void> {
     if (this.engineServiceStub && !this._terminated) {
       return this.engineServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

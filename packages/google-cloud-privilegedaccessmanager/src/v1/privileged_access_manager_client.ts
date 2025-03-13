@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -76,6 +77,8 @@ export class PrivilegedAccessManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('privilegedaccessmanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -112,7 +115,7 @@ export class PrivilegedAccessManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -672,7 +675,36 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkOnboardingStatus(request, options, callback);
+    this._log.info('checkOnboardingStatus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+          | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkOnboardingStatus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkOnboardingStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusResponse,
+          (
+            | protos.google.cloud.privilegedaccessmanager.v1.ICheckOnboardingStatusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkOnboardingStatus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single entitlement.
@@ -768,7 +800,36 @@ export class PrivilegedAccessManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEntitlement(request, options, callback);
+    this._log.info('getEntitlement request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+          | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntitlement response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+          (
+            | protos.google.cloud.privilegedaccessmanager.v1.IGetEntitlementRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntitlement response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details of a single grant.
@@ -864,7 +925,36 @@ export class PrivilegedAccessManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getGrant(request, options, callback);
+    this._log.info('getGrant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGrant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGrant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          (
+            | protos.google.cloud.privilegedaccessmanager.v1.IGetGrantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGrant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new grant in a given project/folder/organization and
@@ -978,7 +1068,36 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createGrant(request, options, callback);
+    this._log.info('createGrant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createGrant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createGrant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          (
+            | protos.google.cloud.privilegedaccessmanager.v1.ICreateGrantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createGrant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * `ApproveGrant` is used to approve a grant. This method can only be called
@@ -1080,7 +1199,36 @@ export class PrivilegedAccessManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.approveGrant(request, options, callback);
+    this._log.info('approveGrant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('approveGrant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .approveGrant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          (
+            | protos.google.cloud.privilegedaccessmanager.v1.IApproveGrantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('approveGrant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * `DenyGrant` is used to deny a grant. This method can only be called on a
@@ -1182,7 +1330,36 @@ export class PrivilegedAccessManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.denyGrant(request, options, callback);
+    this._log.info('denyGrant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('denyGrant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .denyGrant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+          (
+            | protos.google.cloud.privilegedaccessmanager.v1.IDenyGrantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('denyGrant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1317,7 +1494,37 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEntitlement request %j', request);
+    return this.innerApiCalls
+      .createEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEntitlement()`.
@@ -1338,6 +1545,7 @@ export class PrivilegedAccessManagerClient {
       protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
     >
   > {
+    this._log.info('createEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1472,7 +1680,37 @@ export class PrivilegedAccessManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEntitlement request %j', request);
+    return this.innerApiCalls
+      .deleteEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEntitlement()`.
@@ -1493,6 +1731,7 @@ export class PrivilegedAccessManagerClient {
       protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1637,7 +1876,37 @@ export class PrivilegedAccessManagerClient {
         'entitlement.name': request.entitlement!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEntitlement request %j', request);
+    return this.innerApiCalls
+      .updateEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IEntitlement,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEntitlement()`.
@@ -1658,6 +1927,7 @@ export class PrivilegedAccessManagerClient {
       protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1776,7 +2046,37 @@ export class PrivilegedAccessManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.revokeGrant(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('revokeGrant response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('revokeGrant request %j', request);
+    return this.innerApiCalls
+      .revokeGrant(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.privilegedaccessmanager.v1.IGrant,
+            protos.google.cloud.privilegedaccessmanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('revokeGrant response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `revokeGrant()`.
@@ -1797,6 +2097,7 @@ export class PrivilegedAccessManagerClient {
       protos.google.cloud.privilegedaccessmanager.v1.OperationMetadata
     >
   > {
+    this._log.info('revokeGrant long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1912,7 +2213,33 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntitlements(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
+          | protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntitlements values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntitlements request %j', request);
+    return this.innerApiCalls
+      .listEntitlements(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest | null,
+          protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsResponse,
+        ]) => {
+          this._log.info('listEntitlements values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1956,6 +2283,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitlements stream %j', request);
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as GaxCall,
       request,
@@ -2007,6 +2335,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitlements iterate %j', request);
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
       request as {},
@@ -2116,7 +2445,33 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchEntitlements(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
+          | protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchEntitlements values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchEntitlements request %j', request);
+    return this.innerApiCalls
+      .searchEntitlements(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IEntitlement[],
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest | null,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsResponse,
+        ]) => {
+          this._log.info('searchEntitlements values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2162,6 +2517,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['searchEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchEntitlements stream %j', request);
     return this.descriptors.page.searchEntitlements.createStream(
       this.innerApiCalls.searchEntitlements as GaxCall,
       request,
@@ -2215,6 +2571,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['searchEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchEntitlements iterate %j', request);
     return this.descriptors.page.searchEntitlements.asyncIterate(
       this.innerApiCalls['searchEntitlements'] as GaxCall,
       request as {},
@@ -2321,7 +2678,33 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listGrants(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
+          | protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGrants values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGrants request %j', request);
+    return this.innerApiCalls
+      .listGrants(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest | null,
+          protos.google.cloud.privilegedaccessmanager.v1.IListGrantsResponse,
+        ]) => {
+          this._log.info('listGrants values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2365,6 +2748,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['listGrants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listGrants stream %j', request);
     return this.descriptors.page.listGrants.createStream(
       this.innerApiCalls.listGrants as GaxCall,
       request,
@@ -2416,6 +2800,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['listGrants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listGrants iterate %j', request);
     return this.descriptors.page.listGrants.asyncIterate(
       this.innerApiCalls['listGrants'] as GaxCall,
       request as {},
@@ -2524,7 +2909,33 @@ export class PrivilegedAccessManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchGrants(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
+          | protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchGrants values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchGrants request %j', request);
+    return this.innerApiCalls
+      .searchGrants(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.privilegedaccessmanager.v1.IGrant[],
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest | null,
+          protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsResponse,
+        ]) => {
+          this._log.info('searchGrants values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2569,6 +2980,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['searchGrants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchGrants stream %j', request);
     return this.descriptors.page.searchGrants.createStream(
       this.innerApiCalls.searchGrants as GaxCall,
       request,
@@ -2621,6 +3033,7 @@ export class PrivilegedAccessManagerClient {
     const defaultCallSettings = this._defaults['searchGrants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchGrants iterate %j', request);
     return this.descriptors.page.searchGrants.asyncIterate(
       this.innerApiCalls['searchGrants'] as GaxCall,
       request as {},
@@ -3453,6 +3866,7 @@ export class PrivilegedAccessManagerClient {
   close(): Promise<void> {
     if (this.privilegedAccessManagerStub && !this._terminated) {
       return this.privilegedAccessManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ConversationHistoryClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ConversationHistoryClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -583,7 +586,36 @@ export class ConversationHistoryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConversation(request, options, callback);
+    this._log.info('getConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified conversation.
@@ -681,7 +713,36 @@ export class ConversationHistoryClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConversation(request, options, callback);
+    this._log.info('deleteConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -794,7 +855,33 @@ export class ConversationHistoryClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversations request %j', request);
+    return this.innerApiCalls
+      .listConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IConversation[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListConversationsResponse,
+        ]) => {
+          this._log.info('listConversations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -848,6 +935,7 @@ export class ConversationHistoryClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
       request,
@@ -909,6 +997,7 @@ export class ConversationHistoryClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
@@ -3301,6 +3390,7 @@ export class ConversationHistoryClient {
   close(): Promise<void> {
     if (this.conversationHistoryStub && !this._terminated) {
       return this.conversationHistoryStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class OrganizationsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('resource-manager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class OrganizationsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -497,7 +500,36 @@ export class OrganizationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOrganization(request, options, callback);
+    this._log.info('getOrganization request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.resourcemanager.v3.IOrganization,
+          | protos.google.cloud.resourcemanager.v3.IGetOrganizationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrganization response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrganization(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.resourcemanager.v3.IOrganization,
+          (
+            | protos.google.cloud.resourcemanager.v3.IGetOrganizationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrganization response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for an organization resource. The policy may
@@ -588,7 +620,31 @@ export class OrganizationsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy on an organization resource. Replaces any
@@ -687,7 +743,31 @@ export class OrganizationsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the permissions that a caller has on the specified organization.
@@ -779,7 +859,31 @@ export class OrganizationsClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -900,7 +1004,33 @@ export class OrganizationsClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.searchOrganizations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
+          | protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.resourcemanager.v3.IOrganization
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchOrganizations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchOrganizations request %j', request);
+    return this.innerApiCalls
+      .searchOrganizations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.resourcemanager.v3.IOrganization[],
+          protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest | null,
+          protos.google.cloud.resourcemanager.v3.ISearchOrganizationsResponse,
+        ]) => {
+          this._log.info('searchOrganizations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -956,6 +1086,7 @@ export class OrganizationsClient {
     const defaultCallSettings = this._defaults['searchOrganizations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchOrganizations stream %j', request);
     return this.descriptors.page.searchOrganizations.createStream(
       this.innerApiCalls.searchOrganizations as GaxCall,
       request,
@@ -1019,6 +1150,7 @@ export class OrganizationsClient {
     const defaultCallSettings = this._defaults['searchOrganizations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchOrganizations iterate %j', request);
     return this.descriptors.page.searchOrganizations.asyncIterate(
       this.innerApiCalls['searchOrganizations'] as GaxCall,
       request as {},
@@ -1215,6 +1347,7 @@ export class OrganizationsClient {
   close(): Promise<void> {
     if (this.organizationsStub && !this._terminated) {
       return this.organizationsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

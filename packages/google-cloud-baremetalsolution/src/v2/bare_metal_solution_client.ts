@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -66,6 +67,8 @@ export class BareMetalSolutionClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('bare-metal-solution');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -103,7 +106,7 @@ export class BareMetalSolutionClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -834,7 +837,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInstance(request, options, callback);
+    this._log.info('getInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IInstance,
+          | protos.google.cloud.baremetalsolution.v2.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IInstance,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IGetInstanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * RenameInstance sets a new name for an instance.
@@ -934,7 +966,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.renameInstance(request, options, callback);
+    this._log.info('renameInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IInstance,
+          | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renameInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IInstance,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renameInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Register a public SSH key in the specified project for use with the
@@ -1033,7 +1094,36 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSshKey(request, options, callback);
+    this._log.info('createSSHKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.ISSHKey,
+          | protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSSHKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSshKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.ISSHKey,
+          (
+            | protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSSHKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a public SSH key registered in the specified project.
@@ -1124,7 +1214,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSshKey(request, options, callback);
+    this._log.info('deleteSSHKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSSHKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSshKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSSHKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details of a single storage volume.
@@ -1214,7 +1333,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVolume(request, options, callback);
+    this._log.info('getVolume request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolume,
+          | protos.google.cloud.baremetalsolution.v2.IGetVolumeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVolume response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IVolume,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IGetVolumeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVolume response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * RenameVolume sets a new name for a volume.
@@ -1308,7 +1456,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.renameVolume(request, options, callback);
+    this._log.info('renameVolume request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolume,
+          | protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renameVolume response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IVolume,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renameVolume response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * List all Networks (and used IPs for each Network) in the vendor account
@@ -1405,7 +1582,36 @@ export class BareMetalSolutionClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNetworkUsage(request, options, callback);
+    this._log.info('listNetworkUsage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IListNetworkUsageResponse,
+          | protos.google.cloud.baremetalsolution.v2.IListNetworkUsageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listNetworkUsage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listNetworkUsage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IListNetworkUsageResponse,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IListNetworkUsageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listNetworkUsage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details of a single network.
@@ -1495,7 +1701,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNetwork(request, options, callback);
+    this._log.info('getNetwork request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.INetwork,
+          | protos.google.cloud.baremetalsolution.v2.IGetNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNetwork response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.INetwork,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IGetNetworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNetwork response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Takes a snapshot of a boot volume.
@@ -1594,7 +1829,36 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createVolumeSnapshot(request, options, callback);
+    this._log.info('createVolumeSnapshot request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+          | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createVolumeSnapshot response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createVolumeSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+          (
+            | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createVolumeSnapshot response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a volume snapshot.
@@ -1691,7 +1955,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteVolumeSnapshot(request, options, callback);
+    this._log.info('deleteVolumeSnapshot request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteVolumeSnapshot response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteVolumeSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVolumeSnapshot response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified snapshot resource.
@@ -1788,7 +2081,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVolumeSnapshot(request, options, callback);
+    this._log.info('getVolumeSnapshot request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+          | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVolumeSnapshot response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVolumeSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVolumeSnapshot response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details of a single storage logical unit number(LUN).
@@ -1878,7 +2200,33 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLun(request, options, callback);
+    this._log.info('getLun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.ILun,
+          | protos.google.cloud.baremetalsolution.v2.IGetLunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.ILun,
+          protos.google.cloud.baremetalsolution.v2.IGetLunRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getLun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get details of a single NFS share.
@@ -1968,7 +2316,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNfsShare(request, options, callback);
+    this._log.info('getNfsShare request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.INfsShare,
+          | protos.google.cloud.baremetalsolution.v2.IGetNfsShareRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNfsShare response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNfsShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.INfsShare,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IGetNfsShareRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNfsShare response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * RenameNfsShare sets a new name for an nfsshare.
@@ -2068,7 +2445,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.renameNfsShare(request, options, callback);
+    this._log.info('renameNfsShare request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.INfsShare,
+          | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renameNfsShare response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameNfsShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.INfsShare,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renameNfsShare response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Submit a provisiong configuration for a given project.
@@ -2170,11 +2576,36 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.submitProvisioningConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('submitProvisioningConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+          | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('submitProvisioningConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .submitProvisioningConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+          (
+            | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('submitProvisioningConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get ProvisioningConfig by name.
@@ -2270,7 +2701,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProvisioningConfig(request, options, callback);
+    this._log.info('getProvisioningConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProvisioningConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProvisioningConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProvisioningConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create new ProvisioningConfig.
@@ -2372,11 +2832,36 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createProvisioningConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createProvisioningConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createProvisioningConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createProvisioningConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          (
+            | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createProvisioningConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update existing ProvisioningConfig.
@@ -2477,11 +2962,36 @@ export class BareMetalSolutionClient {
         'provisioning_config.name': request.provisioningConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateProvisioningConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateProvisioningConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateProvisioningConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateProvisioningConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateProvisioningConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * RenameNetwork sets a new name for a network.
@@ -2581,7 +3091,36 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.renameNetwork(request, options, callback);
+    this._log.info('renameNetwork request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.INetwork,
+          | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('renameNetwork response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .renameNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.baremetalsolution.v2.INetwork,
+          (
+            | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('renameNetwork response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2693,7 +3232,37 @@ export class BareMetalSolutionClient {
         'instance.name': request.instance!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IInstance,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IInstance,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInstance()`.
@@ -2714,6 +3283,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2830,7 +3400,37 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resetInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IResetInstanceResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resetInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resetInstance request %j', request);
+    return this.innerApiCalls
+      .resetInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IResetInstanceResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resetInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resetInstance()`.
@@ -2851,6 +3451,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('resetInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2966,7 +3567,37 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IStartInstanceResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startInstance request %j', request);
+    return this.innerApiCalls
+      .startInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IStartInstanceResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startInstance()`.
@@ -2987,6 +3618,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('startInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3102,7 +3734,37 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IStopInstanceResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopInstance request %j', request);
+    return this.innerApiCalls
+      .stopInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IStopInstanceResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopInstance()`.
@@ -3123,6 +3785,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('stopInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3238,11 +3901,43 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.enableInteractiveSerialConsole(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'enableInteractiveSerialConsole response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enableInteractiveSerialConsole request %j', request);
+    return this.innerApiCalls
+      .enableInteractiveSerialConsole(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'enableInteractiveSerialConsole response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enableInteractiveSerialConsole()`.
@@ -3263,6 +3958,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('enableInteractiveSerialConsole long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3378,11 +4074,43 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.disableInteractiveSerialConsole(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'disableInteractiveSerialConsole response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disableInteractiveSerialConsole request %j', request);
+    return this.innerApiCalls
+      .disableInteractiveSerialConsole(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'disableInteractiveSerialConsole response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `disableInteractiveSerialConsole()`.
@@ -3403,6 +4131,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('disableInteractiveSerialConsole long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3522,7 +4251,37 @@ export class BareMetalSolutionClient {
         instance: request.instance ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.detachLun(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IInstance,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('detachLun response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('detachLun request %j', request);
+    return this.innerApiCalls
+      .detachLun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IInstance,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('detachLun response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `detachLun()`.
@@ -3543,6 +4302,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('detachLun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3665,7 +4425,37 @@ export class BareMetalSolutionClient {
         'volume.name': request.volume!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVolume(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolume,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateVolume request %j', request);
+    return this.innerApiCalls
+      .updateVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolume,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateVolume()`.
@@ -3686,6 +4476,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('updateVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3802,7 +4593,37 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.evictVolume(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('evictVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('evictVolume request %j', request);
+    return this.innerApiCalls
+      .evictVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('evictVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `evictVolume()`.
@@ -3823,6 +4644,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('evictVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3940,7 +4762,37 @@ export class BareMetalSolutionClient {
         volume: request.volume ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resizeVolume(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolume,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resizeVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resizeVolume request %j', request);
+    return this.innerApiCalls
+      .resizeVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolume,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resizeVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resizeVolume()`.
@@ -3961,6 +4813,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('resizeVolume long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4083,7 +4936,37 @@ export class BareMetalSolutionClient {
         'network.name': request.network!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNetwork(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INetwork,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateNetwork response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateNetwork request %j', request);
+    return this.innerApiCalls
+      .updateNetwork(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INetwork,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNetwork response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateNetwork()`.
@@ -4104,6 +4987,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('updateNetwork long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4221,7 +5105,37 @@ export class BareMetalSolutionClient {
         volume_snapshot: request.volumeSnapshot ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreVolumeSnapshot(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreVolumeSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreVolumeSnapshot request %j', request);
+    return this.innerApiCalls
+      .restoreVolumeSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreVolumeSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restoreVolumeSnapshot()`.
@@ -4242,6 +5156,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('restoreVolumeSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4358,7 +5273,37 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.evictLun(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('evictLun response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('evictLun request %j', request);
+    return this.innerApiCalls
+      .evictLun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('evictLun response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `evictLun()`.
@@ -4379,6 +5324,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('evictLun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4502,7 +5448,37 @@ export class BareMetalSolutionClient {
         'nfs_share.name': request.nfsShare!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNfsShare(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INfsShare,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateNfsShare response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateNfsShare request %j', request);
+    return this.innerApiCalls
+      .updateNfsShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INfsShare,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNfsShare response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateNfsShare()`.
@@ -4523,6 +5499,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('updateNfsShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4640,7 +5617,37 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNfsShare(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INfsShare,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNfsShare response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNfsShare request %j', request);
+    return this.innerApiCalls
+      .createNfsShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INfsShare,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNfsShare response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNfsShare()`.
@@ -4661,6 +5668,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('createNfsShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4776,7 +5784,37 @@ export class BareMetalSolutionClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNfsShare(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNfsShare response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNfsShare request %j', request);
+    return this.innerApiCalls
+      .deleteNfsShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNfsShare response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNfsShare()`.
@@ -4797,6 +5835,7 @@ export class BareMetalSolutionClient {
       protos.google.cloud.baremetalsolution.v2.OperationMetadata
     >
   > {
+    this._log.info('deleteNfsShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4910,7 +5949,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListInstancesRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.IInstance[],
+          protos.google.cloud.baremetalsolution.v2.IListInstancesRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4952,6 +6017,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -5001,6 +6067,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -5104,7 +6171,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSshKeys(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.ISSHKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSSHKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSSHKeys request %j', request);
+    return this.innerApiCalls
+      .listSshKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.ISSHKey[],
+          protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse,
+        ]) => {
+          this._log.info('listSSHKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5144,6 +6237,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listSshKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSSHKeys stream %j', request);
     return this.descriptors.page.listSSHKeys.createStream(
       this.innerApiCalls.listSshKeys as GaxCall,
       request,
@@ -5191,6 +6285,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listSshKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSSHKeys iterate %j', request);
     return this.descriptors.page.listSSHKeys.asyncIterate(
       this.innerApiCalls['listSshKeys'] as GaxCall,
       request as {},
@@ -5295,7 +6390,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVolumes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListVolumesRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListVolumesResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IVolume
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVolumes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVolumes request %j', request);
+    return this.innerApiCalls
+      .listVolumes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.IVolume[],
+          protos.google.cloud.baremetalsolution.v2.IListVolumesRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListVolumesResponse,
+        ]) => {
+          this._log.info('listVolumes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5337,6 +6458,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumes stream %j', request);
     return this.descriptors.page.listVolumes.createStream(
       this.innerApiCalls.listVolumes as GaxCall,
       request,
@@ -5386,6 +6508,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumes iterate %j', request);
     return this.descriptors.page.listVolumes.asyncIterate(
       this.innerApiCalls['listVolumes'] as GaxCall,
       request as {},
@@ -5490,7 +6613,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNetworks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListNetworksRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListNetworksResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.INetwork
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNetworks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNetworks request %j', request);
+    return this.innerApiCalls
+      .listNetworks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.INetwork[],
+          protos.google.cloud.baremetalsolution.v2.IListNetworksRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListNetworksResponse,
+        ]) => {
+          this._log.info('listNetworks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5532,6 +6681,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworks stream %j', request);
     return this.descriptors.page.listNetworks.createStream(
       this.innerApiCalls.listNetworks as GaxCall,
       request,
@@ -5581,6 +6731,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNetworks iterate %j', request);
     return this.descriptors.page.listNetworks.asyncIterate(
       this.innerApiCalls['listNetworks'] as GaxCall,
       request as {},
@@ -5685,7 +6836,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVolumeSnapshots(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVolumeSnapshots values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVolumeSnapshots request %j', request);
+    return this.innerApiCalls
+      .listVolumeSnapshots(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[],
+          protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse,
+        ]) => {
+          this._log.info('listVolumeSnapshots values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5725,6 +6902,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listVolumeSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumeSnapshots stream %j', request);
     return this.descriptors.page.listVolumeSnapshots.createStream(
       this.innerApiCalls.listVolumeSnapshots as GaxCall,
       request,
@@ -5772,6 +6950,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listVolumeSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVolumeSnapshots iterate %j', request);
     return this.descriptors.page.listVolumeSnapshots.asyncIterate(
       this.innerApiCalls['listVolumeSnapshots'] as GaxCall,
       request as {},
@@ -5874,7 +7053,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLuns(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListLunsRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListLunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.ILun
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLuns values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLuns request %j', request);
+    return this.innerApiCalls
+      .listLuns(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.ILun[],
+          protos.google.cloud.baremetalsolution.v2.IListLunsRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListLunsResponse,
+        ]) => {
+          this._log.info('listLuns values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5914,6 +7119,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLuns stream %j', request);
     return this.descriptors.page.listLuns.createStream(
       this.innerApiCalls.listLuns as GaxCall,
       request,
@@ -5961,6 +7167,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLuns iterate %j', request);
     return this.descriptors.page.listLuns.asyncIterate(
       this.innerApiCalls['listLuns'] as GaxCall,
       request as {},
@@ -6065,7 +7272,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNfsShares(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.INfsShare
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNfsShares values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNfsShares request %j', request);
+    return this.innerApiCalls
+      .listNfsShares(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.INfsShare[],
+          protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse,
+        ]) => {
+          this._log.info('listNfsShares values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6107,6 +7340,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNfsShares stream %j', request);
     return this.descriptors.page.listNfsShares.createStream(
       this.innerApiCalls.listNfsShares as GaxCall,
       request,
@@ -6156,6 +7390,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNfsShares iterate %j', request);
     return this.descriptors.page.listNfsShares.asyncIterate(
       this.innerApiCalls['listNfsShares'] as GaxCall,
       request as {},
@@ -6260,11 +7495,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProvisioningQuotas(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IProvisioningQuota
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProvisioningQuotas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProvisioningQuotas request %j', request);
+    return this.innerApiCalls
+      .listProvisioningQuotas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[],
+          protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse,
+        ]) => {
+          this._log.info('listProvisioningQuotas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6306,6 +7563,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listProvisioningQuotas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProvisioningQuotas stream %j', request);
     return this.descriptors.page.listProvisioningQuotas.createStream(
       this.innerApiCalls.listProvisioningQuotas as GaxCall,
       request,
@@ -6355,6 +7613,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listProvisioningQuotas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProvisioningQuotas iterate %j', request);
     return this.descriptors.page.listProvisioningQuotas.asyncIterate(
       this.innerApiCalls['listProvisioningQuotas'] as GaxCall,
       request as {},
@@ -6459,7 +7718,33 @@ export class BareMetalSolutionClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOsImages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IOSImage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOSImages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOSImages request %j', request);
+    return this.innerApiCalls
+      .listOsImages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.baremetalsolution.v2.IOSImage[],
+          protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest | null,
+          protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse,
+        ]) => {
+          this._log.info('listOSImages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6501,6 +7786,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listOsImages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOSImages stream %j', request);
     return this.descriptors.page.listOSImages.createStream(
       this.innerApiCalls.listOsImages as GaxCall,
       request,
@@ -6550,6 +7836,7 @@ export class BareMetalSolutionClient {
     const defaultCallSettings = this._defaults['listOsImages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOSImages iterate %j', request);
     return this.descriptors.page.listOSImages.asyncIterate(
       this.innerApiCalls['listOsImages'] as GaxCall,
       request as {},
@@ -7841,6 +9128,7 @@ export class BareMetalSolutionClient {
   close(): Promise<void> {
     if (this.bareMetalSolutionStub && !this._terminated) {
       return this.bareMetalSolutionStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

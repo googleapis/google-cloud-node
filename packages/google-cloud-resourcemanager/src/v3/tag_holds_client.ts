@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class TagHoldsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('resource-manager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class TagHoldsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -563,7 +566,37 @@ export class TagHoldsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTagHold(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.resourcemanager.v3.ITagHold,
+            protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTagHold response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTagHold request %j', request);
+    return this.innerApiCalls
+      .createTagHold(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.resourcemanager.v3.ITagHold,
+            protos.google.cloud.resourcemanager.v3.ICreateTagHoldMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTagHold response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTagHold()`.
@@ -584,6 +617,7 @@ export class TagHoldsClient {
       protos.google.cloud.resourcemanager.v3.CreateTagHoldMetadata
     >
   > {
+    this._log.info('createTagHold long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -703,7 +737,37 @@ export class TagHoldsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTagHold(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTagHold response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTagHold request %j', request);
+    return this.innerApiCalls
+      .deleteTagHold(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.resourcemanager.v3.IDeleteTagHoldMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTagHold response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTagHold()`.
@@ -724,6 +788,7 @@ export class TagHoldsClient {
       protos.google.cloud.resourcemanager.v3.DeleteTagHoldMetadata
     >
   > {
+    this._log.info('deleteTagHold long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -850,7 +915,33 @@ export class TagHoldsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTagHolds(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest,
+          | protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse
+          | null
+          | undefined,
+          protos.google.cloud.resourcemanager.v3.ITagHold
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTagHolds values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTagHolds request %j', request);
+    return this.innerApiCalls
+      .listTagHolds(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.resourcemanager.v3.ITagHold[],
+          protos.google.cloud.resourcemanager.v3.IListTagHoldsRequest | null,
+          protos.google.cloud.resourcemanager.v3.IListTagHoldsResponse,
+        ]) => {
+          this._log.info('listTagHolds values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -905,6 +996,7 @@ export class TagHoldsClient {
     const defaultCallSettings = this._defaults['listTagHolds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTagHolds stream %j', request);
     return this.descriptors.page.listTagHolds.createStream(
       this.innerApiCalls.listTagHolds as GaxCall,
       request,
@@ -967,6 +1059,7 @@ export class TagHoldsClient {
     const defaultCallSettings = this._defaults['listTagHolds'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTagHolds iterate %j', request);
     return this.descriptors.page.listTagHolds.asyncIterate(
       this.innerApiCalls['listTagHolds'] as GaxCall,
       request as {},
@@ -1387,6 +1480,7 @@ export class TagHoldsClient {
   close(): Promise<void> {
     if (this.tagHoldsStub && !this._terminated) {
       return this.tagHoldsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

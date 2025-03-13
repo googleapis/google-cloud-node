@@ -31,6 +31,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class EstimateBillingServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class EstimateBillingServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -760,7 +763,37 @@ export class EstimateBillingServiceClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.estimateDataSize(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeResponse,
+            protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('estimateDataSize response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('estimateDataSize request %j', request);
+    return this.innerApiCalls
+      .estimateDataSize(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeResponse,
+            protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('estimateDataSize response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `estimateDataSize()`.
@@ -781,6 +814,7 @@ export class EstimateBillingServiceClient {
       protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeMetadata
     >
   > {
+    this._log.info('estimateDataSize long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4468,6 +4502,7 @@ export class EstimateBillingServiceClient {
   close(): Promise<void> {
     if (this.estimateBillingServiceStub && !this._terminated) {
       return this.estimateBillingServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class BusinessInfoServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class BusinessInfoServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -507,7 +510,36 @@ export class BusinessInfoServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBusinessInfo(request, options, callback);
+    this._log.info('getBusinessInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessInfo,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBusinessInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBusinessInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessInfo,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetBusinessInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBusinessInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the business info of an account. Executing this method requires
@@ -606,7 +638,36 @@ export class BusinessInfoServiceClient {
         'business_info.name': request.businessInfo!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBusinessInfo(request, options, callback);
+    this._log.info('updateBusinessInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessInfo,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBusinessInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBusinessInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IBusinessInfo,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateBusinessInfoRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBusinessInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -1099,6 +1160,7 @@ export class BusinessInfoServiceClient {
   close(): Promise<void> {
     if (this.businessInfoServiceStub && !this._terminated) {
       return this.businessInfoServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

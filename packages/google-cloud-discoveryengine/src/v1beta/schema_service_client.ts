@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class SchemaServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class SchemaServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -785,7 +788,36 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSchema(request, options, callback);
+    this._log.info('getSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.ISchema,
+          | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.ISchema,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -901,7 +933,37 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSchema(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSchema response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSchema request %j', request);
+    return this.innerApiCalls
+      .createSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSchema response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSchema()`.
@@ -922,6 +984,7 @@ export class SchemaServiceClient {
       protos.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
     >
   > {
+    this._log.info('createSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1043,7 +1106,37 @@ export class SchemaServiceClient {
         'schema.name': request.schema!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSchema(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSchema response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSchema request %j', request);
+    return this.innerApiCalls
+      .updateSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSchema response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSchema()`.
@@ -1064,6 +1157,7 @@ export class SchemaServiceClient {
       protos.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
     >
   > {
+    this._log.info('updateSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1180,7 +1274,37 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSchema(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSchema response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSchema request %j', request);
+    return this.innerApiCalls
+      .deleteSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSchema response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSchema()`.
@@ -1201,6 +1325,7 @@ export class SchemaServiceClient {
       protos.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
     >
   > {
+    this._log.info('deleteSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1324,7 +1449,33 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSchemas(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.ISchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSchemas request %j', request);
+    return this.innerApiCalls
+      .listSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.ISchema[],
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse,
+        ]) => {
+          this._log.info('listSchemas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1376,6 +1527,7 @@ export class SchemaServiceClient {
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSchemas stream %j', request);
     return this.descriptors.page.listSchemas.createStream(
       this.innerApiCalls.listSchemas as GaxCall,
       request,
@@ -1435,6 +1587,7 @@ export class SchemaServiceClient {
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSchemas iterate %j', request);
     return this.descriptors.page.listSchemas.asyncIterate(
       this.innerApiCalls['listSchemas'] as GaxCall,
       request as {},
@@ -5286,6 +5439,7 @@ export class SchemaServiceClient {
   close(): Promise<void> {
     if (this.schemaServiceStub && !this._terminated) {
       return this.schemaServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

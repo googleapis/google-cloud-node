@@ -1566,6 +1566,9 @@ export namespace google {
                     /** Event ja3 */
                     ja3?: (string|null);
 
+                    /** Event ja4 */
+                    ja4?: (string|null);
+
                     /** Event headers */
                     headers?: (string[]|null);
 
@@ -1620,6 +1623,9 @@ export namespace google {
 
                     /** Event ja3. */
                     public ja3: string;
+
+                    /** Event ja4. */
+                    public ja4: string;
 
                     /** Event headers. */
                     public headers: string[];

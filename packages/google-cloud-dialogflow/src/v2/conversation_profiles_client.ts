@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class ConversationProfilesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class ConversationProfilesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -724,11 +727,36 @@ export class ConversationProfilesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConversationProfile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getConversationProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IConversationProfile,
+          | protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversationProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversationProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IConversationProfile,
+          (
+            | protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversationProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a conversation profile in the specified project.
@@ -834,11 +862,36 @@ export class ConversationProfilesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConversationProfile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createConversationProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IConversationProfile,
+          | protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConversationProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConversationProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IConversationProfile,
+          (
+            | protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversationProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified conversation profile.
@@ -943,11 +996,36 @@ export class ConversationProfilesClient {
         'conversation_profile.name': request.conversationProfile!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConversationProfile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateConversationProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IConversationProfile,
+          | protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversationProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversationProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IConversationProfile,
+          (
+            | protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversationProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified conversation profile.
@@ -1045,11 +1123,36 @@ export class ConversationProfilesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConversationProfile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteConversationProfile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversationProfile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConversationProfile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversationProfile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1176,11 +1279,37 @@ export class ConversationProfilesClient {
         conversation_profile: request.conversationProfile ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setSuggestionFeatureConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IConversationProfile,
+            protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('setSuggestionFeatureConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('setSuggestionFeatureConfig request %j', request);
+    return this.innerApiCalls
+      .setSuggestionFeatureConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IConversationProfile,
+            protos.google.cloud.dialogflow.v2.ISetSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setSuggestionFeatureConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `setSuggestionFeatureConfig()`.
@@ -1201,6 +1330,7 @@ export class ConversationProfilesClient {
       protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata
     >
   > {
+    this._log.info('setSuggestionFeatureConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1333,11 +1463,43 @@ export class ConversationProfilesClient {
         conversation_profile: request.conversationProfile ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.clearSuggestionFeatureConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IConversationProfile,
+            protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'clearSuggestionFeatureConfig response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('clearSuggestionFeatureConfig request %j', request);
+    return this.innerApiCalls
+      .clearSuggestionFeatureConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IConversationProfile,
+            protos.google.cloud.dialogflow.v2.IClearSuggestionFeatureConfigOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'clearSuggestionFeatureConfig response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `clearSuggestionFeatureConfig()`.
@@ -1358,6 +1520,7 @@ export class ConversationProfilesClient {
       protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata
     >
   > {
+    this._log.info('clearSuggestionFeatureConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1470,11 +1633,33 @@ export class ConversationProfilesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversationProfiles(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
+          | protos.google.cloud.dialogflow.v2.IListConversationProfilesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IConversationProfile
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversationProfiles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversationProfiles request %j', request);
+    return this.innerApiCalls
+      .listConversationProfiles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.IConversationProfile[],
+          protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest | null,
+          protos.google.cloud.dialogflow.v2.IListConversationProfilesResponse,
+        ]) => {
+          this._log.info('listConversationProfiles values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1515,6 +1700,7 @@ export class ConversationProfilesClient {
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversationProfiles stream %j', request);
     return this.descriptors.page.listConversationProfiles.createStream(
       this.innerApiCalls.listConversationProfiles as GaxCall,
       request,
@@ -1563,6 +1749,7 @@ export class ConversationProfilesClient {
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversationProfiles iterate %j', request);
     return this.descriptors.page.listConversationProfiles.asyncIterate(
       this.innerApiCalls['listConversationProfiles'] as GaxCall,
       request as {},
@@ -4585,6 +4772,7 @@ export class ConversationProfilesClient {
   close(): Promise<void> {
     if (this.conversationProfilesStub && !this._terminated) {
       return this.conversationProfilesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

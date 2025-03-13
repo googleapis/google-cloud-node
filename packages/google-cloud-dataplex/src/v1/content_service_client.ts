@@ -32,6 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ContentServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataplex');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class ContentServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -818,7 +821,33 @@ export class ContentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createContent(request, options, callback);
+    this._log.info('createContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IContent,
+          | protos.google.cloud.dataplex.v1.ICreateContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IContent,
+          protos.google.cloud.dataplex.v1.ICreateContentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a content. Only supports full resource update.
@@ -908,7 +937,33 @@ export class ContentServiceClient {
         'content.name': request.content!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateContent(request, options, callback);
+    this._log.info('updateContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IContent,
+          | protos.google.cloud.dataplex.v1.IUpdateContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IContent,
+          protos.google.cloud.dataplex.v1.IUpdateContentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete a content.
@@ -993,7 +1048,33 @@ export class ContentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteContent(request, options, callback);
+    this._log.info('deleteContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataplex.v1.IDeleteContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.IDeleteContentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a content resource.
@@ -1078,7 +1159,31 @@ export class ContentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getContent(request, options, callback);
+    this._log.info('getContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IContent,
+          protos.google.cloud.dataplex.v1.IGetContentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IContent,
+          protos.google.cloud.dataplex.v1.IGetContentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for a contentitem resource. A `NOT_FOUND`
@@ -1169,7 +1274,31 @@ export class ContentServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the access control policy on the specified contentitem resource.
@@ -1267,7 +1396,31 @@ export class ContentServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the caller's permissions on a resource.
@@ -1364,7 +1517,31 @@ export class ContentServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1472,7 +1649,33 @@ export class ContentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listContent(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListContentRequest,
+          | protos.google.cloud.dataplex.v1.IListContentResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IContent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listContent values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listContent request %j', request);
+    return this.innerApiCalls
+      .listContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IContent[],
+          protos.google.cloud.dataplex.v1.IListContentRequest | null,
+          protos.google.cloud.dataplex.v1.IListContentResponse,
+        ]) => {
+          this._log.info('listContent values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1527,6 +1730,7 @@ export class ContentServiceClient {
     const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listContent stream %j', request);
     return this.descriptors.page.listContent.createStream(
       this.innerApiCalls.listContent as GaxCall,
       request,
@@ -1589,6 +1793,7 @@ export class ContentServiceClient {
     const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listContent iterate %j', request);
     return this.descriptors.page.listContent.asyncIterate(
       this.innerApiCalls['listContent'] as GaxCall,
       request as {},
@@ -3528,6 +3733,7 @@ export class ContentServiceClient {
   close(): Promise<void> {
     if (this.contentServiceStub && !this._terminated) {
       return this.contentServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class FulfillmentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class FulfillmentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -604,7 +607,33 @@ export class FulfillmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFulfillment(request, options, callback);
+    this._log.info('getFulfillment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IFulfillment,
+          | protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFulfillment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFulfillment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IFulfillment,
+          protos.google.cloud.dialogflow.v2.IGetFulfillmentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFulfillment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the fulfillment.
@@ -697,7 +726,36 @@ export class FulfillmentsClient {
         'fulfillment.name': request.fulfillment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFulfillment(request, options, callback);
+    this._log.info('updateFulfillment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IFulfillment,
+          | protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFulfillment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFulfillment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IFulfillment,
+          (
+            | protos.google.cloud.dialogflow.v2.IUpdateFulfillmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFulfillment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3408,6 +3466,7 @@ export class FulfillmentsClient {
   close(): Promise<void> {
     if (this.fulfillmentsStub && !this._terminated) {
       return this.fulfillmentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

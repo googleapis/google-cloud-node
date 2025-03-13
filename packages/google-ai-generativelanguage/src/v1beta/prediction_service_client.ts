@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class PredictionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('generativelanguage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class PredictionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -477,7 +480,36 @@ export class PredictionServiceClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.predict(request, options, callback);
+    this._log.info('predict request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+          | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('predict response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .predict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IPredictResponse,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IPredictRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('predict response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -779,6 +811,7 @@ export class PredictionServiceClient {
   close(): Promise<void> {
     if (this.predictionServiceStub && !this._terminated) {
       return this.predictionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

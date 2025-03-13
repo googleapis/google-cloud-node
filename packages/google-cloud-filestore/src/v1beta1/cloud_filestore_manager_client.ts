@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -76,6 +77,8 @@ export class CloudFilestoreManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('filestore');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -112,7 +115,7 @@ export class CloudFilestoreManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -765,7 +768,33 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInstance(request, options, callback);
+    this._log.info('getInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.filestore.v1beta1.IInstance,
+          | protos.google.cloud.filestore.v1beta1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.filestore.v1beta1.IInstance,
+          protos.google.cloud.filestore.v1beta1.IGetInstanceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a specific snapshot.
@@ -856,7 +885,33 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSnapshot(request, options, callback);
+    this._log.info('getSnapshot request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.filestore.v1beta1.ISnapshot,
+          | protos.google.cloud.filestore.v1beta1.IGetSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSnapshot response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.filestore.v1beta1.ISnapshot,
+          protos.google.cloud.filestore.v1beta1.IGetSnapshotRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSnapshot response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a specific backup.
@@ -947,7 +1002,33 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBackup(request, options, callback);
+    this._log.info('getBackup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.filestore.v1beta1.IBackup,
+          | protos.google.cloud.filestore.v1beta1.IGetBackupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBackup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.filestore.v1beta1.IBackup,
+          protos.google.cloud.filestore.v1beta1.IGetBackupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBackup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details of a specific share.
@@ -1032,7 +1113,33 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getShare(request, options, callback);
+    this._log.info('getShare request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.filestore.v1beta1.IShare,
+          | protos.google.cloud.filestore.v1beta1.IGetShareRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getShare response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.filestore.v1beta1.IShare,
+          protos.google.cloud.filestore.v1beta1.IGetShareRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getShare response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1148,7 +1255,37 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInstance request %j', request);
+    return this.innerApiCalls
+      .createInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInstance()`.
@@ -1169,6 +1306,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1296,7 +1434,37 @@ export class CloudFilestoreManagerClient {
         'instance.name': request.instance!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInstance()`.
@@ -1317,6 +1485,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1446,7 +1615,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreInstance request %j', request);
+    return this.innerApiCalls
+      .restoreInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restoreInstance()`.
@@ -1467,6 +1666,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('restoreInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1587,7 +1787,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.revertInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('revertInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('revertInstance request %j', request);
+    return this.innerApiCalls
+      .revertInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('revertInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `revertInstance()`.
@@ -1608,6 +1838,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('revertInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1729,7 +1960,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.promoteReplica(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('promoteReplica response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('promoteReplica request %j', request);
+    return this.innerApiCalls
+      .promoteReplica(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IInstance,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('promoteReplica response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `promoteReplica()`.
@@ -1750,6 +2011,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('promoteReplica long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1869,7 +2131,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInstance request %j', request);
+    return this.innerApiCalls
+      .deleteInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInstance()`.
@@ -1890,6 +2182,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('deleteInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2014,7 +2307,37 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSnapshot(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.ISnapshot,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSnapshot request %j', request);
+    return this.innerApiCalls
+      .createSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.ISnapshot,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSnapshot()`.
@@ -2035,6 +2358,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('createSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2151,7 +2475,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSnapshot(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSnapshot request %j', request);
+    return this.innerApiCalls
+      .deleteSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSnapshot()`.
@@ -2172,6 +2526,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('deleteSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2290,7 +2645,37 @@ export class CloudFilestoreManagerClient {
         'snapshot.name': request.snapshot!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSnapshot(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.ISnapshot,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSnapshot request %j', request);
+    return this.innerApiCalls
+      .updateSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.ISnapshot,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSnapshot()`.
@@ -2311,6 +2696,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('updateSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2436,7 +2822,37 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IBackup,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBackup request %j', request);
+    return this.innerApiCalls
+      .createBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IBackup,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBackup()`.
@@ -2457,6 +2873,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('createBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2573,7 +2990,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBackup request %j', request);
+    return this.innerApiCalls
+      .deleteBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBackup()`.
@@ -2594,6 +3041,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('deleteBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2712,7 +3160,37 @@ export class CloudFilestoreManagerClient {
         'backup.name': request.backup!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBackup(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IBackup,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackup request %j', request);
+    return this.innerApiCalls
+      .updateBackup(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IBackup,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackup response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBackup()`.
@@ -2733,6 +3211,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('updateBackup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2857,7 +3336,37 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createShare(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IShare,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createShare response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createShare request %j', request);
+    return this.innerApiCalls
+      .createShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IShare,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createShare response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createShare()`.
@@ -2878,6 +3387,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('createShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2994,7 +3504,37 @@ export class CloudFilestoreManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteShare(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteShare response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteShare request %j', request);
+    return this.innerApiCalls
+      .deleteShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteShare response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteShare()`.
@@ -3015,6 +3555,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('deleteShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3140,7 +3681,37 @@ export class CloudFilestoreManagerClient {
         'share.name': request.share!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateShare(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IShare,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateShare response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateShare request %j', request);
+    return this.innerApiCalls
+      .updateShare(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.filestore.v1beta1.IShare,
+            protos.google.cloud.common.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateShare response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateShare()`.
@@ -3161,6 +3732,7 @@ export class CloudFilestoreManagerClient {
       protos.google.cloud.common.OperationMetadata
     >
   > {
+    this._log.info('updateShare long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3282,7 +3854,33 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.filestore.v1beta1.IListInstancesRequest,
+          | protos.google.cloud.filestore.v1beta1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.filestore.v1beta1.IInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.filestore.v1beta1.IInstance[],
+          protos.google.cloud.filestore.v1beta1.IListInstancesRequest | null,
+          protos.google.cloud.filestore.v1beta1.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3331,6 +3929,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -3387,6 +3986,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -3499,7 +4099,33 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSnapshots(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.filestore.v1beta1.IListSnapshotsRequest,
+          | protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse
+          | null
+          | undefined,
+          protos.google.cloud.filestore.v1beta1.ISnapshot
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSnapshots values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSnapshots request %j', request);
+    return this.innerApiCalls
+      .listSnapshots(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.filestore.v1beta1.ISnapshot[],
+          protos.google.cloud.filestore.v1beta1.IListSnapshotsRequest | null,
+          protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse,
+        ]) => {
+          this._log.info('listSnapshots values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3548,6 +4174,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSnapshots stream %j', request);
     return this.descriptors.page.listSnapshots.createStream(
       this.innerApiCalls.listSnapshots as GaxCall,
       request,
@@ -3604,6 +4231,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSnapshots iterate %j', request);
     return this.descriptors.page.listSnapshots.asyncIterate(
       this.innerApiCalls['listSnapshots'] as GaxCall,
       request as {},
@@ -3716,7 +4344,33 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBackups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.filestore.v1beta1.IListBackupsRequest,
+          | protos.google.cloud.filestore.v1beta1.IListBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.filestore.v1beta1.IBackup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackups request %j', request);
+    return this.innerApiCalls
+      .listBackups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.filestore.v1beta1.IBackup[],
+          protos.google.cloud.filestore.v1beta1.IListBackupsRequest | null,
+          protos.google.cloud.filestore.v1beta1.IListBackupsResponse,
+        ]) => {
+          this._log.info('listBackups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3765,6 +4419,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
       request,
@@ -3821,6 +4476,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
       request as {},
@@ -3929,7 +4585,33 @@ export class CloudFilestoreManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listShares(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.filestore.v1beta1.IListSharesRequest,
+          | protos.google.cloud.filestore.v1beta1.IListSharesResponse
+          | null
+          | undefined,
+          protos.google.cloud.filestore.v1beta1.IShare
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listShares values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listShares request %j', request);
+    return this.innerApiCalls
+      .listShares(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.filestore.v1beta1.IShare[],
+          protos.google.cloud.filestore.v1beta1.IListSharesRequest | null,
+          protos.google.cloud.filestore.v1beta1.IListSharesResponse,
+        ]) => {
+          this._log.info('listShares values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3975,6 +4657,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listShares'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listShares stream %j', request);
     return this.descriptors.page.listShares.createStream(
       this.innerApiCalls.listShares as GaxCall,
       request,
@@ -4028,6 +4711,7 @@ export class CloudFilestoreManagerClient {
     const defaultCallSettings = this._defaults['listShares'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listShares iterate %j', request);
     return this.descriptors.page.listShares.asyncIterate(
       this.innerApiCalls['listShares'] as GaxCall,
       request as {},
@@ -4666,6 +5350,7 @@ export class CloudFilestoreManagerClient {
   close(): Promise<void> {
     if (this.cloudFilestoreManagerStub && !this._terminated) {
       return this.cloudFilestoreManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

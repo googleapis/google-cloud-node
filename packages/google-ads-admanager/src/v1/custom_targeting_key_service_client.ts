@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CustomTargetingKeyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CustomTargetingKeyServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -524,7 +527,36 @@ export class CustomTargetingKeyServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCustomTargetingKey(request, options, callback);
+    this._log.info('getCustomTargetingKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomTargetingKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomTargetingKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ICustomTargetingKey,
+          (
+            | protos.google.ads.admanager.v1.IGetCustomTargetingKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomTargetingKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -640,11 +672,33 @@ export class CustomTargetingKeyServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCustomTargetingKeys(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
+          | protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.ICustomTargetingKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomTargetingKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomTargetingKeys request %j', request);
+    return this.innerApiCalls
+      .listCustomTargetingKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.ICustomTargetingKey[],
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest | null,
+          protos.google.ads.admanager.v1.IListCustomTargetingKeysResponse,
+        ]) => {
+          this._log.info('listCustomTargetingKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -701,6 +755,7 @@ export class CustomTargetingKeyServiceClient {
     const defaultCallSettings = this._defaults['listCustomTargetingKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomTargetingKeys stream %j', request);
     return this.descriptors.page.listCustomTargetingKeys.createStream(
       this.innerApiCalls.listCustomTargetingKeys as GaxCall,
       request,
@@ -765,6 +820,7 @@ export class CustomTargetingKeyServiceClient {
     const defaultCallSettings = this._defaults['listCustomTargetingKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomTargetingKeys iterate %j', request);
     return this.descriptors.page.listCustomTargetingKeys.asyncIterate(
       this.innerApiCalls['listCustomTargetingKeys'] as GaxCall,
       request as {},
@@ -1401,6 +1457,7 @@ export class CustomTargetingKeyServiceClient {
   close(): Promise<void> {
     if (this.customTargetingKeyServiceStub && !this._terminated) {
       return this.customTargetingKeyServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

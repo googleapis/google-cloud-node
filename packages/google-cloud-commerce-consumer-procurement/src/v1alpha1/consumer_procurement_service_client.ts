@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -64,6 +65,8 @@ export class ConsumerProcurementServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('procurement');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -99,7 +102,7 @@ export class ConsumerProcurementServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -539,7 +542,36 @@ export class ConsumerProcurementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOrder(request, options, callback);
+    this._log.info('getOrder request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+          | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrder response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IGetOrderRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrder response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -665,7 +697,37 @@ export class ConsumerProcurementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.placeOrder(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('placeOrder response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('placeOrder request %j', request);
+    return this.innerApiCalls
+      .placeOrder(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder,
+            protos.google.cloud.commerce.consumer.procurement.v1alpha1.IPlaceOrderMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('placeOrder response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `placeOrder()`.
@@ -686,6 +748,7 @@ export class ConsumerProcurementServiceClient {
       protos.google.cloud.commerce.consumer.procurement.v1alpha1.PlaceOrderMetadata
     >
   > {
+    this._log.info('placeOrder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -817,7 +880,33 @@ export class ConsumerProcurementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOrders(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest,
+          | protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse
+          | null
+          | undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrders values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrders request %j', request);
+    return this.innerApiCalls
+      .listOrders(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IOrder[],
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersRequest | null,
+          protos.google.cloud.commerce.consumer.procurement.v1alpha1.IListOrdersResponse,
+        ]) => {
+          this._log.info('listOrders values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -875,6 +964,7 @@ export class ConsumerProcurementServiceClient {
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
       request,
@@ -940,6 +1030,7 @@ export class ConsumerProcurementServiceClient {
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
       request as {},
@@ -1245,6 +1336,7 @@ export class ConsumerProcurementServiceClient {
   close(): Promise<void> {
     if (this.consumerProcurementServiceStub && !this._terminated) {
       return this.consumerProcurementServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

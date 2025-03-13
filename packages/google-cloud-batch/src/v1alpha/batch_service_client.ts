@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class BatchServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('batch');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -95,7 +98,7 @@ export class BatchServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -623,7 +626,33 @@ export class BatchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createJob(request, options, callback);
+    this._log.info('createJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IJob,
+          | protos.google.cloud.batch.v1alpha.ICreateJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.IJob,
+          protos.google.cloud.batch.v1alpha.ICreateJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a Job specified by its resource name.
@@ -705,7 +734,31 @@ export class BatchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getJob(request, options, callback);
+    this._log.info('getJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IJob,
+          protos.google.cloud.batch.v1alpha.IGetJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.IJob,
+          protos.google.cloud.batch.v1alpha.IGetJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a Job.
@@ -822,7 +875,33 @@ export class BatchServiceClient {
         'job.name': request.job!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateJob(request, options, callback);
+    this._log.info('updateJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IJob,
+          | protos.google.cloud.batch.v1alpha.IUpdateJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.IJob,
+          protos.google.cloud.batch.v1alpha.IUpdateJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Return a single Task.
@@ -904,7 +983,31 @@ export class BatchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTask(request, options, callback);
+    this._log.info('getTask request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.ITask,
+          protos.google.cloud.batch.v1alpha.IGetTaskRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTask response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.ITask,
+          protos.google.cloud.batch.v1alpha.IGetTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTask response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a Resource Allowance.
@@ -1028,11 +1131,36 @@ export class BatchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createResourceAllowance(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createResourceAllowance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createResourceAllowance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createResourceAllowance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          (
+            | protos.google.cloud.batch.v1alpha.ICreateResourceAllowanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createResourceAllowance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a ResourceAllowance specified by its resource name.
@@ -1128,7 +1256,36 @@ export class BatchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getResourceAllowance(request, options, callback);
+    this._log.info('getResourceAllowance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getResourceAllowance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getResourceAllowance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          (
+            | protos.google.cloud.batch.v1alpha.IGetResourceAllowanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getResourceAllowance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a Resource Allowance.
@@ -1250,11 +1407,36 @@ export class BatchServiceClient {
         'resource_allowance.name': request.resourceAllowance!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateResourceAllowance(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateResourceAllowance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateResourceAllowance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateResourceAllowance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.batch.v1alpha.IResourceAllowance,
+          (
+            | protos.google.cloud.batch.v1alpha.IUpdateResourceAllowanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateResourceAllowance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1373,7 +1555,37 @@ export class BatchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteJob request %j', request);
+    return this.innerApiCalls
+      .deleteJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteJob()`.
@@ -1394,6 +1606,7 @@ export class BatchServiceClient {
       protos.google.cloud.batch.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1523,7 +1736,37 @@ export class BatchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelJob(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('cancelJob response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('cancelJob request %j', request);
+    return this.innerApiCalls
+      .cancelJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.batch.v1alpha.ICancelJobResponse,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelJob response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `cancelJob()`.
@@ -1544,6 +1787,7 @@ export class BatchServiceClient {
       protos.google.cloud.batch.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('cancelJob long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1675,11 +1919,37 @@ export class BatchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteResourceAllowance(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteResourceAllowance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteResourceAllowance request %j', request);
+    return this.innerApiCalls
+      .deleteResourceAllowance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.batch.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteResourceAllowance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteResourceAllowance()`.
@@ -1700,6 +1970,7 @@ export class BatchServiceClient {
       protos.google.cloud.batch.v1alpha.OperationMetadata
     >
   > {
+    this._log.info('deleteResourceAllowance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1809,7 +2080,33 @@ export class BatchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.batch.v1alpha.IListJobsRequest,
+          | protos.google.cloud.batch.v1alpha.IListJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.batch.v1alpha.IJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listJobs request %j', request);
+    return this.innerApiCalls
+      .listJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.batch.v1alpha.IJob[],
+          protos.google.cloud.batch.v1alpha.IListJobsRequest | null,
+          protos.google.cloud.batch.v1alpha.IListJobsResponse,
+        ]) => {
+          this._log.info('listJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1853,6 +2150,7 @@ export class BatchServiceClient {
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
@@ -1904,6 +2202,7 @@ export class BatchServiceClient {
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
@@ -2007,7 +2306,33 @@ export class BatchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTasks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.batch.v1alpha.IListTasksRequest,
+          | protos.google.cloud.batch.v1alpha.IListTasksResponse
+          | null
+          | undefined,
+          protos.google.cloud.batch.v1alpha.ITask
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTasks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTasks request %j', request);
+    return this.innerApiCalls
+      .listTasks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.batch.v1alpha.ITask[],
+          protos.google.cloud.batch.v1alpha.IListTasksRequest | null,
+          protos.google.cloud.batch.v1alpha.IListTasksResponse,
+        ]) => {
+          this._log.info('listTasks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2054,6 +2379,7 @@ export class BatchServiceClient {
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
       request,
@@ -2108,6 +2434,7 @@ export class BatchServiceClient {
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
       request as {},
@@ -2209,11 +2536,33 @@ export class BatchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listResourceAllowances(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest,
+          | protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.batch.v1alpha.IResourceAllowance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listResourceAllowances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listResourceAllowances request %j', request);
+    return this.innerApiCalls
+      .listResourceAllowances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.batch.v1alpha.IResourceAllowance[],
+          protos.google.cloud.batch.v1alpha.IListResourceAllowancesRequest | null,
+          protos.google.cloud.batch.v1alpha.IListResourceAllowancesResponse,
+        ]) => {
+          this._log.info('listResourceAllowances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2252,6 +2601,7 @@ export class BatchServiceClient {
     const defaultCallSettings = this._defaults['listResourceAllowances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listResourceAllowances stream %j', request);
     return this.descriptors.page.listResourceAllowances.createStream(
       this.innerApiCalls.listResourceAllowances as GaxCall,
       request,
@@ -2298,6 +2648,7 @@ export class BatchServiceClient {
     const defaultCallSettings = this._defaults['listResourceAllowances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listResourceAllowances iterate %j', request);
     return this.descriptors.page.listResourceAllowances.asyncIterate(
       this.innerApiCalls['listResourceAllowances'] as GaxCall,
       request as {},
@@ -2939,6 +3290,7 @@ export class BatchServiceClient {
   close(): Promise<void> {
     if (this.batchServiceStub && !this._terminated) {
       return this.batchServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

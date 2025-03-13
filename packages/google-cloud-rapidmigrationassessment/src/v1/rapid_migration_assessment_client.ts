@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class RapidMigrationAssessmentClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('rapidmigrationassessment');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class RapidMigrationAssessmentClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -626,7 +629,36 @@ export class RapidMigrationAssessmentClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAnnotation(request, options, callback);
+    this._log.info('getAnnotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+          | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnnotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnnotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+          (
+            | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnnotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single Collector.
@@ -722,7 +754,36 @@ export class RapidMigrationAssessmentClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCollector(request, options, callback);
+    this._log.info('getCollector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+          | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCollector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+          (
+            | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCollector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -832,7 +893,37 @@ export class RapidMigrationAssessmentClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCollector(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCollector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCollector request %j', request);
+    return this.innerApiCalls
+      .createCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCollector response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCollector()`.
@@ -853,6 +944,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('createCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -972,7 +1064,37 @@ export class RapidMigrationAssessmentClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAnnotation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAnnotation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAnnotation request %j', request);
+    return this.innerApiCalls
+      .createAnnotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.IAnnotation,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAnnotation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAnnotation()`.
@@ -993,6 +1115,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('createAnnotation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1128,7 +1251,37 @@ export class RapidMigrationAssessmentClient {
         'collector.name': request.collector!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCollector(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCollector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCollector request %j', request);
+    return this.innerApiCalls
+      .updateCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCollector response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCollector()`.
@@ -1149,6 +1302,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1279,7 +1433,37 @@ export class RapidMigrationAssessmentClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCollector(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCollector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCollector request %j', request);
+    return this.innerApiCalls
+      .deleteCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCollector response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCollector()`.
@@ -1300,6 +1484,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1429,7 +1614,37 @@ export class RapidMigrationAssessmentClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resumeCollector(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resumeCollector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resumeCollector request %j', request);
+    return this.innerApiCalls
+      .resumeCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeCollector response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resumeCollector()`.
@@ -1450,6 +1665,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('resumeCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1579,7 +1795,37 @@ export class RapidMigrationAssessmentClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.registerCollector(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('registerCollector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('registerCollector request %j', request);
+    return this.innerApiCalls
+      .registerCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('registerCollector response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `registerCollector()`.
@@ -1600,6 +1846,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('registerCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1729,7 +1976,37 @@ export class RapidMigrationAssessmentClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.pauseCollector(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('pauseCollector response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('pauseCollector request %j', request);
+    return this.innerApiCalls
+      .pauseCollector(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.rapidmigrationassessment.v1.ICollector,
+            protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseCollector response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `pauseCollector()`.
@@ -1750,6 +2027,7 @@ export class RapidMigrationAssessmentClient {
       protos.google.cloud.rapidmigrationassessment.v1.OperationMetadata
     >
   > {
+    this._log.info('pauseCollector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1865,7 +2143,33 @@ export class RapidMigrationAssessmentClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCollectors(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
+          | protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+          | null
+          | undefined,
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCollectors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCollectors request %j', request);
+    return this.innerApiCalls
+      .listCollectors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
+          protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
+        ]) => {
+          this._log.info('listCollectors values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1909,6 +2213,7 @@ export class RapidMigrationAssessmentClient {
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCollectors stream %j', request);
     return this.descriptors.page.listCollectors.createStream(
       this.innerApiCalls.listCollectors as GaxCall,
       request,
@@ -1960,6 +2265,7 @@ export class RapidMigrationAssessmentClient {
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCollectors iterate %j', request);
     return this.descriptors.page.listCollectors.asyncIterate(
       this.innerApiCalls['listCollectors'] as GaxCall,
       request as {},
@@ -2421,6 +2727,7 @@ export class RapidMigrationAssessmentClient {
   close(): Promise<void> {
     if (this.rapidMigrationAssessmentStub && !this._terminated) {
       return this.rapidMigrationAssessmentStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

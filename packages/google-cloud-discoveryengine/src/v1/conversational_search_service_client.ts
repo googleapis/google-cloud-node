@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ConversationalSearchServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ConversationalSearchServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -684,7 +687,36 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.converseConversation(request, options, callback);
+    this._log.info('converseConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IConverseConversationResponse,
+          | protos.google.cloud.discoveryengine.v1.IConverseConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('converseConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .converseConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IConverseConversationResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.IConverseConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('converseConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Conversation.
@@ -786,7 +818,36 @@ export class ConversationalSearchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConversation(request, options, callback);
+    this._log.info('createConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IConversation,
+          | protos.google.cloud.discoveryengine.v1.ICreateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IConversation,
+          (
+            | protos.google.cloud.discoveryengine.v1.ICreateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Conversation.
@@ -886,7 +947,36 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConversation(request, options, callback);
+    this._log.info('deleteConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.discoveryengine.v1.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.discoveryengine.v1.IDeleteConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Conversation.
@@ -995,7 +1085,36 @@ export class ConversationalSearchServiceClient {
         'conversation.name': request.conversation!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConversation(request, options, callback);
+    this._log.info('updateConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IConversation,
+          | protos.google.cloud.discoveryengine.v1.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IConversation,
+          (
+            | protos.google.cloud.discoveryengine.v1.IUpdateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Conversation.
@@ -1092,7 +1211,36 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConversation(request, options, callback);
+    this._log.info('getConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IConversation,
+          | protos.google.cloud.discoveryengine.v1.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IConversation,
+          (
+            | protos.google.cloud.discoveryengine.v1.IGetConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Answer query method.
@@ -1247,7 +1395,36 @@ export class ConversationalSearchServiceClient {
         serving_config: request.servingConfig ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.answerQuery(request, options, callback);
+    this._log.info('answerQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAnswerQueryResponse,
+          | protos.google.cloud.discoveryengine.v1.IAnswerQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('answerQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .answerQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IAnswerQueryResponse,
+          (
+            | protos.google.cloud.discoveryengine.v1.IAnswerQueryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('answerQuery response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Answer.
@@ -1338,7 +1515,33 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAnswer(request, options, callback);
+    this._log.info('getAnswer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IAnswer,
+          | protos.google.cloud.discoveryengine.v1.IGetAnswerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnswer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnswer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IAnswer,
+          protos.google.cloud.discoveryengine.v1.IGetAnswerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnswer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Session.
@@ -1434,7 +1637,36 @@ export class ConversationalSearchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSession(request, options, callback);
+    this._log.info('createSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.ISession,
+          | protos.google.cloud.discoveryengine.v1.ICreateSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.ISession,
+          (
+            | protos.google.cloud.discoveryengine.v1.ICreateSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Session.
@@ -1528,7 +1760,36 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSession(request, options, callback);
+    this._log.info('deleteSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.discoveryengine.v1.IDeleteSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.discoveryengine.v1.IDeleteSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Session.
@@ -1630,7 +1891,36 @@ export class ConversationalSearchServiceClient {
         'session.name': request.session!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSession(request, options, callback);
+    this._log.info('updateSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.ISession,
+          | protos.google.cloud.discoveryengine.v1.IUpdateSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.ISession,
+          (
+            | protos.google.cloud.discoveryengine.v1.IUpdateSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Session.
@@ -1721,7 +2011,33 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSession(request, options, callback);
+    this._log.info('getSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.ISession,
+          | protos.google.cloud.discoveryengine.v1.IGetSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.ISession,
+          protos.google.cloud.discoveryengine.v1.IGetSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1840,7 +2156,33 @@ export class ConversationalSearchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListConversationsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IConversation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listConversations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listConversations request %j', request);
+    return this.innerApiCalls
+      .listConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1.IConversation[],
+          protos.google.cloud.discoveryengine.v1.IListConversationsRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListConversationsResponse,
+        ]) => {
+          this._log.info('listConversations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1899,6 +2241,7 @@ export class ConversationalSearchServiceClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
       request,
@@ -1965,6 +2308,7 @@ export class ConversationalSearchServiceClient {
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
@@ -2087,7 +2431,33 @@ export class ConversationalSearchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSessions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListSessionsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.ISession
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSessions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSessions request %j', request);
+    return this.innerApiCalls
+      .listSessions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1.ISession[],
+          protos.google.cloud.discoveryengine.v1.IListSessionsRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListSessionsResponse,
+        ]) => {
+          this._log.info('listSessions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2146,6 +2516,7 @@ export class ConversationalSearchServiceClient {
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
@@ -2212,6 +2583,7 @@ export class ConversationalSearchServiceClient {
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},
@@ -5410,6 +5782,7 @@ export class ConversationalSearchServiceClient {
   close(): Promise<void> {
     if (this.conversationalSearchServiceStub && !this._terminated) {
       return this.conversationalSearchServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

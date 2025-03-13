@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class NetworkSecurityClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('networksecurity');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -98,7 +101,7 @@ export class NetworkSecurityClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -735,11 +738,36 @@ export class NetworkSecurityClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAuthorizationPolicy(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getAuthorizationPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+          | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAuthorizationPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAuthorizationPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+          (
+            | protos.google.cloud.networksecurity.v1.IGetAuthorizationPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAuthorizationPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ServerTlsPolicy.
@@ -836,7 +864,36 @@ export class NetworkSecurityClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServerTlsPolicy(request, options, callback);
+    this._log.info('getServerTlsPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+          | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServerTlsPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServerTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+          (
+            | protos.google.cloud.networksecurity.v1.IGetServerTlsPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServerTlsPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ClientTlsPolicy.
@@ -933,7 +990,36 @@ export class NetworkSecurityClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getClientTlsPolicy(request, options, callback);
+    this._log.info('getClientTlsPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+          | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getClientTlsPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getClientTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+          (
+            | protos.google.cloud.networksecurity.v1.IGetClientTlsPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getClientTlsPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1044,11 +1130,37 @@ export class NetworkSecurityClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAuthorizationPolicy(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAuthorizationPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAuthorizationPolicy request %j', request);
+    return this.innerApiCalls
+      .createAuthorizationPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAuthorizationPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAuthorizationPolicy()`.
@@ -1069,6 +1181,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('createAuthorizationPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1190,11 +1303,37 @@ export class NetworkSecurityClient {
         'authorization_policy.name': request.authorizationPolicy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAuthorizationPolicy(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAuthorizationPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAuthorizationPolicy request %j', request);
+    return this.innerApiCalls
+      .updateAuthorizationPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IAuthorizationPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAuthorizationPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAuthorizationPolicy()`.
@@ -1215,6 +1354,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('updateAuthorizationPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1331,11 +1471,37 @@ export class NetworkSecurityClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAuthorizationPolicy(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAuthorizationPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAuthorizationPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteAuthorizationPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAuthorizationPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAuthorizationPolicy()`.
@@ -1356,6 +1522,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAuthorizationPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1478,7 +1645,37 @@ export class NetworkSecurityClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createServerTlsPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createServerTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createServerTlsPolicy request %j', request);
+    return this.innerApiCalls
+      .createServerTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createServerTlsPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createServerTlsPolicy()`.
@@ -1499,6 +1696,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('createServerTlsPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1621,7 +1819,37 @@ export class NetworkSecurityClient {
         'server_tls_policy.name': request.serverTlsPolicy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateServerTlsPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateServerTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateServerTlsPolicy request %j', request);
+    return this.innerApiCalls
+      .updateServerTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IServerTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateServerTlsPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateServerTlsPolicy()`.
@@ -1642,6 +1870,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('updateServerTlsPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1758,7 +1987,37 @@ export class NetworkSecurityClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteServerTlsPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteServerTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteServerTlsPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteServerTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteServerTlsPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteServerTlsPolicy()`.
@@ -1779,6 +2038,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteServerTlsPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1901,7 +2161,37 @@ export class NetworkSecurityClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createClientTlsPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createClientTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createClientTlsPolicy request %j', request);
+    return this.innerApiCalls
+      .createClientTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createClientTlsPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createClientTlsPolicy()`.
@@ -1922,6 +2212,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('createClientTlsPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2044,7 +2335,37 @@ export class NetworkSecurityClient {
         'client_tls_policy.name': request.clientTlsPolicy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateClientTlsPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateClientTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateClientTlsPolicy request %j', request);
+    return this.innerApiCalls
+      .updateClientTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1.IClientTlsPolicy,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateClientTlsPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateClientTlsPolicy()`.
@@ -2065,6 +2386,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('updateClientTlsPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2181,7 +2503,37 @@ export class NetworkSecurityClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteClientTlsPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteClientTlsPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteClientTlsPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteClientTlsPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteClientTlsPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteClientTlsPolicy()`.
@@ -2202,6 +2554,7 @@ export class NetworkSecurityClient {
       protos.google.cloud.networksecurity.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteClientTlsPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2317,11 +2670,33 @@ export class NetworkSecurityClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAuthorizationPolicies(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest,
+          | protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.IAuthorizationPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAuthorizationPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAuthorizationPolicies request %j', request);
+    return this.innerApiCalls
+      .listAuthorizationPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.IAuthorizationPolicy[],
+          protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesRequest | null,
+          protos.google.cloud.networksecurity.v1.IListAuthorizationPoliciesResponse,
+        ]) => {
+          this._log.info('listAuthorizationPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2365,6 +2740,7 @@ export class NetworkSecurityClient {
     const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAuthorizationPolicies stream %j', request);
     return this.descriptors.page.listAuthorizationPolicies.createStream(
       this.innerApiCalls.listAuthorizationPolicies as GaxCall,
       request,
@@ -2416,6 +2792,7 @@ export class NetworkSecurityClient {
     const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAuthorizationPolicies iterate %j', request);
     return this.descriptors.page.listAuthorizationPolicies.asyncIterate(
       this.innerApiCalls['listAuthorizationPolicies'] as GaxCall,
       request as {},
@@ -2521,7 +2898,33 @@ export class NetworkSecurityClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServerTlsPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest,
+          | protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.IServerTlsPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServerTlsPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServerTlsPolicies request %j', request);
+    return this.innerApiCalls
+      .listServerTlsPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.IServerTlsPolicy[],
+          protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesRequest | null,
+          protos.google.cloud.networksecurity.v1.IListServerTlsPoliciesResponse,
+        ]) => {
+          this._log.info('listServerTlsPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2564,6 +2967,7 @@ export class NetworkSecurityClient {
     const defaultCallSettings = this._defaults['listServerTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServerTlsPolicies stream %j', request);
     return this.descriptors.page.listServerTlsPolicies.createStream(
       this.innerApiCalls.listServerTlsPolicies as GaxCall,
       request,
@@ -2614,6 +3018,7 @@ export class NetworkSecurityClient {
     const defaultCallSettings = this._defaults['listServerTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServerTlsPolicies iterate %j', request);
     return this.descriptors.page.listServerTlsPolicies.asyncIterate(
       this.innerApiCalls['listServerTlsPolicies'] as GaxCall,
       request as {},
@@ -2719,7 +3124,33 @@ export class NetworkSecurityClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listClientTlsPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest,
+          | protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1.IClientTlsPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listClientTlsPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listClientTlsPolicies request %j', request);
+    return this.innerApiCalls
+      .listClientTlsPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1.IClientTlsPolicy[],
+          protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesRequest | null,
+          protos.google.cloud.networksecurity.v1.IListClientTlsPoliciesResponse,
+        ]) => {
+          this._log.info('listClientTlsPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2762,6 +3193,7 @@ export class NetworkSecurityClient {
     const defaultCallSettings = this._defaults['listClientTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listClientTlsPolicies stream %j', request);
     return this.descriptors.page.listClientTlsPolicies.createStream(
       this.innerApiCalls.listClientTlsPolicies as GaxCall,
       request,
@@ -2812,6 +3244,7 @@ export class NetworkSecurityClient {
     const defaultCallSettings = this._defaults['listClientTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listClientTlsPolicies iterate %j', request);
     return this.descriptors.page.listClientTlsPolicies.asyncIterate(
       this.innerApiCalls['listClientTlsPolicies'] as GaxCall,
       request as {},
@@ -3450,6 +3883,7 @@ export class NetworkSecurityClient {
   close(): Promise<void> {
     if (this.networkSecurityStub && !this._terminated) {
       return this.networkSecurityStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

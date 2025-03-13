@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SipTrunksClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class SipTrunksClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -622,7 +625,36 @@ export class SipTrunksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSipTrunk(request, options, callback);
+    this._log.info('createSipTrunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateSipTrunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSipTrunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSipTrunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ICreateSipTrunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSipTrunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a specified SipTrunk.
@@ -714,7 +746,36 @@ export class SipTrunksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSipTrunk(request, options, callback);
+    this._log.info('deleteSipTrunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2beta1.IDeleteSipTrunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSipTrunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSipTrunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IDeleteSipTrunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSipTrunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified SipTrunk.
@@ -806,7 +867,36 @@ export class SipTrunksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSipTrunk(request, options, callback);
+    this._log.info('getSipTrunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk,
+          | protos.google.cloud.dialogflow.v2beta1.IGetSipTrunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSipTrunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSipTrunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGetSipTrunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSipTrunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified SipTrunk.
@@ -899,7 +989,36 @@ export class SipTrunksClient {
         'sip_trunk.name': request.sipTrunk!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSipTrunk(request, options, callback);
+    this._log.info('updateSipTrunk request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateSipTrunkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSipTrunk response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSipTrunk(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IUpdateSipTrunkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSipTrunk response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -999,7 +1118,33 @@ export class SipTrunksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSipTrunks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListSipTrunksRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListSipTrunksResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSipTrunks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSipTrunks request %j', request);
+    return this.innerApiCalls
+      .listSipTrunks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.ISipTrunk[],
+          protos.google.cloud.dialogflow.v2beta1.IListSipTrunksRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListSipTrunksResponse,
+        ]) => {
+          this._log.info('listSipTrunks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1040,6 +1185,7 @@ export class SipTrunksClient {
     const defaultCallSettings = this._defaults['listSipTrunks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSipTrunks stream %j', request);
     return this.descriptors.page.listSipTrunks.createStream(
       this.innerApiCalls.listSipTrunks as GaxCall,
       request,
@@ -1088,6 +1234,7 @@ export class SipTrunksClient {
     const defaultCallSettings = this._defaults['listSipTrunks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSipTrunks iterate %j', request);
     return this.descriptors.page.listSipTrunks.asyncIterate(
       this.innerApiCalls['listSipTrunks'] as GaxCall,
       request as {},
@@ -3691,6 +3838,7 @@ export class SipTrunksClient {
   close(): Promise<void> {
     if (this.sipTrunksStub && !this._terminated) {
       return this.sipTrunksStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

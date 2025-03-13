@@ -29,8 +29,6 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the DataTaxonomy:
-   *  projects/{project_number}/locations/{location_id}/dataTaxonomies/{data_taxonomy_id}
    */
   // const name = 'abc123'
 

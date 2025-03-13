@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class EnvironmentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('orchestration-airflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class EnvironmentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -635,7 +638,36 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEnvironment(request, options, callback);
+    this._log.info('getEnvironment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IEnvironment,
+          | protos.google.cloud.orchestration.airflow.service.v1.IGetEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEnvironment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IEnvironment,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IGetEnvironmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEnvironment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Executes Airflow CLI command.
@@ -741,7 +773,36 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.executeAirflowCommand(request, options, callback);
+    this._log.info('executeAirflowCommand request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('executeAirflowCommand response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .executeAirflowCommand(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandResponse,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IExecuteAirflowCommandRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('executeAirflowCommand response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Stops Airflow CLI command execution.
@@ -847,7 +908,36 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopAirflowCommand(request, options, callback);
+    this._log.info('stopAirflowCommand request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('stopAirflowCommand response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .stopAirflowCommand(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandResponse,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IStopAirflowCommandRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('stopAirflowCommand response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Polls Airflow CLI command execution and fetches logs.
@@ -952,13 +1042,42 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.pollAirflowCommand(request, options, callback);
+    this._log.info('pollAirflowCommand request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pollAirflowCommand response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pollAirflowCommand(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandResponse,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IPollAirflowCommandRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pollAirflowCommand response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a user workloads Secret.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1054,18 +1173,43 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createUserWorkloadsSecret(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createUserWorkloadsSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUserWorkloadsSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUserWorkloadsSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUserWorkloadsSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an existing user workloads Secret.
    * Values of the "data" field in the response are cleared.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1159,17 +1303,42 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getUserWorkloadsSecret(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getUserWorkloadsSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUserWorkloadsSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUserWorkloadsSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUserWorkloadsSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a user workloads Secret.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1262,17 +1431,42 @@ export class EnvironmentsClient {
         'user_workloads_secret.name': request.userWorkloadsSecret!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateUserWorkloadsSecret(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateUserWorkloadsSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUserWorkloadsSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUserWorkloadsSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUserWorkloadsSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a user workloads Secret.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1366,17 +1560,42 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteUserWorkloadsSecret(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteUserWorkloadsSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUserWorkloadsSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUserWorkloadsSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsSecretRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUserWorkloadsSecret response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1472,17 +1691,42 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createUserWorkloadsConfigMap(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createUserWorkloadsConfigMap request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUserWorkloadsConfigMap response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUserWorkloadsConfigMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.ICreateUserWorkloadsConfigMapRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUserWorkloadsConfigMap response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an existing user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1576,17 +1820,42 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getUserWorkloadsConfigMap(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getUserWorkloadsConfigMap request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUserWorkloadsConfigMap response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUserWorkloadsConfigMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IGetUserWorkloadsConfigMapRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUserWorkloadsConfigMap response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1680,17 +1949,42 @@ export class EnvironmentsClient {
           request.userWorkloadsConfigMap!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateUserWorkloadsConfigMap(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateUserWorkloadsConfigMap request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUserWorkloadsConfigMap response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUserWorkloadsConfigMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IUpdateUserWorkloadsConfigMapRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUserWorkloadsConfigMap response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1784,11 +2078,36 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteUserWorkloadsConfigMap(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteUserWorkloadsConfigMap request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUserWorkloadsConfigMap response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUserWorkloadsConfigMap(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IDeleteUserWorkloadsConfigMapRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUserWorkloadsConfigMap response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches database properties.
@@ -1885,11 +2204,36 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fetchDatabaseProperties(
-      request,
-      options,
-      callback
-    );
+    this._log.info('fetchDatabaseProperties request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+          | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchDatabaseProperties response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchDatabaseProperties(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesResponse,
+          (
+            | protos.google.cloud.orchestration.airflow.service.v1.IFetchDatabasePropertiesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchDatabaseProperties response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1995,7 +2339,37 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEnvironment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IEnvironment,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEnvironment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEnvironment request %j', request);
+    return this.innerApiCalls
+      .createEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IEnvironment,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEnvironment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEnvironment()`.
@@ -2016,6 +2390,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('createEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2259,7 +2634,37 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEnvironment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IEnvironment,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEnvironment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEnvironment request %j', request);
+    return this.innerApiCalls
+      .updateEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IEnvironment,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEnvironment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEnvironment()`.
@@ -2280,6 +2685,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2396,7 +2802,37 @@ export class EnvironmentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEnvironment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEnvironment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEnvironment request %j', request);
+    return this.innerApiCalls
+      .deleteEnvironment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEnvironment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEnvironment()`.
@@ -2417,6 +2853,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2561,7 +2998,37 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkUpgrade(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('checkUpgrade response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('checkUpgrade request %j', request);
+    return this.innerApiCalls
+      .checkUpgrade(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('checkUpgrade response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `checkUpgrade()`.
@@ -2582,6 +3049,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('checkUpgrade long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2704,7 +3172,37 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.saveSnapshot(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('saveSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('saveSnapshot request %j', request);
+    return this.innerApiCalls
+      .saveSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ISaveSnapshotResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('saveSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `saveSnapshot()`.
@@ -2725,6 +3223,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('saveSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2859,7 +3358,37 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.loadSnapshot(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('loadSnapshot response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('loadSnapshot request %j', request);
+    return this.innerApiCalls
+      .loadSnapshot(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ILoadSnapshotResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('loadSnapshot response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `loadSnapshot()`.
@@ -2880,6 +3409,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('loadSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2996,7 +3526,37 @@ export class EnvironmentsClient {
         environment: request.environment ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.databaseFailover(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('databaseFailover response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('databaseFailover request %j', request);
+    return this.innerApiCalls
+      .databaseFailover(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.IDatabaseFailoverResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('databaseFailover response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `databaseFailover()`.
@@ -3017,6 +3577,7 @@ export class EnvironmentsClient {
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >
   > {
+    this._log.info('databaseFailover long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3128,7 +3689,33 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEnvironments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListEnvironmentsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListEnvironmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IEnvironment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEnvironments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEnvironments request %j', request);
+    return this.innerApiCalls
+      .listEnvironments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IEnvironment[],
+          protos.google.cloud.orchestration.airflow.service.v1.IListEnvironmentsRequest | null,
+          protos.google.cloud.orchestration.airflow.service.v1.IListEnvironmentsResponse,
+        ]) => {
+          this._log.info('listEnvironments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3168,6 +3755,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEnvironments stream %j', request);
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as GaxCall,
       request,
@@ -3215,6 +3803,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEnvironments iterate %j', request);
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
       request as {},
@@ -3329,7 +3918,33 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWorkloads(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkloads values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkloads request %j', request);
+    return this.innerApiCalls
+      .listWorkloads(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.IComposerWorkload[],
+          protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest | null,
+          protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsResponse,
+        ]) => {
+          this._log.info('listWorkloads values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3377,6 +3992,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
       request,
@@ -3432,6 +4048,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
       request as {},
@@ -3442,7 +4059,7 @@ export class EnvironmentsClient {
    * Lists user workloads Secrets.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3538,11 +4155,33 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listUserWorkloadsSecrets(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUserWorkloadsSecrets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUserWorkloadsSecrets request %j', request);
+    return this.innerApiCalls
+      .listUserWorkloadsSecrets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsSecret[],
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest | null,
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsResponse,
+        ]) => {
+          this._log.info('listUserWorkloadsSecrets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3583,6 +4222,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUserWorkloadsSecrets stream %j', request);
     return this.descriptors.page.listUserWorkloadsSecrets.createStream(
       this.innerApiCalls.listUserWorkloadsSecrets as GaxCall,
       request,
@@ -3631,6 +4271,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUserWorkloadsSecrets iterate %j', request);
     return this.descriptors.page.listUserWorkloadsSecrets.asyncIterate(
       this.innerApiCalls['listUserWorkloadsSecrets'] as GaxCall,
       request as {},
@@ -3641,7 +4282,7 @@ export class EnvironmentsClient {
    * Lists user workloads ConfigMaps.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3737,11 +4378,33 @@ export class EnvironmentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listUserWorkloadsConfigMaps(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUserWorkloadsConfigMaps values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUserWorkloadsConfigMaps request %j', request);
+    return this.innerApiCalls
+      .listUserWorkloadsConfigMaps(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IUserWorkloadsConfigMap[],
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest | null,
+          protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsResponse,
+        ]) => {
+          this._log.info('listUserWorkloadsConfigMaps values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3782,6 +4445,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUserWorkloadsConfigMaps stream %j', request);
     return this.descriptors.page.listUserWorkloadsConfigMaps.createStream(
       this.innerApiCalls.listUserWorkloadsConfigMaps as GaxCall,
       request,
@@ -3830,6 +4494,7 @@ export class EnvironmentsClient {
     const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUserWorkloadsConfigMaps iterate %j', request);
     return this.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate(
       this.innerApiCalls['listUserWorkloadsConfigMaps'] as GaxCall,
       request as {},
@@ -4285,6 +4950,7 @@ export class EnvironmentsClient {
   close(): Promise<void> {
     if (this.environmentsStub && !this._terminated) {
       return this.environmentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

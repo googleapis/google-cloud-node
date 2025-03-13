@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -66,6 +67,8 @@ export class GrafeasClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('grafeas');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -100,7 +103,7 @@ export class GrafeasClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -501,7 +504,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOccurrence(request, options, callback);
+    this._log.info('getOccurrence request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IGetOccurrenceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOccurrence response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOccurrence(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IGetOccurrenceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getOccurrence response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified occurrence. For example, use this method to delete an
@@ -586,7 +613,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteOccurrence(request, options, callback);
+    this._log.info('deleteOccurrence request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteOccurrenceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteOccurrence response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteOccurrence(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteOccurrenceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOccurrence response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new occurrence.
@@ -671,7 +722,31 @@ export class GrafeasClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createOccurrence(request, options, callback);
+    this._log.info('createOccurrence request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.ICreateOccurrenceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createOccurrence response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createOccurrence(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.ICreateOccurrenceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createOccurrence response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates new occurrences in batch.
@@ -756,11 +831,31 @@ export class GrafeasClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateOccurrences(
-      request,
-      options,
-      callback
-    );
+    this._log.info('batchCreateOccurrences request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+          protos.grafeas.v1.IBatchCreateOccurrencesRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateOccurrences response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateOccurrences(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.IBatchCreateOccurrencesResponse,
+          protos.grafeas.v1.IBatchCreateOccurrencesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateOccurrences response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified occurrence.
@@ -847,7 +942,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateOccurrence(request, options, callback);
+    this._log.info('updateOccurrence request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IUpdateOccurrenceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateOccurrence response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateOccurrence(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.IOccurrence,
+          protos.grafeas.v1.IUpdateOccurrenceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateOccurrence response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the note attached to the specified occurrence. Consumer projects can
@@ -931,7 +1050,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOccurrenceNote(request, options, callback);
+    this._log.info('getOccurrenceNote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetOccurrenceNoteRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOccurrenceNote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOccurrenceNote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetOccurrenceNoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getOccurrenceNote response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the specified note.
@@ -1014,7 +1157,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNote(request, options, callback);
+    this._log.info('getNote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetNoteRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IGetNoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNote response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified note.
@@ -1097,7 +1264,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNote(request, options, callback);
+    this._log.info('deleteNote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteNoteRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteNote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteNote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.grafeas.v1.IDeleteNoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNote response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new note.
@@ -1184,7 +1375,31 @@ export class GrafeasClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNote(request, options, callback);
+    this._log.info('createNote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.ICreateNoteRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.ICreateNoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNote response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates new notes in batch.
@@ -1269,7 +1484,31 @@ export class GrafeasClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateNotes(request, options, callback);
+    this._log.info('batchCreateNotes request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.IBatchCreateNotesResponse,
+          protos.grafeas.v1.IBatchCreateNotesRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateNotes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateNotes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.IBatchCreateNotesResponse,
+          protos.grafeas.v1.IBatchCreateNotesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateNotes response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified note.
@@ -1356,7 +1595,31 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNote(request, options, callback);
+    this._log.info('updateNote request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IUpdateNoteRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNote response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNote(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.grafeas.v1.INote,
+          protos.grafeas.v1.IUpdateNoteRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNote response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1450,11 +1713,35 @@ export class GrafeasClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOccurrences(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.grafeas.v1.IListOccurrencesRequest,
+          protos.grafeas.v1.IListOccurrencesResponse | null | undefined,
+          protos.grafeas.v1.IOccurrence
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOccurrences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOccurrences request %j', request);
+    return this.innerApiCalls
+      .listOccurrences(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.grafeas.v1.IOccurrence[],
+          protos.grafeas.v1.IListOccurrencesRequest | null,
+          protos.grafeas.v1.IListOccurrencesResponse,
+        ]) => {
+          this._log.info('listOccurrences values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOccurrences`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1493,6 +1780,7 @@ export class GrafeasClient {
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOccurrences stream %j', request);
     return this.descriptors.page.listOccurrences.createStream(
       this.innerApiCalls.listOccurrences as GaxCall,
       request,
@@ -1543,6 +1831,7 @@ export class GrafeasClient {
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOccurrences iterate %j', request);
     return this.descriptors.page.listOccurrences.asyncIterate(
       this.innerApiCalls['listOccurrences'] as GaxCall,
       request as {},
@@ -1640,11 +1929,35 @@ export class GrafeasClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNotes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.grafeas.v1.IListNotesRequest,
+          protos.grafeas.v1.IListNotesResponse | null | undefined,
+          protos.grafeas.v1.INote
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotes request %j', request);
+    return this.innerApiCalls
+      .listNotes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.grafeas.v1.INote[],
+          protos.grafeas.v1.IListNotesRequest | null,
+          protos.grafeas.v1.IListNotesResponse,
+        ]) => {
+          this._log.info('listNotes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1683,6 +1996,7 @@ export class GrafeasClient {
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotes stream %j', request);
     return this.descriptors.page.listNotes.createStream(
       this.innerApiCalls.listNotes as GaxCall,
       request,
@@ -1733,6 +2047,7 @@ export class GrafeasClient {
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotes iterate %j', request);
     return this.descriptors.page.listNotes.asyncIterate(
       this.innerApiCalls['listNotes'] as GaxCall,
       request as {},
@@ -1831,11 +2146,35 @@ export class GrafeasClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNoteOccurrences(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.grafeas.v1.IListNoteOccurrencesRequest,
+          protos.grafeas.v1.IListNoteOccurrencesResponse | null | undefined,
+          protos.grafeas.v1.IOccurrence
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNoteOccurrences values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNoteOccurrences request %j', request);
+    return this.innerApiCalls
+      .listNoteOccurrences(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.grafeas.v1.IOccurrence[],
+          protos.grafeas.v1.IListNoteOccurrencesRequest | null,
+          protos.grafeas.v1.IListNoteOccurrencesResponse,
+        ]) => {
+          this._log.info('listNoteOccurrences values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNoteOccurrences`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -1873,6 +2212,7 @@ export class GrafeasClient {
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNoteOccurrences stream %j', request);
     return this.descriptors.page.listNoteOccurrences.createStream(
       this.innerApiCalls.listNoteOccurrences as GaxCall,
       request,
@@ -1922,6 +2262,7 @@ export class GrafeasClient {
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNoteOccurrences iterate %j', request);
     return this.descriptors.page.listNoteOccurrences.asyncIterate(
       this.innerApiCalls['listNoteOccurrences'] as GaxCall,
       request as {},
@@ -2038,6 +2379,7 @@ export class GrafeasClient {
   close(): Promise<void> {
     if (this.grafeasStub && !this._terminated) {
       return this.grafeasStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

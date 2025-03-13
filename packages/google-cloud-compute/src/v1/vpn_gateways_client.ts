@@ -30,6 +30,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class VpnGatewaysClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('compute');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class VpnGatewaysClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -487,9 +490,24 @@ export class VpnGatewaysClient {
         vpn_gateway: request.vpnGateway ?? '',
       });
     this.initialize();
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteVpnGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('delete response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
+      .delete(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -597,7 +615,33 @@ export class VpnGatewaysClient {
         vpn_gateway: request.vpnGateway ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IVpnGateway,
+          | protos.google.cloud.compute.v1.IGetVpnGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IVpnGateway,
+          protos.google.cloud.compute.v1.IGetVpnGatewayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the status for the specified VPN gateway.
@@ -693,7 +737,36 @@ export class VpnGatewaysClient {
         vpn_gateway: request.vpnGateway ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getStatus(request, options, callback);
+    this._log.info('getStatus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IVpnGatewaysGetStatusResponse,
+          | protos.google.cloud.compute.v1.IGetStatusVpnGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getStatus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IVpnGatewaysGetStatusResponse,
+          (
+            | protos.google.cloud.compute.v1.IGetStatusVpnGatewayRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getStatus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a VPN gateway in the specified project and region using the data included in the request.
@@ -795,9 +868,24 @@ export class VpnGatewaysClient {
         region: request.region ?? '',
       });
     this.initialize();
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IInsertVpnGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('insert response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
+      .insert(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -920,9 +1008,24 @@ export class VpnGatewaysClient {
         resource: request.resource ?? '',
       });
     this.initialize();
+    this._log.info('setLabels request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetLabelsVpnGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setLabels response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
     return this.innerApiCalls
-      .setLabels(request, options, callback)
-      .then(
+      .setLabels(request, options, wrappedCallback)
+      ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
@@ -1044,7 +1147,36 @@ export class VpnGatewaysClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          | protos.google.cloud.compute.v1.ITestIamPermissionsVpnGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          (
+            | protos.google.cloud.compute.v1.ITestIamPermissionsVpnGatewayRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1098,6 +1230,7 @@ export class VpnGatewaysClient {
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
@@ -1202,7 +1335,31 @@ export class VpnGatewaysClient {
         region: request.region ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListVpnGatewaysRequest,
+          protos.google.cloud.compute.v1.IVpnGatewayList | null | undefined,
+          protos.google.cloud.compute.v1.IVpnGateway
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('list values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('list request %j', request);
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.IVpnGateway[],
+          protos.google.cloud.compute.v1.IListVpnGatewaysRequest | null,
+          protos.google.cloud.compute.v1.IVpnGatewayList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1250,6 +1407,7 @@ export class VpnGatewaysClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
@@ -1305,6 +1463,7 @@ export class VpnGatewaysClient {
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
@@ -1321,6 +1480,7 @@ export class VpnGatewaysClient {
   close(): Promise<void> {
     if (this.vpnGatewaysStub && !this._terminated) {
       return this.vpnGatewaysStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

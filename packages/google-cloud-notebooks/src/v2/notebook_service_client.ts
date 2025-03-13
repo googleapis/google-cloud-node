@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class NotebookServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('notebooks');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class NotebookServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -656,7 +659,33 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInstance(request, options, callback);
+    this._log.info('getInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.notebooks.v2.IInstance,
+          | protos.google.cloud.notebooks.v2.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.notebooks.v2.IInstance,
+          protos.google.cloud.notebooks.v2.IGetInstanceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Checks whether a notebook instance is upgradable.
@@ -753,11 +782,36 @@ export class NotebookServiceClient {
         notebook_instance: request.notebookInstance ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkInstanceUpgradability(
-      request,
-      options,
-      callback
-    );
+    this._log.info('checkInstanceUpgradability request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.notebooks.v2.ICheckInstanceUpgradabilityResponse,
+          | protos.google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkInstanceUpgradability response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkInstanceUpgradability(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.notebooks.v2.ICheckInstanceUpgradabilityResponse,
+          (
+            | protos.google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkInstanceUpgradability response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -867,7 +921,37 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInstance request %j', request);
+    return this.innerApiCalls
+      .createInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInstance()`.
@@ -888,6 +972,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1007,7 +1092,37 @@ export class NotebookServiceClient {
         'instance.name': request.instance!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInstance()`.
@@ -1028,6 +1143,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1146,7 +1262,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInstance request %j', request);
+    return this.innerApiCalls
+      .deleteInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInstance()`.
@@ -1167,6 +1313,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('deleteInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1283,7 +1430,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startInstance request %j', request);
+    return this.innerApiCalls
+      .startInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startInstance()`.
@@ -1304,6 +1481,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('startInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1420,7 +1598,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopInstance request %j', request);
+    return this.innerApiCalls
+      .stopInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopInstance()`.
@@ -1441,6 +1649,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('stopInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1557,7 +1766,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resetInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resetInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resetInstance request %j', request);
+    return this.innerApiCalls
+      .resetInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resetInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resetInstance()`.
@@ -1578,6 +1817,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('resetInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1694,7 +1934,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.upgradeInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('upgradeInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('upgradeInstance request %j', request);
+    return this.innerApiCalls
+      .upgradeInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('upgradeInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `upgradeInstance()`.
@@ -1715,6 +1985,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('upgradeInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1836,7 +2107,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rollbackInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rollbackInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rollbackInstance request %j', request);
+    return this.innerApiCalls
+      .rollbackInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `rollbackInstance()`.
@@ -1857,6 +2158,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('rollbackInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1977,7 +2279,37 @@ export class NotebookServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.diagnoseInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('diagnoseInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('diagnoseInstance request %j', request);
+    return this.innerApiCalls
+      .diagnoseInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.notebooks.v2.IInstance,
+            protos.google.cloud.notebooks.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('diagnoseInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `diagnoseInstance()`.
@@ -1998,6 +2330,7 @@ export class NotebookServiceClient {
       protos.google.cloud.notebooks.v2.OperationMetadata
     >
   > {
+    this._log.info('diagnoseInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2115,7 +2448,33 @@ export class NotebookServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.notebooks.v2.IListInstancesRequest,
+          | protos.google.cloud.notebooks.v2.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.notebooks.v2.IInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.notebooks.v2.IInstance[],
+          protos.google.cloud.notebooks.v2.IListInstancesRequest | null,
+          protos.google.cloud.notebooks.v2.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2161,6 +2520,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -2214,6 +2574,7 @@ export class NotebookServiceClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -2781,6 +3142,7 @@ export class NotebookServiceClient {
   close(): Promise<void> {
     if (this.notebookServiceStub && !this._terminated) {
       return this.notebookServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
