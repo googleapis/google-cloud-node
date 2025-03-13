@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -65,6 +66,8 @@ export class AccessContextManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('access-context-manager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -100,7 +103,7 @@ export class AccessContextManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -767,7 +770,36 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAccessPolicy(request, options, callback);
+    this._log.info('getAccessPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+          | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccessPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccessPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+          (
+            | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccessPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an [access level]
@@ -878,7 +910,36 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAccessLevel(request, options, callback);
+    this._log.info('getAccessLevel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+          | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccessLevel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccessLevel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+          (
+            | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccessLevel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a [service perimeter]
@@ -980,7 +1041,36 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServicePerimeter(request, options, callback);
+    this._log.info('getServicePerimeter request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+          | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServicePerimeter response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServicePerimeter(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+          (
+            | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServicePerimeter response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the [GcpUserAccessBinding]
@@ -1078,11 +1168,36 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getGcpUserAccessBinding(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getGcpUserAccessBinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+          | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGcpUserAccessBinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGcpUserAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+          (
+            | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getGcpUserAccessBinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the IAM policy for the specified Access Context Manager
@@ -1181,7 +1296,31 @@ export class AccessContextManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAM policy for the specified Access Context Manager
@@ -1268,7 +1407,31 @@ export class AccessContextManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the IAM permissions that the caller has on the specified Access
@@ -1361,7 +1524,31 @@ export class AccessContextManagerClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1495,7 +1682,37 @@ export class AccessContextManagerClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.createAccessPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAccessPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAccessPolicy request %j', request);
+    return this.innerApiCalls
+      .createAccessPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAccessPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAccessPolicy()`.
@@ -1516,6 +1733,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('createAccessPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1638,7 +1856,37 @@ export class AccessContextManagerClient {
         'policy.name': request.policy!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAccessPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAccessPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAccessPolicy request %j', request);
+    return this.innerApiCalls
+      .updateAccessPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessPolicy,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccessPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAccessPolicy()`.
@@ -1659,6 +1907,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('updateAccessPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1780,7 +2029,37 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAccessPolicy(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAccessPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAccessPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteAccessPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAccessPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAccessPolicy()`.
@@ -1801,6 +2080,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('deleteAccessPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1931,7 +2211,37 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAccessLevel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAccessLevel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAccessLevel request %j', request);
+    return this.innerApiCalls
+      .createAccessLevel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAccessLevel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAccessLevel()`.
@@ -1952,6 +2262,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('createAccessLevel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2080,7 +2391,37 @@ export class AccessContextManagerClient {
         'access_level.name': request.accessLevel!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAccessLevel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAccessLevel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAccessLevel request %j', request);
+    return this.innerApiCalls
+      .updateAccessLevel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IAccessLevel,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccessLevel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateAccessLevel()`.
@@ -2101,6 +2442,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('updateAccessLevel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2225,7 +2567,37 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAccessLevel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAccessLevel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAccessLevel request %j', request);
+    return this.innerApiCalls
+      .deleteAccessLevel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAccessLevel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAccessLevel()`.
@@ -2246,6 +2618,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('deleteAccessLevel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2396,7 +2769,37 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.replaceAccessLevels(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('replaceAccessLevels response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('replaceAccessLevels request %j', request);
+    return this.innerApiCalls
+      .replaceAccessLevels(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IReplaceAccessLevelsResponse,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('replaceAccessLevels response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `replaceAccessLevels()`.
@@ -2417,6 +2820,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('replaceAccessLevels long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2548,11 +2952,37 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createServicePerimeter(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createServicePerimeter response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createServicePerimeter request %j', request);
+    return this.innerApiCalls
+      .createServicePerimeter(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createServicePerimeter response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createServicePerimeter()`.
@@ -2573,6 +3003,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('createServicePerimeter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2698,11 +3129,37 @@ export class AccessContextManagerClient {
         'service_perimeter.name': request.servicePerimeter!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateServicePerimeter(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateServicePerimeter response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateServicePerimeter request %j', request);
+    return this.innerApiCalls
+      .updateServicePerimeter(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IServicePerimeter,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateServicePerimeter response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateServicePerimeter()`.
@@ -2723,6 +3180,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('updateServicePerimeter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2847,11 +3305,37 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteServicePerimeter(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteServicePerimeter response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteServicePerimeter request %j', request);
+    return this.innerApiCalls
+      .deleteServicePerimeter(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteServicePerimeter response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteServicePerimeter()`.
@@ -2872,6 +3356,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('deleteServicePerimeter long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3018,11 +3503,37 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.replaceServicePerimeters(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('replaceServicePerimeters response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('replaceServicePerimeters request %j', request);
+    return this.innerApiCalls
+      .replaceServicePerimeters(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IReplaceServicePerimetersResponse,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('replaceServicePerimeters response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `replaceServicePerimeters()`.
@@ -3043,6 +3554,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('replaceServicePerimeters long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3186,11 +3698,37 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.commitServicePerimeters(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('commitServicePerimeters response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('commitServicePerimeters request %j', request);
+    return this.innerApiCalls
+      .commitServicePerimeters(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.ICommitServicePerimetersResponse,
+            protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('commitServicePerimeters response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `commitServicePerimeters()`.
@@ -3211,6 +3749,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.AccessContextManagerOperationMetadata
     >
   > {
+    this._log.info('commitServicePerimeters long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3338,11 +3877,37 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createGcpUserAccessBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createGcpUserAccessBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createGcpUserAccessBinding request %j', request);
+    return this.innerApiCalls
+      .createGcpUserAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGcpUserAccessBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createGcpUserAccessBinding()`.
@@ -3363,6 +3928,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
     >
   > {
+    this._log.info('createGcpUserAccessBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3491,11 +4057,37 @@ export class AccessContextManagerClient {
           request.gcpUserAccessBinding!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateGcpUserAccessBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateGcpUserAccessBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateGcpUserAccessBinding request %j', request);
+    return this.innerApiCalls
+      .updateGcpUserAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding,
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGcpUserAccessBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateGcpUserAccessBinding()`.
@@ -3516,6 +4108,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
     >
   > {
+    this._log.info('updateGcpUserAccessBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3635,11 +4228,37 @@ export class AccessContextManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteGcpUserAccessBinding(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteGcpUserAccessBinding response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteGcpUserAccessBinding request %j', request);
+    return this.innerApiCalls
+      .deleteGcpUserAccessBinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGcpUserAccessBinding response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteGcpUserAccessBinding()`.
@@ -3660,6 +4279,7 @@ export class AccessContextManagerClient {
       protos.google.identity.accesscontextmanager.v1.GcpUserAccessBindingOperationMetadata
     >
   > {
+    this._log.info('deleteGcpUserAccessBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3773,7 +4393,33 @@ export class AccessContextManagerClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listAccessPolicies(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
+          | protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+          | null
+          | undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccessPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccessPolicies request %j', request);
+    return this.innerApiCalls
+      .listAccessPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
+          protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
+        ]) => {
+          this._log.info('listAccessPolicies values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3813,6 +4459,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listAccessPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAccessPolicies stream %j', request);
     return this.descriptors.page.listAccessPolicies.createStream(
       this.innerApiCalls.listAccessPolicies as GaxCall,
       request,
@@ -3860,6 +4507,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listAccessPolicies'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAccessPolicies iterate %j', request);
     return this.descriptors.page.listAccessPolicies.asyncIterate(
       this.innerApiCalls['listAccessPolicies'] as GaxCall,
       request as {},
@@ -3975,7 +4623,33 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAccessLevels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
+          | protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+          | null
+          | undefined,
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAccessLevels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAccessLevels request %j', request);
+    return this.innerApiCalls
+      .listAccessLevels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
+          protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
+        ]) => {
+          this._log.info('listAccessLevels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4026,6 +4700,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listAccessLevels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAccessLevels stream %j', request);
     return this.descriptors.page.listAccessLevels.createStream(
       this.innerApiCalls.listAccessLevels as GaxCall,
       request,
@@ -4084,6 +4759,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listAccessLevels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAccessLevels iterate %j', request);
     return this.descriptors.page.listAccessLevels.asyncIterate(
       this.innerApiCalls['listAccessLevels'] as GaxCall,
       request as {},
@@ -4195,7 +4871,33 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServicePerimeters(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
+          | protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+          | null
+          | undefined,
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServicePerimeters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServicePerimeters request %j', request);
+    return this.innerApiCalls
+      .listServicePerimeters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
+          protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
+        ]) => {
+          this._log.info('listServicePerimeters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4242,6 +4944,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listServicePerimeters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServicePerimeters stream %j', request);
     return this.descriptors.page.listServicePerimeters.createStream(
       this.innerApiCalls.listServicePerimeters as GaxCall,
       request,
@@ -4296,6 +4999,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listServicePerimeters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServicePerimeters iterate %j', request);
     return this.descriptors.page.listServicePerimeters.asyncIterate(
       this.innerApiCalls['listServicePerimeters'] as GaxCall,
       request as {},
@@ -4403,11 +5107,33 @@ export class AccessContextManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listGcpUserAccessBindings(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
+          | protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+          | null
+          | undefined,
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listGcpUserAccessBindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listGcpUserAccessBindings request %j', request);
+    return this.innerApiCalls
+      .listGcpUserAccessBindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
+          protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
+        ]) => {
+          this._log.info('listGcpUserAccessBindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4450,6 +5176,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listGcpUserAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listGcpUserAccessBindings stream %j', request);
     return this.descriptors.page.listGcpUserAccessBindings.createStream(
       this.innerApiCalls.listGcpUserAccessBindings as GaxCall,
       request,
@@ -4500,6 +5227,7 @@ export class AccessContextManagerClient {
     const defaultCallSettings = this._defaults['listGcpUserAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listGcpUserAccessBindings iterate %j', request);
     return this.descriptors.page.listGcpUserAccessBindings.asyncIterate(
       this.innerApiCalls['listGcpUserAccessBindings'] as GaxCall,
       request as {},
@@ -4913,6 +5641,7 @@ export class AccessContextManagerClient {
   close(): Promise<void> {
     if (this.accessContextManagerStub && !this._terminated) {
       return this.accessContextManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
