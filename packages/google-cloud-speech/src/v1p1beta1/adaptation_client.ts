@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AdaptationClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('speech');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class AdaptationClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -510,7 +513,36 @@ export class AdaptationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPhraseSet(request, options, callback);
+    this._log.info('createPhraseSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPhraseSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPhraseSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          (
+            | protos.google.cloud.speech.v1p1beta1.ICreatePhraseSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPhraseSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a phrase set.
@@ -608,7 +640,33 @@ export class AdaptationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPhraseSet(request, options, callback);
+    this._log.info('getPhraseSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          | protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPhraseSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPhraseSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          protos.google.cloud.speech.v1p1beta1.IGetPhraseSetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPhraseSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a phrase set.
@@ -711,7 +769,36 @@ export class AdaptationClient {
         'phrase_set.name': request.phraseSet!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePhraseSet(request, options, callback);
+    this._log.info('updatePhraseSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePhraseSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePhraseSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet,
+          (
+            | protos.google.cloud.speech.v1p1beta1.IUpdatePhraseSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePhraseSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete a phrase set.
@@ -803,7 +890,36 @@ export class AdaptationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePhraseSet(request, options, callback);
+    this._log.info('deletePhraseSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePhraseSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePhraseSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.speech.v1p1beta1.IDeletePhraseSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePhraseSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a custom class.
@@ -916,7 +1032,36 @@ export class AdaptationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCustomClass(request, options, callback);
+    this._log.info('createCustomClass request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomClass response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomClass(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          (
+            | protos.google.cloud.speech.v1p1beta1.ICreateCustomClassRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomClass response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get a custom class.
@@ -1008,7 +1153,36 @@ export class AdaptationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCustomClass(request, options, callback);
+    this._log.info('getCustomClass request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomClass response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomClass(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          (
+            | protos.google.cloud.speech.v1p1beta1.IGetCustomClassRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomClass response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a custom class.
@@ -1117,7 +1291,36 @@ export class AdaptationClient {
         'custom_class.name': request.customClass!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCustomClass(request, options, callback);
+    this._log.info('updateCustomClass request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomClass response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomClass(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.speech.v1p1beta1.ICustomClass,
+          (
+            | protos.google.cloud.speech.v1p1beta1.IUpdateCustomClassRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomClass response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Delete a custom class.
@@ -1221,7 +1424,36 @@ export class AdaptationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCustomClass(request, options, callback);
+    this._log.info('deleteCustomClass request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCustomClass response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomClass(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.speech.v1p1beta1.IDeleteCustomClassRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomClass response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1334,7 +1566,33 @@ export class AdaptationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPhraseSet(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest,
+          | protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse
+          | null
+          | undefined,
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPhraseSet values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPhraseSet request %j', request);
+    return this.innerApiCalls
+      .listPhraseSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.speech.v1p1beta1.IPhraseSet[],
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetRequest | null,
+          protos.google.cloud.speech.v1p1beta1.IListPhraseSetResponse,
+        ]) => {
+          this._log.info('listPhraseSet values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1388,6 +1646,7 @@ export class AdaptationClient {
     const defaultCallSettings = this._defaults['listPhraseSet'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPhraseSet stream %j', request);
     return this.descriptors.page.listPhraseSet.createStream(
       this.innerApiCalls.listPhraseSet as GaxCall,
       request,
@@ -1449,6 +1708,7 @@ export class AdaptationClient {
     const defaultCallSettings = this._defaults['listPhraseSet'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPhraseSet iterate %j', request);
     return this.descriptors.page.listPhraseSet.asyncIterate(
       this.innerApiCalls['listPhraseSet'] as GaxCall,
       request as {},
@@ -1565,7 +1825,33 @@ export class AdaptationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCustomClasses(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest,
+          | protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse
+          | null
+          | undefined,
+          protos.google.cloud.speech.v1p1beta1.ICustomClass
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomClasses values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomClasses request %j', request);
+    return this.innerApiCalls
+      .listCustomClasses(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.speech.v1p1beta1.ICustomClass[],
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesRequest | null,
+          protos.google.cloud.speech.v1p1beta1.IListCustomClassesResponse,
+        ]) => {
+          this._log.info('listCustomClasses values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1619,6 +1905,7 @@ export class AdaptationClient {
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomClasses stream %j', request);
     return this.descriptors.page.listCustomClasses.createStream(
       this.innerApiCalls.listCustomClasses as GaxCall,
       request,
@@ -1680,6 +1967,7 @@ export class AdaptationClient {
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomClasses iterate %j', request);
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,
       request as {},
@@ -1862,6 +2150,7 @@ export class AdaptationClient {
   close(): Promise<void> {
     if (this.adaptationStub && !this._terminated) {
       return this.adaptationStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
