@@ -90,6 +90,7 @@ export interface StorageTransportCallback<T> {
     fullResponse?: GaxiosResponse,
   ): void;
 }
+let projectId: string;
 
 export class StorageTransport {
   authClient: GoogleAuth<AuthClient>;
@@ -98,6 +99,7 @@ export class StorageTransport {
   private retryOptions: RetryOptions;
   private baseUrl: string;
   private timeout?: number;
+  private projectId?: string;
   private useAuthWithCustomEndpoint?: boolean;
 
   constructor(options: TransportParameters) {
@@ -115,6 +117,7 @@ export class StorageTransport {
     this.retryOptions = options.retryOptions;
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
+    this.projectId = options.projectId;
     this.useAuthWithCustomEndpoint = options.useAuthWithCustomEndpoint;
   }
 
@@ -134,19 +137,39 @@ export class StorageTransport {
         transport.instance.interceptors.request.add(inter);
       }
     }
-    const requestPromise = this.authClient.request<T>({
-      retryConfig: {
-        retry: this.retryOptions.maxRetries,
-        noResponseRetries: this.retryOptions.maxRetries,
-        maxRetryDelay: this.retryOptions.maxRetryDelay,
-        retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
-        shouldRetry: this.retryOptions.retryableErrorFn,
-        totalTimeout: this.retryOptions.totalTimeout,
-      },
-      ...reqOpts,
-      headers,
-      url: this.#buildUrl(reqOpts.url?.toString(), reqOpts.queryParameters),
-      timeout: this.timeout,
+    const prepareRequest = async () => {
+      try {
+        const getProjectId = async () => {
+          if (reqOpts.projectId) return reqOpts.projectId;
+          projectId = await this.authClient.getProjectId();
+          return projectId;
+        };
+        const _projectId = await getProjectId();
+        if (_projectId) {
+          projectId = _projectId;
+          this.projectId = projectId;
+        }
+        return projectId;
+      } catch (e) {
+        if (callback) return callback(e as GaxiosError);
+        throw e;
+      }
+    };
+    const requestPromise = prepareRequest().then(() => {
+      return this.authClient.request<T>({
+        retryConfig: {
+          retry: this.retryOptions.maxRetries,
+          noResponseRetries: this.retryOptions.maxRetries,
+          maxRetryDelay: this.retryOptions.maxRetryDelay,
+          retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
+          shouldRetry: this.retryOptions.retryableErrorFn,
+          totalTimeout: this.retryOptions.totalTimeout,
+        },
+        ...reqOpts,
+        headers,
+        url: this.#buildUrl(reqOpts.url?.toString(), reqOpts.queryParameters),
+        timeout: this.timeout,
+      });
     });
 
     return callback
@@ -157,6 +180,13 @@ export class StorageTransport {
   }
 
   #buildUrl(pathUri = '', queryParameters: StorageQueryParameters = {}): URL {
+    if (
+      'project' in queryParameters &&
+      (queryParameters.project !== this.projectId ||
+        queryParameters.project !== projectId)
+    ) {
+      queryParameters.project = this.projectId;
+    }
     const qp = this.#buildRequestQueryParams(queryParameters);
     let url: URL;
     if (this.#isValidUrl(pathUri)) {

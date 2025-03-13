@@ -897,7 +897,7 @@ describe('Bucket', () => {
     const PUBSUB_SERVICE_PATH = '//pubsub.googleapis.com/';
     const TOPIC = 'my-topic';
     const FULL_TOPIC_NAME =
-      PUBSUB_SERVICE_PATH + 'projects/{{projectId}}/topics/' + TOPIC;
+      PUBSUB_SERVICE_PATH + `projects/${PROJECT_ID}/topics/` + TOPIC;
 
     it('should throw an error if a valid topic is not provided', () => {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises

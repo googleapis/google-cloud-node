@@ -2024,7 +2024,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     const body = Object.assign({topic}, options);
 
     if (body.topic.indexOf('projects') !== 0) {
-      body.topic = 'projects/{{projectId}}/topics/' + body.topic;
+      body.topic = `projects/${this.storage.projectId}/topics/` + body.topic;
     }
 
     body.topic = `//pubsub.${this.storage.universeDomain}/` + body.topic;

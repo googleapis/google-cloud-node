@@ -33,11 +33,13 @@ describe('Storage Transport', () => {
 
     authClientStub = new GoogleAuth();
     sandbox.stub(authClientStub, 'request');
+    sandbox.stub(authClientStub, 'getProjectId').resolves('project-id');
 
     transport = new StorageTransport({
       apiEndpoint: baseUrl,
       baseUrl,
       authClient: authClientStub,
+      projectId: 'project-id',
       retryOptions: {
         maxRetries: 3,
         retryDelayMultiplier: 2,
