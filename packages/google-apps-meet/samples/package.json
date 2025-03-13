@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"
@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-apps/meet": "^0.3.0"
+    "@google-apps/meet": "^0.4.0"
   },
   "devDependencies": {
     "c8": "^8.0.0",

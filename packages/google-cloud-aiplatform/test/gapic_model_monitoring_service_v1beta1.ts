@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -375,7 +375,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
       );
@@ -407,7 +407,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
       );
@@ -455,7 +455,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModelMonitor = stubSimpleCall(
         undefined,
@@ -509,7 +509,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
       );
@@ -542,7 +542,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
       );
@@ -590,7 +590,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModelMonitoringJob = stubSimpleCall(
         undefined,
@@ -650,7 +650,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
       );
@@ -683,7 +683,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
       );
@@ -731,7 +731,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getModelMonitoringJob = stubSimpleCall(
         undefined,
@@ -791,7 +791,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -825,7 +825,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -880,7 +880,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModelMonitor = stubLongRunningCall(
         undefined,
@@ -912,7 +912,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createModelMonitor = stubLongRunningCall(
         undefined,
@@ -992,7 +992,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor', 'name']
       );
       request.modelMonitor.name = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1027,7 +1027,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor', 'name']
       );
       request.modelMonitor.name = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1083,7 +1083,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor', 'name']
       );
       request.modelMonitor.name = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateModelMonitor = stubLongRunningCall(
         undefined,
@@ -1116,7 +1116,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor', 'name']
       );
       request.modelMonitor.name = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateModelMonitor = stubLongRunningCall(
         undefined,
@@ -1195,7 +1195,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1229,7 +1229,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1284,7 +1284,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModelMonitor = stubLongRunningCall(
         undefined,
@@ -1316,7 +1316,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModelMonitor = stubLongRunningCall(
         undefined,
@@ -1395,7 +1395,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1429,7 +1429,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1484,7 +1484,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModelMonitoringJob = stubLongRunningCall(
         undefined,
@@ -1519,7 +1519,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModelMonitoringJob = stubLongRunningCall(
         undefined,
@@ -1599,7 +1599,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
@@ -1639,7 +1639,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
@@ -1697,7 +1697,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listModelMonitors = stubSimpleCall(
         undefined,
@@ -1729,7 +1729,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
@@ -1791,7 +1791,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModelMonitors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1842,7 +1842,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitor()
@@ -1893,7 +1893,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModelMonitors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1937,7 +1937,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
@@ -1978,7 +1978,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
@@ -2036,7 +2036,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listModelMonitoringJobs = stubSimpleCall(
         undefined,
@@ -2071,7 +2071,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
@@ -2141,7 +2141,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModelMonitoringJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2200,7 +2200,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringJob()
@@ -2255,7 +2255,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listModelMonitoringJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2303,7 +2303,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
@@ -2344,7 +2344,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
@@ -2402,7 +2402,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchModelMonitoringStats = stubSimpleCall(
         undefined,
@@ -2437,7 +2437,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
@@ -2507,7 +2507,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchModelMonitoringStats.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2566,7 +2566,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringStats()
@@ -2621,7 +2621,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchModelMonitoringStats.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2669,7 +2669,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
@@ -2710,7 +2710,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
@@ -2768,7 +2768,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchModelMonitoringAlerts = stubSimpleCall(
         undefined,
@@ -2803,7 +2803,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
@@ -2873,7 +2873,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchModelMonitoringAlerts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2932,7 +2932,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.ModelMonitoringAlert()
@@ -2987,7 +2987,7 @@ describe('v1beta1.ModelMonitoringServiceClient', () => {
         ['modelMonitor']
       );
       request.modelMonitor = defaultValue1;
-      const expectedHeaderRequestParams = `model_monitor=${defaultValue1}`;
+      const expectedHeaderRequestParams = `model_monitor=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchModelMonitoringAlerts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class ControlServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class ControlServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -523,9 +526,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Full resource name of parent data store. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {google.cloud.discoveryengine.v1.Control} request.control
    *   Required. The Control to create.
    * @param {string} request.controlId
@@ -615,7 +618,36 @@ export class ControlServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createControl(request, options, callback);
+    this._log.info('createControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IControl,
+          | protos.google.cloud.discoveryengine.v1.ICreateControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IControl,
+          (
+            | protos.google.cloud.discoveryengine.v1.ICreateControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Control.
@@ -627,7 +659,7 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Control to delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -709,7 +741,36 @@ export class ControlServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteControl(request, options, callback);
+    this._log.info('deleteControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.discoveryengine.v1.IDeleteControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.discoveryengine.v1.IDeleteControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Control.
@@ -812,7 +873,36 @@ export class ControlServiceClient {
         'control.name': request.control!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateControl(request, options, callback);
+    this._log.info('updateControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IControl,
+          | protos.google.cloud.discoveryengine.v1.IUpdateControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IControl,
+          (
+            | protos.google.cloud.discoveryengine.v1.IUpdateControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Control.
@@ -821,7 +911,7 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Control to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -903,7 +993,33 @@ export class ControlServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getControl(request, options, callback);
+    this._log.info('getControl request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IControl,
+          | protos.google.cloud.discoveryengine.v1.IGetControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getControl response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1.IControl,
+          protos.google.cloud.discoveryengine.v1.IGetControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getControl response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -914,9 +1030,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1013,18 +1129,44 @@ export class ControlServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listControls(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1.IListControlsRequest,
+          | protos.google.cloud.discoveryengine.v1.IListControlsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1.IControl
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listControls values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listControls request %j', request);
+    return this.innerApiCalls
+      .listControls(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1.IControl[],
+          protos.google.cloud.discoveryengine.v1.IListControlsRequest | null,
+          protos.google.cloud.discoveryengine.v1.IListControlsResponse,
+        ]) => {
+          this._log.info('listControls values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listControls`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1063,6 +1205,7 @@ export class ControlServiceClient {
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listControls stream %j', request);
     return this.descriptors.page.listControls.createStream(
       this.innerApiCalls.listControls as GaxCall,
       request,
@@ -1078,9 +1221,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1120,6 +1263,7 @@ export class ControlServiceClient {
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listControls iterate %j', request);
     return this.descriptors.page.listControls.asyncIterate(
       this.innerApiCalls['listControls'] as GaxCall,
       request as {},
@@ -4063,6 +4207,7 @@ export class ControlServiceClient {
   close(): Promise<void> {
     if (this.controlServiceStub && !this._terminated) {
       return this.controlServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

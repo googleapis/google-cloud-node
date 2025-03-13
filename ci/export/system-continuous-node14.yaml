@@ -1,5 +1,5 @@
 createTime: '2022-06-22T20:37:15.591560546Z'
-description: Continuous build with node 14
+description: Continuous build with node 18
 filename: ci/cloudbuild.yaml
 github:
   name: google-cloud-node
@@ -7,7 +7,7 @@ github:
   push:
     branch: ^main$
 id: d05bbe17-fb41-4a39-9be2-3210779da9fb
-name: system-continuous-node14
+name: system-continuous-node18
 resourceName: projects/long-door-651/locations/global/triggers/d05bbe17-fb41-4a39-9be2-3210779da9fb
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 substitutions:

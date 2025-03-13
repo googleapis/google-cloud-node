@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class RegionalInventoryServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('inventories');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class RegionalInventoryServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -498,11 +501,36 @@ export class RegionalInventoryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.insertRegionalInventory(
-      request,
-      options,
-      callback
-    );
+    this._log.info('insertRegionalInventory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.inventories.v1beta.IRegionalInventory,
+          | protos.google.shopping.merchant.inventories.v1beta.IInsertRegionalInventoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insertRegionalInventory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insertRegionalInventory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.inventories.v1beta.IRegionalInventory,
+          (
+            | protos.google.shopping.merchant.inventories.v1beta.IInsertRegionalInventoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insertRegionalInventory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified `RegionalInventory` resource from the given product
@@ -604,11 +632,36 @@ export class RegionalInventoryServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRegionalInventory(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteRegionalInventory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.inventories.v1beta.IDeleteRegionalInventoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRegionalInventory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRegionalInventory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.inventories.v1beta.IDeleteRegionalInventoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRegionalInventory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -722,15 +775,37 @@ export class RegionalInventoryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRegionalInventories(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesRequest,
+          | protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.inventories.v1beta.IRegionalInventory
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRegionalInventories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRegionalInventories request %j', request);
+    return this.innerApiCalls
+      .listRegionalInventories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.inventories.v1beta.IRegionalInventory[],
+          protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesRequest | null,
+          protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesResponse,
+        ]) => {
+          this._log.info('listRegionalInventories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRegionalInventories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -776,6 +851,7 @@ export class RegionalInventoryServiceClient {
     const defaultCallSettings = this._defaults['listRegionalInventories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRegionalInventories stream %j', request);
     return this.descriptors.page.listRegionalInventories.createStream(
       this.innerApiCalls.listRegionalInventories as GaxCall,
       request,
@@ -833,6 +909,7 @@ export class RegionalInventoryServiceClient {
     const defaultCallSettings = this._defaults['listRegionalInventories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRegionalInventories iterate %j', request);
     return this.descriptors.page.listRegionalInventories.asyncIterate(
       this.innerApiCalls['listRegionalInventories'] as GaxCall,
       request as {},
@@ -998,6 +1075,7 @@ export class RegionalInventoryServiceClient {
   close(): Promise<void> {
     if (this.regionalInventoryServiceStub && !this._terminated) {
       return this.regionalInventoryServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

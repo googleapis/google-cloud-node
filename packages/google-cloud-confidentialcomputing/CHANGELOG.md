@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.7.0...confidentialcomputing-v1.8.0) (2025-02-28)
+
+
+### Features
+
+* [confidentialcomputing] A new field `attester` is added to message `.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest` ([#6044](https://github.com/googleapis/google-cloud-node/issues/6044)) ([b962c5a](https://github.com/googleapis/google-cloud-node/commit/b962c5ae4c742b25592a0941a901022bca038f0e))
+
 ## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.6.0...confidentialcomputing-v1.7.0) (2024-12-18)
 
 

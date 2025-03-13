@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -499,7 +496,7 @@
                               "type": "string",
                               "id": 18,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                               }
                             },
@@ -515,8 +512,15 @@
                               "type": "string",
                               "id": 20,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "replicationStatus": {
+                              "type": "ReplicationStatus",
+                              "id": 24,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           },
@@ -533,6 +537,31 @@
                                 "maxSlots": {
                                   "type": "int64",
                                   "id": 2
+                                }
+                              }
+                            },
+                            "ReplicationStatus": {
+                              "fields": {
+                                "error": {
+                                  "type": "google.rpc.Status",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "lastErrorTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "lastReplicationTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
                                 }
                               }
                             }
@@ -917,6 +946,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "enableGeminiInBigquery": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -926,7 +962,8 @@
                                 "PIPELINE": 1,
                                 "QUERY": 2,
                                 "ML_EXTERNAL": 3,
-                                "BACKGROUND": 4
+                                "BACKGROUND": 4,
+                                "CONTINUOUS": 6
                               }
                             },
                             "State": {

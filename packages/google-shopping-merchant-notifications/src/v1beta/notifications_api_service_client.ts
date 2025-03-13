@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class NotificationsApiServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('notifications');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class NotificationsApiServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -483,11 +486,36 @@ export class NotificationsApiServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNotificationSubscription(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getNotificationSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotificationSubscription response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNotificationSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          (
+            | protos.google.shopping.merchant.notifications.v1beta.IGetNotificationSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNotificationSubscription response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a notification subscription for a merchant. We will allow the
@@ -597,11 +625,42 @@ export class NotificationsApiServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNotificationSubscription(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createNotificationSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createNotificationSubscription response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNotificationSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          (
+            | protos.google.shopping.merchant.notifications.v1beta.ICreateNotificationSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createNotificationSubscription response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing notification subscription for a merchant.
@@ -701,11 +760,42 @@ export class NotificationsApiServiceClient {
           request.notificationSubscription!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNotificationSubscription(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateNotificationSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateNotificationSubscription response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNotificationSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription,
+          (
+            | protos.google.shopping.merchant.notifications.v1beta.IUpdateNotificationSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateNotificationSubscription response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a notification subscription for a merchant.
@@ -801,11 +891,42 @@ export class NotificationsApiServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNotificationSubscription(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteNotificationSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteNotificationSubscription response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteNotificationSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.notifications.v1beta.IDeleteNotificationSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteNotificationSubscription response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -907,15 +1028,37 @@ export class NotificationsApiServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNotificationSubscriptions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
+          | protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotificationSubscriptions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotificationSubscriptions request %j', request);
+    return this.innerApiCalls
+      .listNotificationSubscriptions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.notifications.v1beta.INotificationSubscription[],
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest | null,
+          protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsResponse,
+        ]) => {
+          this._log.info('listNotificationSubscriptions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotificationSubscriptions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -954,6 +1097,7 @@ export class NotificationsApiServiceClient {
     const defaultCallSettings = this._defaults['listNotificationSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotificationSubscriptions stream %j', request);
     return this.descriptors.page.listNotificationSubscriptions.createStream(
       this.innerApiCalls.listNotificationSubscriptions as GaxCall,
       request,
@@ -1004,6 +1148,7 @@ export class NotificationsApiServiceClient {
     const defaultCallSettings = this._defaults['listNotificationSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotificationSubscriptions iterate %j', request);
     return this.descriptors.page.listNotificationSubscriptions.asyncIterate(
       this.innerApiCalls['listNotificationSubscriptions'] as GaxCall,
       request as {},
@@ -1093,6 +1238,7 @@ export class NotificationsApiServiceClient {
   close(): Promise<void> {
     if (this.notificationsApiServiceStub && !this._terminated) {
       return this.notificationsApiServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

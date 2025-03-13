@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -340,7 +340,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse()
       );
@@ -374,7 +374,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse()
       );
@@ -424,7 +424,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readFeatureValues = stubSimpleCall(
         undefined,
@@ -482,7 +482,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse()
       );
@@ -517,7 +517,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse()
       );
@@ -567,7 +567,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.writeFeatureValues = stubSimpleCall(
         undefined,
@@ -625,7 +625,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse()
       );
@@ -671,7 +671,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadFeatureValuesResponse()
       );
@@ -720,7 +720,7 @@ describe('v1beta1.FeaturestoreOnlineServingServiceClient', () => {
         ['entityType']
       );
       request.entityType = defaultValue1;
-      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.streamingReadFeatureValues = stubServerStreamingCall(
         undefined,

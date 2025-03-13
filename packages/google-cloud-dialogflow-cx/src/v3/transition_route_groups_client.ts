@@ -32,6 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class TransitionRouteGroupsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class TransitionRouteGroupsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -636,11 +639,36 @@ export class TransitionRouteGroupsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTransitionRouteGroup(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getTransitionRouteGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup,
+          | protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTransitionRouteGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTransitionRouteGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTransitionRouteGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an
@@ -761,11 +789,36 @@ export class TransitionRouteGroupsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTransitionRouteGroup(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createTransitionRouteGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup,
+          | protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTransitionRouteGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTransitionRouteGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTransitionRouteGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified
@@ -880,11 +933,36 @@ export class TransitionRouteGroupsClient {
         'transition_route_group.name': request.transitionRouteGroup!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTransitionRouteGroup(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateTransitionRouteGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTransitionRouteGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTransitionRouteGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTransitionRouteGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified
@@ -998,11 +1076,36 @@ export class TransitionRouteGroupsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTransitionRouteGroup(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteTransitionRouteGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTransitionRouteGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTransitionRouteGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTransitionRouteGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1117,15 +1220,37 @@ export class TransitionRouteGroupsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTransitionRouteGroups(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTransitionRouteGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTransitionRouteGroups request %j', request);
+    return this.innerApiCalls
+      .listTransitionRouteGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.ITransitionRouteGroup[],
+          protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsResponse,
+        ]) => {
+          this._log.info('listTransitionRouteGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTransitionRouteGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1177,6 +1302,7 @@ export class TransitionRouteGroupsClient {
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTransitionRouteGroups stream %j', request);
     return this.descriptors.page.listTransitionRouteGroups.createStream(
       this.innerApiCalls.listTransitionRouteGroups as GaxCall,
       request,
@@ -1240,6 +1366,7 @@ export class TransitionRouteGroupsClient {
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTransitionRouteGroups iterate %j', request);
     return this.descriptors.page.listTransitionRouteGroups.asyncIterate(
       this.innerApiCalls['listTransitionRouteGroups'] as GaxCall,
       request as {},
@@ -1356,7 +1483,7 @@ export class TransitionRouteGroupsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1369,6 +1496,20 @@ export class TransitionRouteGroupsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1405,6 +1546,13 @@ export class TransitionRouteGroupsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1440,11 +1588,11 @@ export class TransitionRouteGroupsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1453,6 +1601,20 @@ export class TransitionRouteGroupsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1483,7 +1645,7 @@ export class TransitionRouteGroupsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1496,6 +1658,20 @@ export class TransitionRouteGroupsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3349,6 +3525,7 @@ export class TransitionRouteGroupsClient {
   close(): Promise<void> {
     if (this.transitionRouteGroupsStub && !this._terminated) {
       return this.transitionRouteGroupsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

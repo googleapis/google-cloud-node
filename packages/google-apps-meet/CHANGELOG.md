@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.3.0...meet-v0.4.0) (2025-02-28)
+
+
+### Features
+
+* [meet] Add `ConnectActiveConference` method to `SpacesService` ([#6050](https://github.com/googleapis/google-cloud-node/issues/6050)) ([b77c164](https://github.com/googleapis/google-cloud-node/commit/b77c1641ad7d05b67e48e670d964457f2454c8d2))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.2.0...meet-v0.3.0) (2024-05-21)
 
 

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 
@@ -393,6 +393,16 @@ export class ReasoningEngineExecutionServiceClient {
       ),
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamQueryReasoningEngine: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService',
@@ -443,12 +453,27 @@ export class ReasoningEngineExecutionServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const reasoningEngineExecutionServiceStubMethods = ['queryReasoningEngine'];
+    const reasoningEngineExecutionServiceStubMethods = [
+      'queryReasoningEngine',
+      'streamQueryReasoningEngine',
+    ];
     for (const methodName of reasoningEngineExecutionServiceStubMethods) {
       const callPromise = this.reasoningEngineExecutionServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({objectMode: true});
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.'
+                    )
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -459,7 +484,7 @@ export class ReasoningEngineExecutionServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -569,6 +594,9 @@ export class ReasoningEngineExecutionServiceClient {
    * @param {google.protobuf.Struct} [request.input]
    *   Optional. Input content provided by users in JSON object format. Examples
    *   include text query, function calling parameters, media bytes, etc.
+   * @param {string} [request.classMethod]
+   *   Optional. Class method to be used for the query.
+   *   It is optional and defaults to "query" if unspecified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -657,6 +685,46 @@ export class ReasoningEngineExecutionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.queryReasoningEngine(request, options, callback);
+  }
+
+  /**
+   * Streams queries using a reasoning engine.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the ReasoningEngine resource to use.
+   *   Format:
+   *   `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+   * @param {google.protobuf.Struct} [request.input]
+   *   Optional. Input content provided by users in JSON object format. Examples
+   *   include text query, function calling parameters, media bytes, etc.
+   * @param {string} [request.classMethod]
+   *   Optional. Class method to be used for the stream query.
+   *   It is optional and defaults to "stream_query" if unspecified.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/reasoning_engine_execution_service.stream_query_reasoning_engine.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ReasoningEngineExecutionService_StreamQueryReasoningEngine_async
+   */
+  streamQueryReasoningEngine(
+    request?: protos.google.cloud.aiplatform.v1beta1.IStreamQueryReasoningEngineRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.streamQueryReasoningEngine(request, options);
   }
 
   /**

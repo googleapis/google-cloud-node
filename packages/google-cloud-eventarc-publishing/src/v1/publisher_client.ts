@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -50,15 +51,20 @@ const version = require('../../../package.json').version;
  *  A subscriber is a GCP customer interested in receiving events.
  *
  *  Channel is a first-class Eventarc resource that is created and managed
- *  by the subscriber in their GCP project. A Channel represents a subscriber's
- *  intent to receive events from an event provider. A Channel is associated with
- *  exactly one event provider.
+ *  by the subscriber in their Google Cloud project. A Channel represents a
+ *  subscriber's intent to receive events from an event provider. A Channel is
+ *  associated with exactly one event provider.
  *
  *  ChannelConnection is a first-class Eventarc resource that
- *  is created and managed by the partner in their GCP project. A
+ *  is created and managed by the partner in their Google Cloud project. A
  *  ChannelConnection represents a connection between a partner and a
  *  subscriber's Channel. A ChannelConnection has a one-to-one mapping with a
  *  Channel.
+ *
+ *  Bus is a first-class Eventarc resource that is created and managed in a
+ *  Google Cloud project. A Bus provides a discoverable endpoint for events and
+ *  is a router that receives all events published by event providers and
+ *  delivers them to zero or more subscribers.
  *
  *  Publisher allows an event provider to publish events to Eventarc.
  * @class
@@ -74,6 +80,8 @@ export class PublisherClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('eventarc-publishing');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -107,7 +115,7 @@ export class PublisherClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -486,11 +494,42 @@ export class PublisherClient {
         channel_connection: request.channelConnection ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.publishChannelConnectionEvents(
-      request,
-      options,
-      callback
-    );
+    this._log.info('publishChannelConnectionEvents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsResponse,
+          | protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'publishChannelConnectionEvents response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .publishChannelConnectionEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsResponse,
+          (
+            | protos.google.cloud.eventarc.publishing.v1.IPublishChannelConnectionEventsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'publishChannelConnectionEvents response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Publish events to a subscriber's channel.
@@ -596,7 +635,36 @@ export class PublisherClient {
         channel: request.channel ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.publishEvents(request, options, callback);
+    this._log.info('publishEvents request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+          | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('publishEvents response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .publishEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.publishing.v1.IPublishEventsResponse,
+          (
+            | protos.google.cloud.eventarc.publishing.v1.IPublishEventsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('publishEvents response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Publish events to a message bus.
@@ -699,7 +767,36 @@ export class PublisherClient {
         message_bus: request.messageBus ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.publish(request, options, callback);
+    this._log.info('publish request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+          | protos.google.cloud.eventarc.publishing.v1.IPublishRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('publish response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .publish(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.eventarc.publishing.v1.IPublishResponse,
+          (
+            | protos.google.cloud.eventarc.publishing.v1.IPublishRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('publish response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -711,6 +808,7 @@ export class PublisherClient {
   close(): Promise<void> {
     if (this.publisherStub && !this._terminated) {
       return this.publisherStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

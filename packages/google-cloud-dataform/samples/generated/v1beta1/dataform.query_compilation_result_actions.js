@@ -43,8 +43,8 @@ function main(name) {
    *  `QueryCompilationResultActions` call. Provide this to retrieve the
    *  subsequent page.
    *  When paginating, all other parameters provided to
-   *  `QueryCompilationResultActions` must match the call that provided the page
-   *  token.
+   *  `QueryCompilationResultActions`, with the exception of `page_size`, must
+   *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**

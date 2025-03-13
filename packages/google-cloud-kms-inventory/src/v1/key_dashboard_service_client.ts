@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class KeyDashboardServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms-inventory');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class KeyDashboardServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -504,11 +507,37 @@ export class KeyDashboardServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCryptoKeys(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.inventory.v1.IListCryptoKeysRequest,
+          | protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.kms.v1.ICryptoKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCryptoKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCryptoKeys request %j', request);
+    return this.innerApiCalls
+      .listCryptoKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.ICryptoKey[],
+          protos.google.cloud.kms.inventory.v1.IListCryptoKeysRequest | null,
+          protos.google.cloud.kms.inventory.v1.IListCryptoKeysResponse,
+        ]) => {
+          this._log.info('listCryptoKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCryptoKeys`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -547,6 +576,7 @@ export class KeyDashboardServiceClient {
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCryptoKeys stream %j', request);
     return this.descriptors.page.listCryptoKeys.createStream(
       this.innerApiCalls.listCryptoKeys as GaxCall,
       request,
@@ -597,6 +627,7 @@ export class KeyDashboardServiceClient {
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCryptoKeys iterate %j', request);
     return this.descriptors.page.listCryptoKeys.asyncIterate(
       this.innerApiCalls['listCryptoKeys'] as GaxCall,
       request as {},
@@ -1195,6 +1226,7 @@ export class KeyDashboardServiceClient {
   close(): Promise<void> {
     if (this.keyDashboardServiceStub && !this._terminated) {
       return this.keyDashboardServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

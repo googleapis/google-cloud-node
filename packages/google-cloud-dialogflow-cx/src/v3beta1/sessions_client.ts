@@ -29,6 +29,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class SessionsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class SessionsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -303,6 +306,9 @@ export class SessionsClient {
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
       ),
+      toolVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
+      ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
       ),
@@ -389,7 +395,7 @@ export class SessionsClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -634,7 +640,36 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.detectIntent(request, options, callback);
+    this._log.info('detectIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentResponse,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('detectIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .detectIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDetectIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('detectIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns preliminary intent match results, doesn't change the session
@@ -743,7 +778,36 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.matchIntent(request, options, callback);
+    this._log.info('matchIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentResponse,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('matchIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .matchIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IMatchIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('matchIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fulfills a matched intent returned by
@@ -851,7 +915,36 @@ export class SessionsClient {
           request.matchIntentRequest!.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.fulfillIntent(request, options, callback);
+    this._log.info('fulfillIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IFulfillIntentResponse,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IFulfillIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fulfillIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fulfillIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IFulfillIntentResponse,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IFulfillIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fulfillIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the feedback received from the user for a single turn of the bot
@@ -956,7 +1049,36 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.submitAnswerFeedback(request, options, callback);
+    this._log.info('submitAnswerFeedback request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('submitAnswerFeedback response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .submitAnswerFeedback(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IAnswerFeedback,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ISubmitAnswerFeedbackRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('submitAnswerFeedback response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1014,6 +1136,7 @@ export class SessionsClient {
         session: request.session ?? '',
       });
     this.initialize();
+    this._log.info('serverStreamingDetectIntent stream %j', options);
     return this.innerApiCalls.serverStreamingDetectIntent(request, options);
   }
 
@@ -1039,6 +1162,7 @@ export class SessionsClient {
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingDetectIntent stream %j', options);
     return this.innerApiCalls.streamingDetectIntent(null, options);
   }
 
@@ -3463,6 +3587,92 @@ export class SessionsClient {
   }
 
   /**
+   * Return a fully-qualified toolVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string
+  ) {
+    return this.pathTemplates.toolVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
+  }
+
+  /**
+   * Parse the tool from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
+  }
+
+  /**
+   * Parse the version from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
+  }
+
+  /**
    * Return a fully-qualified version resource name string.
    *
    * @param {string} project
@@ -3619,6 +3829,7 @@ export class SessionsClient {
   close(): Promise<void> {
     if (this.sessionsStub && !this._terminated) {
       return this.sessionsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

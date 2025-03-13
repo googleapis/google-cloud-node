@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"
@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/dialogflow-cx": "^4.9.0",
+    "@google-cloud/dialogflow-cx": "^4.10.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class WebSecurityScannerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('web-security-scanner');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -89,7 +92,7 @@ export class WebSecurityScannerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -516,7 +519,36 @@ export class WebSecurityScannerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createScanConfig(request, options, callback);
+    this._log.info('createScanConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
+          | protos.google.cloud.websecurityscanner.v1alpha.ICreateScanConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createScanConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createScanConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.ICreateScanConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createScanConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes an existing ScanConfig and its child resources.
@@ -613,7 +645,36 @@ export class WebSecurityScannerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteScanConfig(request, options, callback);
+    this._log.info('deleteScanConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.websecurityscanner.v1alpha.IDeleteScanConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteScanConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteScanConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IDeleteScanConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteScanConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a ScanConfig.
@@ -710,7 +771,36 @@ export class WebSecurityScannerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getScanConfig(request, options, callback);
+    this._log.info('getScanConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
+          | protos.google.cloud.websecurityscanner.v1alpha.IGetScanConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getScanConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getScanConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IGetScanConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getScanConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a ScanConfig. This method support partial update of a ScanConfig.
@@ -812,7 +902,36 @@ export class WebSecurityScannerClient {
         'scan_config.name': request.scanConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateScanConfig(request, options, callback);
+    this._log.info('updateScanConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
+          | protos.google.cloud.websecurityscanner.v1alpha.IUpdateScanConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateScanConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateScanConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IUpdateScanConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateScanConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Start a ScanRun according to the given ScanConfig.
@@ -909,7 +1028,36 @@ export class WebSecurityScannerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startScanRun(request, options, callback);
+    this._log.info('startScanRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
+          | protos.google.cloud.websecurityscanner.v1alpha.IStartScanRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startScanRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startScanRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IStartScanRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('startScanRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a ScanRun.
@@ -1007,7 +1155,36 @@ export class WebSecurityScannerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getScanRun(request, options, callback);
+    this._log.info('getScanRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
+          | protos.google.cloud.websecurityscanner.v1alpha.IGetScanRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getScanRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getScanRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IGetScanRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getScanRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Stops a ScanRun. The stopped ScanRun is returned.
@@ -1105,7 +1282,36 @@ export class WebSecurityScannerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopScanRun(request, options, callback);
+    this._log.info('stopScanRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
+          | protos.google.cloud.websecurityscanner.v1alpha.IStopScanRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('stopScanRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .stopScanRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IStopScanRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('stopScanRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Finding.
@@ -1203,7 +1409,36 @@ export class WebSecurityScannerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFinding(request, options, callback);
+    this._log.info('getFinding request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IFinding,
+          | protos.google.cloud.websecurityscanner.v1alpha.IGetFindingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFinding response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFinding(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IFinding,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IGetFindingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFinding response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * List all FindingTypeStats under a given ScanRun.
@@ -1301,7 +1536,36 @@ export class WebSecurityScannerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFindingTypeStats(request, options, callback);
+    this._log.info('listFindingTypeStats request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsResponse,
+          | protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listFindingTypeStats response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listFindingTypeStats(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsResponse,
+          (
+            | protos.google.cloud.websecurityscanner.v1alpha.IListFindingTypeStatsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listFindingTypeStats response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1404,11 +1668,37 @@ export class WebSecurityScannerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listScanConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsRequest,
+          | protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listScanConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listScanConfigs request %j', request);
+    return this.innerApiCalls
+      .listScanConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanConfig[],
+          protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsRequest | null,
+          protos.google.cloud.websecurityscanner.v1alpha.IListScanConfigsResponse,
+        ]) => {
+          this._log.info('listScanConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listScanConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1448,6 +1738,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listScanConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listScanConfigs stream %j', request);
     return this.descriptors.page.listScanConfigs.createStream(
       this.innerApiCalls.listScanConfigs as GaxCall,
       request,
@@ -1499,6 +1790,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listScanConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listScanConfigs iterate %j', request);
     return this.descriptors.page.listScanConfigs.asyncIterate(
       this.innerApiCalls['listScanConfigs'] as GaxCall,
       request as {},
@@ -1606,11 +1898,37 @@ export class WebSecurityScannerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listScanRuns(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsRequest,
+          | protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listScanRuns values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listScanRuns request %j', request);
+    return this.innerApiCalls
+      .listScanRuns(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IScanRun[],
+          protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsRequest | null,
+          protos.google.cloud.websecurityscanner.v1alpha.IListScanRunsResponse,
+        ]) => {
+          this._log.info('listScanRuns values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listScanRuns`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1650,6 +1968,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listScanRuns'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listScanRuns stream %j', request);
     return this.descriptors.page.listScanRuns.createStream(
       this.innerApiCalls.listScanRuns as GaxCall,
       request,
@@ -1701,6 +2020,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listScanRuns'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listScanRuns iterate %j', request);
     return this.descriptors.page.listScanRuns.asyncIterate(
       this.innerApiCalls['listScanRuns'] as GaxCall,
       request as {},
@@ -1808,11 +2128,37 @@ export class WebSecurityScannerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCrawledUrls(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsRequest,
+          | protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse
+          | null
+          | undefined,
+          protos.google.cloud.websecurityscanner.v1alpha.ICrawledUrl
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCrawledUrls values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCrawledUrls request %j', request);
+    return this.innerApiCalls
+      .listCrawledUrls(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.websecurityscanner.v1alpha.ICrawledUrl[],
+          protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsRequest | null,
+          protos.google.cloud.websecurityscanner.v1alpha.IListCrawledUrlsResponse,
+        ]) => {
+          this._log.info('listCrawledUrls values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCrawledUrls`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1853,6 +2199,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listCrawledUrls'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCrawledUrls stream %j', request);
     return this.descriptors.page.listCrawledUrls.createStream(
       this.innerApiCalls.listCrawledUrls as GaxCall,
       request,
@@ -1905,6 +2252,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listCrawledUrls'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCrawledUrls iterate %j', request);
     return this.descriptors.page.listCrawledUrls.asyncIterate(
       this.innerApiCalls['listCrawledUrls'] as GaxCall,
       request as {},
@@ -2017,11 +2365,37 @@ export class WebSecurityScannerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFindings(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.websecurityscanner.v1alpha.IListFindingsRequest,
+          | protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.websecurityscanner.v1alpha.IFinding
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFindings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFindings request %j', request);
+    return this.innerApiCalls
+      .listFindings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.websecurityscanner.v1alpha.IFinding[],
+          protos.google.cloud.websecurityscanner.v1alpha.IListFindingsRequest | null,
+          protos.google.cloud.websecurityscanner.v1alpha.IListFindingsResponse,
+        ]) => {
+          this._log.info('listFindings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFindings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2067,6 +2441,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
       request,
@@ -2124,6 +2499,7 @@ export class WebSecurityScannerClient {
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
       request as {},
@@ -2322,6 +2698,7 @@ export class WebSecurityScannerClient {
   close(): Promise<void> {
     if (this.webSecurityScannerStub && !this._terminated) {
       return this.webSecurityScannerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

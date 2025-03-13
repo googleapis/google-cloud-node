@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -82,6 +82,12 @@ function main(servingConfig) {
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const offset = 1234
+  /**
+   *  The maximum number of results to return for OneBox.
+   *  This applies to each OneBox type individually.
+   *  Default number is 10.
+   */
+  // const oneBoxPageSize = 1234
   /**
    *  Specs defining dataStores to filter on in a search call and configurations
    *  for those dataStores. This is only considered for engines with multiple
@@ -311,6 +317,18 @@ function main(servingConfig) {
    *  comprehensive coverage of relevant information.
    */
   // const relevanceThreshold = {}
+  /**
+   *  The specification for personalization.
+   *  Notice that if both
+   *  ServingConfig.personalization_spec google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec 
+   *  and
+   *  SearchRequest.personalization_spec google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec 
+   *  are set,
+   *  SearchRequest.personalization_spec google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec 
+   *  overrides
+   *  ServingConfig.personalization_spec google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec.
+   */
+  // const personalizationSpec = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;

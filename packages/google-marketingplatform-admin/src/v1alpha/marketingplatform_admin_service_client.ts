@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class MarketingplatformAdminServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('marketing-platform-admin');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class MarketingplatformAdminServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -490,7 +493,36 @@ export class MarketingplatformAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOrganization(request, options, callback);
+    this._log.info('getOrganization request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IOrganization,
+          | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrganization response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrganization(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IOrganization,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IGetOrganizationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrganization response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates the link between the Analytics account and the Google Marketing
@@ -594,11 +626,36 @@ export class MarketingplatformAdminServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAnalyticsAccountLink(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createAnalyticsAccountLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+          | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAnalyticsAccountLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAnalyticsAccountLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.ICreateAnalyticsAccountLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAnalyticsAccountLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the AnalyticsAccountLink, which detaches the Analytics account from
@@ -700,11 +757,36 @@ export class MarketingplatformAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAnalyticsAccountLink(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteAnalyticsAccountLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAnalyticsAccountLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAnalyticsAccountLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.IDeleteAnalyticsAccountLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAnalyticsAccountLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the service level for an Analytics property.
@@ -809,11 +891,36 @@ export class MarketingplatformAdminServiceClient {
         analytics_account_link: request.analyticsAccountLink ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setPropertyServiceLevel(
-      request,
-      options,
-      callback
-    );
+    this._log.info('setPropertyServiceLevel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+          | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setPropertyServiceLevel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setPropertyServiceLevel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelResponse,
+          (
+            | protos.google.marketingplatform.admin.v1alpha.ISetPropertyServiceLevelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setPropertyServiceLevel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -922,15 +1029,37 @@ export class MarketingplatformAdminServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAnalyticsAccountLinks(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
+          | protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse
+          | null
+          | undefined,
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAnalyticsAccountLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAnalyticsAccountLinks request %j', request);
+    return this.innerApiCalls
+      .listAnalyticsAccountLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.marketingplatform.admin.v1alpha.IAnalyticsAccountLink[],
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest | null,
+          protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksResponse,
+        ]) => {
+          this._log.info('listAnalyticsAccountLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listAnalyticsAccountLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -975,6 +1104,7 @@ export class MarketingplatformAdminServiceClient {
     const defaultCallSettings = this._defaults['listAnalyticsAccountLinks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnalyticsAccountLinks stream %j', request);
     return this.descriptors.page.listAnalyticsAccountLinks.createStream(
       this.innerApiCalls.listAnalyticsAccountLinks as GaxCall,
       request,
@@ -1031,6 +1161,7 @@ export class MarketingplatformAdminServiceClient {
     const defaultCallSettings = this._defaults['listAnalyticsAccountLinks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnalyticsAccountLinks iterate %j', request);
     return this.descriptors.page.listAnalyticsAccountLinks.asyncIterate(
       this.innerApiCalls['listAnalyticsAccountLinks'] as GaxCall,
       request as {},
@@ -1141,6 +1272,7 @@ export class MarketingplatformAdminServiceClient {
   close(): Promise<void> {
     if (this.marketingplatformAdminServiceStub && !this._terminated) {
       return this.marketingplatformAdminServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

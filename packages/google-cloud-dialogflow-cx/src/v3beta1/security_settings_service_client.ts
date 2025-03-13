@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SecuritySettingsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class SecuritySettingsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -310,6 +313,9 @@ export class SecuritySettingsServiceClient {
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+      ),
+      toolVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -601,11 +607,36 @@ export class SecuritySettingsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSecuritySettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createSecuritySettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSecuritySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSecuritySettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSecuritySettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified
@@ -705,7 +736,36 @@ export class SecuritySettingsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSecuritySettings(request, options, callback);
+    this._log.info('getSecuritySettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSecuritySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSecuritySettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecuritySettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified
@@ -806,11 +866,36 @@ export class SecuritySettingsServiceClient {
         'security_settings.name': request.securitySettings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSecuritySettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateSecuritySettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSecuritySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSecuritySettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecuritySettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified
@@ -910,11 +995,36 @@ export class SecuritySettingsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSecuritySettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteSecuritySettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSecuritySettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSecuritySettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSecuritySettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1014,11 +1124,37 @@ export class SecuritySettingsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSecuritySettings(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSecuritySettings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSecuritySettings request %j', request);
+    return this.innerApiCalls
+      .listSecuritySettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse,
+        ]) => {
+          this._log.info('listSecuritySettings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSecuritySettings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1055,6 +1191,7 @@ export class SecuritySettingsServiceClient {
     const defaultCallSettings = this._defaults['listSecuritySettings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecuritySettings stream %j', request);
     return this.descriptors.page.listSecuritySettings.createStream(
       this.innerApiCalls.listSecuritySettings as GaxCall,
       request,
@@ -1103,6 +1240,7 @@ export class SecuritySettingsServiceClient {
     const defaultCallSettings = this._defaults['listSecuritySettings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecuritySettings iterate %j', request);
     return this.descriptors.page.listSecuritySettings.asyncIterate(
       this.innerApiCalls['listSecuritySettings'] as GaxCall,
       request as {},
@@ -3521,6 +3659,92 @@ export class SecuritySettingsServiceClient {
   }
 
   /**
+   * Return a fully-qualified toolVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string
+  ) {
+    return this.pathTemplates.toolVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
+  }
+
+  /**
+   * Parse the tool from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
+  }
+
+  /**
+   * Parse the version from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
+  }
+
+  /**
    * Return a fully-qualified version resource name string.
    *
    * @param {string} project
@@ -3677,6 +3901,7 @@ export class SecuritySettingsServiceClient {
   close(): Promise<void> {
     if (this.securitySettingsServiceStub && !this._terminated) {
       return this.securitySettingsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

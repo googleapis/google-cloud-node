@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ProductReviewsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('reviews');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class ProductReviewsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -486,7 +489,36 @@ export class ProductReviewsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProductReview(request, options, callback);
+    this._log.info('getProductReview request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProductReview response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProductReview(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          (
+            | protos.google.shopping.merchant.reviews.v1beta.IGetProductReviewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProductReview response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Inserts a product review.
@@ -588,7 +620,36 @@ export class ProductReviewsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.insertProductReview(request, options, callback);
+    this._log.info('insertProductReview request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insertProductReview response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insertProductReview(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview,
+          (
+            | protos.google.shopping.merchant.reviews.v1beta.IInsertProductReviewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insertProductReview response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a product review.
@@ -685,7 +746,36 @@ export class ProductReviewsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteProductReview(request, options, callback);
+    this._log.info('deleteProductReview request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteProductReview response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteProductReview(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.reviews.v1beta.IDeleteProductReviewRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteProductReview response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -789,11 +879,37 @@ export class ProductReviewsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listProductReviews(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
+          | protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProductReviews values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProductReviews request %j', request);
+    return this.innerApiCalls
+      .listProductReviews(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.reviews.v1beta.IProductReview[],
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest | null,
+          protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsResponse,
+        ]) => {
+          this._log.info('listProductReviews values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProductReviews`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -834,6 +950,7 @@ export class ProductReviewsServiceClient {
     const defaultCallSettings = this._defaults['listProductReviews'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProductReviews stream %j', request);
     return this.descriptors.page.listProductReviews.createStream(
       this.innerApiCalls.listProductReviews as GaxCall,
       request,
@@ -886,6 +1003,7 @@ export class ProductReviewsServiceClient {
     const defaultCallSettings = this._defaults['listProductReviews'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProductReviews iterate %j', request);
     return this.descriptors.page.listProductReviews.asyncIterate(
       this.innerApiCalls['listProductReviews'] as GaxCall,
       request as {},
@@ -1006,6 +1124,7 @@ export class ProductReviewsServiceClient {
   close(): Promise<void> {
     if (this.productReviewsServiceStub && !this._terminated) {
       return this.productReviewsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

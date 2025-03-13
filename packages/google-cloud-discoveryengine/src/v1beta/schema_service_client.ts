@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class SchemaServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class SchemaServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -215,6 +218,9 @@ export class SchemaServiceClient {
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/evaluations/{evaluation}'
       ),
+      groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -265,6 +271,10 @@ export class SchemaServiceClient {
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -336,6 +346,10 @@ export class SchemaServiceClient {
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -774,7 +788,36 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSchema(request, options, callback);
+    this._log.info('getSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.ISchema,
+          | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.ISchema,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -890,7 +933,37 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSchema(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSchema response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSchema request %j', request);
+    return this.innerApiCalls
+      .createSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.ICreateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSchema response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSchema()`.
@@ -911,6 +984,7 @@ export class SchemaServiceClient {
       protos.google.cloud.discoveryengine.v1beta.CreateSchemaMetadata
     >
   > {
+    this._log.info('createSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1032,7 +1106,37 @@ export class SchemaServiceClient {
         'schema.name': request.schema!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSchema(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSchema response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSchema request %j', request);
+    return this.innerApiCalls
+      .updateSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.ISchema,
+            protos.google.cloud.discoveryengine.v1beta.IUpdateSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSchema response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSchema()`.
@@ -1053,6 +1157,7 @@ export class SchemaServiceClient {
       protos.google.cloud.discoveryengine.v1beta.UpdateSchemaMetadata
     >
   > {
+    this._log.info('updateSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1169,7 +1274,37 @@ export class SchemaServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSchema(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSchema response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSchema request %j', request);
+    return this.innerApiCalls
+      .deleteSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.discoveryengine.v1beta.IDeleteSchemaMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSchema response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSchema()`.
@@ -1190,6 +1325,7 @@ export class SchemaServiceClient {
       protos.google.cloud.discoveryengine.v1beta.DeleteSchemaMetadata
     >
   > {
+    this._log.info('deleteSchema long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1313,11 +1449,37 @@ export class SchemaServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSchemas(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.ISchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSchemas request %j', request);
+    return this.innerApiCalls
+      .listSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.ISchema[],
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListSchemasResponse,
+        ]) => {
+          this._log.info('listSchemas values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSchemas`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1365,6 +1527,7 @@ export class SchemaServiceClient {
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSchemas stream %j', request);
     return this.descriptors.page.listSchemas.createStream(
       this.innerApiCalls.listSchemas as GaxCall,
       request,
@@ -1424,6 +1587,7 @@ export class SchemaServiceClient {
     const defaultCallSettings = this._defaults['listSchemas'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSchemas iterate %j', request);
     return this.descriptors.page.listSchemas.asyncIterate(
       this.innerApiCalls['listSchemas'] as GaxCall,
       request as {},
@@ -1540,7 +1704,7 @@ export class SchemaServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1553,6 +1717,20 @@ export class SchemaServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1589,6 +1767,13 @@ export class SchemaServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1624,11 +1809,11 @@ export class SchemaServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1637,6 +1822,20 @@ export class SchemaServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1667,7 +1866,7 @@ export class SchemaServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1680,6 +1879,20 @@ export class SchemaServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1804,6 +2017,65 @@ export class SchemaServiceClient {
   matchEvaluationFromEvaluationName(evaluationName: string) {
     return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
       .evaluation;
+  }
+
+  /**
+   * Return a fully-qualified groundingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} grounding_config
+   * @returns {string} Resource name string.
+   */
+  groundingConfigPath(
+    project: string,
+    location: string,
+    groundingConfig: string
+  ) {
+    return this.pathTemplates.groundingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      grounding_config: groundingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the grounding_config from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the grounding_config.
+   */
+  matchGroundingConfigFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).grounding_config;
   }
 
   /**
@@ -3081,6 +3353,109 @@ export class SchemaServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
@@ -4756,6 +5131,91 @@ export class SchemaServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSiteSearchEngineTargetSite resource name string.
    *
    * @param {string} project
@@ -4979,6 +5439,7 @@ export class SchemaServiceClient {
   close(): Promise<void> {
     if (this.schemaServiceStub && !this._terminated) {
       return this.schemaServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

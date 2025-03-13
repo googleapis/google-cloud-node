@@ -31,7 +31,7 @@
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
   * [Sql_instances_service.delete](#sql_instances_service.delete)
   * [Sql_instances_service.demote](#sql_instances_service.demote)
-  * [Sql_instances_service.demote_master](#sql_instances_service.demote_master)
+  * [Sql_instances_service.demote_main](#sql_instances_service.demote_main)
   * [Sql_instances_service.export](#sql_instances_service.export)
   * [Sql_instances_service.failover](#sql_instances_service.failover)
   * [Sql_instances_service.get](#sql_instances_service.get)
@@ -91,7 +91,7 @@
   * [Sql_instances_service.create_ephemeral](#sql_instances_service.create_ephemeral)
   * [Sql_instances_service.delete](#sql_instances_service.delete)
   * [Sql_instances_service.demote](#sql_instances_service.demote)
-  * [Sql_instances_service.demote_master](#sql_instances_service.demote_master)
+  * [Sql_instances_service.demote_main](#sql_instances_service.demote_main)
   * [Sql_instances_service.export](#sql_instances_service.export)
   * [Sql_instances_service.failover](#sql_instances_service.failover)
   * [Sql_instances_service.get](#sql_instances_service.get)
@@ -472,16 +472,16 @@ __Usage:__
 
 
 
-### Sql_instances_service.demote_master
+### Sql_instances_service.demote_main
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_main.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_main.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js`
+`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_main.js`
 
 
 -----
@@ -1492,16 +1492,16 @@ __Usage:__
 
 
 
-### Sql_instances_service.demote_master
+### Sql_instances_service.demote_main
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_main.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_main.js,samples/README.md)
 
 __Usage:__
 
 
-`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js`
+`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_main.js`
 
 
 -----

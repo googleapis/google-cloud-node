@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.9.0...dialogflow-cx-v4.10.0) (2025-02-28)
+
+
+### Features
+
+* [dialogflow-cx] added support for handlers ([#6055](https://github.com/googleapis/google-cloud-node/issues/6055)) ([3773a8c](https://github.com/googleapis/google-cloud-node/commit/3773a8c5ba59f9899c43e74ebcf8e5c31402b284))
+* [dialogflow-cx] exposed Zone Separation & Zone Isolation status of an agent ([#6062](https://github.com/googleapis/google-cloud-node/issues/6062)) ([9b7a778](https://github.com/googleapis/google-cloud-node/commit/9b7a778e7c9019e58818e20faf5f0cfcb9b3c10d))
+
 ## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.8.0...dialogflow-cx-v4.9.0) (2024-11-14)
 
 

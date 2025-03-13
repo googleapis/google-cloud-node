@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class EkmServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class EkmServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -516,7 +519,33 @@ export class EkmServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEkmConnection(request, options, callback);
+    this._log.info('getEkmConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConnection,
+          | protos.google.cloud.kms.v1.IGetEkmConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEkmConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEkmConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IEkmConnection,
+          protos.google.cloud.kms.v1.IGetEkmConnectionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEkmConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection} in a given
@@ -609,7 +638,33 @@ export class EkmServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEkmConnection(request, options, callback);
+    this._log.info('createEkmConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConnection,
+          | protos.google.cloud.kms.v1.ICreateEkmConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEkmConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEkmConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IEkmConnection,
+          protos.google.cloud.kms.v1.ICreateEkmConnectionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEkmConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an {@link protos.google.cloud.kms.v1.EkmConnection|EkmConnection}'s metadata.
@@ -696,7 +751,33 @@ export class EkmServiceClient {
         'ekm_connection.name': request.ekmConnection!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEkmConnection(request, options, callback);
+    this._log.info('updateEkmConnection request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConnection,
+          | protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEkmConnection response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEkmConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IEkmConnection,
+          protos.google.cloud.kms.v1.IUpdateEkmConnectionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEkmConnection response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig} singleton resource
@@ -780,7 +861,31 @@ export class EkmServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEkmConfig(request, options, callback);
+    this._log.info('getEkmConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConfig,
+          protos.google.cloud.kms.v1.IGetEkmConfigRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEkmConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEkmConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IEkmConfig,
+          protos.google.cloud.kms.v1.IGetEkmConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEkmConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the {@link protos.google.cloud.kms.v1.EkmConfig|EkmConfig} singleton resource
@@ -865,7 +970,31 @@ export class EkmServiceClient {
         'ekm_config.name': request.ekmConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEkmConfig(request, options, callback);
+    this._log.info('updateEkmConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IEkmConfig,
+          protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEkmConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEkmConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IEkmConfig,
+          protos.google.cloud.kms.v1.IUpdateEkmConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEkmConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Verifies that Cloud KMS can successfully connect to the external key
@@ -954,7 +1083,33 @@ export class EkmServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.verifyConnectivity(request, options, callback);
+    this._log.info('verifyConnectivity request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+          | protos.google.cloud.kms.v1.IVerifyConnectivityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyConnectivity response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyConnectivity(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IVerifyConnectivityResponse,
+          protos.google.cloud.kms.v1.IVerifyConnectivityRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyConnectivity response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1065,11 +1220,37 @@ export class EkmServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEkmConnections(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
+          | protos.google.cloud.kms.v1.IListEkmConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.kms.v1.IEkmConnection
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEkmConnections values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEkmConnections request %j', request);
+    return this.innerApiCalls
+      .listEkmConnections(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.IEkmConnection[],
+          protos.google.cloud.kms.v1.IListEkmConnectionsRequest | null,
+          protos.google.cloud.kms.v1.IListEkmConnectionsResponse,
+        ]) => {
+          this._log.info('listEkmConnections values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEkmConnections`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1123,6 +1304,7 @@ export class EkmServiceClient {
     const defaultCallSettings = this._defaults['listEkmConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEkmConnections stream %j', request);
     return this.descriptors.page.listEkmConnections.createStream(
       this.innerApiCalls.listEkmConnections as GaxCall,
       request,
@@ -1188,6 +1370,7 @@ export class EkmServiceClient {
     const defaultCallSettings = this._defaults['listEkmConnections'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEkmConnections iterate %j', request);
     return this.descriptors.page.listEkmConnections.asyncIterate(
       this.innerApiCalls['listEkmConnections'] as GaxCall,
       request as {},
@@ -1993,6 +2176,7 @@ export class EkmServiceClient {
   close(): Promise<void> {
     if (this.ekmServiceStub && !this._terminated) {
       return this.ekmServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

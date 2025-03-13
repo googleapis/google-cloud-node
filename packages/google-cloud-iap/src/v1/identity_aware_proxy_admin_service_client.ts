@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class IdentityAwareProxyAdminServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('iap');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class IdentityAwareProxyAdminServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -492,7 +495,31 @@ export class IdentityAwareProxyAdminServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setIamPolicy(request, options, callback);
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the access control policy for an Identity-Aware Proxy protected
@@ -581,7 +608,31 @@ export class IdentityAwareProxyAdminServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIamPolicy(request, options, callback);
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns permissions that a caller has on the Identity-Aware Proxy protected
@@ -672,7 +723,31 @@ export class IdentityAwareProxyAdminServiceClient {
         resource: request.resource ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.testIamPermissions(request, options, callback);
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the IAP settings on a particular IAP protected resource.
@@ -756,7 +831,31 @@ export class IdentityAwareProxyAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIapSettings(request, options, callback);
+    this._log.info('getIapSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IGetIapSettingsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIapSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIapSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IGetIapSettingsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIapSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the IAP settings on a particular IAP protected resource. It
@@ -850,7 +949,33 @@ export class IdentityAwareProxyAdminServiceClient {
         'iap_settings.name': request.iapSettings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateIapSettings(request, options, callback);
+    this._log.info('updateIapSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.IIapSettings,
+          | protos.google.cloud.iap.v1.IUpdateIapSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateIapSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateIapSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.IIapSettings,
+          protos.google.cloud.iap.v1.IUpdateIapSettingsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIapSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new TunnelDestGroup.
@@ -950,7 +1075,33 @@ export class IdentityAwareProxyAdminServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTunnelDestGroup(request, options, callback);
+    this._log.info('createTunnelDestGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          | protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTunnelDestGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.ICreateTunnelDestGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTunnelDestGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves an existing TunnelDestGroup.
@@ -1036,7 +1187,33 @@ export class IdentityAwareProxyAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTunnelDestGroup(request, options, callback);
+    this._log.info('getTunnelDestGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          | protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTunnelDestGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IGetTunnelDestGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTunnelDestGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a TunnelDestGroup.
@@ -1128,7 +1305,33 @@ export class IdentityAwareProxyAdminServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTunnelDestGroup(request, options, callback);
+    this._log.info('deleteTunnelDestGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTunnelDestGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.iap.v1.IDeleteTunnelDestGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTunnelDestGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a TunnelDestGroup.
@@ -1222,7 +1425,33 @@ export class IdentityAwareProxyAdminServiceClient {
         'tunnel_dest_group.name': request.tunnelDestGroup!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTunnelDestGroup(request, options, callback);
+    this._log.info('updateTunnelDestGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          | protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTunnelDestGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTunnelDestGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.iap.v1.ITunnelDestGroup,
+          protos.google.cloud.iap.v1.IUpdateTunnelDestGroupRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTunnelDestGroup response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1333,11 +1562,37 @@ export class IdentityAwareProxyAdminServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTunnelDestGroups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
+          | protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.iap.v1.ITunnelDestGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTunnelDestGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTunnelDestGroups request %j', request);
+    return this.innerApiCalls
+      .listTunnelDestGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.iap.v1.ITunnelDestGroup[],
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest | null,
+          protos.google.cloud.iap.v1.IListTunnelDestGroupsResponse,
+        ]) => {
+          this._log.info('listTunnelDestGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTunnelDestGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1383,6 +1638,7 @@ export class IdentityAwareProxyAdminServiceClient {
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTunnelDestGroups stream %j', request);
     return this.descriptors.page.listTunnelDestGroups.createStream(
       this.innerApiCalls.listTunnelDestGroups as GaxCall,
       request,
@@ -1440,6 +1696,7 @@ export class IdentityAwareProxyAdminServiceClient {
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTunnelDestGroups iterate %j', request);
     return this.descriptors.page.listTunnelDestGroups.asyncIterate(
       this.innerApiCalls['listTunnelDestGroups'] as GaxCall,
       request as {},
@@ -1577,6 +1834,7 @@ export class IdentityAwareProxyAdminServiceClient {
   close(): Promise<void> {
     if (this.identityAwareProxyAdminServiceStub && !this._terminated) {
       return this.identityAwareProxyAdminServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

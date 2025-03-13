@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -323,7 +323,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult()
@@ -362,7 +362,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult()
@@ -419,7 +419,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.search = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.search(request), expectedError);
@@ -447,7 +447,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult()
@@ -510,7 +510,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.createStream = stubPageStreamingCall(
         undefined,
@@ -564,7 +564,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.discoveryengine.v1alpha.SearchResponse.SearchResult()
@@ -613,7 +613,7 @@ describe('v1alpha.SearchServiceClient', () => {
         ['servingConfig']
       );
       request.servingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.search.asyncIterate = stubAsyncIterationCall(
         undefined,

@@ -338,7 +338,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -370,7 +370,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -418,7 +418,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubSimpleCall(
         undefined,
@@ -473,7 +473,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -507,7 +507,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -556,7 +556,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset', 'name']
       );
       request.dataset.name = defaultValue1;
-      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDatasetMetadata = stubSimpleCall(
         undefined,
@@ -617,7 +617,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -649,7 +649,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.Dataset()
       );
@@ -697,7 +697,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
@@ -751,7 +751,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -783,7 +783,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -831,7 +831,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubSimpleCall(
         undefined,
@@ -885,7 +885,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -920,7 +920,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -967,7 +967,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchDatasetErrors = stubSimpleCall(
         undefined,
@@ -999,7 +999,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -1051,7 +1051,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchDatasetErrors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1098,7 +1098,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.rpc.Status()),
         generateSampleMessage(new protos.google.rpc.Status()),
@@ -1142,7 +1142,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['dataset']
       );
       request.dataset = defaultValue1;
-      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchDatasetErrors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1185,7 +1185,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1225,7 +1225,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1283,7 +1283,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
@@ -1315,7 +1315,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1377,7 +1377,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -1430,7 +1430,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.maps.mapsplatformdatasets.v1.Dataset()
@@ -1481,7 +1481,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

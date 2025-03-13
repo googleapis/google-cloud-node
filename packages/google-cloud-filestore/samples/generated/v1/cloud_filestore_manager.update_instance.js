@@ -35,6 +35,9 @@ function main() {
    *  * "description"
    *  * "file_shares"
    *  * "labels"
+   *  * "performance_config"
+   *  * "deletion_protection_enabled"
+   *  * "deletion_protection_reason"
    */
   // const updateMask = {}
   /**

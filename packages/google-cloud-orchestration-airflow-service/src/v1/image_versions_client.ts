@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ImageVersionsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('orchestration-airflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class ImageVersionsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -484,7 +487,33 @@ export class ImageVersionsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listImageVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
+          | protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listImageVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listImageVersions request %j', request);
+    return this.innerApiCalls
+      .listImageVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.orchestration.airflow.service.v1.IImageVersion[],
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest | null,
+          protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsResponse,
+        ]) => {
+          this._log.info('listImageVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -526,6 +555,7 @@ export class ImageVersionsClient {
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImageVersions stream %j', request);
     return this.descriptors.page.listImageVersions.createStream(
       this.innerApiCalls.listImageVersions as GaxCall,
       request,
@@ -575,6 +605,7 @@ export class ImageVersionsClient {
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImageVersions iterate %j', request);
     return this.descriptors.page.listImageVersions.asyncIterate(
       this.innerApiCalls['listImageVersions'] as GaxCall,
       request as {},
@@ -806,6 +837,7 @@ export class ImageVersionsClient {
   close(): Promise<void> {
     if (this.imageVersionsStub && !this._terminated) {
       return this.imageVersionsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

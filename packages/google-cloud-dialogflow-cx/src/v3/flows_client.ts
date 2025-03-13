@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class FlowsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class FlowsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -671,7 +674,33 @@ export class FlowsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createFlow(request, options, callback);
+    this._log.info('createFlow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IFlow,
+          | protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createFlow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IFlow,
+          protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createFlow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a specified flow.
@@ -774,7 +803,33 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteFlow(request, options, callback);
+    this._log.info('deleteFlow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteFlow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFlow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the specified flow.
@@ -874,7 +929,33 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFlow(request, options, callback);
+    this._log.info('getFlow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IFlow,
+          | protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFlow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IFlow,
+          protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFlow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified flow.
@@ -984,7 +1065,33 @@ export class FlowsClient {
         'flow.name': request.flow!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateFlow(request, options, callback);
+    this._log.info('updateFlow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IFlow,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFlow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IFlow,
+          protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFlow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Validates the specified flow and creates or updates validation results.
@@ -1080,7 +1187,33 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.validateFlow(request, options, callback);
+    this._log.info('validateFlow request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IFlowValidationResult,
+          | protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('validateFlow response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .validateFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IFlowValidationResult,
+          protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('validateFlow response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the latest flow validation result. Flow validation is performed
@@ -1181,11 +1314,36 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getFlowValidationResult(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getFlowValidationResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IFlowValidationResult,
+          | protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFlowValidationResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFlowValidationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IFlowValidationResult,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFlowValidationResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1304,7 +1462,37 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.trainFlow(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('trainFlow response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('trainFlow request %j', request);
+    return this.innerApiCalls
+      .trainFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('trainFlow response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `trainFlow()`.
@@ -1322,6 +1510,7 @@ export class FlowsClient {
   ): Promise<
     LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
   > {
+    this._log.info('trainFlow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1468,7 +1657,37 @@ export class FlowsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importFlow(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importFlow response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importFlow request %j', request);
+    return this.innerApiCalls
+      .importFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IImportFlowResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importFlow response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importFlow()`.
@@ -1489,6 +1708,7 @@ export class FlowsClient {
       protos.google.protobuf.Struct
     >
   > {
+    this._log.info('importFlow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1631,7 +1851,37 @@ export class FlowsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportFlow(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportFlow response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportFlow request %j', request);
+    return this.innerApiCalls
+      .exportFlow(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IExportFlowResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportFlow response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportFlow()`.
@@ -1652,6 +1902,7 @@ export class FlowsClient {
       protos.google.protobuf.Struct
     >
   > {
+    this._log.info('exportFlow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1778,11 +2029,37 @@ export class FlowsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listFlows(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListFlowsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IFlow
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listFlows values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listFlows request %j', request);
+    return this.innerApiCalls
+      .listFlows(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.IFlow[],
+          protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListFlowsResponse,
+        ]) => {
+          this._log.info('listFlows values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listFlows`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1833,6 +2110,7 @@ export class FlowsClient {
     const defaultCallSettings = this._defaults['listFlows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFlows stream %j', request);
     return this.descriptors.page.listFlows.createStream(
       this.innerApiCalls.listFlows as GaxCall,
       request,
@@ -1895,6 +2173,7 @@ export class FlowsClient {
     const defaultCallSettings = this._defaults['listFlows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listFlows iterate %j', request);
     return this.descriptors.page.listFlows.asyncIterate(
       this.innerApiCalls['listFlows'] as GaxCall,
       request as {},
@@ -2011,7 +2290,7 @@ export class FlowsClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -2024,6 +2303,20 @@ export class FlowsClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2060,6 +2353,13 @@ export class FlowsClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2095,11 +2395,11 @@ export class FlowsClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -2108,6 +2408,20 @@ export class FlowsClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -2138,7 +2452,7 @@ export class FlowsClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -2151,6 +2465,20 @@ export class FlowsClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -4004,6 +4332,7 @@ export class FlowsClient {
   close(): Promise<void> {
     if (this.flowsStub && !this._terminated) {
       return this.flowsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
