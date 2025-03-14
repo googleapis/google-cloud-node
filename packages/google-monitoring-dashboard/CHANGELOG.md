@@ -1,21 +1,5 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.3.0...monitoring-dashboards-v4.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Features
-
-* [Many APIs] add request/response debug logging to gapics ([388b4e2](https://github.com/googleapis/google-cloud-node/commit/388b4e20329b7f6fc0dd061dddff573c45104213))
-
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-dashboards-v3.2.0...monitoring-dashboards-v3.3.0) (2024-05-21)
 
 
