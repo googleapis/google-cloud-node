@@ -2513,6 +2513,11 @@
                 "removeResourcePolicies"
               ]
             },
+            "ReportHostAsFaulty": {
+              "methods": [
+                "reportHostAsFaulty"
+              ]
+            },
             "Reset": {
               "methods": [
                 "reset"
@@ -2762,6 +2767,11 @@
             "RemoveResourcePolicies": {
               "methods": [
                 "removeResourcePolicies"
+              ]
+            },
+            "ReportHostAsFaulty": {
+              "methods": [
+                "reportHostAsFaulty"
               ]
             },
             "Reset": {

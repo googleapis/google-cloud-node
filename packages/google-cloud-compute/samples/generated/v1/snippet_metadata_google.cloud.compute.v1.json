@@ -11456,6 +11456,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Instances_ReportHostAsFaulty_async",
+            "title": "AcceleratorTypes reportHostAsFaulty Sample",
+            "origin": "API_DEFINITION",
+            "description": " Mark the host as faulty and try to restart the instance on a new host.",
+            "canonical": true,
+            "file": "instances.report_host_as_faulty.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReportHostAsFaulty",
+                "fullName": "google.cloud.compute.v1.Instances.ReportHostAsFaulty",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances_report_host_as_faulty_request_resource",
+                        "type": ".google.cloud.compute.v1.InstancesReportHostAsFaultyRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "zone",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InstancesClient",
+                    "fullName": "google.cloud.compute.v1.InstancesClient"
+                },
+                "method": {
+                    "shortName": "ReportHostAsFaulty",
+                    "fullName": "google.cloud.compute.v1.Instances.ReportHostAsFaulty",
+                    "service": {
+                        "shortName": "Instances",
+                        "fullName": "google.cloud.compute.v1.Instances"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Instances_Reset_async",
             "title": "AcceleratorTypes reset Sample",
             "origin": "API_DEFINITION",
