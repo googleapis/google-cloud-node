@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class DatasetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class DatasetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2385,7 +2388,33 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataset(request, options, callback);
+    this._log.info('getDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDataset,
+          | protos.google.cloud.aiplatform.v1.IGetDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDataset,
+          protos.google.cloud.aiplatform.v1.IGetDatasetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Dataset.
@@ -2483,7 +2512,33 @@ export class DatasetServiceClient {
         'dataset.name': request.dataset!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataset(request, options, callback);
+    this._log.info('updateDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDataset,
+          | protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDataset,
+          protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a DatasetVersion.
@@ -2585,7 +2640,36 @@ export class DatasetServiceClient {
         'dataset_version.name': request.datasetVersion!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDatasetVersion(request, options, callback);
+    this._log.info('updateDatasetVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDatasetVersion,
+          | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDatasetVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDatasetVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDatasetVersion,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateDatasetVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDatasetVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Dataset version.
@@ -2679,7 +2763,36 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDatasetVersion(request, options, callback);
+    this._log.info('getDatasetVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDatasetVersion,
+          | protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDatasetVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDatasetVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IDatasetVersion,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDatasetVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an AnnotationSpec.
@@ -2773,7 +2886,36 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAnnotationSpec(request, options, callback);
+    this._log.info('getAnnotationSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IAnnotationSpec,
+          | protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnnotationSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnnotationSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IAnnotationSpec,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnnotationSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2879,7 +3021,37 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDataset,
+            protos.google.cloud.aiplatform.v1.ICreateDatasetOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataset request %j', request);
+    return this.innerApiCalls
+      .createDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDataset,
+            protos.google.cloud.aiplatform.v1.ICreateDatasetOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataset()`.
@@ -2900,6 +3072,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.CreateDatasetOperationMetadata
     >
   > {
+    this._log.info('createDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3017,7 +3190,37 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataset request %j', request);
+    return this.innerApiCalls
+      .deleteDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataset()`.
@@ -3038,6 +3241,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3158,7 +3362,37 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importData(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IImportDataResponse,
+            protos.google.cloud.aiplatform.v1.IImportDataOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importData request %j', request);
+    return this.innerApiCalls
+      .importData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IImportDataResponse,
+            protos.google.cloud.aiplatform.v1.IImportDataOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importData()`.
@@ -3179,6 +3413,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.ImportDataOperationMetadata
     >
   > {
+    this._log.info('importData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3298,7 +3533,37 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportData(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IExportDataResponse,
+            protos.google.cloud.aiplatform.v1.IExportDataOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportData request %j', request);
+    return this.innerApiCalls
+      .exportData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IExportDataResponse,
+            protos.google.cloud.aiplatform.v1.IExportDataOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportData()`.
@@ -3319,6 +3584,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.ExportDataOperationMetadata
     >
   > {
+    this._log.info('exportData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3440,7 +3706,37 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDatasetVersion(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDatasetVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDatasetVersion request %j', request);
+    return this.innerApiCalls
+      .createDatasetVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDatasetVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDatasetVersion()`.
@@ -3461,6 +3757,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.CreateDatasetVersionOperationMetadata
     >
   > {
+    this._log.info('createDatasetVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3578,7 +3875,37 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDatasetVersion(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDatasetVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDatasetVersion request %j', request);
+    return this.innerApiCalls
+      .deleteDatasetVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDatasetVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDatasetVersion()`.
@@ -3599,6 +3926,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteDatasetVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3716,7 +4044,37 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreDatasetVersion(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreDatasetVersion response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreDatasetVersion request %j', request);
+    return this.innerApiCalls
+      .restoreDatasetVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreDatasetVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `restoreDatasetVersion()`.
@@ -3737,6 +4095,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.RestoreDatasetVersionOperationMetadata
     >
   > {
+    this._log.info('restoreDatasetVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3854,7 +4213,37 @@ export class DatasetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSavedQuery(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSavedQuery response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSavedQuery request %j', request);
+    return this.innerApiCalls
+      .deleteSavedQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSavedQuery response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSavedQuery()`.
@@ -3875,6 +4264,7 @@ export class DatasetServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteSavedQuery long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4011,7 +4401,33 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDatasets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDataset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatasets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatasets request %j', request);
+    return this.innerApiCalls
+      .listDatasets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDataset[],
+          protos.google.cloud.aiplatform.v1.IListDatasetsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListDatasetsResponse,
+        ]) => {
+          this._log.info('listDatasets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4076,6 +4492,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
       request,
@@ -4148,6 +4565,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
       request as {},
@@ -4258,7 +4676,33 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDatasetVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDatasetVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatasetVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatasetVersions request %j', request);
+    return this.innerApiCalls
+      .listDatasetVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDatasetVersion[],
+          protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse,
+        ]) => {
+          this._log.info('listDatasetVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4306,6 +4750,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listDatasetVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasetVersions stream %j', request);
     return this.descriptors.page.listDatasetVersions.createStream(
       this.innerApiCalls.listDatasetVersions as GaxCall,
       request,
@@ -4361,6 +4806,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listDatasetVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasetVersions iterate %j', request);
     return this.descriptors.page.listDatasetVersions.asyncIterate(
       this.innerApiCalls['listDatasetVersions'] as GaxCall,
       request as {},
@@ -4471,7 +4917,33 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDataItems(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDataItemsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDataItem
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDataItems values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDataItems request %j', request);
+    return this.innerApiCalls
+      .listDataItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDataItem[],
+          protos.google.cloud.aiplatform.v1.IListDataItemsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListDataItemsResponse,
+        ]) => {
+          this._log.info('listDataItems values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4519,6 +4991,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataItems stream %j', request);
     return this.descriptors.page.listDataItems.createStream(
       this.innerApiCalls.listDataItems as GaxCall,
       request,
@@ -4574,6 +5047,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDataItems iterate %j', request);
     return this.descriptors.page.listDataItems.asyncIterate(
       this.innerApiCalls['listDataItems'] as GaxCall,
       request as {},
@@ -4732,7 +5206,33 @@ export class DatasetServiceClient {
         dataset: request.dataset ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchDataItems(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
+          | protos.google.cloud.aiplatform.v1.ISearchDataItemsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDataItemView
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchDataItems values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchDataItems request %j', request);
+    return this.innerApiCalls
+      .searchDataItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IDataItemView[],
+          protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest | null,
+          protos.google.cloud.aiplatform.v1.ISearchDataItemsResponse,
+        ]) => {
+          this._log.info('searchDataItems values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4828,6 +5328,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['searchDataItems'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchDataItems stream %j', request);
     return this.descriptors.page.searchDataItems.createStream(
       this.innerApiCalls.searchDataItems as GaxCall,
       request,
@@ -4931,6 +5432,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['searchDataItems'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchDataItems iterate %j', request);
     return this.descriptors.page.searchDataItems.asyncIterate(
       this.innerApiCalls['searchDataItems'] as GaxCall,
       request as {},
@@ -5041,7 +5543,33 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSavedQueries(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+          | protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ISavedQuery
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSavedQueries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSavedQueries request %j', request);
+    return this.innerApiCalls
+      .listSavedQueries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ISavedQuery[],
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse,
+        ]) => {
+          this._log.info('listSavedQueries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5089,6 +5617,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSavedQueries stream %j', request);
     return this.descriptors.page.listSavedQueries.createStream(
       this.innerApiCalls.listSavedQueries as GaxCall,
       request,
@@ -5144,6 +5673,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSavedQueries iterate %j', request);
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
       request as {},
@@ -5256,7 +5786,33 @@ export class DatasetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAnnotations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
+          | protos.google.cloud.aiplatform.v1.IListAnnotationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IAnnotation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAnnotations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAnnotations request %j', request);
+    return this.innerApiCalls
+      .listAnnotations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IAnnotation[],
+          protos.google.cloud.aiplatform.v1.IListAnnotationsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListAnnotationsResponse,
+        ]) => {
+          this._log.info('listAnnotations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5304,6 +5860,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnnotations stream %j', request);
     return this.descriptors.page.listAnnotations.createStream(
       this.innerApiCalls.listAnnotations as GaxCall,
       request,
@@ -5359,6 +5916,7 @@ export class DatasetServiceClient {
     const defaultCallSettings = this._defaults['listAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAnnotations iterate %j', request);
     return this.descriptors.page.listAnnotations.asyncIterate(
       this.innerApiCalls['listAnnotations'] as GaxCall,
       request as {},
@@ -9376,6 +9934,7 @@ export class DatasetServiceClient {
   close(): Promise<void> {
     if (this.datasetServiceStub && !this._terminated) {
       return this.datasetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

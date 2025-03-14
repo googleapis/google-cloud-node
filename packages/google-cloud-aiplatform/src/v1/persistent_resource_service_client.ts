@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class PersistentResourceServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class PersistentResourceServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2331,7 +2334,36 @@ export class PersistentResourceServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPersistentResource(request, options, callback);
+    this._log.info('getPersistentResource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IPersistentResource,
+          | protos.google.cloud.aiplatform.v1.IGetPersistentResourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPersistentResource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPersistentResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IPersistentResource,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetPersistentResourceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPersistentResource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2443,11 +2475,37 @@ export class PersistentResourceServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPersistentResource(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1.ICreatePersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPersistentResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPersistentResource request %j', request);
+    return this.innerApiCalls
+      .createPersistentResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1.ICreatePersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPersistentResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPersistentResource()`.
@@ -2468,6 +2526,7 @@ export class PersistentResourceServiceClient {
       protos.google.cloud.aiplatform.v1.CreatePersistentResourceOperationMetadata
     >
   > {
+    this._log.info('createPersistentResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2585,11 +2644,37 @@ export class PersistentResourceServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePersistentResource(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePersistentResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePersistentResource request %j', request);
+    return this.innerApiCalls
+      .deletePersistentResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePersistentResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePersistentResource()`.
@@ -2610,6 +2695,7 @@ export class PersistentResourceServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deletePersistentResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2732,11 +2818,37 @@ export class PersistentResourceServiceClient {
         'persistent_resource.name': request.persistentResource!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePersistentResource(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1.IUpdatePersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePersistentResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePersistentResource request %j', request);
+    return this.innerApiCalls
+      .updatePersistentResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1.IUpdatePersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePersistentResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePersistentResource()`.
@@ -2757,6 +2869,7 @@ export class PersistentResourceServiceClient {
       protos.google.cloud.aiplatform.v1.UpdatePersistentResourceOperationMetadata
     >
   > {
+    this._log.info('updatePersistentResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2874,11 +2987,37 @@ export class PersistentResourceServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rebootPersistentResource(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1.IRebootPersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rebootPersistentResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rebootPersistentResource request %j', request);
+    return this.innerApiCalls
+      .rebootPersistentResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1.IRebootPersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rebootPersistentResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `rebootPersistentResource()`.
@@ -2899,6 +3038,7 @@ export class PersistentResourceServiceClient {
       protos.google.cloud.aiplatform.v1.RebootPersistentResourceOperationMetadata
     >
   > {
+    this._log.info('rebootPersistentResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3013,11 +3153,33 @@ export class PersistentResourceServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPersistentResources(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListPersistentResourcesRequest,
+          | protos.google.cloud.aiplatform.v1.IListPersistentResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IPersistentResource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPersistentResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPersistentResources request %j', request);
+    return this.innerApiCalls
+      .listPersistentResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IPersistentResource[],
+          protos.google.cloud.aiplatform.v1.IListPersistentResourcesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListPersistentResourcesResponse,
+        ]) => {
+          this._log.info('listPersistentResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3060,6 +3222,7 @@ export class PersistentResourceServiceClient {
     const defaultCallSettings = this._defaults['listPersistentResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPersistentResources stream %j', request);
     return this.descriptors.page.listPersistentResources.createStream(
       this.innerApiCalls.listPersistentResources as GaxCall,
       request,
@@ -3110,6 +3273,7 @@ export class PersistentResourceServiceClient {
     const defaultCallSettings = this._defaults['listPersistentResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPersistentResources iterate %j', request);
     return this.descriptors.page.listPersistentResources.asyncIterate(
       this.innerApiCalls['listPersistentResources'] as GaxCall,
       request as {},
@@ -7127,6 +7291,7 @@ export class PersistentResourceServiceClient {
   close(): Promise<void> {
     if (this.persistentResourceServiceStub && !this._terminated) {
       return this.persistentResourceServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

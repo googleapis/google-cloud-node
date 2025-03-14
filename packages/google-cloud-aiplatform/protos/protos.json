@@ -1,7 +1,4 @@
 {
-  "options": {
-    "syntax": "proto3"
-  },
   "nested": {
     "google": {
       "nested": {
@@ -2226,6 +2223,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "versionId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skipHfModelCache": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3876,9 +3887,23 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "googleSearch": {
+                          "type": "GoogleSearch",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "googleSearchRetrieval": {
                           "type": "GoogleSearchRetrieval",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enterpriseWebSearch": {
+                          "type": "EnterpriseWebSearch",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3892,6 +3917,9 @@
                         }
                       },
                       "nested": {
+                        "GoogleSearch": {
+                          "fields": {}
+                        },
                         "CodeExecution": {
                           "fields": {}
                         }
@@ -4124,7 +4152,14 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "engine": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -4136,6 +4171,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "EnterpriseWebSearch": {
+                      "fields": {}
                     },
                     "DynamicRetrievalConfig": {
                       "oneofs": {
@@ -4260,6 +4298,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "ranking": {
+                          "type": "Ranking",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4292,6 +4337,72 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Ranking": {
+                          "oneofs": {
+                            "rankingConfig": {
+                              "oneof": [
+                                "rankService",
+                                "llmRanker"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "rankService": {
+                              "type": "RankService",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "llmRanker": {
+                              "type": "LlmRanker",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RankService": {
+                              "oneofs": {
+                                "_modelName": {
+                                  "oneof": [
+                                    "modelName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "modelName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "LlmRanker": {
+                              "oneofs": {
+                                "_modelName": {
+                                  "oneof": [
+                                    "modelName"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "modelName": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
                               }
                             }
                           }
@@ -34226,6 +34337,35 @@
                         }
                       }
                     },
+                    "RagFileParsingConfig": {
+                      "oneofs": {
+                        "parser": {
+                          "oneof": [
+                            "layoutParser"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "layoutParser": {
+                          "type": "LayoutParser",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "LayoutParser": {
+                          "fields": {
+                            "processorName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "maxParsingRequestsPerMin": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "UploadRagFileConfig": {
                       "fields": {
                         "ragFileTransformationConfig": {
@@ -34290,6 +34430,13 @@
                         "ragFileTransformationConfig": {
                           "type": "RagFileTransformationConfig",
                           "id": 16
+                        },
+                        "ragFileParsingConfig": {
+                          "type": "RagFileParsingConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "maxEmbeddingRequestsPerMin": {
                           "type": "int32",
