@@ -25,7 +25,7 @@ import * as datacatalogModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LROperation, operationsProtos} from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -64,38 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
-}
-
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -159,16 +127,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.DataCatalogClient', () => {
+describe('v1beta1.DataCatalogClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new datacatalogModule.v1.DataCatalogClient();
+      const client = new datacatalogModule.v1beta1.DataCatalogClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new datacatalogModule.v1.DataCatalogClient();
+      const client = new datacatalogModule.v1beta1.DataCatalogClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -179,7 +147,8 @@ describe('v1.DataCatalogClient', () => {
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const servicePath = datacatalogModule.v1.DataCatalogClient.servicePath;
+        const servicePath =
+          datacatalogModule.v1beta1.DataCatalogClient.servicePath;
         assert.strictEqual(servicePath, 'datacatalog.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -187,14 +156,15 @@ describe('v1.DataCatalogClient', () => {
 
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint = datacatalogModule.v1.DataCatalogClient.apiEndpoint;
+        const apiEndpoint =
+          datacatalogModule.v1beta1.DataCatalogClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'datacatalog.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -202,7 +172,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
@@ -214,7 +184,7 @@ describe('v1.DataCatalogClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datacatalogModule.v1.DataCatalogClient();
+          const client = new datacatalogModule.v1beta1.DataCatalogClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'datacatalog.example.com');
           if (saved) {
@@ -227,7 +197,7 @@ describe('v1.DataCatalogClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datacatalogModule.v1.DataCatalogClient({
+          const client = new datacatalogModule.v1beta1.DataCatalogClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
@@ -242,7 +212,7 @@ describe('v1.DataCatalogClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new datacatalogModule.v1.DataCatalogClient({
+        new datacatalogModule.v1beta1.DataCatalogClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -250,25 +220,25 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('has port', () => {
-      const port = datacatalogModule.v1.DataCatalogClient.port;
+      const port = datacatalogModule.v1beta1.DataCatalogClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new datacatalogModule.v1.DataCatalogClient();
+      const client = new datacatalogModule.v1beta1.DataCatalogClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -278,7 +248,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('has close method for the initialized client', done => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -290,7 +260,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -302,7 +272,7 @@ describe('v1.DataCatalogClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -314,7 +284,7 @@ describe('v1.DataCatalogClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -337,23 +307,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('createEntryGroup', () => {
     it('invokes createEntryGroup without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryGroup()
+        new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.createEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.createEntryGroup(request);
@@ -370,23 +340,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createEntryGroup without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryGroup()
+        new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.createEntryGroup =
         stubSimpleCallWithCallback(expectedResponse);
@@ -395,7 +365,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntryGroup | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntryGroup | null
           ) => {
             if (err) {
               reject(err);
@@ -419,17 +389,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createEntryGroup with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -452,17 +422,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createEntryGroup with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -473,164 +443,26 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
-  describe('getEntryGroup', () => {
-    it('invokes getEntryGroup without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryGroup()
-      );
-      client.innerApiCalls.getEntryGroup = stubSimpleCall(expectedResponse);
-      const [response] = await client.getEntryGroup(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEntryGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEntryGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEntryGroup without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryGroup()
-      );
-      client.innerApiCalls.getEntryGroup =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getEntryGroup(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntryGroup | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getEntryGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEntryGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEntryGroup with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getEntryGroup = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getEntryGroup(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.getEntryGroup as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getEntryGroup as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getEntryGroup with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getEntryGroup(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
   describe('updateEntryGroup', () => {
     it('invokes updateEntryGroup without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest',
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
       const expectedHeaderRequestParams = `entry_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryGroup()
+        new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.updateEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.updateEntryGroup(request);
@@ -647,24 +479,24 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateEntryGroup without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest',
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
       const expectedHeaderRequestParams = `entry_group.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryGroup()
+        new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.updateEntryGroup =
         stubSimpleCallWithCallback(expectedResponse);
@@ -673,7 +505,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntryGroup | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntryGroup | null
           ) => {
             if (err) {
               reject(err);
@@ -697,18 +529,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateEntryGroup with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest',
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
@@ -731,18 +563,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateEntryGroup with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest',
         ['entryGroup', 'name']
       );
       request.entryGroup.name = defaultValue1;
@@ -753,19 +585,157 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
-  describe('deleteEntryGroup', () => {
-    it('invokes deleteEntryGroup without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+  describe('getEntryGroup', () => {
+    it('invokes getEntryGroup without error', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
+      );
+      client.innerApiCalls.getEntryGroup = stubSimpleCall(expectedResponse);
+      const [response] = await client.getEntryGroup(request);
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEntryGroup without error using callback', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
+      );
+      client.innerApiCalls.getEntryGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEntryGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntryGroup | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEntryGroup with error', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEntryGroup = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
+      const actualRequest = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEntryGroup with closed client', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEntryGroup(request), expectedError);
+      assert(stub.calledOnce);
+    });
+  });
+
+  describe('deleteEntryGroup', () => {
+    it('invokes deleteEntryGroup without error', async () => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      const stub = sinon.stub(client, 'warn');
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -788,17 +758,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteEntryGroup without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -837,17 +807,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteEntryGroup with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -870,17 +840,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteEntryGroup with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -893,23 +863,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('createEntry', () => {
     it('invokes createEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.createEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.createEntry(request);
@@ -926,23 +896,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.createEntry =
         stubSimpleCallWithCallback(expectedResponse);
@@ -951,7 +921,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntry | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntry | null
           ) => {
             if (err) {
               reject(err);
@@ -975,17 +945,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1008,17 +978,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1031,24 +1001,24 @@ describe('v1.DataCatalogClient', () => {
 
   describe('updateEntry', () => {
     it('invokes updateEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
       request.entry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryRequest',
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
       const expectedHeaderRequestParams = `entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.updateEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.updateEntry(request);
@@ -1065,24 +1035,24 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
       request.entry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryRequest',
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
       const expectedHeaderRequestParams = `entry.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.updateEntry =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1091,7 +1061,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntry | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntry | null
           ) => {
             if (err) {
               reject(err);
@@ -1115,18 +1085,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
       request.entry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryRequest',
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
@@ -1149,18 +1119,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
       request.entry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateEntryRequest',
         ['entry', 'name']
       );
       request.entry.name = defaultValue1;
@@ -1173,17 +1143,17 @@ describe('v1.DataCatalogClient', () => {
 
   describe('deleteEntry', () => {
     it('invokes deleteEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1206,17 +1176,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1255,17 +1225,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1288,17 +1258,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1311,23 +1281,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('getEntry', () => {
     it('invokes getEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.GetEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.getEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.getEntry(request);
@@ -1344,23 +1314,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.GetEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.getEntry =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1369,7 +1339,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntry | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntry | null
           ) => {
             if (err) {
               reject(err);
@@ -1393,17 +1363,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.GetEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1423,17 +1393,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        '.google.cloud.datacatalog.v1beta1.GetEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1446,17 +1416,17 @@ describe('v1.DataCatalogClient', () => {
 
   describe('lookupEntry', () => {
     it('invokes lookupEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.LookupEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.lookupEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.lookupEntry(request);
@@ -1465,17 +1435,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes lookupEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.LookupEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Entry()
+        new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.lookupEntry =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1484,7 +1454,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntry | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntry | null
           ) => {
             if (err) {
               reject(err);
@@ -1500,14 +1470,14 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes lookupEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.LookupEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupEntry = stubSimpleCall(
@@ -1519,14 +1489,14 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes lookupEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.LookupEntryRequest()
+        new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1535,303 +1505,25 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
-  describe('modifyEntryOverview', () => {
-    it('invokes modifyEntryOverview without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryOverview()
-      );
-      client.innerApiCalls.modifyEntryOverview =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.modifyEntryOverview(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.modifyEntryOverview as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.modifyEntryOverview as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes modifyEntryOverview without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.EntryOverview()
-      );
-      client.innerApiCalls.modifyEntryOverview =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.modifyEntryOverview(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntryOverview | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.modifyEntryOverview as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.modifyEntryOverview as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes modifyEntryOverview with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.modifyEntryOverview = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.modifyEntryOverview(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.modifyEntryOverview as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.modifyEntryOverview as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes modifyEntryOverview with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.modifyEntryOverview(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('modifyEntryContacts', () => {
-    it('invokes modifyEntryContacts without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Contacts()
-      );
-      client.innerApiCalls.modifyEntryContacts =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.modifyEntryContacts(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.modifyEntryContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.modifyEntryContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes modifyEntryContacts without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Contacts()
-      );
-      client.innerApiCalls.modifyEntryContacts =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.modifyEntryContacts(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IContacts | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.modifyEntryContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.modifyEntryContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes modifyEntryContacts with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.modifyEntryContacts = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.modifyEntryContacts(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.modifyEntryContacts as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.modifyEntryContacts as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes modifyEntryContacts with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.modifyEntryContacts(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
   describe('createTagTemplate', () => {
     it('invokes createTagTemplate without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplate()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.createTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.createTagTemplate(request);
@@ -1848,23 +1540,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTagTemplate without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplate()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.createTagTemplate =
         stubSimpleCallWithCallback(expectedResponse);
@@ -1873,7 +1565,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplate | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplate | null
           ) => {
             if (err) {
               reject(err);
@@ -1897,17 +1589,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTagTemplate with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1930,17 +1622,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTagTemplate with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1953,23 +1645,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('getTagTemplate', () => {
     it('invokes getTagTemplate without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplate()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.getTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.getTagTemplate(request);
@@ -1986,23 +1678,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getTagTemplate without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplate()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.getTagTemplate =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2011,7 +1703,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplate | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplate | null
           ) => {
             if (err) {
               reject(err);
@@ -2035,17 +1727,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getTagTemplate with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2068,17 +1760,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getTagTemplate with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2091,24 +1783,24 @@ describe('v1.DataCatalogClient', () => {
 
   describe('updateTagTemplate', () => {
     it('invokes updateTagTemplate without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest',
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplate()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.updateTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.updateTagTemplate(request);
@@ -2125,24 +1817,24 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTagTemplate without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest',
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_template.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplate()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.updateTagTemplate =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2151,7 +1843,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplate | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplate | null
           ) => {
             if (err) {
               reject(err);
@@ -2175,18 +1867,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTagTemplate with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest',
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
@@ -2209,18 +1901,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTagTemplate with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest',
         ['tagTemplate', 'name']
       );
       request.tagTemplate.name = defaultValue1;
@@ -2233,17 +1925,17 @@ describe('v1.DataCatalogClient', () => {
 
   describe('deleteTagTemplate', () => {
     it('invokes deleteTagTemplate without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2266,17 +1958,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTagTemplate without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2315,17 +2007,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTagTemplate with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2348,17 +2040,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTagTemplate with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2371,23 +2063,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('createTagTemplateField', () => {
     it('invokes createTagTemplateField without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.createTagTemplateField =
         stubSimpleCall(expectedResponse);
@@ -2405,23 +2097,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTagTemplateField without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.createTagTemplateField =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2430,7 +2122,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplateField | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplateField | null
           ) => {
             if (err) {
               reject(err);
@@ -2454,17 +2146,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTagTemplateField with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2490,17 +2182,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTagTemplateField with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2516,23 +2208,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('updateTagTemplateField', () => {
     it('invokes updateTagTemplateField without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.updateTagTemplateField =
         stubSimpleCall(expectedResponse);
@@ -2550,23 +2242,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTagTemplateField without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.updateTagTemplateField =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2575,7 +2267,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplateField | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplateField | null
           ) => {
             if (err) {
               reject(err);
@@ -2599,17 +2291,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTagTemplateField with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2635,17 +2327,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTagTemplateField with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2661,23 +2353,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('renameTagTemplateField', () => {
     it('invokes renameTagTemplateField without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.renameTagTemplateField =
         stubSimpleCall(expectedResponse);
@@ -2695,23 +2387,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes renameTagTemplateField without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.renameTagTemplateField =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2720,7 +2412,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplateField | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplateField | null
           ) => {
             if (err) {
               reject(err);
@@ -2744,17 +2436,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes renameTagTemplateField with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2780,17 +2472,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes renameTagTemplateField with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2806,23 +2498,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('renameTagTemplateFieldEnumValue', () => {
     it('invokes renameTagTemplateFieldEnumValue without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.renameTagTemplateFieldEnumValue =
         stubSimpleCall(expectedResponse);
@@ -2840,23 +2532,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes renameTagTemplateFieldEnumValue without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.TagTemplateField()
+        new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
       client.innerApiCalls.renameTagTemplateFieldEnumValue =
         stubSimpleCallWithCallback(expectedResponse);
@@ -2865,7 +2557,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITagTemplateField | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITagTemplateField | null
           ) => {
             if (err) {
               reject(err);
@@ -2889,17 +2581,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes renameTagTemplateFieldEnumValue with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2925,17 +2617,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes renameTagTemplateFieldEnumValue with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
+        new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2951,17 +2643,17 @@ describe('v1.DataCatalogClient', () => {
 
   describe('deleteTagTemplateField', () => {
     it('invokes deleteTagTemplateField without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2985,17 +2677,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTagTemplateField without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3034,17 +2726,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTagTemplateField with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3070,17 +2762,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTagTemplateField with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3096,23 +2788,23 @@ describe('v1.DataCatalogClient', () => {
 
   describe('createTag', () => {
     it('invokes createTag without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Tag()
+        new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
       client.innerApiCalls.createTag = stubSimpleCall(expectedResponse);
       const [response] = await client.createTag(request);
@@ -3129,23 +2821,23 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTag without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Tag()
+        new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
       client.innerApiCalls.createTag =
         stubSimpleCallWithCallback(expectedResponse);
@@ -3154,7 +2846,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITag | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITag | null
           ) => {
             if (err) {
               reject(err);
@@ -3178,17 +2870,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTag with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3208,17 +2900,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes createTag with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.CreateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.CreateTagRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3231,24 +2923,24 @@ describe('v1.DataCatalogClient', () => {
 
   describe('updateTag', () => {
     it('invokes updateTag without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
       request.tag ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagRequest',
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Tag()
+        new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
       client.innerApiCalls.updateTag = stubSimpleCall(expectedResponse);
       const [response] = await client.updateTag(request);
@@ -3265,24 +2957,24 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTag without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
       request.tag ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagRequest',
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.Tag()
+        new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
       client.innerApiCalls.updateTag =
         stubSimpleCallWithCallback(expectedResponse);
@@ -3291,7 +2983,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITag | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITag | null
           ) => {
             if (err) {
               reject(err);
@@ -3315,18 +3007,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTag with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
       request.tag ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagRequest',
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
@@ -3346,18 +3038,18 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes updateTag with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
       request.tag ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        '.google.cloud.datacatalog.v1beta1.UpdateTagRequest',
         ['tag', 'name']
       );
       request.tag.name = defaultValue1;
@@ -3370,17 +3062,17 @@ describe('v1.DataCatalogClient', () => {
 
   describe('deleteTag', () => {
     it('invokes deleteTag without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3403,17 +3095,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTag without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3452,17 +3144,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTag with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3482,17 +3174,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes deleteTag with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
+        new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        '.google.cloud.datacatalog.v1beta1.DeleteTagRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3503,282 +3195,9 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
-  describe('starEntry', () => {
-    it('invokes starEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.StarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.StarEntryResponse()
-      );
-      client.innerApiCalls.starEntry = stubSimpleCall(expectedResponse);
-      const [response] = await client.starEntry(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.starEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.starEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes starEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.StarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.StarEntryResponse()
-      );
-      client.innerApiCalls.starEntry =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.starEntry(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IStarEntryResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.starEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.starEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes starEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.StarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.starEntry = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.starEntry(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.starEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.starEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes starEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.StarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.StarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.starEntry(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('unstarEntry', () => {
-    it('invokes unstarEntry without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UnstarEntryResponse()
-      );
-      client.innerApiCalls.unstarEntry = stubSimpleCall(expectedResponse);
-      const [response] = await client.unstarEntry(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.unstarEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.unstarEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes unstarEntry without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UnstarEntryResponse()
-      );
-      client.innerApiCalls.unstarEntry =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.unstarEntry(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IUnstarEntryResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.unstarEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.unstarEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes unstarEntry with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.unstarEntry = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.unstarEntry(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.unstarEntry as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.unstarEntry as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes unstarEntry with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.unstarEntry(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3811,7 +3230,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3860,7 +3279,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes setIamPolicy with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3893,7 +3312,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes setIamPolicy with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3916,7 +3335,7 @@ describe('v1.DataCatalogClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3949,7 +3368,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -3998,7 +3417,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getIamPolicy with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4031,7 +3450,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes getIamPolicy with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4054,7 +3473,7 @@ describe('v1.DataCatalogClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4088,7 +3507,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4137,7 +3556,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes testIamPermissions with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4170,7 +3589,7 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes testIamPermissions with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -4191,856 +3610,26 @@ describe('v1.DataCatalogClient', () => {
     });
   });
 
-  describe('setConfig', () => {
-    it('invokes setConfig without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SetConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.SetConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.MigrationConfig()
-      );
-      client.innerApiCalls.setConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.setConfig(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setConfig without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SetConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.SetConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.MigrationConfig()
-      );
-      client.innerApiCalls.setConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IMigrationConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.setConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setConfig with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SetConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.SetConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setConfig = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.setConfig(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.setConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.setConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes setConfig with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SetConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.SetConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.setConfig(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('retrieveConfig', () => {
-    it('invokes retrieveConfig without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.OrganizationConfig()
-      );
-      client.innerApiCalls.retrieveConfig = stubSimpleCall(expectedResponse);
-      const [response] = await client.retrieveConfig(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.retrieveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retrieveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retrieveConfig without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.OrganizationConfig()
-      );
-      client.innerApiCalls.retrieveConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.retrieveConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IOrganizationConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.retrieveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retrieveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retrieveConfig with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.retrieveConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.retrieveConfig(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.retrieveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retrieveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retrieveConfig with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.retrieveConfig(request), expectedError);
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('retrieveEffectiveConfig', () => {
-    it('invokes retrieveEffectiveConfig without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.MigrationConfig()
-      );
-      client.innerApiCalls.retrieveEffectiveConfig =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.retrieveEffectiveConfig(request);
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.retrieveEffectiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retrieveEffectiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retrieveEffectiveConfig without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.MigrationConfig()
-      );
-      client.innerApiCalls.retrieveEffectiveConfig =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.retrieveEffectiveConfig(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IMigrationConfig | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.retrieveEffectiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retrieveEffectiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retrieveEffectiveConfig with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.retrieveEffectiveConfig = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.retrieveEffectiveConfig(request),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.retrieveEffectiveConfig as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.retrieveEffectiveConfig as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes retrieveEffectiveConfig with closed client', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.RetrieveEffectiveConfigRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.retrieveEffectiveConfig(request),
-        expectedError
-      );
-      assert(stub.calledOnce);
-    });
-  });
-
-  describe('reconcileTags', () => {
-    it('invokes reconcileTags without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ReconcileTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ReconcileTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.reconcileTags =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.reconcileTags(request);
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes reconcileTags without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ReconcileTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ReconcileTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.reconcileTags =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.reconcileTags(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
-              protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.datacatalog.v1.IReconcileTagsResponse,
-        protos.google.cloud.datacatalog.v1.IReconcileTagsMetadata
-      >;
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes reconcileTags with call error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ReconcileTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ReconcileTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.reconcileTags = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.reconcileTags(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes reconcileTags with LRO error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ReconcileTagsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ReconcileTagsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.reconcileTags = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.reconcileTags(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.reconcileTags as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkReconcileTagsProgress without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkReconcileTagsProgress(
-        expectedResponse.name
-      );
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkReconcileTagsProgress with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkReconcileTagsProgress(''),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('importEntries', () => {
-    it('invokes importEntries without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ImportEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ImportEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importEntries =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importEntries(request);
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importEntries without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ImportEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ImportEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importEntries =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importEntries(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
-              protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.datacatalog.v1.IImportEntriesResponse,
-        protos.google.cloud.datacatalog.v1.IImportEntriesMetadata
-      >;
-      const [response] = await operation.promise();
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importEntries with call error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ImportEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ImportEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importEntries = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.importEntries(request), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importEntries with LRO error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ImportEntriesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ImportEntriesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importEntries = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importEntries(request);
-      await assert.rejects(operation.promise(), expectedError);
-      assert(stub.calledOnce);
-      const actualRequest = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntries as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportEntriesProgress without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportEntriesProgress(
-        expectedResponse.name
-      );
-      assert(stub.calledOnce);
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportEntriesProgress with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const stub = sinon.stub(client, 'warn');
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkImportEntriesProgress(''),
-        expectedError
-      );
-      assert(stub.calledOnce);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
   describe('searchCatalog', () => {
     it('invokes searchCatalog without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
       ];
       client.innerApiCalls.searchCatalog = stubSimpleCall(expectedResponse);
@@ -5050,24 +3639,24 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes searchCatalog without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
       ];
       client.innerApiCalls.searchCatalog =
@@ -5078,7 +3667,7 @@ describe('v1.DataCatalogClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datacatalog.v1.ISearchCatalogResult[]
+              | protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[]
               | null
           ) => {
             if (err) {
@@ -5095,14 +3684,14 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes searchCatalog with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedError = new Error('expected');
       client.innerApiCalls.searchCatalog = stubSimpleCall(
@@ -5114,36 +3703,36 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes searchCatalogStream without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
       ];
       client.descriptors.page.searchCatalog.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.searchCatalogStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.SearchCatalogResult[] =
+        const responses: protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.datacatalog.v1.SearchCatalogResult
+            response: protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult
           ) => {
             responses.push(response);
           }
@@ -5166,26 +3755,26 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes searchCatalogStream with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedError = new Error('expected');
       client.descriptors.page.searchCatalog.createStream =
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.searchCatalogStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.SearchCatalogResult[] =
+        const responses: protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult[] =
           [];
         stream.on(
           'data',
           (
-            response: protos.google.cloud.datacatalog.v1.SearchCatalogResult
+            response: protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult
           ) => {
             responses.push(response);
           }
@@ -5207,29 +3796,29 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with searchCatalog without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.SearchCatalogResult()
+          new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
         ),
       ];
       client.descriptors.page.searchCatalog.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.v1.ISearchCatalogResult[] =
+      const responses: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[] =
         [];
       const iterable = client.searchCatalogAsync(request);
       for await (const resource of iterable) {
@@ -5246,21 +3835,21 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with searchCatalog with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.SearchCatalogRequest()
+        new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
       const expectedError = new Error('expected');
       client.descriptors.page.searchCatalog.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.searchCatalogAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.v1.ISearchCatalogResult[] =
+        const responses: protos.google.cloud.datacatalog.v1beta1.ISearchCatalogResult[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -5278,30 +3867,30 @@ describe('v1.DataCatalogClient', () => {
 
   describe('listEntryGroups', () => {
     it('invokes listEntryGroups without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
       ];
       client.innerApiCalls.listEntryGroups = stubSimpleCall(expectedResponse);
@@ -5319,30 +3908,30 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntryGroups without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
       ];
       client.innerApiCalls.listEntryGroups =
@@ -5352,7 +3941,9 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntryGroup[] | null
+            result?:
+              | protos.google.cloud.datacatalog.v1beta1.IEntryGroup[]
+              | null
           ) => {
             if (err) {
               reject(err);
@@ -5376,17 +3967,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntryGroups with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5409,40 +4000,41 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntryGroupsStream without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
       ];
       client.descriptors.page.listEntryGroups.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listEntryGroupsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.EntryGroup[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.EntryGroup[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.datacatalog.v1.EntryGroup) => {
+          (response: protos.google.cloud.datacatalog.v1beta1.EntryGroup) => {
             responses.push(response);
           }
         );
@@ -5471,17 +4063,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntryGroupsStream with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5491,10 +4083,11 @@ describe('v1.DataCatalogClient', () => {
         stubPageStreamingCall(undefined, expectedError);
       const stream = client.listEntryGroupsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.EntryGroup[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.EntryGroup[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.datacatalog.v1.EntryGroup) => {
+          (response: protos.google.cloud.datacatalog.v1beta1.EntryGroup) => {
             responses.push(response);
           }
         );
@@ -5522,35 +4115,36 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with listEntryGroups without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
         generateSampleMessage(
-          new protos.google.cloud.datacatalog.v1.EntryGroup()
+          new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
         ),
       ];
       client.descriptors.page.listEntryGroups.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.v1.IEntryGroup[] = [];
+      const responses: protos.google.cloud.datacatalog.v1beta1.IEntryGroup[] =
+        [];
       const iterable = client.listEntryGroupsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5573,17 +4167,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with listEntryGroups with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5593,7 +4187,8 @@ describe('v1.DataCatalogClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listEntryGroupsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.v1.IEntryGroup[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.IEntryGroup[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5617,25 +4212,31 @@ describe('v1.DataCatalogClient', () => {
 
   describe('listEntries', () => {
     it('invokes listEntries without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
       ];
       client.innerApiCalls.listEntries = stubSimpleCall(expectedResponse);
       const [response] = await client.listEntries(request);
@@ -5652,25 +4253,31 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntries without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
       ];
       client.innerApiCalls.listEntries =
         stubSimpleCallWithCallback(expectedResponse);
@@ -5679,7 +4286,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.IEntry[] | null
+            result?: protos.google.cloud.datacatalog.v1beta1.IEntry[] | null
           ) => {
             if (err) {
               reject(err);
@@ -5703,17 +4310,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntries with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5736,34 +4343,40 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntriesStream without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
       ];
       client.descriptors.page.listEntries.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listEntriesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.Entry[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.Entry[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.datacatalog.v1.Entry) => {
+          (response: protos.google.cloud.datacatalog.v1beta1.Entry) => {
             responses.push(response);
           }
         );
@@ -5792,17 +4405,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listEntriesStream with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5814,10 +4427,10 @@ describe('v1.DataCatalogClient', () => {
       );
       const stream = client.listEntriesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.Entry[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.Entry[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.datacatalog.v1.Entry) => {
+          (response: protos.google.cloud.datacatalog.v1beta1.Entry) => {
             responses.push(response);
           }
         );
@@ -5845,29 +4458,35 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with listEntries without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Entry()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Entry()
+        ),
       ];
       client.descriptors.page.listEntries.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.v1.IEntry[] = [];
+      const responses: protos.google.cloud.datacatalog.v1beta1.IEntry[] = [];
       const iterable = client.listEntriesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5890,17 +4509,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with listEntries with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        '.google.cloud.datacatalog.v1beta1.ListEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5912,7 +4531,7 @@ describe('v1.DataCatalogClient', () => {
       );
       const iterable = client.listEntriesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.v1.IEntry[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.IEntry[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5936,25 +4555,31 @@ describe('v1.DataCatalogClient', () => {
 
   describe('listTags', () => {
     it('invokes listTags without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
       ];
       client.innerApiCalls.listTags = stubSimpleCall(expectedResponse);
       const [response] = await client.listTags(request);
@@ -5971,25 +4596,31 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listTags without error using callback', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
       ];
       client.innerApiCalls.listTags =
         stubSimpleCallWithCallback(expectedResponse);
@@ -5998,7 +4629,7 @@ describe('v1.DataCatalogClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.datacatalog.v1.ITag[] | null
+            result?: protos.google.cloud.datacatalog.v1beta1.ITag[] | null
           ) => {
             if (err) {
               reject(err);
@@ -6022,17 +4653,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listTags with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6052,34 +4683,40 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listTagsStream without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
       ];
       client.descriptors.page.listTags.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listTagsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.Tag[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.Tag[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.datacatalog.v1.Tag) => {
+          (response: protos.google.cloud.datacatalog.v1beta1.Tag) => {
             responses.push(response);
           }
         );
@@ -6108,17 +4745,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('invokes listTagsStream with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6130,10 +4767,10 @@ describe('v1.DataCatalogClient', () => {
       );
       const stream = client.listTagsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.datacatalog.v1.Tag[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.Tag[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.datacatalog.v1.Tag) => {
+          (response: protos.google.cloud.datacatalog.v1beta1.Tag) => {
             responses.push(response);
           }
         );
@@ -6161,29 +4798,35 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with listTags without error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
-        generateSampleMessage(new protos.google.cloud.datacatalog.v1.Tag()),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.datacatalog.v1beta1.Tag()
+        ),
       ];
       client.descriptors.page.listTags.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.datacatalog.v1.ITag[] = [];
+      const responses: protos.google.cloud.datacatalog.v1beta1.ITag[] = [];
       const iterable = client.listTagsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -6205,17 +4848,17 @@ describe('v1.DataCatalogClient', () => {
     });
 
     it('uses async iteration with listTags with error', async () => {
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.datacatalog.v1.ListTagsRequest()
+        new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        '.google.cloud.datacatalog.v1beta1.ListTagsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6227,7 +4870,7 @@ describe('v1.DataCatalogClient', () => {
       );
       const iterable = client.listTagsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.datacatalog.v1.ITag[] = [];
+        const responses: protos.google.cloud.datacatalog.v1beta1.ITag[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -6257,7 +4900,7 @@ describe('v1.DataCatalogClient', () => {
         entry_group: 'entryGroupValue',
         entry: 'entryValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6332,7 +4975,7 @@ describe('v1.DataCatalogClient', () => {
         location: 'locationValue',
         entry_group: 'entryGroupValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6395,7 +5038,7 @@ describe('v1.DataCatalogClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6446,7 +5089,7 @@ describe('v1.DataCatalogClient', () => {
         taxonomy: 'taxonomyValue',
         policy_tag: 'policyTagValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6519,7 +5162,7 @@ describe('v1.DataCatalogClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6561,7 +5204,7 @@ describe('v1.DataCatalogClient', () => {
         entry: 'entryValue',
         tag: 'tagValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6647,7 +5290,7 @@ describe('v1.DataCatalogClient', () => {
         location: 'locationValue',
         tag_template: 'tagTemplateValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6712,7 +5355,7 @@ describe('v1.DataCatalogClient', () => {
         tag_template: 'tagTemplateValue',
         field: 'fieldValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6793,7 +5436,7 @@ describe('v1.DataCatalogClient', () => {
         tag_template_field_id: 'tagTemplateFieldIdValue',
         enum_value_display_name: 'enumValueDisplayNameValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -6906,7 +5549,7 @@ describe('v1.DataCatalogClient', () => {
         location: 'locationValue',
         taxonomy: 'taxonomyValue',
       };
-      const client = new datacatalogModule.v1.DataCatalogClient({
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
