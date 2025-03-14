@@ -360,7 +360,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.Connection()
       );
@@ -391,7 +391,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.Connection()
       );
@@ -438,7 +438,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnection = stubSimpleCall(
         undefined,
@@ -490,7 +490,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GitRepositoryLink()
       );
@@ -522,7 +522,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GitRepositoryLink()
       );
@@ -569,7 +569,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGitRepositoryLink = stubSimpleCall(
         undefined,
@@ -621,7 +621,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadWriteTokenResponse()
       );
@@ -653,7 +653,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadWriteTokenResponse()
       );
@@ -700,7 +700,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchReadWriteToken = stubSimpleCall(
         undefined,
@@ -752,7 +752,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadTokenResponse()
       );
@@ -783,7 +783,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadTokenResponse()
       );
@@ -830,7 +830,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchReadToken = stubSimpleCall(
         undefined,
@@ -882,7 +882,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse()
       );
@@ -914,7 +914,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse()
       );
@@ -961,7 +961,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchGitHubInstallations = stubSimpleCall(
         undefined,
@@ -1019,7 +1019,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1052,7 +1052,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1106,7 +1106,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnection = stubLongRunningCall(
         undefined,
@@ -1137,7 +1137,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnection = stubLongRunningCall(
         undefined,
@@ -1214,7 +1214,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1248,7 +1248,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1303,7 +1303,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnection = stubLongRunningCall(
         undefined,
@@ -1335,7 +1335,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection', 'name']
       );
       request.connection.name = defaultValue1;
-      const expectedHeaderRequestParams = `connection.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnection = stubLongRunningCall(
         undefined,
@@ -1411,7 +1411,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1444,7 +1444,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1498,7 +1498,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnection = stubLongRunningCall(
         undefined,
@@ -1529,7 +1529,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnection = stubLongRunningCall(
         undefined,
@@ -1605,7 +1605,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1638,7 +1638,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1692,7 +1692,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGitRepositoryLink = stubLongRunningCall(
         undefined,
@@ -1726,7 +1726,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGitRepositoryLink = stubLongRunningCall(
         undefined,
@@ -1803,7 +1803,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1836,7 +1836,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1890,7 +1890,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGitRepositoryLink = stubLongRunningCall(
         undefined,
@@ -1924,7 +1924,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGitRepositoryLink = stubLongRunningCall(
         undefined,
@@ -2001,7 +2001,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.Connection()
@@ -2040,7 +2040,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.Connection()
@@ -2097,7 +2097,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnections = stubSimpleCall(
         undefined,
@@ -2128,7 +2128,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.Connection()
@@ -2189,7 +2189,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2239,7 +2239,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.Connection()
@@ -2289,7 +2289,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2332,7 +2332,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.GitRepositoryLink()
@@ -2372,7 +2372,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.GitRepositoryLink()
@@ -2429,7 +2429,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGitRepositoryLinks = stubSimpleCall(
         undefined,
@@ -2463,7 +2463,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.GitRepositoryLink()
@@ -2532,7 +2532,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGitRepositoryLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2590,7 +2590,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.GitRepositoryLink()
@@ -2644,7 +2644,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGitRepositoryLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2691,7 +2691,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.LinkableGitRepository()
@@ -2731,7 +2731,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.LinkableGitRepository()
@@ -2788,7 +2788,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchLinkableGitRepositories = stubSimpleCall(
         undefined,
@@ -2822,7 +2822,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.LinkableGitRepository()
@@ -2894,7 +2894,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchLinkableGitRepositories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2955,7 +2955,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.developerconnect.v1.LinkableGitRepository()
@@ -3009,7 +3009,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['connection']
       );
       request.connection = defaultValue1;
-      const expectedHeaderRequestParams = `connection=${defaultValue1}`;
+      const expectedHeaderRequestParams = `connection=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchLinkableGitRepositories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3056,7 +3056,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchGitRefs = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchGitRefs(request);
@@ -3085,7 +3085,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.fetchGitRefs =
         stubSimpleCallWithCallback(expectedResponse);
@@ -3127,7 +3127,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchGitRefs = stubSimpleCall(
         undefined,
@@ -3158,7 +3158,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchGitRefs.createStream =
         stubPageStreamingCall(expectedResponse);
@@ -3205,7 +3205,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchGitRefs.createStream = stubPageStreamingCall(
         undefined,
@@ -3253,7 +3253,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.fetchGitRefs.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
@@ -3292,7 +3292,7 @@ describe('v1.DeveloperConnectClient', () => {
         ['gitRepositoryLink']
       );
       request.gitRepositoryLink = defaultValue1;
-      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1}`;
+      const expectedHeaderRequestParams = `git_repository_link=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.fetchGitRefs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.5.2...tasks-v6.0.0) (2025-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [5.5.2](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.5.1...tasks-v5.5.2) (2024-12-18)
 
 

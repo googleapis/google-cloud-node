@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -68,6 +69,8 @@ export class KeyManagementServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -104,7 +107,7 @@ export class KeyManagementServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -556,7 +559,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getKeyRing(request, options, callback);
+    this._log.info('getKeyRing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.IGetKeyRingRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKeyRing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKeyRing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.IGetKeyRingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKeyRing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns metadata for a given {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}, as
@@ -641,7 +668,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCryptoKey(request, options, callback);
+    this._log.info('getCryptoKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCryptoKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCryptoKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IGetCryptoKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCryptoKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns metadata for a given
@@ -727,7 +778,33 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCryptoKeyVersion(request, options, callback);
+    this._log.info('getCryptoKeyVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCryptoKeyVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCryptoKeyVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IGetCryptoKeyVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the public key for the given
@@ -742,6 +819,14 @@ export class KeyManagementServiceClient {
    * @param {string} request.name
    *   Required. The {@link protos.google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} public key to get.
+   * @param {google.cloud.kms.v1.PublicKey.PublicKeyFormat} [request.publicKeyFormat]
+   *   Optional. The {@link protos.google.cloud.kms.v1.PublicKey|PublicKey} format specified
+   *   by the user. This field is required for PQC algorithms. If specified, the
+   *   public key will be exported through the
+   *   {@link protos.google.cloud.kms.v1.PublicKey.public_key|public_key} field in the
+   *   requested format. Otherwise, the {@link protos.google.cloud.kms.v1.PublicKey.pem|pem}
+   *   field will be populated for non-PQC algorithms, and an error will be
+   *   returned for PQC algorithms.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -815,7 +900,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPublicKey(request, options, callback);
+    this._log.info('getPublicKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IPublicKey,
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPublicKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPublicKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IPublicKey,
+          protos.google.cloud.kms.v1.IGetPublicKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPublicKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns metadata for a given {@link protos.google.cloud.kms.v1.ImportJob|ImportJob}.
@@ -898,7 +1007,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getImportJob(request, options, callback);
+    this._log.info('getImportJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.IGetImportJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getImportJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.IGetImportJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getImportJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a new {@link protos.google.cloud.kms.v1.KeyRing|KeyRing} in a given Project and
@@ -989,7 +1122,31 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createKeyRing(request, options, callback);
+    this._log.info('createKeyRing request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createKeyRing response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createKeyRing(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IKeyRing,
+          protos.google.cloud.kms.v1.ICreateKeyRingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createKeyRing response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a new {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} within a
@@ -1092,7 +1249,31 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCryptoKey(request, options, callback);
+    this._log.info('createCryptoKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCryptoKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCryptoKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCryptoKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a new {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in a
@@ -1192,11 +1373,33 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createCryptoKeyVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCryptoKeyVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCryptoKeyVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.ICreateCryptoKeyVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Import wrapped key material into a
@@ -1229,7 +1432,9 @@ export class KeyManagementServiceClient {
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
    *   {@link protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent},
-   *   have been previously created via {@link protos.|ImportCryptoKeyVersion}, and be in
+   *   have been previously created via
+   *   {@link protos.google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion},
+   *   and be in
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}
    *   or
    *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
@@ -1373,11 +1578,33 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('importCryptoKeyVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('importCryptoKeyVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importCryptoKeyVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IImportCryptoKeyVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a new {@link protos.google.cloud.kms.v1.ImportJob|ImportJob} within a
@@ -1471,7 +1698,31 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createImportJob(request, options, callback);
+    this._log.info('createImportJob request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.ICreateImportJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createImportJob response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createImportJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IImportJob,
+          protos.google.cloud.kms.v1.ICreateImportJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createImportJob response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
@@ -1555,7 +1806,31 @@ export class KeyManagementServiceClient {
         'crypto_key.name': request.cryptoKey!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCryptoKey(request, options, callback);
+    this._log.info('updateCryptoKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCryptoKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCryptoKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKey,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCryptoKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}'s
@@ -1659,11 +1934,33 @@ export class KeyManagementServiceClient {
         'crypto_key_version.name': request.cryptoKeyVersion!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateCryptoKeyVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCryptoKeyVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCryptoKeyVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          protos.google.cloud.kms.v1.IUpdateCryptoKeyVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the version of a {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} that
@@ -1768,11 +2065,36 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCryptoKeyPrimaryVersion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateCryptoKeyPrimaryVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKey,
+          | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCryptoKeyPrimaryVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCryptoKeyPrimaryVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKey,
+          (
+            | protos.google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCryptoKeyPrimaryVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Schedule a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for
@@ -1883,11 +2205,36 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.destroyCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('destroyCryptoKeyVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('destroyCryptoKeyVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .destroyCryptoKeyVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          (
+            | protos.google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('destroyCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Restore a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} in the
@@ -1986,11 +2333,36 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.restoreCryptoKeyVersion(
-      request,
-      options,
-      callback
-    );
+    this._log.info('restoreCryptoKeyVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('restoreCryptoKeyVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .restoreCryptoKeyVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          (
+            | protos.google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Encrypts data, so that it can only be recovered by a call to
@@ -2147,7 +2519,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.encrypt(request, options, callback);
+    this._log.info('encrypt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IEncryptResponse,
+          protos.google.cloud.kms.v1.IEncryptRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('encrypt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .encrypt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IEncryptResponse,
+          protos.google.cloud.kms.v1.IEncryptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('encrypt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Decrypts data that was protected by
@@ -2280,7 +2676,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.decrypt(request, options, callback);
+    this._log.info('decrypt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IDecryptResponse,
+          protos.google.cloud.kms.v1.IDecryptRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('decrypt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .decrypt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IDecryptResponse,
+          protos.google.cloud.kms.v1.IDecryptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('decrypt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Encrypts data using portable cryptographic primitives. Most users should
@@ -2450,7 +2870,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rawEncrypt(request, options, callback);
+    this._log.info('rawEncrypt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IRawEncryptResponse,
+          protos.google.cloud.kms.v1.IRawEncryptRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rawEncrypt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rawEncrypt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IRawEncryptResponse,
+          protos.google.cloud.kms.v1.IRawEncryptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rawEncrypt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Decrypts data that was originally encrypted using a raw cryptographic
@@ -2600,7 +3044,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rawDecrypt(request, options, callback);
+    this._log.info('rawDecrypt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IRawDecryptResponse,
+          protos.google.cloud.kms.v1.IRawDecryptRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rawDecrypt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rawDecrypt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IRawDecryptResponse,
+          protos.google.cloud.kms.v1.IRawDecryptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rawDecrypt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Signs data using a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
@@ -2741,7 +3209,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.asymmetricSign(request, options, callback);
+    this._log.info('asymmetricSign request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('asymmetricSign response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .asymmetricSign(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IAsymmetricSignResponse,
+          protos.google.cloud.kms.v1.IAsymmetricSignRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('asymmetricSign response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Decrypts data that was encrypted with a public key retrieved from
@@ -2855,7 +3347,33 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.asymmetricDecrypt(request, options, callback);
+    this._log.info('asymmetricDecrypt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+          | protos.google.cloud.kms.v1.IAsymmetricDecryptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('asymmetricDecrypt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .asymmetricDecrypt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IAsymmetricDecryptResponse,
+          protos.google.cloud.kms.v1.IAsymmetricDecryptRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('asymmetricDecrypt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Signs data using a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
@@ -2962,7 +3480,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.macSign(request, options, callback);
+    this._log.info('macSign request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IMacSignResponse,
+          protos.google.cloud.kms.v1.IMacSignRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('macSign response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .macSign(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IMacSignResponse,
+          protos.google.cloud.kms.v1.IMacSignRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('macSign response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Verifies MAC tag using a
@@ -3010,7 +3552,8 @@ export class KeyManagementServiceClient {
    *   checksum. {@link protos.google.cloud.kms.v1.KeyManagementService|KeyManagementService}
    *   will report an error if the checksum verification fails. If you receive a
    *   checksum error, your client should verify that
-   *   CRC32C({@link protos.|MacVerifyRequest.tag}) is equal to
+   *   CRC32C({@link protos.google.cloud.kms.v1.MacVerifyRequest.mac|MacVerifyRequest.mac}) is
+   *   equal to
    *   {@link protos.google.cloud.kms.v1.MacVerifyRequest.mac_crc32c|MacVerifyRequest.mac_crc32c},
    *   and if so, perform a limited number of retries. A persistent mismatch may
    *   indicate an issue in your computation of the CRC32C checksum. Note: This
@@ -3091,7 +3634,31 @@ export class KeyManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.macVerify(request, options, callback);
+    this._log.info('macVerify request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IMacVerifyResponse,
+          protos.google.cloud.kms.v1.IMacVerifyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('macVerify response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .macVerify(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IMacVerifyResponse,
+          protos.google.cloud.kms.v1.IMacVerifyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('macVerify response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generate random bytes using the Cloud KMS randomness source in the provided
@@ -3185,7 +3752,33 @@ export class KeyManagementServiceClient {
         location: request.location ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateRandomBytes(request, options, callback);
+    this._log.info('generateRandomBytes request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+          | protos.google.cloud.kms.v1.IGenerateRandomBytesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateRandomBytes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateRandomBytes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IGenerateRandomBytesResponse,
+          protos.google.cloud.kms.v1.IGenerateRandomBytesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateRandomBytes response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3294,11 +3887,35 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listKeyRings(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyRingsRequest,
+          protos.google.cloud.kms.v1.IListKeyRingsResponse | null | undefined,
+          protos.google.cloud.kms.v1.IKeyRing
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKeyRings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKeyRings request %j', request);
+    return this.innerApiCalls
+      .listKeyRings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.IKeyRing[],
+          protos.google.cloud.kms.v1.IListKeyRingsRequest | null,
+          protos.google.cloud.kms.v1.IListKeyRingsResponse,
+        ]) => {
+          this._log.info('listKeyRings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listKeyRings`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3352,6 +3969,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listKeyRings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listKeyRings stream %j', request);
     return this.descriptors.page.listKeyRings.createStream(
       this.innerApiCalls.listKeyRings as GaxCall,
       request,
@@ -3417,6 +4035,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listKeyRings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listKeyRings iterate %j', request);
     return this.descriptors.page.listKeyRings.asyncIterate(
       this.innerApiCalls['listKeyRings'] as GaxCall,
       request as {},
@@ -3530,11 +4149,35 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCryptoKeys(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeysRequest,
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse | null | undefined,
+          protos.google.cloud.kms.v1.ICryptoKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCryptoKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCryptoKeys request %j', request);
+    return this.innerApiCalls
+      .listCryptoKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.ICryptoKey[],
+          protos.google.cloud.kms.v1.IListCryptoKeysRequest | null,
+          protos.google.cloud.kms.v1.IListCryptoKeysResponse,
+        ]) => {
+          this._log.info('listCryptoKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCryptoKeys`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3589,6 +4232,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCryptoKeys stream %j', request);
     return this.descriptors.page.listCryptoKeys.createStream(
       this.innerApiCalls.listCryptoKeys as GaxCall,
       request,
@@ -3655,6 +4299,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCryptoKeys iterate %j', request);
     return this.descriptors.page.listCryptoKeys.asyncIterate(
       this.innerApiCalls['listCryptoKeys'] as GaxCall,
       request as {},
@@ -3777,11 +4422,37 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCryptoKeyVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest,
+          | protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.kms.v1.ICryptoKeyVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCryptoKeyVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCryptoKeyVersions request %j', request);
+    return this.innerApiCalls
+      .listCryptoKeyVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion[],
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsRequest | null,
+          protos.google.cloud.kms.v1.IListCryptoKeyVersionsResponse,
+        ]) => {
+          this._log.info('listCryptoKeyVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCryptoKeyVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3837,6 +4508,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listCryptoKeyVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCryptoKeyVersions stream %j', request);
     return this.descriptors.page.listCryptoKeyVersions.createStream(
       this.innerApiCalls.listCryptoKeyVersions as GaxCall,
       request,
@@ -3904,6 +4576,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listCryptoKeyVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCryptoKeyVersions iterate %j', request);
     return this.descriptors.page.listCryptoKeyVersions.asyncIterate(
       this.innerApiCalls['listCryptoKeyVersions'] as GaxCall,
       request as {},
@@ -4015,11 +4688,35 @@ export class KeyManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listImportJobs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListImportJobsRequest,
+          protos.google.cloud.kms.v1.IListImportJobsResponse | null | undefined,
+          protos.google.cloud.kms.v1.IImportJob
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listImportJobs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listImportJobs request %j', request);
+    return this.innerApiCalls
+      .listImportJobs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.IImportJob[],
+          protos.google.cloud.kms.v1.IListImportJobsRequest | null,
+          protos.google.cloud.kms.v1.IListImportJobsResponse,
+        ]) => {
+          this._log.info('listImportJobs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listImportJobs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4072,6 +4769,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImportJobs stream %j', request);
     return this.descriptors.page.listImportJobs.createStream(
       this.innerApiCalls.listImportJobs as GaxCall,
       request,
@@ -4136,6 +4834,7 @@ export class KeyManagementServiceClient {
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listImportJobs iterate %j', request);
     return this.descriptors.page.listImportJobs.asyncIterate(
       this.innerApiCalls['listImportJobs'] as GaxCall,
       request as {},
@@ -4941,6 +5640,7 @@ export class KeyManagementServiceClient {
   close(): Promise<void> {
     if (this.keyManagementServiceStub && !this._terminated) {
       return this.keyManagementServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

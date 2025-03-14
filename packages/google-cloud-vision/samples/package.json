@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"
@@ -13,7 +13,7 @@
     "test": "mocha test --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/vision": "^4.3.3",
+    "@google-cloud/vision": "^5.0.0",
     "natural": "^8.0.0",
     "pureimage": "^0.4.0",
     "redis": "~4.7.0",

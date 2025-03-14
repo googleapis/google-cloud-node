@@ -18,14 +18,14 @@
                     "java_package": "com.google.cloud.dataform.v1beta1",
                     "php_namespace": "Google\\Cloud\\Dataform\\V1beta1",
                     "ruby_package": "Google::Cloud::Dataform::V1beta1",
-                    "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
-                    "(google.api.resource_definition).pattern": "projects/{project}/secrets/{secret}/versions/{version}"
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
                   },
                   "nested": {
                     "Dataform": {
                       "options": {
                         "(google.api.default_host)": "dataform.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/bigquery,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "ListRepositories": {
@@ -124,7 +124,7 @@
                         },
                         "CommitRepositoryChanges": {
                           "requestType": "CommitRepositoryChangesRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "CommitRepositoryChangesResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*}:commit",
                             "(google.api.http).body": "*"
@@ -300,7 +300,7 @@
                         },
                         "PullGitCommits": {
                           "requestType": "PullGitCommitsRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "PullGitCommitsResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:pull",
                             "(google.api.http).body": "*"
@@ -316,7 +316,7 @@
                         },
                         "PushGitCommits": {
                           "requestType": "PushGitCommitsRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "PushGitCommitsResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:push",
                             "(google.api.http).body": "*"
@@ -360,7 +360,7 @@
                         },
                         "CommitWorkspaceChanges": {
                           "requestType": "CommitWorkspaceChangesRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "CommitWorkspaceChangesResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:commit",
                             "(google.api.http).body": "*"
@@ -376,7 +376,7 @@
                         },
                         "ResetWorkspaceChanges": {
                           "requestType": "ResetWorkspaceChangesRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "ResetWorkspaceChangesResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workspaces/*}:reset",
                             "(google.api.http).body": "*"
@@ -418,6 +418,20 @@
                             }
                           ]
                         },
+                        "SearchFiles": {
+                          "requestType": "SearchFilesRequest",
+                          "responseType": "SearchFilesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{workspace=projects/*/locations/*/repositories/*/workspaces/*}:searchFiles"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{workspace=projects/*/locations/*/repositories/*/workspaces/*}:searchFiles"
+                              }
+                            }
+                          ]
+                        },
                         "MakeDirectory": {
                           "requestType": "MakeDirectoryRequest",
                           "responseType": "MakeDirectoryResponse",
@@ -436,7 +450,7 @@
                         },
                         "RemoveDirectory": {
                           "requestType": "RemoveDirectoryRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "RemoveDirectoryResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{workspace=projects/*/locations/*/repositories/*/workspaces/*}:removeDirectory",
                             "(google.api.http).body": "*"
@@ -482,7 +496,7 @@
                         },
                         "RemoveFile": {
                           "requestType": "RemoveFileRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "RemoveFileResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{workspace=projects/*/locations/*/repositories/*/workspaces/*}:removeFile",
                             "(google.api.http).body": "*"
@@ -862,7 +876,7 @@
                         },
                         "CancelWorkflowInvocation": {
                           "requestType": "CancelWorkflowInvocationRequest",
-                          "responseType": "google.protobuf.Empty",
+                          "responseType": "CancelWorkflowInvocationResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/repositories/*/workflowInvocations/*}:cancel",
                             "(google.api.http).body": "*"
@@ -889,18 +903,84 @@
                               }
                             }
                           ]
+                        },
+                        "GetConfig": {
+                          "requestType": "GetConfigRequest",
+                          "responseType": "Config",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/config}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/*/config}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateConfig": {
+                          "requestType": "UpdateConfigRequest",
+                          "responseType": "Config",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{config.name=projects/*/locations/*/config}",
+                            "(google.api.http).body": "config",
+                            "(google.api.method_signature)": "config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{config.name=projects/*/locations/*/config}",
+                                "body": "config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "config,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "DataEncryptionState": {
+                      "fields": {
+                        "kmsKeyVersionName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
                         }
                       }
                     },
                     "Repository": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/Repository",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}",
+                        "(google.api.resource).plural": "repositories",
+                        "(google.api.resource).singular": "repository"
+                      },
+                      "oneofs": {
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -954,6 +1034,29 @@
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "dataEncryptionState": {
+                          "type": "DataEncryptionState",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -1181,7 +1284,10 @@
                         },
                         "force": {
                           "type": "bool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1212,7 +1318,10 @@
                         "fileOperations": {
                           "keyType": "string",
                           "type": "FileOperation",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1248,6 +1357,14 @@
                               "fields": {}
                             }
                           }
+                        }
+                      }
+                    },
+                    "CommitRepositoryChangesResponse": {
+                      "fields": {
+                        "commitSha": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1469,14 +1586,45 @@
                     "Workspace": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/Workspace",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}",
+                        "(google.api.resource).plural": "workspaces",
+                        "(google.api.resource).singular": "workspace"
+                      },
+                      "oneofs": {
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataEncryptionState": {
+                          "type": "DataEncryptionState",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1633,6 +1781,9 @@
                         }
                       }
                     },
+                    "PullGitCommitsResponse": {
+                      "fields": {}
+                    },
                     "PushGitCommitsRequest": {
                       "fields": {
                         "name": {
@@ -1651,6 +1802,9 @@
                           }
                         }
                       }
+                    },
+                    "PushGitCommitsResponse": {
+                      "fields": {}
                     },
                     "FetchFileGitStatusesRequest": {
                       "fields": {
@@ -1681,7 +1835,10 @@
                             },
                             "state": {
                               "type": "State",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -1763,6 +1920,9 @@
                         }
                       }
                     },
+                    "CommitWorkspaceChangesResponse": {
+                      "fields": {}
+                    },
                     "ResetWorkspaceChangesRequest": {
                       "fields": {
                         "name": {
@@ -1789,6 +1949,9 @@
                           }
                         }
                       }
+                    },
+                    "ResetWorkspaceChangesResponse": {
+                      "fields": {}
                     },
                     "FetchFileDiffRequest": {
                       "fields": {
@@ -1883,6 +2046,91 @@
                         }
                       }
                     },
+                    "SearchFilesRequest": {
+                      "fields": {
+                        "workspace": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchFilesResponse": {
+                      "fields": {
+                        "searchResults": {
+                          "rule": "repeated",
+                          "type": "SearchResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SearchResult": {
+                      "oneofs": {
+                        "entry": {
+                          "oneof": [
+                            "file",
+                            "directory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "file": {
+                          "type": "FileSearchResult",
+                          "id": 1
+                        },
+                        "directory": {
+                          "type": "DirectorySearchResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FileSearchResult": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DirectorySearchResult": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "MakeDirectoryRequest": {
                       "fields": {
                         "workspace": {
@@ -1923,6 +2171,9 @@
                           }
                         }
                       }
+                    },
+                    "RemoveDirectoryResponse": {
+                      "fields": {}
                     },
                     "MoveDirectoryRequest": {
                       "fields": {
@@ -1969,6 +2220,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1998,6 +2256,9 @@
                           }
                         }
                       }
+                    },
+                    "RemoveFileResponse": {
+                      "fields": {}
                     },
                     "MoveFileRequest": {
                       "fields": {
@@ -2075,14 +2336,23 @@
                     "ReleaseConfig": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/ReleaseConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/releaseConfigs/{release_config}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/releaseConfigs/{release_config}",
+                        "(google.api.resource).plural": "releaseConfigs",
+                        "(google.api.resource).singular": "releaseConfig"
+                      },
+                      "oneofs": {
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "gitCommitish": {
@@ -2128,6 +2398,21 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/CompilationResult"
                           }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2141,10 +2426,6 @@
                             }
                           },
                           "fields": {
-                            "releaseTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
                             "compilationResult": {
                               "type": "string",
                               "id": 2,
@@ -2155,6 +2436,13 @@
                             "errorStatus": {
                               "type": "google.rpc.Status",
                               "id": 3
+                            },
+                            "releaseTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -2275,7 +2563,9 @@
                     "CompilationResult": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/CompilationResult",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/compilationResults/{compilation_result}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/compilationResults/{compilation_result}",
+                        "(google.api.resource).plural": "compilationResults",
+                        "(google.api.resource).singular": "compilationResult"
                       },
                       "oneofs": {
                         "source": {
@@ -2284,16 +2574,14 @@
                             "workspace",
                             "releaseConfig"
                           ]
+                        },
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
                         }
                       },
                       "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
                         "gitCommitish": {
                           "type": "string",
                           "id": 2,
@@ -2315,6 +2603,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/ReleaseConfig"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "codeCompilationConfig": {
@@ -2344,6 +2639,28 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataEncryptionState": {
+                          "type": "DataEncryptionState",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -2440,6 +2757,31 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "defaultNotebookRuntimeOptions": {
+                          "type": "NotebookRuntimeOptions",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "NotebookRuntimeOptions": {
+                      "oneofs": {
+                        "executionSink": {
+                          "oneof": [
+                            "gcsOutputBucket"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsOutputBucket": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2463,6 +2805,20 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2522,15 +2878,24 @@
                       "fields": {
                         "database": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "schema": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "name": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2579,23 +2944,17 @@
                             "relation",
                             "operations",
                             "assertion",
-                            "declaration"
+                            "declaration",
+                            "notebook"
+                          ]
+                        },
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
                           ]
                         }
                       },
                       "fields": {
-                        "target": {
-                          "type": "Target",
-                          "id": 1
-                        },
-                        "canonicalTarget": {
-                          "type": "Target",
-                          "id": 2
-                        },
-                        "filePath": {
-                          "type": "string",
-                          "id": 3
-                        },
                         "relation": {
                           "type": "Relation",
                           "id": 4
@@ -2611,6 +2970,30 @@
                         "declaration": {
                           "type": "Declaration",
                           "id": 7
+                        },
+                        "notebook": {
+                          "type": "Notebook",
+                          "id": 8
+                        },
+                        "target": {
+                          "type": "Target",
+                          "id": 1
+                        },
+                        "canonicalTarget": {
+                          "type": "Target",
+                          "id": 2
+                        },
+                        "filePath": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2680,15 +3063,6 @@
                             }
                           },
                           "nested": {
-                            "RelationType": {
-                              "values": {
-                                "RELATION_TYPE_UNSPECIFIED": 0,
-                                "TABLE": 1,
-                                "VIEW": 2,
-                                "INCREMENTAL_TABLE": 3,
-                                "MATERIALIZED_VIEW": 4
-                              }
-                            },
                             "IncrementalTableConfig": {
                               "fields": {
                                 "incrementalSelectQuery": {
@@ -2718,6 +3092,15 @@
                                   "type": "string",
                                   "id": 6
                                 }
+                              }
+                            },
+                            "RelationType": {
+                              "values": {
+                                "RELATION_TYPE_UNSPECIFIED": 0,
+                                "TABLE": 1,
+                                "VIEW": 2,
+                                "INCREMENTAL_TABLE": 3,
+                                "MATERIALIZED_VIEW": 4
                               }
                             }
                           }
@@ -2790,6 +3173,28 @@
                               "id": 1
                             }
                           }
+                        },
+                        "Notebook": {
+                          "fields": {
+                            "dependencyTargets": {
+                              "rule": "repeated",
+                              "type": "Target",
+                              "id": 1
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "contents": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "tags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
                         }
                       }
                     },
@@ -2842,14 +3247,23 @@
                     "WorkflowConfig": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/WorkflowConfig",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workflowConfigs/{workflow_config}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workflowConfigs/{workflow_config}",
+                        "(google.api.resource).plural": "workflowConfigs",
+                        "(google.api.resource).singular": "workflowConfig"
+                      },
+                      "oneofs": {
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
+                        }
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "releaseConfig": {
@@ -2888,6 +3302,28 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2901,10 +3337,6 @@
                             }
                           },
                           "fields": {
-                            "executionTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
                             "workflowInvocation": {
                               "type": "string",
                               "id": 2,
@@ -2915,6 +3347,13 @@
                             "errorStatus": {
                               "type": "google.rpc.Status",
                               "id": 3
+                            },
+                            "executionTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -3083,7 +3522,9 @@
                     "WorkflowInvocation": {
                       "options": {
                         "(google.api.resource).type": "dataform.googleapis.com/WorkflowInvocation",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workflowInvocations/{workflow_invocation}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/repositories/{repository}/workflowInvocations/{workflow_invocation}",
+                        "(google.api.resource).plural": "workflowInvocations",
+                        "(google.api.resource).singular": "workflowInvocation"
                       },
                       "oneofs": {
                         "compilationSource": {
@@ -3091,16 +3532,14 @@
                             "compilationResult",
                             "workflowConfig"
                           ]
+                        },
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
                         }
                       },
                       "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
                         "compilationResult": {
                           "type": "string",
                           "id": 2,
@@ -3115,6 +3554,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/WorkflowConfig"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "invocationConfig": {
@@ -3136,6 +3582,29 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resolvedCompilationResult": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/CompilationResult"
+                          }
+                        },
+                        "dataEncryptionState": {
+                          "type": "DataEncryptionState",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -3265,8 +3734,38 @@
                         }
                       }
                     },
+                    "CancelWorkflowInvocationResponse": {
+                      "fields": {}
+                    },
                     "WorkflowInvocationAction": {
+                      "oneofs": {
+                        "action": {
+                          "oneof": [
+                            "bigqueryAction",
+                            "notebookAction"
+                          ]
+                        },
+                        "_internalMetadata": {
+                          "oneof": [
+                            "internalMetadata"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "bigqueryAction": {
+                          "type": "BigQueryAction",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "notebookAction": {
+                          "type": "NotebookAction",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "target": {
                           "type": "Target",
                           "id": 1,
@@ -3302,15 +3801,52 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "bigqueryAction": {
-                          "type": "BigQueryAction",
-                          "id": 6,
+                        "internalMetadata": {
+                          "type": "string",
+                          "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       },
                       "nested": {
+                        "BigQueryAction": {
+                          "fields": {
+                            "sqlScript": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "NotebookAction": {
+                          "fields": {
+                            "contents": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "PENDING": 0,
@@ -3320,17 +3856,6 @@
                             "SUCCEEDED": 4,
                             "CANCELLED": 5,
                             "FAILED": 6
-                          }
-                        },
-                        "BigQueryAction": {
-                          "fields": {
-                            "sqlScript": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
-                              }
-                            }
                           }
                         }
                       }
@@ -3371,6 +3896,61 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "Config": {
+                      "options": {
+                        "(google.api.resource).type": "dataform.googleapis.com/Config",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/config",
+                        "(google.api.resource).plural": "configs",
+                        "(google.api.resource).singular": "config"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "defaultKmsKeyName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
+                    "GetConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dataform.googleapis.com/Config"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateConfigRequest": {
+                      "fields": {
+                        "config": {
+                          "type": "Config",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     }

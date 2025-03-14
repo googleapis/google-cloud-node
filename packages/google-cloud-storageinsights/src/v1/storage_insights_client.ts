@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class StorageInsightsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('storageinsights');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class StorageInsightsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -501,7 +504,36 @@ export class StorageInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReportConfig(request, options, callback);
+    this._log.info('getReportConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReportConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          (
+            | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReportConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new ReportConfig in a given project and location.
@@ -613,7 +645,36 @@ export class StorageInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReportConfig(request, options, callback);
+    this._log.info('createReportConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReportConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          (
+            | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createReportConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single ReportConfig.
@@ -729,7 +790,36 @@ export class StorageInsightsClient {
         'report_config.name': request.reportConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateReportConfig(request, options, callback);
+    this._log.info('updateReportConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateReportConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.storageinsights.v1.IReportConfig,
+          (
+            | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReportConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single ReportConfig.
@@ -841,7 +931,36 @@ export class StorageInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteReportConfig(request, options, callback);
+    this._log.info('deleteReportConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteReportConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteReportConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReportConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single ReportDetail.
@@ -937,7 +1056,36 @@ export class StorageInsightsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getReportDetail(request, options, callback);
+    this._log.info('getReportDetail request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.storageinsights.v1.IReportDetail,
+          | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReportDetail response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getReportDetail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.storageinsights.v1.IReportDetail,
+          (
+            | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getReportDetail response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1040,11 +1188,37 @@ export class StorageInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReportConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
+          | protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.storageinsights.v1.IReportConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReportConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReportConfigs request %j', request);
+    return this.innerApiCalls
+      .listReportConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.storageinsights.v1.IReportConfig[],
+          protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
+          protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
+        ]) => {
+          this._log.info('listReportConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReportConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1084,6 +1258,7 @@ export class StorageInsightsClient {
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportConfigs stream %j', request);
     return this.descriptors.page.listReportConfigs.createStream(
       this.innerApiCalls.listReportConfigs as GaxCall,
       request,
@@ -1135,6 +1310,7 @@ export class StorageInsightsClient {
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportConfigs iterate %j', request);
     return this.descriptors.page.listReportConfigs.asyncIterate(
       this.innerApiCalls['listReportConfigs'] as GaxCall,
       request as {},
@@ -1241,11 +1417,37 @@ export class StorageInsightsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReportDetails(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
+          | protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.storageinsights.v1.IReportDetail
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReportDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReportDetails request %j', request);
+    return this.innerApiCalls
+      .listReportDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.storageinsights.v1.IReportDetail[],
+          protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
+          protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
+        ]) => {
+          this._log.info('listReportDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listReportDetails`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1285,6 +1487,7 @@ export class StorageInsightsClient {
     const defaultCallSettings = this._defaults['listReportDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportDetails stream %j', request);
     return this.descriptors.page.listReportDetails.createStream(
       this.innerApiCalls.listReportDetails as GaxCall,
       request,
@@ -1336,6 +1539,7 @@ export class StorageInsightsClient {
     const defaultCallSettings = this._defaults['listReportDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReportDetails iterate %j', request);
     return this.descriptors.page.listReportDetails.asyncIterate(
       this.innerApiCalls['listReportDetails'] as GaxCall,
       request as {},
@@ -1615,6 +1819,7 @@ export class StorageInsightsClient {
   close(): Promise<void> {
     if (this.storageInsightsStub && !this._terminated) {
       return this.storageInsightsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class SecurityCenterManagementClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('securitycentermanagement');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class SecurityCenterManagementClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -619,11 +622,49 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEffectiveSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'getEffectiveSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectiveSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEffectiveSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a
@@ -721,11 +762,45 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'getSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSecurityHealthAnalyticsCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a resident
@@ -847,11 +922,49 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'createSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.ICreateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the
@@ -976,11 +1089,49 @@ export class SecurityCenterManagementClient {
           request.securityHealthAnalyticsCustomModule!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'updateSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified
@@ -1098,11 +1249,49 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'deleteSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IDeleteSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Simulates the result of using a
@@ -1207,11 +1396,49 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.simulateSecurityHealthAnalyticsCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'simulateSecurityHealthAnalyticsCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'simulateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .simulateSecurityHealthAnalyticsCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleResponse,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.ISimulateSecurityHealthAnalyticsCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'simulateSecurityHealthAnalyticsCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the effective Event Threat Detection custom module at the given level.
@@ -1323,11 +1550,49 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEffectiveEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'getEffectiveEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEffectiveEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEffectiveEventThreatDetectionCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetEffectiveEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEffectiveEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an Event Threat Detection custom module.
@@ -1428,11 +1693,42 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getEventThreatDetectionCustomModule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a resident Event Threat Detection custom module at the scope of the
@@ -1553,11 +1849,45 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'createEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.ICreateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the Event Threat Detection custom module with the given name based
@@ -1675,11 +2005,45 @@ export class SecurityCenterManagementClient {
           request.eventThreatDetectionCustomModule!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'updateEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IUpdateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified Event Threat Detection custom module and all of its
@@ -1796,11 +2160,45 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'deleteEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEventThreatDetectionCustomModule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IDeleteEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Validates the given Event Threat Detection custom module.
@@ -1904,11 +2302,49 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.validateEventThreatDetectionCustomModule(
-      request,
-      options,
-      callback
+    this._log.info(
+      'validateEventThreatDetectionCustomModule request %j',
+      request
     );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'validateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .validateEventThreatDetectionCustomModule(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleResponse,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IValidateEventThreatDetectionCustomModuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'validateEventThreatDetectionCustomModule response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets service settings for the specified Security Command Center service.
@@ -2020,11 +2456,36 @@ export class SecurityCenterManagementClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSecurityCenterService(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getSecurityCenterService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSecurityCenterService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSecurityCenterService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IGetSecurityCenterServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSecurityCenterService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Security Command Center service using the given update mask.
@@ -2142,11 +2603,36 @@ export class SecurityCenterManagementClient {
           request.securityCenterService!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSecurityCenterService(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateSecurityCenterService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSecurityCenterService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSecurityCenterService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService,
+          (
+            | protos.google.cloud.securitycentermanagement.v1.IUpdateSecurityCenterServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSecurityCenterService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2258,15 +2744,50 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEffectiveSecurityHealthAnalyticsCustomModules(
-      request,
-      options,
-      callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listEffectiveSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveSecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEffectiveSecurityHealthAnalyticsCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEffectiveSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2312,6 +2833,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls
         .listEffectiveSecurityHealthAnalyticsCustomModules as GaxCall,
@@ -2370,6 +2895,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listEffectiveSecurityHealthAnalyticsCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listEffectiveSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls[
         'listEffectiveSecurityHealthAnalyticsCustomModules'
@@ -2487,15 +3016,50 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSecurityHealthAnalyticsCustomModules(
-      request,
-      options,
-      callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listSecurityHealthAnalyticsCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listSecurityHealthAnalyticsCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2541,6 +3105,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls.listSecurityHealthAnalyticsCustomModules as GaxCall,
       request,
@@ -2598,6 +3166,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listSecurityHealthAnalyticsCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls['listSecurityHealthAnalyticsCustomModules'] as GaxCall,
       request as {},
@@ -2712,15 +3284,50 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDescendantSecurityHealthAnalyticsCustomModules(
-      request,
-      options,
-      callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listDescendantSecurityHealthAnalyticsCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listDescendantSecurityHealthAnalyticsCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityHealthAnalyticsCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listDescendantSecurityHealthAnalyticsCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDescendantSecurityHealthAnalyticsCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2766,6 +3373,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.createStream(
       this.innerApiCalls
         .listDescendantSecurityHealthAnalyticsCustomModules as GaxCall,
@@ -2824,6 +3435,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listDescendantSecurityHealthAnalyticsCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listDescendantSecurityHealthAnalyticsCustomModules.asyncIterate(
       this.innerApiCalls[
         'listDescendantSecurityHealthAnalyticsCustomModules'
@@ -2939,15 +3554,50 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEffectiveEventThreatDetectionCustomModules(
-      request,
-      options,
-      callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEffectiveEventThreatDetectionCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listEffectiveEventThreatDetectionCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEffectiveEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEffectiveEventThreatDetectionCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEffectiveEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2993,6 +3643,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listEffectiveEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls
         .listEffectiveEventThreatDetectionCustomModules as GaxCall,
@@ -3051,6 +3705,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listEffectiveEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listEffectiveEventThreatDetectionCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listEffectiveEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls[
         'listEffectiveEventThreatDetectionCustomModules'
@@ -3167,15 +3825,43 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEventThreatDetectionCustomModules(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listEventThreatDetectionCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEventThreatDetectionCustomModules request %j', request);
+    return this.innerApiCalls
+      .listEventThreatDetectionCustomModules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listEventThreatDetectionCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3222,6 +3908,7 @@ export class SecurityCenterManagementClient {
       this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEventThreatDetectionCustomModules stream %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls.listEventThreatDetectionCustomModules as GaxCall,
       request,
@@ -3280,6 +3967,7 @@ export class SecurityCenterManagementClient {
       this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEventThreatDetectionCustomModules iterate %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls['listEventThreatDetectionCustomModules'] as GaxCall,
       request as {},
@@ -3393,15 +4081,50 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDescendantEventThreatDetectionCustomModules(
-      request,
-      options,
-      callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listDescendantEventThreatDetectionCustomModules values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules request %j',
+      request
     );
+    return this.innerApiCalls
+      .listDescendantEventThreatDetectionCustomModules(
+        request,
+        options,
+        wrappedCallback
+      )
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.IEventThreatDetectionCustomModule[],
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesResponse,
+        ]) => {
+          this._log.info(
+            'listDescendantEventThreatDetectionCustomModules values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDescendantEventThreatDetectionCustomModules`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3448,6 +4171,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules stream %j',
+      request
+    );
     return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls
         .listDescendantEventThreatDetectionCustomModules as GaxCall,
@@ -3507,6 +4234,10 @@ export class SecurityCenterManagementClient {
       this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info(
+      'listDescendantEventThreatDetectionCustomModules iterate %j',
+      request
+    );
     return this.descriptors.page.listDescendantEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls[
         'listDescendantEventThreatDetectionCustomModules'
@@ -3624,15 +4355,37 @@ export class SecurityCenterManagementClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSecurityCenterServices(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
+          | protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSecurityCenterServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSecurityCenterServices request %j', request);
+    return this.innerApiCalls
+      .listSecurityCenterServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securitycentermanagement.v1.ISecurityCenterService[],
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest | null,
+          protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesResponse,
+        ]) => {
+          this._log.info('listSecurityCenterServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSecurityCenterServices`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3680,6 +4433,7 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings = this._defaults['listSecurityCenterServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecurityCenterServices stream %j', request);
     return this.descriptors.page.listSecurityCenterServices.createStream(
       this.innerApiCalls.listSecurityCenterServices as GaxCall,
       request,
@@ -3739,6 +4493,7 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings = this._defaults['listSecurityCenterServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSecurityCenterServices iterate %j', request);
     return this.descriptors.page.listSecurityCenterServices.asyncIterate(
       this.innerApiCalls['listSecurityCenterServices'] as GaxCall,
       request as {},
@@ -5136,6 +5891,7 @@ export class SecurityCenterManagementClient {
   close(): Promise<void> {
     if (this.securityCenterManagementStub && !this._terminated) {
       return this.securityCenterManagementStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

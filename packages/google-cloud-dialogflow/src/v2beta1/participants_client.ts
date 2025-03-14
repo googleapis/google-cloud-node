@@ -31,6 +31,7 @@ import type {
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ParticipantsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ParticipantsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -664,7 +667,36 @@ export class ParticipantsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createParticipant(request, options, callback);
+    this._log.info('createParticipant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IParticipant,
+          | protos.google.cloud.dialogflow.v2beta1.ICreateParticipantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createParticipant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createParticipant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IParticipant,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ICreateParticipantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createParticipant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a conversation participant.
@@ -756,7 +788,36 @@ export class ParticipantsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getParticipant(request, options, callback);
+    this._log.info('getParticipant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IParticipant,
+          | protos.google.cloud.dialogflow.v2beta1.IGetParticipantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getParticipant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getParticipant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IParticipant,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IGetParticipantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getParticipant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified participant.
@@ -854,7 +915,36 @@ export class ParticipantsClient {
         'participant.name': request.participant!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateParticipant(request, options, callback);
+    this._log.info('updateParticipant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IParticipant,
+          | protos.google.cloud.dialogflow.v2beta1.IUpdateParticipantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateParticipant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateParticipant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IParticipant,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IUpdateParticipantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateParticipant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Adds a text (chat, for example), or audio (phone recording, for example)
@@ -898,8 +988,8 @@ export class ParticipantsClient {
    *   Note: this field should only be used if you are connecting to a Dialogflow
    *   CX agent.
    * @param {string} request.cxCurrentPage
-   *   The unique identifier of the CX page to override the `current_page` in the
-   *   session.
+   *   The unique identifier of the Dialogflow CX page to override the
+   *   `current_page` in the session.
    *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
    *   ID>/flows/<Flow ID>/pages/<Page ID>`.
    *
@@ -1013,7 +1103,36 @@ export class ParticipantsClient {
         participant: request.participant ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.analyzeContent(request, options, callback);
+    this._log.info('analyzeContent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentResponse,
+          | protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('analyzeContent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .analyzeContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.IAnalyzeContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('analyzeContent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets suggested articles for a participant based on specific historical
@@ -1132,7 +1251,36 @@ export class ParticipantsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.suggestArticles(request, options, callback);
+    this._log.info('suggestArticles request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISuggestArticlesResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISuggestArticlesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('suggestArticles response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .suggestArticles(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISuggestArticlesResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ISuggestArticlesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('suggestArticles response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets suggested faq answers for a participant based on specific historical
@@ -1243,7 +1391,36 @@ export class ParticipantsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.suggestFaqAnswers(request, options, callback);
+    this._log.info('suggestFaqAnswers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISuggestFaqAnswersResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISuggestFaqAnswersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('suggestFaqAnswers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .suggestFaqAnswers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISuggestFaqAnswersResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ISuggestFaqAnswersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('suggestFaqAnswers response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets smart replies for a participant based on specific historical
@@ -1356,7 +1533,36 @@ export class ParticipantsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.suggestSmartReplies(request, options, callback);
+    this._log.info('suggestSmartReplies request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISuggestSmartRepliesResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISuggestSmartRepliesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('suggestSmartReplies response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .suggestSmartReplies(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISuggestSmartRepliesResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ISuggestSmartRepliesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('suggestSmartReplies response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets knowledge assist suggestions based on historical messages.
@@ -1379,7 +1585,7 @@ export class ParticipantsClient {
    *   default 100 and at most 100.
    * @param {string} [request.previousSuggestedQuery]
    *   Optional. The previously suggested query for the given conversation. This
-   *   helps identify whether the next suggestion we generate is resonably
+   *   helps identify whether the next suggestion we generate is reasonably
    *   different from the previous one. This is useful to avoid similar
    *   suggestions within the conversation.
    * @param {object} [options]
@@ -1469,11 +1675,36 @@ export class ParticipantsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.suggestKnowledgeAssist(
-      request,
-      options,
-      callback
-    );
+    this._log.info('suggestKnowledgeAssist request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('suggestKnowledgeAssist response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .suggestKnowledgeAssist(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('suggestKnowledgeAssist response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deprecated. use
@@ -1601,7 +1832,36 @@ export class ParticipantsClient {
       'CompileSuggestion is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.compileSuggestion(request, options, callback);
+    this._log.info('compileSuggestion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ICompileSuggestionResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ICompileSuggestionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('compileSuggestion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .compileSuggestion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2beta1.ICompileSuggestionResponse,
+          (
+            | protos.google.cloud.dialogflow.v2beta1.ICompileSuggestionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('compileSuggestion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1634,6 +1894,7 @@ export class ParticipantsClient {
    */
   streamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingAnalyzeContent stream %j', options);
     return this.innerApiCalls.streamingAnalyzeContent(null, options);
   }
 
@@ -1735,7 +1996,33 @@ export class ParticipantsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listParticipants(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListParticipantsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListParticipantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.IParticipant
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listParticipants values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listParticipants request %j', request);
+    return this.innerApiCalls
+      .listParticipants(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.IParticipant[],
+          protos.google.cloud.dialogflow.v2beta1.IListParticipantsRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListParticipantsResponse,
+        ]) => {
+          this._log.info('listParticipants values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1777,6 +2064,7 @@ export class ParticipantsClient {
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listParticipants stream %j', request);
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as GaxCall,
       request,
@@ -1826,6 +2114,7 @@ export class ParticipantsClient {
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listParticipants iterate %j', request);
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
       request as {},
@@ -1964,7 +2253,33 @@ export class ParticipantsClient {
       'ListSuggestions is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.listSuggestions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2beta1.IListSuggestionsRequest,
+          | protos.google.cloud.dialogflow.v2beta1.IListSuggestionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2beta1.ISuggestion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSuggestions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSuggestions request %j', request);
+    return this.innerApiCalls
+      .listSuggestions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2beta1.ISuggestion[],
+          protos.google.cloud.dialogflow.v2beta1.IListSuggestionsRequest | null,
+          protos.google.cloud.dialogflow.v2beta1.IListSuggestionsResponse,
+        ]) => {
+          this._log.info('listSuggestions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2021,6 +2336,7 @@ export class ParticipantsClient {
       'ListSuggestions is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listSuggestions stream %j', request);
     return this.descriptors.page.listSuggestions.createStream(
       this.innerApiCalls.listSuggestions as GaxCall,
       request,
@@ -2085,6 +2401,7 @@ export class ParticipantsClient {
       'ListSuggestions is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
+    this._log.info('listSuggestions iterate %j', request);
     return this.descriptors.page.listSuggestions.asyncIterate(
       this.innerApiCalls['listSuggestions'] as GaxCall,
       request as {},
@@ -4652,6 +4969,7 @@ export class ParticipantsClient {
   close(): Promise<void> {
     if (this.participantsStub && !this._terminated) {
       return this.participantsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

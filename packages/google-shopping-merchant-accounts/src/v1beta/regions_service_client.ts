@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class RegionsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class RegionsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -527,7 +530,36 @@ export class RegionsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRegion(request, options, callback);
+    this._log.info('getRegion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IRegion,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetRegionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRegion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRegion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IRegion,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetRegionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRegion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a region definition in your Merchant Center account. Executing this
@@ -630,7 +662,36 @@ export class RegionsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRegion(request, options, callback);
+    this._log.info('createRegion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IRegion,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateRegionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRegion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRegion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IRegion,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.ICreateRegionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRegion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a region definition in your Merchant Center account. Executing this
@@ -731,7 +792,36 @@ export class RegionsServiceClient {
         'region.name': request.region!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRegion(request, options, callback);
+    this._log.info('updateRegion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IRegion,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateRegionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRegion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRegion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IRegion,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateRegionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRegion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a region definition from your Merchant Center account. Executing
@@ -829,7 +919,36 @@ export class RegionsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRegion(request, options, callback);
+    this._log.info('deleteRegion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.accounts.v1beta.IDeleteRegionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRegion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRegion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IDeleteRegionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRegion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -935,11 +1054,37 @@ export class RegionsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRegions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListRegionsRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListRegionsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IRegion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRegions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRegions request %j', request);
+    return this.innerApiCalls
+      .listRegions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IRegion[],
+          protos.google.shopping.merchant.accounts.v1beta.IListRegionsRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListRegionsResponse,
+        ]) => {
+          this._log.info('listRegions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRegions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -982,6 +1127,7 @@ export class RegionsServiceClient {
     const defaultCallSettings = this._defaults['listRegions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRegions stream %j', request);
     return this.descriptors.page.listRegions.createStream(
       this.innerApiCalls.listRegions as GaxCall,
       request,
@@ -1036,6 +1182,7 @@ export class RegionsServiceClient {
     const defaultCallSettings = this._defaults['listRegions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRegions iterate %j', request);
     return this.descriptors.page.listRegions.asyncIterate(
       this.innerApiCalls['listRegions'] as GaxCall,
       request as {},
@@ -1532,6 +1679,7 @@ export class RegionsServiceClient {
   close(): Promise<void> {
     if (this.regionsServiceStub && !this._terminated) {
       return this.regionsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

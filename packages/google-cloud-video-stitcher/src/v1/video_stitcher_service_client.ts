@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class VideoStitcherServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('video-stitcher');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class VideoStitcherServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -738,7 +741,33 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCdnKey(request, options, callback);
+    this._log.info('getCdnKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.ICdnKey,
+          | protos.google.cloud.video.stitcher.v1.IGetCdnKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCdnKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCdnKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.ICdnKey,
+          protos.google.cloud.video.stitcher.v1.IGetCdnKeyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCdnKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a client side playback VOD session and returns the full
@@ -838,7 +867,36 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createVodSession(request, options, callback);
+    this._log.info('createVodSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.IVodSession,
+          | protos.google.cloud.video.stitcher.v1.ICreateVodSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createVodSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createVodSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.IVodSession,
+          (
+            | protos.google.cloud.video.stitcher.v1.ICreateVodSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createVodSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the full tracking, playback metadata, and relevant ad-ops
@@ -930,7 +988,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVodSession(request, options, callback);
+    this._log.info('getVodSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.IVodSession,
+          | protos.google.cloud.video.stitcher.v1.IGetVodSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVodSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVodSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.IVodSession,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetVodSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVodSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified stitching information for the specified VOD session.
@@ -1028,7 +1115,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVodStitchDetail(request, options, callback);
+    this._log.info('getVodStitchDetail request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.IVodStitchDetail,
+          | protos.google.cloud.video.stitcher.v1.IGetVodStitchDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVodStitchDetail response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVodStitchDetail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.IVodStitchDetail,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetVodStitchDetailRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVodStitchDetail response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified ad tag detail for the specified VOD session.
@@ -1126,7 +1242,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVodAdTagDetail(request, options, callback);
+    this._log.info('getVodAdTagDetail request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.IVodAdTagDetail,
+          | protos.google.cloud.video.stitcher.v1.IGetVodAdTagDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVodAdTagDetail response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVodAdTagDetail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.IVodAdTagDetail,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetVodAdTagDetailRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVodAdTagDetail response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified ad tag detail for the specified live session.
@@ -1223,7 +1368,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLiveAdTagDetail(request, options, callback);
+    this._log.info('getLiveAdTagDetail request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail,
+          | protos.google.cloud.video.stitcher.v1.IGetLiveAdTagDetailRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLiveAdTagDetail response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLiveAdTagDetail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetLiveAdTagDetailRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLiveAdTagDetail response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified slate.
@@ -1308,7 +1482,33 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSlate(request, options, callback);
+    this._log.info('getSlate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.ISlate,
+          | protos.google.cloud.video.stitcher.v1.IGetSlateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSlate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSlate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.ISlate,
+          protos.google.cloud.video.stitcher.v1.IGetSlateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSlate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new live session.
@@ -1407,7 +1607,36 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createLiveSession(request, options, callback);
+    this._log.info('createLiveSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.ILiveSession,
+          | protos.google.cloud.video.stitcher.v1.ICreateLiveSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createLiveSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createLiveSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.ILiveSession,
+          (
+            | protos.google.cloud.video.stitcher.v1.ICreateLiveSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createLiveSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the details for the specified live session.
@@ -1498,7 +1727,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLiveSession(request, options, callback);
+    this._log.info('getLiveSession request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.ILiveSession,
+          | protos.google.cloud.video.stitcher.v1.IGetLiveSessionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLiveSession response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLiveSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.ILiveSession,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetLiveSessionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLiveSession response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified live config managed by the Video
@@ -1591,7 +1849,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLiveConfig(request, options, callback);
+    this._log.info('getLiveConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.ILiveConfig,
+          | protos.google.cloud.video.stitcher.v1.IGetLiveConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLiveConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLiveConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.ILiveConfig,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetLiveConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLiveConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified VOD config managed by the Video
@@ -1683,7 +1970,36 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getVodConfig(request, options, callback);
+    this._log.info('getVodConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.stitcher.v1.IVodConfig,
+          | protos.google.cloud.video.stitcher.v1.IGetVodConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVodConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVodConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.stitcher.v1.IVodConfig,
+          (
+            | protos.google.cloud.video.stitcher.v1.IGetVodConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVodConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1796,7 +2112,37 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCdnKey(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ICdnKey,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createCdnKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createCdnKey request %j', request);
+    return this.innerApiCalls
+      .createCdnKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ICdnKey,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCdnKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createCdnKey()`.
@@ -1817,6 +2163,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('createCdnKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1933,7 +2280,37 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCdnKey(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteCdnKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteCdnKey request %j', request);
+    return this.innerApiCalls
+      .deleteCdnKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCdnKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteCdnKey()`.
@@ -1954,6 +2331,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteCdnKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2074,7 +2452,37 @@ export class VideoStitcherServiceClient {
         'cdn_key.name': request.cdnKey!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCdnKey(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ICdnKey,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateCdnKey response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCdnKey request %j', request);
+    return this.innerApiCalls
+      .updateCdnKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ICdnKey,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCdnKey response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateCdnKey()`.
@@ -2095,6 +2503,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('updateCdnKey long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2232,7 +2641,37 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSlate(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ISlate,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createSlate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createSlate request %j', request);
+    return this.innerApiCalls
+      .createSlate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ISlate,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSlate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createSlate()`.
@@ -2253,6 +2692,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('createSlate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2370,7 +2810,37 @@ export class VideoStitcherServiceClient {
         'slate.name': request.slate!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSlate(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ISlate,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateSlate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateSlate request %j', request);
+    return this.innerApiCalls
+      .updateSlate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ISlate,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSlate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateSlate()`.
@@ -2391,6 +2861,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('updateSlate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2507,7 +2978,37 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSlate(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSlate response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSlate request %j', request);
+    return this.innerApiCalls
+      .deleteSlate(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSlate response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSlate()`.
@@ -2528,6 +3029,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteSlate long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2663,7 +3165,37 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createLiveConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ILiveConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createLiveConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createLiveConfig request %j', request);
+    return this.innerApiCalls
+      .createLiveConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ILiveConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLiveConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createLiveConfig()`.
@@ -2684,6 +3216,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('createLiveConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2800,7 +3333,37 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteLiveConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteLiveConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteLiveConfig request %j', request);
+    return this.innerApiCalls
+      .deleteLiveConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLiveConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteLiveConfig()`.
@@ -2821,6 +3384,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteLiveConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2942,7 +3506,37 @@ export class VideoStitcherServiceClient {
         'live_config.name': request.liveConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateLiveConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ILiveConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateLiveConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateLiveConfig request %j', request);
+    return this.innerApiCalls
+      .updateLiveConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.ILiveConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLiveConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateLiveConfig()`.
@@ -2963,6 +3557,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('updateLiveConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3098,7 +3693,37 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createVodConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.IVodConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createVodConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createVodConfig request %j', request);
+    return this.innerApiCalls
+      .createVodConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.IVodConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVodConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createVodConfig()`.
@@ -3119,6 +3744,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('createVodConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3235,7 +3861,37 @@ export class VideoStitcherServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteVodConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteVodConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteVodConfig request %j', request);
+    return this.innerApiCalls
+      .deleteVodConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVodConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteVodConfig()`.
@@ -3256,6 +3912,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteVodConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3377,7 +4034,37 @@ export class VideoStitcherServiceClient {
         'vod_config.name': request.vodConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateVodConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.IVodConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateVodConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateVodConfig request %j', request);
+    return this.innerApiCalls
+      .updateVodConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.stitcher.v1.IVodConfig,
+            protos.google.cloud.video.stitcher.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVodConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateVodConfig()`.
@@ -3398,6 +4085,7 @@ export class VideoStitcherServiceClient {
       protos.google.cloud.video.stitcher.v1.OperationMetadata
     >
   > {
+    this._log.info('updateVodConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3514,7 +4202,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCdnKeys(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListCdnKeysRequest,
+          | protos.google.cloud.video.stitcher.v1.IListCdnKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.ICdnKey
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCdnKeys values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCdnKeys request %j', request);
+    return this.innerApiCalls
+      .listCdnKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.ICdnKey[],
+          protos.google.cloud.video.stitcher.v1.IListCdnKeysRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListCdnKeysResponse,
+        ]) => {
+          this._log.info('listCdnKeys values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3559,6 +4273,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listCdnKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCdnKeys stream %j', request);
     return this.descriptors.page.listCdnKeys.createStream(
       this.innerApiCalls.listCdnKeys as GaxCall,
       request,
@@ -3611,6 +4326,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listCdnKeys'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCdnKeys iterate %j', request);
     return this.descriptors.page.listCdnKeys.asyncIterate(
       this.innerApiCalls['listCdnKeys'] as GaxCall,
       request as {},
@@ -3714,7 +4430,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVodStitchDetails(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsRequest,
+          | protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.IVodStitchDetail
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVodStitchDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVodStitchDetails request %j', request);
+    return this.innerApiCalls
+      .listVodStitchDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.IVodStitchDetail[],
+          protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsResponse,
+        ]) => {
+          this._log.info('listVodStitchDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3754,6 +4496,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listVodStitchDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVodStitchDetails stream %j', request);
     return this.descriptors.page.listVodStitchDetails.createStream(
       this.innerApiCalls.listVodStitchDetails as GaxCall,
       request,
@@ -3801,6 +4544,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listVodStitchDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVodStitchDetails iterate %j', request);
     return this.descriptors.page.listVodStitchDetails.asyncIterate(
       this.innerApiCalls['listVodStitchDetails'] as GaxCall,
       request as {},
@@ -3903,7 +4647,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVodAdTagDetails(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsRequest,
+          | protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.IVodAdTagDetail
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVodAdTagDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVodAdTagDetails request %j', request);
+    return this.innerApiCalls
+      .listVodAdTagDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.IVodAdTagDetail[],
+          protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsResponse,
+        ]) => {
+          this._log.info('listVodAdTagDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3943,6 +4713,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listVodAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVodAdTagDetails stream %j', request);
     return this.descriptors.page.listVodAdTagDetails.createStream(
       this.innerApiCalls.listVodAdTagDetails as GaxCall,
       request,
@@ -3990,6 +4761,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listVodAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVodAdTagDetails iterate %j', request);
     return this.descriptors.page.listVodAdTagDetails.asyncIterate(
       this.innerApiCalls['listVodAdTagDetails'] as GaxCall,
       request as {},
@@ -4092,7 +4864,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLiveAdTagDetails(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsRequest,
+          | protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLiveAdTagDetails values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLiveAdTagDetails request %j', request);
+    return this.innerApiCalls
+      .listLiveAdTagDetails(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.ILiveAdTagDetail[],
+          protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsResponse,
+        ]) => {
+          this._log.info('listLiveAdTagDetails values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4132,6 +4930,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listLiveAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLiveAdTagDetails stream %j', request);
     return this.descriptors.page.listLiveAdTagDetails.createStream(
       this.innerApiCalls.listLiveAdTagDetails as GaxCall,
       request,
@@ -4179,6 +4978,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listLiveAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLiveAdTagDetails iterate %j', request);
     return this.descriptors.page.listLiveAdTagDetails.asyncIterate(
       this.innerApiCalls['listLiveAdTagDetails'] as GaxCall,
       request as {},
@@ -4286,7 +5086,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSlates(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListSlatesRequest,
+          | protos.google.cloud.video.stitcher.v1.IListSlatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.ISlate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSlates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSlates request %j', request);
+    return this.innerApiCalls
+      .listSlates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.ISlate[],
+          protos.google.cloud.video.stitcher.v1.IListSlatesRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListSlatesResponse,
+        ]) => {
+          this._log.info('listSlates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4331,6 +5157,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listSlates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSlates stream %j', request);
     return this.descriptors.page.listSlates.createStream(
       this.innerApiCalls.listSlates as GaxCall,
       request,
@@ -4383,6 +5210,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listSlates'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSlates iterate %j', request);
     return this.descriptors.page.listSlates.asyncIterate(
       this.innerApiCalls['listSlates'] as GaxCall,
       request as {},
@@ -4493,7 +5321,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLiveConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListLiveConfigsRequest,
+          | protos.google.cloud.video.stitcher.v1.IListLiveConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.ILiveConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLiveConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLiveConfigs request %j', request);
+    return this.innerApiCalls
+      .listLiveConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.ILiveConfig[],
+          protos.google.cloud.video.stitcher.v1.IListLiveConfigsRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListLiveConfigsResponse,
+        ]) => {
+          this._log.info('listLiveConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4540,6 +5394,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listLiveConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLiveConfigs stream %j', request);
     return this.descriptors.page.listLiveConfigs.createStream(
       this.innerApiCalls.listLiveConfigs as GaxCall,
       request,
@@ -4594,6 +5449,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listLiveConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLiveConfigs iterate %j', request);
     return this.descriptors.page.listLiveConfigs.asyncIterate(
       this.innerApiCalls['listLiveConfigs'] as GaxCall,
       request as {},
@@ -4705,7 +5561,33 @@ export class VideoStitcherServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listVodConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.stitcher.v1.IListVodConfigsRequest,
+          | protos.google.cloud.video.stitcher.v1.IListVodConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.stitcher.v1.IVodConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVodConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVodConfigs request %j', request);
+    return this.innerApiCalls
+      .listVodConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.stitcher.v1.IVodConfig[],
+          protos.google.cloud.video.stitcher.v1.IListVodConfigsRequest | null,
+          protos.google.cloud.video.stitcher.v1.IListVodConfigsResponse,
+        ]) => {
+          this._log.info('listVodConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4753,6 +5635,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listVodConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVodConfigs stream %j', request);
     return this.descriptors.page.listVodConfigs.createStream(
       this.innerApiCalls.listVodConfigs as GaxCall,
       request,
@@ -4808,6 +5691,7 @@ export class VideoStitcherServiceClient {
     const defaultCallSettings = this._defaults['listVodConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listVodConfigs iterate %j', request);
     return this.descriptors.page.listVodConfigs.asyncIterate(
       this.innerApiCalls['listVodConfigs'] as GaxCall,
       request as {},
@@ -5641,6 +6525,7 @@ export class VideoStitcherServiceClient {
   close(): Promise<void> {
     if (this.videoStitcherServiceStub && !this._terminated) {
       return this.videoStitcherServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

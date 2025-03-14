@@ -1282,6 +1282,20 @@ export namespace maps {
                 public getTrip(request: maps.fleetengine.v1.IGetTripRequest): Promise<maps.fleetengine.v1.Trip>;
 
                 /**
+                 * Calls DeleteTrip.
+                 * @param request DeleteTripRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteTrip(request: maps.fleetengine.v1.IDeleteTripRequest, callback: maps.fleetengine.v1.TripService.DeleteTripCallback): void;
+
+                /**
+                 * Calls DeleteTrip.
+                 * @param request DeleteTripRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteTrip(request: maps.fleetengine.v1.IDeleteTripRequest): Promise<google.protobuf.Empty>;
+
+                /**
                  * Calls ReportBillableTrip.
                  * @param request ReportBillableTripRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Empty
@@ -1339,6 +1353,13 @@ export namespace maps {
                  * @param [response] Trip
                  */
                 type GetTripCallback = (error: (Error|null), response?: maps.fleetengine.v1.Trip) => void;
+
+                /**
+                 * Callback as used by {@link maps.fleetengine.v1.TripService|deleteTrip}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteTripCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                 /**
                  * Callback as used by {@link maps.fleetengine.v1.TripService|reportBillableTrip}.
@@ -1610,6 +1631,109 @@ export namespace maps {
 
                 /**
                  * Gets the default type url for GetTripRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DeleteTripRequest. */
+            interface IDeleteTripRequest {
+
+                /** DeleteTripRequest header */
+                header?: (maps.fleetengine.v1.IRequestHeader|null);
+
+                /** DeleteTripRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a DeleteTripRequest. */
+            class DeleteTripRequest implements IDeleteTripRequest {
+
+                /**
+                 * Constructs a new DeleteTripRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: maps.fleetengine.v1.IDeleteTripRequest);
+
+                /** DeleteTripRequest header. */
+                public header?: (maps.fleetengine.v1.IRequestHeader|null);
+
+                /** DeleteTripRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new DeleteTripRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteTripRequest instance
+                 */
+                public static create(properties?: maps.fleetengine.v1.IDeleteTripRequest): maps.fleetengine.v1.DeleteTripRequest;
+
+                /**
+                 * Encodes the specified DeleteTripRequest message. Does not implicitly {@link maps.fleetengine.v1.DeleteTripRequest.verify|verify} messages.
+                 * @param message DeleteTripRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: maps.fleetengine.v1.IDeleteTripRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteTripRequest message, length delimited. Does not implicitly {@link maps.fleetengine.v1.DeleteTripRequest.verify|verify} messages.
+                 * @param message DeleteTripRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: maps.fleetengine.v1.IDeleteTripRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteTripRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteTripRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): maps.fleetengine.v1.DeleteTripRequest;
+
+                /**
+                 * Decodes a DeleteTripRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteTripRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): maps.fleetengine.v1.DeleteTripRequest;
+
+                /**
+                 * Verifies a DeleteTripRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteTripRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteTripRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): maps.fleetengine.v1.DeleteTripRequest;
+
+                /**
+                 * Creates a plain object from a DeleteTripRequest message. Also converts values to other types if specified.
+                 * @param message DeleteTripRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: maps.fleetengine.v1.DeleteTripRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteTripRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteTripRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -2574,6 +2698,20 @@ export namespace maps {
                 public getVehicle(request: maps.fleetengine.v1.IGetVehicleRequest): Promise<maps.fleetengine.v1.Vehicle>;
 
                 /**
+                 * Calls DeleteVehicle.
+                 * @param request DeleteVehicleRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteVehicle(request: maps.fleetengine.v1.IDeleteVehicleRequest, callback: maps.fleetengine.v1.VehicleService.DeleteVehicleCallback): void;
+
+                /**
+                 * Calls DeleteVehicle.
+                 * @param request DeleteVehicleRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteVehicle(request: maps.fleetengine.v1.IDeleteVehicleRequest): Promise<google.protobuf.Empty>;
+
+                /**
                  * Calls UpdateVehicle.
                  * @param request UpdateVehicleRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Vehicle
@@ -2645,6 +2783,13 @@ export namespace maps {
                  * @param [response] Vehicle
                  */
                 type GetVehicleCallback = (error: (Error|null), response?: maps.fleetengine.v1.Vehicle) => void;
+
+                /**
+                 * Callback as used by {@link maps.fleetengine.v1.VehicleService|deleteVehicle}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteVehicleCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                 /**
                  * Callback as used by {@link maps.fleetengine.v1.VehicleService|updateVehicle}.
@@ -2899,6 +3044,109 @@ export namespace maps {
 
                 /**
                  * Gets the default type url for GetVehicleRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DeleteVehicleRequest. */
+            interface IDeleteVehicleRequest {
+
+                /** DeleteVehicleRequest header */
+                header?: (maps.fleetengine.v1.IRequestHeader|null);
+
+                /** DeleteVehicleRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a DeleteVehicleRequest. */
+            class DeleteVehicleRequest implements IDeleteVehicleRequest {
+
+                /**
+                 * Constructs a new DeleteVehicleRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: maps.fleetengine.v1.IDeleteVehicleRequest);
+
+                /** DeleteVehicleRequest header. */
+                public header?: (maps.fleetengine.v1.IRequestHeader|null);
+
+                /** DeleteVehicleRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new DeleteVehicleRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteVehicleRequest instance
+                 */
+                public static create(properties?: maps.fleetengine.v1.IDeleteVehicleRequest): maps.fleetengine.v1.DeleteVehicleRequest;
+
+                /**
+                 * Encodes the specified DeleteVehicleRequest message. Does not implicitly {@link maps.fleetengine.v1.DeleteVehicleRequest.verify|verify} messages.
+                 * @param message DeleteVehicleRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: maps.fleetengine.v1.IDeleteVehicleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteVehicleRequest message, length delimited. Does not implicitly {@link maps.fleetengine.v1.DeleteVehicleRequest.verify|verify} messages.
+                 * @param message DeleteVehicleRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: maps.fleetengine.v1.IDeleteVehicleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteVehicleRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteVehicleRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): maps.fleetengine.v1.DeleteVehicleRequest;
+
+                /**
+                 * Decodes a DeleteVehicleRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteVehicleRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): maps.fleetengine.v1.DeleteVehicleRequest;
+
+                /**
+                 * Verifies a DeleteVehicleRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteVehicleRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteVehicleRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): maps.fleetengine.v1.DeleteVehicleRequest;
+
+                /**
+                 * Creates a plain object from a DeleteVehicleRequest message. Also converts values to other types if specified.
+                 * @param message DeleteVehicleRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: maps.fleetengine.v1.DeleteVehicleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteVehicleRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteVehicleRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */

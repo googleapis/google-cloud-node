@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class LocalInventoryServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('inventories');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class LocalInventoryServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -497,7 +500,36 @@ export class LocalInventoryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.insertLocalInventory(request, options, callback);
+    this._log.info('insertLocalInventory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.inventories.v1beta.ILocalInventory,
+          | protos.google.shopping.merchant.inventories.v1beta.IInsertLocalInventoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insertLocalInventory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insertLocalInventory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.inventories.v1beta.ILocalInventory,
+          (
+            | protos.google.shopping.merchant.inventories.v1beta.IInsertLocalInventoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insertLocalInventory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified `LocalInventory` from the given product in your
@@ -599,7 +631,36 @@ export class LocalInventoryServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteLocalInventory(request, options, callback);
+    this._log.info('deleteLocalInventory request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.inventories.v1beta.IDeleteLocalInventoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteLocalInventory response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteLocalInventory(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.inventories.v1beta.IDeleteLocalInventoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLocalInventory response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -714,11 +775,37 @@ export class LocalInventoryServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLocalInventories(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesRequest,
+          | protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.inventories.v1beta.ILocalInventory
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLocalInventories values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLocalInventories request %j', request);
+    return this.innerApiCalls
+      .listLocalInventories(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.inventories.v1beta.ILocalInventory[],
+          protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesRequest | null,
+          protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesResponse,
+        ]) => {
+          this._log.info('listLocalInventories values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLocalInventories`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -765,6 +852,7 @@ export class LocalInventoryServiceClient {
     const defaultCallSettings = this._defaults['listLocalInventories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLocalInventories stream %j', request);
     return this.descriptors.page.listLocalInventories.createStream(
       this.innerApiCalls.listLocalInventories as GaxCall,
       request,
@@ -823,6 +911,7 @@ export class LocalInventoryServiceClient {
     const defaultCallSettings = this._defaults['listLocalInventories'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listLocalInventories iterate %j', request);
     return this.descriptors.page.listLocalInventories.asyncIterate(
       this.innerApiCalls['listLocalInventories'] as GaxCall,
       request as {},
@@ -988,6 +1077,7 @@ export class LocalInventoryServiceClient {
   close(): Promise<void> {
     if (this.localInventoryServiceStub && !this._terminated) {
       return this.localInventoryServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

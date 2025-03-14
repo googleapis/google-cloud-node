@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class IntentsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class IntentsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -296,6 +299,9 @@ export class IntentsClient {
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+      ),
+      toolVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -667,7 +673,36 @@ export class IntentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIntent(request, options, callback);
+    this._log.info('getIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an intent in the specified agent.
@@ -780,7 +815,36 @@ export class IntentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createIntent(request, options, callback);
+    this._log.info('createIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreateIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified intent.
@@ -893,7 +957,36 @@ export class IntentsClient {
         'intent.name': request.intent!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateIntent(request, options, callback);
+    this._log.info('updateIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified intent.
@@ -995,7 +1088,36 @@ export class IntentsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteIntent(request, options, callback);
+    this._log.info('deleteIntent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteIntentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteIntent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteIntent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteIntentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIntent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1122,7 +1244,37 @@ export class IntentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importIntents(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importIntents response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importIntents request %j', request);
+    return this.innerApiCalls
+      .importIntents(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IImportIntentsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importIntents response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importIntents()`.
@@ -1143,6 +1295,7 @@ export class IntentsClient {
       protos.google.cloud.dialogflow.cx.v3beta1.ImportIntentsMetadata
     >
   > {
+    this._log.info('importIntents long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1288,7 +1441,37 @@ export class IntentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportIntents(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportIntents response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportIntents request %j', request);
+    return this.innerApiCalls
+      .exportIntents(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsResponse,
+            protos.google.cloud.dialogflow.cx.v3beta1.IExportIntentsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportIntents response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportIntents()`.
@@ -1309,6 +1492,7 @@ export class IntentsClient {
       protos.google.cloud.dialogflow.cx.v3beta1.ExportIntentsMetadata
     >
   > {
+    this._log.info('exportIntents long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1434,7 +1618,33 @@ export class IntentsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listIntents(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListIntentsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListIntentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIntents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIntents request %j', request);
+    return this.innerApiCalls
+      .listIntents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IIntent[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListIntentsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListIntentsResponse,
+        ]) => {
+          this._log.info('listIntents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1488,6 +1698,7 @@ export class IntentsClient {
     const defaultCallSettings = this._defaults['listIntents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listIntents stream %j', request);
     return this.descriptors.page.listIntents.createStream(
       this.innerApiCalls.listIntents as GaxCall,
       request,
@@ -1549,6 +1760,7 @@ export class IntentsClient {
     const defaultCallSettings = this._defaults['listIntents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listIntents iterate %j', request);
     return this.descriptors.page.listIntents.asyncIterate(
       this.innerApiCalls['listIntents'] as GaxCall,
       request as {},
@@ -3923,6 +4135,92 @@ export class IntentsClient {
   }
 
   /**
+   * Return a fully-qualified toolVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string
+  ) {
+    return this.pathTemplates.toolVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
+  }
+
+  /**
+   * Parse the tool from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
+  }
+
+  /**
+   * Parse the version from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
+  }
+
+  /**
    * Return a fully-qualified version resource name string.
    *
    * @param {string} project
@@ -4079,6 +4377,7 @@ export class IntentsClient {
   close(): Promise<void> {
     if (this.intentsStub && !this._terminated) {
       return this.intentsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

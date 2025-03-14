@@ -47,8 +47,8 @@ function main(workspace) {
    *  Optional. Page token received from a previous `QueryDirectoryContents`
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  `QueryDirectoryContents` must match the call that provided the page
-   *  token.
+   *  `QueryDirectoryContents`, with the exception of `page_size`, must match the
+   *  call that provided the page token.
    */
   // const pageToken = 'abc123'
 

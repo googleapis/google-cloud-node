@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -74,6 +75,8 @@ export class CloudChannelServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('channel');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -109,7 +112,7 @@ export class CloudChannelServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -823,7 +826,31 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCustomer(request, options, callback);
+    this._log.info('getCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomer,
+          protos.google.cloud.channel.v1.IGetCustomerRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomer,
+          protos.google.cloud.channel.v1.IGetCustomerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Confirms the existence of Cloud Identity accounts based on the domain and
@@ -945,11 +972,42 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkCloudIdentityAccountsExist(
-      request,
-      options,
-      callback
-    );
+    this._log.info('checkCloudIdentityAccountsExist request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistResponse,
+          | protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'checkCloudIdentityAccountsExist response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkCloudIdentityAccountsExist(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistResponse,
+          (
+            | protos.google.cloud.channel.v1.ICheckCloudIdentityAccountsExistRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'checkCloudIdentityAccountsExist response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new {@link protos.google.cloud.channel.v1.Customer|Customer} resource under
@@ -1051,7 +1109,33 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCustomer(request, options, callback);
+    this._log.info('createCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomer,
+          | protos.google.cloud.channel.v1.ICreateCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomer,
+          protos.google.cloud.channel.v1.ICreateCustomerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an existing {@link protos.google.cloud.channel.v1.Customer|Customer} resource
@@ -1150,7 +1234,33 @@ export class CloudChannelServiceClient {
         'customer.name': request.customer!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCustomer(request, options, callback);
+    this._log.info('updateCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomer,
+          | protos.google.cloud.channel.v1.IUpdateCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomer,
+          protos.google.cloud.channel.v1.IUpdateCustomerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the given {@link protos.google.cloud.channel.v1.Customer|Customer} permanently.
@@ -1243,7 +1353,33 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCustomer(request, options, callback);
+    this._log.info('deleteCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.channel.v1.IDeleteCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.channel.v1.IDeleteCustomerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Imports a {@link protos.google.cloud.channel.v1.Customer|Customer} from the Cloud
@@ -1372,7 +1508,33 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importCustomer(request, options, callback);
+    this._log.info('importCustomer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomer,
+          | protos.google.cloud.channel.v1.IImportCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('importCustomer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importCustomer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomer,
+          protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importCustomer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested {@link protos.google.cloud.channel.v1.Entitlement|Entitlement}
@@ -1468,7 +1630,33 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEntitlement(request, options, callback);
+    this._log.info('getEntitlement request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IEntitlement,
+          | protos.google.cloud.channel.v1.IGetEntitlementRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntitlement response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IEntitlement,
+          protos.google.cloud.channel.v1.IGetEntitlementRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntitlement response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested
@@ -1576,7 +1764,36 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getChannelPartnerLink(request, options, callback);
+    this._log.info('getChannelPartnerLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerLink,
+          | protos.google.cloud.channel.v1.IGetChannelPartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChannelPartnerLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChannelPartnerLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IChannelPartnerLink,
+          (
+            | protos.google.cloud.channel.v1.IGetChannelPartnerLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChannelPartnerLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Initiates a channel partner link between a distributor and a reseller, or
@@ -1700,11 +1917,36 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createChannelPartnerLink(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createChannelPartnerLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerLink,
+          | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createChannelPartnerLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createChannelPartnerLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IChannelPartnerLink,
+          (
+            | protos.google.cloud.channel.v1.ICreateChannelPartnerLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createChannelPartnerLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a channel partner link. Distributors call this method to change a
@@ -1830,11 +2072,36 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateChannelPartnerLink(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateChannelPartnerLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerLink,
+          | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateChannelPartnerLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateChannelPartnerLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IChannelPartnerLink,
+          (
+            | protos.google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateChannelPartnerLink response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about how a Reseller modifies their bill before sending
@@ -1948,11 +2215,36 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCustomerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getCustomerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCustomerRepricingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCustomerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          (
+            | protos.google.cloud.channel.v1.IGetCustomerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCustomerRepricingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a CustomerRepricingConfig. Call this method to set modifications
@@ -2093,11 +2385,36 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCustomerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createCustomerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCustomerRepricingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCustomerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          (
+            | protos.google.cloud.channel.v1.ICreateCustomerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCustomerRepricingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a CustomerRepricingConfig. Call this method to set modifications
@@ -2225,11 +2542,36 @@ export class CloudChannelServiceClient {
           request.customerRepricingConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCustomerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateCustomerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCustomerRepricingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCustomerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig,
+          (
+            | protos.google.cloud.channel.v1.IUpdateCustomerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCustomerRepricingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the given
@@ -2343,11 +2685,36 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCustomerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteCustomerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCustomerRepricingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCustomerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.channel.v1.IDeleteCustomerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCustomerRepricingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets information about how a Distributor modifies their bill before sending
@@ -2461,11 +2828,42 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getChannelPartnerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getChannelPartnerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getChannelPartnerRepricingConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChannelPartnerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          (
+            | protos.google.cloud.channel.v1.IGetChannelPartnerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getChannelPartnerRepricingConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a ChannelPartnerRepricingConfig. Call this method to set
@@ -2607,11 +3005,42 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createChannelPartnerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createChannelPartnerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'createChannelPartnerRepricingConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createChannelPartnerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          (
+            | protos.google.cloud.channel.v1.ICreateChannelPartnerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'createChannelPartnerRepricingConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a ChannelPartnerRepricingConfig. Call this method to set
@@ -2739,11 +3168,42 @@ export class CloudChannelServiceClient {
           request.channelPartnerRepricingConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateChannelPartnerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateChannelPartnerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateChannelPartnerRepricingConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateChannelPartnerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig,
+          (
+            | protos.google.cloud.channel.v1.IUpdateChannelPartnerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateChannelPartnerRepricingConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the given
@@ -2856,11 +3316,42 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteChannelPartnerRepricingConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteChannelPartnerRepricingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'deleteChannelPartnerRepricingConfig response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteChannelPartnerRepricingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.channel.v1.IDeleteChannelPartnerRepricingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteChannelPartnerRepricingConfig response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested {@link protos.google.cloud.channel.v1.Offer|Offer} resource.
@@ -2953,7 +3444,31 @@ export class CloudChannelServiceClient {
         entitlement: request.entitlement ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.lookupOffer(request, options, callback);
+    this._log.info('lookupOffer request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IOffer,
+          protos.google.cloud.channel.v1.ILookupOfferRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('lookupOffer response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .lookupOffer(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IOffer,
+          protos.google.cloud.channel.v1.ILookupOfferRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupOffer response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists the billing accounts that are eligible to purchase particular SKUs
@@ -3064,11 +3579,36 @@ export class CloudChannelServiceClient {
         customer: request.customer ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.queryEligibleBillingAccounts(
-      request,
-      options,
-      callback
-    );
+    this._log.info('queryEligibleBillingAccounts request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+          | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('queryEligibleBillingAccounts response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .queryEligibleBillingAccounts(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+          (
+            | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryEligibleBillingAccounts response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Registers a service account with subscriber privileges on the Cloud Pub/Sub
@@ -3178,7 +3718,33 @@ export class CloudChannelServiceClient {
         account: request.account ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.registerSubscriber(request, options, callback);
+    this._log.info('registerSubscriber request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+          | protos.google.cloud.channel.v1.IRegisterSubscriberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('registerSubscriber response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .registerSubscriber(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IRegisterSubscriberResponse,
+          protos.google.cloud.channel.v1.IRegisterSubscriberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('registerSubscriber response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Unregisters a service account with subscriber privileges on the Cloud
@@ -3291,7 +3857,36 @@ export class CloudChannelServiceClient {
         account: request.account ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.unregisterSubscriber(request, options, callback);
+    this._log.info('unregisterSubscriber request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+          | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('unregisterSubscriber response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .unregisterSubscriber(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.channel.v1.IUnregisterSubscriberResponse,
+          (
+            | protos.google.cloud.channel.v1.IUnregisterSubscriberRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('unregisterSubscriber response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3424,11 +4019,37 @@ export class CloudChannelServiceClient {
         customer: request.customer ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.provisionCloudIdentity(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.ICustomer,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('provisionCloudIdentity response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('provisionCloudIdentity request %j', request);
+    return this.innerApiCalls
+      .provisionCloudIdentity(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.ICustomer,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('provisionCloudIdentity response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `provisionCloudIdentity()`.
@@ -3449,6 +4070,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('provisionCloudIdentity long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3619,7 +4241,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEntitlement request %j', request);
+    return this.innerApiCalls
+      .createEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEntitlement()`.
@@ -3640,6 +4292,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('createEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3801,7 +4454,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.changeParameters(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('changeParameters response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('changeParameters request %j', request);
+    return this.innerApiCalls
+      .changeParameters(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('changeParameters response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `changeParameters()`.
@@ -3822,6 +4505,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('changeParameters long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3976,7 +4660,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.changeRenewalSettings(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('changeRenewalSettings response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('changeRenewalSettings request %j', request);
+    return this.innerApiCalls
+      .changeRenewalSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('changeRenewalSettings response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `changeRenewalSettings()`.
@@ -3997,6 +4711,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('changeRenewalSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4163,7 +4878,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.changeOffer(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('changeOffer response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('changeOffer request %j', request);
+    return this.innerApiCalls
+      .changeOffer(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('changeOffer response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `changeOffer()`.
@@ -4184,6 +4929,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('changeOffer long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4337,7 +5083,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startPaidService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startPaidService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startPaidService request %j', request);
+    return this.innerApiCalls
+      .startPaidService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startPaidService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startPaidService()`.
@@ -4358,6 +5134,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('startPaidService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4508,7 +5285,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.suspendEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('suspendEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('suspendEntitlement request %j', request);
+    return this.innerApiCalls
+      .suspendEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('suspendEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `suspendEntitlement()`.
@@ -4529,6 +5336,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('suspendEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4684,7 +5492,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('cancelEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('cancelEntitlement request %j', request);
+    return this.innerApiCalls
+      .cancelEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `cancelEntitlement()`.
@@ -4705,6 +5543,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('cancelEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4861,7 +5700,37 @@ export class CloudChannelServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.activateEntitlement(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('activateEntitlement response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('activateEntitlement request %j', request);
+    return this.innerApiCalls
+      .activateEntitlement(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.IEntitlement,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('activateEntitlement response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `activateEntitlement()`.
@@ -4882,6 +5751,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('activateEntitlement long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5050,7 +5920,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.transferEntitlements(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('transferEntitlements response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('transferEntitlements request %j', request);
+    return this.innerApiCalls
+      .transferEntitlements(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.channel.v1.ITransferEntitlementsResponse,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('transferEntitlements response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `transferEntitlements()`.
@@ -5071,6 +5971,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('transferEntitlements long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5231,11 +6132,43 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.transferEntitlementsToGoogle(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'transferEntitlementsToGoogle response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('transferEntitlementsToGoogle request %j', request);
+    return this.innerApiCalls
+      .transferEntitlementsToGoogle(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.channel.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'transferEntitlementsToGoogle response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `transferEntitlementsToGoogle()`.
@@ -5256,6 +6189,7 @@ export class CloudChannelServiceClient {
       protos.google.cloud.channel.v1.OperationMetadata
     >
   > {
+    this._log.info('transferEntitlementsToGoogle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5383,11 +6317,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCustomers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListCustomersRequest,
+          | protos.google.cloud.channel.v1.IListCustomersResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ICustomer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomers request %j', request);
+    return this.innerApiCalls
+      .listCustomers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.ICustomer[],
+          protos.google.cloud.channel.v1.IListCustomersRequest | null,
+          protos.google.cloud.channel.v1.IListCustomersResponse,
+        ]) => {
+          this._log.info('listCustomers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5435,6 +6395,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomers stream %j', request);
     return this.descriptors.page.listCustomers.createStream(
       this.innerApiCalls.listCustomers as GaxCall,
       request,
@@ -5494,6 +6455,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomers iterate %j', request);
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
       request as {},
@@ -5614,11 +6576,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntitlements(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListEntitlementsRequest,
+          | protos.google.cloud.channel.v1.IListEntitlementsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IEntitlement
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntitlements values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntitlements request %j', request);
+    return this.innerApiCalls
+      .listEntitlements(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IEntitlement[],
+          protos.google.cloud.channel.v1.IListEntitlementsRequest | null,
+          protos.google.cloud.channel.v1.IListEntitlementsResponse,
+        ]) => {
+          this._log.info('listEntitlements values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntitlements`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -5662,6 +6650,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitlements stream %j', request);
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as GaxCall,
       request,
@@ -5717,6 +6706,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitlements iterate %j', request);
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
       request as {},
@@ -5862,11 +6852,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTransferableSkus(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListTransferableSkusRequest,
+          | protos.google.cloud.channel.v1.IListTransferableSkusResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ITransferableSku
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTransferableSkus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTransferableSkus request %j', request);
+    return this.innerApiCalls
+      .listTransferableSkus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.ITransferableSku[],
+          protos.google.cloud.channel.v1.IListTransferableSkusRequest | null,
+          protos.google.cloud.channel.v1.IListTransferableSkusResponse,
+        ]) => {
+          this._log.info('listTransferableSkus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTransferableSkus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.cloudIdentityId
@@ -5927,6 +6943,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTransferableSkus stream %j', request);
     return this.descriptors.page.listTransferableSkus.createStream(
       this.innerApiCalls.listTransferableSkus as GaxCall,
       request,
@@ -5999,6 +7016,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTransferableSkus iterate %j', request);
     return this.descriptors.page.listTransferableSkus.asyncIterate(
       this.innerApiCalls['listTransferableSkus'] as GaxCall,
       request as {},
@@ -6145,15 +7163,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTransferableOffers(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListTransferableOffersRequest,
+          | protos.google.cloud.channel.v1.IListTransferableOffersResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ITransferableOffer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTransferableOffers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTransferableOffers request %j', request);
+    return this.innerApiCalls
+      .listTransferableOffers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.ITransferableOffer[],
+          protos.google.cloud.channel.v1.IListTransferableOffersRequest | null,
+          protos.google.cloud.channel.v1.IListTransferableOffersResponse,
+        ]) => {
+          this._log.info('listTransferableOffers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTransferableOffers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.cloudIdentityId
@@ -6212,6 +7252,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTransferableOffers stream %j', request);
     return this.descriptors.page.listTransferableOffers.createStream(
       this.innerApiCalls.listTransferableOffers as GaxCall,
       request,
@@ -6282,6 +7323,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTransferableOffers iterate %j', request);
     return this.descriptors.page.listTransferableOffers.asyncIterate(
       this.innerApiCalls['listTransferableOffers'] as GaxCall,
       request as {},
@@ -6404,15 +7446,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listChannelPartnerLinks(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest,
+          | protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IChannelPartnerLink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChannelPartnerLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChannelPartnerLinks request %j', request);
+    return this.innerApiCalls
+      .listChannelPartnerLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IChannelPartnerLink[],
+          protos.google.cloud.channel.v1.IListChannelPartnerLinksRequest | null,
+          protos.google.cloud.channel.v1.IListChannelPartnerLinksResponse,
+        ]) => {
+          this._log.info('listChannelPartnerLinks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChannelPartnerLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6457,6 +7521,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChannelPartnerLinks stream %j', request);
     return this.descriptors.page.listChannelPartnerLinks.createStream(
       this.innerApiCalls.listChannelPartnerLinks as GaxCall,
       request,
@@ -6513,6 +7578,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChannelPartnerLinks iterate %j', request);
     return this.descriptors.page.listChannelPartnerLinks.asyncIterate(
       this.innerApiCalls['listChannelPartnerLinks'] as GaxCall,
       request as {},
@@ -6656,15 +7722,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCustomerRepricingConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest,
+          | protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCustomerRepricingConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCustomerRepricingConfigs request %j', request);
+    return this.innerApiCalls
+      .listCustomerRepricingConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.ICustomerRepricingConfig[],
+          protos.google.cloud.channel.v1.IListCustomerRepricingConfigsRequest | null,
+          protos.google.cloud.channel.v1.IListCustomerRepricingConfigsResponse,
+        ]) => {
+          this._log.info('listCustomerRepricingConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCustomerRepricingConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6717,6 +7805,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomerRepricingConfigs stream %j', request);
     return this.descriptors.page.listCustomerRepricingConfigs.createStream(
       this.innerApiCalls.listCustomerRepricingConfigs as GaxCall,
       request,
@@ -6781,6 +7870,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCustomerRepricingConfigs iterate %j', request);
     return this.descriptors.page.listCustomerRepricingConfigs.asyncIterate(
       this.innerApiCalls['listCustomerRepricingConfigs'] as GaxCall,
       request as {},
@@ -6927,15 +8017,43 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listChannelPartnerRepricingConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest,
+          | protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info(
+            'listChannelPartnerRepricingConfigs values %j',
+            values
+          );
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChannelPartnerRepricingConfigs request %j', request);
+    return this.innerApiCalls
+      .listChannelPartnerRepricingConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IChannelPartnerRepricingConfig[],
+          protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsRequest | null,
+          protos.google.cloud.channel.v1.IListChannelPartnerRepricingConfigsResponse,
+        ]) => {
+          this._log.info(
+            'listChannelPartnerRepricingConfigs values %j',
+            response
+          );
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listChannelPartnerRepricingConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -6993,6 +8111,7 @@ export class CloudChannelServiceClient {
       this._defaults['listChannelPartnerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChannelPartnerRepricingConfigs stream %j', request);
     return this.descriptors.page.listChannelPartnerRepricingConfigs.createStream(
       this.innerApiCalls.listChannelPartnerRepricingConfigs as GaxCall,
       request,
@@ -7062,6 +8181,7 @@ export class CloudChannelServiceClient {
       this._defaults['listChannelPartnerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChannelPartnerRepricingConfigs iterate %j', request);
     return this.descriptors.page.listChannelPartnerRepricingConfigs.asyncIterate(
       this.innerApiCalls['listChannelPartnerRepricingConfigs'] as GaxCall,
       request as {},
@@ -7183,11 +8303,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSkuGroups(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSkuGroupsRequest,
+          | protos.google.cloud.channel.v1.IListSkuGroupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.ISkuGroup
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSkuGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSkuGroups request %j', request);
+    return this.innerApiCalls
+      .listSkuGroups(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.ISkuGroup[],
+          protos.google.cloud.channel.v1.IListSkuGroupsRequest | null,
+          protos.google.cloud.channel.v1.IListSkuGroupsResponse,
+        ]) => {
+          this._log.info('listSkuGroups values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSkuGroups`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7230,6 +8376,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSkuGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkuGroups stream %j', request);
     return this.descriptors.page.listSkuGroups.createStream(
       this.innerApiCalls.listSkuGroups as GaxCall,
       request,
@@ -7284,6 +8431,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSkuGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkuGroups iterate %j', request);
     return this.descriptors.page.listSkuGroups.asyncIterate(
       this.innerApiCalls['listSkuGroups'] as GaxCall,
       request as {},
@@ -7410,15 +8558,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSkuGroupBillableSkus(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest,
+          | protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IBillableSku
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSkuGroupBillableSkus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSkuGroupBillableSkus request %j', request);
+    return this.innerApiCalls
+      .listSkuGroupBillableSkus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IBillableSku[],
+          protos.google.cloud.channel.v1.IListSkuGroupBillableSkusRequest | null,
+          protos.google.cloud.channel.v1.IListSkuGroupBillableSkusResponse,
+        ]) => {
+          this._log.info('listSkuGroupBillableSkus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSkuGroupBillableSkus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7460,6 +8630,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSkuGroupBillableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkuGroupBillableSkus stream %j', request);
     return this.descriptors.page.listSkuGroupBillableSkus.createStream(
       this.innerApiCalls.listSkuGroupBillableSkus as GaxCall,
       request,
@@ -7513,6 +8684,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSkuGroupBillableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkuGroupBillableSkus iterate %j', request);
     return this.descriptors.page.listSkuGroupBillableSkus.asyncIterate(
       this.innerApiCalls['listSkuGroupBillableSkus'] as GaxCall,
       request as {},
@@ -7615,11 +8787,37 @@ export class CloudChannelServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listProducts(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListProductsRequest,
+          | protos.google.cloud.channel.v1.IListProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IProduct
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listProducts values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listProducts request %j', request);
+    return this.innerApiCalls
+      .listProducts(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IProduct[],
+          protos.google.cloud.channel.v1.IListProductsRequest | null,
+          protos.google.cloud.channel.v1.IListProductsResponse,
+        ]) => {
+          this._log.info('listProducts values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listProducts`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
@@ -7657,6 +8855,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
       request,
@@ -7706,6 +8905,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
       request as {},
@@ -7815,11 +9015,35 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSkus(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSkusRequest,
+          protos.google.cloud.channel.v1.IListSkusResponse | null | undefined,
+          protos.google.cloud.channel.v1.ISku
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSkus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSkus request %j', request);
+    return this.innerApiCalls
+      .listSkus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.ISku[],
+          protos.google.cloud.channel.v1.IListSkusRequest | null,
+          protos.google.cloud.channel.v1.IListSkusResponse,
+        ]) => {
+          this._log.info('listSkus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSkus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -7866,6 +9090,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkus stream %j', request);
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as GaxCall,
       request,
@@ -7924,6 +9149,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSkus iterate %j', request);
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
       request as {},
@@ -8039,11 +9265,35 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOffers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListOffersRequest,
+          protos.google.cloud.channel.v1.IListOffersResponse | null | undefined,
+          protos.google.cloud.channel.v1.IOffer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOffers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOffers request %j', request);
+    return this.innerApiCalls
+      .listOffers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IOffer[],
+          protos.google.cloud.channel.v1.IListOffersRequest | null,
+          protos.google.cloud.channel.v1.IListOffersResponse,
+        ]) => {
+          this._log.info('listOffers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listOffers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -8096,6 +9346,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOffers stream %j', request);
     return this.descriptors.page.listOffers.createStream(
       this.innerApiCalls.listOffers as GaxCall,
       request,
@@ -8160,6 +9411,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOffers iterate %j', request);
     return this.descriptors.page.listOffers.asyncIterate(
       this.innerApiCalls['listOffers'] as GaxCall,
       request as {},
@@ -8280,11 +9532,37 @@ export class CloudChannelServiceClient {
         customer: request.customer ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPurchasableSkus(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListPurchasableSkusRequest,
+          | protos.google.cloud.channel.v1.IListPurchasableSkusResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IPurchasableSku
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPurchasableSkus values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPurchasableSkus request %j', request);
+    return this.innerApiCalls
+      .listPurchasableSkus(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IPurchasableSku[],
+          protos.google.cloud.channel.v1.IListPurchasableSkusRequest | null,
+          protos.google.cloud.channel.v1.IListPurchasableSkusResponse,
+        ]) => {
+          this._log.info('listPurchasableSkus values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPurchasableSkus`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.channel.v1.ListPurchasableSkusRequest.CreateEntitlementPurchase} request.createEntitlementPurchase
@@ -8330,6 +9608,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPurchasableSkus stream %j', request);
     return this.descriptors.page.listPurchasableSkus.createStream(
       this.innerApiCalls.listPurchasableSkus as GaxCall,
       request,
@@ -8387,6 +9666,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPurchasableSkus iterate %j', request);
     return this.descriptors.page.listPurchasableSkus.asyncIterate(
       this.innerApiCalls['listPurchasableSkus'] as GaxCall,
       request as {},
@@ -8510,11 +9790,37 @@ export class CloudChannelServiceClient {
         customer: request.customer ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPurchasableOffers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListPurchasableOffersRequest,
+          | protos.google.cloud.channel.v1.IListPurchasableOffersResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IPurchasableOffer
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPurchasableOffers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPurchasableOffers request %j', request);
+    return this.innerApiCalls
+      .listPurchasableOffers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IPurchasableOffer[],
+          protos.google.cloud.channel.v1.IListPurchasableOffersRequest | null,
+          protos.google.cloud.channel.v1.IListPurchasableOffersResponse,
+        ]) => {
+          this._log.info('listPurchasableOffers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPurchasableOffers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.channel.v1.ListPurchasableOffersRequest.CreateEntitlementPurchase} request.createEntitlementPurchase
@@ -8560,6 +9866,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPurchasableOffers stream %j', request);
     return this.descriptors.page.listPurchasableOffers.createStream(
       this.innerApiCalls.listPurchasableOffers as GaxCall,
       request,
@@ -8617,6 +9924,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPurchasableOffers iterate %j', request);
     return this.descriptors.page.listPurchasableOffers.asyncIterate(
       this.innerApiCalls['listPurchasableOffers'] as GaxCall,
       request as {},
@@ -8741,11 +10049,37 @@ export class CloudChannelServiceClient {
         account: request.account ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSubscribers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListSubscribersRequest,
+          | protos.google.cloud.channel.v1.IListSubscribersResponse
+          | null
+          | undefined,
+          string
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSubscribers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSubscribers request %j', request);
+    return this.innerApiCalls
+      .listSubscribers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          string[],
+          protos.google.cloud.channel.v1.IListSubscribersRequest | null,
+          protos.google.cloud.channel.v1.IListSubscribersResponse,
+        ]) => {
+          this._log.info('listSubscribers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSubscribers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.account
@@ -8787,6 +10121,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSubscribers stream %j', request);
     return this.descriptors.page.listSubscribers.createStream(
       this.innerApiCalls.listSubscribers as GaxCall,
       request,
@@ -8840,6 +10175,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSubscribers iterate %j', request);
     return this.descriptors.page.listSubscribers.asyncIterate(
       this.innerApiCalls['listSubscribers'] as GaxCall,
       request as {},
@@ -8972,15 +10308,37 @@ export class CloudChannelServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntitlementChanges(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.channel.v1.IListEntitlementChangesRequest,
+          | protos.google.cloud.channel.v1.IListEntitlementChangesResponse
+          | null
+          | undefined,
+          protos.google.cloud.channel.v1.IEntitlementChange
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntitlementChanges values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntitlementChanges request %j', request);
+    return this.innerApiCalls
+      .listEntitlementChanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.channel.v1.IEntitlementChange[],
+          protos.google.cloud.channel.v1.IListEntitlementChangesRequest | null,
+          protos.google.cloud.channel.v1.IListEntitlementChangesResponse,
+        ]) => {
+          this._log.info('listEntitlementChanges values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntitlementChanges`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -9031,6 +10389,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listEntitlementChanges'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitlementChanges stream %j', request);
     return this.descriptors.page.listEntitlementChanges.createStream(
       this.innerApiCalls.listEntitlementChanges as GaxCall,
       request,
@@ -9093,6 +10452,7 @@ export class CloudChannelServiceClient {
     const defaultCallSettings = this._defaults['listEntitlementChanges'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitlementChanges iterate %j', request);
     return this.descriptors.page.listEntitlementChanges.asyncIterate(
       this.innerApiCalls['listEntitlementChanges'] as GaxCall,
       request as {},
@@ -9131,7 +10491,7 @@ export class CloudChannelServiceClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -9144,6 +10504,20 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -9180,6 +10554,13 @@ export class CloudChannelServiceClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -9215,11 +10596,11 @@ export class CloudChannelServiceClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -9228,6 +10609,20 @@ export class CloudChannelServiceClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -9258,7 +10653,7 @@ export class CloudChannelServiceClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -9271,6 +10666,20 @@ export class CloudChannelServiceClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -9793,6 +11202,7 @@ export class CloudChannelServiceClient {
   close(): Promise<void> {
     if (this.cloudChannelServiceStub && !this._terminated) {
       return this.cloudChannelServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

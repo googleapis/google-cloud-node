@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -68,17 +68,6 @@ function main(servingConfig, query) {
    *  Query understanding specification.
    */
   // const queryUnderstandingSpec = {}
-  /**
-   *  Asynchronous mode control.
-   *  If enabled, the response will be returned with answer/session resource
-   *  name without final answer. The API users need to do the polling to get
-   *  the latest status of answer/session by calling
-   *  ConversationalSearchService.GetAnswer google.cloud.discoveryengine.v1.ConversationalSearchService.GetAnswer 
-   *  or
-   *  ConversationalSearchService.GetSession google.cloud.discoveryengine.v1.ConversationalSearchService.GetSession 
-   *  method.
-   */
-  // const asynchronousMode = true
   /**
    *  A unique identifier for tracking visitors. For example, this could be
    *  implemented with an HTTP cookie, which should be able to uniquely identify

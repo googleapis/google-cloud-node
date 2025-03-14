@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -870,6 +870,9 @@ message SuggestionFeature {
 
     // Run smart reply model for chat.
     SMART_REPLY = 3;
+
+    // Run conversation summarization model for chat.
+    CONVERSATION_SUMMARIZATION = 8;
 
     // Run knowledge search with text input from agent or text generated query.
     KNOWLEDGE_SEARCH = 14;

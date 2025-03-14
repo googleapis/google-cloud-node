@@ -43,6 +43,11 @@
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
+        "IngestContextReferences": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
         "ListMessages": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
@@ -64,6 +69,11 @@
           "retry_params_name": "default"
         },
         "SearchKnowledge": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "GenerateSuggestions": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "default"

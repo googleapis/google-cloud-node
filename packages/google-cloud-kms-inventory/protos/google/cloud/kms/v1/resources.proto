@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Kms.V1";
 option go_package = "cloud.google.com/go/kms/apiv1/kmspb;kmspb";
 option java_multiple_files = true;
 option java_outer_classname = "KmsResourcesProto";
 option java_package = "com.google.cloud.kms.v1";
 option php_namespace = "Google\\Cloud\\Kms\\V1";
+
+// LINT: LEGACY_NAMES
 
 // A [KeyRing][google.cloud.kms.v1.KeyRing] is a toplevel logical grouping of
 // [CryptoKeys][google.cloud.kms.v1.CryptoKey].
@@ -184,7 +185,7 @@ message CryptoKey {
   // [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED]
   // state before transitioning to
   // [DESTROYED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED].
-  // If not specified at creation time, the default duration is 24 hours.
+  // If not specified at creation time, the default duration is 30 days.
   google.protobuf.Duration destroy_scheduled_duration = 14
       [(google.api.field_behavior) = IMMUTABLE];
 
@@ -194,7 +195,7 @@ message CryptoKey {
   // where all related cryptographic operations are performed. Only applicable
   // if [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] have a
   // [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] of
-  // [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC], with the
+  // [EXTERNAL_VPC][google.cloud.kms.v1.ProtectionLevel.EXTERNAL_VPC], with the
   // resource name in the format `projects/*/locations/*/ekmConnections/*`.
   // Note, this list is non-exhaustive and may apply to additional
   // [ProtectionLevels][google.cloud.kms.v1.ProtectionLevel] in the future.
@@ -348,6 +349,7 @@ message CryptoKeyVersion {
   // The suffix following `HMAC_` corresponds to the hash algorithm being used
   // (eg. SHA256).
   //
+  //
   // For more information, see [Key purposes and algorithms]
   // (https://cloud.google.com/kms/docs/algorithms).
   enum CryptoKeyVersionAlgorithm {
@@ -465,6 +467,14 @@ message CryptoKeyVersion {
 
     // Algorithm representing symmetric encryption by an external key manager.
     EXTERNAL_SYMMETRIC_ENCRYPTION = 18;
+
+    // The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
+    // security level 3. Randomized version.
+    PQ_SIGN_ML_DSA_65 = 56;
+
+    // The post-quantum stateless hash-based digital signature algorithm, at
+    // security level 1. Randomized version.
+    PQ_SIGN_SLH_DSA_SHA2_128S = 57;
   }
 
   // The state of a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion],
@@ -656,6 +666,28 @@ message CryptoKeyVersion {
   bool reimport_eligible = 18 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
+// Data with integrity verification field.
+message ChecksummedData {
+  // Raw Data.
+  bytes data = 3;
+
+  // Integrity verification field. A CRC32C
+  // checksum of the returned
+  // [ChecksummedData.data][google.cloud.kms.v1.ChecksummedData.data]. An
+  // integrity check of
+  // [ChecksummedData.data][google.cloud.kms.v1.ChecksummedData.data] can be
+  // performed by computing the CRC32C checksum of
+  // [ChecksummedData.data][google.cloud.kms.v1.ChecksummedData.data] and
+  // comparing your results to this field. Discard the response in case of
+  // non-matching checksum values, and perform a limited number of retries. A
+  // persistent mismatch may indicate an issue in your computation of the CRC32C
+  // checksum. Note: This field is defined as int64 for reasons of compatibility
+  // across different languages. However, it is a non-negative integer, which
+  // will never exceed `2^32-1`, and can be safely downconverted to uint32 in
+  // languages that support this type.
+  google.protobuf.Int64Value crc32c_checksum = 2;
+}
+
 // The public keys for a given
 // [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. Obtained via
 // [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].
@@ -664,6 +696,33 @@ message PublicKey {
     type: "cloudkms.googleapis.com/PublicKey"
     pattern: "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey"
   };
+
+  // The supported [PublicKey][google.cloud.kms.v1.PublicKey] formats.
+  enum PublicKeyFormat {
+    // If the
+    // [public_key_format][google.cloud.kms.v1.GetPublicKeyRequest.public_key_format]
+    // field is not specified:
+    // - For PQC algorithms, an error will be returned.
+    // - For non-PQC algorithms, the default format is PEM, and the field
+    //   [pem][google.cloud.kms.v1.PublicKey.pem] will be populated.
+    //
+    // Otherwise, the public key will be exported through the
+    // [public_key][google.cloud.kms.v1.PublicKey.public_key] field in the
+    // requested format.
+    PUBLIC_KEY_FORMAT_UNSPECIFIED = 0;
+
+    // The returned public key will be encoded in PEM format.
+    // See the [RFC7468](https://tools.ietf.org/html/rfc7468) sections for
+    // [General Considerations](https://tools.ietf.org/html/rfc7468#section-2)
+    // and [Textual Encoding of Subject Public Key Info]
+    // (https://tools.ietf.org/html/rfc7468#section-13) for more information.
+    PEM = 1;
+
+    // This is supported only for PQC algorithms.
+    // The key material is returned in the format defined by NIST PQC
+    // standards (FIPS 203, FIPS 204, and FIPS 205).
+    NIST_PQC = 3;
+  }
 
   // The public key, encoded in PEM format. For more information, see the
   // [RFC 7468](https://tools.ietf.org/html/rfc7468) sections for
@@ -687,8 +746,8 @@ message PublicKey {
   // mismatch may indicate an issue in your computation of the CRC32C checksum.
   // Note: This field is defined as int64 for reasons of compatibility across
   // different languages. However, it is a non-negative integer, which will
-  // never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-  // that support this type.
+  // never exceed `2^32-1`, and can be safely downconverted to uint32 in
+  // languages that support this type.
   //
   // NOTE: This field is in Beta.
   google.protobuf.Int64Value pem_crc32c = 3;
@@ -703,6 +762,17 @@ message PublicKey {
   // The [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] of the
   // [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key.
   ProtectionLevel protection_level = 5;
+
+  // The [PublicKey][google.cloud.kms.v1.PublicKey] format specified by the
+  // customer through the
+  // [public_key_format][google.cloud.kms.v1.GetPublicKeyRequest.public_key_format]
+  // field.
+  PublicKeyFormat public_key_format = 7;
+
+  // This field contains the public key (with integrity verification), formatted
+  // according to the
+  // [public_key_format][google.cloud.kms.v1.PublicKey.public_key_format] field.
+  ChecksummedData public_key = 8;
 }
 
 // An [ImportJob][google.cloud.kms.v1.ImportJob] can be used to create
@@ -913,6 +983,20 @@ message ExternalProtectionLevelOptions {
   string ekm_connection_key_path = 2;
 }
 
+// A
+// [KeyAccessJustificationsPolicy][google.cloud.kms.v1.KeyAccessJustificationsPolicy]
+// specifies zero or more allowed
+// [AccessReason][google.cloud.kms.v1.AccessReason] values for encrypt, decrypt,
+// and sign operations on a [CryptoKey][google.cloud.kms.v1.CryptoKey].
+message KeyAccessJustificationsPolicy {
+  // The list of allowed reasons for access to a
+  // [CryptoKey][google.cloud.kms.v1.CryptoKey]. Zero allowed access reasons
+  // means all encrypt, decrypt, and sign operations for the
+  // [CryptoKey][google.cloud.kms.v1.CryptoKey] associated with this policy will
+  // fail.
+  repeated AccessReason allowed_access_reasons = 1;
+}
+
 // [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] specifies how
 // cryptographic operations are performed. For more information, see [Protection
 // levels] (https://cloud.google.com/kms/docs/algorithms#protection_levels).
@@ -998,18 +1082,4 @@ enum AccessReason {
   // * Customer-initiated Google support access.
   // * Google-initiated support access to protect system reliability.
   CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11;
-}
-
-// A
-// [KeyAccessJustificationsPolicy][google.cloud.kms.v1.KeyAccessJustificationsPolicy]
-// specifies zero or more allowed
-// [AccessReason][google.cloud.kms.v1.AccessReason] values for encrypt, decrypt,
-// and sign operations on a [CryptoKey][google.cloud.kms.v1.CryptoKey].
-message KeyAccessJustificationsPolicy {
-  // The list of allowed reasons for access to a
-  // [CryptoKey][google.cloud.kms.v1.CryptoKey]. Zero allowed access reasons
-  // means all encrypt, decrypt, and sign operations for the
-  // [CryptoKey][google.cloud.kms.v1.CryptoKey] associated with this policy will
-  // fail.
-  repeated AccessReason allowed_access_reasons = 1;
 }

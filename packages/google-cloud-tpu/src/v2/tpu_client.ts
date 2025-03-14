@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class TpuClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('tpu');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -95,7 +98,7 @@ export class TpuClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -654,7 +657,31 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNode(request, options, callback);
+    this._log.info('getNode request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tpu.v2.INode,
+          protos.google.cloud.tpu.v2.IGetNodeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNode response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tpu.v2.INode,
+          protos.google.cloud.tpu.v2.IGetNodeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNode response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a queued resource.
@@ -738,7 +765,33 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getQueuedResource(request, options, callback);
+    this._log.info('getQueuedResource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tpu.v2.IQueuedResource,
+          | protos.google.cloud.tpu.v2.IGetQueuedResourceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getQueuedResource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getQueuedResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tpu.v2.IQueuedResource,
+          protos.google.cloud.tpu.v2.IGetQueuedResourceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getQueuedResource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Generates the Cloud TPU service identity for the project.
@@ -828,11 +881,36 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateServiceIdentity(
-      request,
-      options,
-      callback
-    );
+    this._log.info('generateServiceIdentity request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tpu.v2.IGenerateServiceIdentityResponse,
+          | protos.google.cloud.tpu.v2.IGenerateServiceIdentityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateServiceIdentity response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateServiceIdentity(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tpu.v2.IGenerateServiceIdentityResponse,
+          (
+            | protos.google.cloud.tpu.v2.IGenerateServiceIdentityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateServiceIdentity response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets AcceleratorType.
@@ -916,7 +994,33 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAcceleratorType(request, options, callback);
+    this._log.info('getAcceleratorType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tpu.v2.IAcceleratorType,
+          | protos.google.cloud.tpu.v2.IGetAcceleratorTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAcceleratorType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAcceleratorType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tpu.v2.IAcceleratorType,
+          protos.google.cloud.tpu.v2.IGetAcceleratorTypeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAcceleratorType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a runtime version.
@@ -1000,7 +1104,33 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRuntimeVersion(request, options, callback);
+    this._log.info('getRuntimeVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tpu.v2.IRuntimeVersion,
+          | protos.google.cloud.tpu.v2.IGetRuntimeVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRuntimeVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRuntimeVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tpu.v2.IRuntimeVersion,
+          protos.google.cloud.tpu.v2.IGetRuntimeVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRuntimeVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the guest attributes for the node.
@@ -1089,7 +1219,33 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getGuestAttributes(request, options, callback);
+    this._log.info('getGuestAttributes request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tpu.v2.IGetGuestAttributesResponse,
+          | protos.google.cloud.tpu.v2.IGetGuestAttributesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getGuestAttributes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getGuestAttributes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tpu.v2.IGetGuestAttributesResponse,
+          protos.google.cloud.tpu.v2.IGetGuestAttributesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGuestAttributes response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1196,7 +1352,37 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNode(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createNode response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createNode request %j', request);
+    return this.innerApiCalls
+      .createNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNode response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createNode()`.
@@ -1217,6 +1403,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('createNode long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1332,7 +1519,37 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNode(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteNode response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteNode request %j', request);
+    return this.innerApiCalls
+      .deleteNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNode response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteNode()`.
@@ -1353,6 +1570,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('deleteNode long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1468,7 +1686,37 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopNode(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopNode response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopNode request %j', request);
+    return this.innerApiCalls
+      .stopNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopNode response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopNode()`.
@@ -1489,6 +1737,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('stopNode long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1604,7 +1853,37 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startNode(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startNode response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startNode request %j', request);
+    return this.innerApiCalls
+      .startNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startNode response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startNode()`.
@@ -1625,6 +1904,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('startNode long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1744,7 +2024,37 @@ export class TpuClient {
         'node.name': request.node!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNode(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateNode response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateNode request %j', request);
+    return this.innerApiCalls
+      .updateNode(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tpu.v2.INode,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNode response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateNode()`.
@@ -1765,6 +2075,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('updateNode long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1887,7 +2198,37 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createQueuedResource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2.IQueuedResource,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createQueuedResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createQueuedResource request %j', request);
+    return this.innerApiCalls
+      .createQueuedResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tpu.v2.IQueuedResource,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createQueuedResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createQueuedResource()`.
@@ -1908,6 +2249,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('createQueuedResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2031,7 +2373,37 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteQueuedResource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteQueuedResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteQueuedResource request %j', request);
+    return this.innerApiCalls
+      .deleteQueuedResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteQueuedResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteQueuedResource()`.
@@ -2052,6 +2424,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('deleteQueuedResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2167,7 +2540,37 @@ export class TpuClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.resetQueuedResource(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2.IQueuedResource,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('resetQueuedResource response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('resetQueuedResource request %j', request);
+    return this.innerApiCalls
+      .resetQueuedResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tpu.v2.IQueuedResource,
+            protos.google.cloud.tpu.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resetQueuedResource response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `resetQueuedResource()`.
@@ -2188,6 +2591,7 @@ export class TpuClient {
       protos.google.cloud.tpu.v2.OperationMetadata
     >
   > {
+    this._log.info('resetQueuedResource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2290,7 +2694,31 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNodes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.tpu.v2.IListNodesRequest,
+          protos.google.cloud.tpu.v2.IListNodesResponse | null | undefined,
+          protos.google.cloud.tpu.v2.INode
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNodes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNodes request %j', request);
+    return this.innerApiCalls
+      .listNodes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.tpu.v2.INode[],
+          protos.google.cloud.tpu.v2.IListNodesRequest | null,
+          protos.google.cloud.tpu.v2.IListNodesResponse,
+        ]) => {
+          this._log.info('listNodes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2329,6 +2757,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNodes stream %j', request);
     return this.descriptors.page.listNodes.createStream(
       this.innerApiCalls.listNodes as GaxCall,
       request,
@@ -2375,6 +2804,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNodes iterate %j', request);
     return this.descriptors.page.listNodes.asyncIterate(
       this.innerApiCalls['listNodes'] as GaxCall,
       request as {},
@@ -2477,7 +2907,33 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listQueuedResources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.tpu.v2.IListQueuedResourcesRequest,
+          | protos.google.cloud.tpu.v2.IListQueuedResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.tpu.v2.IQueuedResource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listQueuedResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listQueuedResources request %j', request);
+    return this.innerApiCalls
+      .listQueuedResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.tpu.v2.IQueuedResource[],
+          protos.google.cloud.tpu.v2.IListQueuedResourcesRequest | null,
+          protos.google.cloud.tpu.v2.IListQueuedResourcesResponse,
+        ]) => {
+          this._log.info('listQueuedResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2517,6 +2973,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listQueuedResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQueuedResources stream %j', request);
     return this.descriptors.page.listQueuedResources.createStream(
       this.innerApiCalls.listQueuedResources as GaxCall,
       request,
@@ -2564,6 +3021,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listQueuedResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listQueuedResources iterate %j', request);
     return this.descriptors.page.listQueuedResources.asyncIterate(
       this.innerApiCalls['listQueuedResources'] as GaxCall,
       request as {},
@@ -2669,7 +3127,33 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAcceleratorTypes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.tpu.v2.IListAcceleratorTypesRequest,
+          | protos.google.cloud.tpu.v2.IListAcceleratorTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.tpu.v2.IAcceleratorType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAcceleratorTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAcceleratorTypes request %j', request);
+    return this.innerApiCalls
+      .listAcceleratorTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.tpu.v2.IAcceleratorType[],
+          protos.google.cloud.tpu.v2.IListAcceleratorTypesRequest | null,
+          protos.google.cloud.tpu.v2.IListAcceleratorTypesResponse,
+        ]) => {
+          this._log.info('listAcceleratorTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2712,6 +3196,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listAcceleratorTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAcceleratorTypes stream %j', request);
     return this.descriptors.page.listAcceleratorTypes.createStream(
       this.innerApiCalls.listAcceleratorTypes as GaxCall,
       request,
@@ -2762,6 +3247,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listAcceleratorTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAcceleratorTypes iterate %j', request);
     return this.descriptors.page.listAcceleratorTypes.asyncIterate(
       this.innerApiCalls['listAcceleratorTypes'] as GaxCall,
       request as {},
@@ -2867,7 +3353,33 @@ export class TpuClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRuntimeVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.tpu.v2.IListRuntimeVersionsRequest,
+          | protos.google.cloud.tpu.v2.IListRuntimeVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.tpu.v2.IRuntimeVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRuntimeVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRuntimeVersions request %j', request);
+    return this.innerApiCalls
+      .listRuntimeVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.tpu.v2.IRuntimeVersion[],
+          protos.google.cloud.tpu.v2.IListRuntimeVersionsRequest | null,
+          protos.google.cloud.tpu.v2.IListRuntimeVersionsResponse,
+        ]) => {
+          this._log.info('listRuntimeVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2910,6 +3422,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listRuntimeVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRuntimeVersions stream %j', request);
     return this.descriptors.page.listRuntimeVersions.createStream(
       this.innerApiCalls.listRuntimeVersions as GaxCall,
       request,
@@ -2960,6 +3473,7 @@ export class TpuClient {
     const defaultCallSettings = this._defaults['listRuntimeVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRuntimeVersions iterate %j', request);
     return this.descriptors.page.listRuntimeVersions.asyncIterate(
       this.innerApiCalls['listRuntimeVersions'] as GaxCall,
       request as {},
@@ -3566,6 +4080,7 @@ export class TpuClient {
   close(): Promise<void> {
     if (this.tpuStub && !this._terminated) {
       return this.tpuStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

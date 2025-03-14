@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class ConfigClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('config');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class ConfigClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -681,7 +684,33 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDeployment(request, options, callback);
+    this._log.info('getDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IDeployment,
+          | protos.google.cloud.config.v1.IGetDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IDeployment,
+          protos.google.cloud.config.v1.IGetDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a {@link protos.google.cloud.config.v1.Revision|Revision}.
@@ -764,7 +793,31 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRevision(request, options, callback);
+    this._log.info('getRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IRevision,
+          protos.google.cloud.config.v1.IGetRevisionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IRevision,
+          protos.google.cloud.config.v1.IGetRevisionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getRevision response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a {@link protos.google.cloud.config.v1.Resource|Resource} deployed
@@ -848,7 +901,31 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getResource(request, options, callback);
+    this._log.info('getResource request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IResource,
+          protos.google.cloud.config.v1.IGetResourceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getResource response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getResource(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IResource,
+          protos.google.cloud.config.v1.IGetResourceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getResource response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Exports Terraform state file from a given deployment.
@@ -950,11 +1027,36 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportDeploymentStatefile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('exportDeploymentStatefile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IStatefile,
+          | protos.google.cloud.config.v1.IExportDeploymentStatefileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportDeploymentStatefile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportDeploymentStatefile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IStatefile,
+          (
+            | protos.google.cloud.config.v1.IExportDeploymentStatefileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportDeploymentStatefile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Exports Terraform state file from a given revision.
@@ -1046,11 +1148,36 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportRevisionStatefile(
-      request,
-      options,
-      callback
-    );
+    this._log.info('exportRevisionStatefile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IStatefile,
+          | protos.google.cloud.config.v1.IExportRevisionStatefileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportRevisionStatefile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportRevisionStatefile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IStatefile,
+          (
+            | protos.google.cloud.config.v1.IExportRevisionStatefileRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportRevisionStatefile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Imports Terraform state file in a given deployment. The state file does not
@@ -1142,7 +1269,33 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importStatefile(request, options, callback);
+    this._log.info('importStatefile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IStatefile,
+          | protos.google.cloud.config.v1.IImportStatefileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('importStatefile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importStatefile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IStatefile,
+          protos.google.cloud.config.v1.IImportStatefileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importStatefile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes Terraform state file in a given deployment.
@@ -1230,7 +1383,33 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteStatefile(request, options, callback);
+    this._log.info('deleteStatefile request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.config.v1.IDeleteStatefileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteStatefile response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteStatefile(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.config.v1.IDeleteStatefileRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteStatefile response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Exports the lock info on a locked deployment.
@@ -1315,7 +1494,33 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportLockInfo(request, options, callback);
+    this._log.info('exportLockInfo request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.ILockInfo,
+          | protos.google.cloud.config.v1.IExportLockInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportLockInfo response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportLockInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.ILockInfo,
+          protos.google.cloud.config.v1.IExportLockInfoRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportLockInfo response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a {@link protos.google.cloud.config.v1.Preview|Preview}.
@@ -1398,7 +1603,31 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPreview(request, options, callback);
+    this._log.info('getPreview request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IPreview,
+          protos.google.cloud.config.v1.IGetPreviewRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPreview response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPreview(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IPreview,
+          protos.google.cloud.config.v1.IGetPreviewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPreview response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Export {@link protos.google.cloud.config.v1.Preview|Preview} results.
@@ -1490,7 +1719,33 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportPreviewResult(request, options, callback);
+    this._log.info('exportPreviewResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.IExportPreviewResultResponse,
+          | protos.google.cloud.config.v1.IExportPreviewResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportPreviewResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportPreviewResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.IExportPreviewResultResponse,
+          protos.google.cloud.config.v1.IExportPreviewResultRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportPreviewResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details about a
@@ -1582,7 +1837,33 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTerraformVersion(request, options, callback);
+    this._log.info('getTerraformVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.config.v1.ITerraformVersion,
+          | protos.google.cloud.config.v1.IGetTerraformVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTerraformVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTerraformVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.config.v1.ITerraformVersion,
+          protos.google.cloud.config.v1.IGetTerraformVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTerraformVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1705,7 +1986,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDeployment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDeployment request %j', request);
+    return this.innerApiCalls
+      .createDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDeployment()`.
@@ -1726,6 +2037,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('createDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1866,7 +2178,37 @@ export class ConfigClient {
         'deployment.name': request.deployment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDeployment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDeployment request %j', request);
+    return this.innerApiCalls
+      .updateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDeployment()`.
@@ -1887,6 +2229,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('updateDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2025,7 +2368,37 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDeployment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDeployment request %j', request);
+    return this.innerApiCalls
+      .deleteDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDeployment()`.
@@ -2046,6 +2419,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2162,7 +2536,37 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.lockDeployment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('lockDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('lockDeployment request %j', request);
+    return this.innerApiCalls
+      .lockDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('lockDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `lockDeployment()`.
@@ -2183,6 +2587,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('lockDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2301,7 +2706,37 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.unlockDeployment(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('unlockDeployment response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('unlockDeployment request %j', request);
+    return this.innerApiCalls
+      .unlockDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IDeployment,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('unlockDeployment response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `unlockDeployment()`.
@@ -2322,6 +2757,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('unlockDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2456,7 +2892,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPreview(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IPreview,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPreview response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPreview request %j', request);
+    return this.innerApiCalls
+      .createPreview(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IPreview,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPreview response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPreview()`.
@@ -2477,6 +2943,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('createPreview long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2607,7 +3074,37 @@ export class ConfigClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePreview(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.config.v1.IPreview,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePreview response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePreview request %j', request);
+    return this.innerApiCalls
+      .deletePreview(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.config.v1.IPreview,
+            protos.google.cloud.config.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePreview response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePreview()`.
@@ -2628,6 +3125,7 @@ export class ConfigClient {
       protos.google.cloud.config.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePreview long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2762,11 +3260,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeployments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListDeploymentsRequest,
+          | protos.google.cloud.config.v1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.IDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeployments request %j', request);
+    return this.innerApiCalls
+      .listDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.config.v1.IDeployment[],
+          protos.google.cloud.config.v1.IListDeploymentsRequest | null,
+          protos.google.cloud.config.v1.IListDeploymentsResponse,
+        ]) => {
+          this._log.info('listDeployments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -2830,6 +3354,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
       request,
@@ -2905,6 +3430,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
       request as {},
@@ -3029,11 +3555,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRevisions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListRevisionsRequest,
+          | protos.google.cloud.config.v1.IListRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.IRevision
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRevisions request %j', request);
+    return this.innerApiCalls
+      .listRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.config.v1.IRevision[],
+          protos.google.cloud.config.v1.IListRevisionsRequest | null,
+          protos.google.cloud.config.v1.IListRevisionsResponse,
+        ]) => {
+          this._log.info('listRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRevisions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3097,6 +3649,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRevisions stream %j', request);
     return this.descriptors.page.listRevisions.createStream(
       this.innerApiCalls.listRevisions as GaxCall,
       request,
@@ -3172,6 +3725,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRevisions iterate %j', request);
     return this.descriptors.page.listRevisions.asyncIterate(
       this.innerApiCalls['listRevisions'] as GaxCall,
       request as {},
@@ -3288,11 +3842,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listResources(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListResourcesRequest,
+          | protos.google.cloud.config.v1.IListResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.IResource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listResources request %j', request);
+    return this.innerApiCalls
+      .listResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.config.v1.IResource[],
+          protos.google.cloud.config.v1.IListResourcesRequest | null,
+          protos.google.cloud.config.v1.IListResourcesResponse,
+        ]) => {
+          this._log.info('listResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listResources`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3348,6 +3928,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listResources stream %j', request);
     return this.descriptors.page.listResources.createStream(
       this.innerApiCalls.listResources as GaxCall,
       request,
@@ -3415,6 +3996,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listResources iterate %j', request);
     return this.descriptors.page.listResources.asyncIterate(
       this.innerApiCalls['listResources'] as GaxCall,
       request as {},
@@ -3540,11 +4122,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPreviews(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListPreviewsRequest,
+          | protos.google.cloud.config.v1.IListPreviewsResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.IPreview
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPreviews values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPreviews request %j', request);
+    return this.innerApiCalls
+      .listPreviews(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.config.v1.IPreview[],
+          protos.google.cloud.config.v1.IListPreviewsRequest | null,
+          protos.google.cloud.config.v1.IListPreviewsResponse,
+        ]) => {
+          this._log.info('listPreviews values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPreviews`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3608,6 +4216,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listPreviews'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPreviews stream %j', request);
     return this.descriptors.page.listPreviews.createStream(
       this.innerApiCalls.listPreviews as GaxCall,
       request,
@@ -3683,6 +4292,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listPreviews'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPreviews iterate %j', request);
     return this.descriptors.page.listPreviews.asyncIterate(
       this.innerApiCalls['listPreviews'] as GaxCall,
       request as {},
@@ -3802,11 +4412,37 @@ export class ConfigClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTerraformVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.config.v1.IListTerraformVersionsRequest,
+          | protos.google.cloud.config.v1.IListTerraformVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.config.v1.ITerraformVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTerraformVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTerraformVersions request %j', request);
+    return this.innerApiCalls
+      .listTerraformVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.config.v1.ITerraformVersion[],
+          protos.google.cloud.config.v1.IListTerraformVersionsRequest | null,
+          protos.google.cloud.config.v1.IListTerraformVersionsResponse,
+        ]) => {
+          this._log.info('listTerraformVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTerraformVersions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3858,6 +4494,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listTerraformVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTerraformVersions stream %j', request);
     return this.descriptors.page.listTerraformVersions.createStream(
       this.innerApiCalls.listTerraformVersions as GaxCall,
       request,
@@ -3921,6 +4558,7 @@ export class ConfigClient {
     const defaultCallSettings = this._defaults['listTerraformVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTerraformVersions iterate %j', request);
     return this.descriptors.page.listTerraformVersions.asyncIterate(
       this.innerApiCalls['listTerraformVersions'] as GaxCall,
       request as {},
@@ -4175,7 +4813,7 @@ export class ConfigClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4188,6 +4826,20 @@ export class ConfigClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4224,6 +4876,13 @@ export class ConfigClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4259,11 +4918,11 @@ export class ConfigClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4272,6 +4931,20 @@ export class ConfigClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -4302,7 +4975,7 @@ export class ConfigClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4315,6 +4988,20 @@ export class ConfigClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -4769,6 +5456,7 @@ export class ConfigClient {
   close(): Promise<void> {
     if (this.configStub && !this._terminated) {
       return this.configStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

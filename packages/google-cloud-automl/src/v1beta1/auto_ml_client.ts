@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -68,6 +69,8 @@ export class AutoMlClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('automl');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -103,7 +106,7 @@ export class AutoMlClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -727,7 +730,33 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataset(request, options, callback);
+    this._log.info('createDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IDataset,
+          | protos.google.cloud.automl.v1beta1.ICreateDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IDataset,
+          protos.google.cloud.automl.v1beta1.ICreateDatasetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a dataset.
@@ -811,7 +840,33 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataset(request, options, callback);
+    this._log.info('getDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IDataset,
+          | protos.google.cloud.automl.v1beta1.IGetDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IDataset,
+          protos.google.cloud.automl.v1beta1.IGetDatasetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a dataset.
@@ -903,7 +958,33 @@ export class AutoMlClient {
         'dataset.name': request.dataset!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataset(request, options, callback);
+    this._log.info('updateDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IDataset,
+          | protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IDataset,
+          protos.google.cloud.automl.v1beta1.IUpdateDatasetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an annotation spec.
@@ -993,7 +1074,36 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAnnotationSpec(request, options, callback);
+    this._log.info('getAnnotationSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IAnnotationSpec,
+          | protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAnnotationSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAnnotationSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IAnnotationSpec,
+          (
+            | protos.google.cloud.automl.v1beta1.IGetAnnotationSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAnnotationSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a table spec.
@@ -1085,7 +1195,33 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTableSpec(request, options, callback);
+    this._log.info('getTableSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.ITableSpec,
+          | protos.google.cloud.automl.v1beta1.IGetTableSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTableSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTableSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.ITableSpec,
+          protos.google.cloud.automl.v1beta1.IGetTableSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTableSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a table spec.
@@ -1177,7 +1313,36 @@ export class AutoMlClient {
         'table_spec.name': request.tableSpec!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTableSpec(request, options, callback);
+    this._log.info('updateTableSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.ITableSpec,
+          | protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTableSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTableSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.ITableSpec,
+          (
+            | protos.google.cloud.automl.v1beta1.IUpdateTableSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTableSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a column spec.
@@ -1269,7 +1434,33 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getColumnSpec(request, options, callback);
+    this._log.info('getColumnSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IColumnSpec,
+          | protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getColumnSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getColumnSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IColumnSpec,
+          protos.google.cloud.automl.v1beta1.IGetColumnSpecRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getColumnSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a column spec.
@@ -1361,7 +1552,36 @@ export class AutoMlClient {
         'column_spec.name': request.columnSpec!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateColumnSpec(request, options, callback);
+    this._log.info('updateColumnSpec request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IColumnSpec,
+          | protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateColumnSpec response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateColumnSpec(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IColumnSpec,
+          (
+            | protos.google.cloud.automl.v1beta1.IUpdateColumnSpecRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateColumnSpec response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a model.
@@ -1445,7 +1665,33 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getModel(request, options, callback);
+    this._log.info('getModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IModel,
+          | protos.google.cloud.automl.v1beta1.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IModel,
+          protos.google.cloud.automl.v1beta1.IGetModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a model evaluation.
@@ -1535,7 +1781,36 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getModelEvaluation(request, options, callback);
+    this._log.info('getModelEvaluation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1beta1.IModelEvaluation,
+          | protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getModelEvaluation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModelEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1beta1.IModelEvaluation,
+          (
+            | protos.google.cloud.automl.v1beta1.IGetModelEvaluationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getModelEvaluation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1642,7 +1917,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataset request %j', request);
+    return this.innerApiCalls
+      .deleteDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataset()`.
@@ -1663,6 +1968,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('deleteDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1790,7 +2096,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importData(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importData request %j', request);
+    return this.innerApiCalls
+      .importData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importData()`.
@@ -1811,6 +2147,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('importData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1930,7 +2267,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportData(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportData response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportData request %j', request);
+    return this.innerApiCalls
+      .exportData(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportData response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportData()`.
@@ -1951,6 +2318,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('exportData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2072,7 +2440,37 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.automl.v1beta1.IModel,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createModel request %j', request);
+    return this.innerApiCalls
+      .createModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.automl.v1beta1.IModel,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createModel()`.
@@ -2093,6 +2491,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('createModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2212,7 +2611,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteModel request %j', request);
+    return this.innerApiCalls
+      .deleteModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteModel()`.
@@ -2233,6 +2662,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('deleteModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2363,7 +2793,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deployModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deployModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deployModel request %j', request);
+    return this.innerApiCalls
+      .deployModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deployModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deployModel()`.
@@ -2384,6 +2844,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('deployModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2505,7 +2966,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.undeployModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeployModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeployModel request %j', request);
+    return this.innerApiCalls
+      .undeployModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeployModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeployModel()`.
@@ -2526,6 +3017,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('undeployModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2650,7 +3142,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportModel request %j', request);
+    return this.innerApiCalls
+      .exportModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportModel()`.
@@ -2671,6 +3193,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('exportModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2802,11 +3325,37 @@ export class AutoMlClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportEvaluatedExamples(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportEvaluatedExamples response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportEvaluatedExamples request %j', request);
+    return this.innerApiCalls
+      .exportEvaluatedExamples(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.automl.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEvaluatedExamples response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportEvaluatedExamples()`.
@@ -2827,6 +3376,7 @@ export class AutoMlClient {
       protos.google.cloud.automl.v1beta1.OperationMetadata
     >
   > {
+    this._log.info('exportEvaluatedExamples long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2950,11 +3500,37 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDatasets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.automl.v1beta1.IListDatasetsRequest,
+          | protos.google.cloud.automl.v1beta1.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1beta1.IDataset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatasets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatasets request %j', request);
+    return this.innerApiCalls
+      .listDatasets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.automl.v1beta1.IDataset[],
+          protos.google.cloud.automl.v1beta1.IListDatasetsRequest | null,
+          protos.google.cloud.automl.v1beta1.IListDatasetsResponse,
+        ]) => {
+          this._log.info('listDatasets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listDatasets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3002,6 +3578,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
       request,
@@ -3061,6 +3638,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
       request as {},
@@ -3170,11 +3748,37 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTableSpecs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.automl.v1beta1.IListTableSpecsRequest,
+          | protos.google.cloud.automl.v1beta1.IListTableSpecsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1beta1.ITableSpec
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTableSpecs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTableSpecs request %j', request);
+    return this.innerApiCalls
+      .listTableSpecs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.automl.v1beta1.ITableSpec[],
+          protos.google.cloud.automl.v1beta1.IListTableSpecsRequest | null,
+          protos.google.cloud.automl.v1beta1.IListTableSpecsResponse,
+        ]) => {
+          this._log.info('listTableSpecs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listTableSpecs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3217,6 +3821,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listTableSpecs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTableSpecs stream %j', request);
     return this.descriptors.page.listTableSpecs.createStream(
       this.innerApiCalls.listTableSpecs as GaxCall,
       request,
@@ -3271,6 +3876,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listTableSpecs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTableSpecs iterate %j', request);
     return this.descriptors.page.listTableSpecs.asyncIterate(
       this.innerApiCalls['listTableSpecs'] as GaxCall,
       request as {},
@@ -3380,11 +3986,37 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listColumnSpecs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest,
+          | protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1beta1.IColumnSpec
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listColumnSpecs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listColumnSpecs request %j', request);
+    return this.innerApiCalls
+      .listColumnSpecs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.automl.v1beta1.IColumnSpec[],
+          protos.google.cloud.automl.v1beta1.IListColumnSpecsRequest | null,
+          protos.google.cloud.automl.v1beta1.IListColumnSpecsResponse,
+        ]) => {
+          this._log.info('listColumnSpecs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listColumnSpecs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3427,6 +4059,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listColumnSpecs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listColumnSpecs stream %j', request);
     return this.descriptors.page.listColumnSpecs.createStream(
       this.innerApiCalls.listColumnSpecs as GaxCall,
       request,
@@ -3481,6 +4114,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listColumnSpecs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listColumnSpecs iterate %j', request);
     return this.descriptors.page.listColumnSpecs.asyncIterate(
       this.innerApiCalls['listColumnSpecs'] as GaxCall,
       request as {},
@@ -3589,11 +4223,37 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listModels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.automl.v1beta1.IListModelsRequest,
+          | protos.google.cloud.automl.v1beta1.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1beta1.IModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModels request %j', request);
+    return this.innerApiCalls
+      .listModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.automl.v1beta1.IModel[],
+          protos.google.cloud.automl.v1beta1.IListModelsRequest | null,
+          protos.google.cloud.automl.v1beta1.IListModelsResponse,
+        ]) => {
+          this._log.info('listModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModels`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3641,6 +4301,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -3700,6 +4361,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
@@ -3818,11 +4480,37 @@ export class AutoMlClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listModelEvaluations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest,
+          | protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.automl.v1beta1.IModelEvaluation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModelEvaluations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModelEvaluations request %j', request);
+    return this.innerApiCalls
+      .listModelEvaluations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.automl.v1beta1.IModelEvaluation[],
+          protos.google.cloud.automl.v1beta1.IListModelEvaluationsRequest | null,
+          protos.google.cloud.automl.v1beta1.IListModelEvaluationsResponse,
+        ]) => {
+          this._log.info('listModelEvaluations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listModelEvaluations`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3874,6 +4562,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModelEvaluations stream %j', request);
     return this.descriptors.page.listModelEvaluations.createStream(
       this.innerApiCalls.listModelEvaluations as GaxCall,
       request,
@@ -3937,6 +4626,7 @@ export class AutoMlClient {
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModelEvaluations iterate %j', request);
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,
       request as {},
@@ -4397,6 +5087,7 @@ export class AutoMlClient {
   close(): Promise<void> {
     if (this.autoMlStub && !this._terminated) {
       return this.autoMlStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

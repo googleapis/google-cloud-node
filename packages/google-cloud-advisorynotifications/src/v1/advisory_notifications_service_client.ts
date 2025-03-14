@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class AdvisoryNotificationsServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('advisorynotifications');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class AdvisoryNotificationsServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -502,7 +505,36 @@ export class AdvisoryNotificationsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNotification(request, options, callback);
+    this._log.info('getNotification request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.advisorynotifications.v1.INotification,
+          | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNotification response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNotification(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.advisorynotifications.v1.INotification,
+          (
+            | protos.google.cloud.advisorynotifications.v1.IGetNotificationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNotification response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Get notification settings.
@@ -601,7 +633,36 @@ export class AdvisoryNotificationsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSettings(request, options, callback);
+    this._log.info('getSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.advisorynotifications.v1.ISettings,
+          | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.advisorynotifications.v1.ISettings,
+          (
+            | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update notification settings.
@@ -697,7 +758,36 @@ export class AdvisoryNotificationsServiceClient {
         'settings.name': request.settings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSettings(request, options, callback);
+    this._log.info('updateSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.advisorynotifications.v1.ISettings,
+          | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.advisorynotifications.v1.ISettings,
+          (
+            | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -811,11 +901,37 @@ export class AdvisoryNotificationsServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNotifications(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
+          | protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.advisorynotifications.v1.INotification
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNotifications values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNotifications request %j', request);
+    return this.innerApiCalls
+      .listNotifications(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.advisorynotifications.v1.INotification[],
+          protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest | null,
+          protos.google.cloud.advisorynotifications.v1.IListNotificationsResponse,
+        ]) => {
+          this._log.info('listNotifications values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listNotifications`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -866,6 +982,7 @@ export class AdvisoryNotificationsServiceClient {
     const defaultCallSettings = this._defaults['listNotifications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotifications stream %j', request);
     return this.descriptors.page.listNotifications.createStream(
       this.innerApiCalls.listNotifications as GaxCall,
       request,
@@ -928,6 +1045,7 @@ export class AdvisoryNotificationsServiceClient {
     const defaultCallSettings = this._defaults['listNotifications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listNotifications iterate %j', request);
     return this.descriptors.page.listNotifications.asyncIterate(
       this.innerApiCalls['listNotifications'] as GaxCall,
       request as {},
@@ -1209,6 +1327,7 @@ export class AdvisoryNotificationsServiceClient {
   close(): Promise<void> {
     if (this.advisoryNotificationsServiceStub && !this._terminated) {
       return this.advisoryNotificationsServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

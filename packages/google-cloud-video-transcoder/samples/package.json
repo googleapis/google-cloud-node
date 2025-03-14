@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js",
@@ -14,7 +14,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/video-transcoder": "^3.3.0"
+    "@google-cloud/video-transcoder": "^4.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^7.0.0",

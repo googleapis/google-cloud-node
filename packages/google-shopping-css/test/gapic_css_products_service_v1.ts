@@ -322,7 +322,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.CssProduct()
       );
@@ -353,7 +353,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.shopping.css.v1.CssProduct()
       );
@@ -400,7 +400,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCssProduct = stubSimpleCall(
         undefined,
@@ -452,7 +452,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
@@ -485,7 +485,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
@@ -534,7 +534,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCssProducts = stubSimpleCall(
         undefined,
@@ -565,7 +565,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
@@ -619,7 +619,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCssProducts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -668,7 +668,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
         generateSampleMessage(new protos.google.shopping.css.v1.CssProduct()),
@@ -711,7 +711,7 @@ describe('v1.CssProductsServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCssProducts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

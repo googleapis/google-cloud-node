@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -325,7 +325,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ProtectedResourcesSummary()
       );
@@ -357,7 +357,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ProtectedResourcesSummary()
       );
@@ -404,7 +404,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProtectedResourcesSummary = stubSimpleCall(
         undefined,
@@ -462,7 +462,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.inventory.v1.ProtectedResource()
@@ -502,7 +502,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.inventory.v1.ProtectedResource()
@@ -559,7 +559,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchProtectedResources = stubSimpleCall(
         undefined,
@@ -593,7 +593,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.inventory.v1.ProtectedResource()
@@ -662,7 +662,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchProtectedResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -720,7 +720,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.inventory.v1.ProtectedResource()
@@ -774,7 +774,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         ['scope']
       );
       request.scope = defaultValue1;
-      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
+      const expectedHeaderRequestParams = `scope=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchProtectedResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

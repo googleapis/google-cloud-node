@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.13.0...dataproc-v6.0.0) (2025-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([e7409c8](https://github.com/googleapis/google-cloud-node/commit/e7409c87febcf33359a2d36ae4551f502b8a2f93))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.12.0...dataproc-v5.13.0) (2025-02-28)
+
+
+### Features
+
+* [dataproc] Added support for the AuthenticationConfig field to Dataproc serverless workload configurations, allowing specification of the user workload identity as either the end user or a service account ([#6045](https://github.com/googleapis/google-cloud-node/issues/6045)) ([8a66270](https://github.com/googleapis/google-cloud-node/commit/8a662709b9e9b749f63e44acd92087381e95b7f9))
+
 ## [5.12.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.11.0...dataproc-v5.12.0) (2024-10-30)
 
 
