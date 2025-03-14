@@ -33,9 +33,9 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If set to true, any child resources of this repository will also be
-   *  deleted. (Otherwise, the request will only succeed if the repository has no
-   *  child resources.)
+   *  Optional. If set to true, any child resources of this repository will also
+   *  be deleted. (Otherwise, the request will only succeed if the repository has
+   *  no child resources.)
    */
   // const force = true
 

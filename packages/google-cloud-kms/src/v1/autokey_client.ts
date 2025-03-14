@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,14 +25,17 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
   IamClient,
   IamProtos,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -43,7 +46,8 @@ import * as gapicConfig from './autokey_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides interfaces for using Cloud KMS Autokey to provision new
+ *  Provides interfaces for using [Cloud KMS
+ *  Autokey](https://cloud.google.com/kms/help/autokey) to provision new
  *  {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKeys}, ready for Customer Managed
  *  Encryption Key (CMEK) use, on-demand. To support certain client tooling, this
  *  feature is modeled around a {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}
@@ -73,6 +77,8 @@ export class AutokeyClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -110,7 +116,7 @@ export class AutokeyClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -257,6 +263,17 @@ export class AutokeyClient {
       ),
       publicKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}/publicKey'
+      ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listKeyHandles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'keyHandles'
       ),
     };
 
@@ -436,7 +453,10 @@ export class AutokeyClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -619,104 +639,40 @@ export class AutokeyClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getKeyHandle(request, options, callback);
-  }
-  /**
-   * Lists {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the resource project and location from which to list
-   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
-   *   `projects/{PROJECT_ID}/locations/{LOCATION}`.
-   * @param {string} [request.filter]
-   *   Optional. Filter to apply when listing
-   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
-   *   `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse|ListKeyHandlesResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/autokey.list_key_handles.js</caption>
-   * region_tag:cloudkms_v1_generated_Autokey_ListKeyHandles_async
-   */
-  listKeyHandles(
-    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
-      protos.google.cloud.kms.v1.IListKeyHandlesRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  listKeyHandles(
-    request: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
-      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listKeyHandles(
-    request: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
-    callback: Callback<
-      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
-      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listKeyHandles(
-    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
-    optionsOrCallback?:
-      | CallOptions
+    this._log.info('getKeyHandle request %j', request);
+    const wrappedCallback:
       | Callback<
-          protos.google.cloud.kms.v1.IListKeyHandlesResponse,
-          protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
+          protos.google.cloud.kms.v1.IKeyHandle,
+          protos.google.cloud.kms.v1.IGetKeyHandleRequest | null | undefined,
           {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
-      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
-      protos.google.cloud.kms.v1.IListKeyHandlesRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listKeyHandles(request, options, callback);
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getKeyHandle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getKeyHandle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IKeyHandle,
+          protos.google.cloud.kms.v1.IGetKeyHandleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getKeyHandle response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
    * Creates a new {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}, triggering the
    * provisioning of a new {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} for CMEK
    * use with the given resource type in the configured key project and the same
-   * location. {@link protos.Operations.GetOperation|GetOperation} should be used to resolve
-   * the resulting long-running operation and get the resulting
-   * {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} and
+   * location. {@link protos.google.longrunning.Operations.GetOperation|GetOperation} should
+   * be used to resolve the resulting long-running operation and get the
+   * resulting {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} and
    * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request
@@ -824,7 +780,37 @@ export class AutokeyClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createKeyHandle(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.kms.v1.IKeyHandle,
+            protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createKeyHandle response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createKeyHandle request %j', request);
+    return this.innerApiCalls
+      .createKeyHandle(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.kms.v1.IKeyHandle,
+            protos.google.cloud.kms.v1.ICreateKeyHandleMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createKeyHandle response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createKeyHandle()`.
@@ -845,6 +831,7 @@ export class AutokeyClient {
       protos.google.cloud.kms.v1.CreateKeyHandleMetadata
     >
   > {
+    this._log.info('createKeyHandle long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -859,6 +846,252 @@ export class AutokeyClient {
       protos.google.cloud.kms.v1.KeyHandle,
       protos.google.cloud.kms.v1.CreateKeyHandleMetadata
     >;
+  }
+  /**
+   * Lists {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the resource project and location from which to list
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `projects/{PROJECT_ID}/locations/{LOCATION}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} to include in the response. The
+   *   service may return fewer than this value. Further
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} can subsequently be obtained by
+   *   including the
+   *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, at most 100
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Filter to apply when listing
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listKeyHandlesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listKeyHandles(
+    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IKeyHandle[],
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+    ]
+  >;
+  listKeyHandles(
+    request: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse | null | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle
+    >
+  ): void;
+  listKeyHandles(
+    request: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse | null | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle
+    >
+  ): void;
+  listKeyHandles(
+    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+          protos.google.cloud.kms.v1.IListKeyHandlesResponse | null | undefined,
+          protos.google.cloud.kms.v1.IKeyHandle
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse | null | undefined,
+      protos.google.cloud.kms.v1.IKeyHandle
+    >
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IKeyHandle[],
+      protos.google.cloud.kms.v1.IListKeyHandlesRequest | null,
+      protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+          protos.google.cloud.kms.v1.IListKeyHandlesResponse | null | undefined,
+          protos.google.cloud.kms.v1.IKeyHandle
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listKeyHandles values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listKeyHandles request %j', request);
+    return this.innerApiCalls
+      .listKeyHandles(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.v1.IKeyHandle[],
+          protos.google.cloud.kms.v1.IListKeyHandlesRequest | null,
+          protos.google.cloud.kms.v1.IListKeyHandlesResponse,
+        ]) => {
+          this._log.info('listKeyHandles values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listKeyHandles`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the resource project and location from which to list
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `projects/{PROJECT_ID}/locations/{LOCATION}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} to include in the response. The
+   *   service may return fewer than this value. Further
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} can subsequently be obtained by
+   *   including the
+   *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, at most 100
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Filter to apply when listing
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listKeyHandlesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listKeyHandlesStream(
+    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listKeyHandles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    this._log.info('listKeyHandles stream %j', request);
+    return this.descriptors.page.listKeyHandles.createStream(
+      this.innerApiCalls.listKeyHandles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listKeyHandles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the resource project and location from which to list
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `projects/{PROJECT_ID}/locations/{LOCATION}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Optional limit on the number of
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} to include in the response. The
+   *   service may return fewer than this value. Further
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} can subsequently be obtained by
+   *   including the
+   *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}
+   *   in a subsequent request.  If unspecified, at most 100
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles} will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. Optional pagination token, returned earlier via
+   *   {@link protos.google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token|ListKeyHandlesResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Filter to apply when listing
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandles}, e.g.
+   *   `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.kms.v1.KeyHandle|KeyHandle}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/autokey.list_key_handles.js</caption>
+   * region_tag:cloudkms_v1_generated_Autokey_ListKeyHandles_async
+   */
+  listKeyHandlesAsync(
+    request?: protos.google.cloud.kms.v1.IListKeyHandlesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.kms.v1.IKeyHandle> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listKeyHandles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    this._log.info('listKeyHandles iterate %j', request);
+    return this.descriptors.page.listKeyHandles.asyncIterate(
+      this.innerApiCalls['listKeyHandles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.kms.v1.IKeyHandle>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -1108,7 +1341,7 @@ export class AutokeyClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1121,6 +1354,20 @@ export class AutokeyClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1157,6 +1404,13 @@ export class AutokeyClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1192,11 +1446,11 @@ export class AutokeyClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1205,6 +1459,20 @@ export class AutokeyClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1235,7 +1503,7 @@ export class AutokeyClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1248,6 +1516,20 @@ export class AutokeyClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1834,6 +2116,7 @@ export class AutokeyClient {
   close(): Promise<void> {
     if (this.autokeyStub && !this._terminated) {
       return this.autokeyStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

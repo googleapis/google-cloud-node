@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -335,7 +335,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
@@ -367,7 +367,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
@@ -415,7 +415,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKeyRing = stubSimpleCall(
         undefined,
@@ -469,7 +469,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -501,7 +501,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -549,7 +549,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCryptoKey = stubSimpleCall(
         undefined,
@@ -603,7 +603,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -636,7 +636,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -684,7 +684,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -738,7 +738,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.PublicKey()
       );
@@ -770,7 +770,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.PublicKey()
       );
@@ -818,7 +818,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPublicKey = stubSimpleCall(
         undefined,
@@ -872,7 +872,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
@@ -904,7 +904,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
@@ -952,7 +952,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getImportJob = stubSimpleCall(
         undefined,
@@ -1006,7 +1006,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
@@ -1038,7 +1038,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
@@ -1086,7 +1086,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKeyRing = stubSimpleCall(
         undefined,
@@ -1140,7 +1140,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1172,7 +1172,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1220,7 +1220,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCryptoKey = stubSimpleCall(
         undefined,
@@ -1274,7 +1274,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1307,7 +1307,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1355,7 +1355,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -1415,7 +1415,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1448,7 +1448,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1496,7 +1496,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -1556,7 +1556,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
@@ -1588,7 +1588,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
@@ -1636,7 +1636,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createImportJob = stubSimpleCall(
         undefined,
@@ -1691,7 +1691,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['cryptoKey', 'name']
       );
       request.cryptoKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1724,7 +1724,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['cryptoKey', 'name']
       );
       request.cryptoKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1773,7 +1773,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['cryptoKey', 'name']
       );
       request.cryptoKey.name = defaultValue1;
-      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCryptoKey = stubSimpleCall(
         undefined,
@@ -1829,7 +1829,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
-      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1863,7 +1863,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
-      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1912,7 +1912,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
-      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -1973,7 +1973,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -2006,7 +2006,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -2054,7 +2054,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCryptoKeyPrimaryVersion = stubSimpleCall(
         undefined,
@@ -2114,7 +2114,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2147,7 +2147,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2195,7 +2195,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.destroyCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -2255,7 +2255,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2288,7 +2288,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2336,7 +2336,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -2396,7 +2396,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptResponse()
       );
@@ -2428,7 +2428,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptResponse()
       );
@@ -2476,7 +2476,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.encrypt = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.encrypt(request), expectedError);
@@ -2527,7 +2527,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptResponse()
       );
@@ -2559,7 +2559,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptResponse()
       );
@@ -2607,7 +2607,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.decrypt = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.decrypt(request), expectedError);
@@ -2658,7 +2658,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawEncryptResponse()
       );
@@ -2690,7 +2690,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawEncryptResponse()
       );
@@ -2738,7 +2738,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rawEncrypt = stubSimpleCall(
         undefined,
@@ -2792,7 +2792,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawDecryptResponse()
       );
@@ -2824,7 +2824,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawDecryptResponse()
       );
@@ -2872,7 +2872,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rawDecrypt = stubSimpleCall(
         undefined,
@@ -2926,7 +2926,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignResponse()
       );
@@ -2958,7 +2958,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignResponse()
       );
@@ -3006,7 +3006,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asymmetricSign = stubSimpleCall(
         undefined,
@@ -3060,7 +3060,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptResponse()
       );
@@ -3092,7 +3092,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptResponse()
       );
@@ -3140,7 +3140,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asymmetricDecrypt = stubSimpleCall(
         undefined,
@@ -3194,7 +3194,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignResponse()
       );
@@ -3226,7 +3226,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignResponse()
       );
@@ -3274,7 +3274,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.macSign = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.macSign(request), expectedError);
@@ -3325,7 +3325,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyResponse()
       );
@@ -3357,7 +3357,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyResponse()
       );
@@ -3405,7 +3405,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.macVerify = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.macVerify(request), expectedError);
@@ -3456,7 +3456,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesResponse()
       );
@@ -3489,7 +3489,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesResponse()
       );
@@ -3537,7 +3537,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['location']
       );
       request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      const expectedHeaderRequestParams = `location=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateRandomBytes = stubSimpleCall(
         undefined,
@@ -3591,7 +3591,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3625,7 +3625,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3675,7 +3675,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeyRings = stubSimpleCall(
         undefined,
@@ -3707,7 +3707,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3759,7 +3759,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeyRings.createStream = stubPageStreamingCall(
         undefined,
@@ -3808,7 +3808,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3852,7 +3852,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeyRings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3895,7 +3895,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -3929,7 +3929,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -3979,7 +3979,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCryptoKeys = stubSimpleCall(
         undefined,
@@ -4011,7 +4011,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -4063,7 +4063,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeys.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4110,7 +4110,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -4154,7 +4154,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeys.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4197,7 +4197,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -4238,7 +4238,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -4294,7 +4294,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCryptoKeyVersions = stubSimpleCall(
         undefined,
@@ -4329,7 +4329,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -4396,7 +4396,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeyVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4452,7 +4452,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -4506,7 +4506,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeyVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4553,7 +4553,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4587,7 +4587,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4637,7 +4637,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listImportJobs = stubSimpleCall(
         undefined,
@@ -4669,7 +4669,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4721,7 +4721,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImportJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4768,7 +4768,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4812,7 +4812,7 @@ describe('v1.KeyManagementServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImportJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);

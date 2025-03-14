@@ -1085,25 +1085,6 @@
     "support_documentation": "https://cloud.google.com/filestore/docs/getting-support"
   },
   {
-    "codeowner_team": "@googleapis/firestore-dpe",
-    "language": "nodejs",
-    "api_id": "firestore.googleapis.com",
-    "name_pretty": "Firestore",
-    "requires_billing ": false,
-    "default_version": "v1",
-    "product_documentation": "https://cloud.google.com/firestore",
-    "name": "firestore",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/5337669",
-    "distribution_name": "@google-cloud/firestore",
-    "repo": "googleapis/nodejs-firestore",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/firestore/latest",
-    "release_level": "stable",
-    "api_shortname": "firestore",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-firestore",
-    "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
-  },
-  {
     "issue_tracker": "",
     "distribution_name": "@google-cloud/functions",
     "product_documentation": "https://cloud.google.com/functions",
@@ -1213,25 +1194,6 @@
     "api_shortname": "bigqueryreservation",
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-reservation",
-    "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
-  },
-  {
-    "distribution_name": "@google-cloud/bigquery-storage",
-    "release_level": "stable",
-    "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
-    "repo": "googleapis/nodejs-bigquery-storage",
-    "default_version": "v1",
-    "language": "nodejs",
-    "requires_billing": true,
-    "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-storage/latest",
-    "name": "bigquerystorage",
-    "name_pretty": "Google BigQuery Storage",
-    "api_id": "bigquerystorage.googleapis.com",
-    "codeowner_team": "@googleapis/api-bigquery",
-    "api_shortname": "bigquerystorage",
-    "library_type": "GAPIC_AUTO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-bigquery-storage",
     "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
@@ -2231,24 +2193,6 @@
     "support_documentation": "https://cloud.google.com/shell/docs/getting-support"
   },
   {
-    "name": "spanner",
-    "name_pretty": "Spanner",
-    "product_documentation": "https://cloud.google.com/spanner/docs/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/spanner/latest",
-    "issue_tracker": "https://issuetracker.google.com/issues?q=componentid:190851%2B%20status:open",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-spanner",
-    "distribution_name": "@google-cloud/spanner",
-    "api_id": "spanner.googleapis.com",
-    "requires_billing": true,
-    "codeowner_team": "@googleapis/spanner-client-libraries-nodejs",
-    "api_shortname": "spanner",
-    "library_type": "GAPIC_COMBO",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-spanner",
-    "support_documentation": "https://cloud.google.com/spanner/docs/getting-support"
-  },
-  {
     "name": "speech",
     "name_pretty": "Speech",
     "product_documentation": "https://cloud.google.com/speech-to-text/docs/",
@@ -2301,24 +2245,6 @@
     "library_type": "GAPIC_AUTO",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-monitoring",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "name": "storage",
-    "name_pretty": "Storage",
-    "product_documentation": "https://cloud.google.com/storage",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/559782",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-storage",
-    "distribution_name": "@google-cloud/storage",
-    "api_id": "storage-api.googleapis.com",
-    "requires_billing": true,
-    "codeowner_team": "@googleapis/cloud-storage-dpe",
-    "api_shortname": "storage",
-    "library_type": "GAPIC_MANUAL",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-storage",
-    "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
   },
   {
     "name": "storage",
@@ -3534,6 +3460,24 @@
     "support_documentation": "https://developers.google.com/maps/documentation/places/web-service/docs/getting-support"
   },
   {
+    "name": "area-insights",
+    "name_pretty": "Places Insights API",
+    "product_documentation": "https://developers.google.com/maps/documentation/places-insights",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area-insights/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@googlemaps/areainsights",
+    "api_id": "areainsights.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "area-insights",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-areainsights",
+    "support_documentation": "https://developers.google.com/maps/documentation/places-insights/docs/getting-support"
+  },
+  {
     "name": "iam",
     "name_pretty": "Policy Troubleshooter API",
     "product_documentation": "cloud.google.com/iam/",
@@ -3657,18 +3601,5 @@
     "library_type": "AGENT",
     "linkToRepoHomepage": "https://github.com/googleapis/cloud-trace-nodejs",
     "support_documentation": "https://cloud.google.com/trace/docs/getting-support"
-  },
-  {
-    "name": "vertexai",
-    "name_pretty": "Vertex AI",
-    "release_level": "preview",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-vertexai",
-    "distribution_name": "@google-cloud/vertexai",
-    "api_id": "aiplatform.googleapis.com",
-    "api_shortname": "aiplatform",
-    "library_type": "GAPIC_MANUAL",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vertexai/latest",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-vertexai"
   }
 ]

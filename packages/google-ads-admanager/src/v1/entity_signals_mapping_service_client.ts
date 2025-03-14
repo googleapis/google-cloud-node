@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class EntitySignalsMappingServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('admanager');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class EntitySignalsMappingServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -534,11 +537,36 @@ export class EntitySignalsMappingServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEntitySignalsMapping(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getEntitySignalsMapping request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntitySignalsMapping response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntitySignalsMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          (
+            | protos.google.ads.admanager.v1.IGetEntitySignalsMappingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntitySignalsMapping response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * API to create an `EntitySignalsMapping` object.
@@ -637,11 +665,36 @@ export class EntitySignalsMappingServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEntitySignalsMapping(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createEntitySignalsMapping request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntitySignalsMapping response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEntitySignalsMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          (
+            | protos.google.ads.admanager.v1.ICreateEntitySignalsMappingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntitySignalsMapping response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * API to update an `EntitySignalsMapping` object.
@@ -744,11 +797,36 @@ export class EntitySignalsMappingServiceClient {
         'entity_signals_mapping.name': request.entitySignalsMapping!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEntitySignalsMapping(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateEntitySignalsMapping request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntitySignalsMapping response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEntitySignalsMapping(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping,
+          (
+            | protos.google.ads.admanager.v1.IUpdateEntitySignalsMappingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntitySignalsMapping response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * API to batch create `EntitySignalsMapping` objects.
@@ -849,11 +927,42 @@ export class EntitySignalsMappingServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchCreateEntitySignalsMappings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('batchCreateEntitySignalsMappings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchCreateEntitySignalsMappings response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateEntitySignalsMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchCreateEntitySignalsMappingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchCreateEntitySignalsMappings response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * API to batch update `EntitySignalsMapping` objects.
@@ -954,11 +1063,42 @@ export class EntitySignalsMappingServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchUpdateEntitySignalsMappings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('batchUpdateEntitySignalsMappings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchUpdateEntitySignalsMappings response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateEntitySignalsMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateEntitySignalsMappingsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchUpdateEntitySignalsMappings response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1076,11 +1216,33 @@ export class EntitySignalsMappingServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntitySignalsMappings(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
+          | protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse
+          | null
+          | undefined,
+          protos.google.ads.admanager.v1.IEntitySignalsMapping
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntitySignalsMappings values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntitySignalsMappings request %j', request);
+    return this.innerApiCalls
+      .listEntitySignalsMappings(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IEntitySignalsMapping[],
+          protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest | null,
+          protos.google.ads.admanager.v1.IListEntitySignalsMappingsResponse,
+        ]) => {
+          this._log.info('listEntitySignalsMappings values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1139,6 +1301,7 @@ export class EntitySignalsMappingServiceClient {
     const defaultCallSettings = this._defaults['listEntitySignalsMappings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitySignalsMappings stream %j', request);
     return this.descriptors.page.listEntitySignalsMappings.createStream(
       this.innerApiCalls.listEntitySignalsMappings as GaxCall,
       request,
@@ -1205,6 +1368,7 @@ export class EntitySignalsMappingServiceClient {
     const defaultCallSettings = this._defaults['listEntitySignalsMappings'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntitySignalsMappings iterate %j', request);
     return this.descriptors.page.listEntitySignalsMappings.asyncIterate(
       this.innerApiCalls['listEntitySignalsMappings'] as GaxCall,
       request as {},
@@ -1841,6 +2005,7 @@ export class EntitySignalsMappingServiceClient {
   close(): Promise<void> {
     if (this.entitySignalsMappingServiceStub && !this._terminated) {
       return this.entitySignalsMappingServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

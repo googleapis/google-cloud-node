@@ -323,7 +323,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Table()
       );
@@ -354,7 +354,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Table()
       );
@@ -401,7 +401,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTable = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTable(request), expectedError);
@@ -450,7 +450,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Workspace()
       );
@@ -481,7 +481,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Workspace()
       );
@@ -528,7 +528,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkspace = stubSimpleCall(
         undefined,
@@ -580,7 +580,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
@@ -611,7 +611,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
@@ -658,7 +658,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRow = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRow(request), expectedError);
@@ -707,7 +707,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
@@ -738,7 +738,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
@@ -785,7 +785,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRow = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createRow(request), expectedError);
@@ -834,7 +834,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsResponse()
       );
@@ -865,7 +865,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsResponse()
       );
@@ -912,7 +912,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateRows = stubSimpleCall(
         undefined,
@@ -965,7 +965,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['row', 'name']
       );
       request.row.name = defaultValue1;
-      const expectedHeaderRequestParams = `row.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `row.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
@@ -997,7 +997,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['row', 'name']
       );
       request.row.name = defaultValue1;
-      const expectedHeaderRequestParams = `row.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `row.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.Row()
       );
@@ -1045,7 +1045,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['row', 'name']
       );
       request.row.name = defaultValue1;
-      const expectedHeaderRequestParams = `row.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `row.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRow = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateRow(request), expectedError);
@@ -1095,7 +1095,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsResponse()
       );
@@ -1126,7 +1126,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsResponse()
       );
@@ -1173,7 +1173,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchUpdateRows = stubSimpleCall(
         undefined,
@@ -1225,7 +1225,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1256,7 +1256,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1303,7 +1303,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRow = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteRow(request), expectedError);
@@ -1352,7 +1352,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1383,7 +1383,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1430,7 +1430,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteRows = stubSimpleCall(
         undefined,
@@ -1949,7 +1949,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
@@ -1982,7 +1982,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
@@ -2031,7 +2031,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRows = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listRows(request), expectedError);
@@ -2059,7 +2059,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
@@ -2113,7 +2113,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRows.createStream = stubPageStreamingCall(
         undefined,
@@ -2164,7 +2164,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
         generateSampleMessage(new protos.google.area120.tables.v1alpha1.Row()),
@@ -2206,7 +2206,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRows.asyncIterate = stubAsyncIterationCall(
         undefined,

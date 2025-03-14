@@ -420,6 +420,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateBackup(request: google.cloud.filestore.v1.IUpdateBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls PromoteReplica.
+                     * @param request PromoteReplicaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public promoteReplica(request: google.cloud.filestore.v1.IPromoteReplicaRequest, callback: google.cloud.filestore.v1.CloudFilestoreManager.PromoteReplicaCallback): void;
+
+                    /**
+                     * Calls PromoteReplica.
+                     * @param request PromoteReplicaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public promoteReplica(request: google.cloud.filestore.v1.IPromoteReplicaRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace CloudFilestoreManager {
@@ -542,6 +556,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1.CloudFilestoreManager|promoteReplica}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type PromoteReplicaCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a NetworkConfig. */
@@ -937,6 +958,253 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ReplicaConfig. */
+                interface IReplicaConfig {
+
+                    /** ReplicaConfig state */
+                    state?: (google.cloud.filestore.v1.ReplicaConfig.State|keyof typeof google.cloud.filestore.v1.ReplicaConfig.State|null);
+
+                    /** ReplicaConfig stateReasons */
+                    stateReasons?: (google.cloud.filestore.v1.ReplicaConfig.StateReason[]|null);
+
+                    /** ReplicaConfig peerInstance */
+                    peerInstance?: (string|null);
+
+                    /** ReplicaConfig lastActiveSyncTime */
+                    lastActiveSyncTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ReplicaConfig. */
+                class ReplicaConfig implements IReplicaConfig {
+
+                    /**
+                     * Constructs a new ReplicaConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1.IReplicaConfig);
+
+                    /** ReplicaConfig state. */
+                    public state: (google.cloud.filestore.v1.ReplicaConfig.State|keyof typeof google.cloud.filestore.v1.ReplicaConfig.State);
+
+                    /** ReplicaConfig stateReasons. */
+                    public stateReasons: google.cloud.filestore.v1.ReplicaConfig.StateReason[];
+
+                    /** ReplicaConfig peerInstance. */
+                    public peerInstance: string;
+
+                    /** ReplicaConfig lastActiveSyncTime. */
+                    public lastActiveSyncTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ReplicaConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicaConfig instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1.IReplicaConfig): google.cloud.filestore.v1.ReplicaConfig;
+
+                    /**
+                     * Encodes the specified ReplicaConfig message. Does not implicitly {@link google.cloud.filestore.v1.ReplicaConfig.verify|verify} messages.
+                     * @param message ReplicaConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1.IReplicaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicaConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.ReplicaConfig.verify|verify} messages.
+                     * @param message ReplicaConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1.IReplicaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicaConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicaConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.ReplicaConfig;
+
+                    /**
+                     * Decodes a ReplicaConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicaConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.ReplicaConfig;
+
+                    /**
+                     * Verifies a ReplicaConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicaConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicaConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.ReplicaConfig;
+
+                    /**
+                     * Creates a plain object from a ReplicaConfig message. Also converts values to other types if specified.
+                     * @param message ReplicaConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1.ReplicaConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicaConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicaConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReplicaConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 3,
+                        REMOVING = 4,
+                        FAILED = 5
+                    }
+
+                    /** StateReason enum. */
+                    enum StateReason {
+                        STATE_REASON_UNSPECIFIED = 0,
+                        PEER_INSTANCE_UNREACHABLE = 1,
+                        REMOVE_FAILED = 2
+                    }
+                }
+
+                /** Properties of a Replication. */
+                interface IReplication {
+
+                    /** Replication role */
+                    role?: (google.cloud.filestore.v1.Replication.Role|keyof typeof google.cloud.filestore.v1.Replication.Role|null);
+
+                    /** Replication replicas */
+                    replicas?: (google.cloud.filestore.v1.IReplicaConfig[]|null);
+                }
+
+                /** Represents a Replication. */
+                class Replication implements IReplication {
+
+                    /**
+                     * Constructs a new Replication.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1.IReplication);
+
+                    /** Replication role. */
+                    public role: (google.cloud.filestore.v1.Replication.Role|keyof typeof google.cloud.filestore.v1.Replication.Role);
+
+                    /** Replication replicas. */
+                    public replicas: google.cloud.filestore.v1.IReplicaConfig[];
+
+                    /**
+                     * Creates a new Replication instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Replication instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1.IReplication): google.cloud.filestore.v1.Replication;
+
+                    /**
+                     * Encodes the specified Replication message. Does not implicitly {@link google.cloud.filestore.v1.Replication.verify|verify} messages.
+                     * @param message Replication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1.IReplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Replication message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.Replication.verify|verify} messages.
+                     * @param message Replication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1.IReplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Replication message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Replication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.Replication;
+
+                    /**
+                     * Decodes a Replication message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Replication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.Replication;
+
+                    /**
+                     * Verifies a Replication message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Replication message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Replication
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.Replication;
+
+                    /**
+                     * Creates a plain object from a Replication message. Also converts values to other types if specified.
+                     * @param message Replication
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1.Replication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Replication to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Replication
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Replication {
+
+                    /** Role enum. */
+                    enum Role {
+                        ROLE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        STANDBY = 2
+                    }
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -981,6 +1249,30 @@ export namespace google {
 
                     /** Instance suspensionReasons */
                     suspensionReasons?: (google.cloud.filestore.v1.Instance.SuspensionReason[]|null);
+
+                    /** Instance replication */
+                    replication?: (google.cloud.filestore.v1.IReplication|null);
+
+                    /** Instance tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** Instance protocol */
+                    protocol?: (google.cloud.filestore.v1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1.Instance.FileProtocol|null);
+
+                    /** Instance customPerformanceSupported */
+                    customPerformanceSupported?: (boolean|null);
+
+                    /** Instance performanceConfig */
+                    performanceConfig?: (google.cloud.filestore.v1.Instance.IPerformanceConfig|null);
+
+                    /** Instance performanceLimits */
+                    performanceLimits?: (google.cloud.filestore.v1.Instance.IPerformanceLimits|null);
+
+                    /** Instance deletionProtectionEnabled */
+                    deletionProtectionEnabled?: (boolean|null);
+
+                    /** Instance deletionProtectionReason */
+                    deletionProtectionReason?: (string|null);
                 }
 
                 /** Represents an Instance. */
@@ -1033,6 +1325,30 @@ export namespace google {
 
                     /** Instance suspensionReasons. */
                     public suspensionReasons: google.cloud.filestore.v1.Instance.SuspensionReason[];
+
+                    /** Instance replication. */
+                    public replication?: (google.cloud.filestore.v1.IReplication|null);
+
+                    /** Instance tags. */
+                    public tags: { [k: string]: string };
+
+                    /** Instance protocol. */
+                    public protocol: (google.cloud.filestore.v1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1.Instance.FileProtocol);
+
+                    /** Instance customPerformanceSupported. */
+                    public customPerformanceSupported: boolean;
+
+                    /** Instance performanceConfig. */
+                    public performanceConfig?: (google.cloud.filestore.v1.Instance.IPerformanceConfig|null);
+
+                    /** Instance performanceLimits. */
+                    public performanceLimits?: (google.cloud.filestore.v1.Instance.IPerformanceLimits|null);
+
+                    /** Instance deletionProtectionEnabled. */
+                    public deletionProtectionEnabled: boolean;
+
+                    /** Instance deletionProtectionReason. */
+                    public deletionProtectionReason: string;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -1126,7 +1442,8 @@ export namespace google {
                         SUSPENDED = 8,
                         SUSPENDING = 9,
                         RESUMING = 10,
-                        REVERTING = 12
+                        REVERTING = 12,
+                        PROMOTING = 13
                     }
 
                     /** Tier enum. */
@@ -1146,6 +1463,434 @@ export namespace google {
                     enum SuspensionReason {
                         SUSPENSION_REASON_UNSPECIFIED = 0,
                         KMS_KEY_ISSUE = 1
+                    }
+
+                    /** FileProtocol enum. */
+                    enum FileProtocol {
+                        FILE_PROTOCOL_UNSPECIFIED = 0,
+                        NFS_V3 = 1,
+                        NFS_V4_1 = 2
+                    }
+
+                    /** Properties of a IOPSPerTB. */
+                    interface IIOPSPerTB {
+
+                        /** IOPSPerTB maxIopsPerTb */
+                        maxIopsPerTb?: (number|Long|string|null);
+                    }
+
+                    /** Represents a IOPSPerTB. */
+                    class IOPSPerTB implements IIOPSPerTB {
+
+                        /**
+                         * Constructs a new IOPSPerTB.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1.Instance.IIOPSPerTB);
+
+                        /** IOPSPerTB maxIopsPerTb. */
+                        public maxIopsPerTb: (number|Long|string);
+
+                        /**
+                         * Creates a new IOPSPerTB instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IOPSPerTB instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1.Instance.IIOPSPerTB): google.cloud.filestore.v1.Instance.IOPSPerTB;
+
+                        /**
+                         * Encodes the specified IOPSPerTB message. Does not implicitly {@link google.cloud.filestore.v1.Instance.IOPSPerTB.verify|verify} messages.
+                         * @param message IOPSPerTB message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1.Instance.IIOPSPerTB, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IOPSPerTB message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.Instance.IOPSPerTB.verify|verify} messages.
+                         * @param message IOPSPerTB message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1.Instance.IIOPSPerTB, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a IOPSPerTB message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IOPSPerTB
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.Instance.IOPSPerTB;
+
+                        /**
+                         * Decodes a IOPSPerTB message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IOPSPerTB
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.Instance.IOPSPerTB;
+
+                        /**
+                         * Verifies a IOPSPerTB message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a IOPSPerTB message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IOPSPerTB
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.Instance.IOPSPerTB;
+
+                        /**
+                         * Creates a plain object from a IOPSPerTB message. Also converts values to other types if specified.
+                         * @param message IOPSPerTB
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1.Instance.IOPSPerTB, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IOPSPerTB to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IOPSPerTB
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FixedIOPS. */
+                    interface IFixedIOPS {
+
+                        /** FixedIOPS maxIops */
+                        maxIops?: (number|Long|string|null);
+                    }
+
+                    /** Represents a FixedIOPS. */
+                    class FixedIOPS implements IFixedIOPS {
+
+                        /**
+                         * Constructs a new FixedIOPS.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1.Instance.IFixedIOPS);
+
+                        /** FixedIOPS maxIops. */
+                        public maxIops: (number|Long|string);
+
+                        /**
+                         * Creates a new FixedIOPS instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FixedIOPS instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1.Instance.IFixedIOPS): google.cloud.filestore.v1.Instance.FixedIOPS;
+
+                        /**
+                         * Encodes the specified FixedIOPS message. Does not implicitly {@link google.cloud.filestore.v1.Instance.FixedIOPS.verify|verify} messages.
+                         * @param message FixedIOPS message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1.Instance.IFixedIOPS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FixedIOPS message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.Instance.FixedIOPS.verify|verify} messages.
+                         * @param message FixedIOPS message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1.Instance.IFixedIOPS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FixedIOPS message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FixedIOPS
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.Instance.FixedIOPS;
+
+                        /**
+                         * Decodes a FixedIOPS message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FixedIOPS
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.Instance.FixedIOPS;
+
+                        /**
+                         * Verifies a FixedIOPS message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FixedIOPS message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FixedIOPS
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.Instance.FixedIOPS;
+
+                        /**
+                         * Creates a plain object from a FixedIOPS message. Also converts values to other types if specified.
+                         * @param message FixedIOPS
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1.Instance.FixedIOPS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FixedIOPS to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FixedIOPS
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PerformanceConfig. */
+                    interface IPerformanceConfig {
+
+                        /** PerformanceConfig iopsPerTb */
+                        iopsPerTb?: (google.cloud.filestore.v1.Instance.IIOPSPerTB|null);
+
+                        /** PerformanceConfig fixedIops */
+                        fixedIops?: (google.cloud.filestore.v1.Instance.IFixedIOPS|null);
+                    }
+
+                    /** Represents a PerformanceConfig. */
+                    class PerformanceConfig implements IPerformanceConfig {
+
+                        /**
+                         * Constructs a new PerformanceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1.Instance.IPerformanceConfig);
+
+                        /** PerformanceConfig iopsPerTb. */
+                        public iopsPerTb?: (google.cloud.filestore.v1.Instance.IIOPSPerTB|null);
+
+                        /** PerformanceConfig fixedIops. */
+                        public fixedIops?: (google.cloud.filestore.v1.Instance.IFixedIOPS|null);
+
+                        /** PerformanceConfig mode. */
+                        public mode?: ("iopsPerTb"|"fixedIops");
+
+                        /**
+                         * Creates a new PerformanceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PerformanceConfig instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1.Instance.IPerformanceConfig): google.cloud.filestore.v1.Instance.PerformanceConfig;
+
+                        /**
+                         * Encodes the specified PerformanceConfig message. Does not implicitly {@link google.cloud.filestore.v1.Instance.PerformanceConfig.verify|verify} messages.
+                         * @param message PerformanceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1.Instance.IPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PerformanceConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.Instance.PerformanceConfig.verify|verify} messages.
+                         * @param message PerformanceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1.Instance.IPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PerformanceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PerformanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.Instance.PerformanceConfig;
+
+                        /**
+                         * Decodes a PerformanceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PerformanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.Instance.PerformanceConfig;
+
+                        /**
+                         * Verifies a PerformanceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PerformanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PerformanceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.Instance.PerformanceConfig;
+
+                        /**
+                         * Creates a plain object from a PerformanceConfig message. Also converts values to other types if specified.
+                         * @param message PerformanceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1.Instance.PerformanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PerformanceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PerformanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PerformanceLimits. */
+                    interface IPerformanceLimits {
+
+                        /** PerformanceLimits maxIops */
+                        maxIops?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxReadIops */
+                        maxReadIops?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxWriteIops */
+                        maxWriteIops?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxReadThroughputBps */
+                        maxReadThroughputBps?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxWriteThroughputBps */
+                        maxWriteThroughputBps?: (number|Long|string|null);
+                    }
+
+                    /** Represents a PerformanceLimits. */
+                    class PerformanceLimits implements IPerformanceLimits {
+
+                        /**
+                         * Constructs a new PerformanceLimits.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1.Instance.IPerformanceLimits);
+
+                        /** PerformanceLimits maxIops. */
+                        public maxIops: (number|Long|string);
+
+                        /** PerformanceLimits maxReadIops. */
+                        public maxReadIops: (number|Long|string);
+
+                        /** PerformanceLimits maxWriteIops. */
+                        public maxWriteIops: (number|Long|string);
+
+                        /** PerformanceLimits maxReadThroughputBps. */
+                        public maxReadThroughputBps: (number|Long|string);
+
+                        /** PerformanceLimits maxWriteThroughputBps. */
+                        public maxWriteThroughputBps: (number|Long|string);
+
+                        /**
+                         * Creates a new PerformanceLimits instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PerformanceLimits instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1.Instance.IPerformanceLimits): google.cloud.filestore.v1.Instance.PerformanceLimits;
+
+                        /**
+                         * Encodes the specified PerformanceLimits message. Does not implicitly {@link google.cloud.filestore.v1.Instance.PerformanceLimits.verify|verify} messages.
+                         * @param message PerformanceLimits message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1.Instance.IPerformanceLimits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PerformanceLimits message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.Instance.PerformanceLimits.verify|verify} messages.
+                         * @param message PerformanceLimits message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1.Instance.IPerformanceLimits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PerformanceLimits message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PerformanceLimits
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.Instance.PerformanceLimits;
+
+                        /**
+                         * Decodes a PerformanceLimits message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PerformanceLimits
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.Instance.PerformanceLimits;
+
+                        /**
+                         * Verifies a PerformanceLimits message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PerformanceLimits message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PerformanceLimits
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.Instance.PerformanceLimits;
+
+                        /**
+                         * Creates a plain object from a PerformanceLimits message. Also converts values to other types if specified.
+                         * @param message PerformanceLimits
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1.Instance.PerformanceLimits, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PerformanceLimits to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PerformanceLimits
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -2026,6 +2771,9 @@ export namespace google {
 
                     /** Snapshot filesystemUsedBytes */
                     filesystemUsedBytes?: (number|Long|string|null);
+
+                    /** Snapshot tags */
+                    tags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Snapshot. */
@@ -2054,6 +2802,9 @@ export namespace google {
 
                     /** Snapshot filesystemUsedBytes. */
                     public filesystemUsedBytes: (number|Long|string);
+
+                    /** Snapshot tags. */
+                    public tags: { [k: string]: string };
 
                     /**
                      * Creates a new Snapshot instance using the specified properties.
@@ -2567,6 +3318,9 @@ export namespace google {
 
                     /** ListSnapshotsRequest filter */
                     filter?: (string|null);
+
+                    /** ListSnapshotsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListSnapshotsRequest. */
@@ -2592,6 +3346,9 @@ export namespace google {
 
                     /** ListSnapshotsRequest filter. */
                     public filter: string;
+
+                    /** ListSnapshotsRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListSnapshotsRequest instance using the specified properties.
@@ -2679,6 +3436,9 @@ export namespace google {
 
                     /** ListSnapshotsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListSnapshotsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListSnapshotsResponse. */
@@ -2695,6 +3455,9 @@ export namespace google {
 
                     /** ListSnapshotsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListSnapshotsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListSnapshotsResponse instance using the specified properties.
@@ -2818,6 +3581,12 @@ export namespace google {
 
                     /** Backup kmsKey */
                     kmsKey?: (string|null);
+
+                    /** Backup tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** Backup fileSystemProtocol */
+                    fileSystemProtocol?: (google.cloud.filestore.v1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1.Instance.FileProtocol|null);
                 }
 
                 /** Represents a Backup. */
@@ -2870,6 +3639,12 @@ export namespace google {
 
                     /** Backup kmsKey. */
                     public kmsKey: string;
+
+                    /** Backup tags. */
+                    public tags: { [k: string]: string };
+
+                    /** Backup fileSystemProtocol. */
+                    public fileSystemProtocol: (google.cloud.filestore.v1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1.Instance.FileProtocol);
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -3265,6 +4040,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateBackupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PromoteReplicaRequest. */
+                interface IPromoteReplicaRequest {
+
+                    /** PromoteReplicaRequest name */
+                    name?: (string|null);
+
+                    /** PromoteReplicaRequest peerInstance */
+                    peerInstance?: (string|null);
+                }
+
+                /** Represents a PromoteReplicaRequest. */
+                class PromoteReplicaRequest implements IPromoteReplicaRequest {
+
+                    /**
+                     * Constructs a new PromoteReplicaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1.IPromoteReplicaRequest);
+
+                    /** PromoteReplicaRequest name. */
+                    public name: string;
+
+                    /** PromoteReplicaRequest peerInstance. */
+                    public peerInstance: string;
+
+                    /**
+                     * Creates a new PromoteReplicaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PromoteReplicaRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1.IPromoteReplicaRequest): google.cloud.filestore.v1.PromoteReplicaRequest;
+
+                    /**
+                     * Encodes the specified PromoteReplicaRequest message. Does not implicitly {@link google.cloud.filestore.v1.PromoteReplicaRequest.verify|verify} messages.
+                     * @param message PromoteReplicaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1.IPromoteReplicaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PromoteReplicaRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1.PromoteReplicaRequest.verify|verify} messages.
+                     * @param message PromoteReplicaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1.IPromoteReplicaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PromoteReplicaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PromoteReplicaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1.PromoteReplicaRequest;
+
+                    /**
+                     * Decodes a PromoteReplicaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PromoteReplicaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1.PromoteReplicaRequest;
+
+                    /**
+                     * Verifies a PromoteReplicaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PromoteReplicaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PromoteReplicaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1.PromoteReplicaRequest;
+
+                    /**
+                     * Creates a plain object from a PromoteReplicaRequest message. Also converts values to other types if specified.
+                     * @param message PromoteReplicaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1.PromoteReplicaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PromoteReplicaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PromoteReplicaRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3707,6 +4585,20 @@ export namespace google {
                     public revertInstance(request: google.cloud.filestore.v1beta1.IRevertInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls PromoteReplica.
+                     * @param request PromoteReplicaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public promoteReplica(request: google.cloud.filestore.v1beta1.IPromoteReplicaRequest, callback: google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplicaCallback): void;
+
+                    /**
+                     * Calls PromoteReplica.
+                     * @param request PromoteReplicaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public promoteReplica(request: google.cloud.filestore.v1beta1.IPromoteReplicaRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls DeleteInstance.
                      * @param request DeleteInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -3974,6 +4866,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RevertInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|promoteReplica}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type PromoteReplicaCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.filestore.v1beta1.CloudFilestoreManager|deleteInstance}.
@@ -4699,6 +5598,253 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReplicaConfig. */
+                interface IReplicaConfig {
+
+                    /** ReplicaConfig state */
+                    state?: (google.cloud.filestore.v1beta1.ReplicaConfig.State|keyof typeof google.cloud.filestore.v1beta1.ReplicaConfig.State|null);
+
+                    /** ReplicaConfig stateReasons */
+                    stateReasons?: (google.cloud.filestore.v1beta1.ReplicaConfig.StateReason[]|null);
+
+                    /** ReplicaConfig peerInstance */
+                    peerInstance?: (string|null);
+
+                    /** ReplicaConfig lastActiveSyncTime */
+                    lastActiveSyncTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ReplicaConfig. */
+                class ReplicaConfig implements IReplicaConfig {
+
+                    /**
+                     * Constructs a new ReplicaConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IReplicaConfig);
+
+                    /** ReplicaConfig state. */
+                    public state: (google.cloud.filestore.v1beta1.ReplicaConfig.State|keyof typeof google.cloud.filestore.v1beta1.ReplicaConfig.State);
+
+                    /** ReplicaConfig stateReasons. */
+                    public stateReasons: google.cloud.filestore.v1beta1.ReplicaConfig.StateReason[];
+
+                    /** ReplicaConfig peerInstance. */
+                    public peerInstance: string;
+
+                    /** ReplicaConfig lastActiveSyncTime. */
+                    public lastActiveSyncTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ReplicaConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplicaConfig instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IReplicaConfig): google.cloud.filestore.v1beta1.ReplicaConfig;
+
+                    /**
+                     * Encodes the specified ReplicaConfig message. Does not implicitly {@link google.cloud.filestore.v1beta1.ReplicaConfig.verify|verify} messages.
+                     * @param message ReplicaConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IReplicaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplicaConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ReplicaConfig.verify|verify} messages.
+                     * @param message ReplicaConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IReplicaConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplicaConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplicaConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.ReplicaConfig;
+
+                    /**
+                     * Decodes a ReplicaConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplicaConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.ReplicaConfig;
+
+                    /**
+                     * Verifies a ReplicaConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplicaConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplicaConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.ReplicaConfig;
+
+                    /**
+                     * Creates a plain object from a ReplicaConfig message. Also converts values to other types if specified.
+                     * @param message ReplicaConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.ReplicaConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplicaConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReplicaConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ReplicaConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        READY = 3,
+                        REMOVING = 4,
+                        FAILED = 5
+                    }
+
+                    /** StateReason enum. */
+                    enum StateReason {
+                        STATE_REASON_UNSPECIFIED = 0,
+                        PEER_INSTANCE_UNREACHABLE = 1,
+                        REMOVE_FAILED = 2
+                    }
+                }
+
+                /** Properties of a Replication. */
+                interface IReplication {
+
+                    /** Replication role */
+                    role?: (google.cloud.filestore.v1beta1.Replication.Role|keyof typeof google.cloud.filestore.v1beta1.Replication.Role|null);
+
+                    /** Replication replicas */
+                    replicas?: (google.cloud.filestore.v1beta1.IReplicaConfig[]|null);
+                }
+
+                /** Represents a Replication. */
+                class Replication implements IReplication {
+
+                    /**
+                     * Constructs a new Replication.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IReplication);
+
+                    /** Replication role. */
+                    public role: (google.cloud.filestore.v1beta1.Replication.Role|keyof typeof google.cloud.filestore.v1beta1.Replication.Role);
+
+                    /** Replication replicas. */
+                    public replicas: google.cloud.filestore.v1beta1.IReplicaConfig[];
+
+                    /**
+                     * Creates a new Replication instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Replication instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IReplication): google.cloud.filestore.v1beta1.Replication;
+
+                    /**
+                     * Encodes the specified Replication message. Does not implicitly {@link google.cloud.filestore.v1beta1.Replication.verify|verify} messages.
+                     * @param message Replication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IReplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Replication message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Replication.verify|verify} messages.
+                     * @param message Replication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IReplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Replication message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Replication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Replication;
+
+                    /**
+                     * Decodes a Replication message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Replication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Replication;
+
+                    /**
+                     * Verifies a Replication message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Replication message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Replication
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Replication;
+
+                    /**
+                     * Creates a plain object from a Replication message. Also converts values to other types if specified.
+                     * @param message Replication
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.Replication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Replication to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Replication
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Replication {
+
+                    /** Role enum. */
+                    enum Role {
+                        ROLE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        STANDBY = 2
+                    }
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -4764,6 +5910,27 @@ export namespace google {
 
                     /** Instance directoryServices */
                     directoryServices?: (google.cloud.filestore.v1beta1.IDirectoryServicesConfig|null);
+
+                    /** Instance replication */
+                    replication?: (google.cloud.filestore.v1beta1.IReplication|null);
+
+                    /** Instance tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** Instance customPerformanceSupported */
+                    customPerformanceSupported?: (boolean|null);
+
+                    /** Instance performanceConfig */
+                    performanceConfig?: (google.cloud.filestore.v1beta1.Instance.IPerformanceConfig|null);
+
+                    /** Instance performanceLimits */
+                    performanceLimits?: (google.cloud.filestore.v1beta1.Instance.IPerformanceLimits|null);
+
+                    /** Instance deletionProtectionEnabled */
+                    deletionProtectionEnabled?: (boolean|null);
+
+                    /** Instance deletionProtectionReason */
+                    deletionProtectionReason?: (string|null);
                 }
 
                 /** Represents an Instance. */
@@ -4837,6 +6004,27 @@ export namespace google {
 
                     /** Instance directoryServices. */
                     public directoryServices?: (google.cloud.filestore.v1beta1.IDirectoryServicesConfig|null);
+
+                    /** Instance replication. */
+                    public replication?: (google.cloud.filestore.v1beta1.IReplication|null);
+
+                    /** Instance tags. */
+                    public tags: { [k: string]: string };
+
+                    /** Instance customPerformanceSupported. */
+                    public customPerformanceSupported: boolean;
+
+                    /** Instance performanceConfig. */
+                    public performanceConfig?: (google.cloud.filestore.v1beta1.Instance.IPerformanceConfig|null);
+
+                    /** Instance performanceLimits. */
+                    public performanceLimits?: (google.cloud.filestore.v1beta1.Instance.IPerformanceLimits|null);
+
+                    /** Instance deletionProtectionEnabled. */
+                    public deletionProtectionEnabled: boolean;
+
+                    /** Instance deletionProtectionReason. */
+                    public deletionProtectionReason: string;
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -4930,7 +6118,8 @@ export namespace google {
                         SUSPENDED = 8,
                         REVERTING = 9,
                         SUSPENDING = 10,
-                        RESUMING = 11
+                        RESUMING = 11,
+                        PROMOTING = 13
                     }
 
                     /** Tier enum. */
@@ -4957,6 +6146,427 @@ export namespace google {
                         FILE_PROTOCOL_UNSPECIFIED = 0,
                         NFS_V3 = 1,
                         NFS_V4_1 = 2
+                    }
+
+                    /** Properties of a IOPSPerTB. */
+                    interface IIOPSPerTB {
+
+                        /** IOPSPerTB maxIopsPerTb */
+                        maxIopsPerTb?: (number|Long|string|null);
+                    }
+
+                    /** Represents a IOPSPerTB. */
+                    class IOPSPerTB implements IIOPSPerTB {
+
+                        /**
+                         * Constructs a new IOPSPerTB.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1beta1.Instance.IIOPSPerTB);
+
+                        /** IOPSPerTB maxIopsPerTb. */
+                        public maxIopsPerTb: (number|Long|string);
+
+                        /**
+                         * Creates a new IOPSPerTB instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IOPSPerTB instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1beta1.Instance.IIOPSPerTB): google.cloud.filestore.v1beta1.Instance.IOPSPerTB;
+
+                        /**
+                         * Encodes the specified IOPSPerTB message. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.IOPSPerTB.verify|verify} messages.
+                         * @param message IOPSPerTB message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1beta1.Instance.IIOPSPerTB, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IOPSPerTB message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.IOPSPerTB.verify|verify} messages.
+                         * @param message IOPSPerTB message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1beta1.Instance.IIOPSPerTB, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a IOPSPerTB message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IOPSPerTB
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Instance.IOPSPerTB;
+
+                        /**
+                         * Decodes a IOPSPerTB message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IOPSPerTB
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Instance.IOPSPerTB;
+
+                        /**
+                         * Verifies a IOPSPerTB message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a IOPSPerTB message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IOPSPerTB
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Instance.IOPSPerTB;
+
+                        /**
+                         * Creates a plain object from a IOPSPerTB message. Also converts values to other types if specified.
+                         * @param message IOPSPerTB
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1beta1.Instance.IOPSPerTB, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IOPSPerTB to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IOPSPerTB
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FixedIOPS. */
+                    interface IFixedIOPS {
+
+                        /** FixedIOPS maxIops */
+                        maxIops?: (number|Long|string|null);
+                    }
+
+                    /** Represents a FixedIOPS. */
+                    class FixedIOPS implements IFixedIOPS {
+
+                        /**
+                         * Constructs a new FixedIOPS.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1beta1.Instance.IFixedIOPS);
+
+                        /** FixedIOPS maxIops. */
+                        public maxIops: (number|Long|string);
+
+                        /**
+                         * Creates a new FixedIOPS instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FixedIOPS instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1beta1.Instance.IFixedIOPS): google.cloud.filestore.v1beta1.Instance.FixedIOPS;
+
+                        /**
+                         * Encodes the specified FixedIOPS message. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.FixedIOPS.verify|verify} messages.
+                         * @param message FixedIOPS message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1beta1.Instance.IFixedIOPS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FixedIOPS message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.FixedIOPS.verify|verify} messages.
+                         * @param message FixedIOPS message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1beta1.Instance.IFixedIOPS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FixedIOPS message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FixedIOPS
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Instance.FixedIOPS;
+
+                        /**
+                         * Decodes a FixedIOPS message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FixedIOPS
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Instance.FixedIOPS;
+
+                        /**
+                         * Verifies a FixedIOPS message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FixedIOPS message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FixedIOPS
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Instance.FixedIOPS;
+
+                        /**
+                         * Creates a plain object from a FixedIOPS message. Also converts values to other types if specified.
+                         * @param message FixedIOPS
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1beta1.Instance.FixedIOPS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FixedIOPS to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FixedIOPS
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PerformanceConfig. */
+                    interface IPerformanceConfig {
+
+                        /** PerformanceConfig iopsPerTb */
+                        iopsPerTb?: (google.cloud.filestore.v1beta1.Instance.IIOPSPerTB|null);
+
+                        /** PerformanceConfig fixedIops */
+                        fixedIops?: (google.cloud.filestore.v1beta1.Instance.IFixedIOPS|null);
+                    }
+
+                    /** Represents a PerformanceConfig. */
+                    class PerformanceConfig implements IPerformanceConfig {
+
+                        /**
+                         * Constructs a new PerformanceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1beta1.Instance.IPerformanceConfig);
+
+                        /** PerformanceConfig iopsPerTb. */
+                        public iopsPerTb?: (google.cloud.filestore.v1beta1.Instance.IIOPSPerTB|null);
+
+                        /** PerformanceConfig fixedIops. */
+                        public fixedIops?: (google.cloud.filestore.v1beta1.Instance.IFixedIOPS|null);
+
+                        /** PerformanceConfig mode. */
+                        public mode?: ("iopsPerTb"|"fixedIops");
+
+                        /**
+                         * Creates a new PerformanceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PerformanceConfig instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1beta1.Instance.IPerformanceConfig): google.cloud.filestore.v1beta1.Instance.PerformanceConfig;
+
+                        /**
+                         * Encodes the specified PerformanceConfig message. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.PerformanceConfig.verify|verify} messages.
+                         * @param message PerformanceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1beta1.Instance.IPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PerformanceConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.PerformanceConfig.verify|verify} messages.
+                         * @param message PerformanceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1beta1.Instance.IPerformanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PerformanceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PerformanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Instance.PerformanceConfig;
+
+                        /**
+                         * Decodes a PerformanceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PerformanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Instance.PerformanceConfig;
+
+                        /**
+                         * Verifies a PerformanceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PerformanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PerformanceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Instance.PerformanceConfig;
+
+                        /**
+                         * Creates a plain object from a PerformanceConfig message. Also converts values to other types if specified.
+                         * @param message PerformanceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1beta1.Instance.PerformanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PerformanceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PerformanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PerformanceLimits. */
+                    interface IPerformanceLimits {
+
+                        /** PerformanceLimits maxIops */
+                        maxIops?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxReadIops */
+                        maxReadIops?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxWriteIops */
+                        maxWriteIops?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxReadThroughputBps */
+                        maxReadThroughputBps?: (number|Long|string|null);
+
+                        /** PerformanceLimits maxWriteThroughputBps */
+                        maxWriteThroughputBps?: (number|Long|string|null);
+                    }
+
+                    /** Represents a PerformanceLimits. */
+                    class PerformanceLimits implements IPerformanceLimits {
+
+                        /**
+                         * Constructs a new PerformanceLimits.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.filestore.v1beta1.Instance.IPerformanceLimits);
+
+                        /** PerformanceLimits maxIops. */
+                        public maxIops: (number|Long|string);
+
+                        /** PerformanceLimits maxReadIops. */
+                        public maxReadIops: (number|Long|string);
+
+                        /** PerformanceLimits maxWriteIops. */
+                        public maxWriteIops: (number|Long|string);
+
+                        /** PerformanceLimits maxReadThroughputBps. */
+                        public maxReadThroughputBps: (number|Long|string);
+
+                        /** PerformanceLimits maxWriteThroughputBps. */
+                        public maxWriteThroughputBps: (number|Long|string);
+
+                        /**
+                         * Creates a new PerformanceLimits instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PerformanceLimits instance
+                         */
+                        public static create(properties?: google.cloud.filestore.v1beta1.Instance.IPerformanceLimits): google.cloud.filestore.v1beta1.Instance.PerformanceLimits;
+
+                        /**
+                         * Encodes the specified PerformanceLimits message. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.PerformanceLimits.verify|verify} messages.
+                         * @param message PerformanceLimits message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.filestore.v1beta1.Instance.IPerformanceLimits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PerformanceLimits message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.Instance.PerformanceLimits.verify|verify} messages.
+                         * @param message PerformanceLimits message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.filestore.v1beta1.Instance.IPerformanceLimits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PerformanceLimits message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PerformanceLimits
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.Instance.PerformanceLimits;
+
+                        /**
+                         * Decodes a PerformanceLimits message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PerformanceLimits
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.Instance.PerformanceLimits;
+
+                        /**
+                         * Verifies a PerformanceLimits message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PerformanceLimits message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PerformanceLimits
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.Instance.PerformanceLimits;
+
+                        /**
+                         * Creates a plain object from a PerformanceLimits message. Also converts values to other types if specified.
+                         * @param message PerformanceLimits
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.filestore.v1beta1.Instance.PerformanceLimits, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PerformanceLimits to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PerformanceLimits
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -5823,6 +7433,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PromoteReplicaRequest. */
+                interface IPromoteReplicaRequest {
+
+                    /** PromoteReplicaRequest name */
+                    name?: (string|null);
+
+                    /** PromoteReplicaRequest peerInstance */
+                    peerInstance?: (string|null);
+                }
+
+                /** Represents a PromoteReplicaRequest. */
+                class PromoteReplicaRequest implements IPromoteReplicaRequest {
+
+                    /**
+                     * Constructs a new PromoteReplicaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IPromoteReplicaRequest);
+
+                    /** PromoteReplicaRequest name. */
+                    public name: string;
+
+                    /** PromoteReplicaRequest peerInstance. */
+                    public peerInstance: string;
+
+                    /**
+                     * Creates a new PromoteReplicaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PromoteReplicaRequest instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IPromoteReplicaRequest): google.cloud.filestore.v1beta1.PromoteReplicaRequest;
+
+                    /**
+                     * Encodes the specified PromoteReplicaRequest message. Does not implicitly {@link google.cloud.filestore.v1beta1.PromoteReplicaRequest.verify|verify} messages.
+                     * @param message PromoteReplicaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IPromoteReplicaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PromoteReplicaRequest message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.PromoteReplicaRequest.verify|verify} messages.
+                     * @param message PromoteReplicaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IPromoteReplicaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PromoteReplicaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PromoteReplicaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.PromoteReplicaRequest;
+
+                    /**
+                     * Decodes a PromoteReplicaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PromoteReplicaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.PromoteReplicaRequest;
+
+                    /**
+                     * Verifies a PromoteReplicaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PromoteReplicaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PromoteReplicaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.PromoteReplicaRequest;
+
+                    /**
+                     * Creates a plain object from a PromoteReplicaRequest message. Also converts values to other types if specified.
+                     * @param message PromoteReplicaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.PromoteReplicaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PromoteReplicaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PromoteReplicaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Snapshot. */
                 interface ISnapshot {
 
@@ -5843,6 +7556,9 @@ export namespace google {
 
                     /** Snapshot filesystemUsedBytes */
                     filesystemUsedBytes?: (number|Long|string|null);
+
+                    /** Snapshot tags */
+                    tags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Snapshot. */
@@ -5871,6 +7587,9 @@ export namespace google {
 
                     /** Snapshot filesystemUsedBytes. */
                     public filesystemUsedBytes: (number|Long|string);
+
+                    /** Snapshot tags. */
+                    public tags: { [k: string]: string };
 
                     /**
                      * Creates a new Snapshot instance using the specified properties.
@@ -6384,6 +8103,9 @@ export namespace google {
 
                     /** ListSnapshotsRequest filter */
                     filter?: (string|null);
+
+                    /** ListSnapshotsRequest returnPartialSuccess */
+                    returnPartialSuccess?: (boolean|null);
                 }
 
                 /** Represents a ListSnapshotsRequest. */
@@ -6409,6 +8131,9 @@ export namespace google {
 
                     /** ListSnapshotsRequest filter. */
                     public filter: string;
+
+                    /** ListSnapshotsRequest returnPartialSuccess. */
+                    public returnPartialSuccess: boolean;
 
                     /**
                      * Creates a new ListSnapshotsRequest instance using the specified properties.
@@ -6496,6 +8221,9 @@ export namespace google {
 
                     /** ListSnapshotsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListSnapshotsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListSnapshotsResponse. */
@@ -6512,6 +8240,9 @@ export namespace google {
 
                     /** ListSnapshotsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListSnapshotsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListSnapshotsResponse instance using the specified properties.
@@ -6635,6 +8366,12 @@ export namespace google {
 
                     /** Backup kmsKeyName */
                     kmsKeyName?: (string|null);
+
+                    /** Backup tags */
+                    tags?: ({ [k: string]: string }|null);
+
+                    /** Backup fileSystemProtocol */
+                    fileSystemProtocol?: (google.cloud.filestore.v1beta1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1beta1.Instance.FileProtocol|null);
                 }
 
                 /** Represents a Backup. */
@@ -6687,6 +8424,12 @@ export namespace google {
 
                     /** Backup kmsKeyName. */
                     public kmsKeyName: string;
+
+                    /** Backup tags. */
+                    public tags: { [k: string]: string };
+
+                    /** Backup fileSystemProtocol. */
+                    public fileSystemProtocol: (google.cloud.filestore.v1beta1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1beta1.Instance.FileProtocol);
 
                     /**
                      * Creates a new Backup instance using the specified properties.

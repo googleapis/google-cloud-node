@@ -27,6 +27,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class RoutesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('routing');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -84,7 +87,7 @@ export class RoutesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -258,7 +261,7 @@ export class RoutesClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -590,7 +593,33 @@ export class RoutesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.computeRoutes(request, options, callback);
+    this._log.info('computeRoutes request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.routing.v2.IComputeRoutesResponse,
+          | protos.google.maps.routing.v2.IComputeRoutesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('computeRoutes response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .computeRoutes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.routing.v2.IComputeRoutesResponse,
+          protos.google.maps.routing.v2.IComputeRoutesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('computeRoutes response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -720,6 +749,7 @@ export class RoutesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
+    this._log.info('computeRouteMatrix stream %j', options);
     return this.innerApiCalls.computeRouteMatrix(request, options);
   }
 
@@ -732,6 +762,7 @@ export class RoutesClient {
   close(): Promise<void> {
     if (this.routesStub && !this._terminated) {
       return this.routesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

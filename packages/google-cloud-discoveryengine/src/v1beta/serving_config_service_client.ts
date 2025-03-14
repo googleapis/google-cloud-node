@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class ServingConfigServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('discoveryengine');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ServingConfigServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -213,6 +216,9 @@ export class ServingConfigServiceClient {
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/evaluations/{evaluation}'
       ),
+      groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -266,6 +272,10 @@ export class ServingConfigServiceClient {
       projectLocationCollectionDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -337,6 +347,10 @@ export class ServingConfigServiceClient {
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -633,7 +647,36 @@ export class ServingConfigServiceClient {
         'serving_config.name': request.servingConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateServingConfig(request, options, callback);
+    this._log.info('updateServingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IServingConfig,
+          | protos.google.cloud.discoveryengine.v1beta.IUpdateServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateServingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateServingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IServingConfig,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IUpdateServingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateServingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a ServingConfig.
@@ -644,7 +687,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to get. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -732,7 +775,36 @@ export class ServingConfigServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServingConfig(request, options, callback);
+    this._log.info('getServingConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.discoveryengine.v1beta.IServingConfig,
+          | protos.google.cloud.discoveryengine.v1beta.IGetServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServingConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.discoveryengine.v1beta.IServingConfig,
+          (
+            | protos.google.cloud.discoveryengine.v1beta.IGetServingConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServingConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -742,7 +814,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Full resource name of the parent resource. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -834,16 +906,42 @@ export class ServingConfigServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServingConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.discoveryengine.v1beta.IListServingConfigsRequest,
+          | protos.google.cloud.discoveryengine.v1beta.IListServingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.discoveryengine.v1beta.IServingConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServingConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServingConfigs request %j', request);
+    return this.innerApiCalls
+      .listServingConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.discoveryengine.v1beta.IServingConfig[],
+          protos.google.cloud.discoveryengine.v1beta.IListServingConfigsRequest | null,
+          protos.google.cloud.discoveryengine.v1beta.IListServingConfigsResponse,
+        ]) => {
+          this._log.info('listServingConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listServingConfigs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Full resource name of the parent resource. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -877,6 +975,7 @@ export class ServingConfigServiceClient {
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServingConfigs stream %j', request);
     return this.descriptors.page.listServingConfigs.createStream(
       this.innerApiCalls.listServingConfigs as GaxCall,
       request,
@@ -892,7 +991,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Full resource name of the parent resource. Format:
-   *   `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+   *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -927,6 +1026,7 @@ export class ServingConfigServiceClient {
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServingConfigs iterate %j', request);
     return this.descriptors.page.listServingConfigs.asyncIterate(
       this.innerApiCalls['listServingConfigs'] as GaxCall,
       request as {},
@@ -1132,6 +1232,65 @@ export class ServingConfigServiceClient {
   matchEvaluationFromEvaluationName(evaluationName: string) {
     return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
       .evaluation;
+  }
+
+  /**
+   * Return a fully-qualified groundingConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} grounding_config
+   * @returns {string} Resource name string.
+   */
+  groundingConfigPath(
+    project: string,
+    location: string,
+    groundingConfig: string
+  ) {
+    return this.pathTemplates.groundingConfigPathTemplate.render({
+      project: project,
+      location: location,
+      grounding_config: groundingConfig,
+    });
+  }
+
+  /**
+   * Parse the project from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the grounding_config from GroundingConfig resource.
+   *
+   * @param {string} groundingConfigName
+   *   A fully-qualified path representing GroundingConfig resource.
+   * @returns {string} A string representing the grounding_config.
+   */
+  matchGroundingConfigFromGroundingConfigName(groundingConfigName: string) {
+    return this.pathTemplates.groundingConfigPathTemplate.match(
+      groundingConfigName
+    ).grounding_config;
   }
 
   /**
@@ -2445,6 +2604,109 @@ export class ServingConfigServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
@@ -4120,6 +4382,91 @@ export class ServingConfigServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSiteSearchEngineTargetSite resource name string.
    *
    * @param {string} project
@@ -4343,6 +4690,7 @@ export class ServingConfigServiceClient {
   close(): Promise<void> {
     if (this.servingConfigServiceStub && !this._terminated) {
       return this.servingConfigServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,22 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
+   *  Optional. Optional limit on the number of
+   *  KeyHandles google.cloud.kms.v1.KeyHandle  to include in the response. The
+   *  service may return fewer than this value. Further
+   *  KeyHandles google.cloud.kms.v1.KeyHandle  can subsequently be obtained by
+   *  including the
+   *  ListKeyHandlesResponse.next_page_token google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token 
+   *  in a subsequent request.  If unspecified, at most 100
+   *  KeyHandles google.cloud.kms.v1.KeyHandle  will be returned.
+   */
+  // const pageSize = 1234
+  /**
+   *  Optional. Optional pagination token, returned earlier via
+   *  ListKeyHandlesResponse.next_page_token google.cloud.kms.v1.ListKeyHandlesResponse.next_page_token.
+   */
+  // const pageToken = 'abc123'
+  /**
    *  Optional. Filter to apply when listing
    *  KeyHandles google.cloud.kms.v1.KeyHandle, e.g.
    *  `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
@@ -54,8 +70,10 @@ function main(parent) {
     };
 
     // Run request
-    const response = await kmsClient.listKeyHandles(request);
-    console.log(response);
+    const iterable = kmsClient.listKeyHandlesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
   callListKeyHandles();

@@ -892,6 +892,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "ja4": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "headers": {
                           "rule": "repeated",
                           "type": "string",

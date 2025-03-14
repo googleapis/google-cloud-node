@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,6 +39,11 @@ function main(name) {
    *  include text query, function calling parameters, media bytes, etc.
    */
   // const input = {}
+  /**
+   *  Optional. Class method to be used for the query.
+   *  It is optional and defaults to "query" if unspecified.
+   */
+  // const classMethod = 'abc123'
 
   // Imports the Aiplatform library
   const {ReasoningEngineExecutionServiceClient} = require('@google-cloud/aiplatform').v1beta1;

@@ -76,6 +76,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateFeatureMonitor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteFeatureMonitor": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

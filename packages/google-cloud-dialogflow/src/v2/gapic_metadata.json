@@ -517,6 +517,11 @@
                 "completeConversation"
               ]
             },
+            "IngestContextReferences": {
+              "methods": [
+                "ingestContextReferences"
+              ]
+            },
             "SuggestConversationSummary": {
               "methods": [
                 "suggestConversationSummary"
@@ -535,6 +540,11 @@
             "SearchKnowledge": {
               "methods": [
                 "searchKnowledge"
+              ]
+            },
+            "GenerateSuggestions": {
+              "methods": [
+                "generateSuggestions"
               ]
             },
             "ListConversations": {
@@ -571,6 +581,11 @@
                 "completeConversation"
               ]
             },
+            "IngestContextReferences": {
+              "methods": [
+                "ingestContextReferences"
+              ]
+            },
             "SuggestConversationSummary": {
               "methods": [
                 "suggestConversationSummary"
@@ -589,6 +604,11 @@
             "SearchKnowledge": {
               "methods": [
                 "searchKnowledge"
+              ]
+            },
+            "GenerateSuggestions": {
+              "methods": [
+                "generateSuggestions"
               ]
             },
             "ListConversations": {

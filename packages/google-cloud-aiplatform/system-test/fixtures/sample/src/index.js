@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ function main() {
   const featurestoreOnlineServingServiceClient =
     new aiplatform.FeaturestoreOnlineServingServiceClient();
   const featurestoreServiceClient = new aiplatform.FeaturestoreServiceClient();
+  const genAiCacheServiceClient = new aiplatform.GenAiCacheServiceClient();
   const genAiTuningServiceClient = new aiplatform.GenAiTuningServiceClient();
   const indexEndpointServiceClient =
     new aiplatform.IndexEndpointServiceClient();
@@ -50,10 +51,17 @@ function main() {
     new aiplatform.PersistentResourceServiceClient();
   const pipelineServiceClient = new aiplatform.PipelineServiceClient();
   const predictionServiceClient = new aiplatform.PredictionServiceClient();
+  const reasoningEngineExecutionServiceClient =
+    new aiplatform.ReasoningEngineExecutionServiceClient();
+  const reasoningEngineServiceClient =
+    new aiplatform.ReasoningEngineServiceClient();
   const scheduleServiceClient = new aiplatform.ScheduleServiceClient();
   const specialistPoolServiceClient =
     new aiplatform.SpecialistPoolServiceClient();
   const tensorboardServiceClient = new aiplatform.TensorboardServiceClient();
+  const vertexRagDataServiceClient =
+    new aiplatform.VertexRagDataServiceClient();
+  const vertexRagServiceClient = new aiplatform.VertexRagServiceClient();
   const vizierServiceClient = new aiplatform.VizierServiceClient();
 }
 

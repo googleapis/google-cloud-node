@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class EntityTypesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class EntityTypesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -652,7 +655,36 @@ export class EntityTypesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEntityType(request, options, callback);
+    this._log.info('getEntityType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IEntityType,
+          | protos.google.cloud.dialogflow.cx.v3.IGetEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEntityType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IEntityType,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IGetEntityTypeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEntityType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an entity type in the specified agent.
@@ -761,7 +793,36 @@ export class EntityTypesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEntityType(request, options, callback);
+    this._log.info('createEntityType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IEntityType,
+          | protos.google.cloud.dialogflow.cx.v3.ICreateEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEntityType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IEntityType,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.ICreateEntityTypeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEntityType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified entity type.
@@ -869,7 +930,36 @@ export class EntityTypesClient {
         'entity_type.name': request.entityType!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEntityType(request, options, callback);
+    this._log.info('updateEntityType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IEntityType,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdateEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateEntityType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IEntityType,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IUpdateEntityTypeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEntityType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified entity type.
@@ -978,7 +1068,36 @@ export class EntityTypesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEntityType(request, options, callback);
+    this._log.info('deleteEntityType request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeleteEntityTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEntityType response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEntityType(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3.IDeleteEntityTypeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEntityType response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1115,7 +1234,37 @@ export class EntityTypesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportEntityTypes(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+            protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportEntityTypes response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportEntityTypes request %j', request);
+    return this.innerApiCalls
+      .exportEntityTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesResponse,
+            protos.google.cloud.dialogflow.cx.v3.IExportEntityTypesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEntityTypes response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportEntityTypes()`.
@@ -1136,6 +1285,7 @@ export class EntityTypesClient {
       protos.google.cloud.dialogflow.cx.v3.ExportEntityTypesMetadata
     >
   > {
+    this._log.info('exportEntityTypes long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1275,7 +1425,37 @@ export class EntityTypesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importEntityTypes(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+            protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importEntityTypes response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importEntityTypes request %j', request);
+    return this.innerApiCalls
+      .importEntityTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesResponse,
+            protos.google.cloud.dialogflow.cx.v3.IImportEntityTypesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importEntityTypes response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importEntityTypes()`.
@@ -1296,6 +1476,7 @@ export class EntityTypesClient {
       protos.google.cloud.dialogflow.cx.v3.ImportEntityTypesMetadata
     >
   > {
+    this._log.info('importEntityTypes long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1421,11 +1602,37 @@ export class EntityTypesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEntityTypes(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListEntityTypesRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListEntityTypesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IEntityType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEntityTypes values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEntityTypes request %j', request);
+    return this.innerApiCalls
+      .listEntityTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.IEntityType[],
+          protos.google.cloud.dialogflow.cx.v3.IListEntityTypesRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListEntityTypesResponse,
+        ]) => {
+          this._log.info('listEntityTypes values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listEntityTypes`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1475,6 +1682,7 @@ export class EntityTypesClient {
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntityTypes stream %j', request);
     return this.descriptors.page.listEntityTypes.createStream(
       this.innerApiCalls.listEntityTypes as GaxCall,
       request,
@@ -1536,6 +1744,7 @@ export class EntityTypesClient {
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEntityTypes iterate %j', request);
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
       request as {},
@@ -1652,7 +1861,7 @@ export class EntityTypesClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1665,6 +1874,20 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1701,6 +1924,13 @@ export class EntityTypesClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1736,11 +1966,11 @@ export class EntityTypesClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1749,6 +1979,20 @@ export class EntityTypesClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1779,7 +2023,7 @@ export class EntityTypesClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1792,6 +2036,20 @@ export class EntityTypesClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3645,6 +3903,7 @@ export class EntityTypesClient {
   close(): Promise<void> {
     if (this.entityTypesStub && !this._terminated) {
       return this.entityTypesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

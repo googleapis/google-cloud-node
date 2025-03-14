@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -65,6 +65,10 @@ function main(parent) {
    *  default English (en).
    */
   // const languageCode = 'abc123'
+  /**
+   *  Optional. List all publisher model versions if the flag is set to true.
+   */
+  // const listAllVersions = true
 
   // Imports the Aiplatform library
   const {ModelGardenServiceClient} = require('@google-cloud/aiplatform').v1beta1;

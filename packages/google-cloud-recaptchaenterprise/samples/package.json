@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js"
@@ -13,7 +13,7 @@
     "test": "echo add tests"
   },
   "dependencies": {
-    "@google-cloud/recaptcha-enterprise": "^5.13.0"
+    "@google-cloud/recaptcha-enterprise": "^6.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

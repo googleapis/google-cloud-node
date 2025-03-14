@@ -8,7 +8,7 @@
     "!test/"
   ],
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "scripts": {
     "test": "mocha --recursive --timeout 240000"
@@ -16,7 +16,7 @@
   "dependencies": {
     "@google-cloud/automl": "^4.0.0",
     "@google-cloud/text-to-speech": "^5.0.0",
-    "@google-cloud/translate": "^8.5.0",
+    "@google-cloud/translate": "^8.5.1",
     "@google-cloud/vision": "^4.0.0",
     "yargs": "^17.0.0"
   },

@@ -20,6 +20,11 @@
                 "getTrip"
               ]
             },
+            "DeleteTrip": {
+              "methods": [
+                "deleteTrip"
+              ]
+            },
             "ReportBillableTrip": {
               "methods": [
                 "reportBillableTrip"
@@ -50,6 +55,11 @@
             "GetTrip": {
               "methods": [
                 "getTrip"
+              ]
+            },
+            "DeleteTrip": {
+              "methods": [
+                "deleteTrip"
               ]
             },
             "ReportBillableTrip": {
@@ -88,6 +98,11 @@
                 "getVehicle"
               ]
             },
+            "DeleteVehicle": {
+              "methods": [
+                "deleteVehicle"
+              ]
+            },
             "UpdateVehicle": {
               "methods": [
                 "updateVehicle"
@@ -123,6 +138,11 @@
             "GetVehicle": {
               "methods": [
                 "getVehicle"
+              ]
+            },
+            "DeleteVehicle": {
+              "methods": [
+                "deleteVehicle"
               ]
             },
             "UpdateVehicle": {

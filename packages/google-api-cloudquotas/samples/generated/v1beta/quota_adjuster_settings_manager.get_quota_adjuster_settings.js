@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the config. Required to be “settings”, as only a single
-   *  setting per container will be supported initially.
+   *  Required. Name of the `quotaAdjusterSettings` configuration. Only a single
+   *  setting per project is supported.
    */
   // const name = 'abc123'
 

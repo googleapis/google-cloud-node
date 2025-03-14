@@ -262,13 +262,13 @@
                           "requestType": "GetConsumerGroupRequest",
                           "responseType": "ConsumerGroup",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/*}",
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/**}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/*}"
+                                "get": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/**}"
                               }
                             },
                             {
@@ -280,14 +280,14 @@
                           "requestType": "UpdateConsumerGroupRequest",
                           "responseType": "ConsumerGroup",
                           "options": {
-                            "(google.api.http).patch": "/v1/{consumer_group.name=projects/*/locations/*/clusters/*/consumerGroups/*}",
+                            "(google.api.http).patch": "/v1/{consumer_group.name=projects/*/locations/*/clusters/*/consumerGroups/**}",
                             "(google.api.http).body": "consumer_group",
                             "(google.api.method_signature)": "consumer_group,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v1/{consumer_group.name=projects/*/locations/*/clusters/*/consumerGroups/*}",
+                                "patch": "/v1/{consumer_group.name=projects/*/locations/*/clusters/*/consumerGroups/**}",
                                 "body": "consumer_group"
                               }
                             },
@@ -300,13 +300,13 @@
                           "requestType": "DeleteConsumerGroupRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/*}",
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/**}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/*}"
+                                "delete": "/v1/{name=projects/*/locations/*/clusters/*/consumerGroups/**}"
                               }
                             },
                             {

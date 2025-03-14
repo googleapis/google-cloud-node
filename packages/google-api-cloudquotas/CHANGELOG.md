@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v1.0.0...cloudquotas-v2.0.0) (2025-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [cloudquotas] add request/response debug logging to gapics, update templates to gax 5  ([5d8bb18](https://github.com/googleapis/google-cloud-node/commit/5d8bb188b7c6f447f75b88e2b0807f89a7c5f6b7))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.6.0...cloudquotas-v1.0.0) (2025-02-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* This is a breaking change for Node, but on a v1beta surface.
+
+### Bug Fixes
+
+* [cloudquotas] remove unneeded dependency on common Cloud resources ([#6023](https://github.com/googleapis/google-cloud-node/issues/6023)) ([c525ede](https://github.com/googleapis/google-cloud-node/commit/c525ede76e56ba30bbfd5ab34eb9b11729d8f168))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudquotas-v0.5.0...cloudquotas-v0.6.0) (2025-01-11)
 
 

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -85,6 +86,8 @@ export class AccessApprovalClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('access-approval');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -119,7 +122,7 @@ export class AccessApprovalClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -546,7 +549,36 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getApprovalRequest(request, options, callback);
+    this._log.info('getApprovalRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          | protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getApprovalRequest response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getApprovalRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          (
+            | protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getApprovalRequest response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Approves a request and returns the updated ApprovalRequest.
@@ -647,11 +679,36 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.approveApprovalRequest(
-      request,
-      options,
-      callback
-    );
+    this._log.info('approveApprovalRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          | protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('approveApprovalRequest response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .approveApprovalRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          (
+            | protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('approveApprovalRequest response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Dismisses a request. Returns the updated ApprovalRequest.
@@ -756,11 +813,36 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.dismissApprovalRequest(
-      request,
-      options,
-      callback
-    );
+    this._log.info('dismissApprovalRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          | protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('dismissApprovalRequest response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .dismissApprovalRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          (
+            | protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('dismissApprovalRequest response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Invalidates an existing ApprovalRequest. Returns the updated
@@ -863,11 +945,36 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.invalidateApprovalRequest(
-      request,
-      options,
-      callback
-    );
+    this._log.info('invalidateApprovalRequest request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('invalidateApprovalRequest response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .invalidateApprovalRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IApprovalRequest,
+          (
+            | protos.google.cloud.accessapproval.v1.IInvalidateApprovalRequestMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('invalidateApprovalRequest response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the settings associated with a project, folder, or organization.
@@ -964,11 +1071,36 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAccessApprovalSettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getAccessApprovalSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IAccessApprovalSettings,
+          | protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAccessApprovalSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccessApprovalSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IAccessApprovalSettings,
+          (
+            | protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccessApprovalSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the settings associated with a project, folder, or organization.
@@ -1076,11 +1208,36 @@ export class AccessApprovalClient {
         'settings.name': request.settings!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAccessApprovalSettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateAccessApprovalSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IAccessApprovalSettings,
+          | protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAccessApprovalSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAccessApprovalSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IAccessApprovalSettings,
+          (
+            | protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAccessApprovalSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the settings associated with a project, folder, or organization.
@@ -1181,11 +1338,36 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAccessApprovalSettings(
-      request,
-      options,
-      callback
-    );
+    this._log.info('deleteAccessApprovalSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteAccessApprovalSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteAccessApprovalSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAccessApprovalSettings response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the service account that is used by Access Approval to access KMS
@@ -1282,11 +1464,42 @@ export class AccessApprovalClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAccessApprovalServiceAccount(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getAccessApprovalServiceAccount request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+          | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'getAccessApprovalServiceAccount response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAccessApprovalServiceAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.accessapproval.v1.IAccessApprovalServiceAccount,
+          (
+            | protos.google.cloud.accessapproval.v1.IGetAccessApprovalServiceAccountMessage
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getAccessApprovalServiceAccount response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1400,11 +1613,37 @@ export class AccessApprovalClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listApprovalRequests(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage,
+          | protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse
+          | null
+          | undefined,
+          protos.google.cloud.accessapproval.v1.IApprovalRequest
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listApprovalRequests values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listApprovalRequests request %j', request);
+    return this.innerApiCalls
+      .listApprovalRequests(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.accessapproval.v1.IApprovalRequest[],
+          protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage | null,
+          protos.google.cloud.accessapproval.v1.IListApprovalRequestsResponse,
+        ]) => {
+          this._log.info('listApprovalRequests values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listApprovalRequests`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1453,6 +1692,7 @@ export class AccessApprovalClient {
     const defaultCallSettings = this._defaults['listApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApprovalRequests stream %j', request);
     return this.descriptors.page.listApprovalRequests.createStream(
       this.innerApiCalls.listApprovalRequests as GaxCall,
       request,
@@ -1513,6 +1753,7 @@ export class AccessApprovalClient {
     const defaultCallSettings = this._defaults['listApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listApprovalRequests iterate %j', request);
     return this.descriptors.page.listApprovalRequests.asyncIterate(
       this.innerApiCalls['listApprovalRequests'] as GaxCall,
       request as {},
@@ -1848,6 +2089,7 @@ export class AccessApprovalClient {
   close(): Promise<void> {
     if (this.accessApprovalStub && !this._terminated) {
       return this.accessApprovalStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

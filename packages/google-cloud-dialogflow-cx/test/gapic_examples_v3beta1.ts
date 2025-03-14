@@ -318,7 +318,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -349,7 +349,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -396,7 +396,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createExample = stubSimpleCall(
         undefined,
@@ -448,7 +448,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -479,7 +479,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -526,7 +526,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteExample = stubSimpleCall(
         undefined,
@@ -578,7 +578,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -609,7 +609,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -656,7 +656,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getExample = stubSimpleCall(
         undefined,
@@ -709,7 +709,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['example', 'name']
       );
       request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `example.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -741,7 +741,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['example', 'name']
       );
       request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `example.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.Example()
       );
@@ -789,7 +789,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['example', 'name']
       );
       request.example.name = defaultValue1;
-      const expectedHeaderRequestParams = `example.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `example.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateExample = stubSimpleCall(
         undefined,
@@ -842,7 +842,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -881,7 +881,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -936,7 +936,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listExamples = stubSimpleCall(
         undefined,
@@ -967,7 +967,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -1028,7 +1028,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.createStream = stubPageStreamingCall(
         undefined,
@@ -1080,7 +1080,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.cx.v3beta1.Example()
@@ -1130,7 +1130,7 @@ describe('v3beta1.ExamplesClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listExamples.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3724,6 +3724,94 @@ describe('v3beta1.ExamplesClient', () => {
         assert.strictEqual(result, 'toolValue');
         assert(
           (client.pathTemplates.toolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('toolVersion', () => {
+      const fakePath = '/rendered/path/toolVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        tool: 'toolValue',
+        version: 'versionValue',
+      };
+      const client = new examplesModule.v3beta1.ExamplesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.toolVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.toolVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('toolVersionPath', () => {
+        const result = client.toolVersionPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'toolValue',
+          'versionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromToolVersionName', () => {
+        const result = client.matchProjectFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromToolVersionName', () => {
+        const result = client.matchLocationFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromToolVersionName', () => {
+        const result = client.matchAgentFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchToolFromToolVersionName', () => {
+        const result = client.matchToolFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'toolValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchVersionFromToolVersionName', () => {
+        const result = client.matchVersionFromToolVersionName(fakePath);
+        assert.strictEqual(result, 'versionValue');
+        assert(
+          (client.pathTemplates.toolVersionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

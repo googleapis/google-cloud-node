@@ -33387,6 +33387,72 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|getSpaceNotificationSetting}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef GetSpaceNotificationSettingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.SpaceNotificationSetting} [response] SpaceNotificationSetting
+                     */
+    
+                    /**
+                     * Calls GetSpaceNotificationSetting.
+                     * @function getSpaceNotificationSetting
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetSpaceNotificationSettingRequest} request GetSpaceNotificationSettingRequest message or plain object
+                     * @param {google.chat.v1.ChatService.GetSpaceNotificationSettingCallback} callback Node-style callback called with the error, if any, and SpaceNotificationSetting
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.getSpaceNotificationSetting = function getSpaceNotificationSetting(request, callback) {
+                        return this.rpcCall(getSpaceNotificationSetting, $root.google.chat.v1.GetSpaceNotificationSettingRequest, $root.google.chat.v1.SpaceNotificationSetting, request, callback);
+                    }, "name", { value: "GetSpaceNotificationSetting" });
+    
+                    /**
+                     * Calls GetSpaceNotificationSetting.
+                     * @function getSpaceNotificationSetting
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetSpaceNotificationSettingRequest} request GetSpaceNotificationSettingRequest message or plain object
+                     * @returns {Promise<google.chat.v1.SpaceNotificationSetting>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|updateSpaceNotificationSetting}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef UpdateSpaceNotificationSettingCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.SpaceNotificationSetting} [response] SpaceNotificationSetting
+                     */
+    
+                    /**
+                     * Calls UpdateSpaceNotificationSetting.
+                     * @function updateSpaceNotificationSetting
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateSpaceNotificationSettingRequest} request UpdateSpaceNotificationSettingRequest message or plain object
+                     * @param {google.chat.v1.ChatService.UpdateSpaceNotificationSettingCallback} callback Node-style callback called with the error, if any, and SpaceNotificationSetting
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.updateSpaceNotificationSetting = function updateSpaceNotificationSetting(request, callback) {
+                        return this.rpcCall(updateSpaceNotificationSetting, $root.google.chat.v1.UpdateSpaceNotificationSettingRequest, $root.google.chat.v1.SpaceNotificationSetting, request, callback);
+                    }, "name", { value: "UpdateSpaceNotificationSetting" });
+    
+                    /**
+                     * Calls UpdateSpaceNotificationSetting.
+                     * @function updateSpaceNotificationSetting
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IUpdateSpaceNotificationSettingRequest} request UpdateSpaceNotificationSettingRequest message or plain object
+                     * @returns {Promise<google.chat.v1.SpaceNotificationSetting>} Promise
+                     * @variation 2
+                     */
+    
                     return ChatService;
                 })();
     
@@ -56522,6 +56588,823 @@
                     };
     
                     return ReactionBatchDeletedEventData;
+                })();
+    
+                v1.SpaceNotificationSetting = (function() {
+    
+                    /**
+                     * Properties of a SpaceNotificationSetting.
+                     * @memberof google.chat.v1
+                     * @interface ISpaceNotificationSetting
+                     * @property {string|null} [name] SpaceNotificationSetting name
+                     * @property {google.chat.v1.SpaceNotificationSetting.NotificationSetting|null} [notificationSetting] SpaceNotificationSetting notificationSetting
+                     * @property {google.chat.v1.SpaceNotificationSetting.MuteSetting|null} [muteSetting] SpaceNotificationSetting muteSetting
+                     */
+    
+                    /**
+                     * Constructs a new SpaceNotificationSetting.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SpaceNotificationSetting.
+                     * @implements ISpaceNotificationSetting
+                     * @constructor
+                     * @param {google.chat.v1.ISpaceNotificationSetting=} [properties] Properties to set
+                     */
+                    function SpaceNotificationSetting(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SpaceNotificationSetting name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @instance
+                     */
+                    SpaceNotificationSetting.prototype.name = "";
+    
+                    /**
+                     * SpaceNotificationSetting notificationSetting.
+                     * @member {google.chat.v1.SpaceNotificationSetting.NotificationSetting|null|undefined} notificationSetting
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @instance
+                     */
+                    SpaceNotificationSetting.prototype.notificationSetting = null;
+    
+                    /**
+                     * SpaceNotificationSetting muteSetting.
+                     * @member {google.chat.v1.SpaceNotificationSetting.MuteSetting|null|undefined} muteSetting
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @instance
+                     */
+                    SpaceNotificationSetting.prototype.muteSetting = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * SpaceNotificationSetting _notificationSetting.
+                     * @member {"notificationSetting"|undefined} _notificationSetting
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @instance
+                     */
+                    Object.defineProperty(SpaceNotificationSetting.prototype, "_notificationSetting", {
+                        get: $util.oneOfGetter($oneOfFields = ["notificationSetting"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * SpaceNotificationSetting _muteSetting.
+                     * @member {"muteSetting"|undefined} _muteSetting
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @instance
+                     */
+                    Object.defineProperty(SpaceNotificationSetting.prototype, "_muteSetting", {
+                        get: $util.oneOfGetter($oneOfFields = ["muteSetting"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new SpaceNotificationSetting instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {google.chat.v1.ISpaceNotificationSetting=} [properties] Properties to set
+                     * @returns {google.chat.v1.SpaceNotificationSetting} SpaceNotificationSetting instance
+                     */
+                    SpaceNotificationSetting.create = function create(properties) {
+                        return new SpaceNotificationSetting(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceNotificationSetting message. Does not implicitly {@link google.chat.v1.SpaceNotificationSetting.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {google.chat.v1.ISpaceNotificationSetting} message SpaceNotificationSetting message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceNotificationSetting.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.notificationSetting != null && Object.hasOwnProperty.call(message, "notificationSetting"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.notificationSetting);
+                        if (message.muteSetting != null && Object.hasOwnProperty.call(message, "muteSetting"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.muteSetting);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceNotificationSetting message, length delimited. Does not implicitly {@link google.chat.v1.SpaceNotificationSetting.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {google.chat.v1.ISpaceNotificationSetting} message SpaceNotificationSetting message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceNotificationSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SpaceNotificationSetting message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SpaceNotificationSetting} SpaceNotificationSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceNotificationSetting.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceNotificationSetting();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.notificationSetting = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.muteSetting = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SpaceNotificationSetting message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SpaceNotificationSetting} SpaceNotificationSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceNotificationSetting.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SpaceNotificationSetting message.
+                     * @function verify
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SpaceNotificationSetting.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.notificationSetting != null && message.hasOwnProperty("notificationSetting")) {
+                            properties._notificationSetting = 1;
+                            switch (message.notificationSetting) {
+                            default:
+                                return "notificationSetting: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        }
+                        if (message.muteSetting != null && message.hasOwnProperty("muteSetting")) {
+                            properties._muteSetting = 1;
+                            switch (message.muteSetting) {
+                            default:
+                                return "muteSetting: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SpaceNotificationSetting message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SpaceNotificationSetting} SpaceNotificationSetting
+                     */
+                    SpaceNotificationSetting.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SpaceNotificationSetting)
+                            return object;
+                        var message = new $root.google.chat.v1.SpaceNotificationSetting();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        switch (object.notificationSetting) {
+                        default:
+                            if (typeof object.notificationSetting === "number") {
+                                message.notificationSetting = object.notificationSetting;
+                                break;
+                            }
+                            break;
+                        case "NOTIFICATION_SETTING_UNSPECIFIED":
+                        case 0:
+                            message.notificationSetting = 0;
+                            break;
+                        case "ALL":
+                        case 1:
+                            message.notificationSetting = 1;
+                            break;
+                        case "MAIN_CONVERSATIONS":
+                        case 2:
+                            message.notificationSetting = 2;
+                            break;
+                        case "FOR_YOU":
+                        case 3:
+                            message.notificationSetting = 3;
+                            break;
+                        case "OFF":
+                        case 4:
+                            message.notificationSetting = 4;
+                            break;
+                        }
+                        switch (object.muteSetting) {
+                        default:
+                            if (typeof object.muteSetting === "number") {
+                                message.muteSetting = object.muteSetting;
+                                break;
+                            }
+                            break;
+                        case "MUTE_SETTING_UNSPECIFIED":
+                        case 0:
+                            message.muteSetting = 0;
+                            break;
+                        case "UNMUTED":
+                        case 1:
+                            message.muteSetting = 1;
+                            break;
+                        case "MUTED":
+                        case 2:
+                            message.muteSetting = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SpaceNotificationSetting message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {google.chat.v1.SpaceNotificationSetting} message SpaceNotificationSetting
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SpaceNotificationSetting.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.notificationSetting != null && message.hasOwnProperty("notificationSetting")) {
+                            object.notificationSetting = options.enums === String ? $root.google.chat.v1.SpaceNotificationSetting.NotificationSetting[message.notificationSetting] === undefined ? message.notificationSetting : $root.google.chat.v1.SpaceNotificationSetting.NotificationSetting[message.notificationSetting] : message.notificationSetting;
+                            if (options.oneofs)
+                                object._notificationSetting = "notificationSetting";
+                        }
+                        if (message.muteSetting != null && message.hasOwnProperty("muteSetting")) {
+                            object.muteSetting = options.enums === String ? $root.google.chat.v1.SpaceNotificationSetting.MuteSetting[message.muteSetting] === undefined ? message.muteSetting : $root.google.chat.v1.SpaceNotificationSetting.MuteSetting[message.muteSetting] : message.muteSetting;
+                            if (options.oneofs)
+                                object._muteSetting = "muteSetting";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SpaceNotificationSetting to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SpaceNotificationSetting.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SpaceNotificationSetting
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SpaceNotificationSetting
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SpaceNotificationSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SpaceNotificationSetting";
+                    };
+    
+                    /**
+                     * NotificationSetting enum.
+                     * @name google.chat.v1.SpaceNotificationSetting.NotificationSetting
+                     * @enum {number}
+                     * @property {number} NOTIFICATION_SETTING_UNSPECIFIED=0 NOTIFICATION_SETTING_UNSPECIFIED value
+                     * @property {number} ALL=1 ALL value
+                     * @property {number} MAIN_CONVERSATIONS=2 MAIN_CONVERSATIONS value
+                     * @property {number} FOR_YOU=3 FOR_YOU value
+                     * @property {number} OFF=4 OFF value
+                     */
+                    SpaceNotificationSetting.NotificationSetting = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NOTIFICATION_SETTING_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ALL"] = 1;
+                        values[valuesById[2] = "MAIN_CONVERSATIONS"] = 2;
+                        values[valuesById[3] = "FOR_YOU"] = 3;
+                        values[valuesById[4] = "OFF"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * MuteSetting enum.
+                     * @name google.chat.v1.SpaceNotificationSetting.MuteSetting
+                     * @enum {number}
+                     * @property {number} MUTE_SETTING_UNSPECIFIED=0 MUTE_SETTING_UNSPECIFIED value
+                     * @property {number} UNMUTED=1 UNMUTED value
+                     * @property {number} MUTED=2 MUTED value
+                     */
+                    SpaceNotificationSetting.MuteSetting = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "MUTE_SETTING_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "UNMUTED"] = 1;
+                        values[valuesById[2] = "MUTED"] = 2;
+                        return values;
+                    })();
+    
+                    return SpaceNotificationSetting;
+                })();
+    
+                v1.GetSpaceNotificationSettingRequest = (function() {
+    
+                    /**
+                     * Properties of a GetSpaceNotificationSettingRequest.
+                     * @memberof google.chat.v1
+                     * @interface IGetSpaceNotificationSettingRequest
+                     * @property {string|null} [name] GetSpaceNotificationSettingRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetSpaceNotificationSettingRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a GetSpaceNotificationSettingRequest.
+                     * @implements IGetSpaceNotificationSettingRequest
+                     * @constructor
+                     * @param {google.chat.v1.IGetSpaceNotificationSettingRequest=} [properties] Properties to set
+                     */
+                    function GetSpaceNotificationSettingRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetSpaceNotificationSettingRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @instance
+                     */
+                    GetSpaceNotificationSettingRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetSpaceNotificationSettingRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceNotificationSettingRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.GetSpaceNotificationSettingRequest} GetSpaceNotificationSettingRequest instance
+                     */
+                    GetSpaceNotificationSettingRequest.create = function create(properties) {
+                        return new GetSpaceNotificationSettingRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetSpaceNotificationSettingRequest message. Does not implicitly {@link google.chat.v1.GetSpaceNotificationSettingRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceNotificationSettingRequest} message GetSpaceNotificationSettingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSpaceNotificationSettingRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetSpaceNotificationSettingRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceNotificationSettingRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceNotificationSettingRequest} message GetSpaceNotificationSettingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSpaceNotificationSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetSpaceNotificationSettingRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.GetSpaceNotificationSettingRequest} GetSpaceNotificationSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSpaceNotificationSettingRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceNotificationSettingRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetSpaceNotificationSettingRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.GetSpaceNotificationSettingRequest} GetSpaceNotificationSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSpaceNotificationSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetSpaceNotificationSettingRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetSpaceNotificationSettingRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetSpaceNotificationSettingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.GetSpaceNotificationSettingRequest} GetSpaceNotificationSettingRequest
+                     */
+                    GetSpaceNotificationSettingRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.GetSpaceNotificationSettingRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.GetSpaceNotificationSettingRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetSpaceNotificationSettingRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.GetSpaceNotificationSettingRequest} message GetSpaceNotificationSettingRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetSpaceNotificationSettingRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetSpaceNotificationSettingRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetSpaceNotificationSettingRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetSpaceNotificationSettingRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.GetSpaceNotificationSettingRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetSpaceNotificationSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.GetSpaceNotificationSettingRequest";
+                    };
+    
+                    return GetSpaceNotificationSettingRequest;
+                })();
+    
+                v1.UpdateSpaceNotificationSettingRequest = (function() {
+    
+                    /**
+                     * Properties of an UpdateSpaceNotificationSettingRequest.
+                     * @memberof google.chat.v1
+                     * @interface IUpdateSpaceNotificationSettingRequest
+                     * @property {google.chat.v1.ISpaceNotificationSetting|null} [spaceNotificationSetting] UpdateSpaceNotificationSettingRequest spaceNotificationSetting
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSpaceNotificationSettingRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new UpdateSpaceNotificationSettingRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents an UpdateSpaceNotificationSettingRequest.
+                     * @implements IUpdateSpaceNotificationSettingRequest
+                     * @constructor
+                     * @param {google.chat.v1.IUpdateSpaceNotificationSettingRequest=} [properties] Properties to set
+                     */
+                    function UpdateSpaceNotificationSettingRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * UpdateSpaceNotificationSettingRequest spaceNotificationSetting.
+                     * @member {google.chat.v1.ISpaceNotificationSetting|null|undefined} spaceNotificationSetting
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @instance
+                     */
+                    UpdateSpaceNotificationSettingRequest.prototype.spaceNotificationSetting = null;
+    
+                    /**
+                     * UpdateSpaceNotificationSettingRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @instance
+                     */
+                    UpdateSpaceNotificationSettingRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new UpdateSpaceNotificationSettingRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSpaceNotificationSettingRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.UpdateSpaceNotificationSettingRequest} UpdateSpaceNotificationSettingRequest instance
+                     */
+                    UpdateSpaceNotificationSettingRequest.create = function create(properties) {
+                        return new UpdateSpaceNotificationSettingRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSpaceNotificationSettingRequest message. Does not implicitly {@link google.chat.v1.UpdateSpaceNotificationSettingRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSpaceNotificationSettingRequest} message UpdateSpaceNotificationSettingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSpaceNotificationSettingRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spaceNotificationSetting != null && Object.hasOwnProperty.call(message, "spaceNotificationSetting"))
+                            $root.google.chat.v1.SpaceNotificationSetting.encode(message.spaceNotificationSetting, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified UpdateSpaceNotificationSettingRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateSpaceNotificationSettingRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.IUpdateSpaceNotificationSettingRequest} message UpdateSpaceNotificationSettingRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateSpaceNotificationSettingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an UpdateSpaceNotificationSettingRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.UpdateSpaceNotificationSettingRequest} UpdateSpaceNotificationSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSpaceNotificationSettingRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.UpdateSpaceNotificationSettingRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.spaceNotificationSetting = $root.google.chat.v1.SpaceNotificationSetting.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an UpdateSpaceNotificationSettingRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.UpdateSpaceNotificationSettingRequest} UpdateSpaceNotificationSettingRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateSpaceNotificationSettingRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an UpdateSpaceNotificationSettingRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateSpaceNotificationSettingRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spaceNotificationSetting != null && message.hasOwnProperty("spaceNotificationSetting")) {
+                            var error = $root.google.chat.v1.SpaceNotificationSetting.verify(message.spaceNotificationSetting);
+                            if (error)
+                                return "spaceNotificationSetting." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an UpdateSpaceNotificationSettingRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.UpdateSpaceNotificationSettingRequest} UpdateSpaceNotificationSettingRequest
+                     */
+                    UpdateSpaceNotificationSettingRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.UpdateSpaceNotificationSettingRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.UpdateSpaceNotificationSettingRequest();
+                        if (object.spaceNotificationSetting != null) {
+                            if (typeof object.spaceNotificationSetting !== "object")
+                                throw TypeError(".google.chat.v1.UpdateSpaceNotificationSettingRequest.spaceNotificationSetting: object expected");
+                            message.spaceNotificationSetting = $root.google.chat.v1.SpaceNotificationSetting.fromObject(object.spaceNotificationSetting);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.chat.v1.UpdateSpaceNotificationSettingRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an UpdateSpaceNotificationSettingRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {google.chat.v1.UpdateSpaceNotificationSettingRequest} message UpdateSpaceNotificationSettingRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateSpaceNotificationSettingRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.spaceNotificationSetting = null;
+                            object.updateMask = null;
+                        }
+                        if (message.spaceNotificationSetting != null && message.hasOwnProperty("spaceNotificationSetting"))
+                            object.spaceNotificationSetting = $root.google.chat.v1.SpaceNotificationSetting.toObject(message.spaceNotificationSetting, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this UpdateSpaceNotificationSettingRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateSpaceNotificationSettingRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for UpdateSpaceNotificationSettingRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.UpdateSpaceNotificationSettingRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateSpaceNotificationSettingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.UpdateSpaceNotificationSettingRequest";
+                    };
+    
+                    return UpdateSpaceNotificationSettingRequest;
                 })();
     
                 v1.SpaceReadState = (function() {

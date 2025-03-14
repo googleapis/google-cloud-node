@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class TelcoAutomationClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('telcoautomation');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class TelcoAutomationClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -690,11 +693,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOrchestrationCluster(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getOrchestrationCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster,
+          | protos.google.cloud.telcoautomation.v1alpha1.IGetOrchestrationClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOrchestrationCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOrchestrationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IGetOrchestrationClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOrchestrationCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single EdgeSlm.
@@ -790,7 +818,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEdgeSlm(request, options, callback);
+    this._log.info('getEdgeSlm request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm,
+          | protos.google.cloud.telcoautomation.v1alpha1.IGetEdgeSlmRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEdgeSlm response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEdgeSlm(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IGetEdgeSlmRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEdgeSlm response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a blueprint.
@@ -892,7 +949,36 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBlueprint(request, options, callback);
+    this._log.info('createBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.ICreateBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.ICreateBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a blueprint.
@@ -991,7 +1077,36 @@ export class TelcoAutomationClient {
         'blueprint.name': request.blueprint!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBlueprint(request, options, callback);
+    this._log.info('updateBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.IUpdateBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IUpdateBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested blueprint.
@@ -1094,7 +1209,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBlueprint(request, options, callback);
+    this._log.info('getBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.IGetBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IGetBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a blueprint and all its revisions.
@@ -1193,7 +1337,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBlueprint(request, options, callback);
+    this._log.info('deleteBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.telcoautomation.v1alpha1.IDeleteBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IDeleteBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Approves a blueprint and commits a new revision.
@@ -1290,7 +1463,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.approveBlueprint(request, options, callback);
+    this._log.info('approveBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.IApproveBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('approveBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .approveBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IApproveBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('approveBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Proposes a blueprint for approval of changes.
@@ -1386,7 +1588,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.proposeBlueprint(request, options, callback);
+    this._log.info('proposeBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.IProposeBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('proposeBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .proposeBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IProposeBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('proposeBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Rejects a blueprint revision proposal and flips it back to Draft state.
@@ -1482,7 +1713,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rejectBlueprint(request, options, callback);
+    this._log.info('rejectBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.IRejectBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rejectBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rejectBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IRejectBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rejectBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Discards the changes in a blueprint and reverts the blueprint to the last
@@ -1580,11 +1840,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.discardBlueprintChanges(
-      request,
-      options,
-      callback
-    );
+    this._log.info('discardBlueprintChanges request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDiscardBlueprintChangesResponse,
+          | protos.google.cloud.telcoautomation.v1alpha1.IDiscardBlueprintChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('discardBlueprintChanges response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .discardBlueprintChanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDiscardBlueprintChangesResponse,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IDiscardBlueprintChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('discardBlueprintChanges response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested public blueprint.
@@ -1680,7 +1965,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPublicBlueprint(request, options, callback);
+    this._log.info('getPublicBlueprint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint,
+          | protos.google.cloud.telcoautomation.v1alpha1.IGetPublicBlueprintRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPublicBlueprint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPublicBlueprint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IGetPublicBlueprintRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPublicBlueprint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a deployment.
@@ -1782,7 +2096,36 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDeployment(request, options, callback);
+    this._log.info('createDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.ICreateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.ICreateDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a deployment.
@@ -1881,7 +2224,36 @@ export class TelcoAutomationClient {
         'deployment.name': request.deployment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDeployment(request, options, callback);
+    this._log.info('updateDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IUpdateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IUpdateDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested deployment.
@@ -1985,7 +2357,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDeployment(request, options, callback);
+    this._log.info('getDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IGetDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IGetDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Removes the deployment by marking it as DELETING. Post which deployment and
@@ -2082,7 +2483,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.removeDeployment(request, options, callback);
+    this._log.info('removeDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.telcoautomation.v1alpha1.IRemoveDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IRemoveDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Discards the changes in a deployment and reverts the deployment to the last
@@ -2180,11 +2610,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.discardDeploymentChanges(
-      request,
-      options,
-      callback
-    );
+    this._log.info('discardDeploymentChanges request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDiscardDeploymentChangesResponse,
+          | protos.google.cloud.telcoautomation.v1alpha1.IDiscardDeploymentChangesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('discardDeploymentChanges response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .discardDeploymentChanges(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDiscardDeploymentChangesResponse,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IDiscardDeploymentChangesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('discardDeploymentChanges response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Applies the deployment's YAML files to the parent orchestration cluster.
@@ -2280,7 +2735,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.applyDeployment(request, options, callback);
+    this._log.info('applyDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IApplyDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('applyDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .applyDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IApplyDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('applyDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested deployment status.
@@ -2376,11 +2860,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.computeDeploymentStatus(
-      request,
-      options,
-      callback
-    );
+    this._log.info('computeDeploymentStatus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IComputeDeploymentStatusResponse,
+          | protos.google.cloud.telcoautomation.v1alpha1.IComputeDeploymentStatusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('computeDeploymentStatus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .computeDeploymentStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IComputeDeploymentStatusResponse,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IComputeDeploymentStatusRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('computeDeploymentStatus response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Rollback the active deployment to the given past approved deployment
@@ -2479,7 +2988,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rollbackDeployment(request, options, callback);
+    this._log.info('rollbackDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IRollbackDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rollbackDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rollbackDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IRollbackDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested hydrated deployment.
@@ -2575,7 +3113,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getHydratedDeployment(request, options, callback);
+    this._log.info('getHydratedDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IGetHydratedDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getHydratedDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getHydratedDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IGetHydratedDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHydratedDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a hydrated deployment.
@@ -2674,11 +3241,36 @@ export class TelcoAutomationClient {
         'hydrated_deployment.name': request.hydratedDeployment!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateHydratedDeployment(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateHydratedDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IUpdateHydratedDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateHydratedDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateHydratedDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IUpdateHydratedDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHydratedDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Applies a hydrated deployment to a workload cluster.
@@ -2774,11 +3366,36 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.applyHydratedDeployment(
-      request,
-      options,
-      callback
-    );
+    this._log.info('applyHydratedDeployment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment,
+          | protos.google.cloud.telcoautomation.v1alpha1.IApplyHydratedDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('applyHydratedDeployment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .applyHydratedDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment,
+          (
+            | protos.google.cloud.telcoautomation.v1alpha1.IApplyHydratedDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('applyHydratedDeployment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2901,11 +3518,37 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createOrchestrationCluster(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createOrchestrationCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createOrchestrationCluster request %j', request);
+    return this.innerApiCalls
+      .createOrchestrationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createOrchestrationCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createOrchestrationCluster()`.
@@ -2926,6 +3569,7 @@ export class TelcoAutomationClient {
       protos.google.cloud.telcoautomation.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('createOrchestrationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3055,11 +3699,37 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteOrchestrationCluster(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteOrchestrationCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteOrchestrationCluster request %j', request);
+    return this.innerApiCalls
+      .deleteOrchestrationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOrchestrationCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteOrchestrationCluster()`.
@@ -3080,6 +3750,7 @@ export class TelcoAutomationClient {
       protos.google.cloud.telcoautomation.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('deleteOrchestrationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3215,7 +3886,37 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEdgeSlm(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEdgeSlm response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEdgeSlm request %j', request);
+    return this.innerApiCalls
+      .createEdgeSlm(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEdgeSlm response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEdgeSlm()`.
@@ -3236,6 +3937,7 @@ export class TelcoAutomationClient {
       protos.google.cloud.telcoautomation.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('createEdgeSlm long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3365,7 +4067,37 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEdgeSlm(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEdgeSlm response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEdgeSlm request %j', request);
+    return this.innerApiCalls
+      .deleteEdgeSlm(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.telcoautomation.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEdgeSlm response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEdgeSlm()`.
@@ -3386,6 +4118,7 @@ export class TelcoAutomationClient {
       protos.google.cloud.telcoautomation.v1alpha1.OperationMetadata
     >
   > {
+    this._log.info('deleteEdgeSlm long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3501,11 +4234,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOrchestrationClusters(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListOrchestrationClustersRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListOrchestrationClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOrchestrationClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOrchestrationClusters request %j', request);
+    return this.innerApiCalls
+      .listOrchestrationClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IOrchestrationCluster[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListOrchestrationClustersRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListOrchestrationClustersResponse,
+        ]) => {
+          this._log.info('listOrchestrationClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3549,6 +4304,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listOrchestrationClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOrchestrationClusters stream %j', request);
     return this.descriptors.page.listOrchestrationClusters.createStream(
       this.innerApiCalls.listOrchestrationClusters as GaxCall,
       request,
@@ -3600,6 +4356,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listOrchestrationClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listOrchestrationClusters iterate %j', request);
     return this.descriptors.page.listOrchestrationClusters.asyncIterate(
       this.innerApiCalls['listOrchestrationClusters'] as GaxCall,
       request as {},
@@ -3706,7 +4463,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEdgeSlms(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListEdgeSlmsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListEdgeSlmsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEdgeSlms values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEdgeSlms request %j', request);
+    return this.innerApiCalls
+      .listEdgeSlms(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IEdgeSlm[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListEdgeSlmsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListEdgeSlmsResponse,
+        ]) => {
+          this._log.info('listEdgeSlms values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3750,6 +4533,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listEdgeSlms'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEdgeSlms stream %j', request);
     return this.descriptors.page.listEdgeSlms.createStream(
       this.innerApiCalls.listEdgeSlms as GaxCall,
       request,
@@ -3801,6 +4585,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listEdgeSlms'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEdgeSlms iterate %j', request);
     return this.descriptors.page.listEdgeSlms.asyncIterate(
       this.innerApiCalls['listEdgeSlms'] as GaxCall,
       request as {},
@@ -3909,7 +4694,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBlueprints(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBlueprints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBlueprints request %j', request);
+    return this.innerApiCalls
+      .listBlueprints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintsResponse,
+        ]) => {
+          this._log.info('listBlueprints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3955,6 +4766,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBlueprints stream %j', request);
     return this.descriptors.page.listBlueprints.createStream(
       this.innerApiCalls.listBlueprints as GaxCall,
       request,
@@ -4008,6 +4820,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBlueprints iterate %j', request);
     return this.descriptors.page.listBlueprints.asyncIterate(
       this.innerApiCalls['listBlueprints'] as GaxCall,
       request as {},
@@ -4110,11 +4923,33 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBlueprintRevisions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintRevisionsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBlueprintRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBlueprintRevisions request %j', request);
+    return this.innerApiCalls
+      .listBlueprintRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintRevisionsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListBlueprintRevisionsResponse,
+        ]) => {
+          this._log.info('listBlueprintRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4154,6 +4989,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBlueprintRevisions stream %j', request);
     return this.descriptors.page.listBlueprintRevisions.createStream(
       this.innerApiCalls.listBlueprintRevisions as GaxCall,
       request,
@@ -4201,6 +5037,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBlueprintRevisions iterate %j', request);
     return this.descriptors.page.listBlueprintRevisions.asyncIterate(
       this.innerApiCalls['listBlueprintRevisions'] as GaxCall,
       request as {},
@@ -4314,11 +5151,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchBlueprintRevisions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.ISearchBlueprintRevisionsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.ISearchBlueprintRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchBlueprintRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchBlueprintRevisions request %j', request);
+    return this.innerApiCalls
+      .searchBlueprintRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IBlueprint[],
+          protos.google.cloud.telcoautomation.v1alpha1.ISearchBlueprintRevisionsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.ISearchBlueprintRevisionsResponse,
+        ]) => {
+          this._log.info('searchBlueprintRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4369,6 +5228,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['searchBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchBlueprintRevisions stream %j', request);
     return this.descriptors.page.searchBlueprintRevisions.createStream(
       this.innerApiCalls.searchBlueprintRevisions as GaxCall,
       request,
@@ -4427,6 +5287,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['searchBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchBlueprintRevisions iterate %j', request);
     return this.descriptors.page.searchBlueprintRevisions.asyncIterate(
       this.innerApiCalls['searchBlueprintRevisions'] as GaxCall,
       request as {},
@@ -4541,11 +5402,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchDeploymentRevisions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.ISearchDeploymentRevisionsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.ISearchDeploymentRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchDeploymentRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchDeploymentRevisions request %j', request);
+    return this.innerApiCalls
+      .searchDeploymentRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment[],
+          protos.google.cloud.telcoautomation.v1alpha1.ISearchDeploymentRevisionsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.ISearchDeploymentRevisionsResponse,
+        ]) => {
+          this._log.info('searchDeploymentRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4597,6 +5480,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['searchDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchDeploymentRevisions stream %j', request);
     return this.descriptors.page.searchDeploymentRevisions.createStream(
       this.innerApiCalls.searchDeploymentRevisions as GaxCall,
       request,
@@ -4656,6 +5540,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['searchDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchDeploymentRevisions iterate %j', request);
     return this.descriptors.page.searchDeploymentRevisions.asyncIterate(
       this.innerApiCalls['searchDeploymentRevisions'] as GaxCall,
       request as {},
@@ -4761,7 +5646,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPublicBlueprints(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListPublicBlueprintsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListPublicBlueprintsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPublicBlueprints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPublicBlueprints request %j', request);
+    return this.innerApiCalls
+      .listPublicBlueprints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IPublicBlueprint[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListPublicBlueprintsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListPublicBlueprintsResponse,
+        ]) => {
+          this._log.info('listPublicBlueprints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4803,6 +5714,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listPublicBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPublicBlueprints stream %j', request);
     return this.descriptors.page.listPublicBlueprints.createStream(
       this.innerApiCalls.listPublicBlueprints as GaxCall,
       request,
@@ -4852,6 +5764,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listPublicBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPublicBlueprints iterate %j', request);
     return this.descriptors.page.listPublicBlueprints.asyncIterate(
       this.innerApiCalls['listPublicBlueprints'] as GaxCall,
       request as {},
@@ -4960,7 +5873,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeployments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeployments request %j', request);
+    return this.innerApiCalls
+      .listDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentsResponse,
+        ]) => {
+          this._log.info('listDeployments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5006,6 +5945,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
       request,
@@ -5059,6 +5999,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
       request as {},
@@ -5161,11 +6102,33 @@ export class TelcoAutomationClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDeploymentRevisions(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentRevisionsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDeploymentRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDeploymentRevisions request %j', request);
+    return this.innerApiCalls
+      .listDeploymentRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IDeployment[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentRevisionsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListDeploymentRevisionsResponse,
+        ]) => {
+          this._log.info('listDeploymentRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5205,6 +6168,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeploymentRevisions stream %j', request);
     return this.descriptors.page.listDeploymentRevisions.createStream(
       this.innerApiCalls.listDeploymentRevisions as GaxCall,
       request,
@@ -5252,6 +6216,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDeploymentRevisions iterate %j', request);
     return this.descriptors.page.listDeploymentRevisions.asyncIterate(
       this.innerApiCalls['listDeploymentRevisions'] as GaxCall,
       request as {},
@@ -5357,11 +6322,33 @@ export class TelcoAutomationClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listHydratedDeployments(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.telcoautomation.v1alpha1.IListHydratedDeploymentsRequest,
+          | protos.google.cloud.telcoautomation.v1alpha1.IListHydratedDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listHydratedDeployments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listHydratedDeployments request %j', request);
+    return this.innerApiCalls
+      .listHydratedDeployments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.telcoautomation.v1alpha1.IHydratedDeployment[],
+          protos.google.cloud.telcoautomation.v1alpha1.IListHydratedDeploymentsRequest | null,
+          protos.google.cloud.telcoautomation.v1alpha1.IListHydratedDeploymentsResponse,
+        ]) => {
+          this._log.info('listHydratedDeployments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5404,6 +6391,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listHydratedDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listHydratedDeployments stream %j', request);
     return this.descriptors.page.listHydratedDeployments.createStream(
       this.innerApiCalls.listHydratedDeployments as GaxCall,
       request,
@@ -5454,6 +6442,7 @@ export class TelcoAutomationClient {
     const defaultCallSettings = this._defaults['listHydratedDeployments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listHydratedDeployments iterate %j', request);
     return this.descriptors.page.listHydratedDeployments.asyncIterate(
       this.innerApiCalls['listHydratedDeployments'] as GaxCall,
       request as {},
@@ -6240,6 +7229,7 @@ export class TelcoAutomationClient {
   close(): Promise<void> {
     if (this.telcoAutomationStub && !this._terminated) {
       return this.telcoAutomationStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

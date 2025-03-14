@@ -32,6 +32,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class PagesClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -92,7 +95,7 @@ export class PagesClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -626,7 +629,33 @@ export class PagesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPage(request, options, callback);
+    this._log.info('getPage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IPage,
+          | protos.google.cloud.dialogflow.cx.v3.IGetPageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IPage,
+          protos.google.cloud.dialogflow.cx.v3.IGetPageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a page in the specified flow.
@@ -745,7 +774,33 @@ export class PagesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPage(request, options, callback);
+    this._log.info('createPage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IPage,
+          | protos.google.cloud.dialogflow.cx.v3.ICreatePageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createPage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createPage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IPage,
+          protos.google.cloud.dialogflow.cx.v3.ICreatePageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified page.
@@ -863,7 +918,33 @@ export class PagesClient {
         'page.name': request.page!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePage(request, options, callback);
+    this._log.info('updatePage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3.IPage,
+          | protos.google.cloud.dialogflow.cx.v3.IUpdatePageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updatePage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updatePage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3.IPage,
+          protos.google.cloud.dialogflow.cx.v3.IUpdatePageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified page.
@@ -970,7 +1051,33 @@ export class PagesClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePage(request, options, callback);
+    this._log.info('deletePage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3.IDeletePageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deletePage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deletePage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.cx.v3.IDeletePageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1093,11 +1200,37 @@ export class PagesClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListPagesRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListPagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IPage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPages request %j', request);
+    return this.innerApiCalls
+      .listPages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3.IPage[],
+          protos.google.cloud.dialogflow.cx.v3.IListPagesRequest | null,
+          protos.google.cloud.dialogflow.cx.v3.IListPagesResponse,
+        ]) => {
+          this._log.info('listPages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listPages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1157,6 +1290,7 @@ export class PagesClient {
     const defaultCallSettings = this._defaults['listPages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPages stream %j', request);
     return this.descriptors.page.listPages.createStream(
       this.innerApiCalls.listPages as GaxCall,
       request,
@@ -1228,6 +1362,7 @@ export class PagesClient {
     const defaultCallSettings = this._defaults['listPages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPages iterate %j', request);
     return this.descriptors.page.listPages.asyncIterate(
       this.innerApiCalls['listPages'] as GaxCall,
       request as {},
@@ -1344,7 +1479,7 @@ export class PagesClient {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -1357,6 +1492,20 @@ export class PagesClient {
       {} | null | undefined
     >
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1393,6 +1542,13 @@ export class PagesClient {
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
   ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1428,11 +1584,11 @@ export class PagesClient {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -1441,6 +1597,20 @@ export class PagesClient {
       {} | undefined | null
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
 
@@ -1471,7 +1641,7 @@ export class PagesClient {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -1484,6 +1654,20 @@ export class PagesClient {
       {} | null | undefined
     >
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3337,6 +3521,7 @@ export class PagesClient {
   close(): Promise<void> {
     if (this.pagesStub && !this._terminated) {
       return this.pagesStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

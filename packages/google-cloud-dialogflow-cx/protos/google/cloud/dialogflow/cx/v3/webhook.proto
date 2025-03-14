@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -106,8 +106,8 @@ message Webhook {
       // Required. The client ID provided by the 3rd party platform.
       string client_id = 1 [(google.api.field_behavior) = REQUIRED];
 
-      // Required. The client secret provided by the 3rd party platform.
-      string client_secret = 2 [(google.api.field_behavior) = REQUIRED];
+      // Optional. The client secret provided by the 3rd party platform.
+      string client_secret = 2 [(google.api.field_behavior) = OPTIONAL];
 
       // Required. The token endpoint provided by the 3rd party platform to
       // exchange an access token.
@@ -190,8 +190,7 @@ message Webhook {
     // The password for HTTP Basic authentication.
     string password = 3 [deprecated = true];
 
-    // The HTTP request headers to send together with webhook
-    // requests.
+    // The HTTP request headers to send together with webhook requests.
     map<string, string> request_headers = 4;
 
     // Optional. Specifies a list of allowed custom CA certificates (in DER

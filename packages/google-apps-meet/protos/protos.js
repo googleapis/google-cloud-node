@@ -15674,6 +15674,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.apps.meet.v2beta.SpacesService|connectActiveConference}.
+                         * @memberof google.apps.meet.v2beta.SpacesService
+                         * @typedef ConnectActiveConferenceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.apps.meet.v2beta.ConnectActiveConferenceResponse} [response] ConnectActiveConferenceResponse
+                         */
+    
+                        /**
+                         * Calls ConnectActiveConference.
+                         * @function connectActiveConference
+                         * @memberof google.apps.meet.v2beta.SpacesService
+                         * @instance
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceRequest} request ConnectActiveConferenceRequest message or plain object
+                         * @param {google.apps.meet.v2beta.SpacesService.ConnectActiveConferenceCallback} callback Node-style callback called with the error, if any, and ConnectActiveConferenceResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SpacesService.prototype.connectActiveConference = function connectActiveConference(request, callback) {
+                            return this.rpcCall(connectActiveConference, $root.google.apps.meet.v2beta.ConnectActiveConferenceRequest, $root.google.apps.meet.v2beta.ConnectActiveConferenceResponse, request, callback);
+                        }, "name", { value: "ConnectActiveConference" });
+    
+                        /**
+                         * Calls ConnectActiveConference.
+                         * @function connectActiveConference
+                         * @memberof google.apps.meet.v2beta.SpacesService
+                         * @instance
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceRequest} request ConnectActiveConferenceRequest message or plain object
+                         * @returns {Promise<google.apps.meet.v2beta.ConnectActiveConferenceResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.apps.meet.v2beta.SpacesService|endActiveConference}.
                          * @memberof google.apps.meet.v2beta.SpacesService
                          * @typedef EndActiveConferenceCallback
@@ -16918,6 +16951,460 @@
                         };
     
                         return UpdateSpaceRequest;
+                    })();
+    
+                    v2beta.ConnectActiveConferenceRequest = (function() {
+    
+                        /**
+                         * Properties of a ConnectActiveConferenceRequest.
+                         * @memberof google.apps.meet.v2beta
+                         * @interface IConnectActiveConferenceRequest
+                         * @property {string|null} [name] ConnectActiveConferenceRequest name
+                         * @property {string|null} [offer] ConnectActiveConferenceRequest offer
+                         */
+    
+                        /**
+                         * Constructs a new ConnectActiveConferenceRequest.
+                         * @memberof google.apps.meet.v2beta
+                         * @classdesc Represents a ConnectActiveConferenceRequest.
+                         * @implements IConnectActiveConferenceRequest
+                         * @constructor
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceRequest=} [properties] Properties to set
+                         */
+                        function ConnectActiveConferenceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConnectActiveConferenceRequest name.
+                         * @member {string} name
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @instance
+                         */
+                        ConnectActiveConferenceRequest.prototype.name = "";
+    
+                        /**
+                         * ConnectActiveConferenceRequest offer.
+                         * @member {string} offer
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @instance
+                         */
+                        ConnectActiveConferenceRequest.prototype.offer = "";
+    
+                        /**
+                         * Creates a new ConnectActiveConferenceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceRequest=} [properties] Properties to set
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceRequest} ConnectActiveConferenceRequest instance
+                         */
+                        ConnectActiveConferenceRequest.create = function create(properties) {
+                            return new ConnectActiveConferenceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectActiveConferenceRequest message. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceRequest} message ConnectActiveConferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectActiveConferenceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.offer != null && Object.hasOwnProperty.call(message, "offer"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.offer);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectActiveConferenceRequest message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceRequest} message ConnectActiveConferenceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectActiveConferenceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConnectActiveConferenceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceRequest} ConnectActiveConferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectActiveConferenceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.meet.v2beta.ConnectActiveConferenceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.offer = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConnectActiveConferenceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceRequest} ConnectActiveConferenceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectActiveConferenceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConnectActiveConferenceRequest message.
+                         * @function verify
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConnectActiveConferenceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.offer != null && message.hasOwnProperty("offer"))
+                                if (!$util.isString(message.offer))
+                                    return "offer: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConnectActiveConferenceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceRequest} ConnectActiveConferenceRequest
+                         */
+                        ConnectActiveConferenceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.meet.v2beta.ConnectActiveConferenceRequest)
+                                return object;
+                            var message = new $root.google.apps.meet.v2beta.ConnectActiveConferenceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.offer != null)
+                                message.offer = String(object.offer);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConnectActiveConferenceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {google.apps.meet.v2beta.ConnectActiveConferenceRequest} message ConnectActiveConferenceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConnectActiveConferenceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.offer = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.offer != null && message.hasOwnProperty("offer"))
+                                object.offer = message.offer;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConnectActiveConferenceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConnectActiveConferenceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConnectActiveConferenceRequest
+                         * @function getTypeUrl
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConnectActiveConferenceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.meet.v2beta.ConnectActiveConferenceRequest";
+                        };
+    
+                        return ConnectActiveConferenceRequest;
+                    })();
+    
+                    v2beta.ConnectActiveConferenceResponse = (function() {
+    
+                        /**
+                         * Properties of a ConnectActiveConferenceResponse.
+                         * @memberof google.apps.meet.v2beta
+                         * @interface IConnectActiveConferenceResponse
+                         * @property {string|null} [answer] ConnectActiveConferenceResponse answer
+                         * @property {string|null} [traceId] ConnectActiveConferenceResponse traceId
+                         */
+    
+                        /**
+                         * Constructs a new ConnectActiveConferenceResponse.
+                         * @memberof google.apps.meet.v2beta
+                         * @classdesc Represents a ConnectActiveConferenceResponse.
+                         * @implements IConnectActiveConferenceResponse
+                         * @constructor
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceResponse=} [properties] Properties to set
+                         */
+                        function ConnectActiveConferenceResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConnectActiveConferenceResponse answer.
+                         * @member {string} answer
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @instance
+                         */
+                        ConnectActiveConferenceResponse.prototype.answer = "";
+    
+                        /**
+                         * ConnectActiveConferenceResponse traceId.
+                         * @member {string} traceId
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @instance
+                         */
+                        ConnectActiveConferenceResponse.prototype.traceId = "";
+    
+                        /**
+                         * Creates a new ConnectActiveConferenceResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceResponse=} [properties] Properties to set
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceResponse} ConnectActiveConferenceResponse instance
+                         */
+                        ConnectActiveConferenceResponse.create = function create(properties) {
+                            return new ConnectActiveConferenceResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectActiveConferenceResponse message. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceResponse} message ConnectActiveConferenceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectActiveConferenceResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.answer != null && Object.hasOwnProperty.call(message, "answer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.answer);
+                            if (message.traceId != null && Object.hasOwnProperty.call(message, "traceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.traceId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectActiveConferenceResponse message, length delimited. Does not implicitly {@link google.apps.meet.v2beta.ConnectActiveConferenceResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {google.apps.meet.v2beta.IConnectActiveConferenceResponse} message ConnectActiveConferenceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectActiveConferenceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConnectActiveConferenceResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceResponse} ConnectActiveConferenceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectActiveConferenceResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.apps.meet.v2beta.ConnectActiveConferenceResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.answer = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.traceId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConnectActiveConferenceResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceResponse} ConnectActiveConferenceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectActiveConferenceResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConnectActiveConferenceResponse message.
+                         * @function verify
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConnectActiveConferenceResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.answer != null && message.hasOwnProperty("answer"))
+                                if (!$util.isString(message.answer))
+                                    return "answer: string expected";
+                            if (message.traceId != null && message.hasOwnProperty("traceId"))
+                                if (!$util.isString(message.traceId))
+                                    return "traceId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConnectActiveConferenceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.apps.meet.v2beta.ConnectActiveConferenceResponse} ConnectActiveConferenceResponse
+                         */
+                        ConnectActiveConferenceResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.apps.meet.v2beta.ConnectActiveConferenceResponse)
+                                return object;
+                            var message = new $root.google.apps.meet.v2beta.ConnectActiveConferenceResponse();
+                            if (object.answer != null)
+                                message.answer = String(object.answer);
+                            if (object.traceId != null)
+                                message.traceId = String(object.traceId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConnectActiveConferenceResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {google.apps.meet.v2beta.ConnectActiveConferenceResponse} message ConnectActiveConferenceResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConnectActiveConferenceResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.answer = "";
+                                object.traceId = "";
+                            }
+                            if (message.answer != null && message.hasOwnProperty("answer"))
+                                object.answer = message.answer;
+                            if (message.traceId != null && message.hasOwnProperty("traceId"))
+                                object.traceId = message.traceId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConnectActiveConferenceResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConnectActiveConferenceResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConnectActiveConferenceResponse
+                         * @function getTypeUrl
+                         * @memberof google.apps.meet.v2beta.ConnectActiveConferenceResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConnectActiveConferenceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.apps.meet.v2beta.ConnectActiveConferenceResponse";
+                        };
+    
+                        return ConnectActiveConferenceResponse;
                     })();
     
                     v2beta.EndActiveConferenceRequest = (function() {
