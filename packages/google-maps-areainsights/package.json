@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/areainsights",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Places Insights API client for Node.js",
   "repository": {
     "type": "git",
