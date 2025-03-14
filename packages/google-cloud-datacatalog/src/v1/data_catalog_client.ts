@@ -42,10 +42,13 @@ import * as gapicConfig from './data_catalog_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
+ *  Deprecated: Please use Dataplex Catalog instead.
+ *
  *  Data Catalog API service allows you to discover, understand, and manage
  *  your data.
  * @class
  * @memberof v1
+ * @deprecated DataCatalog is deprecated and may be removed in a future version.
  */
 export class DataCatalogClient {
   private _terminated = false;
@@ -350,6 +353,11 @@ export class DataCatalogClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.dataCatalogStub) {
+      this.warn(
+        'DEP$DataCatalog',
+        'DataCatalog is deprecated and may be removed in a future version.',
+        'DeprecationWarning'
+      );
       return this.dataCatalogStub;
     }
 
@@ -435,6 +443,11 @@ export class DataCatalogClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn(
+      'DEP$DataCatalog',
+      'DataCatalog is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
 
     return this.dataCatalogStub;
   }
@@ -576,6 +589,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.create_entry_group.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_CreateEntryGroup_async
+   * @deprecated CreateEntryGroup is deprecated and may be removed in a future version.
    */
   createEntryGroup(
     request?: protos.google.cloud.datacatalog.v1.ICreateEntryGroupRequest,
@@ -649,6 +663,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$CreateEntryGroup',
+      'CreateEntryGroup is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('createEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -697,6 +716,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.get_entry_group.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_GetEntryGroup_async
+   * @deprecated GetEntryGroup is deprecated and may be removed in a future version.
    */
   getEntryGroup(
     request?: protos.google.cloud.datacatalog.v1.IGetEntryGroupRequest,
@@ -770,6 +790,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$GetEntryGroup',
+      'GetEntryGroup is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('getEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -824,6 +849,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.update_entry_group.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_UpdateEntryGroup_async
+   * @deprecated UpdateEntryGroup is deprecated and may be removed in a future version.
    */
   updateEntryGroup(
     request?: protos.google.cloud.datacatalog.v1.IUpdateEntryGroupRequest,
@@ -897,6 +923,11 @@ export class DataCatalogClient {
         'entry_group.name': request.entryGroup!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$UpdateEntryGroup',
+      'UpdateEntryGroup is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('updateEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -950,6 +981,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.delete_entry_group.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_DeleteEntryGroup_async
+   * @deprecated DeleteEntryGroup is deprecated and may be removed in a future version.
    */
   deleteEntryGroup(
     request?: protos.google.cloud.datacatalog.v1.IDeleteEntryGroupRequest,
@@ -1023,6 +1055,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$DeleteEntryGroup',
+      'DeleteEntryGroup is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('deleteEntryGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1090,6 +1127,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.create_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_CreateEntry_async
+   * @deprecated CreateEntry is deprecated and may be removed in a future version.
    */
   createEntry(
     request?: protos.google.cloud.datacatalog.v1.ICreateEntryRequest,
@@ -1157,6 +1195,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$CreateEntry',
+      'CreateEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('createEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1235,6 +1278,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.update_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_UpdateEntry_async
+   * @deprecated UpdateEntry is deprecated and may be removed in a future version.
    */
   updateEntry(
     request?: protos.google.cloud.datacatalog.v1.IUpdateEntryRequest,
@@ -1302,6 +1346,11 @@ export class DataCatalogClient {
         'entry.name': request.entry!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$UpdateEntry',
+      'UpdateEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('updateEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1354,6 +1403,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.delete_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_DeleteEntry_async
+   * @deprecated DeleteEntry is deprecated and may be removed in a future version.
    */
   deleteEntry(
     request?: protos.google.cloud.datacatalog.v1.IDeleteEntryRequest,
@@ -1421,6 +1471,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$DeleteEntry',
+      'DeleteEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('deleteEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1464,6 +1519,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.get_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_GetEntry_async
+   * @deprecated GetEntry is deprecated and may be removed in a future version.
    */
   getEntry(
     request?: protos.google.cloud.datacatalog.v1.IGetEntryRequest,
@@ -1531,6 +1587,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$GetEntry',
+      'GetEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('getEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1623,6 +1684,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.lookup_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_LookupEntry_async
+   * @deprecated LookupEntry is deprecated and may be removed in a future version.
    */
   lookupEntry(
     request?: protos.google.cloud.datacatalog.v1.ILookupEntryRequest,
@@ -1686,6 +1748,11 @@ export class DataCatalogClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$LookupEntry',
+      'LookupEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('lookupEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1735,6 +1802,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.modify_entry_overview.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ModifyEntryOverview_async
+   * @deprecated ModifyEntryOverview is deprecated and may be removed in a future version.
    */
   modifyEntryOverview(
     request?: protos.google.cloud.datacatalog.v1.IModifyEntryOverviewRequest,
@@ -1814,6 +1882,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ModifyEntryOverview',
+      'ModifyEntryOverview is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('modifyEntryOverview request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1866,6 +1939,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.modify_entry_contacts.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_async
+   * @deprecated ModifyEntryContacts is deprecated and may be removed in a future version.
    */
   modifyEntryContacts(
     request?: protos.google.cloud.datacatalog.v1.IModifyEntryContactsRequest,
@@ -1945,6 +2019,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ModifyEntryContacts',
+      'ModifyEntryContacts is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('modifyEntryContacts request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2005,6 +2084,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.create_tag_template.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_CreateTagTemplate_async
+   * @deprecated CreateTagTemplate is deprecated and may be removed in a future version.
    */
   createTagTemplate(
     request?: protos.google.cloud.datacatalog.v1.ICreateTagTemplateRequest,
@@ -2078,6 +2158,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$CreateTagTemplate',
+      'CreateTagTemplate is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('createTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2124,6 +2209,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.get_tag_template.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_GetTagTemplate_async
+   * @deprecated GetTagTemplate is deprecated and may be removed in a future version.
    */
   getTagTemplate(
     request?: protos.google.cloud.datacatalog.v1.IGetTagTemplateRequest,
@@ -2197,6 +2283,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$GetTagTemplate',
+      'GetTagTemplate is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('getTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2258,6 +2349,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.update_tag_template.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_UpdateTagTemplate_async
+   * @deprecated UpdateTagTemplate is deprecated and may be removed in a future version.
    */
   updateTagTemplate(
     request?: protos.google.cloud.datacatalog.v1.IUpdateTagTemplateRequest,
@@ -2331,6 +2423,11 @@ export class DataCatalogClient {
         'tag_template.name': request.tagTemplate!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$UpdateTagTemplate',
+      'UpdateTagTemplate is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('updateTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2385,6 +2482,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.delete_tag_template.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_DeleteTagTemplate_async
+   * @deprecated DeleteTagTemplate is deprecated and may be removed in a future version.
    */
   deleteTagTemplate(
     request?: protos.google.cloud.datacatalog.v1.IDeleteTagTemplateRequest,
@@ -2458,6 +2556,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$DeleteTagTemplate',
+      'DeleteTagTemplate is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('deleteTagTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2520,6 +2623,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.create_tag_template_field.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_CreateTagTemplateField_async
+   * @deprecated CreateTagTemplateField is deprecated and may be removed in a future version.
    */
   createTagTemplateField(
     request?: protos.google.cloud.datacatalog.v1.ICreateTagTemplateFieldRequest,
@@ -2599,6 +2703,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$CreateTagTemplateField',
+      'CreateTagTemplateField is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('createTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2671,6 +2780,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.update_tag_template_field.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_UpdateTagTemplateField_async
+   * @deprecated UpdateTagTemplateField is deprecated and may be removed in a future version.
    */
   updateTagTemplateField(
     request?: protos.google.cloud.datacatalog.v1.IUpdateTagTemplateFieldRequest,
@@ -2750,6 +2860,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$UpdateTagTemplateField',
+      'UpdateTagTemplateField is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('updateTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2803,6 +2918,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.rename_tag_template_field.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_RenameTagTemplateField_async
+   * @deprecated RenameTagTemplateField is deprecated and may be removed in a future version.
    */
   renameTagTemplateField(
     request?: protos.google.cloud.datacatalog.v1.IRenameTagTemplateFieldRequest,
@@ -2882,6 +2998,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$RenameTagTemplateField',
+      'RenameTagTemplateField is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('renameTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2933,6 +3054,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.rename_tag_template_field_enum_value.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_RenameTagTemplateFieldEnumValue_async
+   * @deprecated RenameTagTemplateFieldEnumValue is deprecated and may be removed in a future version.
    */
   renameTagTemplateFieldEnumValue(
     request?: protos.google.cloud.datacatalog.v1.IRenameTagTemplateFieldEnumValueRequest,
@@ -3012,6 +3134,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$RenameTagTemplateFieldEnumValue',
+      'RenameTagTemplateFieldEnumValue is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('renameTagTemplateFieldEnumValue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3073,6 +3200,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.delete_tag_template_field.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_DeleteTagTemplateField_async
+   * @deprecated DeleteTagTemplateField is deprecated and may be removed in a future version.
    */
   deleteTagTemplateField(
     request?: protos.google.cloud.datacatalog.v1.IDeleteTagTemplateFieldRequest,
@@ -3152,6 +3280,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$DeleteTagTemplateField',
+      'DeleteTagTemplateField is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('deleteTagTemplateField request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3217,6 +3350,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.create_tag.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_CreateTag_async
+   * @deprecated CreateTag is deprecated and may be removed in a future version.
    */
   createTag(
     request?: protos.google.cloud.datacatalog.v1.ICreateTagRequest,
@@ -3284,6 +3418,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$CreateTag',
+      'CreateTag is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('createTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3334,6 +3473,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.update_tag.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_UpdateTag_async
+   * @deprecated UpdateTag is deprecated and may be removed in a future version.
    */
   updateTag(
     request?: protos.google.cloud.datacatalog.v1.IUpdateTagRequest,
@@ -3401,6 +3541,11 @@ export class DataCatalogClient {
         'tag.name': request.tag!.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$UpdateTag',
+      'UpdateTag is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('updateTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3444,6 +3589,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.delete_tag.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_DeleteTag_async
+   * @deprecated DeleteTag is deprecated and may be removed in a future version.
    */
   deleteTag(
     request?: protos.google.cloud.datacatalog.v1.IDeleteTagRequest,
@@ -3511,6 +3657,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$DeleteTag',
+      'DeleteTag is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('deleteTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3555,6 +3706,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.star_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_StarEntry_async
+   * @deprecated StarEntry is deprecated and may be removed in a future version.
    */
   starEntry(
     request?: protos.google.cloud.datacatalog.v1.IStarEntryRequest,
@@ -3622,6 +3774,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$StarEntry',
+      'StarEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('starEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3666,6 +3823,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.unstar_entry.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_UnstarEntry_async
+   * @deprecated UnstarEntry is deprecated and may be removed in a future version.
    */
   unstarEntry(
     request?: protos.google.cloud.datacatalog.v1.IUnstarEntryRequest,
@@ -3733,6 +3891,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$UnstarEntry',
+      'UnstarEntry is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('unstarEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3804,6 +3967,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.set_iam_policy.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_SetIamPolicy_async
+   * @deprecated SetIamPolicy is deprecated and may be removed in a future version.
    */
   setIamPolicy(
     request?: protos.google.iam.v1.ISetIamPolicyRequest,
@@ -3869,6 +4033,11 @@ export class DataCatalogClient {
         resource: request.resource ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$SetIamPolicy',
+      'SetIamPolicy is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3934,6 +4103,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.get_iam_policy.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_GetIamPolicy_async
+   * @deprecated GetIamPolicy is deprecated and may be removed in a future version.
    */
   getIamPolicy(
     request?: protos.google.iam.v1.IGetIamPolicyRequest,
@@ -3999,6 +4169,11 @@ export class DataCatalogClient {
         resource: request.resource ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$GetIamPolicy',
+      'GetIamPolicy is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4059,6 +4234,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.test_iam_permissions.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_TestIamPermissions_async
+   * @deprecated TestIamPermissions is deprecated and may be removed in a future version.
    */
   testIamPermissions(
     request?: protos.google.iam.v1.ITestIamPermissionsRequest,
@@ -4124,6 +4300,11 @@ export class DataCatalogClient {
         resource: request.resource ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$TestIamPermissions',
+      'TestIamPermissions is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4170,6 +4351,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.set_config.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_SetConfig_async
+   * @deprecated SetConfig is deprecated and may be removed in a future version.
    */
   setConfig(
     request?: protos.google.cloud.datacatalog.v1.ISetConfigRequest,
@@ -4237,6 +4419,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$SetConfig',
+      'SetConfig is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('setConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4282,6 +4469,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.retrieve_config.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_RetrieveConfig_async
+   * @deprecated RetrieveConfig is deprecated and may be removed in a future version.
    */
   retrieveConfig(
     request?: protos.google.cloud.datacatalog.v1.IRetrieveConfigRequest,
@@ -4355,6 +4543,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$RetrieveConfig',
+      'RetrieveConfig is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('retrieveConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4402,6 +4595,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.retrieve_effective_config.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_RetrieveEffectiveConfig_async
+   * @deprecated RetrieveEffectiveConfig is deprecated and may be removed in a future version.
    */
   retrieveEffectiveConfig(
     request?: protos.google.cloud.datacatalog.v1.IRetrieveEffectiveConfigRequest,
@@ -4481,6 +4675,11 @@ export class DataCatalogClient {
         name: request.name ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$RetrieveEffectiveConfig',
+      'RetrieveEffectiveConfig is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('retrieveEffectiveConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4553,6 +4752,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.reconcile_tags.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ReconcileTags_async
+   * @deprecated ReconcileTags is deprecated and may be removed in a future version.
    */
   reconcileTags(
     request?: protos.google.cloud.datacatalog.v1.IReconcileTagsRequest,
@@ -4636,6 +4836,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ReconcileTags',
+      'ReconcileTags is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4678,6 +4883,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.reconcile_tags.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ReconcileTags_async
+   * @deprecated ReconcileTags is deprecated and may be removed in a future version.
    */
   async checkReconcileTagsProgress(
     name: string
@@ -4687,6 +4893,11 @@ export class DataCatalogClient {
       protos.google.cloud.datacatalog.v1.ReconcileTagsMetadata
     >
   > {
+    this.warn(
+      'DEP$DataCatalog-$checkReconcileTagsProgress',
+      'checkReconcileTagsProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('reconcileTags long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
@@ -4742,6 +4953,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.import_entries.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ImportEntries_async
+   * @deprecated ImportEntries is deprecated and may be removed in a future version.
    */
   importEntries(
     request?: protos.google.cloud.datacatalog.v1.IImportEntriesRequest,
@@ -4825,6 +5037,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ImportEntries',
+      'ImportEntries is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4867,6 +5084,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.import_entries.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ImportEntries_async
+   * @deprecated ImportEntries is deprecated and may be removed in a future version.
    */
   async checkImportEntriesProgress(
     name: string
@@ -4876,6 +5094,11 @@ export class DataCatalogClient {
       protos.google.cloud.datacatalog.v1.ImportEntriesMetadata
     >
   > {
+    this.warn(
+      'DEP$DataCatalog-$checkImportEntriesProgress',
+      'checkImportEntriesProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('importEntries long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
@@ -4979,6 +5202,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated SearchCatalog is deprecated and may be removed in a future version.
    */
   searchCatalog(
     request?: protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -5048,6 +5272,11 @@ export class DataCatalogClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$SearchCatalog',
+      'SearchCatalog is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -5148,6 +5377,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated SearchCatalog is deprecated and may be removed in a future version.
    */
   searchCatalogStream(
     request?: protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -5160,6 +5390,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['searchCatalog'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$SearchCatalog',
+      'SearchCatalog is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('searchCatalog stream %j', request);
     return this.descriptors.page.searchCatalog.createStream(
       this.innerApiCalls.searchCatalog as GaxCall,
@@ -5242,6 +5477,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.search_catalog.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_SearchCatalog_async
+   * @deprecated SearchCatalog is deprecated and may be removed in a future version.
    */
   searchCatalogAsync(
     request?: protos.google.cloud.datacatalog.v1.ISearchCatalogRequest,
@@ -5254,6 +5490,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['searchCatalog'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$SearchCatalog',
+      'SearchCatalog is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('searchCatalog iterate %j', request);
     return this.descriptors.page.searchCatalog.asyncIterate(
       this.innerApiCalls['searchCatalog'] as GaxCall,
@@ -5289,6 +5530,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListEntryGroups is deprecated and may be removed in a future version.
    */
   listEntryGroups(
     request?: protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -5362,6 +5604,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListEntryGroups',
+      'ListEntryGroups is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -5417,6 +5664,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListEntryGroups is deprecated and may be removed in a future version.
    */
   listEntryGroupsStream(
     request?: protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -5433,6 +5681,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListEntryGroups',
+      'ListEntryGroups is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('listEntryGroups stream %j', request);
     return this.descriptors.page.listEntryGroups.createStream(
       this.innerApiCalls.listEntryGroups as GaxCall,
@@ -5470,6 +5723,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.list_entry_groups.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ListEntryGroups_async
+   * @deprecated ListEntryGroups is deprecated and may be removed in a future version.
    */
   listEntryGroupsAsync(
     request?: protos.google.cloud.datacatalog.v1.IListEntryGroupsRequest,
@@ -5486,6 +5740,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListEntryGroups',
+      'ListEntryGroups is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('listEntryGroups iterate %j', request);
     return this.descriptors.page.listEntryGroups.asyncIterate(
       this.innerApiCalls['listEntryGroups'] as GaxCall,
@@ -5529,6 +5788,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListEntries is deprecated and may be removed in a future version.
    */
   listEntries(
     request?: protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -5602,6 +5862,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListEntries',
+      'ListEntries is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -5661,6 +5926,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListEntries is deprecated and may be removed in a future version.
    */
   listEntriesStream(
     request?: protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -5677,6 +5943,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListEntries',
+      'ListEntries is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('listEntries stream %j', request);
     return this.descriptors.page.listEntries.createStream(
       this.innerApiCalls.listEntries as GaxCall,
@@ -5718,6 +5989,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.list_entries.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ListEntries_async
+   * @deprecated ListEntries is deprecated and may be removed in a future version.
    */
   listEntriesAsync(
     request?: protos.google.cloud.datacatalog.v1.IListEntriesRequest,
@@ -5734,6 +6006,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListEntries',
+      'ListEntries is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('listEntries iterate %j', request);
     return this.descriptors.page.listEntries.asyncIterate(
       this.innerApiCalls['listEntries'] as GaxCall,
@@ -5770,6 +6047,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListTags is deprecated and may be removed in a future version.
    */
   listTags(
     request?: protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -5837,6 +6115,11 @@ export class DataCatalogClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListTags',
+      'ListTags is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -5891,6 +6174,7 @@ export class DataCatalogClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListTags is deprecated and may be removed in a future version.
    */
   listTagsStream(
     request?: protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -5907,6 +6191,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListTags',
+      'ListTags is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('listTags stream %j', request);
     return this.descriptors.page.listTags.createStream(
       this.innerApiCalls.listTags as GaxCall,
@@ -5943,6 +6232,7 @@ export class DataCatalogClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/data_catalog.list_tags.js</caption>
    * region_tag:datacatalog_v1_generated_DataCatalog_ListTags_async
+   * @deprecated ListTags is deprecated and may be removed in a future version.
    */
   listTagsAsync(
     request?: protos.google.cloud.datacatalog.v1.IListTagsRequest,
@@ -5959,6 +6249,11 @@ export class DataCatalogClient {
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this.warn(
+      'DEP$DataCatalog-$ListTags',
+      'ListTags is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     this._log.info('listTags iterate %j', request);
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
