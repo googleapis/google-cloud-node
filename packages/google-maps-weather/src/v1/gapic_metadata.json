@@ -1,0 +1,75 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.weather.v1",
+  "libraryPackage": "@google-cloud/weather",
+  "services": {
+    "Weather": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "WeatherClient",
+          "rpcs": {
+            "LookupCurrentConditions": {
+              "methods": [
+                "lookupCurrentConditions"
+              ]
+            },
+            "LookupForecastHours": {
+              "methods": [
+                "lookupForecastHours",
+                "lookupForecastHoursStream",
+                "lookupForecastHoursAsync"
+              ]
+            },
+            "LookupForecastDays": {
+              "methods": [
+                "lookupForecastDays",
+                "lookupForecastDaysStream",
+                "lookupForecastDaysAsync"
+              ]
+            },
+            "LookupHistoryHours": {
+              "methods": [
+                "lookupHistoryHours",
+                "lookupHistoryHoursStream",
+                "lookupHistoryHoursAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "WeatherClient",
+          "rpcs": {
+            "LookupCurrentConditions": {
+              "methods": [
+                "lookupCurrentConditions"
+              ]
+            },
+            "LookupForecastHours": {
+              "methods": [
+                "lookupForecastHours",
+                "lookupForecastHoursStream",
+                "lookupForecastHoursAsync"
+              ]
+            },
+            "LookupForecastDays": {
+              "methods": [
+                "lookupForecastDays",
+                "lookupForecastDaysStream",
+                "lookupForecastDaysAsync"
+              ]
+            },
+            "LookupHistoryHours": {
+              "methods": [
+                "lookupHistoryHours",
+                "lookupHistoryHoursStream",
+                "lookupHistoryHoursAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
