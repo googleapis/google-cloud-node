@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class AMLClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('financialservices');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class AMLClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -908,7 +911,36 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInstance(request, options, callback);
+    this._log.info('getInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IInstance,
+          | protos.google.cloud.financialservices.v1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IInstance,
+          (
+            | protos.google.cloud.financialservices.v1.IGetInstanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a dataset.
@@ -998,7 +1030,36 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDataset(request, options, callback);
+    this._log.info('getDataset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IDataset,
+          | protos.google.cloud.financialservices.v1.IGetDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDataset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IDataset,
+          (
+            | protos.google.cloud.financialservices.v1.IGetDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a model.
@@ -1088,7 +1149,33 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getModel(request, options, callback);
+    this._log.info('getModel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IModel,
+          | protos.google.cloud.financialservices.v1.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getModel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IModel,
+          protos.google.cloud.financialservices.v1.IGetModelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getModel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets an engine config.
@@ -1184,7 +1271,36 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEngineConfig(request, options, callback);
+    this._log.info('getEngineConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IEngineConfig,
+          | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEngineConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEngineConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IEngineConfig,
+          (
+            | protos.google.cloud.financialservices.v1.IGetEngineConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEngineConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a single EngineVersion.
@@ -1280,7 +1396,36 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEngineVersion(request, options, callback);
+    this._log.info('getEngineVersion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IEngineVersion,
+          | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEngineVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEngineVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IEngineVersion,
+          (
+            | protos.google.cloud.financialservices.v1.IGetEngineVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEngineVersion response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a PredictionResult.
@@ -1376,7 +1521,36 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPredictionResult(request, options, callback);
+    this._log.info('getPredictionResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IPredictionResult,
+          | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPredictionResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPredictionResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IPredictionResult,
+          (
+            | protos.google.cloud.financialservices.v1.IGetPredictionResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPredictionResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a BacktestResult.
@@ -1472,7 +1646,36 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getBacktestResult(request, options, callback);
+    this._log.info('getBacktestResult request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.financialservices.v1.IBacktestResult,
+          | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBacktestResult response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBacktestResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.financialservices.v1.IBacktestResult,
+          (
+            | protos.google.cloud.financialservices.v1.IGetBacktestResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBacktestResult response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1594,7 +1797,37 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IInstance,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInstance request %j', request);
+    return this.innerApiCalls
+      .createInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IInstance,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInstance()`.
@@ -1615,6 +1848,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1751,7 +1985,37 @@ export class AMLClient {
         'instance.name': request.instance!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IInstance,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IInstance,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInstance()`.
@@ -1772,6 +2036,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1901,7 +2166,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInstance request %j', request);
+    return this.innerApiCalls
+      .deleteInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInstance()`.
@@ -1922,6 +2217,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2055,11 +2351,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importRegisteredParties(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importRegisteredParties response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importRegisteredParties request %j', request);
+    return this.innerApiCalls
+      .importRegisteredParties(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IImportRegisteredPartiesResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importRegisteredParties response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importRegisteredParties()`.
@@ -2080,6 +2402,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('importRegisteredParties long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2203,11 +2526,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportRegisteredParties(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportRegisteredParties response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportRegisteredParties request %j', request);
+    return this.innerApiCalls
+      .exportRegisteredParties(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportRegisteredPartiesResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportRegisteredParties response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportRegisteredParties()`.
@@ -2228,6 +2577,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('exportRegisteredParties long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2361,7 +2711,37 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IDataset,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDataset request %j', request);
+    return this.innerApiCalls
+      .createDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IDataset,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createDataset()`.
@@ -2382,6 +2762,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2518,7 +2899,37 @@ export class AMLClient {
         'dataset.name': request.dataset!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IDataset,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDataset request %j', request);
+    return this.innerApiCalls
+      .updateDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IDataset,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDataset()`.
@@ -2539,6 +2950,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2668,7 +3080,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDataset request %j', request);
+    return this.innerApiCalls
+      .deleteDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteDataset()`.
@@ -2689,6 +3131,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2822,7 +3265,37 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IModel,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createModel request %j', request);
+    return this.innerApiCalls
+      .createModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IModel,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createModel()`.
@@ -2843,6 +3316,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2979,7 +3453,37 @@ export class AMLClient {
         'model.name': request.model!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IModel,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateModel request %j', request);
+    return this.innerApiCalls
+      .updateModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IModel,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateModel()`.
@@ -3000,6 +3504,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3120,7 +3625,37 @@ export class AMLClient {
         model: request.model ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportModelMetadata(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportModelMetadata response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportModelMetadata request %j', request);
+    return this.innerApiCalls
+      .exportModelMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportModelMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportModelMetadata response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportModelMetadata()`.
@@ -3141,6 +3676,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('exportModelMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3270,7 +3806,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteModel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteModel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteModel request %j', request);
+    return this.innerApiCalls
+      .deleteModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteModel()`.
@@ -3291,6 +3857,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3424,7 +3991,37 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEngineConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IEngineConfig,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createEngineConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createEngineConfig request %j', request);
+    return this.innerApiCalls
+      .createEngineConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IEngineConfig,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEngineConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createEngineConfig()`.
@@ -3445,6 +4042,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createEngineConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3581,7 +4179,37 @@ export class AMLClient {
         'engine_config.name': request.engineConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateEngineConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IEngineConfig,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateEngineConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateEngineConfig request %j', request);
+    return this.innerApiCalls
+      .updateEngineConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IEngineConfig,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEngineConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateEngineConfig()`.
@@ -3602,6 +4230,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateEngineConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3722,11 +4351,37 @@ export class AMLClient {
         engine_config: request.engineConfig ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportEngineConfigMetadata(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportEngineConfigMetadata response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportEngineConfigMetadata request %j', request);
+    return this.innerApiCalls
+      .exportEngineConfigMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportEngineConfigMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEngineConfigMetadata response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportEngineConfigMetadata()`.
@@ -3747,6 +4402,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('exportEngineConfigMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3876,7 +4532,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEngineConfig(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteEngineConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteEngineConfig request %j', request);
+    return this.innerApiCalls
+      .deleteEngineConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEngineConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteEngineConfig()`.
@@ -3897,6 +4583,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteEngineConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4030,11 +4717,37 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createPredictionResult(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IPredictionResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createPredictionResult response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createPredictionResult request %j', request);
+    return this.innerApiCalls
+      .createPredictionResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IPredictionResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPredictionResult response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createPredictionResult()`.
@@ -4055,6 +4768,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createPredictionResult long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4191,11 +4905,37 @@ export class AMLClient {
         'prediction_result.name': request.predictionResult!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePredictionResult(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IPredictionResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePredictionResult response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePredictionResult request %j', request);
+    return this.innerApiCalls
+      .updatePredictionResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IPredictionResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePredictionResult response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePredictionResult()`.
@@ -4216,6 +4956,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updatePredictionResult long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4336,11 +5077,43 @@ export class AMLClient {
         prediction_result: request.predictionResult ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportPredictionResultMetadata(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'exportPredictionResultMetadata response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportPredictionResultMetadata request %j', request);
+    return this.innerApiCalls
+      .exportPredictionResultMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportPredictionResultMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'exportPredictionResultMetadata response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportPredictionResultMetadata()`.
@@ -4361,6 +5134,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('exportPredictionResultMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4490,11 +5264,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deletePredictionResult(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deletePredictionResult response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deletePredictionResult request %j', request);
+    return this.innerApiCalls
+      .deletePredictionResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePredictionResult response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deletePredictionResult()`.
@@ -4515,6 +5315,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deletePredictionResult long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4648,7 +5449,37 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createBacktestResult(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IBacktestResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBacktestResult response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBacktestResult request %j', request);
+    return this.innerApiCalls
+      .createBacktestResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IBacktestResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBacktestResult response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBacktestResult()`.
@@ -4669,6 +5500,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('createBacktestResult long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4805,7 +5637,37 @@ export class AMLClient {
         'backtest_result.name': request.backtestResult!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateBacktestResult(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IBacktestResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBacktestResult response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBacktestResult request %j', request);
+    return this.innerApiCalls
+      .updateBacktestResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IBacktestResult,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBacktestResult response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBacktestResult()`.
@@ -4826,6 +5688,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('updateBacktestResult long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4946,11 +5809,43 @@ export class AMLClient {
         backtest_result: request.backtestResult ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportBacktestResultMetadata(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'exportBacktestResultMetadata response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportBacktestResultMetadata request %j', request);
+    return this.innerApiCalls
+      .exportBacktestResultMetadata(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.financialservices.v1.IExportBacktestResultMetadataResponse,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'exportBacktestResultMetadata response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportBacktestResultMetadata()`.
@@ -4971,6 +5866,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('exportBacktestResultMetadata long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5100,7 +5996,37 @@ export class AMLClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteBacktestResult(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteBacktestResult response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteBacktestResult request %j', request);
+    return this.innerApiCalls
+      .deleteBacktestResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.financialservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBacktestResult response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteBacktestResult()`.
@@ -5121,6 +6047,7 @@ export class AMLClient {
       protos.google.cloud.financialservices.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteBacktestResult long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5241,7 +6168,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListInstancesRequest,
+          | protos.google.cloud.financialservices.v1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IInstance[],
+          protos.google.cloud.financialservices.v1.IListInstancesRequest | null,
+          protos.google.cloud.financialservices.v1.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5290,6 +6243,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -5346,6 +6300,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -5456,7 +6411,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDatasets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListDatasetsRequest,
+          | protos.google.cloud.financialservices.v1.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IDataset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDatasets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDatasets request %j', request);
+    return this.innerApiCalls
+      .listDatasets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IDataset[],
+          protos.google.cloud.financialservices.v1.IListDatasetsRequest | null,
+          protos.google.cloud.financialservices.v1.IListDatasetsResponse,
+        ]) => {
+          this._log.info('listDatasets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5504,6 +6485,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
       request,
@@ -5559,6 +6541,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
       request as {},
@@ -5669,7 +6652,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listModels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListModelsRequest,
+          | protos.google.cloud.financialservices.v1.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IModel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listModels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listModels request %j', request);
+    return this.innerApiCalls
+      .listModels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IModel[],
+          protos.google.cloud.financialservices.v1.IListModelsRequest | null,
+          protos.google.cloud.financialservices.v1.IListModelsResponse,
+        ]) => {
+          this._log.info('listModels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5717,6 +6726,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
@@ -5772,6 +6782,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
@@ -5883,7 +6894,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEngineConfigs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest,
+          | protos.google.cloud.financialservices.v1.IListEngineConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IEngineConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEngineConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEngineConfigs request %j', request);
+    return this.innerApiCalls
+      .listEngineConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IEngineConfig[],
+          protos.google.cloud.financialservices.v1.IListEngineConfigsRequest | null,
+          protos.google.cloud.financialservices.v1.IListEngineConfigsResponse,
+        ]) => {
+          this._log.info('listEngineConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5932,6 +6969,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listEngineConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEngineConfigs stream %j', request);
     return this.descriptors.page.listEngineConfigs.createStream(
       this.innerApiCalls.listEngineConfigs as GaxCall,
       request,
@@ -5988,6 +7026,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listEngineConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEngineConfigs iterate %j', request);
     return this.descriptors.page.listEngineConfigs.asyncIterate(
       this.innerApiCalls['listEngineConfigs'] as GaxCall,
       request as {},
@@ -6101,7 +7140,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEngineVersions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest,
+          | protos.google.cloud.financialservices.v1.IListEngineVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IEngineVersion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEngineVersions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEngineVersions request %j', request);
+    return this.innerApiCalls
+      .listEngineVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IEngineVersion[],
+          protos.google.cloud.financialservices.v1.IListEngineVersionsRequest | null,
+          protos.google.cloud.financialservices.v1.IListEngineVersionsResponse,
+        ]) => {
+          this._log.info('listEngineVersions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6152,6 +7217,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listEngineVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEngineVersions stream %j', request);
     return this.descriptors.page.listEngineVersions.createStream(
       this.innerApiCalls.listEngineVersions as GaxCall,
       request,
@@ -6210,6 +7276,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listEngineVersions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEngineVersions iterate %j', request);
     return this.descriptors.page.listEngineVersions.asyncIterate(
       this.innerApiCalls['listEngineVersions'] as GaxCall,
       request as {},
@@ -6321,7 +7388,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listPredictionResults(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest,
+          | protos.google.cloud.financialservices.v1.IListPredictionResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IPredictionResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listPredictionResults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listPredictionResults request %j', request);
+    return this.innerApiCalls
+      .listPredictionResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IPredictionResult[],
+          protos.google.cloud.financialservices.v1.IListPredictionResultsRequest | null,
+          protos.google.cloud.financialservices.v1.IListPredictionResultsResponse,
+        ]) => {
+          this._log.info('listPredictionResults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6370,6 +7463,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listPredictionResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPredictionResults stream %j', request);
     return this.descriptors.page.listPredictionResults.createStream(
       this.innerApiCalls.listPredictionResults as GaxCall,
       request,
@@ -6426,6 +7520,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listPredictionResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listPredictionResults iterate %j', request);
     return this.descriptors.page.listPredictionResults.asyncIterate(
       this.innerApiCalls['listPredictionResults'] as GaxCall,
       request as {},
@@ -6537,7 +7632,33 @@ export class AMLClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listBacktestResults(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest,
+          | protos.google.cloud.financialservices.v1.IListBacktestResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.financialservices.v1.IBacktestResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBacktestResults values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBacktestResults request %j', request);
+    return this.innerApiCalls
+      .listBacktestResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.financialservices.v1.IBacktestResult[],
+          protos.google.cloud.financialservices.v1.IListBacktestResultsRequest | null,
+          protos.google.cloud.financialservices.v1.IListBacktestResultsResponse,
+        ]) => {
+          this._log.info('listBacktestResults values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6586,6 +7707,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listBacktestResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBacktestResults stream %j', request);
     return this.descriptors.page.listBacktestResults.createStream(
       this.innerApiCalls.listBacktestResults as GaxCall,
       request,
@@ -6642,6 +7764,7 @@ export class AMLClient {
     const defaultCallSettings = this._defaults['listBacktestResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listBacktestResults iterate %j', request);
     return this.descriptors.page.listBacktestResults.asyncIterate(
       this.innerApiCalls['listBacktestResults'] as GaxCall,
       request as {},
@@ -7439,6 +8562,7 @@ export class AMLClient {
   close(): Promise<void> {
     if (this.aMLStub && !this._terminated) {
       return this.aMLStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
