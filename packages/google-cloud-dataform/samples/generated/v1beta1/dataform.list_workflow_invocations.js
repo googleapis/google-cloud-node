@@ -42,8 +42,9 @@ function main(parent) {
   /**
    *  Optional. Page token received from a previous `ListWorkflowInvocations`
    *  call. Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListWorkflowInvocations`
-   *  must match the call that provided the page token.
+   *  When paginating, all other parameters provided to
+   *  `ListWorkflowInvocations`, with the exception of `page_size`, must match
+   *  the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**

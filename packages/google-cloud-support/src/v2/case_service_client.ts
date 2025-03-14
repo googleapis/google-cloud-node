@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CaseServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('support');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CaseServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -496,7 +499,31 @@ export class CaseServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCase(request, options, callback);
+    this._log.info('getCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IGetCaseRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IGetCaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Create a new case and associate it with the given Google Cloud Resource.
@@ -583,7 +610,31 @@ export class CaseServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCase(request, options, callback);
+    this._log.info('createCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICreateCaseRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICreateCaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Update the specified case. Only a subset of fields can be updated.
@@ -675,7 +726,31 @@ export class CaseServiceClient {
         'case.name': request.case!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCase(request, options, callback);
+    this._log.info('updateCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IUpdateCaseRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IUpdateCaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Escalate a case. Escalating a case will initiate the Google Cloud Support
@@ -767,7 +842,33 @@ export class CaseServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.escalateCase(request, options, callback);
+    this._log.info('escalateCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2.ICase,
+          | protos.google.cloud.support.v2.IEscalateCaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('escalateCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .escalateCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.IEscalateCaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('escalateCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Close the specified case.
@@ -849,7 +950,31 @@ export class CaseServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.closeCase(request, options, callback);
+    this._log.info('closeCase request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICloseCaseRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('closeCase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .closeCase(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2.ICase,
+          protos.google.cloud.support.v2.ICloseCaseRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('closeCase response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -963,11 +1088,35 @@ export class CaseServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listCases(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.support.v2.IListCasesRequest,
+          protos.google.cloud.support.v2.IListCasesResponse | null | undefined,
+          protos.google.cloud.support.v2.ICase
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listCases values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listCases request %j', request);
+    return this.innerApiCalls
+      .listCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.support.v2.ICase[],
+          protos.google.cloud.support.v2.IListCasesRequest | null,
+          protos.google.cloud.support.v2.IListCasesResponse,
+        ]) => {
+          this._log.info('listCases values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listCases`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1021,6 +1170,7 @@ export class CaseServiceClient {
     const defaultCallSettings = this._defaults['listCases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCases stream %j', request);
     return this.descriptors.page.listCases.createStream(
       this.innerApiCalls.listCases as GaxCall,
       request,
@@ -1086,6 +1236,7 @@ export class CaseServiceClient {
     const defaultCallSettings = this._defaults['listCases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listCases iterate %j', request);
     return this.descriptors.page.listCases.asyncIterate(
       this.innerApiCalls['listCases'] as GaxCall,
       request as {},
@@ -1219,11 +1370,37 @@ export class CaseServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchCases(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCasesRequest,
+          | protos.google.cloud.support.v2.ISearchCasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.support.v2.ICase
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchCases values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchCases request %j', request);
+    return this.innerApiCalls
+      .searchCases(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.support.v2.ICase[],
+          protos.google.cloud.support.v2.ISearchCasesRequest | null,
+          protos.google.cloud.support.v2.ISearchCasesResponse,
+        ]) => {
+          this._log.info('searchCases values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchCases`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1296,6 +1473,7 @@ export class CaseServiceClient {
     const defaultCallSettings = this._defaults['searchCases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchCases stream %j', request);
     return this.descriptors.page.searchCases.createStream(
       this.innerApiCalls.searchCases as GaxCall,
       request,
@@ -1380,6 +1558,7 @@ export class CaseServiceClient {
     const defaultCallSettings = this._defaults['searchCases'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchCases iterate %j', request);
     return this.descriptors.page.searchCases.asyncIterate(
       this.innerApiCalls['searchCases'] as GaxCall,
       request as {},
@@ -1483,15 +1662,37 @@ export class CaseServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.searchCaseClassifications(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
+          | protos.google.cloud.support.v2.ISearchCaseClassificationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.support.v2.ICaseClassification
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchCaseClassifications values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchCaseClassifications request %j', request);
+    return this.innerApiCalls
+      .searchCaseClassifications(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.support.v2.ICaseClassification[],
+          protos.google.cloud.support.v2.ISearchCaseClassificationsRequest | null,
+          protos.google.cloud.support.v2.ISearchCaseClassificationsResponse,
+        ]) => {
+          this._log.info('searchCaseClassifications values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchCaseClassifications`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.query
@@ -1525,6 +1726,7 @@ export class CaseServiceClient {
     const defaultCallSettings = this._defaults['searchCaseClassifications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchCaseClassifications stream %j', request);
     return this.descriptors.page.searchCaseClassifications.createStream(
       this.innerApiCalls.searchCaseClassifications as GaxCall,
       request,
@@ -1570,6 +1772,7 @@ export class CaseServiceClient {
     const defaultCallSettings = this._defaults['searchCaseClassifications'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchCaseClassifications iterate %j', request);
     return this.descriptors.page.searchCaseClassifications.asyncIterate(
       this.innerApiCalls['searchCaseClassifications'] as GaxCall,
       request as {},
@@ -1941,6 +2144,7 @@ export class CaseServiceClient {
   close(): Promise<void> {
     if (this.caseServiceStub && !this._terminated) {
       return this.caseServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

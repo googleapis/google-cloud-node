@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-filestore",
-        "version": "3.4.1",
+        "version": "4.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -166,7 +166,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -262,7 +262,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 63,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -288,6 +288,50 @@
                 "method": {
                     "shortName": "RevertInstance",
                     "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RevertInstance",
+                    "service": {
+                        "shortName": "CloudFilestoreManager",
+                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async",
+            "title": "CloudFilestoreManager promoteReplica Sample",
+            "origin": "API_DEFINITION",
+            "description": " Promote the standby instance (replica).",
+            "canonical": true,
+            "file": "cloud_filestore_manager.promote_replica.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PromoteReplica",
+                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplica",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "peer_instance",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CloudFilestoreManagerClient",
+                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+                },
+                "method": {
+                    "shortName": "PromoteReplica",
+                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplica",
                     "service": {
                         "shortName": "CloudFilestoreManager",
                         "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
@@ -350,7 +394,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 74,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],
@@ -378,6 +422,10 @@
                     {
                         "name": "filter",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.filestore.v1beta1.ListSnapshotsResponse",

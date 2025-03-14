@@ -267,7 +267,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -304,7 +304,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -356,7 +356,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJobFromTemplate = stubSimpleCall(
         undefined,
@@ -424,7 +424,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -460,7 +460,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -512,7 +512,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.launchTemplate = stubSimpleCall(
         undefined,
@@ -574,7 +574,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -610,7 +610,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -662,7 +662,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         ['location']
       );
       request.location = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&location=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTemplate = stubSimpleCall(
         undefined,

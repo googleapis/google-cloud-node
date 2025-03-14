@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class WebhooksClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dialogflow-cx');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class WebhooksClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -300,6 +303,9 @@ export class WebhooksClient {
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+      ),
+      toolVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -582,7 +588,36 @@ export class WebhooksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getWebhook(request, options, callback);
+    this._log.info('getWebhook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWebhook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWebhook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a webhook in the specified agent.
@@ -681,7 +716,36 @@ export class WebhooksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createWebhook(request, options, callback);
+    this._log.info('createWebhook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
+          | protos.google.cloud.dialogflow.cx.v3beta1.ICreateWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createWebhook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.ICreateWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createWebhook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified webhook.
@@ -780,7 +844,36 @@ export class WebhooksClient {
         'webhook.name': request.webhook!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateWebhook(request, options, callback);
+    this._log.info('updateWebhook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateWebhook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWebhook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified webhook.
@@ -889,7 +982,36 @@ export class WebhooksClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteWebhook(request, options, callback);
+    this._log.info('deleteWebhook request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteWebhookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteWebhook response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteWebhook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteWebhookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWebhook response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -989,7 +1111,33 @@ export class WebhooksClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWebhooks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWebhooks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWebhooks request %j', request);
+    return this.innerApiCalls
+      .listWebhooks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IWebhook[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksResponse,
+        ]) => {
+          this._log.info('listWebhooks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1030,6 +1178,7 @@ export class WebhooksClient {
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWebhooks stream %j', request);
     return this.descriptors.page.listWebhooks.createStream(
       this.innerApiCalls.listWebhooks as GaxCall,
       request,
@@ -1078,6 +1227,7 @@ export class WebhooksClient {
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWebhooks iterate %j', request);
     return this.descriptors.page.listWebhooks.asyncIterate(
       this.innerApiCalls['listWebhooks'] as GaxCall,
       request as {},
@@ -3414,6 +3564,92 @@ export class WebhooksClient {
   }
 
   /**
+   * Return a fully-qualified toolVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} tool
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string
+  ) {
+    return this.pathTemplates.toolVersionPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      tool: tool,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
+  }
+
+  /**
+   * Parse the agent from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
+  }
+
+  /**
+   * Parse the tool from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the tool.
+   */
+  matchToolFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
+  }
+
+  /**
+   * Parse the version from ToolVersion resource.
+   *
+   * @param {string} toolVersionName
+   *   A fully-qualified path representing ToolVersion resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromToolVersionName(toolVersionName: string) {
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
+  }
+
+  /**
    * Return a fully-qualified version resource name string.
    *
    * @param {string} project
@@ -3570,6 +3806,7 @@ export class WebhooksClient {
   close(): Promise<void> {
     if (this.webhooksStub && !this._terminated) {
       return this.webhooksStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class RuleSetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('contentwarehouse');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class RuleSetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -491,7 +494,36 @@ export class RuleSetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createRuleSet(request, options, callback);
+    this._log.info('createRuleSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createRuleSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createRuleSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          (
+            | protos.google.cloud.contentwarehouse.v1.ICreateRuleSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRuleSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a ruleset. Returns NOT_FOUND if the ruleset does not exist.
@@ -583,7 +615,36 @@ export class RuleSetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRuleSet(request, options, callback);
+    this._log.info('getRuleSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRuleSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRuleSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IGetRuleSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRuleSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a ruleset. Returns INVALID_ARGUMENT if the name of the ruleset
@@ -678,7 +739,36 @@ export class RuleSetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRuleSet(request, options, callback);
+    this._log.info('updateRuleSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRuleSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRuleSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.IRuleSet,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IUpdateRuleSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRuleSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a ruleset. Returns NOT_FOUND if the document does not exist.
@@ -770,7 +860,36 @@ export class RuleSetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteRuleSet(request, options, callback);
+    this._log.info('deleteRuleSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteRuleSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteRuleSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IDeleteRuleSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRuleSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -876,11 +995,37 @@ export class RuleSetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRuleSets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
+          | protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contentwarehouse.v1.IRuleSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRuleSets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRuleSets request %j', request);
+    return this.innerApiCalls
+      .listRuleSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contentwarehouse.v1.IRuleSet[],
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest | null,
+          protos.google.cloud.contentwarehouse.v1.IListRuleSetsResponse,
+        ]) => {
+          this._log.info('listRuleSets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listRuleSets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -923,6 +1068,7 @@ export class RuleSetServiceClient {
     const defaultCallSettings = this._defaults['listRuleSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRuleSets stream %j', request);
     return this.descriptors.page.listRuleSets.createStream(
       this.innerApiCalls.listRuleSets as GaxCall,
       request,
@@ -977,6 +1123,7 @@ export class RuleSetServiceClient {
     const defaultCallSettings = this._defaults['listRuleSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRuleSets iterate %j', request);
     return this.descriptors.page.listRuleSets.asyncIterate(
       this.innerApiCalls['listRuleSets'] as GaxCall,
       request as {},
@@ -1359,6 +1506,7 @@ export class RuleSetServiceClient {
   close(): Promise<void> {
     if (this.ruleSetServiceStub && !this._terminated) {
       return this.ruleSetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

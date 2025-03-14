@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class KeyTrackingServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('kms-inventory');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class KeyTrackingServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -505,11 +508,36 @@ export class KeyTrackingServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getProtectedResourcesSummary(
-      request,
-      options,
-      callback
-    );
+    this._log.info('getProtectedResourcesSummary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+          | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getProtectedResourcesSummary response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getProtectedResourcesSummary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.inventory.v1.IProtectedResourcesSummary,
+          (
+            | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getProtectedResourcesSummary response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -636,15 +664,37 @@ export class KeyTrackingServiceClient {
         scope: request.scope ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.searchProtectedResources(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
+          | protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+          | null
+          | undefined,
+          protos.google.cloud.kms.inventory.v1.IProtectedResource
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchProtectedResources values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchProtectedResources request %j', request);
+    return this.innerApiCalls
+      .searchProtectedResources(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.kms.inventory.v1.IProtectedResource[],
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
+          protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
+        ]) => {
+          this._log.info('searchProtectedResources values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `searchProtectedResources`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.scope
@@ -707,6 +757,7 @@ export class KeyTrackingServiceClient {
     const defaultCallSettings = this._defaults['searchProtectedResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchProtectedResources stream %j', request);
     return this.descriptors.page.searchProtectedResources.createStream(
       this.innerApiCalls.searchProtectedResources as GaxCall,
       request,
@@ -781,6 +832,7 @@ export class KeyTrackingServiceClient {
     const defaultCallSettings = this._defaults['searchProtectedResources'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchProtectedResources iterate %j', request);
     return this.descriptors.page.searchProtectedResources.asyncIterate(
       this.innerApiCalls['searchProtectedResources'] as GaxCall,
       request as {},
@@ -1380,6 +1432,7 @@ export class KeyTrackingServiceClient {
   close(): Promise<void> {
     if (this.keyTrackingServiceStub && !this._terminated) {
       return this.keyTrackingServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class WorkstationsClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('workstations');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class WorkstationsClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -756,7 +759,36 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getWorkstationCluster(request, options, callback);
+    this._log.info('getWorkstationCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+          | protos.google.cloud.workstations.v1beta.IGetWorkstationClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkstationCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkstationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+          (
+            | protos.google.cloud.workstations.v1beta.IGetWorkstationClusterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkstationCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested workstation configuration.
@@ -852,7 +884,36 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getWorkstationConfig(request, options, callback);
+    this._log.info('getWorkstationConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+          | protos.google.cloud.workstations.v1beta.IGetWorkstationConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkstationConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkstationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+          (
+            | protos.google.cloud.workstations.v1beta.IGetWorkstationConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkstationConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the requested workstation.
@@ -948,7 +1009,36 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getWorkstation(request, options, callback);
+    this._log.info('getWorkstation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workstations.v1beta.IWorkstation,
+          | protos.google.cloud.workstations.v1beta.IGetWorkstationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getWorkstation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getWorkstation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workstations.v1beta.IWorkstation,
+          (
+            | protos.google.cloud.workstations.v1beta.IGetWorkstationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getWorkstation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a short-lived credential that can be used to send authenticated and
@@ -1055,7 +1145,36 @@ export class WorkstationsClient {
         workstation: request.workstation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.generateAccessToken(request, options, callback);
+    this._log.info('generateAccessToken request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.workstations.v1beta.IGenerateAccessTokenResponse,
+          | protos.google.cloud.workstations.v1beta.IGenerateAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('generateAccessToken response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .generateAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.workstations.v1beta.IGenerateAccessTokenResponse,
+          (
+            | protos.google.cloud.workstations.v1beta.IGenerateAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAccessToken response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1165,11 +1284,37 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createWorkstationCluster(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWorkstationCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWorkstationCluster request %j', request);
+    return this.innerApiCalls
+      .createWorkstationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkstationCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createWorkstationCluster()`.
@@ -1190,6 +1335,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createWorkstationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1315,11 +1461,37 @@ export class WorkstationsClient {
         'workstation_cluster.name': request.workstationCluster!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateWorkstationCluster(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWorkstationCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWorkstationCluster request %j', request);
+    return this.innerApiCalls
+      .updateWorkstationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkstationCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateWorkstationCluster()`.
@@ -1340,6 +1512,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateWorkstationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1465,11 +1638,37 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteWorkstationCluster(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWorkstationCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWorkstationCluster request %j', request);
+    return this.innerApiCalls
+      .deleteWorkstationCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationCluster,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkstationCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteWorkstationCluster()`.
@@ -1490,6 +1689,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteWorkstationCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1612,11 +1812,37 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createWorkstationConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWorkstationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWorkstationConfig request %j', request);
+    return this.innerApiCalls
+      .createWorkstationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkstationConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createWorkstationConfig()`.
@@ -1637,6 +1863,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createWorkstationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1762,11 +1989,37 @@ export class WorkstationsClient {
         'workstation_config.name': request.workstationConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateWorkstationConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWorkstationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWorkstationConfig request %j', request);
+    return this.innerApiCalls
+      .updateWorkstationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkstationConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateWorkstationConfig()`.
@@ -1787,6 +2040,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateWorkstationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1912,11 +2166,37 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteWorkstationConfig(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWorkstationConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWorkstationConfig request %j', request);
+    return this.innerApiCalls
+      .deleteWorkstationConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstationConfig,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkstationConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteWorkstationConfig()`.
@@ -1937,6 +2217,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteWorkstationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2059,7 +2340,37 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createWorkstation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createWorkstation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createWorkstation request %j', request);
+    return this.innerApiCalls
+      .createWorkstation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createWorkstation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createWorkstation()`.
@@ -2080,6 +2391,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('createWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2205,7 +2517,37 @@ export class WorkstationsClient {
         'workstation.name': request.workstation!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateWorkstation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateWorkstation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateWorkstation request %j', request);
+    return this.innerApiCalls
+      .updateWorkstation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateWorkstation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateWorkstation()`.
@@ -2226,6 +2568,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('updateWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2347,7 +2690,37 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteWorkstation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteWorkstation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteWorkstation request %j', request);
+    return this.innerApiCalls
+      .deleteWorkstation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteWorkstation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteWorkstation()`.
@@ -2368,6 +2741,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('deleteWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2489,7 +2863,37 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startWorkstation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startWorkstation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startWorkstation request %j', request);
+    return this.innerApiCalls
+      .startWorkstation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startWorkstation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startWorkstation()`.
@@ -2510,6 +2914,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('startWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2631,7 +3036,37 @@ export class WorkstationsClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopWorkstation(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopWorkstation response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopWorkstation request %j', request);
+    return this.innerApiCalls
+      .stopWorkstation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.workstations.v1beta.IWorkstation,
+            protos.google.cloud.workstations.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopWorkstation response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopWorkstation()`.
@@ -2652,6 +3087,7 @@ export class WorkstationsClient {
       protos.google.cloud.workstations.v1beta.OperationMetadata
     >
   > {
+    this._log.info('stopWorkstation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2763,11 +3199,33 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWorkstationClusters(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workstations.v1beta.IListWorkstationClustersRequest,
+          | protos.google.cloud.workstations.v1beta.IListWorkstationClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.workstations.v1beta.IWorkstationCluster
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkstationClusters values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkstationClusters request %j', request);
+    return this.innerApiCalls
+      .listWorkstationClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workstations.v1beta.IWorkstationCluster[],
+          protos.google.cloud.workstations.v1beta.IListWorkstationClustersRequest | null,
+          protos.google.cloud.workstations.v1beta.IListWorkstationClustersResponse,
+        ]) => {
+          this._log.info('listWorkstationClusters values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2807,6 +3265,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listWorkstationClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkstationClusters stream %j', request);
     return this.descriptors.page.listWorkstationClusters.createStream(
       this.innerApiCalls.listWorkstationClusters as GaxCall,
       request,
@@ -2854,6 +3313,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listWorkstationClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkstationClusters iterate %j', request);
     return this.descriptors.page.listWorkstationClusters.asyncIterate(
       this.innerApiCalls['listWorkstationClusters'] as GaxCall,
       request as {},
@@ -2956,11 +3416,33 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWorkstationConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workstations.v1beta.IListWorkstationConfigsRequest,
+          | protos.google.cloud.workstations.v1beta.IListWorkstationConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workstations.v1beta.IWorkstationConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkstationConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkstationConfigs request %j', request);
+    return this.innerApiCalls
+      .listWorkstationConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workstations.v1beta.IWorkstationConfig[],
+          protos.google.cloud.workstations.v1beta.IListWorkstationConfigsRequest | null,
+          protos.google.cloud.workstations.v1beta.IListWorkstationConfigsResponse,
+        ]) => {
+          this._log.info('listWorkstationConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3000,6 +3482,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkstationConfigs stream %j', request);
     return this.descriptors.page.listWorkstationConfigs.createStream(
       this.innerApiCalls.listWorkstationConfigs as GaxCall,
       request,
@@ -3047,6 +3530,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkstationConfigs iterate %j', request);
     return this.descriptors.page.listWorkstationConfigs.asyncIterate(
       this.innerApiCalls['listWorkstationConfigs'] as GaxCall,
       request as {},
@@ -3150,11 +3634,33 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listUsableWorkstationConfigs(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsRequest,
+          | protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workstations.v1beta.IWorkstationConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsableWorkstationConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsableWorkstationConfigs request %j', request);
+    return this.innerApiCalls
+      .listUsableWorkstationConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workstations.v1beta.IWorkstationConfig[],
+          protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsRequest | null,
+          protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsResponse,
+        ]) => {
+          this._log.info('listUsableWorkstationConfigs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3194,6 +3700,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listUsableWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsableWorkstationConfigs stream %j', request);
     return this.descriptors.page.listUsableWorkstationConfigs.createStream(
       this.innerApiCalls.listUsableWorkstationConfigs as GaxCall,
       request,
@@ -3241,6 +3748,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listUsableWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsableWorkstationConfigs iterate %j', request);
     return this.descriptors.page.listUsableWorkstationConfigs.asyncIterate(
       this.innerApiCalls['listUsableWorkstationConfigs'] as GaxCall,
       request as {},
@@ -3343,7 +3851,33 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listWorkstations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workstations.v1beta.IListWorkstationsRequest,
+          | protos.google.cloud.workstations.v1beta.IListWorkstationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workstations.v1beta.IWorkstation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkstations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkstations request %j', request);
+    return this.innerApiCalls
+      .listWorkstations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workstations.v1beta.IWorkstation[],
+          protos.google.cloud.workstations.v1beta.IListWorkstationsRequest | null,
+          protos.google.cloud.workstations.v1beta.IListWorkstationsResponse,
+        ]) => {
+          this._log.info('listWorkstations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3383,6 +3917,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkstations stream %j', request);
     return this.descriptors.page.listWorkstations.createStream(
       this.innerApiCalls.listWorkstations as GaxCall,
       request,
@@ -3430,6 +3965,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listWorkstations iterate %j', request);
     return this.descriptors.page.listWorkstations.asyncIterate(
       this.innerApiCalls['listWorkstations'] as GaxCall,
       request as {},
@@ -3533,11 +4069,33 @@ export class WorkstationsClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listUsableWorkstations(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workstations.v1beta.IListUsableWorkstationsRequest,
+          | protos.google.cloud.workstations.v1beta.IListUsableWorkstationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workstations.v1beta.IWorkstation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsableWorkstations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsableWorkstations request %j', request);
+    return this.innerApiCalls
+      .listUsableWorkstations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workstations.v1beta.IWorkstation[],
+          protos.google.cloud.workstations.v1beta.IListUsableWorkstationsRequest | null,
+          protos.google.cloud.workstations.v1beta.IListUsableWorkstationsResponse,
+        ]) => {
+          this._log.info('listUsableWorkstations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3577,6 +4135,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listUsableWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsableWorkstations stream %j', request);
     return this.descriptors.page.listUsableWorkstations.createStream(
       this.innerApiCalls.listUsableWorkstations as GaxCall,
       request,
@@ -3624,6 +4183,7 @@ export class WorkstationsClient {
     const defaultCallSettings = this._defaults['listUsableWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsableWorkstations iterate %j', request);
     return this.descriptors.page.listUsableWorkstations.asyncIterate(
       this.innerApiCalls['listUsableWorkstations'] as GaxCall,
       request as {},
@@ -4368,6 +4928,7 @@ export class WorkstationsClient {
   close(): Promise<void> {
     if (this.workstationsStub && !this._terminated) {
       return this.workstationsStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

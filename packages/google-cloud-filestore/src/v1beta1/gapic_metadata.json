@@ -50,6 +50,11 @@
                 "revertInstance"
               ]
             },
+            "PromoteReplica": {
+              "methods": [
+                "promoteReplica"
+              ]
+            },
             "DeleteInstance": {
               "methods": [
                 "deleteInstance"
@@ -171,6 +176,11 @@
             "RevertInstance": {
               "methods": [
                 "revertInstance"
+              ]
+            },
+            "PromoteReplica": {
+              "methods": [
+                "promoteReplica"
               ]
             },
             "DeleteInstance": {

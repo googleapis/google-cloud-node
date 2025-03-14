@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class SynonymSetServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('contentwarehouse');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class SynonymSetServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -500,7 +503,36 @@ export class SynonymSetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createSynonymSet(request, options, callback);
+    this._log.info('createSynonymSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSynonymSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSynonymSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          (
+            | protos.google.cloud.contentwarehouse.v1.ICreateSynonymSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSynonymSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a SynonymSet for a particular context.
@@ -594,7 +626,36 @@ export class SynonymSetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSynonymSet(request, options, callback);
+    this._log.info('getSynonymSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSynonymSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSynonymSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IGetSynonymSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSynonymSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Remove the existing SynonymSet for the context and replaces it
@@ -696,7 +757,36 @@ export class SynonymSetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSynonymSet(request, options, callback);
+    this._log.info('updateSynonymSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSynonymSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSynonymSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IUpdateSynonymSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSynonymSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a SynonymSet for a given context.
@@ -795,7 +885,36 @@ export class SynonymSetServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSynonymSet(request, options, callback);
+    this._log.info('deleteSynonymSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSynonymSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSynonymSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.contentwarehouse.v1.IDeleteSynonymSetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSynonymSet response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -901,11 +1020,37 @@ export class SynonymSetServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSynonymSets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
+          | protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSynonymSets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSynonymSets request %j', request);
+    return this.innerApiCalls
+      .listSynonymSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.contentwarehouse.v1.ISynonymSet[],
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest | null,
+          protos.google.cloud.contentwarehouse.v1.IListSynonymSetsResponse,
+        ]) => {
+          this._log.info('listSynonymSets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSynonymSets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -948,6 +1093,7 @@ export class SynonymSetServiceClient {
     const defaultCallSettings = this._defaults['listSynonymSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSynonymSets stream %j', request);
     return this.descriptors.page.listSynonymSets.createStream(
       this.innerApiCalls.listSynonymSets as GaxCall,
       request,
@@ -1002,6 +1148,7 @@ export class SynonymSetServiceClient {
     const defaultCallSettings = this._defaults['listSynonymSets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSynonymSets iterate %j', request);
     return this.descriptors.page.listSynonymSets.asyncIterate(
       this.innerApiCalls['listSynonymSets'] as GaxCall,
       request as {},
@@ -1384,6 +1531,7 @@ export class SynonymSetServiceClient {
   close(): Promise<void> {
     if (this.synonymSetServiceStub && !this._terminated) {
       return this.synonymSetServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

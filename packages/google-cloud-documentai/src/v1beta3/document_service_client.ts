@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,6 +58,8 @@ export class DocumentServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('documentai');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -93,7 +96,7 @@ export class DocumentServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -602,7 +605,36 @@ export class DocumentServiceClient {
         dataset: request.dataset ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDocument(request, options, callback);
+    this._log.info('getDocument request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+          | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDocument response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDocument(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+          (
+            | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDocument response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the `DatasetSchema` of a `Dataset`.
@@ -702,7 +734,36 @@ export class DocumentServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getDatasetSchema(request, options, callback);
+    this._log.info('getDatasetSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDatasetSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDatasetSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          (
+            | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDatasetSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a `DatasetSchema`.
@@ -801,7 +862,36 @@ export class DocumentServiceClient {
         'dataset_schema.name': request.datasetSchema!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDatasetSchema(request, options, callback);
+    this._log.info('updateDatasetSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateDatasetSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateDatasetSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.documentai.v1beta3.IDatasetSchema,
+          (
+            | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDatasetSchema response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -912,7 +1002,37 @@ export class DocumentServiceClient {
         'dataset.name': request.dataset!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDataset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IDataset,
+            protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateDataset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateDataset request %j', request);
+    return this.innerApiCalls
+      .updateDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IDataset,
+            protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateDataset()`.
@@ -933,6 +1053,7 @@ export class DocumentServiceClient {
       protos.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata
     >
   > {
+    this._log.info('updateDataset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1053,7 +1174,37 @@ export class DocumentServiceClient {
         dataset: request.dataset ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importDocuments(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+            protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importDocuments response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importDocuments request %j', request);
+    return this.innerApiCalls
+      .importDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+            protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importDocuments response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importDocuments()`.
@@ -1074,6 +1225,7 @@ export class DocumentServiceClient {
       protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata
     >
   > {
+    this._log.info('importDocuments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1196,7 +1348,37 @@ export class DocumentServiceClient {
         dataset: request.dataset ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchDeleteDocuments(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchDeleteDocuments response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchDeleteDocuments request %j', request);
+    return this.innerApiCalls
+      .batchDeleteDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteDocuments response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchDeleteDocuments()`.
@@ -1217,6 +1399,7 @@ export class DocumentServiceClient {
       protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata
     >
   > {
+    this._log.info('batchDeleteDocuments long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1372,7 +1555,33 @@ export class DocumentServiceClient {
         dataset: request.dataset ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listDocuments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+          | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDocuments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDocuments request %j', request);
+    return this.innerApiCalls
+      .listDocuments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
+          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest | null,
+          protos.google.cloud.documentai.v1beta3.IListDocumentsResponse,
+        ]) => {
+          this._log.info('listDocuments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1456,6 +1665,7 @@ export class DocumentServiceClient {
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
       request,
@@ -1547,6 +1757,7 @@ export class DocumentServiceClient {
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
       request as {},
@@ -2234,6 +2445,7 @@ export class DocumentServiceClient {
   close(): Promise<void> {
     if (this.documentServiceStub && !this._terminated) {
       return this.documentServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

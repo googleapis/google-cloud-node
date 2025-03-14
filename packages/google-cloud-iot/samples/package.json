@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "repository": "googleapis/nodejs-iot",
   "private": true,
@@ -15,7 +15,7 @@
     "test": "echo tests deprecated"
   },
   "dependencies": {
-    "@google-cloud/iot": "^4.3.0",
+    "@google-cloud/iot": "^5.0.0",
     "@google-cloud/pubsub": "^4.0.0",
     "@google-cloud/storage": "^7.0.0"
   },

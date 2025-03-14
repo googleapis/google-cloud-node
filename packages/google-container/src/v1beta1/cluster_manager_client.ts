@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class ClusterManagerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('container');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -86,7 +89,7 @@ export class ClusterManagerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -500,7 +503,33 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listClusters(request, options, callback);
+    this._log.info('listClusters request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IListClustersResponse,
+          | protos.google.container.v1beta1.IListClustersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listClusters response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listClusters(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IListClustersResponse,
+          protos.google.container.v1beta1.IListClustersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listClusters response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the details for a specific cluster.
@@ -598,7 +627,31 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getCluster(request, options, callback);
+    this._log.info('getCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.ICluster,
+          protos.google.container.v1beta1.IGetClusterRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.ICluster,
+          protos.google.container.v1beta1.IGetClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a cluster, consisting of the specified number and type of Google
@@ -710,7 +763,33 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createCluster(request, options, callback);
+    this._log.info('createCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ICreateClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ICreateClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the settings for a specific cluster.
@@ -812,7 +891,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateCluster(request, options, callback);
+    this._log.info('updateCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IUpdateClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IUpdateClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the version and/or image type of a specific node pool.
@@ -1007,7 +1112,33 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNodePool(request, options, callback);
+    this._log.info('updateNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IUpdateNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IUpdateNodePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the autoscaling settings of a specific node pool.
@@ -1126,11 +1257,36 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setNodePoolAutoscaling(
-      request,
-      options,
-      callback
-    );
+    this._log.info('setNodePoolAutoscaling request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetNodePoolAutoscalingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setNodePoolAutoscaling response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setNodePoolAutoscaling(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          (
+            | protos.google.container.v1beta1.ISetNodePoolAutoscalingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setNodePoolAutoscaling response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the logging service for a specific cluster.
@@ -1248,7 +1404,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setLoggingService(request, options, callback);
+    this._log.info('setLoggingService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetLoggingServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setLoggingService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setLoggingService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetLoggingServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setLoggingService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the monitoring service for a specific cluster.
@@ -1366,7 +1548,36 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setMonitoringService(request, options, callback);
+    this._log.info('setMonitoringService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetMonitoringServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setMonitoringService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setMonitoringService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          (
+            | protos.google.container.v1beta1.ISetMonitoringServiceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setMonitoringService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the addons for a specific cluster.
@@ -1475,7 +1686,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setAddonsConfig(request, options, callback);
+    this._log.info('setAddonsConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetAddonsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setAddonsConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setAddonsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetAddonsConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setAddonsConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the locations for a specific cluster.
@@ -1592,7 +1829,33 @@ export class ClusterManagerClient {
       'SetLocations is deprecated and may be removed in a future version.',
       'DeprecationWarning'
     );
-    return this.innerApiCalls.setLocations(request, options, callback);
+    this._log.info('setLocations request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetLocationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setLocations response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setLocations(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetLocationsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setLocations response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the master for a specific cluster.
@@ -1703,7 +1966,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateMaster(request, options, callback);
+    this._log.info('updateMaster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IUpdateMasterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateMaster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateMaster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IUpdateMasterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMaster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets master auth materials. Currently supports changing the admin password
@@ -1809,7 +2098,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setMasterAuth(request, options, callback);
+    this._log.info('setMasterAuth request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetMasterAuthRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setMasterAuth response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setMasterAuth(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetMasterAuthRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setMasterAuth response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the cluster, including the Kubernetes endpoint and all worker
@@ -1917,7 +2232,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteCluster(request, options, callback);
+    this._log.info('deleteCluster request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IDeleteClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteCluster response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IDeleteClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists all operations in a project in the specified zone or all zones.
@@ -2014,7 +2355,33 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listOperations(request, options, callback);
+    this._log.info('listOperations request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IListOperationsResponse,
+          | protos.google.container.v1beta1.IListOperationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listOperations response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listOperations(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IListOperationsResponse,
+          protos.google.container.v1beta1.IListOperationsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listOperations response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the specified operation.
@@ -2114,7 +2481,33 @@ export class ClusterManagerClient {
         operation_id: request.operationId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getOperation(request, options, callback);
+    this._log.info('getOperation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IGetOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IGetOperationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getOperation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Cancels the specified operation.
@@ -2220,7 +2613,33 @@ export class ClusterManagerClient {
         operation_id: request.operationId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.cancelOperation(request, options, callback);
+    this._log.info('cancelOperation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.container.v1beta1.ICancelOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelOperation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .cancelOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.container.v1beta1.ICancelOperationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelOperation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns configuration info about the Google Kubernetes Engine service.
@@ -2322,7 +2741,33 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getServerConfig(request, options, callback);
+    this._log.info('getServerConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IServerConfig,
+          | protos.google.container.v1beta1.IGetServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getServerConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IServerConfig,
+          protos.google.container.v1beta1.IGetServerConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getServerConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the public component of the cluster signing keys in
@@ -2408,7 +2853,33 @@ export class ClusterManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getJsonWebKeys(request, options, callback);
+    this._log.info('getJSONWebKeys request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+          | protos.google.container.v1beta1.IGetJSONWebKeysRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getJSONWebKeys response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getJsonWebKeys(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IGetJSONWebKeysResponse,
+          protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getJSONWebKeys response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists the node pools for a cluster.
@@ -2508,7 +2979,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listNodePools(request, options, callback);
+    this._log.info('listNodePools request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IListNodePoolsResponse,
+          | protos.google.container.v1beta1.IListNodePoolsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listNodePools response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listNodePools(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IListNodePoolsResponse,
+          protos.google.container.v1beta1.IListNodePoolsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listNodePools response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves the requested node pool.
@@ -2613,7 +3110,33 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getNodePool(request, options, callback);
+    this._log.info('getNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.INodePool,
+          | protos.google.container.v1beta1.IGetNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.INodePool,
+          protos.google.container.v1beta1.IGetNodePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a node pool for a cluster.
@@ -2716,7 +3239,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createNodePool(request, options, callback);
+    this._log.info('createNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ICreateNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ICreateNodePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a node pool from a cluster.
@@ -2821,7 +3370,33 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteNodePool(request, options, callback);
+    this._log.info('deleteNodePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IDeleteNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteNodePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IDeleteNodePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNodePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * CompleteNodePoolUpgrade will signal an on-going node pool upgrade to
@@ -2920,11 +3495,36 @@ export class ClusterManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.completeNodePoolUpgrade(
-      request,
-      options,
-      callback
-    );
+    this._log.info('completeNodePoolUpgrade request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.container.v1beta1.ICompleteNodePoolUpgradeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeNodePoolUpgrade response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeNodePoolUpgrade(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.container.v1beta1.ICompleteNodePoolUpgradeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('completeNodePoolUpgrade response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Rolls back a previously Aborted or Failed NodePool upgrade.
@@ -3045,11 +3645,36 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rollbackNodePoolUpgrade(
-      request,
-      options,
-      callback
-    );
+    this._log.info('rollbackNodePoolUpgrade request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IRollbackNodePoolUpgradeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rollbackNodePoolUpgrade response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rollbackNodePoolUpgrade(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          (
+            | protos.google.container.v1beta1.IRollbackNodePoolUpgradeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('rollbackNodePoolUpgrade response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the NodeManagement options for a node pool.
@@ -3162,7 +3787,36 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setNodePoolManagement(request, options, callback);
+    this._log.info('setNodePoolManagement request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetNodePoolManagementRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setNodePoolManagement response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setNodePoolManagement(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          (
+            | protos.google.container.v1beta1.ISetNodePoolManagementRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setNodePoolManagement response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets labels on a cluster.
@@ -3269,7 +3923,31 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setLabels(request, options, callback);
+    this._log.info('setLabels request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetLabelsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setLabels response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetLabelsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setLabels response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Enables or disables the ABAC authorization mechanism on a cluster.
@@ -3371,7 +4049,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setLegacyAbac(request, options, callback);
+    this._log.info('setLegacyAbac request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetLegacyAbacRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setLegacyAbac response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setLegacyAbac(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetLegacyAbacRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setLegacyAbac response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Starts master IP rotation.
@@ -3479,7 +4183,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startIpRotation(request, options, callback);
+    this._log.info('startIPRotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.IStartIPRotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('startIPRotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .startIpRotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.IStartIPRotationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startIPRotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Completes master IP rotation.
@@ -3585,7 +4315,36 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.completeIpRotation(request, options, callback);
+    this._log.info('completeIPRotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ICompleteIPRotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeIPRotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeIpRotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          (
+            | protos.google.container.v1beta1.ICompleteIPRotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('completeIPRotation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * SetNodePoolSizeRequest sets the size of a node pool. The new size will be
@@ -3700,7 +4459,33 @@ export class ClusterManagerClient {
         node_pool_id: request.nodePoolId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setNodePoolSize(request, options, callback);
+    this._log.info('setNodePoolSize request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetNodePoolSizeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setNodePoolSize response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setNodePoolSize(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetNodePoolSizeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setNodePoolSize response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Enables or disables Network Policy for a cluster.
@@ -3808,7 +4593,33 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setNetworkPolicy(request, options, callback);
+    this._log.info('setNetworkPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetNetworkPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setNetworkPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setNetworkPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          protos.google.container.v1beta1.ISetNetworkPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setNetworkPolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sets the maintenance policy for a cluster.
@@ -3915,7 +4726,36 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.setMaintenancePolicy(request, options, callback);
+    this._log.info('setMaintenancePolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IOperation,
+          | protos.google.container.v1beta1.ISetMaintenancePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setMaintenancePolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setMaintenancePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IOperation,
+          (
+            | protos.google.container.v1beta1.ISetMaintenancePolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('setMaintenancePolicy response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Checks the cluster compatibility with Autopilot mode, and returns a list of
@@ -4013,11 +4853,36 @@ export class ClusterManagerClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.checkAutopilotCompatibility(
-      request,
-      options,
-      callback
-    );
+    this._log.info('checkAutopilotCompatibility request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+          | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkAutopilotCompatibility response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkAutopilotCompatibility(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.ICheckAutopilotCompatibilityResponse,
+          (
+            | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkAutopilotCompatibility response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Fetches locations that offer Google Kubernetes Engine.
@@ -4102,7 +4967,33 @@ export class ClusterManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listLocations(request, options, callback);
+    this._log.info('listLocations request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.container.v1beta1.IListLocationsResponse,
+          | protos.google.container.v1beta1.IListLocationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listLocations response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listLocations(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.container.v1beta1.IListLocationsResponse,
+          protos.google.container.v1beta1.IListLocationsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listLocations response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -4210,11 +5101,37 @@ export class ClusterManagerClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listUsableSubnetworks(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.container.v1beta1.IListUsableSubnetworksRequest,
+          | protos.google.container.v1beta1.IListUsableSubnetworksResponse
+          | null
+          | undefined,
+          protos.google.container.v1beta1.IUsableSubnetwork
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsableSubnetworks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsableSubnetworks request %j', request);
+    return this.innerApiCalls
+      .listUsableSubnetworks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.container.v1beta1.IUsableSubnetwork[],
+          protos.google.container.v1beta1.IListUsableSubnetworksRequest | null,
+          protos.google.container.v1beta1.IListUsableSubnetworksResponse,
+        ]) => {
+          this._log.info('listUsableSubnetworks values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listUsableSubnetworks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4259,6 +5176,7 @@ export class ClusterManagerClient {
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsableSubnetworks stream %j', request);
     return this.descriptors.page.listUsableSubnetworks.createStream(
       this.innerApiCalls.listUsableSubnetworks as GaxCall,
       request,
@@ -4315,6 +5233,7 @@ export class ClusterManagerClient {
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsableSubnetworks iterate %j', request);
     return this.descriptors.page.listUsableSubnetworks.asyncIterate(
       this.innerApiCalls['listUsableSubnetworks'] as GaxCall,
       request as {},
@@ -4331,6 +5250,7 @@ export class ClusterManagerClient {
   close(): Promise<void> {
     if (this.clusterManagerStub && !this._terminated) {
       return this.clusterManagerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

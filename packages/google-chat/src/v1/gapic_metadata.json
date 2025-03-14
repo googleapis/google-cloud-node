@@ -125,6 +125,16 @@
                 "getSpaceEvent"
               ]
             },
+            "GetSpaceNotificationSetting": {
+              "methods": [
+                "getSpaceNotificationSetting"
+              ]
+            },
+            "UpdateSpaceNotificationSetting": {
+              "methods": [
+                "updateSpaceNotificationSetting"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -285,6 +295,16 @@
             "GetSpaceEvent": {
               "methods": [
                 "getSpaceEvent"
+              ]
+            },
+            "GetSpaceNotificationSetting": {
+              "methods": [
+                "getSpaceNotificationSetting"
+              ]
+            },
+            "UpdateSpaceNotificationSetting": {
+              "methods": [
+                "updateSpaceNotificationSetting"
               ]
             },
             "ListMessages": {

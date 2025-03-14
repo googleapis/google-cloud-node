@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class LicenseManagementServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('procurement');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class LicenseManagementServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -485,7 +488,36 @@ export class LicenseManagementServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getLicensePool(request, options, callback);
+    this._log.info('getLicensePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLicensePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLicensePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IGetLicensePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getLicensePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the license pool if one exists for this Order.
@@ -587,7 +619,36 @@ export class LicenseManagementServiceClient {
         'license_pool.name': request.licensePool!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateLicensePool(request, options, callback);
+    this._log.info('updateLicensePool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateLicensePool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateLicensePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensePool,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IUpdateLicensePoolRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLicensePool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Assigns a license to a user.
@@ -686,7 +747,36 @@ export class LicenseManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.assign(request, options, callback);
+    this._log.info('assign request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('assign response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .assign(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.IAssignResponse,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IAssignRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('assign response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Unassigns a license from a user.
@@ -785,7 +875,36 @@ export class LicenseManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.unassign(request, options, callback);
+    this._log.info('unassign request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('unassign response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .unassign(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.IUnassignResponse,
+          (
+            | protos.google.cloud.commerce.consumer.procurement.v1.IUnassignRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('unassign response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -885,15 +1004,37 @@ export class LicenseManagementServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.enumerateLicensedUsers(
-      request,
-      options,
-      callback
-    );
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
+          | protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse
+          | null
+          | undefined,
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('enumerateLicensedUsers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enumerateLicensedUsers request %j', request);
+    return this.innerApiCalls
+      .enumerateLicensedUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.commerce.consumer.procurement.v1.ILicensedUser[],
+          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest | null,
+          protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersResponse,
+        ]) => {
+          this._log.info('enumerateLicensedUsers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `enumerateLicensedUsers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -930,6 +1071,7 @@ export class LicenseManagementServiceClient {
     const defaultCallSettings = this._defaults['enumerateLicensedUsers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('enumerateLicensedUsers stream %j', request);
     return this.descriptors.page.enumerateLicensedUsers.createStream(
       this.innerApiCalls.enumerateLicensedUsers as GaxCall,
       request,
@@ -978,6 +1120,7 @@ export class LicenseManagementServiceClient {
     const defaultCallSettings = this._defaults['enumerateLicensedUsers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('enumerateLicensedUsers iterate %j', request);
     return this.descriptors.page.enumerateLicensedUsers.asyncIterate(
       this.innerApiCalls['enumerateLicensedUsers'] as GaxCall,
       request as {},
@@ -1072,6 +1215,7 @@ export class LicenseManagementServiceClient {
   close(): Promise<void> {
     if (this.licenseManagementServiceStub && !this._terminated) {
       return this.licenseManagementServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

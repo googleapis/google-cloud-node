@@ -1277,6 +1277,1126 @@
                 return Date;
             })();
     
+            type.DateTime = (function() {
+    
+                /**
+                 * Properties of a DateTime.
+                 * @memberof google.type
+                 * @interface IDateTime
+                 * @property {number|null} [year] DateTime year
+                 * @property {number|null} [month] DateTime month
+                 * @property {number|null} [day] DateTime day
+                 * @property {number|null} [hours] DateTime hours
+                 * @property {number|null} [minutes] DateTime minutes
+                 * @property {number|null} [seconds] DateTime seconds
+                 * @property {number|null} [nanos] DateTime nanos
+                 * @property {google.protobuf.IDuration|null} [utcOffset] DateTime utcOffset
+                 * @property {google.type.ITimeZone|null} [timeZone] DateTime timeZone
+                 */
+    
+                /**
+                 * Constructs a new DateTime.
+                 * @memberof google.type
+                 * @classdesc Represents a DateTime.
+                 * @implements IDateTime
+                 * @constructor
+                 * @param {google.type.IDateTime=} [properties] Properties to set
+                 */
+                function DateTime(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DateTime year.
+                 * @member {number} year
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.year = 0;
+    
+                /**
+                 * DateTime month.
+                 * @member {number} month
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.month = 0;
+    
+                /**
+                 * DateTime day.
+                 * @member {number} day
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.day = 0;
+    
+                /**
+                 * DateTime hours.
+                 * @member {number} hours
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.hours = 0;
+    
+                /**
+                 * DateTime minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.minutes = 0;
+    
+                /**
+                 * DateTime seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.seconds = 0;
+    
+                /**
+                 * DateTime nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.nanos = 0;
+    
+                /**
+                 * DateTime utcOffset.
+                 * @member {google.protobuf.IDuration|null|undefined} utcOffset
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.utcOffset = null;
+    
+                /**
+                 * DateTime timeZone.
+                 * @member {google.type.ITimeZone|null|undefined} timeZone
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.timeZone = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * DateTime timeOffset.
+                 * @member {"utcOffset"|"timeZone"|undefined} timeOffset
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                Object.defineProperty(DateTime.prototype, "timeOffset", {
+                    get: $util.oneOfGetter($oneOfFields = ["utcOffset", "timeZone"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new DateTime instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime=} [properties] Properties to set
+                 * @returns {google.type.DateTime} DateTime instance
+                 */
+                DateTime.create = function create(properties) {
+                    return new DateTime(properties);
+                };
+    
+                /**
+                 * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DateTime.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.nanos);
+                    if (message.utcOffset != null && Object.hasOwnProperty.call(message, "utcOffset"))
+                        $root.google.protobuf.Duration.encode(message.utcOffset, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                        $root.google.type.TimeZone.encode(message.timeZone, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DateTime.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DateTime message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.DateTime} DateTime
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DateTime.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.DateTime();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.year = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.month = reader.int32();
+                                break;
+                            }
+                        case 3: {
+                                message.day = reader.int32();
+                                break;
+                            }
+                        case 4: {
+                                message.hours = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.minutes = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.seconds = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.nanos = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 9: {
+                                message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DateTime message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.DateTime} DateTime
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DateTime.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DateTime message.
+                 * @function verify
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DateTime.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                        properties.timeOffset = 1;
+                        {
+                            var error = $root.google.protobuf.Duration.verify(message.utcOffset);
+                            if (error)
+                                return "utcOffset." + error;
+                        }
+                    }
+                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                        if (properties.timeOffset === 1)
+                            return "timeOffset: multiple values";
+                        properties.timeOffset = 1;
+                        {
+                            var error = $root.google.type.TimeZone.verify(message.timeZone);
+                            if (error)
+                                return "timeZone." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.DateTime} DateTime
+                 */
+                DateTime.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.DateTime)
+                        return object;
+                    var message = new $root.google.type.DateTime();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    if (object.utcOffset != null) {
+                        if (typeof object.utcOffset !== "object")
+                            throw TypeError(".google.type.DateTime.utcOffset: object expected");
+                        message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset);
+                    }
+                    if (object.timeZone != null) {
+                        if (typeof object.timeZone !== "object")
+                            throw TypeError(".google.type.DateTime.timeZone: object expected");
+                        message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DateTime message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.DateTime} message DateTime
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DateTime.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                        object.utcOffset = $root.google.protobuf.Duration.toObject(message.utcOffset, options);
+                        if (options.oneofs)
+                            object.timeOffset = "utcOffset";
+                    }
+                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                        object.timeZone = $root.google.type.TimeZone.toObject(message.timeZone, options);
+                        if (options.oneofs)
+                            object.timeOffset = "timeZone";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this DateTime to JSON.
+                 * @function toJSON
+                 * @memberof google.type.DateTime
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DateTime.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for DateTime
+                 * @function getTypeUrl
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                DateTime.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.DateTime";
+                };
+    
+                return DateTime;
+            })();
+    
+            type.TimeZone = (function() {
+    
+                /**
+                 * Properties of a TimeZone.
+                 * @memberof google.type
+                 * @interface ITimeZone
+                 * @property {string|null} [id] TimeZone id
+                 * @property {string|null} [version] TimeZone version
+                 */
+    
+                /**
+                 * Constructs a new TimeZone.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeZone.
+                 * @implements ITimeZone
+                 * @constructor
+                 * @param {google.type.ITimeZone=} [properties] Properties to set
+                 */
+                function TimeZone(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeZone id.
+                 * @member {string} id
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 */
+                TimeZone.prototype.id = "";
+    
+                /**
+                 * TimeZone version.
+                 * @member {string} version
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 */
+                TimeZone.prototype.version = "";
+    
+                /**
+                 * Creates a new TimeZone instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone=} [properties] Properties to set
+                 * @returns {google.type.TimeZone} TimeZone instance
+                 */
+                TimeZone.create = function create(properties) {
+                    return new TimeZone(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeZone.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeZone.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeZone message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeZone} TimeZone
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeZone.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeZone();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.id = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.version = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeZone message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeZone} TimeZone
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeZone.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeZone message.
+                 * @function verify
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeZone.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        if (!$util.isString(message.version))
+                            return "version: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeZone} TimeZone
+                 */
+                TimeZone.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeZone)
+                        return object;
+                    var message = new $root.google.type.TimeZone();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.version != null)
+                        message.version = String(object.version);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.TimeZone} message TimeZone
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeZone.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.version = "";
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = message.version;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeZone to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeZone.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TimeZone
+                 * @function getTypeUrl
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TimeZone.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.TimeZone";
+                };
+    
+                return TimeZone;
+            })();
+    
+            type.PostalAddress = (function() {
+    
+                /**
+                 * Properties of a PostalAddress.
+                 * @memberof google.type
+                 * @interface IPostalAddress
+                 * @property {number|null} [revision] PostalAddress revision
+                 * @property {string|null} [regionCode] PostalAddress regionCode
+                 * @property {string|null} [languageCode] PostalAddress languageCode
+                 * @property {string|null} [postalCode] PostalAddress postalCode
+                 * @property {string|null} [sortingCode] PostalAddress sortingCode
+                 * @property {string|null} [administrativeArea] PostalAddress administrativeArea
+                 * @property {string|null} [locality] PostalAddress locality
+                 * @property {string|null} [sublocality] PostalAddress sublocality
+                 * @property {Array.<string>|null} [addressLines] PostalAddress addressLines
+                 * @property {Array.<string>|null} [recipients] PostalAddress recipients
+                 * @property {string|null} [organization] PostalAddress organization
+                 */
+    
+                /**
+                 * Constructs a new PostalAddress.
+                 * @memberof google.type
+                 * @classdesc Represents a PostalAddress.
+                 * @implements IPostalAddress
+                 * @constructor
+                 * @param {google.type.IPostalAddress=} [properties] Properties to set
+                 */
+                function PostalAddress(properties) {
+                    this.addressLines = [];
+                    this.recipients = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * PostalAddress revision.
+                 * @member {number} revision
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.revision = 0;
+    
+                /**
+                 * PostalAddress regionCode.
+                 * @member {string} regionCode
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.regionCode = "";
+    
+                /**
+                 * PostalAddress languageCode.
+                 * @member {string} languageCode
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.languageCode = "";
+    
+                /**
+                 * PostalAddress postalCode.
+                 * @member {string} postalCode
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.postalCode = "";
+    
+                /**
+                 * PostalAddress sortingCode.
+                 * @member {string} sortingCode
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.sortingCode = "";
+    
+                /**
+                 * PostalAddress administrativeArea.
+                 * @member {string} administrativeArea
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.administrativeArea = "";
+    
+                /**
+                 * PostalAddress locality.
+                 * @member {string} locality
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.locality = "";
+    
+                /**
+                 * PostalAddress sublocality.
+                 * @member {string} sublocality
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.sublocality = "";
+    
+                /**
+                 * PostalAddress addressLines.
+                 * @member {Array.<string>} addressLines
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.addressLines = $util.emptyArray;
+    
+                /**
+                 * PostalAddress recipients.
+                 * @member {Array.<string>} recipients
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.recipients = $util.emptyArray;
+    
+                /**
+                 * PostalAddress organization.
+                 * @member {string} organization
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 */
+                PostalAddress.prototype.organization = "";
+    
+                /**
+                 * Creates a new PostalAddress instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {google.type.IPostalAddress=} [properties] Properties to set
+                 * @returns {google.type.PostalAddress} PostalAddress instance
+                 */
+                PostalAddress.create = function create(properties) {
+                    return new PostalAddress(properties);
+                };
+    
+                /**
+                 * Encodes the specified PostalAddress message. Does not implicitly {@link google.type.PostalAddress.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {google.type.IPostalAddress} message PostalAddress message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PostalAddress.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.revision != null && Object.hasOwnProperty.call(message, "revision"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.revision);
+                    if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.regionCode);
+                    if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.languageCode);
+                    if (message.postalCode != null && Object.hasOwnProperty.call(message, "postalCode"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.postalCode);
+                    if (message.sortingCode != null && Object.hasOwnProperty.call(message, "sortingCode"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.sortingCode);
+                    if (message.administrativeArea != null && Object.hasOwnProperty.call(message, "administrativeArea"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.administrativeArea);
+                    if (message.locality != null && Object.hasOwnProperty.call(message, "locality"))
+                        writer.uint32(/* id 7, wireType 2 =*/58).string(message.locality);
+                    if (message.sublocality != null && Object.hasOwnProperty.call(message, "sublocality"))
+                        writer.uint32(/* id 8, wireType 2 =*/66).string(message.sublocality);
+                    if (message.addressLines != null && message.addressLines.length)
+                        for (var i = 0; i < message.addressLines.length; ++i)
+                            writer.uint32(/* id 9, wireType 2 =*/74).string(message.addressLines[i]);
+                    if (message.recipients != null && message.recipients.length)
+                        for (var i = 0; i < message.recipients.length; ++i)
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.recipients[i]);
+                    if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
+                        writer.uint32(/* id 11, wireType 2 =*/90).string(message.organization);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified PostalAddress message, length delimited. Does not implicitly {@link google.type.PostalAddress.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {google.type.IPostalAddress} message PostalAddress message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                PostalAddress.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a PostalAddress message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.PostalAddress} PostalAddress
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PostalAddress.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.PostalAddress();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.revision = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.regionCode = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.languageCode = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.postalCode = reader.string();
+                                break;
+                            }
+                        case 5: {
+                                message.sortingCode = reader.string();
+                                break;
+                            }
+                        case 6: {
+                                message.administrativeArea = reader.string();
+                                break;
+                            }
+                        case 7: {
+                                message.locality = reader.string();
+                                break;
+                            }
+                        case 8: {
+                                message.sublocality = reader.string();
+                                break;
+                            }
+                        case 9: {
+                                if (!(message.addressLines && message.addressLines.length))
+                                    message.addressLines = [];
+                                message.addressLines.push(reader.string());
+                                break;
+                            }
+                        case 10: {
+                                if (!(message.recipients && message.recipients.length))
+                                    message.recipients = [];
+                                message.recipients.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.organization = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a PostalAddress message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.PostalAddress} PostalAddress
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                PostalAddress.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a PostalAddress message.
+                 * @function verify
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                PostalAddress.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.revision != null && message.hasOwnProperty("revision"))
+                        if (!$util.isInteger(message.revision))
+                            return "revision: integer expected";
+                    if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                        if (!$util.isString(message.regionCode))
+                            return "regionCode: string expected";
+                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                        if (!$util.isString(message.languageCode))
+                            return "languageCode: string expected";
+                    if (message.postalCode != null && message.hasOwnProperty("postalCode"))
+                        if (!$util.isString(message.postalCode))
+                            return "postalCode: string expected";
+                    if (message.sortingCode != null && message.hasOwnProperty("sortingCode"))
+                        if (!$util.isString(message.sortingCode))
+                            return "sortingCode: string expected";
+                    if (message.administrativeArea != null && message.hasOwnProperty("administrativeArea"))
+                        if (!$util.isString(message.administrativeArea))
+                            return "administrativeArea: string expected";
+                    if (message.locality != null && message.hasOwnProperty("locality"))
+                        if (!$util.isString(message.locality))
+                            return "locality: string expected";
+                    if (message.sublocality != null && message.hasOwnProperty("sublocality"))
+                        if (!$util.isString(message.sublocality))
+                            return "sublocality: string expected";
+                    if (message.addressLines != null && message.hasOwnProperty("addressLines")) {
+                        if (!Array.isArray(message.addressLines))
+                            return "addressLines: array expected";
+                        for (var i = 0; i < message.addressLines.length; ++i)
+                            if (!$util.isString(message.addressLines[i]))
+                                return "addressLines: string[] expected";
+                    }
+                    if (message.recipients != null && message.hasOwnProperty("recipients")) {
+                        if (!Array.isArray(message.recipients))
+                            return "recipients: array expected";
+                        for (var i = 0; i < message.recipients.length; ++i)
+                            if (!$util.isString(message.recipients[i]))
+                                return "recipients: string[] expected";
+                    }
+                    if (message.organization != null && message.hasOwnProperty("organization"))
+                        if (!$util.isString(message.organization))
+                            return "organization: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a PostalAddress message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.PostalAddress} PostalAddress
+                 */
+                PostalAddress.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.PostalAddress)
+                        return object;
+                    var message = new $root.google.type.PostalAddress();
+                    if (object.revision != null)
+                        message.revision = object.revision | 0;
+                    if (object.regionCode != null)
+                        message.regionCode = String(object.regionCode);
+                    if (object.languageCode != null)
+                        message.languageCode = String(object.languageCode);
+                    if (object.postalCode != null)
+                        message.postalCode = String(object.postalCode);
+                    if (object.sortingCode != null)
+                        message.sortingCode = String(object.sortingCode);
+                    if (object.administrativeArea != null)
+                        message.administrativeArea = String(object.administrativeArea);
+                    if (object.locality != null)
+                        message.locality = String(object.locality);
+                    if (object.sublocality != null)
+                        message.sublocality = String(object.sublocality);
+                    if (object.addressLines) {
+                        if (!Array.isArray(object.addressLines))
+                            throw TypeError(".google.type.PostalAddress.addressLines: array expected");
+                        message.addressLines = [];
+                        for (var i = 0; i < object.addressLines.length; ++i)
+                            message.addressLines[i] = String(object.addressLines[i]);
+                    }
+                    if (object.recipients) {
+                        if (!Array.isArray(object.recipients))
+                            throw TypeError(".google.type.PostalAddress.recipients: array expected");
+                        message.recipients = [];
+                        for (var i = 0; i < object.recipients.length; ++i)
+                            message.recipients[i] = String(object.recipients[i]);
+                    }
+                    if (object.organization != null)
+                        message.organization = String(object.organization);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a PostalAddress message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {google.type.PostalAddress} message PostalAddress
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                PostalAddress.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.addressLines = [];
+                        object.recipients = [];
+                    }
+                    if (options.defaults) {
+                        object.revision = 0;
+                        object.regionCode = "";
+                        object.languageCode = "";
+                        object.postalCode = "";
+                        object.sortingCode = "";
+                        object.administrativeArea = "";
+                        object.locality = "";
+                        object.sublocality = "";
+                        object.organization = "";
+                    }
+                    if (message.revision != null && message.hasOwnProperty("revision"))
+                        object.revision = message.revision;
+                    if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                        object.regionCode = message.regionCode;
+                    if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                        object.languageCode = message.languageCode;
+                    if (message.postalCode != null && message.hasOwnProperty("postalCode"))
+                        object.postalCode = message.postalCode;
+                    if (message.sortingCode != null && message.hasOwnProperty("sortingCode"))
+                        object.sortingCode = message.sortingCode;
+                    if (message.administrativeArea != null && message.hasOwnProperty("administrativeArea"))
+                        object.administrativeArea = message.administrativeArea;
+                    if (message.locality != null && message.hasOwnProperty("locality"))
+                        object.locality = message.locality;
+                    if (message.sublocality != null && message.hasOwnProperty("sublocality"))
+                        object.sublocality = message.sublocality;
+                    if (message.addressLines && message.addressLines.length) {
+                        object.addressLines = [];
+                        for (var j = 0; j < message.addressLines.length; ++j)
+                            object.addressLines[j] = message.addressLines[j];
+                    }
+                    if (message.recipients && message.recipients.length) {
+                        object.recipients = [];
+                        for (var j = 0; j < message.recipients.length; ++j)
+                            object.recipients[j] = message.recipients[j];
+                    }
+                    if (message.organization != null && message.hasOwnProperty("organization"))
+                        object.organization = message.organization;
+                    return object;
+                };
+    
+                /**
+                 * Converts this PostalAddress to JSON.
+                 * @function toJSON
+                 * @memberof google.type.PostalAddress
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                PostalAddress.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for PostalAddress
+                 * @function getTypeUrl
+                 * @memberof google.type.PostalAddress
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                PostalAddress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.PostalAddress";
+                };
+    
+                return PostalAddress;
+            })();
+    
             return type;
         })();
     
@@ -5875,6 +6995,7 @@
                          * @property {string|null} [internationalPhoneNumber] Place internationalPhoneNumber
                          * @property {string|null} [formattedAddress] Place formattedAddress
                          * @property {string|null} [shortFormattedAddress] Place shortFormattedAddress
+                         * @property {google.type.IPostalAddress|null} [postalAddress] Place postalAddress
                          * @property {Array.<google.maps.places.v1.Place.IAddressComponent>|null} [addressComponents] Place addressComponents
                          * @property {google.maps.places.v1.Place.IPlusCode|null} [plusCode] Place plusCode
                          * @property {google.type.ILatLng|null} [location] Place location
@@ -5885,6 +7006,7 @@
                          * @property {Array.<google.maps.places.v1.IReview>|null} [reviews] Place reviews
                          * @property {google.maps.places.v1.Place.IOpeningHours|null} [regularOpeningHours] Place regularOpeningHours
                          * @property {number|null} [utcOffsetMinutes] Place utcOffsetMinutes
+                         * @property {google.type.ITimeZone|null} [timeZone] Place timeZone
                          * @property {Array.<google.maps.places.v1.IPhoto>|null} [photos] Place photos
                          * @property {string|null} [adrFormatAddress] Place adrFormatAddress
                          * @property {google.maps.places.v1.Place.BusinessStatus|null} [businessStatus] Place businessStatus
@@ -6038,6 +7160,14 @@
                         Place.prototype.shortFormattedAddress = "";
     
                         /**
+                         * Place postalAddress.
+                         * @member {google.type.IPostalAddress|null|undefined} postalAddress
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.postalAddress = null;
+    
+                        /**
                          * Place addressComponents.
                          * @member {Array.<google.maps.places.v1.Place.IAddressComponent>} addressComponents
                          * @memberof google.maps.places.v1.Place
@@ -6116,6 +7246,14 @@
                          * @instance
                          */
                         Place.prototype.utcOffsetMinutes = null;
+    
+                        /**
+                         * Place timeZone.
+                         * @member {google.type.ITimeZone|null|undefined} timeZone
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.timeZone = null;
     
                         /**
                          * Place photos.
@@ -6950,6 +8088,10 @@
                                 writer.uint32(/* id 83, wireType 0 =*/664).bool(message.pureServiceAreaBusiness);
                             if (message.priceRange != null && Object.hasOwnProperty.call(message, "priceRange"))
                                 $root.google.maps.places.v1.PriceRange.encode(message.priceRange, writer.uint32(/* id 86, wireType 2 =*/690).fork()).ldelim();
+                            if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                                $root.google.type.TimeZone.encode(message.timeZone, writer.uint32(/* id 88, wireType 2 =*/706).fork()).ldelim();
+                            if (message.postalAddress != null && Object.hasOwnProperty.call(message, "postalAddress"))
+                                $root.google.type.PostalAddress.encode(message.postalAddress, writer.uint32(/* id 90, wireType 2 =*/722).fork()).ldelim();
                             return writer;
                         };
     
@@ -7026,6 +8168,10 @@
                                         message.shortFormattedAddress = reader.string();
                                         break;
                                     }
+                                case 90: {
+                                        message.postalAddress = $root.google.type.PostalAddress.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 10: {
                                         if (!(message.addressComponents && message.addressComponents.length))
                                             message.addressComponents = [];
@@ -7068,6 +8214,10 @@
                                     }
                                 case 22: {
                                         message.utcOffsetMinutes = reader.int32();
+                                        break;
+                                    }
+                                case 88: {
+                                        message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 54: {
@@ -7340,6 +8490,11 @@
                             if (message.shortFormattedAddress != null && message.hasOwnProperty("shortFormattedAddress"))
                                 if (!$util.isString(message.shortFormattedAddress))
                                     return "shortFormattedAddress: string expected";
+                            if (message.postalAddress != null && message.hasOwnProperty("postalAddress")) {
+                                var error = $root.google.type.PostalAddress.verify(message.postalAddress);
+                                if (error)
+                                    return "postalAddress." + error;
+                            }
                             if (message.addressComponents != null && message.hasOwnProperty("addressComponents")) {
                                 if (!Array.isArray(message.addressComponents))
                                     return "addressComponents: array expected";
@@ -7391,6 +8546,11 @@
                                 properties._utcOffsetMinutes = 1;
                                 if (!$util.isInteger(message.utcOffsetMinutes))
                                     return "utcOffsetMinutes: integer expected";
+                            }
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                                var error = $root.google.type.TimeZone.verify(message.timeZone);
+                                if (error)
+                                    return "timeZone." + error;
                             }
                             if (message.photos != null && message.hasOwnProperty("photos")) {
                                 if (!Array.isArray(message.photos))
@@ -7701,6 +8861,11 @@
                                 message.formattedAddress = String(object.formattedAddress);
                             if (object.shortFormattedAddress != null)
                                 message.shortFormattedAddress = String(object.shortFormattedAddress);
+                            if (object.postalAddress != null) {
+                                if (typeof object.postalAddress !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.postalAddress: object expected");
+                                message.postalAddress = $root.google.type.PostalAddress.fromObject(object.postalAddress);
+                            }
                             if (object.addressComponents) {
                                 if (!Array.isArray(object.addressComponents))
                                     throw TypeError(".google.maps.places.v1.Place.addressComponents: array expected");
@@ -7749,6 +8914,11 @@
                             }
                             if (object.utcOffsetMinutes != null)
                                 message.utcOffsetMinutes = object.utcOffsetMinutes | 0;
+                            if (object.timeZone != null) {
+                                if (typeof object.timeZone !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.timeZone: object expected");
+                                message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
+                            }
                             if (object.photos) {
                                 if (!Array.isArray(object.photos))
                                     throw TypeError(".google.maps.places.v1.Place.photos: array expected");
@@ -8029,6 +9199,8 @@
                                 object.generativeSummary = null;
                                 object.areaSummary = null;
                                 object.priceRange = null;
+                                object.timeZone = null;
+                                object.postalAddress = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8270,6 +9442,10 @@
                             }
                             if (message.priceRange != null && message.hasOwnProperty("priceRange"))
                                 object.priceRange = $root.google.maps.places.v1.PriceRange.toObject(message.priceRange, options);
+                            if (message.timeZone != null && message.hasOwnProperty("timeZone"))
+                                object.timeZone = $root.google.type.TimeZone.toObject(message.timeZone, options);
+                            if (message.postalAddress != null && message.hasOwnProperty("postalAddress"))
+                                object.postalAddress = $root.google.type.PostalAddress.toObject(message.postalAddress, options);
                             return object;
                         };
     

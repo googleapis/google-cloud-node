@@ -24,6 +24,7 @@
   * [Cloud_filestore_manager.list_backups](#cloud_filestore_manager.list_backups)
   * [Cloud_filestore_manager.list_instances](#cloud_filestore_manager.list_instances)
   * [Cloud_filestore_manager.list_snapshots](#cloud_filestore_manager.list_snapshots)
+  * [Cloud_filestore_manager.promote_replica](#cloud_filestore_manager.promote_replica)
   * [Cloud_filestore_manager.restore_instance](#cloud_filestore_manager.restore_instance)
   * [Cloud_filestore_manager.revert_instance](#cloud_filestore_manager.revert_instance)
   * [Cloud_filestore_manager.update_backup](#cloud_filestore_manager.update_backup)
@@ -45,6 +46,7 @@
   * [Cloud_filestore_manager.list_instances](#cloud_filestore_manager.list_instances)
   * [Cloud_filestore_manager.list_shares](#cloud_filestore_manager.list_shares)
   * [Cloud_filestore_manager.list_snapshots](#cloud_filestore_manager.list_snapshots)
+  * [Cloud_filestore_manager.promote_replica](#cloud_filestore_manager.promote_replica)
   * [Cloud_filestore_manager.restore_instance](#cloud_filestore_manager.restore_instance)
   * [Cloud_filestore_manager.revert_instance](#cloud_filestore_manager.revert_instance)
   * [Cloud_filestore_manager.update_backup](#cloud_filestore_manager.update_backup)
@@ -265,6 +267,23 @@ __Usage:__
 
 
 `node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js`
+
+
+-----
+
+
+
+
+### Cloud_filestore_manager.promote_replica
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.promote_replica.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.promote_replica.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.promote_replica.js`
 
 
 -----
@@ -622,6 +641,23 @@ __Usage:__
 
 
 `node packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_snapshots.js`
+
+
+-----
+
+
+
+
+### Cloud_filestore_manager.promote_replica
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js`
 
 
 -----

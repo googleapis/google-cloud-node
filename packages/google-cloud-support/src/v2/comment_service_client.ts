@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CommentServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('support');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CommentServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -479,7 +482,33 @@ export class CommentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createComment(request, options, callback);
+    this._log.info('createComment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.support.v2.IComment,
+          | protos.google.cloud.support.v2.ICreateCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createComment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.support.v2.IComment,
+          protos.google.cloud.support.v2.ICreateCommentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createComment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -573,11 +602,37 @@ export class CommentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listComments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.support.v2.IListCommentsRequest,
+          | protos.google.cloud.support.v2.IListCommentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.support.v2.IComment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listComments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listComments request %j', request);
+    return this.innerApiCalls
+      .listComments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.support.v2.IComment[],
+          protos.google.cloud.support.v2.IListCommentsRequest | null,
+          protos.google.cloud.support.v2.IListCommentsResponse,
+        ]) => {
+          this._log.info('listComments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listComments`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -614,6 +669,7 @@ export class CommentServiceClient {
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listComments stream %j', request);
     return this.descriptors.page.listComments.createStream(
       this.innerApiCalls.listComments as GaxCall,
       request,
@@ -662,6 +718,7 @@ export class CommentServiceClient {
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listComments iterate %j', request);
     return this.descriptors.page.listComments.asyncIterate(
       this.innerApiCalls['listComments'] as GaxCall,
       request as {},
@@ -1009,6 +1066,7 @@ export class CommentServiceClient {
   close(): Promise<void> {
     if (this.commentServiceStub && !this._terminated) {
       return this.commentServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

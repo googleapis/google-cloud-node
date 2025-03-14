@@ -1692,6 +1692,206 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
     });
   });
 
+  describe('promoteReplica', () => {
+    it('invokes promoteReplica without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1beta1.PromoteReplicaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.PromoteReplicaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.promoteReplica =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.promoteReplica(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes promoteReplica without error using callback', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1beta1.PromoteReplicaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.PromoteReplicaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.promoteReplica =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.promoteReplica(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.filestore.v1beta1.IInstance,
+              protos.google.cloud.common.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.filestore.v1beta1.IInstance,
+        protos.google.cloud.common.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes promoteReplica with call error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1beta1.PromoteReplicaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.PromoteReplicaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.promoteReplica = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.promoteReplica(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes promoteReplica with LRO error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.filestore.v1beta1.PromoteReplicaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.PromoteReplicaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.promoteReplica = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.promoteReplica(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.promoteReplica as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkPromoteReplicaProgress without error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkPromoteReplicaProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkPromoteReplicaProgress with error', async () => {
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkPromoteReplicaProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client =
@@ -5595,6 +5795,71 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         assert.strictEqual(result, 'backupValue');
         assert(
           (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('domain', () => {
+      const fakePath = '/rendered/path/domain';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        domain: 'domainValue',
+      };
+      const client =
+        new cloudfilestoremanagerModule.v1beta1.CloudFilestoreManagerClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.domainPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.domainPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('domainPath', () => {
+        const result = client.domainPath(
+          'projectValue',
+          'locationValue',
+          'domainValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.domainPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromDomainName', () => {
+        const result = client.matchProjectFromDomainName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.domainPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromDomainName', () => {
+        const result = client.matchLocationFromDomainName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.domainPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDomainFromDomainName', () => {
+        const result = client.matchDomainFromDomainName(fakePath);
+        assert.strictEqual(result, 'domainValue');
+        assert(
+          (client.pathTemplates.domainPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

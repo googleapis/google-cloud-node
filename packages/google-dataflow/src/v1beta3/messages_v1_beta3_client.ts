@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class MessagesV1Beta3Client {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('dataflow');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class MessagesV1Beta3Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -496,11 +499,37 @@ export class MessagesV1Beta3Client {
         job_id: request.jobId ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listJobMessages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.dataflow.v1beta3.IListJobMessagesRequest,
+          | protos.google.dataflow.v1beta3.IListJobMessagesResponse
+          | null
+          | undefined,
+          protos.google.dataflow.v1beta3.IJobMessage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listJobMessages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listJobMessages request %j', request);
+    return this.innerApiCalls
+      .listJobMessages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.dataflow.v1beta3.IJobMessage[],
+          protos.google.dataflow.v1beta3.IListJobMessagesRequest | null,
+          protos.google.dataflow.v1beta3.IListJobMessagesResponse,
+        ]) => {
+          this._log.info('listJobMessages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listJobMessages`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.projectId
@@ -555,6 +584,7 @@ export class MessagesV1Beta3Client {
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listJobMessages stream %j', request);
     return this.descriptors.page.listJobMessages.createStream(
       this.innerApiCalls.listJobMessages as GaxCall,
       request,
@@ -621,6 +651,7 @@ export class MessagesV1Beta3Client {
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listJobMessages iterate %j', request);
     return this.descriptors.page.listJobMessages.asyncIterate(
       this.innerApiCalls['listJobMessages'] as GaxCall,
       request as {},
@@ -637,6 +668,7 @@ export class MessagesV1Beta3Client {
   close(): Promise<void> {
     if (this.messagesV1Beta3Stub && !this._terminated) {
       return this.messagesV1Beta3Stub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

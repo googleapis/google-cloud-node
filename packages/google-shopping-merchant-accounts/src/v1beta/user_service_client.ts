@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class UserServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('accounts');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class UserServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -527,7 +530,36 @@ export class UserServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getUser(request, options, callback);
+    this._log.info('getUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IUser,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IUser,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetUserRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a Merchant Center account user. Executing this method requires
@@ -630,7 +662,36 @@ export class UserServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createUser(request, options, callback);
+    this._log.info('createUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IUser,
+          | protos.google.shopping.merchant.accounts.v1beta.ICreateUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IUser,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.ICreateUserRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a Merchant Center account user. Executing this method requires
@@ -731,7 +792,36 @@ export class UserServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteUser(request, options, callback);
+    this._log.info('deleteUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.shopping.merchant.accounts.v1beta.IDeleteUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IDeleteUserRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Merchant Center account user. Executing this method requires
@@ -833,7 +923,36 @@ export class UserServiceClient {
         'user.name': request.user!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateUser(request, options, callback);
+    this._log.info('updateUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IUser,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateUserRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.IUser,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateUserRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUser response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -938,11 +1057,37 @@ export class UserServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listUsers(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.accounts.v1beta.IListUsersRequest,
+          | protos.google.shopping.merchant.accounts.v1beta.IListUsersResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.accounts.v1beta.IUser
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsers request %j', request);
+    return this.innerApiCalls
+      .listUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.accounts.v1beta.IUser[],
+          protos.google.shopping.merchant.accounts.v1beta.IListUsersRequest | null,
+          protos.google.shopping.merchant.accounts.v1beta.IListUsersResponse,
+        ]) => {
+          this._log.info('listUsers values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listUsers`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -984,6 +1129,7 @@ export class UserServiceClient {
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsers stream %j', request);
     return this.descriptors.page.listUsers.createStream(
       this.innerApiCalls.listUsers as GaxCall,
       request,
@@ -1037,6 +1183,7 @@ export class UserServiceClient {
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listUsers iterate %j', request);
     return this.descriptors.page.listUsers.asyncIterate(
       this.innerApiCalls['listUsers'] as GaxCall,
       request as {},
@@ -1533,6 +1680,7 @@ export class UserServiceClient {
   close(): Promise<void> {
     if (this.userServiceStub && !this._terminated) {
       return this.userServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

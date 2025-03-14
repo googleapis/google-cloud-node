@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,6 +55,8 @@ export class ChatServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('chat');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -88,7 +91,7 @@ export class ChatServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -219,6 +222,9 @@ export class ChatServiceClient {
       spaceEventPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/spaceEvents/{space_event}'
       ),
+      spaceNotificationSettingPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/spaces/{space}/spaceNotificationSetting'
+      ),
       spaceReadStatePathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/spaces/{space}/spaceReadState'
       ),
@@ -345,6 +351,8 @@ export class ChatServiceClient {
       'getThreadReadState',
       'getSpaceEvent',
       'listSpaceEvents',
+      'getSpaceNotificationSetting',
+      'updateSpaceNotificationSetting',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -460,6 +468,7 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces.readonly',
       'https://www.googleapis.com/auth/chat.users.readstate',
       'https://www.googleapis.com/auth/chat.users.readstate.readonly',
+      'https://www.googleapis.com/auth/chat.users.spacesettings',
     ];
   }
 
@@ -635,7 +644,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMessage(request, options, callback);
+    this._log.info('createMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMessage,
+          protos.google.chat.v1.ICreateMessageRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMessage,
+          protos.google.chat.v1.ICreateMessageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details about a membership. For an example, see
@@ -753,7 +786,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMembership(request, options, callback);
+    this._log.info('getMembership request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IGetMembershipRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMembership response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IGetMembershipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMembership response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details about a message.
@@ -855,7 +912,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getMessage(request, options, callback);
+    this._log.info('getMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMessage,
+          protos.google.chat.v1.IGetMessageRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMessage,
+          protos.google.chat.v1.IGetMessageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a message. There's a difference between the `patch` and `update`
@@ -977,7 +1058,31 @@ export class ChatServiceClient {
         'message.name': request.message!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateMessage(request, options, callback);
+    this._log.info('updateMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMessage,
+          protos.google.chat.v1.IUpdateMessageRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMessage,
+          protos.google.chat.v1.IUpdateMessageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a message.
@@ -1088,7 +1193,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteMessage(request, options, callback);
+    this._log.info('deleteMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteMessageRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteMessageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the metadata of a message attachment. The attachment data is fetched
@@ -1178,7 +1307,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAttachment(request, options, callback);
+    this._log.info('getAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAttachment,
+          protos.google.chat.v1.IGetAttachmentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAttachment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAttachment,
+          protos.google.chat.v1.IGetAttachmentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAttachment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Uploads an attachment. For an example, see
@@ -1272,7 +1425,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.uploadAttachment(request, options, callback);
+    this._log.info('uploadAttachment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IUploadAttachmentResponse,
+          protos.google.chat.v1.IUploadAttachmentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('uploadAttachment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .uploadAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IUploadAttachmentResponse,
+          protos.google.chat.v1.IUploadAttachmentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('uploadAttachment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details about a space. For an example, see
@@ -1379,7 +1556,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSpace(request, options, callback);
+    this._log.info('getSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.IGetSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.IGetSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a space with no members. Can be used to create a named space, or a
@@ -1494,7 +1695,31 @@ export class ChatServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.createSpace(request, options, callback);
+    this._log.info('createSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.ICreateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.ICreateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a space and adds specified users to it. The calling user is
@@ -1682,7 +1907,31 @@ export class ChatServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.setUpSpace(request, options, callback);
+    this._log.info('setUpSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.ISetUpSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setUpSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setUpSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.ISetUpSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setUpSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a space. For an example, see
@@ -1860,7 +2109,31 @@ export class ChatServiceClient {
         'space.name': request.space!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSpace(request, options, callback);
+    this._log.info('updateSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.IUpdateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.IUpdateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a named space. Always performs a cascading delete, which means
@@ -1971,7 +2244,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteSpace(request, options, callback);
+    this._log.info('deleteSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Completes the
@@ -2063,7 +2360,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.completeImportSpace(request, options, callback);
+    this._log.info('completeImportSpace request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ICompleteImportSpaceResponse,
+          protos.google.chat.v1.ICompleteImportSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('completeImportSpace response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .completeImportSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ICompleteImportSpaceResponse,
+          protos.google.chat.v1.ICompleteImportSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('completeImportSpace response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the existing direct message with the specified user. If no direct
@@ -2175,7 +2496,31 @@ export class ChatServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.findDirectMessage(request, options, callback);
+    this._log.info('findDirectMessage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.IFindDirectMessageRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('findDirectMessage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .findDirectMessage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpace,
+          protos.google.chat.v1.IFindDirectMessageRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('findDirectMessage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a membership for the calling Chat app, a user, or a Google Group.
@@ -2341,7 +2686,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createMembership(request, options, callback);
+    this._log.info('createMembership request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.ICreateMembershipRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMembership response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.ICreateMembershipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMembership response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a membership. For an example, see [Update a user's membership in
@@ -2455,7 +2824,31 @@ export class ChatServiceClient {
         'membership.name': request.membership!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateMembership(request, options, callback);
+    this._log.info('updateMembership request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IUpdateMembershipRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateMembership response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IUpdateMembershipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMembership response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a membership. For an example, see
@@ -2577,7 +2970,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteMembership(request, options, callback);
+    this._log.info('deleteMembership request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IDeleteMembershipRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMembership response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMembership(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IMembership,
+          protos.google.chat.v1.IDeleteMembershipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMembership response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a reaction and adds it to a message. For an example, see
@@ -2668,7 +3085,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createReaction(request, options, callback);
+    this._log.info('createReaction request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IReaction,
+          protos.google.chat.v1.ICreateReactionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReaction response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createReaction(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IReaction,
+          protos.google.chat.v1.ICreateReactionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReaction response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a reaction to a message. For an example, see
@@ -2757,7 +3198,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteReaction(request, options, callback);
+    this._log.info('deleteReaction request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteReactionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteReaction response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteReaction(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.chat.v1.IDeleteReactionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReaction response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details about a user's read state within a space, used to identify
@@ -2859,7 +3324,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSpaceReadState(request, options, callback);
+    this._log.info('getSpaceReadState request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IGetSpaceReadStateRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpaceReadState response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpaceReadState(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IGetSpaceReadStateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpaceReadState response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a user's read state within a space, used to identify read and
@@ -2974,7 +3463,31 @@ export class ChatServiceClient {
         'space_read_state.name': request.spaceReadState!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateSpaceReadState(request, options, callback);
+    this._log.info('updateSpaceReadState request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IUpdateSpaceReadStateRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSpaceReadState response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSpaceReadState(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpaceReadState,
+          protos.google.chat.v1.IUpdateSpaceReadStateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpaceReadState response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns details about a user's read state within a thread, used to identify
@@ -3077,7 +3590,31 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getThreadReadState(request, options, callback);
+    this._log.info('getThreadReadState request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IThreadReadState,
+          protos.google.chat.v1.IGetThreadReadStateRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getThreadReadState response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getThreadReadState(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IThreadReadState,
+          protos.google.chat.v1.IGetThreadReadStateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getThreadReadState response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns an event from a Google Chat space. The [event
@@ -3177,7 +3714,297 @@ export class ChatServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getSpaceEvent(request, options, callback);
+    this._log.info('getSpaceEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpaceEvent,
+          protos.google.chat.v1.IGetSpaceEventRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpaceEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpaceEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpaceEvent,
+          protos.google.chat.v1.IGetSpaceEventRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpaceEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Gets the space notification setting. For an example, see [Get the
+   * caller's space notification
+   * setting](https://developers.google.com/workspace/chat/get-space-notification-setting).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format: users/{user}/spaces/{space}/spaceNotificationSetting
+   *
+   *   - `users/me/spaces/{space}/spaceNotificationSetting`, OR
+   *   - `users/user@example.com/spaces/{space}/spaceNotificationSetting`, OR
+   *   - `users/123456789/spaces/{space}/spaceNotificationSetting`.
+   *   Note: Only the caller's user id or email is allowed in the path.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceNotificationSetting|SpaceNotificationSetting}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_space_notification_setting.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetSpaceNotificationSetting_async
+   */
+  getSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IGetSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSpaceNotificationSetting(
+    request: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceNotificationSetting(
+    request: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IGetSpaceNotificationSettingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IGetSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    this._log.info('getSpaceNotificationSetting request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          | protos.google.chat.v1.IGetSpaceNotificationSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSpaceNotificationSetting response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSpaceNotificationSetting(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          protos.google.chat.v1.IGetSpaceNotificationSettingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpaceNotificationSetting response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Updates the space notification setting. For an example, see [Update
+   * the caller's space notification
+   * setting](https://developers.google.com/workspace/chat/update-space-notification-setting).
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.SpaceNotificationSetting} request.spaceNotificationSetting
+   *   Required. The resource name for the space notification settings must be
+   *   populated in the form of
+   *   `users/{user}/spaces/{space}/spaceNotificationSetting`. Only fields
+   *   specified by `update_mask` are updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Supported field paths:
+   *
+   *   - `notification_setting`
+   *
+   *   - `mute_setting`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceNotificationSetting|SpaceNotificationSetting}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_space_notification_setting.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateSpaceNotificationSetting_async
+   */
+  updateSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateSpaceNotificationSetting(
+    request: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceNotificationSetting(
+    request: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSpaceNotificationSetting(
+    request?: protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceNotificationSetting,
+      protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'space_notification_setting.name':
+          request.spaceNotificationSetting!.name ?? '',
+      });
+    this.initialize();
+    this._log.info('updateSpaceNotificationSetting request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'updateSpaceNotificationSetting response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSpaceNotificationSetting(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.ISpaceNotificationSetting,
+          (
+            | protos.google.chat.v1.IUpdateSpaceNotificationSettingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateSpaceNotificationSetting response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -3342,7 +4169,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMessages(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListMessagesRequest,
+          protos.google.chat.v1.IListMessagesResponse | null | undefined,
+          protos.google.chat.v1.IMessage
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMessages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMessages request %j', request);
+    return this.innerApiCalls
+      .listMessages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.IMessage[],
+          protos.google.chat.v1.IListMessagesRequest | null,
+          protos.google.chat.v1.IListMessagesResponse,
+        ]) => {
+          this._log.info('listMessages values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3447,6 +4298,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMessages stream %j', request);
     return this.descriptors.page.listMessages.createStream(
       this.innerApiCalls.listMessages as GaxCall,
       request,
@@ -3559,6 +4411,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMessages iterate %j', request);
     return this.descriptors.page.listMessages.asyncIterate(
       this.innerApiCalls['listMessages'] as GaxCall,
       request as {},
@@ -3757,7 +4610,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listMemberships(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListMembershipsRequest,
+          protos.google.chat.v1.IListMembershipsResponse | null | undefined,
+          protos.google.chat.v1.IMembership
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMemberships values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMemberships request %j', request);
+    return this.innerApiCalls
+      .listMemberships(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.IMembership[],
+          protos.google.chat.v1.IListMembershipsRequest | null,
+          protos.google.chat.v1.IListMembershipsResponse,
+        ]) => {
+          this._log.info('listMemberships values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3880,6 +4757,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMemberships stream %j', request);
     return this.descriptors.page.listMemberships.createStream(
       this.innerApiCalls.listMemberships as GaxCall,
       request,
@@ -4010,6 +4888,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listMemberships iterate %j', request);
     return this.descriptors.page.listMemberships.asyncIterate(
       this.innerApiCalls['listMemberships'] as GaxCall,
       request as {},
@@ -4145,7 +5024,31 @@ export class ChatServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listSpaces(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListSpacesRequest,
+          protos.google.chat.v1.IListSpacesResponse | null | undefined,
+          protos.google.chat.v1.ISpace
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSpaces values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSpaces request %j', request);
+    return this.innerApiCalls
+      .listSpaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.ISpace[],
+          protos.google.chat.v1.IListSpacesRequest | null,
+          protos.google.chat.v1.IListSpacesResponse,
+        ]) => {
+          this._log.info('listSpaces values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4210,6 +5113,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listSpaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSpaces stream %j', request);
     return this.descriptors.page.listSpaces.createStream(
       this.innerApiCalls.listSpaces as GaxCall,
       request,
@@ -4282,6 +5186,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listSpaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSpaces iterate %j', request);
     return this.descriptors.page.listSpaces.asyncIterate(
       this.innerApiCalls['listSpaces'] as GaxCall,
       request as {},
@@ -4494,7 +5399,31 @@ export class ChatServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.searchSpaces(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.ISearchSpacesRequest,
+          protos.google.chat.v1.ISearchSpacesResponse | null | undefined,
+          protos.google.chat.v1.ISpace
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchSpaces values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchSpaces request %j', request);
+    return this.innerApiCalls
+      .searchSpaces(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.ISpace[],
+          protos.google.chat.v1.ISearchSpacesRequest | null,
+          protos.google.chat.v1.ISearchSpacesResponse,
+        ]) => {
+          this._log.info('searchSpaces values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4646,6 +5575,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['searchSpaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchSpaces stream %j', request);
     return this.descriptors.page.searchSpaces.createStream(
       this.innerApiCalls.searchSpaces as GaxCall,
       request,
@@ -4805,6 +5735,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['searchSpaces'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('searchSpaces iterate %j', request);
     return this.descriptors.page.searchSpaces.asyncIterate(
       this.innerApiCalls['searchSpaces'] as GaxCall,
       request as {},
@@ -4958,7 +5889,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listReactions(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListReactionsRequest,
+          protos.google.chat.v1.IListReactionsResponse | null | undefined,
+          protos.google.chat.v1.IReaction
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReactions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReactions request %j', request);
+    return this.innerApiCalls
+      .listReactions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.IReaction[],
+          protos.google.chat.v1.IListReactionsRequest | null,
+          protos.google.chat.v1.IListReactionsResponse,
+        ]) => {
+          this._log.info('listReactions values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5052,6 +6007,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listReactions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReactions stream %j', request);
     return this.descriptors.page.listReactions.createStream(
       this.innerApiCalls.listReactions as GaxCall,
       request,
@@ -5153,6 +6109,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listReactions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listReactions iterate %j', request);
     return this.descriptors.page.listReactions.asyncIterate(
       this.innerApiCalls['listReactions'] as GaxCall,
       request as {},
@@ -5324,7 +6281,31 @@ export class ChatServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSpaceEvents(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.IListSpaceEventsRequest,
+          protos.google.chat.v1.IListSpaceEventsResponse | null | undefined,
+          protos.google.chat.v1.ISpaceEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSpaceEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSpaceEvents request %j', request);
+    return this.innerApiCalls
+      .listSpaceEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.ISpaceEvent[],
+          protos.google.chat.v1.IListSpaceEventsRequest | null,
+          protos.google.chat.v1.IListSpaceEventsResponse,
+        ]) => {
+          this._log.info('listSpaceEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5428,6 +6409,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listSpaceEvents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSpaceEvents stream %j', request);
     return this.descriptors.page.listSpaceEvents.createStream(
       this.innerApiCalls.listSpaceEvents as GaxCall,
       request,
@@ -5539,6 +6521,7 @@ export class ChatServiceClient {
     const defaultCallSettings = this._defaults['listSpaceEvents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listSpaceEvents iterate %j', request);
     return this.descriptors.page.listSpaceEvents.asyncIterate(
       this.innerApiCalls['listSpaceEvents'] as GaxCall,
       request as {},
@@ -5847,6 +6830,50 @@ export class ChatServiceClient {
   }
 
   /**
+   * Return a fully-qualified spaceNotificationSetting resource name string.
+   *
+   * @param {string} user
+   * @param {string} space
+   * @returns {string} Resource name string.
+   */
+  spaceNotificationSettingPath(user: string, space: string) {
+    return this.pathTemplates.spaceNotificationSettingPathTemplate.render({
+      user: user,
+      space: space,
+    });
+  }
+
+  /**
+   * Parse the user from SpaceNotificationSetting resource.
+   *
+   * @param {string} spaceNotificationSettingName
+   *   A fully-qualified path representing SpaceNotificationSetting resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromSpaceNotificationSettingName(
+    spaceNotificationSettingName: string
+  ) {
+    return this.pathTemplates.spaceNotificationSettingPathTemplate.match(
+      spaceNotificationSettingName
+    ).user;
+  }
+
+  /**
+   * Parse the space from SpaceNotificationSetting resource.
+   *
+   * @param {string} spaceNotificationSettingName
+   *   A fully-qualified path representing SpaceNotificationSetting resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromSpaceNotificationSettingName(
+    spaceNotificationSettingName: string
+  ) {
+    return this.pathTemplates.spaceNotificationSettingPathTemplate.match(
+      spaceNotificationSettingName
+    ).space;
+  }
+
+  /**
    * Return a fully-qualified spaceReadState resource name string.
    *
    * @param {string} user
@@ -5986,6 +7013,7 @@ export class ChatServiceClient {
   close(): Promise<void> {
     if (this.chatServiceStub && !this._terminated) {
       return this.chatServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

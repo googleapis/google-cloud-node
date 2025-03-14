@@ -15104,6 +15104,7 @@
                              * @property {string|null} [label] OnlineReturnPolicy label
                              * @property {Array.<string>|null} [countries] OnlineReturnPolicy countries
                              * @property {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.IPolicy|null} [policy] OnlineReturnPolicy policy
+                             * @property {Array.<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride>|null} [seasonalOverrides] OnlineReturnPolicy seasonalOverrides
                              * @property {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.IRestockingFee|null} [restockingFee] OnlineReturnPolicy restockingFee
                              * @property {Array.<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ReturnMethod>|null} [returnMethods] OnlineReturnPolicy returnMethods
                              * @property {Array.<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ItemCondition>|null} [itemConditions] OnlineReturnPolicy itemConditions
@@ -15124,6 +15125,7 @@
                              */
                             function OnlineReturnPolicy(properties) {
                                 this.countries = [];
+                                this.seasonalOverrides = [];
                                 this.returnMethods = [];
                                 this.itemConditions = [];
                                 if (properties)
@@ -15171,6 +15173,14 @@
                              * @instance
                              */
                             OnlineReturnPolicy.prototype.policy = null;
+    
+                            /**
+                             * OnlineReturnPolicy seasonalOverrides.
+                             * @member {Array.<google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride>} seasonalOverrides
+                             * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+                             * @instance
+                             */
+                            OnlineReturnPolicy.prototype.seasonalOverrides = $util.emptyArray;
     
                             /**
                              * OnlineReturnPolicy restockingFee.
@@ -15331,6 +15341,9 @@
                                     writer.uint32(/* id 12, wireType 0 =*/96).int32(message.processRefundDays);
                                 if (message.acceptExchange != null && Object.hasOwnProperty.call(message, "acceptExchange"))
                                     writer.uint32(/* id 13, wireType 0 =*/104).bool(message.acceptExchange);
+                                if (message.seasonalOverrides != null && message.seasonalOverrides.length)
+                                    for (var i = 0; i < message.seasonalOverrides.length; ++i)
+                                        $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.encode(message.seasonalOverrides[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 return writer;
                             };
     
@@ -15385,6 +15398,12 @@
                                         }
                                     case 5: {
                                             message.policy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.Policy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            if (!(message.seasonalOverrides && message.seasonalOverrides.length))
+                                                message.seasonalOverrides = [];
+                                            message.seasonalOverrides.push($root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     case 6: {
@@ -15490,6 +15509,15 @@
                                     if (error)
                                         return "policy." + error;
                                 }
+                                if (message.seasonalOverrides != null && message.hasOwnProperty("seasonalOverrides")) {
+                                    if (!Array.isArray(message.seasonalOverrides))
+                                        return "seasonalOverrides: array expected";
+                                    for (var i = 0; i < message.seasonalOverrides.length; ++i) {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.verify(message.seasonalOverrides[i]);
+                                        if (error)
+                                            return "seasonalOverrides." + error;
+                                    }
+                                }
                                 if (message.restockingFee != null && message.hasOwnProperty("restockingFee")) {
                                     var error = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.RestockingFee.verify(message.restockingFee);
                                     if (error)
@@ -15577,6 +15605,16 @@
                                     if (typeof object.policy !== "object")
                                         throw TypeError(".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.policy: object expected");
                                     message.policy = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.Policy.fromObject(object.policy);
+                                }
+                                if (object.seasonalOverrides) {
+                                    if (!Array.isArray(object.seasonalOverrides))
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.seasonalOverrides: array expected");
+                                    message.seasonalOverrides = [];
+                                    for (var i = 0; i < object.seasonalOverrides.length; ++i) {
+                                        if (typeof object.seasonalOverrides[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.seasonalOverrides: object expected");
+                                        message.seasonalOverrides[i] = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.fromObject(object.seasonalOverrides[i]);
+                                    }
                                 }
                                 if (object.restockingFee != null) {
                                     if (typeof object.restockingFee !== "object")
@@ -15670,6 +15708,7 @@
                                     object.countries = [];
                                     object.returnMethods = [];
                                     object.itemConditions = [];
+                                    object.seasonalOverrides = [];
                                 }
                                 if (options.defaults) {
                                     object.name = "";
@@ -15723,6 +15762,11 @@
                                     object.acceptExchange = message.acceptExchange;
                                     if (options.oneofs)
                                         object._acceptExchange = "acceptExchange";
+                                }
+                                if (message.seasonalOverrides && message.seasonalOverrides.length) {
+                                    object.seasonalOverrides = [];
+                                    for (var j = 0; j < message.seasonalOverrides.length; ++j)
+                                        object.seasonalOverrides[j] = $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.toObject(message.seasonalOverrides[j], options);
                                 }
                                 return object;
                             };
@@ -16567,6 +16611,343 @@
                                 })();
     
                                 return Policy;
+                            })();
+    
+                            OnlineReturnPolicy.SeasonalOverride = (function() {
+    
+                                /**
+                                 * Properties of a SeasonalOverride.
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+                                 * @interface ISeasonalOverride
+                                 * @property {number|null} [returnDays] SeasonalOverride returnDays
+                                 * @property {google.type.IDate|null} [returnUntilDate] SeasonalOverride returnUntilDate
+                                 * @property {string|null} [label] SeasonalOverride label
+                                 * @property {google.type.IDate|null} [startDate] SeasonalOverride startDate
+                                 * @property {google.type.IDate|null} [endDate] SeasonalOverride endDate
+                                 */
+    
+                                /**
+                                 * Constructs a new SeasonalOverride.
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
+                                 * @classdesc Represents a SeasonalOverride.
+                                 * @implements ISeasonalOverride
+                                 * @constructor
+                                 * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride=} [properties] Properties to set
+                                 */
+                                function SeasonalOverride(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SeasonalOverride returnDays.
+                                 * @member {number|null|undefined} returnDays
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 */
+                                SeasonalOverride.prototype.returnDays = null;
+    
+                                /**
+                                 * SeasonalOverride returnUntilDate.
+                                 * @member {google.type.IDate|null|undefined} returnUntilDate
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 */
+                                SeasonalOverride.prototype.returnUntilDate = null;
+    
+                                /**
+                                 * SeasonalOverride label.
+                                 * @member {string} label
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 */
+                                SeasonalOverride.prototype.label = "";
+    
+                                /**
+                                 * SeasonalOverride startDate.
+                                 * @member {google.type.IDate|null|undefined} startDate
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 */
+                                SeasonalOverride.prototype.startDate = null;
+    
+                                /**
+                                 * SeasonalOverride endDate.
+                                 * @member {google.type.IDate|null|undefined} endDate
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 */
+                                SeasonalOverride.prototype.endDate = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * SeasonalOverride returnWindow.
+                                 * @member {"returnDays"|"returnUntilDate"|undefined} returnWindow
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 */
+                                Object.defineProperty(SeasonalOverride.prototype, "returnWindow", {
+                                    get: $util.oneOfGetter($oneOfFields = ["returnDays", "returnUntilDate"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new SeasonalOverride instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride} SeasonalOverride instance
+                                 */
+                                SeasonalOverride.create = function create(properties) {
+                                    return new SeasonalOverride(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SeasonalOverride message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride} message SeasonalOverride message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SeasonalOverride.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.label != null && Object.hasOwnProperty.call(message, "label"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.label);
+                                    if (message.startDate != null && Object.hasOwnProperty.call(message, "startDate"))
+                                        $root.google.type.Date.encode(message.startDate, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.endDate != null && Object.hasOwnProperty.call(message, "endDate"))
+                                        $root.google.type.Date.encode(message.endDate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.returnDays != null && Object.hasOwnProperty.call(message, "returnDays"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.returnDays);
+                                    if (message.returnUntilDate != null && Object.hasOwnProperty.call(message, "returnUntilDate"))
+                                        $root.google.type.Date.encode(message.returnUntilDate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SeasonalOverride message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.ISeasonalOverride} message SeasonalOverride message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SeasonalOverride.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SeasonalOverride message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride} SeasonalOverride
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SeasonalOverride.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 5: {
+                                                message.returnDays = reader.int32();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.returnUntilDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 1: {
+                                                message.label = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.startDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.endDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SeasonalOverride message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride} SeasonalOverride
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SeasonalOverride.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SeasonalOverride message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SeasonalOverride.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.returnDays != null && message.hasOwnProperty("returnDays")) {
+                                        properties.returnWindow = 1;
+                                        if (!$util.isInteger(message.returnDays))
+                                            return "returnDays: integer expected";
+                                    }
+                                    if (message.returnUntilDate != null && message.hasOwnProperty("returnUntilDate")) {
+                                        if (properties.returnWindow === 1)
+                                            return "returnWindow: multiple values";
+                                        properties.returnWindow = 1;
+                                        {
+                                            var error = $root.google.type.Date.verify(message.returnUntilDate);
+                                            if (error)
+                                                return "returnUntilDate." + error;
+                                        }
+                                    }
+                                    if (message.label != null && message.hasOwnProperty("label"))
+                                        if (!$util.isString(message.label))
+                                            return "label: string expected";
+                                    if (message.startDate != null && message.hasOwnProperty("startDate")) {
+                                        var error = $root.google.type.Date.verify(message.startDate);
+                                        if (error)
+                                            return "startDate." + error;
+                                    }
+                                    if (message.endDate != null && message.hasOwnProperty("endDate")) {
+                                        var error = $root.google.type.Date.verify(message.endDate);
+                                        if (error)
+                                            return "endDate." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SeasonalOverride message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride} SeasonalOverride
+                                 */
+                                SeasonalOverride.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride();
+                                    if (object.returnDays != null)
+                                        message.returnDays = object.returnDays | 0;
+                                    if (object.returnUntilDate != null) {
+                                        if (typeof object.returnUntilDate !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.returnUntilDate: object expected");
+                                        message.returnUntilDate = $root.google.type.Date.fromObject(object.returnUntilDate);
+                                    }
+                                    if (object.label != null)
+                                        message.label = String(object.label);
+                                    if (object.startDate != null) {
+                                        if (typeof object.startDate !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.startDate: object expected");
+                                        message.startDate = $root.google.type.Date.fromObject(object.startDate);
+                                    }
+                                    if (object.endDate != null) {
+                                        if (typeof object.endDate !== "object")
+                                            throw TypeError(".google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride.endDate: object expected");
+                                        message.endDate = $root.google.type.Date.fromObject(object.endDate);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SeasonalOverride message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride} message SeasonalOverride
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SeasonalOverride.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.label = "";
+                                        object.startDate = null;
+                                        object.endDate = null;
+                                    }
+                                    if (message.label != null && message.hasOwnProperty("label"))
+                                        object.label = message.label;
+                                    if (message.startDate != null && message.hasOwnProperty("startDate"))
+                                        object.startDate = $root.google.type.Date.toObject(message.startDate, options);
+                                    if (message.endDate != null && message.hasOwnProperty("endDate"))
+                                        object.endDate = $root.google.type.Date.toObject(message.endDate, options);
+                                    if (message.returnDays != null && message.hasOwnProperty("returnDays")) {
+                                        object.returnDays = message.returnDays;
+                                        if (options.oneofs)
+                                            object.returnWindow = "returnDays";
+                                    }
+                                    if (message.returnUntilDate != null && message.hasOwnProperty("returnUntilDate")) {
+                                        object.returnUntilDate = $root.google.type.Date.toObject(message.returnUntilDate, options);
+                                        if (options.oneofs)
+                                            object.returnWindow = "returnUntilDate";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SeasonalOverride to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SeasonalOverride.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SeasonalOverride
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SeasonalOverride.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy.SeasonalOverride";
+                                };
+    
+                                return SeasonalOverride;
                             })();
     
                             /**

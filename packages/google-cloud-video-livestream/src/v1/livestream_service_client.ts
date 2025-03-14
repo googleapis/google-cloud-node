@@ -33,6 +33,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,6 +62,8 @@ export class LivestreamServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('livestream');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class LivestreamServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -741,7 +744,36 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getChannel(request, options, callback);
+    this._log.info('getChannel request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IChannel,
+          | protos.google.cloud.video.livestream.v1.IGetChannelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getChannel response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IChannel,
+          (
+            | protos.google.cloud.video.livestream.v1.IGetChannelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getChannel response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified input.
@@ -832,7 +864,33 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInput(request, options, callback);
+    this._log.info('getInput request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IInput,
+          | protos.google.cloud.video.livestream.v1.IGetInputRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInput response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInput(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IInput,
+          protos.google.cloud.video.livestream.v1.IGetInputRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInput response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates an event with the provided unique ID in the specified channel.
@@ -943,7 +1001,36 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createEvent(request, options, callback);
+    this._log.info('createEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IEvent,
+          | protos.google.cloud.video.livestream.v1.ICreateEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IEvent,
+          (
+            | protos.google.cloud.video.livestream.v1.ICreateEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified event.
@@ -1034,7 +1121,33 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getEvent(request, options, callback);
+    this._log.info('getEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IEvent,
+          | protos.google.cloud.video.livestream.v1.IGetEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IEvent,
+          protos.google.cloud.video.livestream.v1.IGetEventRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified event.
@@ -1139,7 +1252,36 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteEvent(request, options, callback);
+    this._log.info('deleteEvent request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.video.livestream.v1.IDeleteEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteEvent response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.video.livestream.v1.IDeleteEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvent response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified clip.
@@ -1230,7 +1372,33 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getClip(request, options, callback);
+    this._log.info('getClip request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IClip,
+          | protos.google.cloud.video.livestream.v1.IGetClipRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getClip response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getClip(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IClip,
+          protos.google.cloud.video.livestream.v1.IGetClipRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getClip response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified asset.
@@ -1321,7 +1489,33 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getAsset(request, options, callback);
+    this._log.info('getAsset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IAsset,
+          | protos.google.cloud.video.livestream.v1.IGetAssetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAsset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IAsset,
+          protos.google.cloud.video.livestream.v1.IGetAssetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAsset response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the specified pool.
@@ -1412,7 +1606,33 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getPool(request, options, callback);
+    this._log.info('getPool request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.video.livestream.v1.IPool,
+          | protos.google.cloud.video.livestream.v1.IGetPoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getPool response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getPool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.video.livestream.v1.IPool,
+          protos.google.cloud.video.livestream.v1.IGetPoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getPool response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1537,7 +1757,37 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createChannel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannel,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createChannel request %j', request);
+    return this.innerApiCalls
+      .createChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannel,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createChannel()`.
@@ -1558,6 +1808,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('createChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1693,7 +1944,37 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteChannel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteChannel request %j', request);
+    return this.innerApiCalls
+      .deleteChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteChannel()`.
@@ -1714,6 +1995,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1864,7 +2146,37 @@ export class LivestreamServiceClient {
         'channel.name': request.channel!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateChannel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannel,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateChannel request %j', request);
+    return this.innerApiCalls
+      .updateChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannel,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateChannel()`.
@@ -1885,6 +2197,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('updateChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2016,7 +2329,37 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.startChannel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannelOperationResponse,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startChannel request %j', request);
+    return this.innerApiCalls
+      .startChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannelOperationResponse,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `startChannel()`.
@@ -2037,6 +2380,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('startChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2168,7 +2512,37 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.stopChannel(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannelOperationResponse,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopChannel response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopChannel request %j', request);
+    return this.innerApiCalls
+      .stopChannel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IChannelOperationResponse,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopChannel response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `stopChannel()`.
@@ -2189,6 +2563,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('stopChannel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2325,7 +2700,37 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createInput(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IInput,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createInput response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInput request %j', request);
+    return this.innerApiCalls
+      .createInput(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IInput,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInput response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInput()`.
@@ -2346,6 +2751,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('createInput long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2476,7 +2882,37 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteInput(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteInput response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInput request %j', request);
+    return this.innerApiCalls
+      .deleteInput(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInput response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInput()`.
@@ -2497,6 +2933,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteInput long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2639,7 +3076,37 @@ export class LivestreamServiceClient {
         'input.name': request.input!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInput(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IInput,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInput response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInput request %j', request);
+    return this.innerApiCalls
+      .updateInput(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IInput,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInput response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInput()`.
@@ -2660,6 +3127,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('updateInput long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2797,7 +3265,37 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createClip(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IClip,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createClip response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createClip request %j', request);
+    return this.innerApiCalls
+      .createClip(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IClip,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createClip response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createClip()`.
@@ -2818,6 +3316,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('createClip long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2949,7 +3448,37 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteClip(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteClip response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteClip request %j', request);
+    return this.innerApiCalls
+      .deleteClip(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteClip response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteClip()`.
@@ -2970,6 +3499,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteClip long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3107,7 +3637,37 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createAsset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IAsset,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAsset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAsset request %j', request);
+    return this.innerApiCalls
+      .createAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IAsset,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAsset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createAsset()`.
@@ -3128,6 +3688,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('createAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3258,7 +3819,37 @@ export class LivestreamServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAsset(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAsset response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAsset request %j', request);
+    return this.innerApiCalls
+      .deleteAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAsset response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteAsset()`.
@@ -3279,6 +3870,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('deleteAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3416,7 +4008,37 @@ export class LivestreamServiceClient {
         'pool.name': request.pool!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updatePool(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IPool,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updatePool response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updatePool request %j', request);
+    return this.innerApiCalls
+      .updatePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.video.livestream.v1.IPool,
+            protos.google.cloud.video.livestream.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updatePool()`.
@@ -3437,6 +4059,7 @@ export class LivestreamServiceClient {
       protos.google.cloud.video.livestream.v1.OperationMetadata
     >
   > {
+    this._log.info('updatePool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3557,7 +4180,33 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listChannels(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListChannelsRequest,
+          | protos.google.cloud.video.livestream.v1.IListChannelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IChannel
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listChannels values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listChannels request %j', request);
+    return this.innerApiCalls
+      .listChannels(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.livestream.v1.IChannel[],
+          protos.google.cloud.video.livestream.v1.IListChannelsRequest | null,
+          protos.google.cloud.video.livestream.v1.IListChannelsResponse,
+        ]) => {
+          this._log.info('listChannels values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3606,6 +4255,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChannels stream %j', request);
     return this.descriptors.page.listChannels.createStream(
       this.innerApiCalls.listChannels as GaxCall,
       request,
@@ -3662,6 +4312,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listChannels iterate %j', request);
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
       request as {},
@@ -3773,7 +4424,33 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInputs(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListInputsRequest,
+          | protos.google.cloud.video.livestream.v1.IListInputsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IInput
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInputs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInputs request %j', request);
+    return this.innerApiCalls
+      .listInputs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.livestream.v1.IInput[],
+          protos.google.cloud.video.livestream.v1.IListInputsRequest | null,
+          protos.google.cloud.video.livestream.v1.IListInputsResponse,
+        ]) => {
+          this._log.info('listInputs values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3822,6 +4499,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listInputs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInputs stream %j', request);
     return this.descriptors.page.listInputs.createStream(
       this.innerApiCalls.listInputs as GaxCall,
       request,
@@ -3878,6 +4556,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listInputs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInputs iterate %j', request);
     return this.descriptors.page.listInputs.asyncIterate(
       this.innerApiCalls['listInputs'] as GaxCall,
       request as {},
@@ -3989,7 +4668,33 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listEvents(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListEventsRequest,
+          | protos.google.cloud.video.livestream.v1.IListEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IEvent
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listEvents values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listEvents request %j', request);
+    return this.innerApiCalls
+      .listEvents(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.livestream.v1.IEvent[],
+          protos.google.cloud.video.livestream.v1.IListEventsRequest | null,
+          protos.google.cloud.video.livestream.v1.IListEventsResponse,
+        ]) => {
+          this._log.info('listEvents values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4038,6 +4743,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
       request,
@@ -4094,6 +4800,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
       request as {},
@@ -4200,7 +4907,33 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listClips(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListClipsRequest,
+          | protos.google.cloud.video.livestream.v1.IListClipsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IClip
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listClips values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listClips request %j', request);
+    return this.innerApiCalls
+      .listClips(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.livestream.v1.IClip[],
+          protos.google.cloud.video.livestream.v1.IListClipsRequest | null,
+          protos.google.cloud.video.livestream.v1.IListClipsResponse,
+        ]) => {
+          this._log.info('listClips values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4244,6 +4977,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listClips'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listClips stream %j', request);
     return this.descriptors.page.listClips.createStream(
       this.innerApiCalls.listClips as GaxCall,
       request,
@@ -4295,6 +5029,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listClips'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listClips iterate %j', request);
     return this.descriptors.page.listClips.asyncIterate(
       this.innerApiCalls['listClips'] as GaxCall,
       request as {},
@@ -4402,7 +5137,33 @@ export class LivestreamServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAssets(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.video.livestream.v1.IListAssetsRequest,
+          | protos.google.cloud.video.livestream.v1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.video.livestream.v1.IAsset
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAssets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAssets request %j', request);
+    return this.innerApiCalls
+      .listAssets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.video.livestream.v1.IAsset[],
+          protos.google.cloud.video.livestream.v1.IListAssetsRequest | null,
+          protos.google.cloud.video.livestream.v1.IListAssetsResponse,
+        ]) => {
+          this._log.info('listAssets values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -4447,6 +5208,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
@@ -4499,6 +5261,7 @@ export class LivestreamServiceClient {
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
@@ -5199,6 +5962,7 @@ export class LivestreamServiceClient {
   close(): Promise<void> {
     if (this.livestreamServiceStub && !this._terminated) {
       return this.livestreamServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
