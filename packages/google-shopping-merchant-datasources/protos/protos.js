@@ -2522,6 +2522,7 @@
                              * @property {string|null} [contentLanguage] PrimaryProductDataSource contentLanguage
                              * @property {Array.<string>|null} [countries] PrimaryProductDataSource countries
                              * @property {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule|null} [defaultRule] PrimaryProductDataSource defaultRule
+                             * @property {Array.<google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDestination>|null} [destinations] PrimaryProductDataSource destinations
                              */
     
                             /**
@@ -2534,6 +2535,7 @@
                              */
                             function PrimaryProductDataSource(properties) {
                                 this.countries = [];
+                                this.destinations = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -2579,6 +2581,14 @@
                              * @instance
                              */
                             PrimaryProductDataSource.prototype.defaultRule = null;
+    
+                            /**
+                             * PrimaryProductDataSource destinations.
+                             * @member {Array.<google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDestination>} destinations
+                             * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource
+                             * @instance
+                             */
+                            PrimaryProductDataSource.prototype.destinations = $util.emptyArray;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -2640,6 +2650,9 @@
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.countries[i]);
                                 if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
                                     $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.destinations != null && message.destinations.length)
+                                    for (var i = 0; i < message.destinations.length; ++i)
+                                        $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2694,6 +2707,12 @@
                                         }
                                     case 7: {
                                             message.defaultRule = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 10: {
+                                            if (!(message.destinations && message.destinations.length))
+                                                message.destinations = [];
+                                            message.destinations.push($root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -2764,6 +2783,15 @@
                                     if (error)
                                         return "defaultRule." + error;
                                 }
+                                if (message.destinations != null && message.hasOwnProperty("destinations")) {
+                                    if (!Array.isArray(message.destinations))
+                                        return "destinations: array expected";
+                                    for (var i = 0; i < message.destinations.length; ++i) {
+                                        var error = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.verify(message.destinations[i]);
+                                        if (error)
+                                            return "destinations." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -2819,6 +2847,16 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.defaultRule: object expected");
                                     message.defaultRule = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.fromObject(object.defaultRule);
                                 }
+                                if (object.destinations) {
+                                    if (!Array.isArray(object.destinations))
+                                        throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.destinations: array expected");
+                                    message.destinations = [];
+                                    for (var i = 0; i < object.destinations.length; ++i) {
+                                        if (typeof object.destinations[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.destinations: object expected");
+                                        message.destinations[i] = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.fromObject(object.destinations[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -2835,8 +2873,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.arrays || options.defaults)
+                                if (options.arrays || options.defaults) {
                                     object.countries = [];
+                                    object.destinations = [];
+                                }
                                 if (options.defaults) {
                                     object.channel = options.enums === String ? "CHANNEL_UNSPECIFIED" : 0;
                                     object.defaultRule = null;
@@ -2860,6 +2900,11 @@
                                 }
                                 if (message.defaultRule != null && message.hasOwnProperty("defaultRule"))
                                     object.defaultRule = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options);
+                                if (message.destinations && message.destinations.length) {
+                                    object.destinations = [];
+                                    for (var j = 0; j < message.destinations.length; ++j)
+                                        object.destinations[j] = $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.toObject(message.destinations[j], options);
+                                }
                                 return object;
                             };
     
@@ -3111,6 +3156,317 @@
                                 };
     
                                 return DefaultRule;
+                            })();
+    
+                            PrimaryProductDataSource.Destination = (function() {
+    
+                                /**
+                                 * Properties of a Destination.
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource
+                                 * @interface IDestination
+                                 * @property {google.shopping.type.Destination.DestinationEnum|null} [destination] Destination destination
+                                 * @property {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State|null} [state] Destination state
+                                 */
+    
+                                /**
+                                 * Constructs a new Destination.
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource
+                                 * @classdesc Represents a Destination.
+                                 * @implements IDestination
+                                 * @constructor
+                                 * @param {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDestination=} [properties] Properties to set
+                                 */
+                                function Destination(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Destination destination.
+                                 * @member {google.shopping.type.Destination.DestinationEnum} destination
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.destination = 0;
+    
+                                /**
+                                 * Destination state.
+                                 * @member {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State} state
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @instance
+                                 */
+                                Destination.prototype.state = 0;
+    
+                                /**
+                                 * Creates a new Destination instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDestination=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination} Destination instance
+                                 */
+                                Destination.create = function create(properties) {
+                                    return new Destination(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Destination message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDestination} message Destination message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Destination.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.destination);
+                                    if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDestination} message Destination message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination} Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Destination.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.destination = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.state = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Destination message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination} Destination
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Destination.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Destination message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Destination.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                        switch (message.destination) {
+                                        default:
+                                            return "destination: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                            break;
+                                        }
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        switch (message.state) {
+                                        default:
+                                            return "state: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination} Destination
+                                 */
+                                Destination.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination();
+                                    switch (object.destination) {
+                                    default:
+                                        if (typeof object.destination === "number") {
+                                            message.destination = object.destination;
+                                            break;
+                                        }
+                                        break;
+                                    case "DESTINATION_ENUM_UNSPECIFIED":
+                                    case 0:
+                                        message.destination = 0;
+                                        break;
+                                    case "SHOPPING_ADS":
+                                    case 1:
+                                        message.destination = 1;
+                                        break;
+                                    case "DISPLAY_ADS":
+                                    case 2:
+                                        message.destination = 2;
+                                        break;
+                                    case "LOCAL_INVENTORY_ADS":
+                                    case 3:
+                                        message.destination = 3;
+                                        break;
+                                    case "FREE_LISTINGS":
+                                    case 4:
+                                        message.destination = 4;
+                                        break;
+                                    case "FREE_LOCAL_LISTINGS":
+                                    case 5:
+                                        message.destination = 5;
+                                        break;
+                                    case "YOUTUBE_SHOPPING":
+                                    case 6:
+                                        message.destination = 6;
+                                        break;
+                                    }
+                                    switch (object.state) {
+                                    default:
+                                        if (typeof object.state === "number") {
+                                            message.state = object.state;
+                                            break;
+                                        }
+                                        break;
+                                    case "STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.state = 0;
+                                        break;
+                                    case "ENABLED":
+                                    case 1:
+                                        message.state = 1;
+                                        break;
+                                    case "DISABLED":
+                                    case 2:
+                                        message.state = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination} message Destination
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Destination.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.destination = options.enums === String ? "DESTINATION_ENUM_UNSPECIFIED" : 0;
+                                        object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.destination != null && message.hasOwnProperty("destination"))
+                                        object.destination = options.enums === String ? $root.google.shopping.type.Destination.DestinationEnum[message.destination] === undefined ? message.destination : $root.google.shopping.type.Destination.DestinationEnum[message.destination] : message.destination;
+                                    if (message.state != null && message.hasOwnProperty("state"))
+                                        object.state = options.enums === String ? $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State[message.state] === undefined ? message.state : $root.google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State[message.state] : message.state;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Destination to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Destination.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Destination
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Destination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination";
+                                };
+    
+                                /**
+                                 * State enum.
+                                 * @name google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.Destination.State
+                                 * @enum {number}
+                                 * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                                 * @property {number} ENABLED=1 ENABLED value
+                                 * @property {number} DISABLED=2 DISABLED value
+                                 */
+                                Destination.State = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "ENABLED"] = 1;
+                                    values[valuesById[2] = "DISABLED"] = 2;
+                                    return values;
+                                })();
+    
+                                return Destination;
                             })();
     
                             /**
@@ -6685,6 +7041,1491 @@
                 })();
     
                 return merchant;
+            })();
+    
+            shopping.type = (function() {
+    
+                /**
+                 * Namespace type.
+                 * @memberof google.shopping
+                 * @namespace
+                 */
+                var type = {};
+    
+                type.Weight = (function() {
+    
+                    /**
+                     * Properties of a Weight.
+                     * @memberof google.shopping.type
+                     * @interface IWeight
+                     * @property {number|Long|null} [amountMicros] Weight amountMicros
+                     * @property {google.shopping.type.Weight.WeightUnit|null} [unit] Weight unit
+                     */
+    
+                    /**
+                     * Constructs a new Weight.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Weight.
+                     * @implements IWeight
+                     * @constructor
+                     * @param {google.shopping.type.IWeight=} [properties] Properties to set
+                     */
+                    function Weight(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Weight amountMicros.
+                     * @member {number|Long|null|undefined} amountMicros
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Weight.prototype.amountMicros = null;
+    
+                    /**
+                     * Weight unit.
+                     * @member {google.shopping.type.Weight.WeightUnit} unit
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Weight.prototype.unit = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Weight _amountMicros.
+                     * @member {"amountMicros"|undefined} _amountMicros
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     */
+                    Object.defineProperty(Weight.prototype, "_amountMicros", {
+                        get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Weight instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight=} [properties] Properties to set
+                     * @returns {google.shopping.type.Weight} Weight instance
+                     */
+                    Weight.create = function create(properties) {
+                        return new Weight(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Weight message. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight} message Weight message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Weight.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
+                        if (message.unit != null && Object.hasOwnProperty.call(message, "unit"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.unit);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Weight message, length delimited. Does not implicitly {@link google.shopping.type.Weight.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.IWeight} message Weight message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Weight.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Weight message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Weight} Weight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Weight.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Weight();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.amountMicros = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    message.unit = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Weight message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Weight} Weight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Weight.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Weight message.
+                     * @function verify
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Weight.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            properties._amountMicros = 1;
+                            if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
+                                return "amountMicros: integer|Long expected";
+                        }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            switch (message.unit) {
+                            default:
+                                return "unit: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Weight message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Weight} Weight
+                     */
+                    Weight.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Weight)
+                            return object;
+                        var message = new $root.google.shopping.type.Weight();
+                        if (object.amountMicros != null)
+                            if ($util.Long)
+                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                            else if (typeof object.amountMicros === "string")
+                                message.amountMicros = parseInt(object.amountMicros, 10);
+                            else if (typeof object.amountMicros === "number")
+                                message.amountMicros = object.amountMicros;
+                            else if (typeof object.amountMicros === "object")
+                                message.amountMicros = new $util.LongBits(object.amountMicros.low >>> 0, object.amountMicros.high >>> 0).toNumber();
+                        switch (object.unit) {
+                        default:
+                            if (typeof object.unit === "number") {
+                                message.unit = object.unit;
+                                break;
+                            }
+                            break;
+                        case "WEIGHT_UNIT_UNSPECIFIED":
+                        case 0:
+                            message.unit = 0;
+                            break;
+                        case "POUND":
+                        case 1:
+                            message.unit = 1;
+                            break;
+                        case "KILOGRAM":
+                        case 2:
+                            message.unit = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Weight message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {google.shopping.type.Weight} message Weight
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Weight.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.unit = options.enums === String ? "WEIGHT_UNIT_UNSPECIFIED" : 0;
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            if (typeof message.amountMicros === "number")
+                                object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
+                            else
+                                object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
+                            if (options.oneofs)
+                                object._amountMicros = "amountMicros";
+                        }
+                        if (message.unit != null && message.hasOwnProperty("unit"))
+                            object.unit = options.enums === String ? $root.google.shopping.type.Weight.WeightUnit[message.unit] === undefined ? message.unit : $root.google.shopping.type.Weight.WeightUnit[message.unit] : message.unit;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Weight to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Weight
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Weight.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Weight
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Weight
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Weight.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Weight";
+                    };
+    
+                    /**
+                     * WeightUnit enum.
+                     * @name google.shopping.type.Weight.WeightUnit
+                     * @enum {number}
+                     * @property {number} WEIGHT_UNIT_UNSPECIFIED=0 WEIGHT_UNIT_UNSPECIFIED value
+                     * @property {number} POUND=1 POUND value
+                     * @property {number} KILOGRAM=2 KILOGRAM value
+                     */
+                    Weight.WeightUnit = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WEIGHT_UNIT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "POUND"] = 1;
+                        values[valuesById[2] = "KILOGRAM"] = 2;
+                        return values;
+                    })();
+    
+                    return Weight;
+                })();
+    
+                type.Price = (function() {
+    
+                    /**
+                     * Properties of a Price.
+                     * @memberof google.shopping.type
+                     * @interface IPrice
+                     * @property {number|Long|null} [amountMicros] Price amountMicros
+                     * @property {string|null} [currencyCode] Price currencyCode
+                     */
+    
+                    /**
+                     * Constructs a new Price.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Price.
+                     * @implements IPrice
+                     * @constructor
+                     * @param {google.shopping.type.IPrice=} [properties] Properties to set
+                     */
+                    function Price(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Price amountMicros.
+                     * @member {number|Long|null|undefined} amountMicros
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     */
+                    Price.prototype.amountMicros = null;
+    
+                    /**
+                     * Price currencyCode.
+                     * @member {string|null|undefined} currencyCode
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     */
+                    Price.prototype.currencyCode = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Price _amountMicros.
+                     * @member {"amountMicros"|undefined} _amountMicros
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     */
+                    Object.defineProperty(Price.prototype, "_amountMicros", {
+                        get: $util.oneOfGetter($oneOfFields = ["amountMicros"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Price _currencyCode.
+                     * @member {"currencyCode"|undefined} _currencyCode
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     */
+                    Object.defineProperty(Price.prototype, "_currencyCode", {
+                        get: $util.oneOfGetter($oneOfFields = ["currencyCode"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new Price instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.IPrice=} [properties] Properties to set
+                     * @returns {google.shopping.type.Price} Price instance
+                     */
+                    Price.create = function create(properties) {
+                        return new Price(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Price message. Does not implicitly {@link google.shopping.type.Price.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.IPrice} message Price message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Price.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.amountMicros != null && Object.hasOwnProperty.call(message, "amountMicros"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int64(message.amountMicros);
+                        if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.currencyCode);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Price message, length delimited. Does not implicitly {@link google.shopping.type.Price.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.IPrice} message Price message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Price.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Price message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Price} Price
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Price.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Price();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.amountMicros = reader.int64();
+                                    break;
+                                }
+                            case 2: {
+                                    message.currencyCode = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Price message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Price} Price
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Price.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Price message.
+                     * @function verify
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Price.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            properties._amountMicros = 1;
+                            if (!$util.isInteger(message.amountMicros) && !(message.amountMicros && $util.isInteger(message.amountMicros.low) && $util.isInteger(message.amountMicros.high)))
+                                return "amountMicros: integer|Long expected";
+                        }
+                        if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                            properties._currencyCode = 1;
+                            if (!$util.isString(message.currencyCode))
+                                return "currencyCode: string expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Price message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Price} Price
+                     */
+                    Price.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Price)
+                            return object;
+                        var message = new $root.google.shopping.type.Price();
+                        if (object.amountMicros != null)
+                            if ($util.Long)
+                                (message.amountMicros = $util.Long.fromValue(object.amountMicros)).unsigned = false;
+                            else if (typeof object.amountMicros === "string")
+                                message.amountMicros = parseInt(object.amountMicros, 10);
+                            else if (typeof object.amountMicros === "number")
+                                message.amountMicros = object.amountMicros;
+                            else if (typeof object.amountMicros === "object")
+                                message.amountMicros = new $util.LongBits(object.amountMicros.low >>> 0, object.amountMicros.high >>> 0).toNumber();
+                        if (object.currencyCode != null)
+                            message.currencyCode = String(object.currencyCode);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Price message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {google.shopping.type.Price} message Price
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Price.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.amountMicros != null && message.hasOwnProperty("amountMicros")) {
+                            if (typeof message.amountMicros === "number")
+                                object.amountMicros = options.longs === String ? String(message.amountMicros) : message.amountMicros;
+                            else
+                                object.amountMicros = options.longs === String ? $util.Long.prototype.toString.call(message.amountMicros) : options.longs === Number ? new $util.LongBits(message.amountMicros.low >>> 0, message.amountMicros.high >>> 0).toNumber() : message.amountMicros;
+                            if (options.oneofs)
+                                object._amountMicros = "amountMicros";
+                        }
+                        if (message.currencyCode != null && message.hasOwnProperty("currencyCode")) {
+                            object.currencyCode = message.currencyCode;
+                            if (options.oneofs)
+                                object._currencyCode = "currencyCode";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Price to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Price
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Price.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Price
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Price
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Price.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Price";
+                    };
+    
+                    return Price;
+                })();
+    
+                type.CustomAttribute = (function() {
+    
+                    /**
+                     * Properties of a CustomAttribute.
+                     * @memberof google.shopping.type
+                     * @interface ICustomAttribute
+                     * @property {string|null} [name] CustomAttribute name
+                     * @property {string|null} [value] CustomAttribute value
+                     * @property {Array.<google.shopping.type.ICustomAttribute>|null} [groupValues] CustomAttribute groupValues
+                     */
+    
+                    /**
+                     * Constructs a new CustomAttribute.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a CustomAttribute.
+                     * @implements ICustomAttribute
+                     * @constructor
+                     * @param {google.shopping.type.ICustomAttribute=} [properties] Properties to set
+                     */
+                    function CustomAttribute(properties) {
+                        this.groupValues = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CustomAttribute name.
+                     * @member {string|null|undefined} name
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    CustomAttribute.prototype.name = null;
+    
+                    /**
+                     * CustomAttribute value.
+                     * @member {string|null|undefined} value
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    CustomAttribute.prototype.value = null;
+    
+                    /**
+                     * CustomAttribute groupValues.
+                     * @member {Array.<google.shopping.type.ICustomAttribute>} groupValues
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    CustomAttribute.prototype.groupValues = $util.emptyArray;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * CustomAttribute _name.
+                     * @member {"name"|undefined} _name
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    Object.defineProperty(CustomAttribute.prototype, "_name", {
+                        get: $util.oneOfGetter($oneOfFields = ["name"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * CustomAttribute _value.
+                     * @member {"value"|undefined} _value
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     */
+                    Object.defineProperty(CustomAttribute.prototype, "_value", {
+                        get: $util.oneOfGetter($oneOfFields = ["value"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new CustomAttribute instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.ICustomAttribute=} [properties] Properties to set
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute instance
+                     */
+                    CustomAttribute.create = function create(properties) {
+                        return new CustomAttribute(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CustomAttribute message. Does not implicitly {@link google.shopping.type.CustomAttribute.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.ICustomAttribute} message CustomAttribute message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomAttribute.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.value);
+                        if (message.groupValues != null && message.groupValues.length)
+                            for (var i = 0; i < message.groupValues.length; ++i)
+                                $root.google.shopping.type.CustomAttribute.encode(message.groupValues[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CustomAttribute message, length delimited. Does not implicitly {@link google.shopping.type.CustomAttribute.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.ICustomAttribute} message CustomAttribute message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CustomAttribute.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CustomAttribute message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomAttribute.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.CustomAttribute();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.value = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.groupValues && message.groupValues.length))
+                                        message.groupValues = [];
+                                    message.groupValues.push($root.google.shopping.type.CustomAttribute.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CustomAttribute message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CustomAttribute.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CustomAttribute message.
+                     * @function verify
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CustomAttribute.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name")) {
+                            properties._name = 1;
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        }
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            properties._value = 1;
+                            if (!$util.isString(message.value))
+                                return "value: string expected";
+                        }
+                        if (message.groupValues != null && message.hasOwnProperty("groupValues")) {
+                            if (!Array.isArray(message.groupValues))
+                                return "groupValues: array expected";
+                            for (var i = 0; i < message.groupValues.length; ++i) {
+                                var error = $root.google.shopping.type.CustomAttribute.verify(message.groupValues[i]);
+                                if (error)
+                                    return "groupValues." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CustomAttribute message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.CustomAttribute} CustomAttribute
+                     */
+                    CustomAttribute.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.CustomAttribute)
+                            return object;
+                        var message = new $root.google.shopping.type.CustomAttribute();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.value != null)
+                            message.value = String(object.value);
+                        if (object.groupValues) {
+                            if (!Array.isArray(object.groupValues))
+                                throw TypeError(".google.shopping.type.CustomAttribute.groupValues: array expected");
+                            message.groupValues = [];
+                            for (var i = 0; i < object.groupValues.length; ++i) {
+                                if (typeof object.groupValues[i] !== "object")
+                                    throw TypeError(".google.shopping.type.CustomAttribute.groupValues: object expected");
+                                message.groupValues[i] = $root.google.shopping.type.CustomAttribute.fromObject(object.groupValues[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CustomAttribute message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {google.shopping.type.CustomAttribute} message CustomAttribute
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CustomAttribute.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.groupValues = [];
+                        if (message.name != null && message.hasOwnProperty("name")) {
+                            object.name = message.name;
+                            if (options.oneofs)
+                                object._name = "name";
+                        }
+                        if (message.value != null && message.hasOwnProperty("value")) {
+                            object.value = message.value;
+                            if (options.oneofs)
+                                object._value = "value";
+                        }
+                        if (message.groupValues && message.groupValues.length) {
+                            object.groupValues = [];
+                            for (var j = 0; j < message.groupValues.length; ++j)
+                                object.groupValues[j] = $root.google.shopping.type.CustomAttribute.toObject(message.groupValues[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CustomAttribute to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CustomAttribute.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CustomAttribute
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.CustomAttribute
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CustomAttribute.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.CustomAttribute";
+                    };
+    
+                    return CustomAttribute;
+                })();
+    
+                type.Destination = (function() {
+    
+                    /**
+                     * Properties of a Destination.
+                     * @memberof google.shopping.type
+                     * @interface IDestination
+                     */
+    
+                    /**
+                     * Constructs a new Destination.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Destination.
+                     * @implements IDestination
+                     * @constructor
+                     * @param {google.shopping.type.IDestination=} [properties] Properties to set
+                     */
+                    function Destination(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new Destination instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.IDestination=} [properties] Properties to set
+                     * @returns {google.shopping.type.Destination} Destination instance
+                     */
+                    Destination.create = function create(properties) {
+                        return new Destination(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Destination message. Does not implicitly {@link google.shopping.type.Destination.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.IDestination} message Destination message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Destination.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Destination message, length delimited. Does not implicitly {@link google.shopping.type.Destination.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.IDestination} message Destination message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Destination.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Destination message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Destination} Destination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Destination.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Destination();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Destination message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Destination} Destination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Destination.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Destination message.
+                     * @function verify
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Destination.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Destination message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Destination} Destination
+                     */
+                    Destination.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Destination)
+                            return object;
+                        return new $root.google.shopping.type.Destination();
+                    };
+    
+                    /**
+                     * Creates a plain object from a Destination message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {google.shopping.type.Destination} message Destination
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Destination.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this Destination to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Destination
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Destination.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Destination
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Destination
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Destination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Destination";
+                    };
+    
+                    /**
+                     * DestinationEnum enum.
+                     * @name google.shopping.type.Destination.DestinationEnum
+                     * @enum {number}
+                     * @property {number} DESTINATION_ENUM_UNSPECIFIED=0 DESTINATION_ENUM_UNSPECIFIED value
+                     * @property {number} SHOPPING_ADS=1 SHOPPING_ADS value
+                     * @property {number} DISPLAY_ADS=2 DISPLAY_ADS value
+                     * @property {number} LOCAL_INVENTORY_ADS=3 LOCAL_INVENTORY_ADS value
+                     * @property {number} FREE_LISTINGS=4 FREE_LISTINGS value
+                     * @property {number} FREE_LOCAL_LISTINGS=5 FREE_LOCAL_LISTINGS value
+                     * @property {number} YOUTUBE_SHOPPING=6 YOUTUBE_SHOPPING value
+                     */
+                    Destination.DestinationEnum = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DESTINATION_ENUM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SHOPPING_ADS"] = 1;
+                        values[valuesById[2] = "DISPLAY_ADS"] = 2;
+                        values[valuesById[3] = "LOCAL_INVENTORY_ADS"] = 3;
+                        values[valuesById[4] = "FREE_LISTINGS"] = 4;
+                        values[valuesById[5] = "FREE_LOCAL_LISTINGS"] = 5;
+                        values[valuesById[6] = "YOUTUBE_SHOPPING"] = 6;
+                        return values;
+                    })();
+    
+                    return Destination;
+                })();
+    
+                type.ReportingContext = (function() {
+    
+                    /**
+                     * Properties of a ReportingContext.
+                     * @memberof google.shopping.type
+                     * @interface IReportingContext
+                     */
+    
+                    /**
+                     * Constructs a new ReportingContext.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a ReportingContext.
+                     * @implements IReportingContext
+                     * @constructor
+                     * @param {google.shopping.type.IReportingContext=} [properties] Properties to set
+                     */
+                    function ReportingContext(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new ReportingContext instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.IReportingContext=} [properties] Properties to set
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext instance
+                     */
+                    ReportingContext.create = function create(properties) {
+                        return new ReportingContext(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReportingContext message. Does not implicitly {@link google.shopping.type.ReportingContext.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.IReportingContext} message ReportingContext message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReportingContext.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReportingContext message, length delimited. Does not implicitly {@link google.shopping.type.ReportingContext.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.IReportingContext} message ReportingContext message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReportingContext.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReportingContext message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReportingContext.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.ReportingContext();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReportingContext message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReportingContext.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReportingContext message.
+                     * @function verify
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReportingContext.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReportingContext message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.ReportingContext} ReportingContext
+                     */
+                    ReportingContext.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.ReportingContext)
+                            return object;
+                        return new $root.google.shopping.type.ReportingContext();
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReportingContext message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {google.shopping.type.ReportingContext} message ReportingContext
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReportingContext.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this ReportingContext to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.ReportingContext
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReportingContext.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReportingContext
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.ReportingContext
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReportingContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.ReportingContext";
+                    };
+    
+                    /**
+                     * ReportingContextEnum enum.
+                     * @name google.shopping.type.ReportingContext.ReportingContextEnum
+                     * @enum {number}
+                     * @property {number} REPORTING_CONTEXT_ENUM_UNSPECIFIED=0 REPORTING_CONTEXT_ENUM_UNSPECIFIED value
+                     * @property {number} SHOPPING_ADS=1 SHOPPING_ADS value
+                     * @property {number} DISCOVERY_ADS=2 DISCOVERY_ADS value
+                     * @property {number} DEMAND_GEN_ADS=13 DEMAND_GEN_ADS value
+                     * @property {number} DEMAND_GEN_ADS_DISCOVER_SURFACE=14 DEMAND_GEN_ADS_DISCOVER_SURFACE value
+                     * @property {number} VIDEO_ADS=3 VIDEO_ADS value
+                     * @property {number} DISPLAY_ADS=4 DISPLAY_ADS value
+                     * @property {number} LOCAL_INVENTORY_ADS=5 LOCAL_INVENTORY_ADS value
+                     * @property {number} VEHICLE_INVENTORY_ADS=6 VEHICLE_INVENTORY_ADS value
+                     * @property {number} FREE_LISTINGS=7 FREE_LISTINGS value
+                     * @property {number} FREE_LOCAL_LISTINGS=8 FREE_LOCAL_LISTINGS value
+                     * @property {number} FREE_LOCAL_VEHICLE_LISTINGS=9 FREE_LOCAL_VEHICLE_LISTINGS value
+                     * @property {number} YOUTUBE_SHOPPING=10 YOUTUBE_SHOPPING value
+                     * @property {number} CLOUD_RETAIL=11 CLOUD_RETAIL value
+                     * @property {number} LOCAL_CLOUD_RETAIL=12 LOCAL_CLOUD_RETAIL value
+                     */
+                    ReportingContext.ReportingContextEnum = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REPORTING_CONTEXT_ENUM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SHOPPING_ADS"] = 1;
+                        values[valuesById[2] = "DISCOVERY_ADS"] = 2;
+                        values[valuesById[13] = "DEMAND_GEN_ADS"] = 13;
+                        values[valuesById[14] = "DEMAND_GEN_ADS_DISCOVER_SURFACE"] = 14;
+                        values[valuesById[3] = "VIDEO_ADS"] = 3;
+                        values[valuesById[4] = "DISPLAY_ADS"] = 4;
+                        values[valuesById[5] = "LOCAL_INVENTORY_ADS"] = 5;
+                        values[valuesById[6] = "VEHICLE_INVENTORY_ADS"] = 6;
+                        values[valuesById[7] = "FREE_LISTINGS"] = 7;
+                        values[valuesById[8] = "FREE_LOCAL_LISTINGS"] = 8;
+                        values[valuesById[9] = "FREE_LOCAL_VEHICLE_LISTINGS"] = 9;
+                        values[valuesById[10] = "YOUTUBE_SHOPPING"] = 10;
+                        values[valuesById[11] = "CLOUD_RETAIL"] = 11;
+                        values[valuesById[12] = "LOCAL_CLOUD_RETAIL"] = 12;
+                        return values;
+                    })();
+    
+                    return ReportingContext;
+                })();
+    
+                type.Channel = (function() {
+    
+                    /**
+                     * Properties of a Channel.
+                     * @memberof google.shopping.type
+                     * @interface IChannel
+                     */
+    
+                    /**
+                     * Constructs a new Channel.
+                     * @memberof google.shopping.type
+                     * @classdesc Represents a Channel.
+                     * @implements IChannel
+                     * @constructor
+                     * @param {google.shopping.type.IChannel=} [properties] Properties to set
+                     */
+                    function Channel(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new Channel instance using the specified properties.
+                     * @function create
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.IChannel=} [properties] Properties to set
+                     * @returns {google.shopping.type.Channel} Channel instance
+                     */
+                    Channel.create = function create(properties) {
+                        return new Channel(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Channel message. Does not implicitly {@link google.shopping.type.Channel.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.IChannel} message Channel message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Channel.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Channel message, length delimited. Does not implicitly {@link google.shopping.type.Channel.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.IChannel} message Channel message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Channel.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Channel message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.shopping.type.Channel} Channel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Channel.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.type.Channel();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Channel message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.shopping.type.Channel} Channel
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Channel.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Channel message.
+                     * @function verify
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Channel.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Channel message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.shopping.type.Channel} Channel
+                     */
+                    Channel.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.shopping.type.Channel)
+                            return object;
+                        return new $root.google.shopping.type.Channel();
+                    };
+    
+                    /**
+                     * Creates a plain object from a Channel message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {google.shopping.type.Channel} message Channel
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Channel.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this Channel to JSON.
+                     * @function toJSON
+                     * @memberof google.shopping.type.Channel
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Channel.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Channel
+                     * @function getTypeUrl
+                     * @memberof google.shopping.type.Channel
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Channel.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.shopping.type.Channel";
+                    };
+    
+                    /**
+                     * ChannelEnum enum.
+                     * @name google.shopping.type.Channel.ChannelEnum
+                     * @enum {number}
+                     * @property {number} CHANNEL_ENUM_UNSPECIFIED=0 CHANNEL_ENUM_UNSPECIFIED value
+                     * @property {number} ONLINE=1 ONLINE value
+                     * @property {number} LOCAL=2 LOCAL value
+                     */
+                    Channel.ChannelEnum = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "CHANNEL_ENUM_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ONLINE"] = 1;
+                        values[valuesById[2] = "LOCAL"] = 2;
+                        return values;
+                    })();
+    
+                    return Channel;
+                })();
+    
+                return type;
             })();
     
             return shopping;
