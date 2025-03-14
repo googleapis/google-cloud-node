@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cloudbuild",
-        "version": "4.8.1",
+        "version": "5.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {

@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/automl",
   "description": "Cloud AutoML API client for Node.js",
-  "version": "4.3.0",
+  "version": "5.0.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -64,7 +64,7 @@
     "long": "^5.3.1",
     "mocha": "^11.1.0",
     "null-loader": "^4.0.1",
-    "pack-n-play": "^2.1.0",
+    "pack-n-play": "^3.0.0",
     "sinon": "^19.0.2",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",

@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.7.1...networkservices-v1.0.0) (2025-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([#6140](https://github.com/googleapis/google-cloud-node/issues/6140)) ([2f96b1f](https://github.com/googleapis/google-cloud-node/commit/2f96b1f95dd6b7cb89871b56e5ea5aadf5454292))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.7.0...networkservices-v0.7.1) (2025-02-12)
 
 

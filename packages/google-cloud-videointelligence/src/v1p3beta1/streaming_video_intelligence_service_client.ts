@@ -27,6 +27,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class StreamingVideoIntelligenceServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('video-intelligence');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -84,7 +87,7 @@ export class StreamingVideoIntelligenceServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -400,6 +403,7 @@ export class StreamingVideoIntelligenceServiceClient {
    */
   streamingAnnotateVideo(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingAnnotateVideo stream %j', options);
     return this.innerApiCalls.streamingAnnotateVideo(null, options);
   }
 
@@ -412,6 +416,7 @@ export class StreamingVideoIntelligenceServiceClient {
   close(): Promise<void> {
     if (this.streamingVideoIntelligenceServiceStub && !this._terminated) {
       return this.streamingVideoIntelligenceServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

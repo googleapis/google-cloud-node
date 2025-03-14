@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class TenantServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('talent');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class TenantServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -495,7 +498,33 @@ export class TenantServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createTenant(request, options, callback);
+    this._log.info('createTenant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4beta1.ITenant,
+          | protos.google.cloud.talent.v4beta1.ICreateTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTenant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4beta1.ITenant,
+          protos.google.cloud.talent.v4beta1.ICreateTenantRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTenant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves specified tenant.
@@ -582,7 +611,33 @@ export class TenantServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getTenant(request, options, callback);
+    this._log.info('getTenant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4beta1.ITenant,
+          | protos.google.cloud.talent.v4beta1.IGetTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTenant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4beta1.ITenant,
+          protos.google.cloud.talent.v4beta1.IGetTenantRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTenant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates specified tenant.
@@ -685,7 +740,33 @@ export class TenantServiceClient {
         'tenant.name': request.tenant!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateTenant(request, options, callback);
+    this._log.info('updateTenant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.talent.v4beta1.ITenant,
+          | protos.google.cloud.talent.v4beta1.IUpdateTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTenant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.talent.v4beta1.ITenant,
+          protos.google.cloud.talent.v4beta1.IUpdateTenantRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTenant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes specified tenant.
@@ -778,7 +859,33 @@ export class TenantServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteTenant(request, options, callback);
+    this._log.info('deleteTenant request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.talent.v4beta1.IDeleteTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTenant response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.talent.v4beta1.IDeleteTenantRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTenant response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -880,7 +987,33 @@ export class TenantServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listTenants(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.talent.v4beta1.IListTenantsRequest,
+          | protos.google.cloud.talent.v4beta1.IListTenantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.talent.v4beta1.ITenant
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTenants values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTenants request %j', request);
+    return this.innerApiCalls
+      .listTenants(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.talent.v4beta1.ITenant[],
+          protos.google.cloud.talent.v4beta1.IListTenantsRequest | null,
+          protos.google.cloud.talent.v4beta1.IListTenantsResponse,
+        ]) => {
+          this._log.info('listTenants values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -923,6 +1056,7 @@ export class TenantServiceClient {
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTenants stream %j', request);
     return this.descriptors.page.listTenants.createStream(
       this.innerApiCalls.listTenants as GaxCall,
       request,
@@ -973,6 +1107,7 @@ export class TenantServiceClient {
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listTenants iterate %j', request);
     return this.descriptors.page.listTenants.asyncIterate(
       this.innerApiCalls['listTenants'] as GaxCall,
       request as {},
@@ -1238,6 +1373,7 @@ export class TenantServiceClient {
   close(): Promise<void> {
     if (this.tenantServiceStub && !this._terminated) {
       return this.tenantServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

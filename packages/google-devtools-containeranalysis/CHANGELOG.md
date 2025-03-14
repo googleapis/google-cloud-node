@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.6.0...containeranalysis-v6.0.0) (2025-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.5.0...containeranalysis-v5.6.0) (2024-08-09)
 
 

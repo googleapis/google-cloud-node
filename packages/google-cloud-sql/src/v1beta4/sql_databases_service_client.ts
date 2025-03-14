@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,6 +53,8 @@ export class SqlDatabasesServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('sql');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -86,7 +89,7 @@ export class SqlDatabasesServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -465,7 +468,36 @@ export class SqlDatabasesServiceClient {
         database: request.database ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    this._log.info('delete request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlDatabasesDeleteRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('delete response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .delete(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IOperation,
+          (
+            | protos.google.cloud.sql.v1beta4.ISqlDatabasesDeleteRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('delete response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Retrieves a resource containing information about a database inside a Cloud
@@ -562,7 +594,33 @@ export class SqlDatabasesServiceClient {
         database: request.database ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.get(request, options, callback);
+    this._log.info('get request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IDatabase,
+          | protos.google.cloud.sql.v1beta4.ISqlDatabasesGetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('get response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IDatabase,
+          protos.google.cloud.sql.v1beta4.ISqlDatabasesGetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Inserts a resource containing information about a database inside a Cloud
@@ -659,7 +717,36 @@ export class SqlDatabasesServiceClient {
         instance: request.instance ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    this._log.info('insert request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlDatabasesInsertRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('insert response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .insert(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IOperation,
+          (
+            | protos.google.cloud.sql.v1beta4.ISqlDatabasesInsertRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insert response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Lists databases in the specified Cloud SQL instance.
@@ -752,7 +839,33 @@ export class SqlDatabasesServiceClient {
         instance: request.instance ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
+    this._log.info('list request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IDatabasesListResponse,
+          | protos.google.cloud.sql.v1beta4.ISqlDatabasesListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('list response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .list(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IDatabasesListResponse,
+          protos.google.cloud.sql.v1beta4.ISqlDatabasesListRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('list response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Partially updates a resource containing information about a database inside
@@ -850,7 +963,36 @@ export class SqlDatabasesServiceClient {
         database: request.database ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.patch(request, options, callback);
+    this._log.info('patch request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('patch response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .patch(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IOperation,
+          (
+            | protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('patch response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a resource containing information about a database inside a Cloud
@@ -948,7 +1090,36 @@ export class SqlDatabasesServiceClient {
         database: request.database ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.update(request, options, callback);
+    this._log.info('update request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.sql.v1beta4.IOperation,
+          | protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('update response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .update(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.sql.v1beta4.IOperation,
+          (
+            | protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('update response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1038,6 +1209,7 @@ export class SqlDatabasesServiceClient {
   close(): Promise<void> {
     if (this.sqlDatabasesServiceStub && !this._terminated) {
       return this.sqlDatabasesServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

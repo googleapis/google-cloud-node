@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/filestore-v3.4.1...filestore-v4.0.0) (2025-03-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [filestore] add PromoteReplica API ([#6116](https://github.com/googleapis/google-cloud-node/issues/6116)) ([9f33d6a](https://github.com/googleapis/google-cloud-node/commit/9f33d6a030b696d8f42d11054e5896955b3d0720))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [3.4.1](https://github.com/googleapis/google-cloud-node/compare/filestore-v3.4.0...filestore-v3.4.1) (2025-02-12)
 
 

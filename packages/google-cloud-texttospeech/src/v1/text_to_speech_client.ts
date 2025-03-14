@@ -27,6 +27,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,6 +52,8 @@ export class TextToSpeechClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('text-to-speech');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -85,7 +88,7 @@ export class TextToSpeechClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -476,7 +479,33 @@ export class TextToSpeechClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.listVoices(request, options, callback);
+    this._log.info('listVoices request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+          | protos.google.cloud.texttospeech.v1.IListVoicesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('listVoices response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .listVoices(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.texttospeech.v1.IListVoicesResponse,
+          protos.google.cloud.texttospeech.v1.IListVoicesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('listVoices response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Synthesizes speech synchronously: receive results after all text input
@@ -569,7 +598,36 @@ export class TextToSpeechClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
-    return this.innerApiCalls.synthesizeSpeech(request, options, callback);
+    this._log.info('synthesizeSpeech request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+          | protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('synthesizeSpeech response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .synthesizeSpeech(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.texttospeech.v1.ISynthesizeSpeechResponse,
+          (
+            | protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('synthesizeSpeech response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -589,6 +647,7 @@ export class TextToSpeechClient {
    */
   streamingSynthesize(options?: CallOptions): gax.CancellableStream {
     this.initialize();
+    this._log.info('streamingSynthesize stream %j', options);
     return this.innerApiCalls.streamingSynthesize(null, options);
   }
 
@@ -654,6 +713,7 @@ export class TextToSpeechClient {
   close(): Promise<void> {
     if (this.textToSpeechStub && !this._terminated) {
       return this.textToSpeechStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
