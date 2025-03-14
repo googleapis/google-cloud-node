@@ -1546,6 +1546,51 @@ describe('v1beta.AccountsServiceClient', () => {
       });
     });
 
+    describe('automaticImprovements', () => {
+      const fakePath = '/rendered/path/automaticImprovements';
+      const expectedParameters = {
+        account: 'accountValue',
+      };
+      const client = new accountsserviceModule.v1beta.AccountsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.automaticImprovementsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.automaticImprovementsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('automaticImprovementsPath', () => {
+        const result = client.automaticImprovementsPath('accountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.automaticImprovementsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromAutomaticImprovementsName', () => {
+        const result =
+          client.matchAccountFromAutomaticImprovementsName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (
+            client.pathTemplates.automaticImprovementsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('businessIdentity', () => {
       const fakePath = '/rendered/path/businessIdentity';
       const expectedParameters = {

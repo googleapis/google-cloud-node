@@ -31,19 +31,20 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/autofeed_settings_service_client_config.json`.
+ * `src/v1beta/automatic_improvements_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './autofeed_settings_service_client_config.json';
+import * as gapicConfig from './automatic_improvements_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service to support
- *  [autofeed](https://support.google.com/merchants/answer/7538732) setting.
+ *  Service to manage the automatic improvements of an account. The automatic
+ *  improvements of the account can be used to automatically update products,
+ *  improve images and shipping.
  * @class
  * @memberof v1beta
  */
-export class AutofeedSettingsServiceClient {
+export class AutomaticImprovementsServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -65,10 +66,10 @@ export class AutofeedSettingsServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  autofeedSettingsServiceStub?: Promise<{[name: string]: Function}>;
+  automaticImprovementsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of AutofeedSettingsServiceClient.
+   * Construct an instance of AutomaticImprovementsServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -103,7 +104,7 @@ export class AutofeedSettingsServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AutofeedSettingsServiceClient({fallback: true}, gax);
+   *     const client = new AutomaticImprovementsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -112,7 +113,7 @@ export class AutofeedSettingsServiceClient {
   ) {
     // Ensure that options include all the required fields.
     const staticMembers = this
-      .constructor as typeof AutofeedSettingsServiceClient;
+      .constructor as typeof AutomaticImprovementsServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -255,7 +256,7 @@ export class AutofeedSettingsServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.accounts.v1beta.AutofeedSettingsService',
+      'google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -283,32 +284,32 @@ export class AutofeedSettingsServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.autofeedSettingsServiceStub) {
-      return this.autofeedSettingsServiceStub;
+    if (this.automaticImprovementsServiceStub) {
+      return this.automaticImprovementsServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.
-    this.autofeedSettingsServiceStub = this._gaxGrpc.createStub(
+    // google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.
+    this.automaticImprovementsServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.accounts.v1beta.AutofeedSettingsService'
+            'google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.shopping.merchant.accounts.v1beta
-            .AutofeedSettingsService,
+            .AutomaticImprovementsService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const autofeedSettingsServiceStubMethods = [
-      'getAutofeedSettings',
-      'updateAutofeedSettings',
+    const automaticImprovementsServiceStubMethods = [
+      'getAutomaticImprovements',
+      'updateAutomaticImprovements',
     ];
-    for (const methodName of autofeedSettingsServiceStubMethods) {
-      const callPromise = this.autofeedSettingsServiceStub.then(
+    for (const methodName of automaticImprovementsServiceStubMethods) {
+      const callPromise = this.automaticImprovementsServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -333,7 +334,7 @@ export class AutofeedSettingsServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.autofeedSettingsServiceStub;
+    return this.automaticImprovementsServiceStub;
   }
 
   /**
@@ -421,79 +422,79 @@ export class AutofeedSettingsServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Retrieves the autofeed settings of an account.
+   * Retrieves the automatic improvements of an account.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the autofeed settings.
-   *   Format: `accounts/{account}/autofeedSettings`
+   *   Required. The resource name of the automatic improvements.
+   *   Format: `accounts/{account}/automaticImprovements`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings|AutofeedSettings}.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AutomaticImprovements|AutomaticImprovements}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/autofeed_settings_service.get_autofeed_settings.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AutofeedSettingsService_GetAutofeedSettings_async
+   * @example <caption>include:samples/generated/v1beta/automatic_improvements_service.get_automatic_improvements.js</caption>
+   * region_tag:merchantapi_v1beta_generated_AutomaticImprovementsService_GetAutomaticImprovements_async
    */
-  getAutofeedSettings(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
+  getAutomaticImprovements(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  getAutofeedSettings(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
+  getAutomaticImprovements(
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getAutofeedSettings(
-    request: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
+  getAutomaticImprovements(
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getAutofeedSettings(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
+  getAutomaticImprovements(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+          protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-      | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
         | undefined
       ),
       {} | undefined,
@@ -515,112 +516,121 @@ export class AutofeedSettingsServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    this._log.info('getAutofeedSettings request %j', request);
+    this._log.info('getAutomaticImprovements request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-          | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+          protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getAutofeedSettings response %j', response);
+          this._log.info('getAutomaticImprovements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getAutofeedSettings(request, options, wrappedCallback)
+      .getAutomaticImprovements(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+          protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
           (
-            | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+            | protos.google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('getAutofeedSettings response %j', response);
+          this._log.info('getAutomaticImprovements response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Updates the autofeed settings of an account.
+   * Updates the automatic improvements of an account.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettings} request.autofeedSettings
-   *   Required. The new version of the autofeed setting.
+   * @param {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} request.automaticImprovements
+   *   Required. The new version of the automatic imrovements.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. List of fields being updated.
+   *   The following fields are supported (in both `snake_case` and
+   *   `lowerCamelCase`):
+   *
+   *   - `item_updates`
+   *   - `item_updates.account_level_settings`
+   *   - `image_improvements`
+   *   - `image_improvements.account_level_settings`
+   *   - `shipping_improvements`
+   *   - `shipping_improvements.allow_shipping_improvements`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings|AutofeedSettings}.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AutomaticImprovements|AutomaticImprovements}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/autofeed_settings_service.update_autofeed_settings.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AutofeedSettingsService_UpdateAutofeedSettings_async
+   * @example <caption>include:samples/generated/v1beta/automatic_improvements_service.update_automatic_improvements.js</caption>
+   * region_tag:merchantapi_v1beta_generated_AutomaticImprovementsService_UpdateAutomaticImprovements_async
    */
-  updateAutofeedSettings(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+  updateAutomaticImprovements(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  updateAutofeedSettings(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+  updateAutomaticImprovements(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateAutofeedSettings(
-    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+  updateAutomaticImprovements(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest,
     callback: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  updateAutofeedSettings(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+  updateAutomaticImprovements(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+          protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
       (
-        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
         | undefined
       ),
       {} | undefined,
@@ -639,36 +649,37 @@ export class AutofeedSettingsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'autofeed_settings.name': request.autofeedSettings!.name ?? '',
+        'automatic_improvements.name':
+          request.automaticImprovements!.name ?? '',
       });
     this.initialize();
-    this._log.info('updateAutofeedSettings request %j', request);
+    this._log.info('updateAutomaticImprovements request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
-          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+          protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateAutofeedSettings response %j', response);
+          this._log.info('updateAutomaticImprovements response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .updateAutofeedSettings(request, options, wrappedCallback)
+      .updateAutomaticImprovements(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+          protos.google.shopping.merchant.accounts.v1beta.IAutomaticImprovements,
           (
-            | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+            | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest
             | undefined
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateAutofeedSettings response %j', response);
+          this._log.info('updateAutomaticImprovements response %j', response);
           return [response, options, rawResponse];
         }
       );
@@ -1187,8 +1198,8 @@ export class AutofeedSettingsServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.autofeedSettingsServiceStub && !this._terminated) {
-      return this.autofeedSettingsServiceStub.then(stub => {
+    if (this.automaticImprovementsServiceStub && !this._terminated) {
+      return this.automaticImprovementsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

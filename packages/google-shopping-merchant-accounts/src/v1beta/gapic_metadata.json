@@ -197,6 +197,40 @@
         }
       }
     },
+    "AutomaticImprovementsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutomaticImprovementsServiceClient",
+          "rpcs": {
+            "GetAutomaticImprovements": {
+              "methods": [
+                "getAutomaticImprovements"
+              ]
+            },
+            "UpdateAutomaticImprovements": {
+              "methods": [
+                "updateAutomaticImprovements"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutomaticImprovementsServiceClient",
+          "rpcs": {
+            "GetAutomaticImprovements": {
+              "methods": [
+                "getAutomaticImprovements"
+              ]
+            },
+            "UpdateAutomaticImprovements": {
+              "methods": [
+                "updateAutomaticImprovements"
+              ]
+            }
+          }
+        }
+      }
+    },
     "BusinessIdentityService": {
       "clients": {
         "grpc": {

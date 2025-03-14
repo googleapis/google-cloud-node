@@ -26,6 +26,10 @@ const AccountTaxServiceClient = v1beta.AccountTaxServiceClient;
 type AccountTaxServiceClient = v1beta.AccountTaxServiceClient;
 const AutofeedSettingsServiceClient = v1beta.AutofeedSettingsServiceClient;
 type AutofeedSettingsServiceClient = v1beta.AutofeedSettingsServiceClient;
+const AutomaticImprovementsServiceClient =
+  v1beta.AutomaticImprovementsServiceClient;
+type AutomaticImprovementsServiceClient =
+  v1beta.AutomaticImprovementsServiceClient;
 const BusinessIdentityServiceClient = v1beta.BusinessIdentityServiceClient;
 type BusinessIdentityServiceClient = v1beta.BusinessIdentityServiceClient;
 const BusinessInfoServiceClient = v1beta.BusinessInfoServiceClient;
@@ -57,6 +61,7 @@ export {
   AccountsServiceClient,
   AccountTaxServiceClient,
   AutofeedSettingsServiceClient,
+  AutomaticImprovementsServiceClient,
   BusinessIdentityServiceClient,
   BusinessInfoServiceClient,
   EmailPreferencesServiceClient,
@@ -75,6 +80,7 @@ export default {
   AccountsServiceClient,
   AccountTaxServiceClient,
   AutofeedSettingsServiceClient,
+  AutomaticImprovementsServiceClient,
   BusinessIdentityServiceClient,
   BusinessInfoServiceClient,
   EmailPreferencesServiceClient,

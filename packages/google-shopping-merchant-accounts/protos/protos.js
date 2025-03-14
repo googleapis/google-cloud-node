@@ -9704,6 +9704,2215 @@
                             return UpdateAutofeedSettingsRequest;
                         })();
     
+                        v1beta.AutomaticImprovementsService = (function() {
+    
+                            /**
+                             * Constructs a new AutomaticImprovementsService service.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutomaticImprovementsService
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function AutomaticImprovementsService(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (AutomaticImprovementsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = AutomaticImprovementsService;
+    
+                            /**
+                             * Creates new AutomaticImprovementsService service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {AutomaticImprovementsService} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            AutomaticImprovementsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService|getAutomaticImprovements}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @typedef GetAutomaticImprovementsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} [response] AutomaticImprovements
+                             */
+    
+                            /**
+                             * Calls GetAutomaticImprovements.
+                             * @function getAutomaticImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest} request GetAutomaticImprovementsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.GetAutomaticImprovementsCallback} callback Node-style callback called with the error, if any, and AutomaticImprovements
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AutomaticImprovementsService.prototype.getAutomaticImprovements = function getAutomaticImprovements(request, callback) {
+                                return this.rpcCall(getAutomaticImprovements, $root.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest, $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements, request, callback);
+                            }, "name", { value: "GetAutomaticImprovements" });
+    
+                            /**
+                             * Calls GetAutomaticImprovements.
+                             * @function getAutomaticImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest} request GetAutomaticImprovementsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.AutomaticImprovements>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService|updateAutomaticImprovements}.
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @typedef UpdateAutomaticImprovementsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} [response] AutomaticImprovements
+                             */
+    
+                            /**
+                             * Calls UpdateAutomaticImprovements.
+                             * @function updateAutomaticImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest} request UpdateAutomaticImprovementsRequest message or plain object
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.UpdateAutomaticImprovementsCallback} callback Node-style callback called with the error, if any, and AutomaticImprovements
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(AutomaticImprovementsService.prototype.updateAutomaticImprovements = function updateAutomaticImprovements(request, callback) {
+                                return this.rpcCall(updateAutomaticImprovements, $root.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest, $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements, request, callback);
+                            }, "name", { value: "UpdateAutomaticImprovements" });
+    
+                            /**
+                             * Calls UpdateAutomaticImprovements.
+                             * @function updateAutomaticImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService
+                             * @instance
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest} request UpdateAutomaticImprovementsRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.accounts.v1beta.AutomaticImprovements>} Promise
+                             * @variation 2
+                             */
+    
+                            return AutomaticImprovementsService;
+                        })();
+    
+                        v1beta.AutomaticImprovements = (function() {
+    
+                            /**
+                             * Properties of an AutomaticImprovements.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAutomaticImprovements
+                             * @property {string|null} [name] AutomaticImprovements name
+                             * @property {google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates|null} [itemUpdates] AutomaticImprovements itemUpdates
+                             * @property {google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements|null} [imageImprovements] AutomaticImprovements imageImprovements
+                             * @property {google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements|null} [shippingImprovements] AutomaticImprovements shippingImprovements
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticImprovements.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutomaticImprovements.
+                             * @implements IAutomaticImprovements
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImprovements=} [properties] Properties to set
+                             */
+                            function AutomaticImprovements(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticImprovements name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            AutomaticImprovements.prototype.name = "";
+    
+                            /**
+                             * AutomaticImprovements itemUpdates.
+                             * @member {google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates|null|undefined} itemUpdates
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            AutomaticImprovements.prototype.itemUpdates = null;
+    
+                            /**
+                             * AutomaticImprovements imageImprovements.
+                             * @member {google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements|null|undefined} imageImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            AutomaticImprovements.prototype.imageImprovements = null;
+    
+                            /**
+                             * AutomaticImprovements shippingImprovements.
+                             * @member {google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements|null|undefined} shippingImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            AutomaticImprovements.prototype.shippingImprovements = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AutomaticImprovements _itemUpdates.
+                             * @member {"itemUpdates"|undefined} _itemUpdates
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticImprovements.prototype, "_itemUpdates", {
+                                get: $util.oneOfGetter($oneOfFields = ["itemUpdates"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * AutomaticImprovements _imageImprovements.
+                             * @member {"imageImprovements"|undefined} _imageImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticImprovements.prototype, "_imageImprovements", {
+                                get: $util.oneOfGetter($oneOfFields = ["imageImprovements"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * AutomaticImprovements _shippingImprovements.
+                             * @member {"shippingImprovements"|undefined} _shippingImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticImprovements.prototype, "_shippingImprovements", {
+                                get: $util.oneOfGetter($oneOfFields = ["shippingImprovements"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AutomaticImprovements instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImprovements=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} AutomaticImprovements instance
+                             */
+                            AutomaticImprovements.create = function create(properties) {
+                                return new AutomaticImprovements(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticImprovements message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovements.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImprovements} message AutomaticImprovements message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticImprovements.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.itemUpdates != null && Object.hasOwnProperty.call(message, "itemUpdates"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.encode(message.itemUpdates, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.imageImprovements != null && Object.hasOwnProperty.call(message, "imageImprovements"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.encode(message.imageImprovements, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.shippingImprovements != null && Object.hasOwnProperty.call(message, "shippingImprovements"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.encode(message.shippingImprovements, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticImprovements message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovements.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImprovements} message AutomaticImprovements message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticImprovements.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticImprovements message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} AutomaticImprovements
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticImprovements.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.itemUpdates = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.imageImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.shippingImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticImprovements message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} AutomaticImprovements
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticImprovements.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticImprovements message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticImprovements.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.itemUpdates != null && message.hasOwnProperty("itemUpdates")) {
+                                    properties._itemUpdates = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.verify(message.itemUpdates);
+                                        if (error)
+                                            return "itemUpdates." + error;
+                                    }
+                                }
+                                if (message.imageImprovements != null && message.hasOwnProperty("imageImprovements")) {
+                                    properties._imageImprovements = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.verify(message.imageImprovements);
+                                        if (error)
+                                            return "imageImprovements." + error;
+                                    }
+                                }
+                                if (message.shippingImprovements != null && message.hasOwnProperty("shippingImprovements")) {
+                                    properties._shippingImprovements = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.verify(message.shippingImprovements);
+                                        if (error)
+                                            return "shippingImprovements." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticImprovements message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} AutomaticImprovements
+                             */
+                            AutomaticImprovements.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.itemUpdates != null) {
+                                    if (typeof object.itemUpdates !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.AutomaticImprovements.itemUpdates: object expected");
+                                    message.itemUpdates = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.fromObject(object.itemUpdates);
+                                }
+                                if (object.imageImprovements != null) {
+                                    if (typeof object.imageImprovements !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.AutomaticImprovements.imageImprovements: object expected");
+                                    message.imageImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.fromObject(object.imageImprovements);
+                                }
+                                if (object.shippingImprovements != null) {
+                                    if (typeof object.shippingImprovements !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.AutomaticImprovements.shippingImprovements: object expected");
+                                    message.shippingImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.fromObject(object.shippingImprovements);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticImprovements message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticImprovements} message AutomaticImprovements
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticImprovements.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.itemUpdates != null && message.hasOwnProperty("itemUpdates")) {
+                                    object.itemUpdates = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.toObject(message.itemUpdates, options);
+                                    if (options.oneofs)
+                                        object._itemUpdates = "itemUpdates";
+                                }
+                                if (message.imageImprovements != null && message.hasOwnProperty("imageImprovements")) {
+                                    object.imageImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.toObject(message.imageImprovements, options);
+                                    if (options.oneofs)
+                                        object._imageImprovements = "imageImprovements";
+                                }
+                                if (message.shippingImprovements != null && message.hasOwnProperty("shippingImprovements")) {
+                                    object.shippingImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.toObject(message.shippingImprovements, options);
+                                    if (options.oneofs)
+                                        object._shippingImprovements = "shippingImprovements";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticImprovements to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticImprovements.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticImprovements
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImprovements
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticImprovements.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutomaticImprovements";
+                            };
+    
+                            return AutomaticImprovements;
+                        })();
+    
+                        v1beta.AutomaticItemUpdates = (function() {
+    
+                            /**
+                             * Properties of an AutomaticItemUpdates.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAutomaticItemUpdates
+                             * @property {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings|null} [accountItemUpdatesSettings] AutomaticItemUpdates accountItemUpdatesSettings
+                             * @property {boolean|null} [effectiveAllowPriceUpdates] AutomaticItemUpdates effectiveAllowPriceUpdates
+                             * @property {boolean|null} [effectiveAllowAvailabilityUpdates] AutomaticItemUpdates effectiveAllowAvailabilityUpdates
+                             * @property {boolean|null} [effectiveAllowStrictAvailabilityUpdates] AutomaticItemUpdates effectiveAllowStrictAvailabilityUpdates
+                             * @property {boolean|null} [effectiveAllowConditionUpdates] AutomaticItemUpdates effectiveAllowConditionUpdates
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticItemUpdates.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutomaticItemUpdates.
+                             * @implements IAutomaticItemUpdates
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates=} [properties] Properties to set
+                             */
+                            function AutomaticItemUpdates(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticItemUpdates accountItemUpdatesSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings|null|undefined} accountItemUpdatesSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @instance
+                             */
+                            AutomaticItemUpdates.prototype.accountItemUpdatesSettings = null;
+    
+                            /**
+                             * AutomaticItemUpdates effectiveAllowPriceUpdates.
+                             * @member {boolean} effectiveAllowPriceUpdates
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @instance
+                             */
+                            AutomaticItemUpdates.prototype.effectiveAllowPriceUpdates = false;
+    
+                            /**
+                             * AutomaticItemUpdates effectiveAllowAvailabilityUpdates.
+                             * @member {boolean} effectiveAllowAvailabilityUpdates
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @instance
+                             */
+                            AutomaticItemUpdates.prototype.effectiveAllowAvailabilityUpdates = false;
+    
+                            /**
+                             * AutomaticItemUpdates effectiveAllowStrictAvailabilityUpdates.
+                             * @member {boolean} effectiveAllowStrictAvailabilityUpdates
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @instance
+                             */
+                            AutomaticItemUpdates.prototype.effectiveAllowStrictAvailabilityUpdates = false;
+    
+                            /**
+                             * AutomaticItemUpdates effectiveAllowConditionUpdates.
+                             * @member {boolean} effectiveAllowConditionUpdates
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @instance
+                             */
+                            AutomaticItemUpdates.prototype.effectiveAllowConditionUpdates = false;
+    
+                            /**
+                             * Creates a new AutomaticItemUpdates instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates} AutomaticItemUpdates instance
+                             */
+                            AutomaticItemUpdates.create = function create(properties) {
+                                return new AutomaticItemUpdates(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticItemUpdates message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates} message AutomaticItemUpdates message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticItemUpdates.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.accountItemUpdatesSettings != null && Object.hasOwnProperty.call(message, "accountItemUpdatesSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.encode(message.accountItemUpdatesSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.effectiveAllowPriceUpdates != null && Object.hasOwnProperty.call(message, "effectiveAllowPriceUpdates"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.effectiveAllowPriceUpdates);
+                                if (message.effectiveAllowAvailabilityUpdates != null && Object.hasOwnProperty.call(message, "effectiveAllowAvailabilityUpdates"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.effectiveAllowAvailabilityUpdates);
+                                if (message.effectiveAllowStrictAvailabilityUpdates != null && Object.hasOwnProperty.call(message, "effectiveAllowStrictAvailabilityUpdates"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.effectiveAllowStrictAvailabilityUpdates);
+                                if (message.effectiveAllowConditionUpdates != null && Object.hasOwnProperty.call(message, "effectiveAllowConditionUpdates"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.effectiveAllowConditionUpdates);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticItemUpdates message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates} message AutomaticItemUpdates message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticItemUpdates.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticItemUpdates message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates} AutomaticItemUpdates
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticItemUpdates.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.accountItemUpdatesSettings = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.effectiveAllowPriceUpdates = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.effectiveAllowAvailabilityUpdates = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.effectiveAllowStrictAvailabilityUpdates = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.effectiveAllowConditionUpdates = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticItemUpdates message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates} AutomaticItemUpdates
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticItemUpdates.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticItemUpdates message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticItemUpdates.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.accountItemUpdatesSettings != null && message.hasOwnProperty("accountItemUpdatesSettings")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.verify(message.accountItemUpdatesSettings);
+                                    if (error)
+                                        return "accountItemUpdatesSettings." + error;
+                                }
+                                if (message.effectiveAllowPriceUpdates != null && message.hasOwnProperty("effectiveAllowPriceUpdates"))
+                                    if (typeof message.effectiveAllowPriceUpdates !== "boolean")
+                                        return "effectiveAllowPriceUpdates: boolean expected";
+                                if (message.effectiveAllowAvailabilityUpdates != null && message.hasOwnProperty("effectiveAllowAvailabilityUpdates"))
+                                    if (typeof message.effectiveAllowAvailabilityUpdates !== "boolean")
+                                        return "effectiveAllowAvailabilityUpdates: boolean expected";
+                                if (message.effectiveAllowStrictAvailabilityUpdates != null && message.hasOwnProperty("effectiveAllowStrictAvailabilityUpdates"))
+                                    if (typeof message.effectiveAllowStrictAvailabilityUpdates !== "boolean")
+                                        return "effectiveAllowStrictAvailabilityUpdates: boolean expected";
+                                if (message.effectiveAllowConditionUpdates != null && message.hasOwnProperty("effectiveAllowConditionUpdates"))
+                                    if (typeof message.effectiveAllowConditionUpdates !== "boolean")
+                                        return "effectiveAllowConditionUpdates: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticItemUpdates message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates} AutomaticItemUpdates
+                             */
+                            AutomaticItemUpdates.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates();
+                                if (object.accountItemUpdatesSettings != null) {
+                                    if (typeof object.accountItemUpdatesSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.accountItemUpdatesSettings: object expected");
+                                    message.accountItemUpdatesSettings = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.fromObject(object.accountItemUpdatesSettings);
+                                }
+                                if (object.effectiveAllowPriceUpdates != null)
+                                    message.effectiveAllowPriceUpdates = Boolean(object.effectiveAllowPriceUpdates);
+                                if (object.effectiveAllowAvailabilityUpdates != null)
+                                    message.effectiveAllowAvailabilityUpdates = Boolean(object.effectiveAllowAvailabilityUpdates);
+                                if (object.effectiveAllowStrictAvailabilityUpdates != null)
+                                    message.effectiveAllowStrictAvailabilityUpdates = Boolean(object.effectiveAllowStrictAvailabilityUpdates);
+                                if (object.effectiveAllowConditionUpdates != null)
+                                    message.effectiveAllowConditionUpdates = Boolean(object.effectiveAllowConditionUpdates);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticItemUpdates message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates} message AutomaticItemUpdates
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticItemUpdates.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.accountItemUpdatesSettings = null;
+                                    object.effectiveAllowPriceUpdates = false;
+                                    object.effectiveAllowAvailabilityUpdates = false;
+                                    object.effectiveAllowStrictAvailabilityUpdates = false;
+                                    object.effectiveAllowConditionUpdates = false;
+                                }
+                                if (message.accountItemUpdatesSettings != null && message.hasOwnProperty("accountItemUpdatesSettings"))
+                                    object.accountItemUpdatesSettings = $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.toObject(message.accountItemUpdatesSettings, options);
+                                if (message.effectiveAllowPriceUpdates != null && message.hasOwnProperty("effectiveAllowPriceUpdates"))
+                                    object.effectiveAllowPriceUpdates = message.effectiveAllowPriceUpdates;
+                                if (message.effectiveAllowAvailabilityUpdates != null && message.hasOwnProperty("effectiveAllowAvailabilityUpdates"))
+                                    object.effectiveAllowAvailabilityUpdates = message.effectiveAllowAvailabilityUpdates;
+                                if (message.effectiveAllowStrictAvailabilityUpdates != null && message.hasOwnProperty("effectiveAllowStrictAvailabilityUpdates"))
+                                    object.effectiveAllowStrictAvailabilityUpdates = message.effectiveAllowStrictAvailabilityUpdates;
+                                if (message.effectiveAllowConditionUpdates != null && message.hasOwnProperty("effectiveAllowConditionUpdates"))
+                                    object.effectiveAllowConditionUpdates = message.effectiveAllowConditionUpdates;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticItemUpdates to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticItemUpdates.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticItemUpdates
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticItemUpdates.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates";
+                            };
+    
+                            AutomaticItemUpdates.ItemUpdatesAccountLevelSettings = (function() {
+    
+                                /**
+                                 * Properties of an ItemUpdatesAccountLevelSettings.
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                                 * @interface IItemUpdatesAccountLevelSettings
+                                 * @property {boolean|null} [allowPriceUpdates] ItemUpdatesAccountLevelSettings allowPriceUpdates
+                                 * @property {boolean|null} [allowAvailabilityUpdates] ItemUpdatesAccountLevelSettings allowAvailabilityUpdates
+                                 * @property {boolean|null} [allowStrictAvailabilityUpdates] ItemUpdatesAccountLevelSettings allowStrictAvailabilityUpdates
+                                 * @property {boolean|null} [allowConditionUpdates] ItemUpdatesAccountLevelSettings allowConditionUpdates
+                                 */
+    
+                                /**
+                                 * Constructs a new ItemUpdatesAccountLevelSettings.
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates
+                                 * @classdesc Represents an ItemUpdatesAccountLevelSettings.
+                                 * @implements IItemUpdatesAccountLevelSettings
+                                 * @constructor
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings=} [properties] Properties to set
+                                 */
+                                function ItemUpdatesAccountLevelSettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings allowPriceUpdates.
+                                 * @member {boolean|null|undefined} allowPriceUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                ItemUpdatesAccountLevelSettings.prototype.allowPriceUpdates = null;
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings allowAvailabilityUpdates.
+                                 * @member {boolean|null|undefined} allowAvailabilityUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                ItemUpdatesAccountLevelSettings.prototype.allowAvailabilityUpdates = null;
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings allowStrictAvailabilityUpdates.
+                                 * @member {boolean|null|undefined} allowStrictAvailabilityUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                ItemUpdatesAccountLevelSettings.prototype.allowStrictAvailabilityUpdates = null;
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings allowConditionUpdates.
+                                 * @member {boolean|null|undefined} allowConditionUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                ItemUpdatesAccountLevelSettings.prototype.allowConditionUpdates = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings _allowPriceUpdates.
+                                 * @member {"allowPriceUpdates"|undefined} _allowPriceUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(ItemUpdatesAccountLevelSettings.prototype, "_allowPriceUpdates", {
+                                    get: $util.oneOfGetter($oneOfFields = ["allowPriceUpdates"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings _allowAvailabilityUpdates.
+                                 * @member {"allowAvailabilityUpdates"|undefined} _allowAvailabilityUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(ItemUpdatesAccountLevelSettings.prototype, "_allowAvailabilityUpdates", {
+                                    get: $util.oneOfGetter($oneOfFields = ["allowAvailabilityUpdates"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings _allowStrictAvailabilityUpdates.
+                                 * @member {"allowStrictAvailabilityUpdates"|undefined} _allowStrictAvailabilityUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(ItemUpdatesAccountLevelSettings.prototype, "_allowStrictAvailabilityUpdates", {
+                                    get: $util.oneOfGetter($oneOfFields = ["allowStrictAvailabilityUpdates"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * ItemUpdatesAccountLevelSettings _allowConditionUpdates.
+                                 * @member {"allowConditionUpdates"|undefined} _allowConditionUpdates
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(ItemUpdatesAccountLevelSettings.prototype, "_allowConditionUpdates", {
+                                    get: $util.oneOfGetter($oneOfFields = ["allowConditionUpdates"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new ItemUpdatesAccountLevelSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings} ItemUpdatesAccountLevelSettings instance
+                                 */
+                                ItemUpdatesAccountLevelSettings.create = function create(properties) {
+                                    return new ItemUpdatesAccountLevelSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemUpdatesAccountLevelSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings} message ItemUpdatesAccountLevelSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemUpdatesAccountLevelSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.allowPriceUpdates != null && Object.hasOwnProperty.call(message, "allowPriceUpdates"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.allowPriceUpdates);
+                                    if (message.allowAvailabilityUpdates != null && Object.hasOwnProperty.call(message, "allowAvailabilityUpdates"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.allowAvailabilityUpdates);
+                                    if (message.allowStrictAvailabilityUpdates != null && Object.hasOwnProperty.call(message, "allowStrictAvailabilityUpdates"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowStrictAvailabilityUpdates);
+                                    if (message.allowConditionUpdates != null && Object.hasOwnProperty.call(message, "allowConditionUpdates"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowConditionUpdates);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ItemUpdatesAccountLevelSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings} message ItemUpdatesAccountLevelSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ItemUpdatesAccountLevelSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ItemUpdatesAccountLevelSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings} ItemUpdatesAccountLevelSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemUpdatesAccountLevelSettings.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.allowPriceUpdates = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.allowAvailabilityUpdates = reader.bool();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.allowStrictAvailabilityUpdates = reader.bool();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.allowConditionUpdates = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ItemUpdatesAccountLevelSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings} ItemUpdatesAccountLevelSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ItemUpdatesAccountLevelSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ItemUpdatesAccountLevelSettings message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ItemUpdatesAccountLevelSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.allowPriceUpdates != null && message.hasOwnProperty("allowPriceUpdates")) {
+                                        properties._allowPriceUpdates = 1;
+                                        if (typeof message.allowPriceUpdates !== "boolean")
+                                            return "allowPriceUpdates: boolean expected";
+                                    }
+                                    if (message.allowAvailabilityUpdates != null && message.hasOwnProperty("allowAvailabilityUpdates")) {
+                                        properties._allowAvailabilityUpdates = 1;
+                                        if (typeof message.allowAvailabilityUpdates !== "boolean")
+                                            return "allowAvailabilityUpdates: boolean expected";
+                                    }
+                                    if (message.allowStrictAvailabilityUpdates != null && message.hasOwnProperty("allowStrictAvailabilityUpdates")) {
+                                        properties._allowStrictAvailabilityUpdates = 1;
+                                        if (typeof message.allowStrictAvailabilityUpdates !== "boolean")
+                                            return "allowStrictAvailabilityUpdates: boolean expected";
+                                    }
+                                    if (message.allowConditionUpdates != null && message.hasOwnProperty("allowConditionUpdates")) {
+                                        properties._allowConditionUpdates = 1;
+                                        if (typeof message.allowConditionUpdates !== "boolean")
+                                            return "allowConditionUpdates: boolean expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ItemUpdatesAccountLevelSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings} ItemUpdatesAccountLevelSettings
+                                 */
+                                ItemUpdatesAccountLevelSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings();
+                                    if (object.allowPriceUpdates != null)
+                                        message.allowPriceUpdates = Boolean(object.allowPriceUpdates);
+                                    if (object.allowAvailabilityUpdates != null)
+                                        message.allowAvailabilityUpdates = Boolean(object.allowAvailabilityUpdates);
+                                    if (object.allowStrictAvailabilityUpdates != null)
+                                        message.allowStrictAvailabilityUpdates = Boolean(object.allowStrictAvailabilityUpdates);
+                                    if (object.allowConditionUpdates != null)
+                                        message.allowConditionUpdates = Boolean(object.allowConditionUpdates);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ItemUpdatesAccountLevelSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings} message ItemUpdatesAccountLevelSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ItemUpdatesAccountLevelSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.allowPriceUpdates != null && message.hasOwnProperty("allowPriceUpdates")) {
+                                        object.allowPriceUpdates = message.allowPriceUpdates;
+                                        if (options.oneofs)
+                                            object._allowPriceUpdates = "allowPriceUpdates";
+                                    }
+                                    if (message.allowAvailabilityUpdates != null && message.hasOwnProperty("allowAvailabilityUpdates")) {
+                                        object.allowAvailabilityUpdates = message.allowAvailabilityUpdates;
+                                        if (options.oneofs)
+                                            object._allowAvailabilityUpdates = "allowAvailabilityUpdates";
+                                    }
+                                    if (message.allowStrictAvailabilityUpdates != null && message.hasOwnProperty("allowStrictAvailabilityUpdates")) {
+                                        object.allowStrictAvailabilityUpdates = message.allowStrictAvailabilityUpdates;
+                                        if (options.oneofs)
+                                            object._allowStrictAvailabilityUpdates = "allowStrictAvailabilityUpdates";
+                                    }
+                                    if (message.allowConditionUpdates != null && message.hasOwnProperty("allowConditionUpdates")) {
+                                        object.allowConditionUpdates = message.allowConditionUpdates;
+                                        if (options.oneofs)
+                                            object._allowConditionUpdates = "allowConditionUpdates";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ItemUpdatesAccountLevelSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ItemUpdatesAccountLevelSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ItemUpdatesAccountLevelSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ItemUpdatesAccountLevelSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings";
+                                };
+    
+                                return ItemUpdatesAccountLevelSettings;
+                            })();
+    
+                            return AutomaticItemUpdates;
+                        })();
+    
+                        v1beta.AutomaticImageImprovements = (function() {
+    
+                            /**
+                             * Properties of an AutomaticImageImprovements.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAutomaticImageImprovements
+                             * @property {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings|null} [accountImageImprovementsSettings] AutomaticImageImprovements accountImageImprovementsSettings
+                             * @property {boolean|null} [effectiveAllowAutomaticImageImprovements] AutomaticImageImprovements effectiveAllowAutomaticImageImprovements
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticImageImprovements.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutomaticImageImprovements.
+                             * @implements IAutomaticImageImprovements
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements=} [properties] Properties to set
+                             */
+                            function AutomaticImageImprovements(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticImageImprovements accountImageImprovementsSettings.
+                             * @member {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings|null|undefined} accountImageImprovementsSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @instance
+                             */
+                            AutomaticImageImprovements.prototype.accountImageImprovementsSettings = null;
+    
+                            /**
+                             * AutomaticImageImprovements effectiveAllowAutomaticImageImprovements.
+                             * @member {boolean} effectiveAllowAutomaticImageImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @instance
+                             */
+                            AutomaticImageImprovements.prototype.effectiveAllowAutomaticImageImprovements = false;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AutomaticImageImprovements _accountImageImprovementsSettings.
+                             * @member {"accountImageImprovementsSettings"|undefined} _accountImageImprovementsSettings
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticImageImprovements.prototype, "_accountImageImprovementsSettings", {
+                                get: $util.oneOfGetter($oneOfFields = ["accountImageImprovementsSettings"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AutomaticImageImprovements instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements} AutomaticImageImprovements instance
+                             */
+                            AutomaticImageImprovements.create = function create(properties) {
+                                return new AutomaticImageImprovements(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticImageImprovements message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements} message AutomaticImageImprovements message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticImageImprovements.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.accountImageImprovementsSettings != null && Object.hasOwnProperty.call(message, "accountImageImprovementsSettings"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.encode(message.accountImageImprovementsSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.effectiveAllowAutomaticImageImprovements != null && Object.hasOwnProperty.call(message, "effectiveAllowAutomaticImageImprovements"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.effectiveAllowAutomaticImageImprovements);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticImageImprovements message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements} message AutomaticImageImprovements message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticImageImprovements.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticImageImprovements message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements} AutomaticImageImprovements
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticImageImprovements.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.accountImageImprovementsSettings = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.effectiveAllowAutomaticImageImprovements = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticImageImprovements message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements} AutomaticImageImprovements
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticImageImprovements.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticImageImprovements message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticImageImprovements.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.accountImageImprovementsSettings != null && message.hasOwnProperty("accountImageImprovementsSettings")) {
+                                    properties._accountImageImprovementsSettings = 1;
+                                    {
+                                        var error = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.verify(message.accountImageImprovementsSettings);
+                                        if (error)
+                                            return "accountImageImprovementsSettings." + error;
+                                    }
+                                }
+                                if (message.effectiveAllowAutomaticImageImprovements != null && message.hasOwnProperty("effectiveAllowAutomaticImageImprovements"))
+                                    if (typeof message.effectiveAllowAutomaticImageImprovements !== "boolean")
+                                        return "effectiveAllowAutomaticImageImprovements: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticImageImprovements message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements} AutomaticImageImprovements
+                             */
+                            AutomaticImageImprovements.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements();
+                                if (object.accountImageImprovementsSettings != null) {
+                                    if (typeof object.accountImageImprovementsSettings !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.accountImageImprovementsSettings: object expected");
+                                    message.accountImageImprovementsSettings = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.fromObject(object.accountImageImprovementsSettings);
+                                }
+                                if (object.effectiveAllowAutomaticImageImprovements != null)
+                                    message.effectiveAllowAutomaticImageImprovements = Boolean(object.effectiveAllowAutomaticImageImprovements);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticImageImprovements message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements} message AutomaticImageImprovements
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticImageImprovements.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.effectiveAllowAutomaticImageImprovements = false;
+                                if (message.accountImageImprovementsSettings != null && message.hasOwnProperty("accountImageImprovementsSettings")) {
+                                    object.accountImageImprovementsSettings = $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.toObject(message.accountImageImprovementsSettings, options);
+                                    if (options.oneofs)
+                                        object._accountImageImprovementsSettings = "accountImageImprovementsSettings";
+                                }
+                                if (message.effectiveAllowAutomaticImageImprovements != null && message.hasOwnProperty("effectiveAllowAutomaticImageImprovements"))
+                                    object.effectiveAllowAutomaticImageImprovements = message.effectiveAllowAutomaticImageImprovements;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticImageImprovements to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticImageImprovements.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticImageImprovements
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticImageImprovements.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements";
+                            };
+    
+                            AutomaticImageImprovements.ImageImprovementsAccountLevelSettings = (function() {
+    
+                                /**
+                                 * Properties of an ImageImprovementsAccountLevelSettings.
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                                 * @interface IImageImprovementsAccountLevelSettings
+                                 * @property {boolean|null} [allowAutomaticImageImprovements] ImageImprovementsAccountLevelSettings allowAutomaticImageImprovements
+                                 */
+    
+                                /**
+                                 * Constructs a new ImageImprovementsAccountLevelSettings.
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements
+                                 * @classdesc Represents an ImageImprovementsAccountLevelSettings.
+                                 * @implements IImageImprovementsAccountLevelSettings
+                                 * @constructor
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings=} [properties] Properties to set
+                                 */
+                                function ImageImprovementsAccountLevelSettings(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ImageImprovementsAccountLevelSettings allowAutomaticImageImprovements.
+                                 * @member {boolean|null|undefined} allowAutomaticImageImprovements
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @instance
+                                 */
+                                ImageImprovementsAccountLevelSettings.prototype.allowAutomaticImageImprovements = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * ImageImprovementsAccountLevelSettings _allowAutomaticImageImprovements.
+                                 * @member {"allowAutomaticImageImprovements"|undefined} _allowAutomaticImageImprovements
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @instance
+                                 */
+                                Object.defineProperty(ImageImprovementsAccountLevelSettings.prototype, "_allowAutomaticImageImprovements", {
+                                    get: $util.oneOfGetter($oneOfFields = ["allowAutomaticImageImprovements"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new ImageImprovementsAccountLevelSettings instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings} ImageImprovementsAccountLevelSettings instance
+                                 */
+                                ImageImprovementsAccountLevelSettings.create = function create(properties) {
+                                    return new ImageImprovementsAccountLevelSettings(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageImprovementsAccountLevelSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings} message ImageImprovementsAccountLevelSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageImprovementsAccountLevelSettings.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.allowAutomaticImageImprovements != null && Object.hasOwnProperty.call(message, "allowAutomaticImageImprovements"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.allowAutomaticImageImprovements);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ImageImprovementsAccountLevelSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings} message ImageImprovementsAccountLevelSettings message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ImageImprovementsAccountLevelSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an ImageImprovementsAccountLevelSettings message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings} ImageImprovementsAccountLevelSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageImprovementsAccountLevelSettings.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.allowAutomaticImageImprovements = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an ImageImprovementsAccountLevelSettings message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings} ImageImprovementsAccountLevelSettings
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ImageImprovementsAccountLevelSettings.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an ImageImprovementsAccountLevelSettings message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ImageImprovementsAccountLevelSettings.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.allowAutomaticImageImprovements != null && message.hasOwnProperty("allowAutomaticImageImprovements")) {
+                                        properties._allowAutomaticImageImprovements = 1;
+                                        if (typeof message.allowAutomaticImageImprovements !== "boolean")
+                                            return "allowAutomaticImageImprovements: boolean expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an ImageImprovementsAccountLevelSettings message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings} ImageImprovementsAccountLevelSettings
+                                 */
+                                ImageImprovementsAccountLevelSettings.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings();
+                                    if (object.allowAutomaticImageImprovements != null)
+                                        message.allowAutomaticImageImprovements = Boolean(object.allowAutomaticImageImprovements);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an ImageImprovementsAccountLevelSettings message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings} message ImageImprovementsAccountLevelSettings
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ImageImprovementsAccountLevelSettings.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.allowAutomaticImageImprovements != null && message.hasOwnProperty("allowAutomaticImageImprovements")) {
+                                        object.allowAutomaticImageImprovements = message.allowAutomaticImageImprovements;
+                                        if (options.oneofs)
+                                            object._allowAutomaticImageImprovements = "allowAutomaticImageImprovements";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ImageImprovementsAccountLevelSettings to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ImageImprovementsAccountLevelSettings.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ImageImprovementsAccountLevelSettings
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ImageImprovementsAccountLevelSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings";
+                                };
+    
+                                return ImageImprovementsAccountLevelSettings;
+                            })();
+    
+                            return AutomaticImageImprovements;
+                        })();
+    
+                        v1beta.AutomaticShippingImprovements = (function() {
+    
+                            /**
+                             * Properties of an AutomaticShippingImprovements.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IAutomaticShippingImprovements
+                             * @property {boolean|null} [allowShippingImprovements] AutomaticShippingImprovements allowShippingImprovements
+                             */
+    
+                            /**
+                             * Constructs a new AutomaticShippingImprovements.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an AutomaticShippingImprovements.
+                             * @implements IAutomaticShippingImprovements
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements=} [properties] Properties to set
+                             */
+                            function AutomaticShippingImprovements(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AutomaticShippingImprovements allowShippingImprovements.
+                             * @member {boolean|null|undefined} allowShippingImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @instance
+                             */
+                            AutomaticShippingImprovements.prototype.allowShippingImprovements = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * AutomaticShippingImprovements _allowShippingImprovements.
+                             * @member {"allowShippingImprovements"|undefined} _allowShippingImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @instance
+                             */
+                            Object.defineProperty(AutomaticShippingImprovements.prototype, "_allowShippingImprovements", {
+                                get: $util.oneOfGetter($oneOfFields = ["allowShippingImprovements"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new AutomaticShippingImprovements instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements} AutomaticShippingImprovements instance
+                             */
+                            AutomaticShippingImprovements.create = function create(properties) {
+                                return new AutomaticShippingImprovements(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticShippingImprovements message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements} message AutomaticShippingImprovements message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticShippingImprovements.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowShippingImprovements != null && Object.hasOwnProperty.call(message, "allowShippingImprovements"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.allowShippingImprovements);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AutomaticShippingImprovements message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements} message AutomaticShippingImprovements message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AutomaticShippingImprovements.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AutomaticShippingImprovements message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements} AutomaticShippingImprovements
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticShippingImprovements.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.allowShippingImprovements = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AutomaticShippingImprovements message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements} AutomaticShippingImprovements
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AutomaticShippingImprovements.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AutomaticShippingImprovements message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AutomaticShippingImprovements.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.allowShippingImprovements != null && message.hasOwnProperty("allowShippingImprovements")) {
+                                    properties._allowShippingImprovements = 1;
+                                    if (typeof message.allowShippingImprovements !== "boolean")
+                                        return "allowShippingImprovements: boolean expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AutomaticShippingImprovements message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements} AutomaticShippingImprovements
+                             */
+                            AutomaticShippingImprovements.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements();
+                                if (object.allowShippingImprovements != null)
+                                    message.allowShippingImprovements = Boolean(object.allowShippingImprovements);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AutomaticShippingImprovements message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements} message AutomaticShippingImprovements
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AutomaticShippingImprovements.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.allowShippingImprovements != null && message.hasOwnProperty("allowShippingImprovements")) {
+                                    object.allowShippingImprovements = message.allowShippingImprovements;
+                                    if (options.oneofs)
+                                        object._allowShippingImprovements = "allowShippingImprovements";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AutomaticShippingImprovements to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AutomaticShippingImprovements.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AutomaticShippingImprovements
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AutomaticShippingImprovements.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements";
+                            };
+    
+                            return AutomaticShippingImprovements;
+                        })();
+    
+                        v1beta.GetAutomaticImprovementsRequest = (function() {
+    
+                            /**
+                             * Properties of a GetAutomaticImprovementsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IGetAutomaticImprovementsRequest
+                             * @property {string|null} [name] GetAutomaticImprovementsRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetAutomaticImprovementsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents a GetAutomaticImprovementsRequest.
+                             * @implements IGetAutomaticImprovementsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest=} [properties] Properties to set
+                             */
+                            function GetAutomaticImprovementsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetAutomaticImprovementsRequest name.
+                             * @member {string} name
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @instance
+                             */
+                            GetAutomaticImprovementsRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetAutomaticImprovementsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest} GetAutomaticImprovementsRequest instance
+                             */
+                            GetAutomaticImprovementsRequest.create = function create(properties) {
+                                return new GetAutomaticImprovementsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetAutomaticImprovementsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest} message GetAutomaticImprovementsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAutomaticImprovementsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetAutomaticImprovementsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest} message GetAutomaticImprovementsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetAutomaticImprovementsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetAutomaticImprovementsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest} GetAutomaticImprovementsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAutomaticImprovementsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetAutomaticImprovementsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest} GetAutomaticImprovementsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetAutomaticImprovementsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetAutomaticImprovementsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetAutomaticImprovementsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetAutomaticImprovementsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest} GetAutomaticImprovementsRequest
+                             */
+                            GetAutomaticImprovementsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetAutomaticImprovementsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest} message GetAutomaticImprovementsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetAutomaticImprovementsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetAutomaticImprovementsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetAutomaticImprovementsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetAutomaticImprovementsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetAutomaticImprovementsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest";
+                            };
+    
+                            return GetAutomaticImprovementsRequest;
+                        })();
+    
+                        v1beta.UpdateAutomaticImprovementsRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateAutomaticImprovementsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @interface IUpdateAutomaticImprovementsRequest
+                             * @property {google.shopping.merchant.accounts.v1beta.IAutomaticImprovements|null} [automaticImprovements] UpdateAutomaticImprovementsRequest automaticImprovements
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateAutomaticImprovementsRequest updateMask
+                             */
+    
+                            /**
+                             * Constructs a new UpdateAutomaticImprovementsRequest.
+                             * @memberof google.shopping.merchant.accounts.v1beta
+                             * @classdesc Represents an UpdateAutomaticImprovementsRequest.
+                             * @implements IUpdateAutomaticImprovementsRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest=} [properties] Properties to set
+                             */
+                            function UpdateAutomaticImprovementsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateAutomaticImprovementsRequest automaticImprovements.
+                             * @member {google.shopping.merchant.accounts.v1beta.IAutomaticImprovements|null|undefined} automaticImprovements
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @instance
+                             */
+                            UpdateAutomaticImprovementsRequest.prototype.automaticImprovements = null;
+    
+                            /**
+                             * UpdateAutomaticImprovementsRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @instance
+                             */
+                            UpdateAutomaticImprovementsRequest.prototype.updateMask = null;
+    
+                            /**
+                             * Creates a new UpdateAutomaticImprovementsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest} UpdateAutomaticImprovementsRequest instance
+                             */
+                            UpdateAutomaticImprovementsRequest.create = function create(properties) {
+                                return new UpdateAutomaticImprovementsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateAutomaticImprovementsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest} message UpdateAutomaticImprovementsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateAutomaticImprovementsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.automaticImprovements != null && Object.hasOwnProperty.call(message, "automaticImprovements"))
+                                    $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements.encode(message.automaticImprovements, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateAutomaticImprovementsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest} message UpdateAutomaticImprovementsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateAutomaticImprovementsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateAutomaticImprovementsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest} UpdateAutomaticImprovementsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateAutomaticImprovementsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.automaticImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateAutomaticImprovementsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest} UpdateAutomaticImprovementsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateAutomaticImprovementsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateAutomaticImprovementsRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateAutomaticImprovementsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.automaticImprovements != null && message.hasOwnProperty("automaticImprovements")) {
+                                    var error = $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements.verify(message.automaticImprovements);
+                                    if (error)
+                                        return "automaticImprovements." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateAutomaticImprovementsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest} UpdateAutomaticImprovementsRequest
+                             */
+                            UpdateAutomaticImprovementsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest();
+                                if (object.automaticImprovements != null) {
+                                    if (typeof object.automaticImprovements !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest.automaticImprovements: object expected");
+                                    message.automaticImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements.fromObject(object.automaticImprovements);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateAutomaticImprovementsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest} message UpdateAutomaticImprovementsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateAutomaticImprovementsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.automaticImprovements = null;
+                                    object.updateMask = null;
+                                }
+                                if (message.automaticImprovements != null && message.hasOwnProperty("automaticImprovements"))
+                                    object.automaticImprovements = $root.google.shopping.merchant.accounts.v1beta.AutomaticImprovements.toObject(message.automaticImprovements, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateAutomaticImprovementsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateAutomaticImprovementsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateAutomaticImprovementsRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateAutomaticImprovementsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest";
+                            };
+    
+                            return UpdateAutomaticImprovementsRequest;
+                        })();
+    
                         v1beta.BusinessIdentityService = (function() {
     
                             /**
