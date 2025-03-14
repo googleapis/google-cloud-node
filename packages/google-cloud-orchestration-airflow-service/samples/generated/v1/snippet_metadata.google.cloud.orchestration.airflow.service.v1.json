@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-service",
-        "version": "4.0.0",
+        "version": "3.6.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

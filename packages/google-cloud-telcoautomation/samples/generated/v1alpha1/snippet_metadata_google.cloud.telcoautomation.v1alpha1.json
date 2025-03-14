@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-telcoautomation",
-        "version": "1.0.0",
+        "version": "0.3.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

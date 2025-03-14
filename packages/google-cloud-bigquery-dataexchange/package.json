@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-data-exchange",
-  "version": "2.0.0",
+  "version": "1.3.0",
   "description": "analyticshub client for Node.js",
   "repository": {
     "type": "git",

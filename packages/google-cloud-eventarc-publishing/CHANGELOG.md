@@ -1,16 +1,5 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-publishing-v3.4.0...eventarc-publishing-v4.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/eventarc-publishing-v3.3.0...eventarc-publishing-v3.4.0) (2024-10-30)
 
 

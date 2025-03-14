@@ -1,22 +1,5 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.5.0...kms-inventory-v2.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Features
-
-* [Many APIs] add request/response debug logging to gapics ([#6140](https://github.com/googleapis/google-cloud-node/issues/6140)) ([2f96b1f](https://github.com/googleapis/google-cloud-node/commit/2f96b1f95dd6b7cb89871b56e5ea5aadf5454292))
-* Adding a state field for AutokeyConfig ([c043c2e](https://github.com/googleapis/google-cloud-node/commit/c043c2edab6efc9980bceffcf0db888ef8fe41d4))
-
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v1.4.0...kms-inventory-v1.5.0) (2024-06-21)
 
 

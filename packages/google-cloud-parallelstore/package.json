@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/parallelstore",
-  "version": "1.0.0",
+  "version": "0.7.1",
   "description": "Parallelstore API client for Node.js",
   "repository": {
     "type": "git",

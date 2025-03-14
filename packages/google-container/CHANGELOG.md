@@ -4,17 +4,6 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.19.0...container-v6.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [5.19.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.18.0...container-v5.19.0) (2024-11-14)
 
 

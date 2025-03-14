@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-texttospeech",
-        "version": "6.0.0",
+        "version": "5.8.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

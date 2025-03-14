@@ -1,21 +1,5 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v3.3.0...area120-tables-v4.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Features
-
-* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([54a73fe](https://github.com/googleapis/google-cloud-node/commit/54a73fe74eab0675c006f24d5f1e4574c44d829b))
-
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v3.2.0...area120-tables-v3.3.0) (2024-05-21)
 
 
