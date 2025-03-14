@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class RecommenderClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('recommender');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class RecommenderClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -564,7 +567,33 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInsight(request, options, callback);
+    this._log.info('getInsight request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IInsight,
+          | protos.google.cloud.recommender.v1.IGetInsightRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInsight response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInsight(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IInsight,
+          protos.google.cloud.recommender.v1.IGetInsightRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInsight response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks the Insight State as Accepted. Users can use this method to
@@ -670,7 +699,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.markInsightAccepted(request, options, callback);
+    this._log.info('markInsightAccepted request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IInsight,
+          | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markInsightAccepted response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markInsightAccepted(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IInsight,
+          (
+            | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('markInsightAccepted response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the requested recommendation. Requires the recommender.*.get
@@ -761,7 +819,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRecommendation(request, options, callback);
+    this._log.info('getRecommendation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IGetRecommendationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRecommendation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRecommendation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommendation,
+          (
+            | protos.google.cloud.recommender.v1.IGetRecommendationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRecommendation response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Mark the Recommendation State as Dismissed. Users can use this method to
@@ -867,11 +954,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.markRecommendationDismissed(
-      request,
-      options,
-      callback
-    );
+    this._log.info('markRecommendationDismissed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markRecommendationDismissed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markRecommendationDismissed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommendation,
+          (
+            | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('markRecommendationDismissed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks the Recommendation State as Claimed. Users can use this method to
@@ -983,11 +1095,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.markRecommendationClaimed(
-      request,
-      options,
-      callback
-    );
+    this._log.info('markRecommendationClaimed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markRecommendationClaimed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markRecommendationClaimed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommendation,
+          (
+            | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('markRecommendationClaimed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks the Recommendation State as Succeeded. Users can use this method to
@@ -1100,11 +1237,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.markRecommendationSucceeded(
-      request,
-      options,
-      callback
-    );
+    this._log.info('markRecommendationSucceeded request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markRecommendationSucceeded response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markRecommendationSucceeded(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommendation,
+          (
+            | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('markRecommendationSucceeded response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Marks the Recommendation State as Failed. Users can use this method to
@@ -1217,11 +1379,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.markRecommendationFailed(
-      request,
-      options,
-      callback
-    );
+    this._log.info('markRecommendationFailed request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markRecommendationFailed response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markRecommendationFailed(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommendation,
+          (
+            | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('markRecommendationFailed response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the requested Recommender Config. There is only one instance of the
@@ -1328,7 +1515,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getRecommenderConfig(request, options, callback);
+    this._log.info('getRecommenderConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommenderConfig,
+          | protos.google.cloud.recommender.v1.IGetRecommenderConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getRecommenderConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getRecommenderConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommenderConfig,
+          (
+            | protos.google.cloud.recommender.v1.IGetRecommenderConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRecommenderConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a Recommender Config. This will create a new revision of the
@@ -1430,11 +1646,36 @@ export class RecommenderClient {
         'recommender_config.name': request.recommenderConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateRecommenderConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateRecommenderConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommenderConfig,
+          | protos.google.cloud.recommender.v1.IUpdateRecommenderConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateRecommenderConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateRecommenderConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IRecommenderConfig,
+          (
+            | protos.google.cloud.recommender.v1.IUpdateRecommenderConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRecommenderConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the requested InsightTypeConfig. There is only one instance of the
@@ -1541,7 +1782,36 @@ export class RecommenderClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInsightTypeConfig(request, options, callback);
+    this._log.info('getInsightTypeConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IInsightTypeConfig,
+          | protos.google.cloud.recommender.v1.IGetInsightTypeConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInsightTypeConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInsightTypeConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IInsightTypeConfig,
+          (
+            | protos.google.cloud.recommender.v1.IGetInsightTypeConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInsightTypeConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an InsightTypeConfig change. This will create a new revision of the
@@ -1643,11 +1913,36 @@ export class RecommenderClient {
         'insight_type_config.name': request.insightTypeConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInsightTypeConfig(
-      request,
-      options,
-      callback
-    );
+    this._log.info('updateInsightTypeConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.recommender.v1.IInsightTypeConfig,
+          | protos.google.cloud.recommender.v1.IUpdateInsightTypeConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateInsightTypeConfig response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateInsightTypeConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.recommender.v1.IInsightTypeConfig,
+          (
+            | protos.google.cloud.recommender.v1.IUpdateInsightTypeConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInsightTypeConfig response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1796,7 +2091,33 @@ export class RecommenderClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInsights(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recommender.v1.IListInsightsRequest,
+          | protos.google.cloud.recommender.v1.IListInsightsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recommender.v1.IInsight
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInsights values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInsights request %j', request);
+    return this.innerApiCalls
+      .listInsights(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recommender.v1.IInsight[],
+          protos.google.cloud.recommender.v1.IListInsightsRequest | null,
+          protos.google.cloud.recommender.v1.IListInsightsResponse,
+        ]) => {
+          this._log.info('listInsights values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1885,6 +2206,7 @@ export class RecommenderClient {
     const defaultCallSettings = this._defaults['listInsights'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInsights stream %j', request);
     return this.descriptors.page.listInsights.createStream(
       this.innerApiCalls.listInsights as GaxCall,
       request,
@@ -1981,6 +2303,7 @@ export class RecommenderClient {
     const defaultCallSettings = this._defaults['listInsights'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInsights iterate %j', request);
     return this.descriptors.page.listInsights.asyncIterate(
       this.innerApiCalls['listInsights'] as GaxCall,
       request as {},
@@ -2133,7 +2456,33 @@ export class RecommenderClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listRecommendations(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.recommender.v1.IListRecommendationsRequest,
+          | protos.google.cloud.recommender.v1.IListRecommendationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.recommender.v1.IRecommendation
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listRecommendations values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listRecommendations request %j', request);
+    return this.innerApiCalls
+      .listRecommendations(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.recommender.v1.IRecommendation[],
+          protos.google.cloud.recommender.v1.IListRecommendationsRequest | null,
+          protos.google.cloud.recommender.v1.IListRecommendationsResponse,
+        ]) => {
+          this._log.info('listRecommendations values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2222,6 +2571,7 @@ export class RecommenderClient {
     const defaultCallSettings = this._defaults['listRecommendations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRecommendations stream %j', request);
     return this.descriptors.page.listRecommendations.createStream(
       this.innerApiCalls.listRecommendations as GaxCall,
       request,
@@ -2318,6 +2668,7 @@ export class RecommenderClient {
     const defaultCallSettings = this._defaults['listRecommendations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listRecommendations iterate %j', request);
     return this.descriptors.page.listRecommendations.asyncIterate(
       this.innerApiCalls['listRecommendations'] as GaxCall,
       request as {},
@@ -3947,6 +4298,7 @@ export class RecommenderClient {
   close(): Promise<void> {
     if (this.recommenderStub && !this._terminated) {
       return this.recommenderStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

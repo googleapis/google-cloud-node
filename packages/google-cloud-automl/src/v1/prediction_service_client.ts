@@ -29,6 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,6 +57,8 @@ export class PredictionServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('automl');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class PredictionServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -622,7 +625,31 @@ export class PredictionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.predict(request, options, callback);
+    this._log.info('predict request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.automl.v1.IPredictResponse,
+          protos.google.cloud.automl.v1.IPredictRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('predict response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .predict(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.automl.v1.IPredictResponse,
+          protos.google.cloud.automl.v1.IPredictRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('predict response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -829,7 +856,37 @@ export class PredictionServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchPredict(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.automl.v1.IBatchPredictResult,
+            protos.google.cloud.automl.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchPredict response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchPredict request %j', request);
+    return this.innerApiCalls
+      .batchPredict(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.automl.v1.IBatchPredictResult,
+            protos.google.cloud.automl.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchPredict response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchPredict()`.
@@ -850,6 +907,7 @@ export class PredictionServiceClient {
       protos.google.cloud.automl.v1.OperationMetadata
     >
   > {
+    this._log.info('batchPredict long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1126,6 +1184,7 @@ export class PredictionServiceClient {
   close(): Promise<void> {
     if (this.predictionServiceStub && !this._terminated) {
       return this.predictionServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

@@ -3735,6 +3735,7 @@
                          * @property {string|null} [requestedUri] Event requestedUri
                          * @property {boolean|null} [wafTokenAssessment] Event wafTokenAssessment
                          * @property {string|null} [ja3] Event ja3
+                         * @property {string|null} [ja4] Event ja4
                          * @property {Array.<string>|null} [headers] Event headers
                          * @property {boolean|null} [firewallPolicyEvaluation] Event firewallPolicyEvaluation
                          * @property {google.cloud.recaptchaenterprise.v1.ITransactionData|null} [transactionData] Event transactionData
@@ -3839,6 +3840,14 @@
                         Event.prototype.ja3 = "";
     
                         /**
+                         * Event ja4.
+                         * @member {string} ja4
+                         * @memberof google.cloud.recaptchaenterprise.v1.Event
+                         * @instance
+                         */
+                        Event.prototype.ja4 = "";
+    
+                        /**
                          * Event headers.
                          * @member {Array.<string>} headers
                          * @memberof google.cloud.recaptchaenterprise.v1.Event
@@ -3933,6 +3942,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1.UserInfo.encode(message.userInfo, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
                             if (message.fraudPrevention != null && Object.hasOwnProperty.call(message, "fraudPrevention"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.fraudPrevention);
+                            if (message.ja4 != null && Object.hasOwnProperty.call(message, "ja4"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.ja4);
                             return writer;
                         };
     
@@ -4005,6 +4016,10 @@
                                     }
                                 case 10: {
                                         message.ja3 = reader.string();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.ja4 = reader.string();
                                         break;
                                     }
                                 case 11: {
@@ -4094,6 +4109,9 @@
                             if (message.ja3 != null && message.hasOwnProperty("ja3"))
                                 if (!$util.isString(message.ja3))
                                     return "ja3: string expected";
+                            if (message.ja4 != null && message.hasOwnProperty("ja4"))
+                                if (!$util.isString(message.ja4))
+                                    return "ja4: string expected";
                             if (message.headers != null && message.hasOwnProperty("headers")) {
                                 if (!Array.isArray(message.headers))
                                     return "headers: array expected";
@@ -4161,6 +4179,8 @@
                                 message.wafTokenAssessment = Boolean(object.wafTokenAssessment);
                             if (object.ja3 != null)
                                 message.ja3 = String(object.ja3);
+                            if (object.ja4 != null)
+                                message.ja4 = String(object.ja4);
                             if (object.headers) {
                                 if (!Array.isArray(object.headers))
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Event.headers: array expected");
@@ -4239,6 +4259,7 @@
                                 object.express = false;
                                 object.userInfo = null;
                                 object.fraudPrevention = options.enums === String ? "FRAUD_PREVENTION_UNSPECIFIED" : 0;
+                                object.ja4 = "";
                             }
                             if (message.token != null && message.hasOwnProperty("token"))
                                 object.token = message.token;
@@ -4273,6 +4294,8 @@
                                 object.userInfo = $root.google.cloud.recaptchaenterprise.v1.UserInfo.toObject(message.userInfo, options);
                             if (message.fraudPrevention != null && message.hasOwnProperty("fraudPrevention"))
                                 object.fraudPrevention = options.enums === String ? $root.google.cloud.recaptchaenterprise.v1.Event.FraudPrevention[message.fraudPrevention] === undefined ? message.fraudPrevention : $root.google.cloud.recaptchaenterprise.v1.Event.FraudPrevention[message.fraudPrevention] : message.fraudPrevention;
+                            if (message.ja4 != null && message.hasOwnProperty("ja4"))
+                                object.ja4 = message.ja4;
                             return object;
                         };
     

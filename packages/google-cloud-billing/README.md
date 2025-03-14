@@ -73,7 +73,7 @@ async function listBillingAccounts() {
   for (const account of accounts) {
     console.info(`${account.displayName}:`);
     console.info(`\topen: ${account.open}`);
-    console.info(`\tparentBillingAccount: ${account.mainBillingAccount}`);
+    console.info(`\tparentBillingAccount: ${account.masterBillingAccount}`);
   }
 }
 listBillingAccounts();

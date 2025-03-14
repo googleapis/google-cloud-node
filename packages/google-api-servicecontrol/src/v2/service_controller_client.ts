@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,6 +59,8 @@ export class ServiceControllerClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('servicecontrol');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class ServiceControllerClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -481,7 +484,31 @@ export class ServiceControllerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.check(request, options, callback);
+    this._log.info('check request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.servicecontrol.v2.ICheckResponse,
+          protos.google.api.servicecontrol.v2.ICheckRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('check response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .check(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.servicecontrol.v2.ICheckResponse,
+          protos.google.api.servicecontrol.v2.ICheckRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('check response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Private Preview. This feature is only available for approved services.
@@ -593,7 +620,31 @@ export class ServiceControllerClient {
         service_name: request.serviceName ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.report(request, options, callback);
+    this._log.info('report request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.servicecontrol.v2.IReportResponse,
+          protos.google.api.servicecontrol.v2.IReportRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('report response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .report(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.servicecontrol.v2.IReportResponse,
+          protos.google.api.servicecontrol.v2.IReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('report response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -605,6 +656,7 @@ export class ServiceControllerClient {
   close(): Promise<void> {
     if (this.serviceControllerStub && !this._terminated) {
       return this.serviceControllerStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

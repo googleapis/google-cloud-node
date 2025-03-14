@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class ServiceUsageClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('service-usage');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -94,7 +97,7 @@ export class ServiceUsageClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -552,7 +555,33 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getService(request, options, callback);
+    this._log.info('getService request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.serviceusage.v1.IService,
+          | protos.google.api.serviceusage.v1.IGetServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getService response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.serviceusage.v1.IService,
+          protos.google.api.serviceusage.v1.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the service configurations and enabled states for a given list of
@@ -654,7 +683,36 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchGetServices(request, options, callback);
+    this._log.info('batchGetServices request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.serviceusage.v1.IBatchGetServicesResponse,
+          | protos.google.api.serviceusage.v1.IBatchGetServicesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchGetServices response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchGetServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.serviceusage.v1.IBatchGetServicesResponse,
+          (
+            | protos.google.api.serviceusage.v1.IBatchGetServicesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchGetServices response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -767,7 +825,37 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.enableService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1.IEnableServiceResponse,
+            protos.google.api.serviceusage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('enableService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('enableService request %j', request);
+    return this.innerApiCalls
+      .enableService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1.IEnableServiceResponse,
+            protos.google.api.serviceusage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('enableService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `enableService()`.
@@ -788,6 +876,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1.OperationMetadata
     >
   > {
+    this._log.info('enableService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -923,7 +1012,37 @@ export class ServiceUsageClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.disableService(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1.IDisableServiceResponse,
+            protos.google.api.serviceusage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('disableService response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('disableService request %j', request);
+    return this.innerApiCalls
+      .disableService(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1.IDisableServiceResponse,
+            protos.google.api.serviceusage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('disableService response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `disableService()`.
@@ -944,6 +1063,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1.OperationMetadata
     >
   > {
+    this._log.info('disableService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1078,7 +1198,37 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchEnableServices(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.api.serviceusage.v1.IBatchEnableServicesResponse,
+            protos.google.api.serviceusage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchEnableServices response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('batchEnableServices request %j', request);
+    return this.innerApiCalls
+      .batchEnableServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.api.serviceusage.v1.IBatchEnableServicesResponse,
+            protos.google.api.serviceusage.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchEnableServices response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `batchEnableServices()`.
@@ -1099,6 +1249,7 @@ export class ServiceUsageClient {
       protos.google.api.serviceusage.v1.OperationMetadata
     >
   > {
+    this._log.info('batchEnableServices long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1230,7 +1381,33 @@ export class ServiceUsageClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listServices(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.api.serviceusage.v1.IListServicesRequest,
+          | protos.google.api.serviceusage.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.api.serviceusage.v1.IService
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listServices values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listServices request %j', request);
+    return this.innerApiCalls
+      .listServices(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.serviceusage.v1.IService[],
+          protos.google.api.serviceusage.v1.IListServicesRequest | null,
+          protos.google.api.serviceusage.v1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1278,6 +1455,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
@@ -1333,6 +1511,7 @@ export class ServiceUsageClient {
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
@@ -1696,6 +1875,7 @@ export class ServiceUsageClient {
   close(): Promise<void> {
     if (this.serviceUsageStub && !this._terminated) {
       return this.serviceUsageStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();

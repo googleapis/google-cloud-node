@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class CaseAttachmentServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('support');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class CaseAttachmentServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -495,7 +498,33 @@ export class CaseAttachmentServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAttachments(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.support.v2.IListAttachmentsRequest,
+          | protos.google.cloud.support.v2.IListAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.support.v2.IAttachment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAttachments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAttachments request %j', request);
+    return this.innerApiCalls
+      .listAttachments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.support.v2.IAttachment[],
+          protos.google.cloud.support.v2.IListAttachmentsRequest | null,
+          protos.google.cloud.support.v2.IListAttachmentsResponse,
+        ]) => {
+          this._log.info('listAttachments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -538,6 +567,7 @@ export class CaseAttachmentServiceClient {
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAttachments stream %j', request);
     return this.descriptors.page.listAttachments.createStream(
       this.innerApiCalls.listAttachments as GaxCall,
       request,
@@ -588,6 +618,7 @@ export class CaseAttachmentServiceClient {
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listAttachments iterate %j', request);
     return this.descriptors.page.listAttachments.asyncIterate(
       this.innerApiCalls['listAttachments'] as GaxCall,
       request as {},
@@ -935,6 +966,7 @@ export class CaseAttachmentServiceClient {
   close(): Promise<void> {
     if (this.caseAttachmentServiceStub && !this._terminated) {
       return this.caseAttachmentServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

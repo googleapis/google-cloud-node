@@ -27,6 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,6 +54,8 @@ export class PublicCertificateAuthorityServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('publicca');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -87,7 +90,7 @@ export class PublicCertificateAuthorityServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -480,11 +483,36 @@ export class PublicCertificateAuthorityServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createExternalAccountKey(
-      request,
-      options,
-      callback
-    );
+    this._log.info('createExternalAccountKey request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.security.publicca.v1.IExternalAccountKey,
+          | protos.google.cloud.security.publicca.v1.ICreateExternalAccountKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExternalAccountKey response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createExternalAccountKey(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.security.publicca.v1.IExternalAccountKey,
+          (
+            | protos.google.cloud.security.publicca.v1.ICreateExternalAccountKeyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createExternalAccountKey response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   // --------------------
@@ -620,6 +648,7 @@ export class PublicCertificateAuthorityServiceClient {
   close(): Promise<void> {
     if (this.publicCertificateAuthorityServiceStub && !this._terminated) {
       return this.publicCertificateAuthorityServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

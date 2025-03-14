@@ -29,6 +29,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -62,6 +63,8 @@ export class FirewallClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('appengine-admin');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class FirewallClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -493,11 +496,36 @@ export class FirewallClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.batchUpdateIngressRules(
-      request,
-      options,
-      callback
-    );
+    this._log.info('batchUpdateIngressRules request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IBatchUpdateIngressRulesResponse,
+          | protos.google.appengine.v1.IBatchUpdateIngressRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateIngressRules response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateIngressRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IBatchUpdateIngressRulesResponse,
+          (
+            | protos.google.appengine.v1.IBatchUpdateIngressRulesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateIngressRules response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a firewall rule for the application.
@@ -593,7 +621,33 @@ export class FirewallClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createIngressRule(request, options, callback);
+    this._log.info('createIngressRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IFirewallRule,
+          | protos.google.appengine.v1.ICreateIngressRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createIngressRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createIngressRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IFirewallRule,
+          protos.google.appengine.v1.ICreateIngressRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIngressRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the specified firewall rule.
@@ -676,7 +730,31 @@ export class FirewallClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getIngressRule(request, options, callback);
+    this._log.info('getIngressRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IFirewallRule,
+          protos.google.appengine.v1.IGetIngressRuleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIngressRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIngressRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IFirewallRule,
+          protos.google.appengine.v1.IGetIngressRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIngressRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the specified firewall rule.
@@ -765,7 +843,33 @@ export class FirewallClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateIngressRule(request, options, callback);
+    this._log.info('updateIngressRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.appengine.v1.IFirewallRule,
+          | protos.google.appengine.v1.IUpdateIngressRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateIngressRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateIngressRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.appengine.v1.IFirewallRule,
+          protos.google.appengine.v1.IUpdateIngressRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIngressRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes the specified firewall rule.
@@ -850,7 +954,33 @@ export class FirewallClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteIngressRule(request, options, callback);
+    this._log.info('deleteIngressRule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.appengine.v1.IDeleteIngressRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteIngressRule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteIngressRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.appengine.v1.IDeleteIngressRuleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIngressRule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -947,7 +1077,33 @@ export class FirewallClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listIngressRules(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.appengine.v1.IListIngressRulesRequest,
+          | protos.google.appengine.v1.IListIngressRulesResponse
+          | null
+          | undefined,
+          protos.google.appengine.v1.IFirewallRule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIngressRules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIngressRules request %j', request);
+    return this.innerApiCalls
+      .listIngressRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.appengine.v1.IFirewallRule[],
+          protos.google.appengine.v1.IListIngressRulesRequest | null,
+          protos.google.appengine.v1.IListIngressRulesResponse,
+        ]) => {
+          this._log.info('listIngressRules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -991,6 +1147,7 @@ export class FirewallClient {
     const defaultCallSettings = this._defaults['listIngressRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listIngressRules stream %j', request);
     return this.descriptors.page.listIngressRules.createStream(
       this.innerApiCalls.listIngressRules as GaxCall,
       request,
@@ -1042,6 +1199,7 @@ export class FirewallClient {
     const defaultCallSettings = this._defaults['listIngressRules'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listIngressRules iterate %j', request);
     return this.descriptors.page.listIngressRules.asyncIterate(
       this.innerApiCalls['listIngressRules'] as GaxCall,
       request as {},
@@ -1128,6 +1286,7 @@ export class FirewallClient {
   close(): Promise<void> {
     if (this.firewallStub && !this._terminated) {
       return this.firewallStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

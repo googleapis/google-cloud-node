@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -69,6 +70,8 @@ export class CloudRedisClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('redis');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -104,7 +107,7 @@ export class CloudRedisClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -631,7 +634,33 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInstance(request, options, callback);
+    this._log.info('getInstance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.v1beta1.IInstance,
+          | protos.google.cloud.redis.v1beta1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstance response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.v1beta1.IInstance,
+          protos.google.cloud.redis.v1beta1.IGetInstanceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets the AUTH string for a Redis instance. If AUTH is not enabled for the
@@ -731,7 +760,36 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getInstanceAuthString(request, options, callback);
+    this._log.info('getInstanceAuthString request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.v1beta1.IInstanceAuthString,
+          | protos.google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getInstanceAuthString response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getInstanceAuthString(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.v1beta1.IInstanceAuthString,
+          (
+            | protos.google.cloud.redis.v1beta1.IGetInstanceAuthStringRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstanceAuthString response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -858,7 +916,37 @@ export class CloudRedisClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createInstance request %j', request);
+    return this.innerApiCalls
+      .createInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createInstance()`.
@@ -879,6 +967,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('createInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1009,7 +1098,37 @@ export class CloudRedisClient {
         'instance.name': request.instance!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateInstance request %j', request);
+    return this.innerApiCalls
+      .updateInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateInstance()`.
@@ -1030,6 +1149,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('updateInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1150,7 +1270,37 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.upgradeInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('upgradeInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('upgradeInstance request %j', request);
+    return this.innerApiCalls
+      .upgradeInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('upgradeInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `upgradeInstance()`.
@@ -1171,6 +1321,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('upgradeInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1297,7 +1448,37 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.importInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importInstance request %j', request);
+    return this.innerApiCalls
+      .importInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `importInstance()`.
@@ -1318,6 +1499,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('importInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1442,7 +1624,37 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.exportInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportInstance request %j', request);
+    return this.innerApiCalls
+      .exportInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `exportInstance()`.
@@ -1463,6 +1675,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('exportInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1584,7 +1797,37 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.failoverInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('failoverInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('failoverInstance request %j', request);
+    return this.innerApiCalls
+      .failoverInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('failoverInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `failoverInstance()`.
@@ -1605,6 +1848,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('failoverInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1708,7 +1952,37 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteInstance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteInstance request %j', request);
+    return this.innerApiCalls
+      .deleteInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteInstance()`.
@@ -1726,6 +2000,7 @@ export class CloudRedisClient {
   ): Promise<
     LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Any>
   > {
+    this._log.info('deleteInstance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1850,7 +2125,37 @@ export class CloudRedisClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.rescheduleMaintenance(request, options, callback);
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rescheduleMaintenance request %j', request);
+    return this.innerApiCalls
+      .rescheduleMaintenance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.v1beta1.IInstance,
+            protos.google.protobuf.IAny
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `rescheduleMaintenance()`.
@@ -1871,6 +2176,7 @@ export class CloudRedisClient {
       protos.google.protobuf.Any
     >
   > {
+    this._log.info('rescheduleMaintenance long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1998,7 +2304,33 @@ export class CloudRedisClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listInstances(request, options, callback);
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.redis.v1beta1.IListInstancesRequest,
+          | protos.google.cloud.redis.v1beta1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.v1beta1.IInstance
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listInstances values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listInstances request %j', request);
+    return this.innerApiCalls
+      .listInstances(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.redis.v1beta1.IInstance[],
+          protos.google.cloud.redis.v1beta1.IListInstancesRequest | null,
+          protos.google.cloud.redis.v1beta1.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -2046,6 +2378,7 @@ export class CloudRedisClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
@@ -2101,6 +2434,7 @@ export class CloudRedisClient {
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
+    this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
@@ -2205,6 +2539,7 @@ export class CloudRedisClient {
   close(): Promise<void> {
     if (this.cloudRedisStub && !this._terminated) {
       return this.cloudRedisStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.operationsClient.close();
