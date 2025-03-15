@@ -3161,7 +3161,8 @@ export namespace google {
                         ACCOUNT_NOT_LINKED = 1,
                         ACCOUNT_NOT_ACTIVE = 2,
                         ACTIVE = 3,
-                        ACCOUNT_SUSPENDED = 4
+                        ACCOUNT_SUSPENDED = 4,
+                        NOT_APPROVED_IN_PRIVATE_MARKETPLACE = 5
                     }
                 }
 
