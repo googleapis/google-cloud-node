@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
 1.  [Enable the Merchant API API][enable_api].
-1.  [Set up authentication][auth] so you can access the
+1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -116,6 +116,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | --------------------------- | --------------------------------- | ------ |
 | Product_inputs_service.delete_product_input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.delete_product_input.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.delete_product_input.js,packages/google-shopping-merchant-products/samples/README.md) |
 | Product_inputs_service.insert_product_input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.insert_product_input.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.insert_product_input.js,packages/google-shopping-merchant-products/samples/README.md) |
+| Product_inputs_service.update_product_input | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.update_product_input.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/product_inputs_service.update_product_input.js,packages/google-shopping-merchant-products/samples/README.md) |
 | Products_service.get_product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.get_product.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.get_product.js,packages/google-shopping-merchant-products/samples/README.md) |
 | Products_service.list_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.list_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/generated/v1beta/products_service.list_products.js,packages/google-shopping-merchant-products/samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-products/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-products/samples/quickstart.js,packages/google-shopping-merchant-products/samples/README.md) |
@@ -187,4 +188,4 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=merchantapi.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+[auth]: https://cloud.google.com/docs/authentication/getting-started
