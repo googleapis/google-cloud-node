@@ -4,17 +4,6 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.8.1...text-to-speech-v6.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.8.0...text-to-speech-v5.8.1) (2025-02-12)
 
 

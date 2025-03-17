@@ -1,16 +1,5 @@
 # Changelog
 
-## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.4.0...addressvalidation-v3.0.0) (2025-03-12)
-
-
-### ⚠ BREAKING CHANGES
-
-* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
-
-### Miscellaneous Chores
-
-* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
-
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.3.0...addressvalidation-v2.4.0) (2024-05-21)
 
 
