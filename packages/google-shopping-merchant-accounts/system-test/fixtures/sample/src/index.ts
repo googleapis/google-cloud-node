@@ -21,6 +21,7 @@ import {
   AccountsServiceClient,
   AccountTaxServiceClient,
   AutofeedSettingsServiceClient,
+  AutomaticImprovementsServiceClient,
   BusinessIdentityServiceClient,
   BusinessInfoServiceClient,
   EmailPreferencesServiceClient,
@@ -48,6 +49,11 @@ function doStuffWithAccountTaxServiceClient(client: AccountTaxServiceClient) {
 }
 function doStuffWithAutofeedSettingsServiceClient(
   client: AutofeedSettingsServiceClient
+) {
+  client.close();
+}
+function doStuffWithAutomaticImprovementsServiceClient(
+  client: AutomaticImprovementsServiceClient
 ) {
   client.close();
 }
@@ -112,6 +118,12 @@ function main() {
   // check that the client instance can be created
   const autofeedSettingsServiceClient = new AutofeedSettingsServiceClient();
   doStuffWithAutofeedSettingsServiceClient(autofeedSettingsServiceClient);
+  // check that the client instance can be created
+  const automaticImprovementsServiceClient =
+    new AutomaticImprovementsServiceClient();
+  doStuffWithAutomaticImprovementsServiceClient(
+    automaticImprovementsServiceClient
+  );
   // check that the client instance can be created
   const businessIdentityServiceClient = new BusinessIdentityServiceClient();
   doStuffWithBusinessIdentityServiceClient(businessIdentityServiceClient);

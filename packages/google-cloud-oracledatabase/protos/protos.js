@@ -9561,6 +9561,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             return null;
@@ -9613,6 +9614,10 @@
                             case "ACCOUNT_SUSPENDED":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "NOT_APPROVED_IN_PRIVATE_MARKETPLACE":
+                            case 5:
+                                message.state = 5;
                                 break;
                             }
                             return message;
@@ -9683,6 +9688,7 @@
                          * @property {number} ACCOUNT_NOT_ACTIVE=2 ACCOUNT_NOT_ACTIVE value
                          * @property {number} ACTIVE=3 ACTIVE value
                          * @property {number} ACCOUNT_SUSPENDED=4 ACCOUNT_SUSPENDED value
+                         * @property {number} NOT_APPROVED_IN_PRIVATE_MARKETPLACE=5 NOT_APPROVED_IN_PRIVATE_MARKETPLACE value
                          */
                         Entitlement.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -9691,6 +9697,7 @@
                             values[valuesById[2] = "ACCOUNT_NOT_ACTIVE"] = 2;
                             values[valuesById[3] = "ACTIVE"] = 3;
                             values[valuesById[4] = "ACCOUNT_SUSPENDED"] = 4;
+                            values[valuesById[5] = "NOT_APPROVED_IN_PRIVATE_MARKETPLACE"] = 5;
                             return values;
                         })();
     
