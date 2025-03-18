@@ -1154,6 +1154,296 @@
                             }
                           }
                         },
+                        "AutomaticImprovementsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetAutomaticImprovements": {
+                              "requestType": "GetAutomaticImprovementsRequest",
+                              "responseType": "AutomaticImprovements",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1beta/{name=accounts/*/automaticImprovements}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1beta/{name=accounts/*/automaticImprovements}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "UpdateAutomaticImprovements": {
+                              "requestType": "UpdateAutomaticImprovementsRequest",
+                              "responseType": "AutomaticImprovements",
+                              "options": {
+                                "(google.api.http).patch": "/accounts/v1beta/{automatic_improvements.name=accounts/*/automaticImprovements}",
+                                "(google.api.http).body": "automatic_improvements",
+                                "(google.api.method_signature)": "automatic_improvements,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/accounts/v1beta/{automatic_improvements.name=accounts/*/automaticImprovements}",
+                                    "body": "automatic_improvements"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "automatic_improvements,update_mask"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "AutomaticImprovements": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/AutomaticImprovements",
+                            "(google.api.resource).pattern": "accounts/{account}/automaticImprovements",
+                            "(google.api.resource).plural": "automaticImprovements",
+                            "(google.api.resource).singular": "automaticImprovements"
+                          },
+                          "oneofs": {
+                            "_itemUpdates": {
+                              "oneof": [
+                                "itemUpdates"
+                              ]
+                            },
+                            "_imageImprovements": {
+                              "oneof": [
+                                "imageImprovements"
+                              ]
+                            },
+                            "_shippingImprovements": {
+                              "oneof": [
+                                "shippingImprovements"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "itemUpdates": {
+                              "type": "AutomaticItemUpdates",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "imageImprovements": {
+                              "type": "AutomaticImageImprovements",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "shippingImprovements": {
+                              "type": "AutomaticShippingImprovements",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "AutomaticItemUpdates": {
+                          "fields": {
+                            "accountItemUpdatesSettings": {
+                              "type": "ItemUpdatesAccountLevelSettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "effectiveAllowPriceUpdates": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "effectiveAllowAvailabilityUpdates": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "effectiveAllowStrictAvailabilityUpdates": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "effectiveAllowConditionUpdates": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ItemUpdatesAccountLevelSettings": {
+                              "oneofs": {
+                                "_allowPriceUpdates": {
+                                  "oneof": [
+                                    "allowPriceUpdates"
+                                  ]
+                                },
+                                "_allowAvailabilityUpdates": {
+                                  "oneof": [
+                                    "allowAvailabilityUpdates"
+                                  ]
+                                },
+                                "_allowStrictAvailabilityUpdates": {
+                                  "oneof": [
+                                    "allowStrictAvailabilityUpdates"
+                                  ]
+                                },
+                                "_allowConditionUpdates": {
+                                  "oneof": [
+                                    "allowConditionUpdates"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "allowPriceUpdates": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "allowAvailabilityUpdates": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "allowStrictAvailabilityUpdates": {
+                                  "type": "bool",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "allowConditionUpdates": {
+                                  "type": "bool",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AutomaticImageImprovements": {
+                          "oneofs": {
+                            "_accountImageImprovementsSettings": {
+                              "oneof": [
+                                "accountImageImprovementsSettings"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "accountImageImprovementsSettings": {
+                              "type": "ImageImprovementsAccountLevelSettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "effectiveAllowAutomaticImageImprovements": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ImageImprovementsAccountLevelSettings": {
+                              "oneofs": {
+                                "_allowAutomaticImageImprovements": {
+                                  "oneof": [
+                                    "allowAutomaticImageImprovements"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "allowAutomaticImageImprovements": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AutomaticShippingImprovements": {
+                          "oneofs": {
+                            "_allowShippingImprovements": {
+                              "oneof": [
+                                "allowShippingImprovements"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "allowShippingImprovements": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "GetAutomaticImprovementsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/AutomaticImprovements"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateAutomaticImprovementsRequest": {
+                          "fields": {
+                            "automaticImprovements": {
+                              "type": "AutomaticImprovements",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
                         "BusinessIdentityService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",
