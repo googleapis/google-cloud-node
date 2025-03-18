@@ -2569,6 +2569,39 @@
                         }
                       }
                     },
+                    "SecretRef": {
+                      "fields": {
+                        "secret": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SecretEnvVar": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secretRef": {
+                          "type": "SecretRef",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CachedContent": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/CachedContent",
@@ -29942,13 +29975,27 @@
                           "type": "PackageSpec",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deploymentSpec": {
+                          "type": "DeploymentSpec",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "classMethods": {
                           "rule": "repeated",
                           "type": "google.protobuf.Struct",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentFramework": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -29981,6 +30028,26 @@
                             "pythonVersion": {
                               "type": "string",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DeploymentSpec": {
+                          "fields": {
+                            "env": {
+                              "rule": "repeated",
+                              "type": "EnvVar",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "secretEnv": {
+                              "rule": "repeated",
+                              "type": "SecretEnvVar",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -30022,7 +30089,7 @@
                           "type": "ReasoningEngineSpec",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "createTime": {
