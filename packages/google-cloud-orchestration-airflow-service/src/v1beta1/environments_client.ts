@@ -1089,7 +1089,7 @@ export class EnvironmentsClient {
    * Creates a user workloads Secret.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1221,7 +1221,7 @@ export class EnvironmentsClient {
    * Values of the "data" field in the response are cleared.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1350,7 +1350,7 @@ export class EnvironmentsClient {
    * Updates a user workloads Secret.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1478,7 +1478,7 @@ export class EnvironmentsClient {
    * Deletes a user workloads Secret.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1607,7 +1607,7 @@ export class EnvironmentsClient {
    * Creates a user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1738,7 +1738,7 @@ export class EnvironmentsClient {
    * Gets an existing user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1867,7 +1867,7 @@ export class EnvironmentsClient {
    * Updates a user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1996,7 +1996,7 @@ export class EnvironmentsClient {
    * Deletes a user workloads ConfigMap.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4017,7 +4017,7 @@ export class EnvironmentsClient {
    * runs a single Composer component.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-2.*.*-airflow-*.*.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4261,7 +4261,7 @@ export class EnvironmentsClient {
    * Lists user workloads Secrets.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4484,7 +4484,7 @@ export class EnvironmentsClient {
    * Lists user workloads ConfigMaps.
    *
    * This method is supported for Cloud Composer environments in versions
-   * composer-3.*.*-airflow-*.*.* and newer.
+   * composer-3-airflow-*.*.*-build.* and newer.
    *
    * @param {Object} request
    *   The request object that will be sent.
