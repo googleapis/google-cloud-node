@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dns-v4.1.0...dns-v5.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/paginator to v6 ([#6128](https://github.com/googleapis/google-cloud-node/issues/6128)) ([3e16aca](https://github.com/googleapis/google-cloud-node/commit/3e16acaf81165b03bfbb636ca8f24197c971443a))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/dns-v4.0.0...dns-v4.1.0) (2024-05-21)
 
 

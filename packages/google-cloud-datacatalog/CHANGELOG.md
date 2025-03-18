@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.7.0...datacatalog-v5.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.6.0...datacatalog-v4.7.0) (2024-11-21)
 
 

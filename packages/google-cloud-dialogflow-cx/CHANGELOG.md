@@ -1,5 +1,21 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.10.0...dialogflow-cx-v5.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [dialogflow-cx] Change client_secret in OAuthConfig from required to optional ([#6119](https://github.com/googleapis/google-cloud-node/issues/6119)) ([3f75a90](https://github.com/googleapis/google-cloud-node/commit/3f75a90d8f57ea6d896936fb2605db3268069fb9))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [4.10.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.9.0...dialogflow-cx-v4.10.0) (2025-02-28)
 
 
