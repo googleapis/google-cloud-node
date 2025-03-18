@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/streetview-publish-v0.1.0...streetview-publish-v0.2.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [storagetransfer,publish,grafeas] add request/response debug logging to gapics ([a8819af](https://github.com/googleapis/google-cloud-node/commit/a8819af1314602e905ef8e582c20b505c466003b))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## 0.1.0 (2024-06-03)
 
 
