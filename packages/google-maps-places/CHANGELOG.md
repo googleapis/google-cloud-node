@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.10.0...places-v2.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([ec637db](https://github.com/googleapis/google-cloud-node/commit/ec637db171237d31da01f356af88a243e608fb14))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.9.1...places-v1.10.0) (2025-02-28)
 
 

@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.3.1...managedkafka-v0.4.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [managedkafka] add request/response debug logging to gapics, update templates to gax 5 and node 18 ([8b6b9bc](https://github.com/googleapis/google-cloud-node/commit/8b6b9bcc04dbf1b5891a55e3bda0db28f6ecde93))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.3.0...managedkafka-v0.3.1) (2025-02-12)
 
 

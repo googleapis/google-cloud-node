@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-v0.5.0...fleetengine-v0.6.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([388b4e2](https://github.com/googleapis/google-cloud-node/commit/388b4e20329b7f6fc0dd061dddff573c45104213))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/fleetengine-v0.4.0...fleetengine-v0.5.0) (2025-02-28)
 
 

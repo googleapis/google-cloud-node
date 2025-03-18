@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.13.0...recaptcha-enterprise-v6.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [recaptchaenterprise] add request/response debug logging to gapics, update templates to gax 5  ([9010372](https://github.com/googleapis/google-cloud-node/commit/9010372cacb146904e56bc919e0c54e6a7b8b678))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.12.0...recaptcha-enterprise-v5.13.0) (2024-11-14)
 
 
