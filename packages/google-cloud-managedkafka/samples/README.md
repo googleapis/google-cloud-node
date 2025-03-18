@@ -26,6 +26,20 @@
   * [Managed_kafka.update_cluster](#managed_kafka.update_cluster)
   * [Managed_kafka.update_consumer_group](#managed_kafka.update_consumer_group)
   * [Managed_kafka.update_topic](#managed_kafka.update_topic)
+  * [Managed_kafka_connect.create_connect_cluster](#managed_kafka_connect.create_connect_cluster)
+  * [Managed_kafka_connect.create_connector](#managed_kafka_connect.create_connector)
+  * [Managed_kafka_connect.delete_connect_cluster](#managed_kafka_connect.delete_connect_cluster)
+  * [Managed_kafka_connect.delete_connector](#managed_kafka_connect.delete_connector)
+  * [Managed_kafka_connect.get_connect_cluster](#managed_kafka_connect.get_connect_cluster)
+  * [Managed_kafka_connect.get_connector](#managed_kafka_connect.get_connector)
+  * [Managed_kafka_connect.list_connect_clusters](#managed_kafka_connect.list_connect_clusters)
+  * [Managed_kafka_connect.list_connectors](#managed_kafka_connect.list_connectors)
+  * [Managed_kafka_connect.pause_connector](#managed_kafka_connect.pause_connector)
+  * [Managed_kafka_connect.restart_connector](#managed_kafka_connect.restart_connector)
+  * [Managed_kafka_connect.resume_connector](#managed_kafka_connect.resume_connector)
+  * [Managed_kafka_connect.stop_connector](#managed_kafka_connect.stop_connector)
+  * [Managed_kafka_connect.update_connect_cluster](#managed_kafka_connect.update_connect_cluster)
+  * [Managed_kafka_connect.update_connector](#managed_kafka_connect.update_connector)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -274,6 +288,244 @@ __Usage:__
 
 
 `node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka.update_topic.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.create_connect_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.create_connect_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.create_connect_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.create_connect_cluster.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.create_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.create_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.create_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.create_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.delete_connect_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.delete_connect_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.delete_connect_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.delete_connect_cluster.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.delete_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.delete_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.delete_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.delete_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.get_connect_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.get_connect_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.get_connect_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.get_connect_cluster.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.get_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.get_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.get_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.get_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.list_connect_clusters
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.list_connect_clusters.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.list_connect_clusters.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.list_connect_clusters.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.list_connectors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.list_connectors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.list_connectors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.list_connectors.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.pause_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.pause_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.pause_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.pause_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.restart_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.restart_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.restart_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.restart_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.resume_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.resume_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.resume_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.resume_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.stop_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.stop_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.stop_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.stop_connector.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.update_connect_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connect_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connect_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connect_cluster.js`
+
+
+-----
+
+
+
+
+### Managed_kafka_connect.update_connector
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connector.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connector.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-managedkafka/samples/generated/v1/managed_kafka_connect.update_connector.js`
 
 
 -----

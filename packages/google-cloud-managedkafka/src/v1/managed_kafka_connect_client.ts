@@ -37,19 +37,19 @@ import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/managed_kafka_client_config.json`.
+ * `src/v1/managed_kafka_connect_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './managed_kafka_client_config.json';
+import * as gapicConfig from './managed_kafka_connect_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The service that a client application uses to manage Apache Kafka clusters,
- *  topics and consumer groups.
+ *  The service that a client application uses to manage Apache Kafka Connect
+ *  clusters and connectors.
  * @class
  * @memberof v1
  */
-export class ManagedKafkaClient {
+export class ManagedKafkaConnectClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -73,10 +73,10 @@ export class ManagedKafkaClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  managedKafkaStub?: Promise<{[name: string]: Function}>;
+  managedKafkaConnectStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of ManagedKafkaClient.
+   * Construct an instance of ManagedKafkaConnectClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -111,7 +111,7 @@ export class ManagedKafkaClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ManagedKafkaClient({fallback: true}, gax);
+   *     const client = new ManagedKafkaConnectClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -119,7 +119,7 @@ export class ManagedKafkaClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof ManagedKafkaClient;
+    const staticMembers = this.constructor as typeof ManagedKafkaConnectClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -240,20 +240,15 @@ export class ManagedKafkaClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listClusters: new this._gaxModule.PageDescriptor(
+      listConnectClusters: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'clusters'
+        'connectClusters'
       ),
-      listTopics: new this._gaxModule.PageDescriptor(
+      listConnectors: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'topics'
-      ),
-      listConsumerGroups: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'consumerGroups'
+        'connectors'
       ),
     };
 
@@ -298,46 +293,46 @@ export class ManagedKafkaClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedkafka.v1.Cluster'
+    const createConnectClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.managedkafka.v1.ConnectCluster'
     ) as gax.protobuf.Type;
-    const createClusterMetadata = protoFilesRoot.lookup(
+    const createConnectClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.managedkafka.v1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const updateClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.managedkafka.v1.Cluster'
+    const updateConnectClusterResponse = protoFilesRoot.lookup(
+      '.google.cloud.managedkafka.v1.ConnectCluster'
     ) as gax.protobuf.Type;
-    const updateClusterMetadata = protoFilesRoot.lookup(
+    const updateConnectClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.managedkafka.v1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const deleteClusterResponse = protoFilesRoot.lookup(
+    const deleteConnectClusterResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteClusterMetadata = protoFilesRoot.lookup(
+    const deleteConnectClusterMetadata = protoFilesRoot.lookup(
       '.google.cloud.managedkafka.v1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createCluster: new this._gaxModule.LongrunningDescriptor(
+      createConnectCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createClusterResponse.decode.bind(createClusterResponse),
-        createClusterMetadata.decode.bind(createClusterMetadata)
+        createConnectClusterResponse.decode.bind(createConnectClusterResponse),
+        createConnectClusterMetadata.decode.bind(createConnectClusterMetadata)
       ),
-      updateCluster: new this._gaxModule.LongrunningDescriptor(
+      updateConnectCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateClusterResponse.decode.bind(updateClusterResponse),
-        updateClusterMetadata.decode.bind(updateClusterMetadata)
+        updateConnectClusterResponse.decode.bind(updateConnectClusterResponse),
+        updateConnectClusterMetadata.decode.bind(updateConnectClusterMetadata)
       ),
-      deleteCluster: new this._gaxModule.LongrunningDescriptor(
+      deleteConnectCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deleteClusterResponse.decode.bind(deleteClusterResponse),
-        deleteClusterMetadata.decode.bind(deleteClusterMetadata)
+        deleteConnectClusterResponse.decode.bind(deleteConnectClusterResponse),
+        deleteConnectClusterMetadata.decode.bind(deleteConnectClusterMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.managedkafka.v1.ManagedKafka',
+      'google.cloud.managedkafka.v1.ManagedKafkaConnect',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -365,43 +360,44 @@ export class ManagedKafkaClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.managedKafkaStub) {
-      return this.managedKafkaStub;
+    if (this.managedKafkaConnectStub) {
+      return this.managedKafkaConnectStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.managedkafka.v1.ManagedKafka.
-    this.managedKafkaStub = this._gaxGrpc.createStub(
+    // google.cloud.managedkafka.v1.ManagedKafkaConnect.
+    this.managedKafkaConnectStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.managedkafka.v1.ManagedKafka'
+            'google.cloud.managedkafka.v1.ManagedKafkaConnect'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.managedkafka.v1.ManagedKafka,
+          (this._protos as any).google.cloud.managedkafka.v1
+            .ManagedKafkaConnect,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const managedKafkaStubMethods = [
-      'listClusters',
-      'getCluster',
-      'createCluster',
-      'updateCluster',
-      'deleteCluster',
-      'listTopics',
-      'getTopic',
-      'createTopic',
-      'updateTopic',
-      'deleteTopic',
-      'listConsumerGroups',
-      'getConsumerGroup',
-      'updateConsumerGroup',
-      'deleteConsumerGroup',
+    const managedKafkaConnectStubMethods = [
+      'listConnectClusters',
+      'getConnectCluster',
+      'createConnectCluster',
+      'updateConnectCluster',
+      'deleteConnectCluster',
+      'listConnectors',
+      'getConnector',
+      'createConnector',
+      'updateConnector',
+      'deleteConnector',
+      'pauseConnector',
+      'resumeConnector',
+      'restartConnector',
+      'stopConnector',
     ];
-    for (const methodName of managedKafkaStubMethods) {
-      const callPromise = this.managedKafkaStub.then(
+    for (const methodName of managedKafkaConnectStubMethods) {
+      const callPromise = this.managedKafkaConnectStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -429,7 +425,7 @@ export class ManagedKafkaClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.managedKafkaStub;
+    return this.managedKafkaConnectStub;
   }
 
   /**
@@ -517,68 +513,76 @@ export class ManagedKafkaClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the properties of a single cluster.
+   * Returns the properties of a single Kafka Connect cluster.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the cluster whose configuration to return.
+   *   Required. The name of the Kafka Connect cluster whose configuration to
+   *   return. Structured like
+   *   `projects/{project}/locations/{location}/connectClusters/{connect_cluster_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Cluster|Cluster}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.ConnectCluster|ConnectCluster}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.get_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_GetCluster_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.get_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_GetConnectCluster_async
    */
-  getCluster(
-    request?: protos.google.cloud.managedkafka.v1.IGetClusterRequest,
+  getConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ICluster,
-      protos.google.cloud.managedkafka.v1.IGetClusterRequest | undefined,
+      protos.google.cloud.managedkafka.v1.IConnectCluster,
+      protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest | undefined,
       {} | undefined,
     ]
   >;
-  getCluster(
-    request: protos.google.cloud.managedkafka.v1.IGetClusterRequest,
+  getConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.managedkafka.v1.ICluster,
-      protos.google.cloud.managedkafka.v1.IGetClusterRequest | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnectCluster,
+      | protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  getCluster(
-    request: protos.google.cloud.managedkafka.v1.IGetClusterRequest,
+  getConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest,
     callback: Callback<
-      protos.google.cloud.managedkafka.v1.ICluster,
-      protos.google.cloud.managedkafka.v1.IGetClusterRequest | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnectCluster,
+      | protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  getCluster(
-    request?: protos.google.cloud.managedkafka.v1.IGetClusterRequest,
+  getConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.managedkafka.v1.ICluster,
-          | protos.google.cloud.managedkafka.v1.IGetClusterRequest
+          protos.google.cloud.managedkafka.v1.IConnectCluster,
+          | protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.managedkafka.v1.ICluster,
-      protos.google.cloud.managedkafka.v1.IGetClusterRequest | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnectCluster,
+      | protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ICluster,
-      protos.google.cloud.managedkafka.v1.IGetClusterRequest | undefined,
+      protos.google.cloud.managedkafka.v1.IConnectCluster,
+      protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -598,99 +602,108 @@ export class ManagedKafkaClient {
         name: request.name ?? '',
       });
     this.initialize();
-    this._log.info('getCluster request %j', request);
+    this._log.info('getConnectCluster request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.cloud.managedkafka.v1.ICluster,
-          | protos.google.cloud.managedkafka.v1.IGetClusterRequest
+          protos.google.cloud.managedkafka.v1.IConnectCluster,
+          | protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getCluster response %j', response);
+          this._log.info('getConnectCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getCluster(request, options, wrappedCallback)
+      .getConnectCluster(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.cloud.managedkafka.v1.ICluster,
-          protos.google.cloud.managedkafka.v1.IGetClusterRequest | undefined,
+          protos.google.cloud.managedkafka.v1.IConnectCluster,
+          (
+            | protos.google.cloud.managedkafka.v1.IGetConnectClusterRequest
+            | undefined
+          ),
           {} | undefined,
         ]) => {
-          this._log.info('getCluster response %j', response);
+          this._log.info('getConnectCluster response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Returns the properties of a single topic.
+   * Returns the properties of a single connector.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the topic whose configuration to return. Structured
-   *   like:
-   *   projects/{project}/locations/{location}/clusters/{cluster}/topics/{topic}.
+   *   Required. The name of the connector whose configuration to return.
+   *   Structured like:
+   *   projects/{project}/locations/{location}/connectClusters/{connectCluster}/connectors/{connector}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Topic|Topic}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Connector|Connector}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.get_topic.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_GetTopic_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.get_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_GetConnector_async
    */
-  getTopic(
-    request?: protos.google.cloud.managedkafka.v1.IGetTopicRequest,
+  getConnector(
+    request?: protos.google.cloud.managedkafka.v1.IGetConnectorRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IGetTopicRequest | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      protos.google.cloud.managedkafka.v1.IGetConnectorRequest | undefined,
       {} | undefined,
     ]
   >;
-  getTopic(
-    request: protos.google.cloud.managedkafka.v1.IGetTopicRequest,
+  getConnector(
+    request: protos.google.cloud.managedkafka.v1.IGetConnectorRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IGetTopicRequest | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.IGetConnectorRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  getTopic(
-    request: protos.google.cloud.managedkafka.v1.IGetTopicRequest,
+  getConnector(
+    request: protos.google.cloud.managedkafka.v1.IGetConnectorRequest,
     callback: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IGetTopicRequest | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.IGetConnectorRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  getTopic(
-    request?: protos.google.cloud.managedkafka.v1.IGetTopicRequest,
+  getConnector(
+    request?: protos.google.cloud.managedkafka.v1.IGetConnectorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.managedkafka.v1.ITopic,
-          | protos.google.cloud.managedkafka.v1.IGetTopicRequest
+          protos.google.cloud.managedkafka.v1.IConnector,
+          | protos.google.cloud.managedkafka.v1.IGetConnectorRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IGetTopicRequest | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.IGetConnectorRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IGetTopicRequest | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      protos.google.cloud.managedkafka.v1.IGetConnectorRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -710,884 +723,114 @@ export class ManagedKafkaClient {
         name: request.name ?? '',
       });
     this.initialize();
-    this._log.info('getTopic request %j', request);
+    this._log.info('getConnector request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.cloud.managedkafka.v1.ITopic,
-          | protos.google.cloud.managedkafka.v1.IGetTopicRequest
+          protos.google.cloud.managedkafka.v1.IConnector,
+          | protos.google.cloud.managedkafka.v1.IGetConnectorRequest
           | null
           | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTopic response %j', response);
+          this._log.info('getConnector response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getTopic(request, options, wrappedCallback)
+      .getConnector(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.cloud.managedkafka.v1.ITopic,
-          protos.google.cloud.managedkafka.v1.IGetTopicRequest | undefined,
+          protos.google.cloud.managedkafka.v1.IConnector,
+          protos.google.cloud.managedkafka.v1.IGetConnectorRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTopic response %j', response);
+          this._log.info('getConnector response %j', response);
           return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Creates a new topic in a given project and location.
+   * Creates a new connector in a given Connect cluster.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent cluster in which to create the topic.
+   *   Required. The parent Connect cluster in which to create the connector.
    *   Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
-   * @param {string} request.topicId
-   *   Required. The ID to use for the topic, which will become the final
-   *   component of the topic's name.
-   *
-   *   This value is structured like: `my-topic-name`.
-   * @param {google.cloud.managedkafka.v1.Topic} request.topic
-   *   Required. Configuration of the topic to create. Its `name` field is
-   *   ignored.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Topic|Topic}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.create_topic.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_CreateTopic_async
-   */
-  createTopic(
-    request?: protos.google.cloud.managedkafka.v1.ICreateTopicRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.ICreateTopicRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  createTopic(
-    request: protos.google.cloud.managedkafka.v1.ICreateTopicRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      | protos.google.cloud.managedkafka.v1.ICreateTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTopic(
-    request: protos.google.cloud.managedkafka.v1.ICreateTopicRequest,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      | protos.google.cloud.managedkafka.v1.ICreateTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createTopic(
-    request?: protos.google.cloud.managedkafka.v1.ICreateTopicRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.managedkafka.v1.ITopic,
-          | protos.google.cloud.managedkafka.v1.ICreateTopicRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      | protos.google.cloud.managedkafka.v1.ICreateTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.ICreateTopicRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    this._log.info('createTopic request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.managedkafka.v1.ITopic,
-          | protos.google.cloud.managedkafka.v1.ICreateTopicRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('createTopic response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .createTopic(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.managedkafka.v1.ITopic,
-          protos.google.cloud.managedkafka.v1.ICreateTopicRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('createTopic response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Updates the properties of a single topic.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Topic resource by the update. The fields specified in the update_mask are
-   *   relative to the resource, not the full request. A field will be overwritten
-   *   if it is in the mask. The mask is required and a value of * will update all
-   *   fields.
-   * @param {google.cloud.managedkafka.v1.Topic} request.topic
-   *   Required. The topic to update. Its `name` field must be populated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Topic|Topic}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.update_topic.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_UpdateTopic_async
-   */
-  updateTopic(
-    request?: protos.google.cloud.managedkafka.v1.IUpdateTopicRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IUpdateTopicRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  updateTopic(
-    request: protos.google.cloud.managedkafka.v1.IUpdateTopicRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      | protos.google.cloud.managedkafka.v1.IUpdateTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTopic(
-    request: protos.google.cloud.managedkafka.v1.IUpdateTopicRequest,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      | protos.google.cloud.managedkafka.v1.IUpdateTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateTopic(
-    request?: protos.google.cloud.managedkafka.v1.IUpdateTopicRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.managedkafka.v1.ITopic,
-          | protos.google.cloud.managedkafka.v1.IUpdateTopicRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.managedkafka.v1.ITopic,
-      | protos.google.cloud.managedkafka.v1.IUpdateTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.ITopic,
-      protos.google.cloud.managedkafka.v1.IUpdateTopicRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'topic.name': request.topic!.name ?? '',
-      });
-    this.initialize();
-    this._log.info('updateTopic request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.managedkafka.v1.ITopic,
-          | protos.google.cloud.managedkafka.v1.IUpdateTopicRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('updateTopic response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .updateTopic(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.managedkafka.v1.ITopic,
-          protos.google.cloud.managedkafka.v1.IUpdateTopicRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('updateTopic response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Deletes a single topic.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the topic to delete.
-   *   `projects/{project}/locations/{location}/clusters/{cluster}/topics/{topic}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.delete_topic.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_DeleteTopic_async
-   */
-  deleteTopic(
-    request?: protos.google.cloud.managedkafka.v1.IDeleteTopicRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.managedkafka.v1.IDeleteTopicRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteTopic(
-    request: protos.google.cloud.managedkafka.v1.IDeleteTopicRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.managedkafka.v1.IDeleteTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTopic(
-    request: protos.google.cloud.managedkafka.v1.IDeleteTopicRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.managedkafka.v1.IDeleteTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteTopic(
-    request?: protos.google.cloud.managedkafka.v1.IDeleteTopicRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.managedkafka.v1.IDeleteTopicRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.managedkafka.v1.IDeleteTopicRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.cloud.managedkafka.v1.IDeleteTopicRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    this._log.info('deleteTopic request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.managedkafka.v1.IDeleteTopicRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTopic response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .deleteTopic(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.managedkafka.v1.IDeleteTopicRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteTopic response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Returns the properties of a single consumer group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the consumer group whose configuration to return.
-   *   `projects/{project}/locations/{location}/clusters/{cluster}/consumerGroups/{consumerGroup}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.ConsumerGroup|ConsumerGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.get_consumer_group.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_GetConsumerGroup_async
-   */
-  getConsumerGroup(
-    request?: protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getConsumerGroup(
-    request: protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConsumerGroup(
-    request: protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConsumerGroup(
-    request?: protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.managedkafka.v1.IConsumerGroup,
-          | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    this._log.info('getConsumerGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.managedkafka.v1.IConsumerGroup,
-          | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('getConsumerGroup response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .getConsumerGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.managedkafka.v1.IConsumerGroup,
-          (
-            | protos.google.cloud.managedkafka.v1.IGetConsumerGroupRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('getConsumerGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Updates the properties of a single consumer group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   ConsumerGroup resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it is in the mask. The
-   *   mask is required and a value of * will update all fields.
-   * @param {google.cloud.managedkafka.v1.ConsumerGroup} request.consumerGroup
-   *   Required. The consumer group to update. Its `name` field must be populated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.ConsumerGroup|ConsumerGroup}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.update_consumer_group.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_UpdateConsumerGroup_async
-   */
-  updateConsumerGroup(
-    request?: protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      (
-        | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  updateConsumerGroup(
-    request: protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConsumerGroup(
-    request: protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest,
-    callback: Callback<
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConsumerGroup(
-    request?: protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.managedkafka.v1.IConsumerGroup,
-          | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.IConsumerGroup,
-      (
-        | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'consumer_group.name': request.consumerGroup!.name ?? '',
-      });
-    this.initialize();
-    this._log.info('updateConsumerGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.managedkafka.v1.IConsumerGroup,
-          | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('updateConsumerGroup response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .updateConsumerGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.managedkafka.v1.IConsumerGroup,
-          (
-            | protos.google.cloud.managedkafka.v1.IUpdateConsumerGroupRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('updateConsumerGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-  /**
-   * Deletes a single consumer group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the consumer group to delete.
-   *   `projects/{project}/locations/{location}/clusters/{cluster}/consumerGroups/{consumerGroup}`.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.delete_consumer_group.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_DeleteConsumerGroup_async
-   */
-  deleteConsumerGroup(
-    request?: protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  deleteConsumerGroup(
-    request: protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConsumerGroup(
-    request: protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConsumerGroup(
-    request?: protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    this._log.info('deleteConsumerGroup request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, options, rawResponse) => {
-          this._log.info('deleteConsumerGroup response %j', response);
-          callback!(error, response, options, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    return this.innerApiCalls
-      .deleteConsumerGroup(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.protobuf.IEmpty,
-          (
-            | protos.google.cloud.managedkafka.v1.IDeleteConsumerGroupRequest
-            | undefined
-          ),
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteConsumerGroup response %j', response);
-          return [response, options, rawResponse];
-        }
-      );
-  }
-
-  /**
-   * Creates a new cluster in a given project and location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent region in which to create the cluster. Structured like
-   *   `projects/{project}/locations/{location}`.
-   * @param {string} request.clusterId
-   *   Required. The ID to use for the cluster, which will become the final
-   *   component of the cluster's name. The ID must be 1-63 characters long, and
+   *   `projects/{project}/locations/{location}/connectClusters/{connect_cluster_id}`.
+   * @param {string} request.connectorId
+   *   Required. The ID to use for the connector, which will become the final
+   *   component of the connector's name. The ID must be 1-63 characters long, and
    *   match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` to comply with
    *   RFC 1035.
    *
-   *   This value is structured like: `my-cluster-id`.
-   * @param {google.cloud.managedkafka.v1.Cluster} request.cluster
-   *   Required. Configuration of the cluster to create. Its `name` field is
-   *   ignored.
-   * @param {string} [request.requestId]
-   *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID to avoid duplication of requests. If a request times out or
-   *   fails, retrying with the same ID allows the server to recognize the
-   *   previous attempt. For at least 60 minutes, the server ignores duplicate
-   *   requests bearing the same ID.
-   *
-   *   For example, consider a situation where you make an initial request and the
-   *   request times out. If you make the request again with the same request ID
-   *   within 60 minutes of the last request, the server checks if an original
-   *   operation with the same request ID was received. If so, the server ignores
-   *   the second request.
-   *
-   *   The request ID must be a valid UUID. A zero UUID is not supported
-   *   (00000000-0000-0000-0000-000000000000).
+   *   This value is structured like: `my-connector-id`.
+   * @param {google.cloud.managedkafka.v1.Connector} request.connector
+   *   Required. The connector to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Connector|Connector}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.create_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_CreateCluster_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.create_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_CreateConnector_async
    */
-  createCluster(
-    request?: protos.google.cloud.managedkafka.v1.ICreateClusterRequest,
+  createConnector(
+    request?: protos.google.cloud.managedkafka.v1.ICreateConnectorRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      protos.google.cloud.managedkafka.v1.ICreateConnectorRequest | undefined,
       {} | undefined,
     ]
   >;
-  createCluster(
-    request: protos.google.cloud.managedkafka.v1.ICreateClusterRequest,
+  createConnector(
+    request: protos.google.cloud.managedkafka.v1.ICreateConnectorRequest,
     options: CallOptions,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.ICreateConnectorRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  createCluster(
-    request: protos.google.cloud.managedkafka.v1.ICreateClusterRequest,
+  createConnector(
+    request: protos.google.cloud.managedkafka.v1.ICreateConnectorRequest,
     callback: Callback<
-      LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.ICreateConnectorRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): void;
-  createCluster(
-    request?: protos.google.cloud.managedkafka.v1.ICreateClusterRequest,
+  createConnector(
+    request?: protos.google.cloud.managedkafka.v1.ICreateConnectorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          LROperation<
-            protos.google.cloud.managedkafka.v1.ICluster,
-            protos.google.cloud.managedkafka.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
+          protos.google.cloud.managedkafka.v1.IConnector,
+          | protos.google.cloud.managedkafka.v1.ICreateConnectorRequest
+          | null
+          | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.ICreateConnectorRequest
+      | null
+      | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
-        protos.google.cloud.managedkafka.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
+      protos.google.cloud.managedkafka.v1.IConnector,
+      protos.google.cloud.managedkafka.v1.ICreateConnectorRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -1607,75 +850,39 @@ export class ManagedKafkaClient {
         parent: request.parent ?? '',
       });
     this.initialize();
+    this._log.info('createConnector request %j', request);
     const wrappedCallback:
       | Callback<
-          LROperation<
-            protos.google.cloud.managedkafka.v1.ICluster,
-            protos.google.cloud.managedkafka.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
+          protos.google.cloud.managedkafka.v1.IConnector,
+          | protos.google.cloud.managedkafka.v1.ICreateConnectorRequest
+          | null
+          | undefined,
           {} | null | undefined
         >
       | undefined = callback
-      ? (error, response, rawResponse, _) => {
-          this._log.info('createCluster response %j', rawResponse);
-          callback!(error, response, rawResponse, _); // We verified callback above.
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('createCluster request %j', request);
     return this.innerApiCalls
-      .createCluster(request, options, wrappedCallback)
+      .createConnector(request, options, wrappedCallback)
       ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.cloud.managedkafka.v1.ICluster,
-            protos.google.cloud.managedkafka.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IConnector,
+          (
+            | protos.google.cloud.managedkafka.v1.ICreateConnectorRequest
+            | undefined
+          ),
           {} | undefined,
         ]) => {
-          this._log.info('createCluster response %j', rawResponse);
-          return [response, rawResponse, _];
+          this._log.info('createConnector response %j', response);
+          return [response, options, rawResponse];
         }
       );
   }
   /**
-   * Check the status of the long running operation returned by `createCluster()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.create_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_CreateCluster_async
-   */
-  async checkCreateClusterProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.managedkafka.v1.Cluster,
-      protos.google.cloud.managedkafka.v1.OperationMetadata
-    >
-  > {
-    this._log.info('createCluster long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.createCluster,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.managedkafka.v1.Cluster,
-      protos.google.cloud.managedkafka.v1.OperationMetadata
-    >;
-  }
-  /**
-   * Updates the properties of a single cluster.
+   * Updates the properties of a connector.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1685,8 +892,742 @@ export class ManagedKafkaClient {
    *   relative to the resource, not the full request. A field will be overwritten
    *   if it is in the mask. The mask is required and a value of * will update all
    *   fields.
-   * @param {google.cloud.managedkafka.v1.Cluster} request.cluster
-   *   Required. The cluster to update. Its `name` field must be populated.
+   * @param {google.cloud.managedkafka.v1.Connector} request.connector
+   *   Required. The connector to update. Its `name` field must be populated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.Connector|Connector}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.update_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnector_async
+   */
+  updateConnector(
+    request?: protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IConnector,
+      protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateConnector(
+    request: protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnector(
+    request: protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnector(
+    request?: protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IConnector,
+          | protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IConnector,
+      | protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IConnector,
+      protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'connector.name': request.connector!.name ?? '',
+      });
+    this.initialize();
+    this._log.info('updateConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IConnector,
+          | protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IConnector,
+          (
+            | protos.google.cloud.managedkafka.v1.IUpdateConnectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Deletes a connector.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connector to delete.
+   *   Structured like:
+   *   projects/{project}/locations/{location}/connectClusters/{connectCluster}/connectors/{connector}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.delete_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnector_async
+   */
+  deleteConnector(
+    request?: protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteConnector(
+    request: protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConnector(
+    request: protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConnector(
+    request?: protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    this._log.info('deleteConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.managedkafka.v1.IDeleteConnectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Pauses the connector and its tasks.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connector to pause.
+   *   Structured like:
+   *   projects/{project}/locations/{location}/connectClusters/{connectCluster}/connectors/{connector}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.PauseConnectorResponse|PauseConnectorResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.pause_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_PauseConnector_async
+   */
+  pauseConnector(
+    request?: protos.google.cloud.managedkafka.v1.IPauseConnectorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IPauseConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  pauseConnector(
+    request: protos.google.cloud.managedkafka.v1.IPauseConnectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IPauseConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseConnector(
+    request: protos.google.cloud.managedkafka.v1.IPauseConnectorRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IPauseConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseConnector(
+    request?: protos.google.cloud.managedkafka.v1.IPauseConnectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IPauseConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IPauseConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IPauseConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    this._log.info('pauseConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IPauseConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pauseConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IPauseConnectorResponse,
+          (
+            | protos.google.cloud.managedkafka.v1.IPauseConnectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Resumes the connector and its tasks.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connector to pause.
+   *   Structured like:
+   *   projects/{project}/locations/{location}/connectClusters/{connectCluster}/connectors/{connector}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.ResumeConnectorResponse|ResumeConnectorResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.resume_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_ResumeConnector_async
+   */
+  resumeConnector(
+    request?: protos.google.cloud.managedkafka.v1.IResumeConnectorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IResumeConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  resumeConnector(
+    request: protos.google.cloud.managedkafka.v1.IResumeConnectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IResumeConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeConnector(
+    request: protos.google.cloud.managedkafka.v1.IResumeConnectorRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IResumeConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeConnector(
+    request?: protos.google.cloud.managedkafka.v1.IResumeConnectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IResumeConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IResumeConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IResumeConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    this._log.info('resumeConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IResumeConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumeConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IResumeConnectorResponse,
+          (
+            | protos.google.cloud.managedkafka.v1.IResumeConnectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Restarts the connector.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connector to restart.
+   *   Structured like:
+   *   projects/{project}/locations/{location}/connectClusters/{connectCluster}/connectors/{connector}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.RestartConnectorResponse|RestartConnectorResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.restart_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_RestartConnector_async
+   */
+  restartConnector(
+    request?: protos.google.cloud.managedkafka.v1.IRestartConnectorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IRestartConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  restartConnector(
+    request: protos.google.cloud.managedkafka.v1.IRestartConnectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IRestartConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restartConnector(
+    request: protos.google.cloud.managedkafka.v1.IRestartConnectorRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IRestartConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restartConnector(
+    request?: protos.google.cloud.managedkafka.v1.IRestartConnectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IRestartConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IRestartConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IRestartConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    this._log.info('restartConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IRestartConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('restartConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .restartConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IRestartConnectorResponse,
+          (
+            | protos.google.cloud.managedkafka.v1.IRestartConnectorRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('restartConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Stops the connector.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the connector to stop.
+   *   Structured like:
+   *   projects/{project}/locations/{location}/connectClusters/{connectCluster}/connectors/{connector}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.v1.StopConnectorResponse|StopConnectorResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.stop_connector.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_StopConnector_async
+   */
+  stopConnector(
+    request?: protos.google.cloud.managedkafka.v1.IStopConnectorRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IStopConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  stopConnector(
+    request: protos.google.cloud.managedkafka.v1.IStopConnectorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IStopConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopConnector(
+    request: protos.google.cloud.managedkafka.v1.IStopConnectorRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IStopConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  stopConnector(
+    request?: protos.google.cloud.managedkafka.v1.IStopConnectorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IStopConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+      | protos.google.cloud.managedkafka.v1.IStopConnectorRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+      protos.google.cloud.managedkafka.v1.IStopConnectorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    this._log.info('stopConnector request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+          | protos.google.cloud.managedkafka.v1.IStopConnectorRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('stopConnector response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .stopConnector(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.v1.IStopConnectorResponse,
+          protos.google.cloud.managedkafka.v1.IStopConnectorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('stopConnector response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
+  }
+
+  /**
+   * Creates a new Kafka Connect cluster in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project/location in which to create the Kafka Connect
+   *   cluster. Structured like
+   *   `projects/{project}/locations/{location}/`.
+   * @param {string} request.connectClusterId
+   *   Required. The ID to use for the Connect cluster, which will become the
+   *   final component of the cluster's name. The ID must be 1-63 characters long,
+   *   and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` to comply
+   *   with RFC 1035.
+   *
+   *   This value is structured like: `my-cluster-id`.
+   * @param {google.cloud.managedkafka.v1.ConnectCluster} request.connectCluster
+   *   Required. Configuration of the Kafka Connect cluster to create. Its `name`
+   *   field is ignored.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
    *   request ID to avoid duplication of requests. If a request times out or
@@ -1710,52 +1651,52 @@ export class ManagedKafkaClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.update_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_UpdateCluster_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.create_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_CreateConnectCluster_async
    */
-  updateCluster(
-    request?: protos.google.cloud.managedkafka.v1.IUpdateClusterRequest,
+  createConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.ICreateConnectClusterRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
         protos.google.cloud.managedkafka.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  updateCluster(
-    request: protos.google.cloud.managedkafka.v1.IUpdateClusterRequest,
+  createConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.ICreateConnectClusterRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
         protos.google.cloud.managedkafka.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateCluster(
-    request: protos.google.cloud.managedkafka.v1.IUpdateClusterRequest,
+  createConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.ICreateConnectClusterRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
         protos.google.cloud.managedkafka.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateCluster(
-    request?: protos.google.cloud.managedkafka.v1.IUpdateClusterRequest,
+  createConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.ICreateConnectClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IConnectCluster,
             protos.google.cloud.managedkafka.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -1763,7 +1704,7 @@ export class ManagedKafkaClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
         protos.google.cloud.managedkafka.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -1772,7 +1713,7 @@ export class ManagedKafkaClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.managedkafka.v1.ICluster,
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
         protos.google.cloud.managedkafka.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -1792,13 +1733,13 @@ export class ManagedKafkaClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'cluster.name': request.cluster!.name ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     const wrappedCallback:
       | Callback<
           LROperation<
-            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IConnectCluster,
             protos.google.cloud.managedkafka.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -1806,47 +1747,47 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.info('createConnectCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('updateCluster request %j', request);
+    this._log.info('createConnectCluster request %j', request);
     return this.innerApiCalls
-      .updateCluster(request, options, wrappedCallback)
+      .createConnectCluster(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
-            protos.google.cloud.managedkafka.v1.ICluster,
+            protos.google.cloud.managedkafka.v1.IConnectCluster,
             protos.google.cloud.managedkafka.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('updateCluster response %j', rawResponse);
+          this._log.info('createConnectCluster response %j', rawResponse);
           return [response, rawResponse, _];
         }
       );
   }
   /**
-   * Check the status of the long running operation returned by `updateCluster()`.
+   * Check the status of the long running operation returned by `createConnectCluster()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.update_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_UpdateCluster_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.create_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_CreateConnectCluster_async
    */
-  async checkUpdateClusterProgress(
+  async checkCreateConnectClusterProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.managedkafka.v1.Cluster,
+      protos.google.cloud.managedkafka.v1.ConnectCluster,
       protos.google.cloud.managedkafka.v1.OperationMetadata
     >
   > {
-    this._log.info('updateCluster long-running');
+    this._log.info('createConnectCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -1854,21 +1795,28 @@ export class ManagedKafkaClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.updateCluster,
+      this.descriptors.longrunning.createConnectCluster,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.managedkafka.v1.Cluster,
+      protos.google.cloud.managedkafka.v1.ConnectCluster,
       protos.google.cloud.managedkafka.v1.OperationMetadata
     >;
   }
   /**
-   * Deletes a single cluster.
+   * Updates the properties of a single Kafka Connect cluster.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the cluster to delete.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   cluster resource by the update. The fields specified in the update_mask are
+   *   relative to the resource, not the full request. A field will be overwritten
+   *   if it is in the mask. The mask is required and a value of * will update all
+   *   fields.
+   * @param {google.cloud.managedkafka.v1.ConnectCluster} request.connectCluster
+   *   Required. The Kafka Connect cluster to update. Its `name` field must be
+   *   populated.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
    *   request ID to avoid duplication of requests. If a request times out or
@@ -1892,11 +1840,195 @@ export class ManagedKafkaClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.delete_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_DeleteCluster_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.update_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnectCluster_async
    */
-  deleteCluster(
-    request?: protos.google.cloud.managedkafka.v1.IDeleteClusterRequest,
+  updateConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.IUpdateConnectClusterRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
+        protos.google.cloud.managedkafka.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.IUpdateConnectClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
+        protos.google.cloud.managedkafka.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.IUpdateConnectClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
+        protos.google.cloud.managedkafka.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.IUpdateConnectClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedkafka.v1.IConnectCluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
+        protos.google.cloud.managedkafka.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.managedkafka.v1.IConnectCluster,
+        protos.google.cloud.managedkafka.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'connect_cluster.name': request.connectCluster!.name ?? '',
+      });
+    this.initialize();
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.managedkafka.v1.IConnectCluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateConnectCluster response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateConnectCluster request %j', request);
+    return this.innerApiCalls
+      .updateConnectCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.managedkafka.v1.IConnectCluster,
+            protos.google.cloud.managedkafka.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConnectCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateConnectCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.update_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnectCluster_async
+   */
+  async checkUpdateConnectClusterProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.managedkafka.v1.ConnectCluster,
+      protos.google.cloud.managedkafka.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateConnectCluster long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateConnectCluster,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.managedkafka.v1.ConnectCluster,
+      protos.google.cloud.managedkafka.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single Connect cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Kafka Connect cluster to delete.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/connectClusters/{connect_cluster_id}`.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID to avoid duplication of requests. If a request times out or
+   *   fails, retrying with the same ID allows the server to recognize the
+   *   previous attempt. For at least 60 minutes, the server ignores duplicate
+   *   requests bearing the same ID.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request ID
+   *   within 60 minutes of the last request, the server checks if an original
+   *   operation with the same request ID was received. If so, the server ignores
+   *   the second request.
+   *
+   *   The request ID must be a valid UUID. A zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.delete_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnectCluster_async
+   */
+  deleteConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.IDeleteConnectClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1908,8 +2040,8 @@ export class ManagedKafkaClient {
       {} | undefined,
     ]
   >;
-  deleteCluster(
-    request: protos.google.cloud.managedkafka.v1.IDeleteClusterRequest,
+  deleteConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.IDeleteConnectClusterRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
@@ -1920,8 +2052,8 @@ export class ManagedKafkaClient {
       {} | null | undefined
     >
   ): void;
-  deleteCluster(
-    request: protos.google.cloud.managedkafka.v1.IDeleteClusterRequest,
+  deleteConnectCluster(
+    request: protos.google.cloud.managedkafka.v1.IDeleteConnectClusterRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1931,8 +2063,8 @@ export class ManagedKafkaClient {
       {} | null | undefined
     >
   ): void;
-  deleteCluster(
-    request?: protos.google.cloud.managedkafka.v1.IDeleteClusterRequest,
+  deleteConnectCluster(
+    request?: protos.google.cloud.managedkafka.v1.IDeleteConnectClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1988,13 +2120,13 @@ export class ManagedKafkaClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.info('deleteConnectCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('deleteCluster request %j', request);
+    this._log.info('deleteConnectCluster request %j', request);
     return this.innerApiCalls
-      .deleteCluster(request, options, wrappedCallback)
+      .deleteConnectCluster(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
@@ -2004,23 +2136,23 @@ export class ManagedKafkaClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteCluster response %j', rawResponse);
+          this._log.info('deleteConnectCluster response %j', rawResponse);
           return [response, rawResponse, _];
         }
       );
   }
   /**
-   * Check the status of the long running operation returned by `deleteCluster()`.
+   * Check the status of the long running operation returned by `deleteConnectCluster()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.delete_cluster.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_DeleteCluster_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.delete_connect_cluster.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnectCluster_async
    */
-  async checkDeleteClusterProgress(
+  async checkDeleteConnectClusterProgress(
     name: string
   ): Promise<
     LROperation<
@@ -2028,7 +2160,7 @@ export class ManagedKafkaClient {
       protos.google.cloud.managedkafka.v1.OperationMetadata
     >
   > {
-    this._log.info('deleteCluster long-running');
+    this._log.info('deleteConnectCluster long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2036,7 +2168,7 @@ export class ManagedKafkaClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteCluster,
+      this.descriptors.longrunning.deleteConnectCluster,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -2045,23 +2177,23 @@ export class ManagedKafkaClient {
     >;
   }
   /**
-   * Lists the clusters in a given project and location.
+   * Lists the Kafka Connect clusters in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location whose clusters are to be listed. Structured
-   *   like `projects/{project}/locations/{location}`.
+   *   Required. The parent project/location whose Connect clusters are to be
+   *   listed. Structured like `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of clusters to return. The service may return
-   *   fewer than this value. If unspecified, server will pick an appropriate
-   *   default.
+   *   Optional. The maximum number of Connect clusters to return. The service may
+   *   return fewer than this value. If unspecified, server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListClusters` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListConnectClusters`
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListClusters` must match
-   *   the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListConnectClusters`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter expression for the result.
    * @param {string} [request.orderBy]
@@ -2069,69 +2201,69 @@ export class ManagedKafkaClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.managedkafka.v1.Cluster|Cluster}.
+   *   The first element of the array is Array of {@link protos.google.cloud.managedkafka.v1.ConnectCluster|ConnectCluster}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listClustersAsync()`
+   *   We recommend using `listConnectClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listClusters(
-    request?: protos.google.cloud.managedkafka.v1.IListClustersRequest,
+  listConnectClusters(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ICluster[],
-      protos.google.cloud.managedkafka.v1.IListClustersRequest | null,
-      protos.google.cloud.managedkafka.v1.IListClustersResponse,
+      protos.google.cloud.managedkafka.v1.IConnectCluster[],
+      protos.google.cloud.managedkafka.v1.IListConnectClustersRequest | null,
+      protos.google.cloud.managedkafka.v1.IListConnectClustersResponse,
     ]
   >;
-  listClusters(
-    request: protos.google.cloud.managedkafka.v1.IListClustersRequest,
+  listConnectClusters(
+    request: protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListClustersRequest,
-      | protos.google.cloud.managedkafka.v1.IListClustersResponse
+      protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
+      | protos.google.cloud.managedkafka.v1.IListConnectClustersResponse
       | null
       | undefined,
-      protos.google.cloud.managedkafka.v1.ICluster
+      protos.google.cloud.managedkafka.v1.IConnectCluster
     >
   ): void;
-  listClusters(
-    request: protos.google.cloud.managedkafka.v1.IListClustersRequest,
+  listConnectClusters(
+    request: protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
     callback: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListClustersRequest,
-      | protos.google.cloud.managedkafka.v1.IListClustersResponse
+      protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
+      | protos.google.cloud.managedkafka.v1.IListConnectClustersResponse
       | null
       | undefined,
-      protos.google.cloud.managedkafka.v1.ICluster
+      protos.google.cloud.managedkafka.v1.IConnectCluster
     >
   ): void;
-  listClusters(
-    request?: protos.google.cloud.managedkafka.v1.IListClustersRequest,
+  listConnectClusters(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.managedkafka.v1.IListClustersRequest,
-          | protos.google.cloud.managedkafka.v1.IListClustersResponse
+          protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
+          | protos.google.cloud.managedkafka.v1.IListConnectClustersResponse
           | null
           | undefined,
-          protos.google.cloud.managedkafka.v1.ICluster
+          protos.google.cloud.managedkafka.v1.IConnectCluster
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListClustersRequest,
-      | protos.google.cloud.managedkafka.v1.IListClustersResponse
+      protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
+      | protos.google.cloud.managedkafka.v1.IListConnectClustersResponse
       | null
       | undefined,
-      protos.google.cloud.managedkafka.v1.ICluster
+      protos.google.cloud.managedkafka.v1.IConnectCluster
     >
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ICluster[],
-      protos.google.cloud.managedkafka.v1.IListClustersRequest | null,
-      protos.google.cloud.managedkafka.v1.IListClustersResponse,
+      protos.google.cloud.managedkafka.v1.IConnectCluster[],
+      protos.google.cloud.managedkafka.v1.IListConnectClustersRequest | null,
+      protos.google.cloud.managedkafka.v1.IListConnectClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -2152,50 +2284,50 @@ export class ManagedKafkaClient {
     this.initialize();
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.managedkafka.v1.IListClustersRequest,
-          | protos.google.cloud.managedkafka.v1.IListClustersResponse
+          protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
+          | protos.google.cloud.managedkafka.v1.IListConnectClustersResponse
           | null
           | undefined,
-          protos.google.cloud.managedkafka.v1.ICluster
+          protos.google.cloud.managedkafka.v1.IConnectCluster
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listClusters values %j', values);
+          this._log.info('listConnectClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listClusters request %j', request);
+    this._log.info('listConnectClusters request %j', request);
     return this.innerApiCalls
-      .listClusters(request, options, wrappedCallback)
+      .listConnectClusters(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.managedkafka.v1.ICluster[],
-          protos.google.cloud.managedkafka.v1.IListClustersRequest | null,
-          protos.google.cloud.managedkafka.v1.IListClustersResponse,
+          protos.google.cloud.managedkafka.v1.IConnectCluster[],
+          protos.google.cloud.managedkafka.v1.IListConnectClustersRequest | null,
+          protos.google.cloud.managedkafka.v1.IListConnectClustersResponse,
         ]) => {
-          this._log.info('listClusters values %j', response);
+          this._log.info('listConnectClusters values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listClusters`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectClusters`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location whose clusters are to be listed. Structured
-   *   like `projects/{project}/locations/{location}`.
+   *   Required. The parent project/location whose Connect clusters are to be
+   *   listed. Structured like `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of clusters to return. The service may return
-   *   fewer than this value. If unspecified, server will pick an appropriate
-   *   default.
+   *   Optional. The maximum number of Connect clusters to return. The service may
+   *   return fewer than this value. If unspecified, server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListClusters` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListConnectClusters`
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListClusters` must match
-   *   the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListConnectClusters`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter expression for the result.
    * @param {string} [request.orderBy]
@@ -2203,16 +2335,16 @@ export class ManagedKafkaClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.managedkafka.v1.Cluster|Cluster} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.managedkafka.v1.ConnectCluster|ConnectCluster} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listClustersAsync()`
+   *   We recommend using `listConnectClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listClustersStream(
-    request?: protos.google.cloud.managedkafka.v1.IListClustersRequest,
+  listConnectClustersStream(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2223,36 +2355,36 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listClusters'];
+    const defaultCallSettings = this._defaults['listConnectClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    this._log.info('listClusters stream %j', request);
-    return this.descriptors.page.listClusters.createStream(
-      this.innerApiCalls.listClusters as GaxCall,
+    this._log.info('listConnectClusters stream %j', request);
+    return this.descriptors.page.listConnectClusters.createStream(
+      this.innerApiCalls.listConnectClusters as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listClusters`, but returns an iterable object.
+   * Equivalent to `listConnectClusters`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location whose clusters are to be listed. Structured
-   *   like `projects/{project}/locations/{location}`.
+   *   Required. The parent project/location whose Connect clusters are to be
+   *   listed. Structured like `projects/{project}/locations/{location}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of clusters to return. The service may return
-   *   fewer than this value. If unspecified, server will pick an appropriate
-   *   default.
+   *   Optional. The maximum number of Connect clusters to return. The service may
+   *   return fewer than this value. If unspecified, server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListClusters` call.
-   *   Provide this to retrieve the subsequent page.
+   *   Optional. A page token, received from a previous `ListConnectClusters`
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListClusters` must match
-   *   the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListConnectClusters`
+   *   must match the call that provided the page token.
    * @param {string} [request.filter]
    *   Optional. Filter expression for the result.
    * @param {string} [request.orderBy]
@@ -2262,17 +2394,17 @@ export class ManagedKafkaClient {
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.managedkafka.v1.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.managedkafka.v1.ConnectCluster|ConnectCluster}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.list_clusters.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_ListClusters_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.list_connect_clusters.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_ListConnectClusters_async
    */
-  listClustersAsync(
-    request?: protos.google.cloud.managedkafka.v1.IListClustersRequest,
+  listConnectClustersAsync(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.managedkafka.v1.ICluster> {
+  ): AsyncIterable<protos.google.cloud.managedkafka.v1.IConnectCluster> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2281,100 +2413,101 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listClusters'];
+    const defaultCallSettings = this._defaults['listConnectClusters'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    this._log.info('listClusters iterate %j', request);
-    return this.descriptors.page.listClusters.asyncIterate(
-      this.innerApiCalls['listClusters'] as GaxCall,
+    this._log.info('listConnectClusters iterate %j', request);
+    return this.descriptors.page.listConnectClusters.asyncIterate(
+      this.innerApiCalls['listConnectClusters'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.managedkafka.v1.ICluster>;
+    ) as AsyncIterable<protos.google.cloud.managedkafka.v1.IConnectCluster>;
   }
   /**
-   * Lists the topics in a given cluster.
+   * Lists the connectors in a given Connect cluster.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent cluster whose topics are to be listed. Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   *   Required. The parent Connect cluster whose connectors are to be listed.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/connectClusters/{connect_cluster_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of topics to return. The service may return
-   *   fewer than this value. If unset or zero, all topics for the parent is
-   *   returned.
+   *   Optional. The maximum number of connectors to return. The service may
+   *   return fewer than this value. If unspecified, server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListTopics` call.
+   *   Optional. A page token, received from a previous `ListConnectors` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListTopics` must match
-   *   the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListConnectors`
+   *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.managedkafka.v1.Topic|Topic}.
+   *   The first element of the array is Array of {@link protos.google.cloud.managedkafka.v1.Connector|Connector}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listTopicsAsync()`
+   *   We recommend using `listConnectorsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listTopics(
-    request?: protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+  listConnectors(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ITopic[],
-      protos.google.cloud.managedkafka.v1.IListTopicsRequest | null,
-      protos.google.cloud.managedkafka.v1.IListTopicsResponse,
+      protos.google.cloud.managedkafka.v1.IConnector[],
+      protos.google.cloud.managedkafka.v1.IListConnectorsRequest | null,
+      protos.google.cloud.managedkafka.v1.IListConnectorsResponse,
     ]
   >;
-  listTopics(
-    request: protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+  listConnectors(
+    request: protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListTopicsRequest,
-      | protos.google.cloud.managedkafka.v1.IListTopicsResponse
+      protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
+      | protos.google.cloud.managedkafka.v1.IListConnectorsResponse
       | null
       | undefined,
-      protos.google.cloud.managedkafka.v1.ITopic
+      protos.google.cloud.managedkafka.v1.IConnector
     >
   ): void;
-  listTopics(
-    request: protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+  listConnectors(
+    request: protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListTopicsRequest,
-      | protos.google.cloud.managedkafka.v1.IListTopicsResponse
+      protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
+      | protos.google.cloud.managedkafka.v1.IListConnectorsResponse
       | null
       | undefined,
-      protos.google.cloud.managedkafka.v1.ITopic
+      protos.google.cloud.managedkafka.v1.IConnector
     >
   ): void;
-  listTopics(
-    request?: protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+  listConnectors(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.managedkafka.v1.IListTopicsRequest,
-          | protos.google.cloud.managedkafka.v1.IListTopicsResponse
+          protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
+          | protos.google.cloud.managedkafka.v1.IListConnectorsResponse
           | null
           | undefined,
-          protos.google.cloud.managedkafka.v1.ITopic
+          protos.google.cloud.managedkafka.v1.IConnector
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListTopicsRequest,
-      | protos.google.cloud.managedkafka.v1.IListTopicsResponse
+      protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
+      | protos.google.cloud.managedkafka.v1.IListConnectorsResponse
       | null
       | undefined,
-      protos.google.cloud.managedkafka.v1.ITopic
+      protos.google.cloud.managedkafka.v1.IConnector
     >
   ): Promise<
     [
-      protos.google.cloud.managedkafka.v1.ITopic[],
-      protos.google.cloud.managedkafka.v1.IListTopicsRequest | null,
-      protos.google.cloud.managedkafka.v1.IListTopicsResponse,
+      protos.google.cloud.managedkafka.v1.IConnector[],
+      protos.google.cloud.managedkafka.v1.IListConnectorsRequest | null,
+      protos.google.cloud.managedkafka.v1.IListConnectorsResponse,
     ]
   > | void {
     request = request || {};
@@ -2395,63 +2528,64 @@ export class ManagedKafkaClient {
     this.initialize();
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.cloud.managedkafka.v1.IListTopicsRequest,
-          | protos.google.cloud.managedkafka.v1.IListTopicsResponse
+          protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
+          | protos.google.cloud.managedkafka.v1.IListConnectorsResponse
           | null
           | undefined,
-          protos.google.cloud.managedkafka.v1.ITopic
+          protos.google.cloud.managedkafka.v1.IConnector
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTopics values %j', values);
+          this._log.info('listConnectors values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listTopics request %j', request);
+    this._log.info('listConnectors request %j', request);
     return this.innerApiCalls
-      .listTopics(request, options, wrappedCallback)
+      .listConnectors(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.cloud.managedkafka.v1.ITopic[],
-          protos.google.cloud.managedkafka.v1.IListTopicsRequest | null,
-          protos.google.cloud.managedkafka.v1.IListTopicsResponse,
+          protos.google.cloud.managedkafka.v1.IConnector[],
+          protos.google.cloud.managedkafka.v1.IListConnectorsRequest | null,
+          protos.google.cloud.managedkafka.v1.IListConnectorsResponse,
         ]) => {
-          this._log.info('listTopics values %j', response);
+          this._log.info('listConnectors values %j', response);
           return [response, input, output];
         }
       );
   }
 
   /**
-   * Equivalent to `listTopics`, but returns a NodeJS Stream object.
+   * Equivalent to `listConnectors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent cluster whose topics are to be listed. Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   *   Required. The parent Connect cluster whose connectors are to be listed.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/connectClusters/{connect_cluster_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of topics to return. The service may return
-   *   fewer than this value. If unset or zero, all topics for the parent is
-   *   returned.
+   *   Optional. The maximum number of connectors to return. The service may
+   *   return fewer than this value. If unspecified, server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListTopics` call.
+   *   Optional. A page token, received from a previous `ListConnectors` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListTopics` must match
-   *   the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListConnectors`
+   *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.managedkafka.v1.Topic|Topic} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.managedkafka.v1.Connector|Connector} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listTopicsAsync()`
+   *   We recommend using `listConnectorsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listTopicsStream(
-    request?: protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+  listConnectorsStream(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2462,52 +2596,53 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listTopics'];
+    const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    this._log.info('listTopics stream %j', request);
-    return this.descriptors.page.listTopics.createStream(
-      this.innerApiCalls.listTopics as GaxCall,
+    this._log.info('listConnectors stream %j', request);
+    return this.descriptors.page.listConnectors.createStream(
+      this.innerApiCalls.listConnectors as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listTopics`, but returns an iterable object.
+   * Equivalent to `listConnectors`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent cluster whose topics are to be listed. Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
+   *   Required. The parent Connect cluster whose connectors are to be listed.
+   *   Structured like
+   *   `projects/{project}/locations/{location}/connectClusters/{connect_cluster_id}`.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of topics to return. The service may return
-   *   fewer than this value. If unset or zero, all topics for the parent is
-   *   returned.
+   *   Optional. The maximum number of connectors to return. The service may
+   *   return fewer than this value. If unspecified, server will pick an
+   *   appropriate default.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListTopics` call.
+   *   Optional. A page token, received from a previous `ListConnectors` call.
    *   Provide this to retrieve the subsequent page.
    *
-   *   When paginating, all other parameters provided to `ListTopics` must match
-   *   the call that provided the page token.
+   *   When paginating, all other parameters provided to `ListConnectors`
+   *   must match the call that provided the page token.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.managedkafka.v1.Topic|Topic}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.managedkafka.v1.Connector|Connector}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.list_topics.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_ListTopics_async
+   * @example <caption>include:samples/generated/v1/managed_kafka_connect.list_connectors.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedKafkaConnect_ListConnectors_async
    */
-  listTopicsAsync(
-    request?: protos.google.cloud.managedkafka.v1.IListTopicsRequest,
+  listConnectorsAsync(
+    request?: protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.managedkafka.v1.ITopic> {
+  ): AsyncIterable<protos.google.cloud.managedkafka.v1.IConnector> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -2516,253 +2651,15 @@ export class ManagedKafkaClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listTopics'];
+    const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    this._log.info('listTopics iterate %j', request);
-    return this.descriptors.page.listTopics.asyncIterate(
-      this.innerApiCalls['listTopics'] as GaxCall,
+    this._log.info('listConnectors iterate %j', request);
+    return this.descriptors.page.listConnectors.asyncIterate(
+      this.innerApiCalls['listConnectors'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.managedkafka.v1.ITopic>;
-  }
-  /**
-   * Lists the consumer groups in a given cluster.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent cluster whose consumer groups are to be listed.
-   *   Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of consumer groups to return. The service may
-   *   return fewer than this value. If unset or zero, all consumer groups for the
-   *   parent is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListConsumerGroups` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConsumerGroups` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.managedkafka.v1.ConsumerGroup|ConsumerGroup}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listConsumerGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listConsumerGroups(
-    request?: protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.IConsumerGroup[],
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest | null,
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse,
-    ]
-  >;
-  listConsumerGroups(
-    request: protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-      | protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.managedkafka.v1.IConsumerGroup
-    >
-  ): void;
-  listConsumerGroups(
-    request: protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-      | protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.managedkafka.v1.IConsumerGroup
-    >
-  ): void;
-  listConsumerGroups(
-    request?: protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-          | protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.managedkafka.v1.IConsumerGroup
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-      | protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse
-      | null
-      | undefined,
-      protos.google.cloud.managedkafka.v1.IConsumerGroup
-    >
-  ): Promise<
-    [
-      protos.google.cloud.managedkafka.v1.IConsumerGroup[],
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest | null,
-      protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    const wrappedCallback:
-      | PaginationCallback<
-          protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-          | protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse
-          | null
-          | undefined,
-          protos.google.cloud.managedkafka.v1.IConsumerGroup
-        >
-      | undefined = callback
-      ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listConsumerGroups values %j', values);
-          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('listConsumerGroups request %j', request);
-    return this.innerApiCalls
-      .listConsumerGroups(request, options, wrappedCallback)
-      ?.then(
-        ([response, input, output]: [
-          protos.google.cloud.managedkafka.v1.IConsumerGroup[],
-          protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest | null,
-          protos.google.cloud.managedkafka.v1.IListConsumerGroupsResponse,
-        ]) => {
-          this._log.info('listConsumerGroups values %j', response);
-          return [response, input, output];
-        }
-      );
-  }
-
-  /**
-   * Equivalent to `listConsumerGroups`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent cluster whose consumer groups are to be listed.
-   *   Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of consumer groups to return. The service may
-   *   return fewer than this value. If unset or zero, all consumer groups for the
-   *   parent is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListConsumerGroups` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConsumerGroups` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.managedkafka.v1.ConsumerGroup|ConsumerGroup} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConsumerGroupsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   */
-  listConsumerGroupsStream(
-    request?: protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listConsumerGroups'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    this._log.info('listConsumerGroups stream %j', request);
-    return this.descriptors.page.listConsumerGroups.createStream(
-      this.innerApiCalls.listConsumerGroups as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listConsumerGroups`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent cluster whose consumer groups are to be listed.
-   *   Structured like
-   *   `projects/{project}/locations/{location}/clusters/{cluster}`.
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of consumer groups to return. The service may
-   *   return fewer than this value. If unset or zero, all consumer groups for the
-   *   parent is returned.
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListConsumerGroups` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListConsumerGroups` must
-   *   match the call that provided the page token.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.managedkafka.v1.ConsumerGroup|ConsumerGroup}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/managed_kafka.list_consumer_groups.js</caption>
-   * region_tag:managedkafka_v1_generated_ManagedKafka_ListConsumerGroups_async
-   */
-  listConsumerGroupsAsync(
-    request?: protos.google.cloud.managedkafka.v1.IListConsumerGroupsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.managedkafka.v1.IConsumerGroup> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listConsumerGroups'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    this._log.info('listConsumerGroups iterate %j', request);
-    return this.descriptors.page.listConsumerGroups.asyncIterate(
-      this.innerApiCalls['listConsumerGroups'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.managedkafka.v1.IConsumerGroup>;
+    ) as AsyncIterable<protos.google.cloud.managedkafka.v1.IConnector>;
   }
   /**
    * Gets information about a location.
@@ -3448,8 +3345,8 @@ export class ManagedKafkaClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.managedKafkaStub && !this._terminated) {
-      return this.managedKafkaStub.then(stub => {
+    if (this.managedKafkaConnectStub && !this._terminated) {
+      return this.managedKafkaConnectStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

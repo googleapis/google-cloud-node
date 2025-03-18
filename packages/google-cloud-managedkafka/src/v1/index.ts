@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {ManagedKafkaClient} from './managed_kafka_client';
+export {ManagedKafkaConnectClient} from './managed_kafka_connect_client';
