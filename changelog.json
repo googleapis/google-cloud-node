@@ -4,6 +4,5178 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "e73e0d66-7e78-49bc-87af-632e57f8abaa",
+      "createTime": "2025-03-18T00:08:47.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e0f947dd9530a957f0664b14489059b68b59592a",
+          "message": "Add initial files for google.cloud.modelarmor.v1",
+          "issues": [
+            "6053"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "7e625397-85ab-49fa-b37d-e815fdf6535b",
+      "createTime": "2025-03-18T00:08:47.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "b0fd04d7-f1d3-4140-8543-a5e13efb05b6",
+      "createTime": "2025-03-18T00:08:47.513Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "2a031c1c-f903-407b-91ba-bfe791ffee73",
+      "createTime": "2025-03-18T00:08:47.496Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "63055fed-6091-49ee-bd74-8fd3f3dbcfd0",
+      "createTime": "2025-03-18T00:08:47.478Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "d150136e-cf85-4ca7-8405-4405d9964ee8",
+      "createTime": "2025-03-18T00:08:47.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "f50f608a-91b5-4803-a0b9-56cf66b6d86c",
+      "createTime": "2025-03-18T00:08:47.441Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "ebbeb687-fb89-4353-8766-f3c0b023d7be",
+      "createTime": "2025-03-18T00:08:47.423Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "8a824361-18e5-4cb3-a328-7013f8753b5d",
+      "createTime": "2025-03-18T00:08:47.403Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "d2eda198-6993-4de5-8a0d-618130c28145",
+      "createTime": "2025-03-18T00:08:47.386Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "[merchantapi] A new message `SeasonalOverride` is added",
+          "issues": [
+            "6114"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `type` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `type` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `label` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `label` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `countries` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `countries` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "fix",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "An existing optional field `return_policy_uri` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": [],
+          "breakingChangeNote": "An existing optional field `return_policy_uri` is converted to required field in message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy"
+        },
+        {
+          "type": "feat",
+          "sha": "958b317b05196b76c9a62a03649eff5a77bb6a72",
+          "message": "A new field `seasonal_overrides` is added to message .google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy",
+          "issues": []
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "6b875b9d-9670-409d-9efa-74b0cbc38f12",
+      "createTime": "2025-03-18T00:08:47.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "368cd294-a0bb-445e-81db-03864b706186",
+      "createTime": "2025-03-18T00:08:47.348Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "fd2f3b48-eeb0-4060-803c-d44abc517928",
+      "createTime": "2025-03-18T00:08:47.331Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "28cb3d83-95cd-4a36-99aa-081c512e8014",
+      "createTime": "2025-03-18T00:08:47.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "d018eca2-e6e8-4341-a76b-cf65e7e241b1",
+      "createTime": "2025-03-18T00:08:47.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "d6602282-475e-42a6-bd81-ec44eb486ebe",
+      "createTime": "2025-03-18T00:08:47.277Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a8819af1314602e905ef8e582c20b505c466003b",
+          "message": "[storagetransfer,publish,grafeas] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "7e49af63-b630-40f7-bc45-1b201670244c",
+      "createTime": "2025-03-18T00:08:47.260Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "f4b5d4f1-5117-4462-b2b6-06729939f4d2",
+      "createTime": "2025-03-18T00:08:47.241Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8b6b9bcc04dbf1b5891a55e3bda0db28f6ecde93",
+          "message": "[managedkafka] add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "e413fd0b-328c-4f2e-aedb-ef621a9ab5a1",
+      "createTime": "2025-03-18T00:08:47.224Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "9f81df0c-d51e-4dc4-b47c-7c21e8148901",
+      "createTime": "2025-03-18T00:08:47.206Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "f6b08313-7a74-450d-965c-49a1ce7a282a",
+      "createTime": "2025-03-18T00:08:47.186Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "acad666c-c167-49bd-8e00-9d6f4e9c087e",
+      "createTime": "2025-03-18T00:08:47.168Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "cc98b36c-d25c-467a-aa2e-afc116268de3",
+      "createTime": "2025-03-18T00:08:47.151Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "578d03f1-c00d-40fd-8529-4fe477214f7a",
+      "createTime": "2025-03-18T00:08:47.131Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "8404aa9a-82f3-4374-a530-f75ab5aa4743",
+      "createTime": "2025-03-18T00:08:47.113Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "f83ae144-7213-4e41-bb70-58f2afe1e7d5",
+      "createTime": "2025-03-18T00:08:47.095Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupplan proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupplanassociation proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupvault_ba proto",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "b35aae1a0467dba2ab684d4fe6a7cd385046d1a6",
+          "message": "Add backupvault_gce proto",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "b5c99ea7-25b1-4307-8fb7-42628e040e7a",
+      "createTime": "2025-03-18T00:08:47.075Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "f510331f-77f1-443e-a020-9150161da495",
+      "createTime": "2025-03-18T00:08:47.057Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "98b3d409-292f-400d-92c0-e15ec87f9057",
+      "createTime": "2025-03-18T00:08:47.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "20ab12dc-a871-46e9-8daf-36b49a21efdb",
+      "createTime": "2025-03-18T00:08:47.020Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "cb8f09fe-116f-4695-981c-80c26ea9de01",
+      "createTime": "2025-03-18T00:08:47.003Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "062dff45982bfe20c43a4f6298043576ab52b156",
+          "message": "[chat] Addition of space notification setting Chat API",
+          "issues": [
+            "6120"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "dc241355-2695-406e-ae5e-7cf873ff0eb3",
+      "createTime": "2025-03-18T00:08:46.986Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "5b0e97c4-4259-4d54-8d36-d05d07f3a1ba",
+      "createTime": "2025-03-18T00:08:46.966Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "496122f1-30b6-4e66-8a42-b7910ad628c4",
+      "createTime": "2025-03-18T00:08:46.949Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "01bd90df-35b1-4452-a6c2-f811cf2c4886",
+      "createTime": "2025-03-18T00:08:46.931Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "60105b80-b62e-45d7-b4a8-9882fe30f628",
+      "createTime": "2025-03-18T00:08:46.912Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "613b0bcb-fae4-4d1c-806f-97b5b8ee5245",
+      "createTime": "2025-03-18T00:08:46.895Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "769ee260-b03c-46b2-80e4-4cdd94dabd1b",
+      "createTime": "2025-03-18T00:08:46.877Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5d8bb188b7c6f447f75b88e2b0807f89a7c5f6b7",
+          "message": "[cloudquotas] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "9a7caf46-2986-4b20-bc7a-5345c2b2b6d0",
+      "createTime": "2025-03-18T00:08:46.857Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "0d60c377-1a50-4dce-ab38-dc06ba0f5c4b",
+      "createTime": "2025-03-18T00:08:46.840Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "afd4daa6-4158-493d-80d4-e8504790b281",
+      "createTime": "2025-03-18T00:08:46.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "9c0f70e8-31fc-4ec0-adfa-40c3d7cc9310",
+      "createTime": "2025-03-18T00:08:46.804Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "58bd80cf-5c30-4de4-ab45-a6c2232280b5",
+      "createTime": "2025-03-18T00:08:46.787Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "c5db4e03-c8b5-4143-b0b1-0adf1d6846d8",
+      "createTime": "2025-03-18T00:08:46.769Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a8819af1314602e905ef8e582c20b505c466003b",
+          "message": "[storagetransfer,publish,grafeas] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "21d57f5c-bc60-4e30-80d7-f4a6b7df39f0",
+      "createTime": "2025-03-18T00:08:46.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a8819af1314602e905ef8e582c20b505c466003b",
+          "message": "[storagetransfer,publish,grafeas] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "451c9794-7d3b-4a19-b5ec-0f9d1bcd436d",
+      "createTime": "2025-03-18T00:08:46.733Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "f45c2b47-35ef-4258-8e9d-14e2a2c40a8b",
+      "createTime": "2025-03-18T00:08:46.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "1edc62e6-37a1-430f-9022-a2a071cc8050",
+      "createTime": "2025-03-18T00:08:46.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "3ddbf6ce-5cf3-485b-847c-781918d1e092",
+      "createTime": "2025-03-18T00:08:46.679Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ec637db171237d31da01f356af88a243e608fb14",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "00a3b7e6-d9c5-4fca-ba46-5d012d539392",
+      "createTime": "2025-03-18T00:08:46.663Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "388b4e20329b7f6fc0dd061dddff573c45104213",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "7dda5a05-6275-4227-b0d0-cf19be74f3c8",
+      "createTime": "2025-03-18T00:08:46.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "e505bec9-f536-443f-9a4e-5da2017a5fcf",
+      "createTime": "2025-03-18T00:08:46.626Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "9085f6a1-a121-486f-819c-8eba40a5c9f1",
+      "createTime": "2025-03-18T00:08:46.609Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "f3e2cbbe-2e2f-4e9b-a941-588d85c4df14",
+      "createTime": "2025-03-18T00:08:46.590Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "aee30d2f-c39a-40f4-b8eb-9c793426697f",
+      "createTime": "2025-03-18T00:08:46.573Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "d4f29b63-060f-455b-84c3-996dd1c980ff",
+      "createTime": "2025-03-18T00:08:46.556Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "357be782-cf17-4c3b-94c9-c8154eeb63da",
+      "createTime": "2025-03-18T00:08:46.537Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "dda7d685-255a-427c-86d6-4b10559df248",
+      "createTime": "2025-03-18T00:08:46.519Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "8cdfbd07-2a2e-4b38-b3f9-205af5dc6645",
+      "createTime": "2025-03-18T00:08:46.502Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "8b7869fa-5db4-4966-b3f4-84c64c5eccbe",
+      "createTime": "2025-03-18T00:08:46.481Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "0512e037-0126-41b8-bf66-e2c087a83390",
+      "createTime": "2025-03-18T00:08:46.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "36464aff-2af9-4ab7-b0a8-642f50746ac2",
+      "createTime": "2025-03-18T00:08:46.445Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "4e6ea1f8-2b19-42dc-be6e-2850058a3271",
+      "createTime": "2025-03-18T00:08:46.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "042d06cc-116a-42ad-978c-6a2b65a819aa",
+      "createTime": "2025-03-18T00:08:46.407Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "cf6039f9-62e2-4cd8-943a-1b164cab73b9",
+      "createTime": "2025-03-18T00:08:46.390Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "dd2eefb4-c4fe-45e5-a4e9-ac9b47f15627",
+      "createTime": "2025-03-18T00:08:46.371Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "5f6b87ee-cc06-4989-991a-c9e3e3ebc582",
+      "createTime": "2025-03-18T00:08:46.354Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "fb456890-ad81-4d69-ab02-a0d8d34cd074",
+      "createTime": "2025-03-18T00:08:46.336Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "a683a561-41e8-4336-961c-c14924edc307",
+      "createTime": "2025-03-18T00:08:46.316Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "107c8581-704d-455a-b174-c1c14d271bfc",
+      "createTime": "2025-03-18T00:08:46.299Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "61dc159f-d120-4920-a30d-1a60f0ba4680",
+      "createTime": "2025-03-18T00:08:46.281Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "eb4aa245-72dd-4d7c-b1cc-40e6ee71e6e0",
+      "createTime": "2025-03-18T00:08:46.262Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "1cd9a6ff-9330-4ce1-bab4-baa95750b062",
+      "createTime": "2025-03-18T00:08:46.245Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "c06edca281971bf2751dfdb351ffd27a44f2429d",
+          "message": "Migrate translate to Node 18",
+          "issues": [
+            "6152"
+          ],
+          "breakingChangeNote": "migrate translate to Node 18 ([#6152](https://github.com/googleapis/google-cloud-node/issues/6152))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "fc817da4-0737-4aca-b64b-4db27b6ec06c",
+      "createTime": "2025-03-18T00:08:46.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "3bd94e86-896e-434c-a2fc-a678a5d1544e",
+      "createTime": "2025-03-18T00:08:46.209Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "8b413f3b-3981-4495-a879-916c28492556",
+      "createTime": "2025-03-18T00:08:46.193Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "7d0481ec9e9e60e8c1631629439f1314d31858ac",
+          "message": "Migrate tasks to node 18",
+          "issues": [
+            "6123"
+          ],
+          "breakingChangeNote": "migrate tasks to node 18 ([#6123](https://github.com/googleapis/google-cloud-node/issues/6123))"
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "312b2a5e-66e7-4f6a-9ed7-5bc9bd01d6ff",
+      "createTime": "2025-03-18T00:08:46.176Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "29e9afb6-b3bc-4d81-8c56-6f22fc0affbc",
+      "createTime": "2025-03-18T00:08:46.156Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "d347f622-526b-4230-a7f2-5145a20efeea",
+      "createTime": "2025-03-18T00:08:46.138Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "58c30234-88e8-4fde-b6ed-bc78200ef438",
+      "createTime": "2025-03-18T00:08:46.121Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "69fdb989-b64f-4186-b816-ed66ec73e527",
+      "createTime": "2025-03-18T00:08:46.102Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "0e0d2f8b-a690-4167-a024-98bf9c873e05",
+      "createTime": "2025-03-18T00:08:46.085Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "3110b343-1652-4275-89bd-03ca2585c531",
+      "createTime": "2025-03-18T00:08:46.068Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "f0b2d0bf-30b9-4eb6-82c1-17b3ce0f7a57",
+      "createTime": "2025-03-18T00:08:46.049Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "91d79b33-85e6-496b-99db-91c233defe33",
+      "createTime": "2025-03-18T00:08:46.033Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "fce060fa-289f-4282-8788-49cb655bfff3",
+      "createTime": "2025-03-18T00:08:46.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "4b72fec1-4893-4bc4-b44b-53144ed526f0",
+      "createTime": "2025-03-18T00:08:45.997Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "b84db1e1-f738-4c46-acd9-3c737b4c7237",
+      "createTime": "2025-03-18T00:08:45.981Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "63cda58d-c14f-435f-8eba-fa294d1c893e",
+      "createTime": "2025-03-18T00:08:45.964Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "21221b46-4942-4384-b60f-234a74f28397",
+      "createTime": "2025-03-18T00:08:45.946Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "5752d260-90c8-4488-acc1-4bd82ae82d93",
+      "createTime": "2025-03-18T00:08:45.929Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "797b15de-2af5-4c70-8c1e-ec83545521d0",
+      "createTime": "2025-03-18T00:08:45.913Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "a7b3dee0-bf51-496d-b76b-f18b5c8d7978",
+      "createTime": "2025-03-18T00:08:45.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "0009aaf0-f86b-4808-81cb-8fe8c104da47",
+      "createTime": "2025-03-18T00:08:45.875Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9010372cacb146904e56bc919e0c54e6a7b8b678",
+          "message": "[recaptchaenterprise] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "a63a9318-7a97-4036-8eca-d25d74a1d863",
+      "createTime": "2025-03-18T00:08:45.857Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "52c74964-d67b-4c07-9ec5-e49c0e699ae6",
+      "createTime": "2025-03-18T00:08:45.837Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "6b9d0319-2d69-4323-b74e-dc9130ec023c",
+      "createTime": "2025-03-18T00:08:45.820Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "42bd1d1c-ae72-45a1-9693-6211010d9f4b",
+      "createTime": "2025-03-18T00:08:45.803Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "6987bd51-3cdf-4f65-baf0-e507193b7b23",
+      "createTime": "2025-03-18T00:08:45.784Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "877710d1-dfcc-4b5f-bbd0-211e755eef76",
+      "createTime": "2025-03-18T00:08:45.768Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "25eca8d7-3be0-4718-b26b-11f984ac5a26",
+      "createTime": "2025-03-18T00:08:45.751Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b99c5f8269a8401c72e9c913971c7e90467209e2",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "788650af-b8b8-4f24-85df-8f15f48909ab",
+      "createTime": "2025-03-18T00:08:45.732Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "0e6e3222-cec8-451b-9473-814ce2224c34",
+      "createTime": "2025-03-18T00:08:45.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "e45283f2-6cd2-4851-bd9d-466a7bdd3e28",
+      "createTime": "2025-03-18T00:08:45.699Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "2f78688d-926f-404e-9b08-1a8b53b95bd9",
+      "createTime": "2025-03-18T00:08:45.680Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "f40aa79f-a53b-4651-a01b-ad9008644de9",
+      "createTime": "2025-03-18T00:08:45.664Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "a97b17e0-1fde-49af-bf96-2a09681323f2",
+      "createTime": "2025-03-18T00:08:45.647Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "802559e8-5deb-4b23-a00f-1241d0005637",
+      "createTime": "2025-03-18T00:08:45.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "b00b0047-56b4-4bab-b62c-3a2fc9f1c51f",
+      "createTime": "2025-03-18T00:08:45.611Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "4e6b9bae-b3f2-4e6b-b507-12776c8e7110",
+      "createTime": "2025-03-18T00:08:45.595Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "d3812a06-9e9c-4d51-8ba7-e03d7de1f8fd",
+      "createTime": "2025-03-18T00:08:45.576Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "32438ea7-3a67-46e2-8df2-393d524df714",
+      "createTime": "2025-03-18T00:08:45.559Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "278919b8-1bf0-4f21-acf1-9b9c34ac3730",
+      "createTime": "2025-03-18T00:08:45.543Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "88229ca7-ee39-4c8d-b8af-465f91e7d537",
+      "createTime": "2025-03-18T00:08:45.524Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "8601ef71-79ea-4f01-a71c-3c6c5d5cd172",
+      "createTime": "2025-03-18T00:08:45.507Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "c2a4d0de-dc5b-4bc8-b08c-e7f5c2a8f17a",
+      "createTime": "2025-03-18T00:08:45.490Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "3c8ad8e0-d774-4e79-9ac2-3bb0c163597a",
+      "createTime": "2025-03-18T00:08:45.471Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "33b43c7d-9850-4566-b7a8-1a9559d64e60",
+      "createTime": "2025-03-18T00:08:45.453Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "dacf42c9-8b45-452c-ba8e-d352ff30c6cf",
+      "createTime": "2025-03-18T00:08:45.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "c043c2edab6efc9980bceffcf0db888ef8fe41d4",
+          "message": "Adding a state field for AutokeyConfig",
+          "issues": []
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "beb06e27-bdce-4c52-bf89-27f832d95488",
+      "createTime": "2025-03-18T00:08:45.418Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "c8dd40a36be6c1efe12b335af17136605ece7a46",
+          "message": "Adding a state field for AutokeyConfig",
+          "issues": []
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "66affecb-67fc-44cd-b65d-fa1b86635251",
+      "createTime": "2025-03-18T00:08:45.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f96b1f95dd6b7cb89871b56e5ea5aadf5454292",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": [
+            "6140"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "c3d21b4b-c9e0-4d4a-9995-46919f33e6e3",
+      "createTime": "2025-03-18T00:08:45.385Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "2e0634b7-a92d-4a92-9624-f586803f3eed",
+      "createTime": "2025-03-18T00:08:45.365Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "6be17436-b354-4ef5-b62b-a3764851ec42",
+      "createTime": "2025-03-18T00:08:45.348Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "502031af-afbb-4a5a-a937-e4409ec0b61d",
+      "createTime": "2025-03-18T00:08:45.332Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "7cc6c771-a55c-471c-884c-0a3f89f6c9e6",
+      "createTime": "2025-03-18T00:08:45.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "ce551e96-48eb-48a4-a003-2cda07baabca",
+      "createTime": "2025-03-18T00:08:45.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "chore",
+          "sha": "e069a9dca4c60cc3f17c08f424853ebabe9e221f",
+          "message": "[gkeconnect] update copyright year for auto-generated protos",
+          "issues": [
+            "5798"
+          ],
+          "breakingChangeNote": "gRPC support is being removed in favor of HTTP support, as gRPC is not currently supported by Connect Gateway."
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "39d03a85-d40e-4e29-9863-f06cbbe777c6",
+      "createTime": "2025-03-18T00:08:45.282Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "e48bf8f8-3700-443f-bfcf-0d7207d05e37",
+      "createTime": "2025-03-18T00:08:45.264Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "d7beb0f2-3c01-4392-8922-17b57a439d02",
+      "createTime": "2025-03-18T00:08:45.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "9f33d6a030b696d8f42d11054e5896955b3d0720",
+          "message": "[filestore] add PromoteReplica API",
+          "issues": [
+            "6116"
+          ]
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "654694a4-9599-4923-a0f4-9d6b0c524b41",
+      "createTime": "2025-03-18T00:08:45.232Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "7f77891b-b4dd-4104-b3c3-f75165e66c3f",
+      "createTime": "2025-03-18T00:08:45.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "3c0b17af-5238-4332-a204-66bd54709296",
+      "createTime": "2025-03-18T00:08:45.197Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "0634bf3e-2b12-4e04-bbdb-2d38ddb89f82",
+      "createTime": "2025-03-18T00:08:45.182Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "63820dd0-027d-4247-be15-996e0f5a5200",
+      "createTime": "2025-03-18T00:08:45.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "eb997444-de4d-4f2c-b0ee-50484e7ab9eb",
+      "createTime": "2025-03-18T00:08:45.146Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "f40ce3e6-a2dd-4b01-978e-e13ceed1488a",
+      "createTime": "2025-03-18T00:08:45.130Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3e16acaf81165b03bfbb636ca8f24197c971443a",
+          "message": "Update dependency @google-cloud/paginator to v6",
+          "issues": [
+            "6128"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "f5649cd7-0872-49c0-af55-38d3410f286d",
+      "createTime": "2025-03-18T00:08:45.111Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "1d2151e5-f636-4146-b339-7c195ebf8144",
+      "createTime": "2025-03-18T00:08:45.095Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "3f75a90d8f57ea6d896936fb2605db3268069fb9",
+          "message": "[dialogflow-cx] Change client_secret in OAuthConfig from required to optional",
+          "issues": [
+            "6119"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "4cc463f1-6dd1-4345-800f-1ff085bbc648",
+      "createTime": "2025-03-18T00:08:45.078Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "9129d93549847996346f7842ea0a650d5cc493fc",
+          "message": "[dialogflow] Add new RPC IngestContextReferences, GenerateSuggestions",
+          "issues": [
+            "6111"
+          ]
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "ddfe338c-9622-4341-b85f-ee3850aa6187",
+      "createTime": "2025-03-18T00:08:45.059Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "6fadf5e9-a3eb-4e21-931a-047ab0db58a3",
+      "createTime": "2025-03-18T00:08:45.043Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "622f3c56-4ba4-49c7-b04f-d119f3d32060",
+      "createTime": "2025-03-18T00:08:45.027Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "6d15de81-bbcd-4053-b232-f7e443b93259",
+      "createTime": "2025-03-18T00:08:45.008Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "68a5c116-9b42-4e50-9605-50babafa263c",
+      "createTime": "2025-03-18T00:08:44.992Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "284ee6ba-c620-42a4-9f48-9a366a1babad",
+      "createTime": "2025-03-18T00:08:44.975Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "1936a6a8-8a7f-47b0-b771-0e82eb6b835b",
+      "createTime": "2025-03-18T00:08:44.954Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "c2e263e4-367a-421e-b6e8-64486716ca45",
+      "createTime": "2025-03-18T00:08:44.933Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "3ca281f8-fac9-4d2c-a9b4-c622f7815039",
+      "createTime": "2025-03-18T00:08:44.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "b40ea467-bd26-4e48-a861-ff88cc38e5d3",
+      "createTime": "2025-03-18T00:08:44.894Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "a3641a63-1729-4e0e-a7c5-54cfa7706864",
+      "createTime": "2025-03-18T00:08:44.878Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "1c30afca-1dbc-4eee-a9ea-d77535c19a73",
+      "createTime": "2025-03-18T00:08:44.862Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "da744194-af57-457e-addf-936834a485c2",
+      "createTime": "2025-03-18T00:08:44.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "c28f33e1-96df-4e7d-be4f-9420ebddfc23",
+      "createTime": "2025-03-18T00:08:44.816Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "a2dbd18b-77a0-492f-be23-e4d63507823b",
+      "createTime": "2025-03-18T00:08:44.784Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "6c7731ca-1721-417b-b1a9-e7f063a0c5a3",
+      "createTime": "2025-03-18T00:08:44.755Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "d2a8e1aa-cc1b-45ed-a798-842acb56f1e8",
+      "createTime": "2025-03-18T00:08:44.739Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "d251800a-3982-4c57-9710-6c44a648bbb8",
+      "createTime": "2025-03-18T00:08:44.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "be046d4e-e7c4-4157-a306-0c133699e5b8",
+      "createTime": "2025-03-18T00:08:44.705Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "02441a62-c75a-4f2c-88ad-4c92a9e8ee7b",
+      "createTime": "2025-03-18T00:08:44.689Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "6eb20d16-83e7-4cca-94f8-21dbd7e78d46",
+      "createTime": "2025-03-18T00:08:44.673Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e7409c87febcf33359a2d36ae4551f502b8a2f93",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "bf5fc141-219c-4246-8908-e863603fbf56",
+      "createTime": "2025-03-18T00:08:44.655Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "3c0606ba-3421-4e60-9af3-6aa8aad76f7a",
+      "createTime": "2025-03-18T00:08:44.638Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "9eb71d78-eeab-4ddd-8f0d-7f460a10d2cf",
+      "createTime": "2025-03-18T00:08:44.622Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "4b7fa157-13f3-49db-ad43-0561cb925ef8",
+      "createTime": "2025-03-18T00:08:44.604Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "454527f1-a699-440f-a80a-7881d5c86dda",
+      "createTime": "2025-03-18T00:08:44.588Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "81414bc0-2e58-4e7c-865d-0c15b42b630e",
+      "createTime": "2025-03-18T00:08:44.572Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "664d576d-f4f7-42af-a705-5bc1c24af761",
+      "createTime": "2025-03-18T00:08:44.553Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "f87ba094-ff58-4ce8-a09d-def0c139148b",
+      "createTime": "2025-03-18T00:08:44.538Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "9dba74ba-a3de-44fb-abe9-fa0658515347",
+      "createTime": "2025-03-18T00:08:44.522Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "89f302f6-b3db-46a2-a66b-cce3900d76e7",
+      "createTime": "2025-03-18T00:08:44.503Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "1d42e24a-962a-42be-9484-863afa2b4d3d",
+      "createTime": "2025-03-18T00:08:44.488Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "6baafc03-4974-41d0-af3a-488bfeb14db4",
+      "createTime": "2025-03-18T00:08:44.472Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "5ae5428b-f8e2-416c-aef7-cccdc4a5d408",
+      "createTime": "2025-03-18T00:08:44.453Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "5e9fd971-bc2f-4af1-a43e-23ccd91b9cb6",
+      "createTime": "2025-03-18T00:08:44.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "3e556aa7-f39f-45c3-8553-9c9c47e5ac4c",
+      "createTime": "2025-03-18T00:08:44.421Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "31c4486c-d85c-49a1-8727-59fd97559a44",
+      "createTime": "2025-03-18T00:08:44.403Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "d67e453f-ee4a-4ce8-90da-6ca16d4aded5",
+      "createTime": "2025-03-18T00:08:44.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "31d086df-8f0c-40aa-a913-61ec61c90eb4",
+      "createTime": "2025-03-18T00:08:44.370Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "f2af3105-bdd4-47c2-be71-5801f55c1cbc",
+      "createTime": "2025-03-18T00:08:44.352Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32fff6f5e36a33729591a9ba531cc5de07f046cc",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "e2120778-2a91-4d25-b234-1016a4fede7b",
+      "createTime": "2025-03-18T00:08:44.336Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "83c9ade7-9060-4008-bc27-816d33e3f499",
+      "createTime": "2025-03-18T00:08:44.320Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "056a9f04-9726-4054-84a3-abe7524e6105",
+      "createTime": "2025-03-18T00:08:44.300Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "f6613eb5-4a64-41fa-a3e3-69b495bd65bb",
+      "createTime": "2025-03-18T00:08:44.284Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "393d9283-bd7d-4212-82b8-6aaa2e1fd43e",
+      "createTime": "2025-03-18T00:08:44.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "2511874e-bcec-4ab5-aac7-37420a406af6",
+      "createTime": "2025-03-18T00:08:44.247Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "0741db41-7c9d-4577-af30-4321aa186ec8",
+      "createTime": "2025-03-18T00:08:44.231Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "bb68b792-f8e0-4753-b880-b11a92ae6b85",
+      "createTime": "2025-03-18T00:08:44.215Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "4f50ad44-3825-4d3a-99a7-bb72f6d36b24",
+      "createTime": "2025-03-18T00:08:44.196Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "d196e670-f5bf-44a7-b01b-a5e010a84221",
+      "createTime": "2025-03-18T00:08:44.180Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "88d00323-25e7-4d86-8099-3d373c00e651",
+      "createTime": "2025-03-18T00:08:44.163Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "05bab97f-fa2d-4878-818c-334536a99e84",
+      "createTime": "2025-03-18T00:08:44.144Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "0e88da68-2848-4ba9-857f-5d6aa4a3e4da",
+      "createTime": "2025-03-18T00:08:44.127Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "ec43b79e-5725-47d7-9f9e-538307ee08f1",
+      "createTime": "2025-03-18T00:08:44.111Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "3c4351a6-1fee-4291-abec-503cfe8dcef2",
+      "createTime": "2025-03-18T00:08:44.089Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        },
+        {
+          "type": "feat",
+          "sha": "beba36b9f0ef1655bef50d1c063b5f1b54e15a93",
+          "message": "[analytics-admin] added support for KeyEvents AdminAPI ChangeHistory",
+          "issues": [
+            "6113"
+          ]
+        }
+      ],
+      "version": "8.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "4e6653fd-3a93-4c66-84d2-2a3f66a7249d",
+      "createTime": "2025-03-18T00:08:44.070Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "54a73fe74eab0675c006f24d5f1e4574c44d829b",
+          "message": "[Many APIs] add request/response debug logging to gapics, update templates to gax 5",
+          "issues": []
+        },
+        {
+          "type": "chore",
+          "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
+          "message": "Upgrade to Node 18",
+          "issues": [
+            "6096"
+          ],
+          "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
+        }
+      ],
+      "version": "3.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "cb13fdd0-021f-4dbf-abdf-f560bc0fd023",
+      "createTime": "2025-03-18T00:08:44.050Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "ea04ff4128386abfebf1d4de3688d1c4ccde8a5b",
           "message": "Add initial files for google.maps.areainsights.v1",
@@ -40912,5 +46084,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-02-28T17:10:28.034Z"
+  "updateTime": "2025-03-18T00:08:47.591Z"
 }

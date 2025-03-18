@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v3.5.0...bigquery-reservation-v4.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics, update templates to gax 5  ([32fff6f](https://github.com/googleapis/google-cloud-node/commit/32fff6f5e36a33729591a9ba531cc5de07f046cc))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096)) ([eadae64](https://github.com/googleapis/google-cloud-node/commit/eadae64d54e07aa2c65097ea52e65008d4e87436))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v3.4.0...bigquery-reservation-v3.5.0) (2025-02-28)
 
 
