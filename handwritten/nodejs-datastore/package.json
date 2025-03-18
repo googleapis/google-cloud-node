@@ -41,7 +41,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^4.0.0",
+    "@google-cloud/promisify": "4.0.0",
     "arrify": "^2.0.1",
     "async-mutex": "^0.5.0",
     "concat-stream": "^2.0.0",

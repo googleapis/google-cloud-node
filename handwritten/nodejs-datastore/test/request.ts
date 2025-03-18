@@ -1886,7 +1886,7 @@ describe('Request', () => {
   });
 
   describe('requestStream_', () => {
-    let GAX_STREAM: gax.CancellableStream;
+    let GAX_STREAM: gax.CancellableStream = {} as gax.CancellableStream;
     const CONFIG = {};
 
     beforeEach(() => {
