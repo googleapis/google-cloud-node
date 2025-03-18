@@ -52,6 +52,11 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ExportCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "UpgradeCluster": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
