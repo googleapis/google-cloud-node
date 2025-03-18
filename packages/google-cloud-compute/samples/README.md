@@ -236,6 +236,7 @@
   * [Instances.list_referrers](#instances.list_referrers)
   * [Instances.perform_maintenance](#instances.perform_maintenance)
   * [Instances.remove_resource_policies](#instances.remove_resource_policies)
+  * [Instances.report_host_as_faulty](#instances.report_host_as_faulty)
   * [Instances.reset](#instances.reset)
   * [Instances.resume](#instances.resume)
   * [Instances.send_diagnostic_interrupt](#instances.send_diagnostic_interrupt)
@@ -4625,6 +4626,23 @@ __Usage:__
 
 
 `node packages/google-cloud-compute/samples/generated/v1/instances.remove_resource_policies.js`
+
+
+-----
+
+
+
+
+### Instances.report_host_as_faulty
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/instances.report_host_as_faulty.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-compute/samples/generated/v1/instances.report_host_as_faulty.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-compute/samples/generated/v1/instances.report_host_as_faulty.js`
 
 
 -----

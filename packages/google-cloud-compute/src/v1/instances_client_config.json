@@ -100,6 +100,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ReportHostAsFaulty": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Reset": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
