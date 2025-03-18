@@ -11,12 +11,12 @@
                     "csharp_namespace": "Google.Cloud.ManagedKafka.V1",
                     "go_package": "cloud.google.com/go/managedkafka/apiv1/managedkafkapb;managedkafkapb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourcesProto",
+                    "java_outer_classname": "ManagedKafkaConnectProto",
                     "java_package": "com.google.cloud.managedkafka.v1",
                     "php_namespace": "Google\\Cloud\\ManagedKafka\\V1",
                     "ruby_package": "Google::Cloud::ManagedKafka::V1",
-                    "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
-                    "(google.api.resource_definition).pattern": "projects/{project}/secrets/{secret}/versions/{secret_version}"
+                    "(google.api.resource_definition).type": "privateca.googleapis.com/CaPool",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/caPools/{ca_pool}"
                   },
                   "nested": {
                     "ManagedKafka": {
@@ -987,6 +987,851 @@
                           }
                         }
                       }
+                    },
+                    "ConnectCluster": {
+                      "options": {
+                        "(google.api.resource).type": "managedkafka.googleapis.com/ConnectCluster",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/connectClusters/{connect_cluster}",
+                        "(google.api.resource).plural": "connectClusters",
+                        "(google.api.resource).singular": "connectCluster"
+                      },
+                      "oneofs": {
+                        "platformConfig": {
+                          "oneof": [
+                            "gcpConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcpConfig": {
+                          "type": "ConnectGcpConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "kafkaCluster": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "capacityConfig": {
+                          "type": "CapacityConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "config": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "ACTIVE": 2,
+                            "DELETING": 3
+                          }
+                        }
+                      }
+                    },
+                    "ConnectNetworkConfig": {
+                      "fields": {
+                        "primarySubnet": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "additionalSubnets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dnsDomainNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ConnectAccessConfig": {
+                      "fields": {
+                        "networkConfigs": {
+                          "rule": "repeated",
+                          "type": "ConnectNetworkConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ConnectGcpConfig": {
+                      "fields": {
+                        "accessConfig": {
+                          "type": "ConnectAccessConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secretPaths": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        }
+                      }
+                    },
+                    "Connector": {
+                      "options": {
+                        "(google.api.resource).type": "managedkafka.googleapis.com/Connector",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/connectClusters/{connect_cluster}/connectors/{connector}",
+                        "(google.api.resource).plural": "connectors",
+                        "(google.api.resource).singular": "connector"
+                      },
+                      "oneofs": {
+                        "restartPolicy": {
+                          "oneof": [
+                            "taskRestartPolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "taskRestartPolicy": {
+                          "type": "TaskRetryPolicy",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "configs": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "UNASSIGNED": 1,
+                            "RUNNING": 2,
+                            "PAUSED": 3,
+                            "FAILED": 4,
+                            "RESTARTING": 5,
+                            "STOPPED": 6
+                          }
+                        }
+                      }
+                    },
+                    "TaskRetryPolicy": {
+                      "fields": {
+                        "minimumBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maximumBackoff": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ManagedKafkaConnect": {
+                      "options": {
+                        "(google.api.default_host)": "managedkafka.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListConnectClusters": {
+                          "requestType": "ListConnectClustersRequest",
+                          "responseType": "ListConnectClustersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/connectClusters",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/connectClusters"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetConnectCluster": {
+                          "requestType": "GetConnectClusterRequest",
+                          "responseType": "ConnectCluster",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/connectClusters/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/connectClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateConnectCluster": {
+                          "requestType": "CreateConnectClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/connectClusters",
+                            "(google.api.http).body": "connect_cluster",
+                            "(google.api.method_signature)": "parent,connect_cluster,connect_cluster_id",
+                            "(google.longrunning.operation_info).response_type": "ConnectCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/connectClusters",
+                                "body": "connect_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,connect_cluster,connect_cluster_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConnectCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateConnectCluster": {
+                          "requestType": "UpdateConnectClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{connect_cluster.name=projects/*/locations/*/connectClusters/*}",
+                            "(google.api.http).body": "connect_cluster",
+                            "(google.api.method_signature)": "connect_cluster,update_mask",
+                            "(google.longrunning.operation_info).response_type": "ConnectCluster",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{connect_cluster.name=projects/*/locations/*/connectClusters/*}",
+                                "body": "connect_cluster"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "connect_cluster,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ConnectCluster",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConnectCluster": {
+                          "requestType": "DeleteConnectClusterRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/connectClusters/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/connectClusters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListConnectors": {
+                          "requestType": "ListConnectorsRequest",
+                          "responseType": "ListConnectorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/connectClusters/*}/connectors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/connectClusters/*}/connectors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetConnector": {
+                          "requestType": "GetConnectorRequest",
+                          "responseType": "Connector",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateConnector": {
+                          "requestType": "CreateConnectorRequest",
+                          "responseType": "Connector",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/connectClusters/*}/connectors",
+                            "(google.api.http).body": "connector",
+                            "(google.api.method_signature)": "parent,connector,connector_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/connectClusters/*}/connectors",
+                                "body": "connector"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,connector,connector_id"
+                            }
+                          ]
+                        },
+                        "UpdateConnector": {
+                          "requestType": "UpdateConnectorRequest",
+                          "responseType": "Connector",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{connector.name=projects/*/locations/*/connectClusters/*/connectors/*}",
+                            "(google.api.http).body": "connector",
+                            "(google.api.method_signature)": "connector,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{connector.name=projects/*/locations/*/connectClusters/*/connectors/*}",
+                                "body": "connector"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "connector,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteConnector": {
+                          "requestType": "DeleteConnectorRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "PauseConnector": {
+                          "requestType": "PauseConnectorRequest",
+                          "responseType": "PauseConnectorResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:pause",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:pause",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ResumeConnector": {
+                          "requestType": "ResumeConnectorRequest",
+                          "responseType": "ResumeConnectorResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:resume",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:resume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "RestartConnector": {
+                          "requestType": "RestartConnectorRequest",
+                          "responseType": "RestartConnectorResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:restart",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:restart",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "StopConnector": {
+                          "requestType": "StopConnectorRequest",
+                          "responseType": "StopConnectorResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/connectClusters/*/connectors/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetConnectClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/ConnectCluster"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectClusterRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "managedkafka.googleapis.com/ConnectCluster"
+                          }
+                        },
+                        "connectClusterId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "connectCluster": {
+                          "type": "ConnectCluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateConnectClusterRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "connectCluster": {
+                          "type": "ConnectCluster",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteConnectClusterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/ConnectCluster"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListConnectClustersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "managedkafka.googleapis.com/ConnectCluster"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListConnectClustersResponse": {
+                      "fields": {
+                        "connectClusters": {
+                          "rule": "repeated",
+                          "type": "ConnectCluster",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetConnectorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/Connector"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectorRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "managedkafka.googleapis.com/Connector"
+                          }
+                        },
+                        "connectorId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "connector": {
+                          "type": "Connector",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateConnectorRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "connector": {
+                          "type": "Connector",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteConnectorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/Connector"
+                          }
+                        }
+                      }
+                    },
+                    "ListConnectorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "managedkafka.googleapis.com/Connector"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListConnectorsResponse": {
+                      "fields": {
+                        "connectors": {
+                          "rule": "repeated",
+                          "type": "Connector",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PauseConnectorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/Connector"
+                          }
+                        }
+                      }
+                    },
+                    "PauseConnectorResponse": {
+                      "fields": {}
+                    },
+                    "ResumeConnectorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/Connector"
+                          }
+                        }
+                      }
+                    },
+                    "ResumeConnectorResponse": {
+                      "fields": {}
+                    },
+                    "RestartConnectorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/Connector"
+                          }
+                        }
+                      }
+                    },
+                    "RestartConnectorResponse": {
+                      "fields": {}
+                    },
+                    "StopConnectorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "managedkafka.googleapis.com/Connector"
+                          }
+                        }
+                      }
+                    },
+                    "StopConnectorResponse": {
+                      "fields": {}
                     }
                   }
                 }
