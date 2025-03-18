@@ -30738,6 +30738,20 @@ export namespace google {
                     public updateCluster(request: google.cloud.alloydb.v1beta.IUpdateClusterRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ExportCluster.
+                     * @param request ExportClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportCluster(request: google.cloud.alloydb.v1beta.IExportClusterRequest, callback: google.cloud.alloydb.v1beta.AlloyDBAdmin.ExportClusterCallback): void;
+
+                    /**
+                     * Calls ExportCluster.
+                     * @param request ExportClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportCluster(request: google.cloud.alloydb.v1beta.IExportClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls UpgradeCluster.
                      * @param request UpgradeClusterRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -31201,6 +31215,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.alloydb.v1beta.AlloyDBAdmin|exportCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.alloydb.v1beta.AlloyDBAdmin|upgradeCluster}.
@@ -32110,6 +32131,572 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsDestination. */
+                interface IGcsDestination {
+
+                    /** GcsDestination uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a GcsDestination. */
+                class GcsDestination implements IGcsDestination {
+
+                    /**
+                     * Constructs a new GcsDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1beta.IGcsDestination);
+
+                    /** GcsDestination uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new GcsDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsDestination instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1beta.IGcsDestination): google.cloud.alloydb.v1beta.GcsDestination;
+
+                    /**
+                     * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.alloydb.v1beta.GcsDestination.verify|verify} messages.
+                     * @param message GcsDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1beta.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.GcsDestination.verify|verify} messages.
+                     * @param message GcsDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1beta.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.GcsDestination;
+
+                    /**
+                     * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.GcsDestination;
+
+                    /**
+                     * Verifies a GcsDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.GcsDestination;
+
+                    /**
+                     * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                     * @param message GcsDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1beta.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportClusterRequest. */
+                interface IExportClusterRequest {
+
+                    /** ExportClusterRequest gcsDestination */
+                    gcsDestination?: (google.cloud.alloydb.v1beta.IGcsDestination|null);
+
+                    /** ExportClusterRequest csvExportOptions */
+                    csvExportOptions?: (google.cloud.alloydb.v1beta.ExportClusterRequest.ICsvExportOptions|null);
+
+                    /** ExportClusterRequest sqlExportOptions */
+                    sqlExportOptions?: (google.cloud.alloydb.v1beta.ExportClusterRequest.ISqlExportOptions|null);
+
+                    /** ExportClusterRequest name */
+                    name?: (string|null);
+
+                    /** ExportClusterRequest database */
+                    database?: (string|null);
+                }
+
+                /** Represents an ExportClusterRequest. */
+                class ExportClusterRequest implements IExportClusterRequest {
+
+                    /**
+                     * Constructs a new ExportClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1beta.IExportClusterRequest);
+
+                    /** ExportClusterRequest gcsDestination. */
+                    public gcsDestination?: (google.cloud.alloydb.v1beta.IGcsDestination|null);
+
+                    /** ExportClusterRequest csvExportOptions. */
+                    public csvExportOptions?: (google.cloud.alloydb.v1beta.ExportClusterRequest.ICsvExportOptions|null);
+
+                    /** ExportClusterRequest sqlExportOptions. */
+                    public sqlExportOptions?: (google.cloud.alloydb.v1beta.ExportClusterRequest.ISqlExportOptions|null);
+
+                    /** ExportClusterRequest name. */
+                    public name: string;
+
+                    /** ExportClusterRequest database. */
+                    public database: string;
+
+                    /** ExportClusterRequest destination. */
+                    public destination?: "gcsDestination";
+
+                    /** ExportClusterRequest exportOptions. */
+                    public exportOptions?: ("csvExportOptions"|"sqlExportOptions");
+
+                    /**
+                     * Creates a new ExportClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1beta.IExportClusterRequest): google.cloud.alloydb.v1beta.ExportClusterRequest;
+
+                    /**
+                     * Encodes the specified ExportClusterRequest message. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterRequest.verify|verify} messages.
+                     * @param message ExportClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1beta.IExportClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportClusterRequest message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterRequest.verify|verify} messages.
+                     * @param message ExportClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1beta.IExportClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.ExportClusterRequest;
+
+                    /**
+                     * Decodes an ExportClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.ExportClusterRequest;
+
+                    /**
+                     * Verifies an ExportClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.ExportClusterRequest;
+
+                    /**
+                     * Creates a plain object from an ExportClusterRequest message. Also converts values to other types if specified.
+                     * @param message ExportClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1beta.ExportClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExportClusterRequest {
+
+                    /** Properties of a CsvExportOptions. */
+                    interface ICsvExportOptions {
+
+                        /** CsvExportOptions selectQuery */
+                        selectQuery?: (string|null);
+
+                        /** CsvExportOptions fieldDelimiter */
+                        fieldDelimiter?: (string|null);
+
+                        /** CsvExportOptions quoteCharacter */
+                        quoteCharacter?: (string|null);
+
+                        /** CsvExportOptions escapeCharacter */
+                        escapeCharacter?: (string|null);
+                    }
+
+                    /** Represents a CsvExportOptions. */
+                    class CsvExportOptions implements ICsvExportOptions {
+
+                        /**
+                         * Constructs a new CsvExportOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.ExportClusterRequest.ICsvExportOptions);
+
+                        /** CsvExportOptions selectQuery. */
+                        public selectQuery: string;
+
+                        /** CsvExportOptions fieldDelimiter. */
+                        public fieldDelimiter: string;
+
+                        /** CsvExportOptions quoteCharacter. */
+                        public quoteCharacter: string;
+
+                        /** CsvExportOptions escapeCharacter. */
+                        public escapeCharacter: string;
+
+                        /**
+                         * Creates a new CsvExportOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CsvExportOptions instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.ExportClusterRequest.ICsvExportOptions): google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions;
+
+                        /**
+                         * Encodes the specified CsvExportOptions message. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions.verify|verify} messages.
+                         * @param message CsvExportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.ExportClusterRequest.ICsvExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CsvExportOptions message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions.verify|verify} messages.
+                         * @param message CsvExportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.ExportClusterRequest.ICsvExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CsvExportOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CsvExportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions;
+
+                        /**
+                         * Decodes a CsvExportOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CsvExportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions;
+
+                        /**
+                         * Verifies a CsvExportOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CsvExportOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CsvExportOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions;
+
+                        /**
+                         * Creates a plain object from a CsvExportOptions message. Also converts values to other types if specified.
+                         * @param message CsvExportOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CsvExportOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CsvExportOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SqlExportOptions. */
+                    interface ISqlExportOptions {
+
+                        /** SqlExportOptions tables */
+                        tables?: (string[]|null);
+
+                        /** SqlExportOptions schemaOnly */
+                        schemaOnly?: (boolean|null);
+
+                        /** SqlExportOptions cleanTargetObjects */
+                        cleanTargetObjects?: (boolean|null);
+
+                        /** SqlExportOptions ifExistTargetObjects */
+                        ifExistTargetObjects?: (boolean|null);
+                    }
+
+                    /** Represents a SqlExportOptions. */
+                    class SqlExportOptions implements ISqlExportOptions {
+
+                        /**
+                         * Constructs a new SqlExportOptions.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.ExportClusterRequest.ISqlExportOptions);
+
+                        /** SqlExportOptions tables. */
+                        public tables: string[];
+
+                        /** SqlExportOptions schemaOnly. */
+                        public schemaOnly?: (boolean|null);
+
+                        /** SqlExportOptions cleanTargetObjects. */
+                        public cleanTargetObjects?: (boolean|null);
+
+                        /** SqlExportOptions ifExistTargetObjects. */
+                        public ifExistTargetObjects?: (boolean|null);
+
+                        /** SqlExportOptions _schemaOnly. */
+                        public _schemaOnly?: "schemaOnly";
+
+                        /** SqlExportOptions _cleanTargetObjects. */
+                        public _cleanTargetObjects?: "cleanTargetObjects";
+
+                        /** SqlExportOptions _ifExistTargetObjects. */
+                        public _ifExistTargetObjects?: "ifExistTargetObjects";
+
+                        /**
+                         * Creates a new SqlExportOptions instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SqlExportOptions instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.ExportClusterRequest.ISqlExportOptions): google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions;
+
+                        /**
+                         * Encodes the specified SqlExportOptions message. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions.verify|verify} messages.
+                         * @param message SqlExportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.ExportClusterRequest.ISqlExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SqlExportOptions message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions.verify|verify} messages.
+                         * @param message SqlExportOptions message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.ExportClusterRequest.ISqlExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SqlExportOptions message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SqlExportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions;
+
+                        /**
+                         * Decodes a SqlExportOptions message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SqlExportOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions;
+
+                        /**
+                         * Verifies a SqlExportOptions message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SqlExportOptions message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SqlExportOptions
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions;
+
+                        /**
+                         * Creates a plain object from a SqlExportOptions message. Also converts values to other types if specified.
+                         * @param message SqlExportOptions
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SqlExportOptions to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SqlExportOptions
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExportClusterResponse. */
+                interface IExportClusterResponse {
+
+                    /** ExportClusterResponse gcsDestination */
+                    gcsDestination?: (google.cloud.alloydb.v1beta.IGcsDestination|null);
+                }
+
+                /** Represents an ExportClusterResponse. */
+                class ExportClusterResponse implements IExportClusterResponse {
+
+                    /**
+                     * Constructs a new ExportClusterResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1beta.IExportClusterResponse);
+
+                    /** ExportClusterResponse gcsDestination. */
+                    public gcsDestination?: (google.cloud.alloydb.v1beta.IGcsDestination|null);
+
+                    /** ExportClusterResponse destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new ExportClusterResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportClusterResponse instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1beta.IExportClusterResponse): google.cloud.alloydb.v1beta.ExportClusterResponse;
+
+                    /**
+                     * Encodes the specified ExportClusterResponse message. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterResponse.verify|verify} messages.
+                     * @param message ExportClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1beta.IExportClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportClusterResponse message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.ExportClusterResponse.verify|verify} messages.
+                     * @param message ExportClusterResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1beta.IExportClusterResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportClusterResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.ExportClusterResponse;
+
+                    /**
+                     * Decodes an ExportClusterResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportClusterResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.ExportClusterResponse;
+
+                    /**
+                     * Verifies an ExportClusterResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportClusterResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportClusterResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.ExportClusterResponse;
+
+                    /**
+                     * Creates a plain object from an ExportClusterResponse message. Also converts values to other types if specified.
+                     * @param message ExportClusterResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1beta.ExportClusterResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportClusterResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportClusterResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

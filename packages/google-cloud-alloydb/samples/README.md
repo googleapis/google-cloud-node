@@ -93,6 +93,7 @@
   * [Alloy_d_b_admin.delete_instance](#alloy_d_b_admin.delete_instance)
   * [Alloy_d_b_admin.delete_user](#alloy_d_b_admin.delete_user)
   * [Alloy_d_b_admin.execute_sql](#alloy_d_b_admin.execute_sql)
+  * [Alloy_d_b_admin.export_cluster](#alloy_d_b_admin.export_cluster)
   * [Alloy_d_b_admin.failover_instance](#alloy_d_b_admin.failover_instance)
   * [Alloy_d_b_admin.generate_client_certificate](#alloy_d_b_admin.generate_client_certificate)
   * [Alloy_d_b_admin.get_backup](#alloy_d_b_admin.get_backup)
@@ -1503,6 +1504,23 @@ __Usage:__
 
 
 `node packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.execute_sql.js`
+
+
+-----
+
+
+
+
+### Alloy_d_b_admin.export_cluster
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.export_cluster.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.export_cluster.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1beta/alloy_d_b_admin.export_cluster.js`
 
 
 -----
