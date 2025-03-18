@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START workflows_v1_generated_Workflows_ListWorkflows_async]
+function main(name) {
+  // [START workflows_v1_generated_Workflows_ListWorkflowRevisions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,21 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Project and location from which the workflows should be listed.
-   *  Format: projects/{project}/locations/{location}
+   *  Required. Workflow for which the revisions should be listed.
+   *  Format: projects/{project}/locations/{location}/workflows/{workflow}
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Maximum number of workflows to return per call. The service might return
-   *  fewer than this value even if not at the end of the collection. If a value
-   *  is not specified, a default value of 500 is used. The maximum permitted
-   *  value is 1000 and values greater than 1000 are coerced down to 1000.
+   *  The maximum number of revisions to return per page. If a value is not
+   *  specified, a default value of 20 is used. The maximum permitted value is
+   *  100. Values greater than 100 are coerced down to 100.
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListWorkflows` call.
+   *  The page token, received from a previous ListWorkflowRevisions call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to `ListWorkflows` must
-   *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'
-  /**
-   *  Filter to restrict results to specific workflows.
-   *  For details, see <a href="https://google.aip.dev/160"
-   *  class="external">AIP-160</a>.
-   *  For example, if you are using the Google APIs Explorer:
-   *  `state="SUCCEEDED"`
-   *  or
-   *  `createTime>"2023-08-01" AND state="FAILED"`
-   */
-  // const filter = 'abc123'
-  /**
-   *  Comma-separated list of fields that specify the order of the results.
-   *  Default sorting order for a field is ascending. To specify descending order
-   *  for a field, append a "desc" suffix.
-   *  If not specified, the results are returned in an unspecified order.
-   */
-  // const orderBy = 'abc123'
 
   // Imports the Workflows library
   const {WorkflowsClient} = require('@google-cloud/workflows').v1;
@@ -71,21 +51,21 @@ function main(parent) {
   // Instantiates a client
   const workflowsClient = new WorkflowsClient();
 
-  async function callListWorkflows() {
+  async function callListWorkflowRevisions() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = workflowsClient.listWorkflowsAsync(request);
+    const iterable = workflowsClient.listWorkflowRevisionsAsync(request);
     for await (const response of iterable) {
         console.log(response);
     }
   }
 
-  callListWorkflows();
-  // [END workflows_v1_generated_Workflows_ListWorkflows_async]
+  callListWorkflowRevisions();
+  // [END workflows_v1_generated_Workflows_ListWorkflowRevisions_async]
 }
 
 process.on('unhandledRejection', err => {

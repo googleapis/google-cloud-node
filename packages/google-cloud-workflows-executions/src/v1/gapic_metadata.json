@@ -36,6 +36,13 @@
                 "listWorkflowsStream",
                 "listWorkflowsAsync"
               ]
+            },
+            "ListWorkflowRevisions": {
+              "methods": [
+                "listWorkflowRevisions",
+                "listWorkflowRevisionsStream",
+                "listWorkflowRevisionsAsync"
+              ]
             }
           }
         },
@@ -67,6 +74,13 @@
                 "listWorkflows",
                 "listWorkflowsStream",
                 "listWorkflowsAsync"
+              ]
+            },
+            "ListWorkflowRevisions": {
+              "methods": [
+                "listWorkflowRevisions",
+                "listWorkflowRevisionsStream",
+                "listWorkflowRevisionsAsync"
               ]
             }
           }

@@ -714,8 +714,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowsProto",
                     "java_package": "com.google.cloud.workflows.v1",
-                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}"
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}"
                   },
                   "nested": {
                     "Workflows": {
@@ -841,6 +841,20 @@
                               }
                             }
                           ]
+                        },
+                        "ListWorkflowRevisions": {
+                          "requestType": "ListWorkflowRevisionsRequest",
+                          "responseType": "ListWorkflowRevisionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/workflows/*}:listRevisions"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/workflows/*}:listRevisions"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -939,6 +953,47 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "executionHistoryLevel": {
+                          "type": "ExecutionHistoryLevel",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "allKmsKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "allKmsKeysVersions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "cryptoKeyVersion": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "tags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1122,6 +1177,46 @@
                           "type": "string",
                           "id": 5
                         }
+                      }
+                    },
+                    "ListWorkflowRevisionsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "workflows.googleapis.com/Workflow"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListWorkflowRevisionsResponse": {
+                      "fields": {
+                        "workflows": {
+                          "rule": "repeated",
+                          "type": "Workflow",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExecutionHistoryLevel": {
+                      "values": {
+                        "EXECUTION_HISTORY_LEVEL_UNSPECIFIED": 0,
+                        "EXECUTION_HISTORY_BASIC": 1,
+                        "EXECUTION_HISTORY_DETAILED": 2
                       }
                     }
                   }
