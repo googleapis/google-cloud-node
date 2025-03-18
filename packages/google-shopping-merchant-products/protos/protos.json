@@ -40,6 +40,26 @@
                                 }
                               ]
                             },
+                            "UpdateProductInput": {
+                              "requestType": "UpdateProductInputRequest",
+                              "responseType": "ProductInput",
+                              "options": {
+                                "(google.api.http).patch": "/products/v1beta/{product_input.name=accounts/*/productInputs/*}",
+                                "(google.api.http).body": "product_input",
+                                "(google.api.method_signature)": "product_input,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/products/v1beta/{product_input.name=accounts/*/productInputs/*}",
+                                    "body": "product_input"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "product_input,update_mask"
+                                }
+                              ]
+                            },
                             "DeleteProductInput": {
                               "requestType": "DeleteProductInputRequest",
                               "responseType": "google.protobuf.Empty",
@@ -157,6 +177,31 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "dataSource": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateProductInputRequest": {
+                          "fields": {
+                            "productInput": {
+                              "type": "ProductInput",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "dataSource": {
@@ -1000,6 +1045,11 @@
                             "autoPricingMinPrice": {
                               "type": "google.shopping.type.Price",
                               "id": 124
+                            },
+                            "sustainabilityIncentives": {
+                              "rule": "repeated",
+                              "type": "ProductSustainabilityIncentive",
+                              "id": 138
                             }
                           }
                         },
@@ -1696,6 +1746,47 @@
                               "id": 8,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ProductSustainabilityIncentive": {
+                          "oneofs": {
+                            "value": {
+                              "oneof": [
+                                "amount",
+                                "percentage"
+                              ]
+                            },
+                            "_type": {
+                              "oneof": [
+                                "type"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "amount": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2
+                            },
+                            "percentage": {
+                              "type": "double",
+                              "id": 3
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "EV_TAX_CREDIT": 1,
+                                "EV_PRICE_DISCOUNT": 2
                               }
                             }
                           }
@@ -3824,6 +3915,15 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
             },
             "Timestamp": {
               "fields": {

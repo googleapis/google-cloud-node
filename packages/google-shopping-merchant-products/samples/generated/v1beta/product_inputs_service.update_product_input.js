@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, productInput, dataSource) {
-  // [START merchantapi_v1beta_generated_ProductInputsService_InsertProductInput_async]
+function main(productInput, dataSource) {
+  // [START merchantapi_v1beta_generated_ProductInputsService_UpdateProductInput_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,26 @@ function main(parent, productInput, dataSource) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account where this product will be inserted.
-   *  Format: accounts/{account}
-   */
-  // const parent = 'abc123'
-  /**
-   *  Required. The product input to insert.
+   *  Required. The product input resource to update. Information you submit will
+   *  be applied to the processed product as well.
    */
   // const productInput = {}
   /**
-   *  Required. The primary or supplemental product data source name. If the
-   *  product already exists and data source provided is different, then the
-   *  product will be moved to a new data source.
+   *  Optional. The list of product attributes to be updated.
+   *  If the update mask is omitted, then it is treated as implied field mask
+   *  equivalent to all fields that are populated (have a non-empty value).
+   *  Attributes specified in the update mask without a value specified in the
+   *  body will be deleted from the product.
+   *  Update mask can only be specified for top level fields in
+   *  attributes and custom attributes.
+   *  To specify the update mask for custom attributes you need to add the
+   *  `custom_attribute.` prefix.
+   *  Providing special "*" value for full product replacement is not supported.
+   */
+  // const updateMask = {}
+  /**
+   *  Required. The primary or supplemental product data source where
+   *  `data_source` name identifies the product input to be updated.
    *  Only API data sources are supported.
    *  Format: `accounts/{account}/dataSources/{datasource}`.
    */
@@ -52,21 +60,20 @@ function main(parent, productInput, dataSource) {
   // Instantiates a client
   const productsClient = new ProductInputsServiceClient();
 
-  async function callInsertProductInput() {
+  async function callUpdateProductInput() {
     // Construct request
     const request = {
-      parent,
       productInput,
       dataSource,
     };
 
     // Run request
-    const response = await productsClient.insertProductInput(request);
+    const response = await productsClient.updateProductInput(request);
     console.log(response);
   }
 
-  callInsertProductInput();
-  // [END merchantapi_v1beta_generated_ProductInputsService_InsertProductInput_async]
+  callUpdateProductInput();
+  // [END merchantapi_v1beta_generated_ProductInputsService_UpdateProductInput_async]
 }
 
 process.on('unhandledRejection', err => {

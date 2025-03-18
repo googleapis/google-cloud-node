@@ -64,6 +64,20 @@ export namespace google {
                         public insertProductInput(request: google.shopping.merchant.products.v1beta.IInsertProductInputRequest): Promise<google.shopping.merchant.products.v1beta.ProductInput>;
 
                         /**
+                         * Calls UpdateProductInput.
+                         * @param request UpdateProductInputRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ProductInput
+                         */
+                        public updateProductInput(request: google.shopping.merchant.products.v1beta.IUpdateProductInputRequest, callback: google.shopping.merchant.products.v1beta.ProductInputsService.UpdateProductInputCallback): void;
+
+                        /**
+                         * Calls UpdateProductInput.
+                         * @param request UpdateProductInputRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateProductInput(request: google.shopping.merchant.products.v1beta.IUpdateProductInputRequest): Promise<google.shopping.merchant.products.v1beta.ProductInput>;
+
+                        /**
                          * Calls DeleteProductInput.
                          * @param request DeleteProductInputRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Empty
@@ -86,6 +100,13 @@ export namespace google {
                          * @param [response] ProductInput
                          */
                         type InsertProductInputCallback = (error: (Error|null), response?: google.shopping.merchant.products.v1beta.ProductInput) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.products.v1beta.ProductInputsService|updateProductInput}.
+                         * @param error Error, if any
+                         * @param [response] ProductInput
+                         */
+                        type UpdateProductInputCallback = (error: (Error|null), response?: google.shopping.merchant.products.v1beta.ProductInput) => void;
 
                         /**
                          * Callback as used by {@link google.shopping.merchant.products.v1beta.ProductInputsService|deleteProductInput}.
@@ -346,6 +367,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for InsertProductInputRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateProductInputRequest. */
+                    interface IUpdateProductInputRequest {
+
+                        /** UpdateProductInputRequest productInput */
+                        productInput?: (google.shopping.merchant.products.v1beta.IProductInput|null);
+
+                        /** UpdateProductInputRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateProductInputRequest dataSource */
+                        dataSource?: (string|null);
+                    }
+
+                    /** Represents an UpdateProductInputRequest. */
+                    class UpdateProductInputRequest implements IUpdateProductInputRequest {
+
+                        /**
+                         * Constructs a new UpdateProductInputRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.products.v1beta.IUpdateProductInputRequest);
+
+                        /** UpdateProductInputRequest productInput. */
+                        public productInput?: (google.shopping.merchant.products.v1beta.IProductInput|null);
+
+                        /** UpdateProductInputRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateProductInputRequest dataSource. */
+                        public dataSource: string;
+
+                        /**
+                         * Creates a new UpdateProductInputRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateProductInputRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.products.v1beta.IUpdateProductInputRequest): google.shopping.merchant.products.v1beta.UpdateProductInputRequest;
+
+                        /**
+                         * Encodes the specified UpdateProductInputRequest message. Does not implicitly {@link google.shopping.merchant.products.v1beta.UpdateProductInputRequest.verify|verify} messages.
+                         * @param message UpdateProductInputRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.products.v1beta.IUpdateProductInputRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateProductInputRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1beta.UpdateProductInputRequest.verify|verify} messages.
+                         * @param message UpdateProductInputRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.products.v1beta.IUpdateProductInputRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateProductInputRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateProductInputRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1beta.UpdateProductInputRequest;
+
+                        /**
+                         * Decodes an UpdateProductInputRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateProductInputRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1beta.UpdateProductInputRequest;
+
+                        /**
+                         * Verifies an UpdateProductInputRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateProductInputRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateProductInputRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1beta.UpdateProductInputRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateProductInputRequest message. Also converts values to other types if specified.
+                         * @param message UpdateProductInputRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.products.v1beta.UpdateProductInputRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateProductInputRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateProductInputRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -740,6 +870,9 @@ export namespace google {
 
                         /** Attributes autoPricingMinPrice */
                         autoPricingMinPrice?: (google.shopping.type.IPrice|null);
+
+                        /** Attributes sustainabilityIncentives */
+                        sustainabilityIncentives?: (google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive[]|null);
                     }
 
                     /** Represents an Attributes. */
@@ -1026,6 +1159,9 @@ export namespace google {
 
                         /** Attributes autoPricingMinPrice. */
                         public autoPricingMinPrice?: (google.shopping.type.IPrice|null);
+
+                        /** Attributes sustainabilityIncentives. */
+                        public sustainabilityIncentives: google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive[];
 
                         /** Attributes _identifierExists. */
                         public _identifierExists?: "identifierExists";
@@ -3778,6 +3914,131 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductSustainabilityIncentive. */
+                    interface IProductSustainabilityIncentive {
+
+                        /** ProductSustainabilityIncentive amount */
+                        amount?: (google.shopping.type.IPrice|null);
+
+                        /** ProductSustainabilityIncentive percentage */
+                        percentage?: (number|null);
+
+                        /** ProductSustainabilityIncentive type */
+                        type?: (google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type|keyof typeof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type|null);
+                    }
+
+                    /** Represents a ProductSustainabilityIncentive. */
+                    class ProductSustainabilityIncentive implements IProductSustainabilityIncentive {
+
+                        /**
+                         * Constructs a new ProductSustainabilityIncentive.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive);
+
+                        /** ProductSustainabilityIncentive amount. */
+                        public amount?: (google.shopping.type.IPrice|null);
+
+                        /** ProductSustainabilityIncentive percentage. */
+                        public percentage?: (number|null);
+
+                        /** ProductSustainabilityIncentive type. */
+                        public type?: (google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type|keyof typeof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type|null);
+
+                        /** ProductSustainabilityIncentive value. */
+                        public value?: ("amount"|"percentage");
+
+                        /** ProductSustainabilityIncentive _type. */
+                        public _type?: "type";
+
+                        /**
+                         * Creates a new ProductSustainabilityIncentive instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductSustainabilityIncentive instance
+                         */
+                        public static create(properties?: google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive): google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive;
+
+                        /**
+                         * Encodes the specified ProductSustainabilityIncentive message. Does not implicitly {@link google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.verify|verify} messages.
+                         * @param message ProductSustainabilityIncentive message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductSustainabilityIncentive message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.verify|verify} messages.
+                         * @param message ProductSustainabilityIncentive message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductSustainabilityIncentive message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductSustainabilityIncentive
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive;
+
+                        /**
+                         * Decodes a ProductSustainabilityIncentive message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductSustainabilityIncentive
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive;
+
+                        /**
+                         * Verifies a ProductSustainabilityIncentive message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductSustainabilityIncentive message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductSustainabilityIncentive
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive;
+
+                        /**
+                         * Creates a plain object from a ProductSustainabilityIncentive message. Also converts values to other types if specified.
+                         * @param message ProductSustainabilityIncentive
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductSustainabilityIncentive to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductSustainabilityIncentive
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductSustainabilityIncentive {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            EV_TAX_CREDIT = 1,
+                            EV_PRICE_DISCOUNT = 2
+                        }
                     }
 
                     /** Represents a ProductsService */
@@ -11385,6 +11646,103 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
