@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-accounts",
-        "version": "2.0.0",
+        "version": "1.0.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -555,6 +555,90 @@
                     "service": {
                         "shortName": "AutofeedSettingsService",
                         "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_AutomaticImprovementsService_GetAutomaticImprovements_async",
+            "title": "AccountIssueService getAutomaticImprovements Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the automatic improvements of an account.",
+            "canonical": true,
+            "file": "automatic_improvements_service.get_automatic_improvements.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAutomaticImprovements",
+                "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.GetAutomaticImprovements",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.AutomaticImprovements",
+                "client": {
+                    "shortName": "AutomaticImprovementsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAutomaticImprovements",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.GetAutomaticImprovements",
+                    "service": {
+                        "shortName": "AutomaticImprovementsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_AutomaticImprovementsService_UpdateAutomaticImprovements_async",
+            "title": "AccountIssueService updateAutomaticImprovements Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the automatic improvements of an account.",
+            "canonical": true,
+            "file": "automatic_improvements_service.update_automatic_improvements.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateAutomaticImprovements",
+                "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.UpdateAutomaticImprovements",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "automatic_improvements",
+                        "type": ".google.shopping.merchant.accounts.v1beta.AutomaticImprovements"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.AutomaticImprovements",
+                "client": {
+                    "shortName": "AutomaticImprovementsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateAutomaticImprovements",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.UpdateAutomaticImprovements",
+                    "service": {
+                        "shortName": "AutomaticImprovementsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService"
                     }
                 }
             }

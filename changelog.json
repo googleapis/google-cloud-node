@@ -4,6 +4,20 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
           "message": "Upgrade to Node 18",
@@ -13,11 +27,28 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/areainsights",
-      "id": "efd948c3-d8e9-4b77-8f16-0063497a18d0",
-      "createTime": "2025-03-12T07:51:20.369Z"
+      "id": "e73e0d66-7e78-49bc-87af-632e57f8abaa",
+      "createTime": "2025-03-18T00:08:47.591Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e0f947dd9530a957f0664b14489059b68b59592a",
+          "message": "Add initial files for google.cloud.modelarmor.v1",
+          "issues": [
+            "6053"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "7e625397-85ab-49fa-b37d-e815fdf6535b",
+      "createTime": "2025-03-18T00:08:47.544Z"
     },
     {
       "changes": [
@@ -37,11 +68,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/parametermanager",
-      "id": "b80a0507-7fed-4d74-80e2-1cf6f562b9a5",
-      "createTime": "2025-03-12T07:51:20.349Z"
+      "id": "b0fd04d7-f1d3-4140-8543-a5e13efb05b6",
+      "createTime": "2025-03-18T00:08:47.513Z"
     },
     {
       "changes": [
@@ -63,11 +94,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/memorystore",
-      "id": "56ce2c66-0275-4781-8d91-8870d51066ff",
-      "createTime": "2025-03-12T07:51:20.331Z"
+      "id": "2a031c1c-f903-407b-91ba-bfe791ffee73",
+      "createTime": "2025-03-18T00:08:47.496Z"
     },
     {
       "changes": [
@@ -87,11 +118,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/reviews",
-      "id": "5e6929e5-69a5-43e2-92d5-9ac180cc5f70",
-      "createTime": "2025-03-12T07:51:20.313Z"
+      "id": "63055fed-6091-49ee-bd74-8fd3f3dbcfd0",
+      "createTime": "2025-03-18T00:08:47.478Z"
     },
     {
       "changes": [
@@ -111,11 +142,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-ads/admanager",
-      "id": "b722cd3e-b130-40bb-8673-d5eb42e5e6d7",
-      "createTime": "2025-03-12T07:51:20.293Z"
+      "id": "d150136e-cf85-4ca7-8405-4405d9964ee8",
+      "createTime": "2025-03-18T00:08:47.458Z"
     },
     {
       "changes": [
@@ -137,11 +168,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/oracledatabase",
-      "id": "98cdd770-4af9-4baa-ab1f-b2519d6c6324",
-      "createTime": "2025-03-12T07:51:20.275Z"
+      "id": "f50f608a-91b5-4803-a0b9-56cf66b6d86c",
+      "createTime": "2025-03-18T00:08:47.441Z"
     },
     {
       "changes": [
@@ -161,11 +192,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-ads/marketing-platform-admin",
-      "id": "a3091141-cb5d-4fa7-a9ef-3bcaa4f6eb7c",
-      "createTime": "2025-03-12T07:51:20.257Z"
+      "id": "ebbeb687-fb89-4353-8766-f3c0b023d7be",
+      "createTime": "2025-03-18T00:08:47.423Z"
     },
     {
       "changes": [
@@ -185,14 +216,20 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/apihub",
-      "id": "21e4f5f3-d39e-4a92-b545-aae1a3a0b076",
-      "createTime": "2025-03-12T07:51:20.237Z"
+      "id": "8a824361-18e5-4cb3-a328-7013f8753b5d",
+      "createTime": "2025-03-18T00:08:47.403Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -203,11 +240,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.5.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gdchardwaremanagement",
-      "id": "b6b67b8e-eefd-4fb2-a08d-29a507b0e37d",
-      "createTime": "2025-03-12T07:51:20.220Z"
+      "id": "d2eda198-6993-4de5-8a0d-618130c28145",
+      "createTime": "2025-03-18T00:08:47.386Z"
     },
     {
       "changes": [
@@ -272,8 +309,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/accounts",
-      "id": "4bd485b2-4481-4cd1-b759-eab190a7f07f",
-      "createTime": "2025-03-12T07:51:20.202Z"
+      "id": "6b875b9d-9670-409d-9efa-74b0cbc38f12",
+      "createTime": "2025-03-18T00:08:47.368Z"
     },
     {
       "changes": [
@@ -293,11 +330,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/products",
-      "id": "d2c93082-2d12-4082-a68d-13cdd6656806",
-      "createTime": "2025-03-12T07:51:20.182Z"
+      "id": "368cd294-a0bb-445e-81db-03864b706186",
+      "createTime": "2025-03-18T00:08:47.348Z"
     },
     {
       "changes": [
@@ -317,11 +354,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/privilegedaccessmanager",
-      "id": "320845e7-efe7-4c28-a326-471cd5127b1f",
-      "createTime": "2025-03-12T07:51:20.165Z"
+      "id": "fd2f3b48-eeb0-4060-803c-d44abc517928",
+      "createTime": "2025-03-18T00:08:47.331Z"
     },
     {
       "changes": [
@@ -341,11 +378,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/promotions",
-      "id": "0b209781-e8df-412e-ba7f-cf6d701fd9b7",
-      "createTime": "2025-03-12T07:51:20.147Z"
+      "id": "28cb3d83-95cd-4a36-99aa-081c512e8014",
+      "createTime": "2025-03-18T00:08:47.314Z"
     },
     {
       "changes": [
@@ -365,11 +402,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/datasources",
-      "id": "906459cd-335b-4951-b577-59175d53f7e8",
-      "createTime": "2025-03-12T07:51:20.128Z"
+      "id": "d018eca2-e6e8-4341-a76b-cf65e7e241b1",
+      "createTime": "2025-03-18T00:08:47.294Z"
     },
     {
       "changes": [
@@ -389,11 +426,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.6.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/fleetengine",
-      "id": "af445721-3476-4475-9c1d-fc2eefa55be6",
-      "createTime": "2025-03-12T07:51:20.110Z"
+      "id": "d6602282-475e-42a6-bd81-ec44eb486ebe",
+      "createTime": "2025-03-18T00:08:47.277Z"
     },
     {
       "changes": [
@@ -413,14 +450,20 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/streetview-publish",
-      "id": "6ccec58d-2d8c-4e79-9d8a-ae4206936454",
-      "createTime": "2025-03-12T07:51:20.093Z"
+      "id": "7e49af63-b630-40f7-bc45-1b201670244c",
+      "createTime": "2025-03-18T00:08:47.260Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -431,14 +474,20 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/developerconnect",
-      "id": "2440af56-b25f-4821-8898-83e904f87773",
-      "createTime": "2025-03-12T07:51:20.073Z"
+      "id": "f4b5d4f1-5117-4462-b2b6-06729939f4d2",
+      "createTime": "2025-03-18T00:08:47.241Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "8b6b9bcc04dbf1b5891a55e3bda0db28f6ecde93",
+          "message": "[managedkafka] add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -449,11 +498,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/managedkafka",
-      "id": "1b661e41-3d5b-4a7d-a2f5-935ba228c358",
-      "createTime": "2025-03-12T07:51:20.056Z"
+      "id": "e413fd0b-328c-4f2e-aedb-ef621a9ab5a1",
+      "createTime": "2025-03-18T00:08:47.224Z"
     },
     {
       "changes": [
@@ -473,11 +522,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/routeoptimization",
-      "id": "5242719a-1dfe-458c-9aff-f118b129e4e5",
-      "createTime": "2025-03-12T07:51:20.039Z"
+      "id": "9f81df0c-d51e-4dc4-b47c-7c21e8148901",
+      "createTime": "2025-03-18T00:08:47.206Z"
     },
     {
       "changes": [
@@ -497,11 +546,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/solar",
-      "id": "1b724abe-0b4d-4121-bcb5-0c1c985c9b06",
-      "createTime": "2025-03-12T07:51:20.019Z"
+      "id": "f6b08313-7a74-450d-965c-49a1ce7a282a",
+      "createTime": "2025-03-18T00:08:47.186Z"
     },
     {
       "changes": [
@@ -521,14 +570,28 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/conversions",
-      "id": "98f6c010-604f-476a-b40c-36a78aa107f5",
-      "createTime": "2025-03-12T07:51:20.002Z"
+      "id": "acad666c-c167-49bd-8e00-9d6f4e9c087e",
+      "createTime": "2025-03-18T00:08:47.168Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -539,11 +602,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.6.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/securitycentermanagement",
-      "id": "325f5a35-0b0b-49c0-805d-df8a3ad80d31",
-      "createTime": "2025-03-12T07:51:19.985Z"
+      "id": "cc98b36c-d25c-467a-aa2e-afc116268de3",
+      "createTime": "2025-03-18T00:08:47.151Z"
     },
     {
       "changes": [
@@ -563,11 +626,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/lfp",
-      "id": "a58d2c05-f970-4564-ac43-40928f9e1dcc",
-      "createTime": "2025-03-12T07:51:19.965Z"
+      "id": "578d03f1-c00d-40fd-8529-4fe477214f7a",
+      "createTime": "2025-03-18T00:08:47.131Z"
     },
     {
       "changes": [
@@ -587,11 +650,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/notifications",
-      "id": "d4d049dd-df82-4cf6-b97d-dfee89e9b97d",
-      "createTime": "2025-03-12T07:51:19.948Z"
+      "id": "8404aa9a-82f3-4374-a530-f75ab5aa4743",
+      "createTime": "2025-03-18T00:08:47.113Z"
     },
     {
       "changes": [
@@ -611,11 +674,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.5.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/securesourcemanager",
-      "id": "e53c3aad-bb23-4589-8028-2479f2b92de4",
-      "createTime": "2025-03-12T07:51:19.930Z"
+      "id": "f83ae144-7213-4e41-bb70-58f2afe1e7d5",
+      "createTime": "2025-03-18T00:08:47.095Z"
     },
     {
       "changes": [
@@ -659,14 +722,28 @@
           "issues": []
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/backupdr",
-      "id": "a9c7575d-c6f0-4ecf-bfc6-46fec8875f23",
-      "createTime": "2025-03-12T07:51:19.911Z"
+      "id": "b5c99ea7-25b1-4307-8fb7-42628e040e7a",
+      "createTime": "2025-03-18T00:08:47.075Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -677,11 +754,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/fleetengine-delivery",
-      "id": "d0c034ee-e051-4462-afe1-ce02c8fe5a05",
-      "createTime": "2025-03-12T07:51:19.893Z"
+      "id": "f510331f-77f1-443e-a020-9150161da495",
+      "createTime": "2025-03-18T00:08:47.057Z"
     },
     {
       "changes": [
@@ -701,11 +778,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/quota",
-      "id": "f4d8bd03-afd3-49e9-941b-7ff668667d08",
-      "createTime": "2025-03-12T07:51:19.876Z"
+      "id": "98b3d409-292f-400d-92c0-e15ec87f9057",
+      "createTime": "2025-03-18T00:08:47.040Z"
     },
     {
       "changes": [
@@ -719,11 +796,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.3.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/storage-control",
-      "id": "824b9582-cc01-4601-a96d-001bb272004f",
-      "createTime": "2025-03-12T07:51:19.856Z"
+      "id": "20ab12dc-a871-46e9-8daf-36b49a21efdb",
+      "createTime": "2025-03-18T00:08:47.020Z"
     },
     {
       "changes": [
@@ -743,11 +820,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/apphub",
-      "id": "def69c4e-5610-499d-a406-eb8d0b827977",
-      "createTime": "2025-03-12T07:51:19.838Z"
+      "id": "cb8f09fe-116f-4695-981c-80c26ea9de01",
+      "createTime": "2025-03-18T00:08:47.003Z"
     },
     {
       "changes": [
@@ -775,11 +852,11 @@
           ]
         }
       ],
-      "version": "1.0.0",
+      "version": "0.14.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-apps/chat",
-      "id": "42daa3c5-f4e9-4379-9708-30aa246c8c8f",
-      "createTime": "2025-03-12T07:51:19.821Z"
+      "id": "dc241355-2695-406e-ae5e-7cf873ff0eb3",
+      "createTime": "2025-03-18T00:08:46.986Z"
     },
     {
       "changes": [
@@ -799,11 +876,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.8.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/parallelstore",
-      "id": "e3f25935-d7cf-452b-8b1b-8122c58be909",
-      "createTime": "2025-03-12T07:51:19.801Z"
+      "id": "5b0e97c4-4259-4d54-8d36-d05d07f3a1ba",
+      "createTime": "2025-03-18T00:08:46.966Z"
     },
     {
       "changes": [
@@ -823,11 +900,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.5.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-apps/meet",
-      "id": "84f6b91b-80b1-43ed-befd-55f55e5dbd5a",
-      "createTime": "2025-03-12T07:51:19.785Z"
+      "id": "496122f1-30b6-4e66-8a42-b7910ad628c4",
+      "createTime": "2025-03-18T00:08:46.949Z"
     },
     {
       "changes": [
@@ -847,14 +924,28 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.5.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/cloudcontrolspartner",
-      "id": "43d7b7bb-ebff-4333-be9b-603823e64fdb",
-      "createTime": "2025-03-12T07:51:19.768Z"
+      "id": "01bd90df-35b1-4452-a6c2-f811cf2c4886",
+      "createTime": "2025-03-18T00:08:46.931Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -865,14 +956,28 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/telcoautomation",
-      "id": "e78821bd-a304-402d-b973-b730cf93f59b",
-      "createTime": "2025-03-12T07:51:19.747Z"
+      "id": "60105b80-b62e-45d7-b4a8-9882fe30f628",
+      "createTime": "2025-03-18T00:08:46.912Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -883,11 +988,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.6.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/servicehealth",
-      "id": "c74ab02b-5f68-4761-b6b1-f39edbdb7b24",
-      "createTime": "2025-03-12T07:51:19.730Z"
+      "id": "613b0bcb-fae4-4d1c-806f-97b5b8ee5245",
+      "createTime": "2025-03-18T00:08:46.895Z"
     },
     {
       "changes": [
@@ -907,11 +1012,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.7.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/redis-cluster",
-      "id": "169aa70f-643d-44f6-9480-32f03c54c474",
-      "createTime": "2025-03-12T07:51:19.713Z"
+      "id": "769ee260-b03c-46b2-80e4-4cdd94dabd1b",
+      "createTime": "2025-03-18T00:08:46.877Z"
     },
     {
       "changes": [
@@ -934,8 +1039,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/cloudquotas",
-      "id": "9ee57e79-8937-419e-9b54-a9cd0a7d2e69",
-      "createTime": "2025-03-12T07:51:19.694Z"
+      "id": "9a7caf46-2986-4b20-bc7a-5345c2b2b6d0",
+      "createTime": "2025-03-18T00:08:46.857Z"
     },
     {
       "changes": [
@@ -955,11 +1060,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.8.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/css",
-      "id": "77d2888b-cc4f-49b8-864f-7c437c2cc4bf",
-      "createTime": "2025-03-12T07:51:19.677Z"
+      "id": "0d60c377-1a50-4dce-ab38-dc06ba0f5c4b",
+      "createTime": "2025-03-18T00:08:46.840Z"
     },
     {
       "changes": [
@@ -979,11 +1084,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.7.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/inventories",
-      "id": "59a90fc6-c910-4b6b-89d5-cc604b3a0483",
-      "createTime": "2025-03-12T07:51:19.660Z"
+      "id": "afd4daa6-4158-493d-80d4-e8504790b281",
+      "createTime": "2025-03-18T00:08:46.823Z"
     },
     {
       "changes": [
@@ -1003,14 +1108,20 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.8.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-shopping/reports",
-      "id": "c777dd94-ec45-4d79-8190-94b5dac1769f",
-      "createTime": "2025-03-12T07:51:19.640Z"
+      "id": "9c0f70e8-31fc-4ec0-adfa-40c3d7cc9310",
+      "createTime": "2025-03-18T00:08:46.804Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1021,11 +1132,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.7.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/edgenetwork",
-      "id": "7c80360d-0692-4be4-9bf8-07ce9644d464",
-      "createTime": "2025-03-12T07:51:19.622Z"
+      "id": "58bd80cf-5c30-4de4-ab45-a6c2232280b5",
+      "createTime": "2025-03-18T00:08:46.787Z"
     },
     {
       "changes": [
@@ -1042,8 +1153,8 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/typeless-sample-bot",
-      "id": "b2086965-5bf7-479a-8d3f-57ab6ebab38d",
-      "createTime": "2025-03-12T07:51:19.604Z"
+      "id": "c5db4e03-c8b5-4143-b0b1-0adf1d6846d8",
+      "createTime": "2025-03-18T00:08:46.769Z"
     },
     {
       "changes": [
@@ -1066,8 +1177,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/grafeas",
-      "id": "70c9dc72-8c30-4445-8e02-74581b36d10c",
-      "createTime": "2025-03-12T07:51:19.585Z"
+      "id": "21d57f5c-bc60-4e30-80d7-f4a6b7df39f0",
+      "createTime": "2025-03-18T00:08:46.750Z"
     },
     {
       "changes": [
@@ -1090,8 +1201,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/storage-transfer",
-      "id": "043c5011-9ca9-4d8b-8461-765dd59b1fcf",
-      "createTime": "2025-03-12T07:51:19.564Z"
+      "id": "451c9794-7d3b-4a19-b5ec-0f9d1bcd436d",
+      "createTime": "2025-03-18T00:08:46.733Z"
     },
     {
       "changes": [
@@ -1114,8 +1225,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dlp",
-      "id": "23c8fd4b-0fa4-4ab3-8e14-ca20be6b66b3",
-      "createTime": "2025-03-12T07:51:19.546Z"
+      "id": "f45c2b47-35ef-4258-8e9d-14e2a2c40a8b",
+      "createTime": "2025-03-18T00:08:46.716Z"
     },
     {
       "changes": [
@@ -1138,8 +1249,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/monitoring-dashboards",
-      "id": "36e576a6-44a3-4f95-a34c-89d7edb309a7",
-      "createTime": "2025-03-12T07:51:19.526Z"
+      "id": "1edc62e6-37a1-430f-9022-a2a071cc8050",
+      "createTime": "2025-03-18T00:08:46.696Z"
     },
     {
       "changes": [
@@ -1162,8 +1273,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/routing",
-      "id": "abe7e545-c700-4ce0-b3b2-85111954aebf",
-      "createTime": "2025-03-12T07:51:19.508Z"
+      "id": "3ddbf6ce-5cf3-485b-847c-781918d1e092",
+      "createTime": "2025-03-18T00:08:46.679Z"
     },
     {
       "changes": [
@@ -1186,8 +1297,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/places",
-      "id": "01d2c87b-bbf2-497a-838b-1bf33cae728f",
-      "createTime": "2025-03-12T07:51:19.491Z"
+      "id": "00a3b7e6-d9c5-4fca-ba46-5d012d539392",
+      "createTime": "2025-03-18T00:08:46.663Z"
     },
     {
       "changes": [
@@ -1210,11 +1321,25 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/maps-platform-datasets",
-      "id": "cdbb7c7a-67e3-4a8d-ad60-7c1dc3832f75",
-      "createTime": "2025-03-12T07:51:19.471Z"
+      "id": "7dda5a05-6275-4227-b0d0-cf19be74f3c8",
+      "createTime": "2025-03-18T00:08:46.644Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1228,11 +1353,25 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@googlemaps/addressvalidation",
-      "id": "abe8e60f-9769-4fd7-b59e-2aff80b9993f",
-      "createTime": "2025-03-12T07:51:19.454Z"
+      "id": "e505bec9-f536-443f-9a4e-5da2017a5fcf",
+      "createTime": "2025-03-18T00:08:46.626Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1246,11 +1385,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/access-context-manager",
-      "id": "f26843ad-de86-4c20-a5f4-f57f5ab2896e",
-      "createTime": "2025-03-12T07:51:19.436Z"
+      "id": "9085f6a1-a121-486f-819c-8eba40a5c9f1",
+      "createTime": "2025-03-18T00:08:46.609Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1264,11 +1417,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/iam-credentials",
-      "id": "51907646-5b60-43b1-8cd3-371511e32b6f",
-      "createTime": "2025-03-12T07:51:19.416Z"
+      "id": "f3e2cbbe-2e2f-4e9b-a941-588d85c4df14",
+      "createTime": "2025-03-18T00:08:46.590Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1282,11 +1449,25 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/iam",
-      "id": "df81aa8d-986d-4a1c-853c-ff0078ac9528",
-      "createTime": "2025-03-12T07:51:19.398Z"
+      "id": "aee30d2f-c39a-40f4-b8eb-9c793426697f",
+      "createTime": "2025-03-18T00:08:46.573Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1300,11 +1481,25 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/containeranalysis",
-      "id": "9821fc5e-0e85-4f92-bf44-cebcdd7cab6d",
-      "createTime": "2025-03-12T07:51:19.382Z"
+      "id": "d4f29b63-060f-455b-84c3-996dd1c980ff",
+      "createTime": "2025-03-18T00:08:46.556Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1315,14 +1510,28 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.7.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/cloudprofiler",
-      "id": "3adfeb4a-95e4-4256-8705-06c819ec92f8",
-      "createTime": "2025-03-12T07:51:19.363Z"
+      "id": "357be782-cf17-4c3b-94c9-c8154eeb63da",
+      "createTime": "2025-03-18T00:08:46.537Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1336,11 +1545,25 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/cloudbuild",
-      "id": "0a1d63f9-2402-4b71-87ff-a9f2e78403fa",
-      "createTime": "2025-03-12T07:51:19.345Z"
+      "id": "dda7d685-255a-427c-86d6-4b10559df248",
+      "createTime": "2025-03-18T00:08:46.519Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1354,11 +1577,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/artifact-registry",
-      "id": "be84bcf3-cb3c-4fd9-a1ed-d9d6ada4307d",
-      "createTime": "2025-03-12T07:51:19.328Z"
+      "id": "8cdfbd07-2a2e-4b38-b3f9-205af5dc6645",
+      "createTime": "2025-03-18T00:08:46.502Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1372,11 +1609,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dataflow",
-      "id": "7f36a1c9-0311-4619-83cc-030c5330e558",
-      "createTime": "2025-03-12T07:51:19.309Z"
+      "id": "8b7869fa-5db4-4966-b3f4-84c64c5eccbe",
+      "createTime": "2025-03-18T00:08:46.481Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1390,11 +1641,25 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/container",
-      "id": "9eada0da-5030-4883-a9d3-88ad7f86bdee",
-      "createTime": "2025-03-12T07:51:19.291Z"
+      "id": "0512e037-0126-41b8-bf66-e2c087a83390",
+      "createTime": "2025-03-18T00:08:46.464Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1408,11 +1673,25 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/workstations",
-      "id": "8bcd7a81-ff08-4265-9c57-a06995cce786",
-      "createTime": "2025-03-12T07:51:19.274Z"
+      "id": "36464aff-2af9-4ab7-b0a8-642f50746ac2",
+      "createTime": "2025-03-18T00:08:46.445Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1426,11 +1705,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/workflows",
-      "id": "76bbeb62-fc53-4fd8-b9e8-3f10839ef43b",
-      "createTime": "2025-03-12T07:51:19.255Z"
+      "id": "4e6ea1f8-2b19-42dc-be6e-2850058a3271",
+      "createTime": "2025-03-18T00:08:46.425Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1444,11 +1737,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/web-security-scanner",
-      "id": "f63a2dc2-836b-4f67-9e21-5bf8467754de",
-      "createTime": "2025-03-12T07:51:19.237Z"
+      "id": "042d06cc-116a-42ad-978c-6a2b65a819aa",
+      "createTime": "2025-03-18T00:08:46.407Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1462,11 +1769,25 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/web-risk",
-      "id": "ead8a257-abc3-41bc-afcd-9984e544ed0e",
-      "createTime": "2025-03-12T07:51:19.220Z"
+      "id": "cf6039f9-62e2-4cd8-943a-1b164cab73b9",
+      "createTime": "2025-03-18T00:08:46.390Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1480,11 +1801,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/vpc-access",
-      "id": "d25f46e2-c80b-4dee-b742-91a6a6ee2bed",
-      "createTime": "2025-03-12T07:51:19.201Z"
+      "id": "dd2eefb4-c4fe-45e5-a4e9-ac9b47f15627",
+      "createTime": "2025-03-18T00:08:46.371Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1498,11 +1833,25 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/vmwareengine",
-      "id": "bc517d7b-ca4e-4df7-8349-ad86bd65473e",
-      "createTime": "2025-03-12T07:51:19.184Z"
+      "id": "5f6b87ee-cc06-4989-991a-c9e3e3ebc582",
+      "createTime": "2025-03-18T00:08:46.354Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1516,11 +1865,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/vmmigration",
-      "id": "c32f7778-8e59-4112-910b-0270f9791f89",
-      "createTime": "2025-03-12T07:51:19.166Z"
+      "id": "fb456890-ad81-4d69-ab02-a0d8d34cd074",
+      "createTime": "2025-03-18T00:08:46.336Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "7a23322530b610eec2fe4c18fe1854048f31c811",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1534,11 +1897,25 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/vision",
-      "id": "19f28d10-5356-42eb-bb1a-9a84bca9ae28",
-      "createTime": "2025-03-12T07:51:19.147Z"
+      "id": "a683a561-41e8-4336-961c-c14924edc307",
+      "createTime": "2025-03-18T00:08:46.316Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1552,11 +1929,25 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/video-intelligence",
-      "id": "81b8c398-ebbb-4d19-a548-d5b736e2085e",
-      "createTime": "2025-03-12T07:51:19.129Z"
+      "id": "107c8581-704d-455a-b174-c1c14d271bfc",
+      "createTime": "2025-03-18T00:08:46.299Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1570,11 +1961,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/video-transcoder",
-      "id": "234b4cb3-d56b-43c0-8442-a9d5ef7c3290",
-      "createTime": "2025-03-12T07:51:19.109Z"
+      "id": "61dc159f-d120-4920-a30d-1a60f0ba4680",
+      "createTime": "2025-03-18T00:08:46.281Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1588,11 +1993,25 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/video-stitcher",
-      "id": "5cd07de8-3dbe-4221-b2e8-29d2e553a839",
-      "createTime": "2025-03-12T07:51:19.090Z"
+      "id": "eb4aa245-72dd-4d7c-b1cc-40e6ee71e6e0",
+      "createTime": "2025-03-18T00:08:46.262Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1606,11 +2025,57 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/livestream",
-      "id": "e92f1c0b-08e9-4a6c-95ab-c6338808f7bf",
-      "createTime": "2025-03-12T07:51:19.073Z"
+      "id": "1cd9a6ff-9330-4ce1-bab4-baa95750b062",
+      "createTime": "2025-03-18T00:08:46.245Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "c06edca281971bf2751dfdb351ffd27a44f2429d",
+          "message": "Migrate translate to Node 18",
+          "issues": [
+            "6152"
+          ],
+          "breakingChangeNote": "migrate translate to Node 18 ([#6152](https://github.com/googleapis/google-cloud-node/issues/6152))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "fc817da4-0737-4aca-b64b-4db27b6ec06c",
+      "createTime": "2025-03-18T00:08:46.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1624,11 +2089,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/tpu",
-      "id": "cf0bb53a-1c53-4707-9ad7-efc559639fe1",
-      "createTime": "2025-03-12T07:51:19.056Z"
+      "id": "3bd94e86-896e-434c-a2fc-a678a5d1544e",
+      "createTime": "2025-03-18T00:08:46.209Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1642,11 +2121,34 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/text-to-speech",
-      "id": "46f54d47-e21c-456b-a098-f148ce104e66",
-      "createTime": "2025-03-12T07:51:19.035Z"
+      "id": "8b413f3b-3981-4495-a879-916c28492556",
+      "createTime": "2025-03-18T00:08:46.193Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "7d0481ec9e9e60e8c1631629439f1314d31858ac",
+          "message": "Migrate tasks to node 18",
+          "issues": [
+            "6123"
+          ],
+          "breakingChangeNote": "migrate tasks to node 18 ([#6123](https://github.com/googleapis/google-cloud-node/issues/6123))"
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1660,11 +2162,25 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/tasks",
-      "id": "be2298d0-aa2f-4f4a-800e-e74a1de1243a",
-      "createTime": "2025-03-12T07:51:19.018Z"
+      "id": "312b2a5e-66e7-4f6a-9ed7-5bc9bd01d6ff",
+      "createTime": "2025-03-18T00:08:46.176Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1678,11 +2194,25 @@
       "version": "7.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/talent",
-      "id": "8d7771be-3982-43d0-bd4b-2db0b37b1364",
-      "createTime": "2025-03-12T07:51:19.000Z"
+      "id": "29e9afb6-b3bc-4d81-8c56-6f22fc0affbc",
+      "createTime": "2025-03-18T00:08:46.156Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1696,11 +2226,25 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/support",
-      "id": "5e2d75fc-6476-4cbb-9110-74a70a2d7a83",
-      "createTime": "2025-03-12T07:51:18.982Z"
+      "id": "d347f622-526b-4230-a7f2-5145a20efeea",
+      "createTime": "2025-03-18T00:08:46.138Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1714,11 +2258,25 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/storageinsights",
-      "id": "a940550c-3101-4dd3-812c-31c536836717",
-      "createTime": "2025-03-12T07:51:18.964Z"
+      "id": "58c30234-88e8-4fde-b6ed-bc78200ef438",
+      "createTime": "2025-03-18T00:08:46.121Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1729,14 +2287,28 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.20.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/sql",
-      "id": "161b2d6a-7498-4821-8d83-60ec4ac5bffd",
-      "createTime": "2025-03-12T07:51:18.947Z"
+      "id": "69fdb989-b64f-4186-b816-ed66ec73e527",
+      "createTime": "2025-03-18T00:08:46.102Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1750,11 +2322,25 @@
       "version": "7.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/speech",
-      "id": "1a40842d-c54a-47d7-abdc-f21900a4f0e5",
-      "createTime": "2025-03-12T07:51:18.926Z"
+      "id": "0e0d2f8b-a690-4167-a024-98bf9c873e05",
+      "createTime": "2025-03-18T00:08:46.085Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1768,11 +2354,25 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/shell",
-      "id": "b81684a7-0f06-4550-af6c-4375f104f4b3",
-      "createTime": "2025-03-12T07:51:18.909Z"
+      "id": "3110b343-1652-4275-89bd-03ca2585c531",
+      "createTime": "2025-03-18T00:08:46.068Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1786,11 +2386,25 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/service-directory",
-      "id": "42ceb25c-b35d-430d-a042-74e51b459b8f",
-      "createTime": "2025-03-12T07:51:18.893Z"
+      "id": "f0b2d0bf-30b9-4eb6-82c1-17b3ce0f7a57",
+      "createTime": "2025-03-18T00:08:46.049Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1804,11 +2418,25 @@
       "version": "9.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/security-center",
-      "id": "50983761-aec6-4c35-81e7-665f5356a237",
-      "createTime": "2025-03-12T07:51:18.873Z"
+      "id": "91d79b33-85e6-496b-99db-91c233defe33",
+      "createTime": "2025-03-18T00:08:46.033Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add json files to tsconfig templates (#1692) (ba6be1d)",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "eed00f4e4de22392db3a440a20486c3eeb9d33a6",
+          "message": "Add request/response debug logging to gapics, update templates to gax 5 and node 18",
+          "issues": [
+            "1671"
+          ]
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -1822,8 +2450,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/publicca",
-      "id": "ac287a73-cabf-4869-b32f-0d9c1ff0d005",
-      "createTime": "2025-03-12T07:51:18.856Z"
+      "id": "fce060fa-289f-4282-8788-49cb655bfff3",
+      "createTime": "2025-03-18T00:08:46.016Z"
     },
     {
       "changes": [
@@ -1846,8 +2474,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/security-private-ca",
-      "id": "52f25f9f-ce55-4038-bdbe-da1742f37105",
-      "createTime": "2025-03-12T07:51:18.840Z"
+      "id": "4b72fec1-4893-4bc4-b44b-53144ed526f0",
+      "createTime": "2025-03-18T00:08:45.997Z"
     },
     {
       "changes": [
@@ -1870,8 +2498,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/secret-manager",
-      "id": "9b946e79-4fba-438d-b585-de53b1273cee",
-      "createTime": "2025-03-12T07:51:18.820Z"
+      "id": "b84db1e1-f738-4c46-acd9-3c737b4c7237",
+      "createTime": "2025-03-18T00:08:45.981Z"
     },
     {
       "changes": [
@@ -1894,8 +2522,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/scheduler",
-      "id": "dc35b866-cee7-4e92-b538-72df9baff7c7",
-      "createTime": "2025-03-12T07:51:18.803Z"
+      "id": "63cda58d-c14f-435f-8eba-fa294d1c893e",
+      "createTime": "2025-03-18T00:08:45.964Z"
     },
     {
       "changes": [
@@ -1918,8 +2546,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/run",
-      "id": "fd08bcf8-b3a4-41bb-884a-1b422e017eae",
-      "createTime": "2025-03-12T07:51:18.786Z"
+      "id": "21221b46-4942-4384-b60f-234a74f28397",
+      "createTime": "2025-03-18T00:08:45.946Z"
     },
     {
       "changes": [
@@ -1942,8 +2570,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/retail",
-      "id": "57409ce1-8ec3-4fc6-b6ad-81ca64e0e062",
-      "createTime": "2025-03-12T07:51:18.767Z"
+      "id": "5752d260-90c8-4488-acc1-4bd82ae82d93",
+      "createTime": "2025-03-18T00:08:45.929Z"
     },
     {
       "changes": [
@@ -1966,8 +2594,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/resource-manager",
-      "id": "4851f099-a101-4342-9505-339b9e06aee0",
-      "createTime": "2025-03-12T07:51:18.750Z"
+      "id": "797b15de-2af5-4c70-8c1e-ec83545521d0",
+      "createTime": "2025-03-18T00:08:45.913Z"
     },
     {
       "changes": [
@@ -1990,8 +2618,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/redis",
-      "id": "50e293e1-871d-431f-8fd3-2a06e8ba2896",
-      "createTime": "2025-03-12T07:51:18.734Z"
+      "id": "a7b3dee0-bf51-496d-b76b-f18b5c8d7978",
+      "createTime": "2025-03-18T00:08:45.894Z"
     },
     {
       "changes": [
@@ -2014,8 +2642,8 @@
       "version": "7.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/recommender",
-      "id": "46ef457c-6203-446f-bef3-a7d6049dd8d7",
-      "createTime": "2025-03-12T07:51:18.714Z"
+      "id": "0009aaf0-f86b-4808-81cb-8fe8c104da47",
+      "createTime": "2025-03-18T00:08:45.875Z"
     },
     {
       "changes": [
@@ -2038,8 +2666,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/recaptcha-enterprise",
-      "id": "3f5d47a6-39c0-44c6-b5ea-dcce9654e945",
-      "createTime": "2025-03-12T07:51:18.698Z"
+      "id": "a63a9318-7a97-4036-8eca-d25d74a1d863",
+      "createTime": "2025-03-18T00:08:45.857Z"
     },
     {
       "changes": [
@@ -2062,8 +2690,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/rapidmigrationassessment",
-      "id": "5d251e2a-9200-40fc-9893-9acbb7a4a16c",
-      "createTime": "2025-03-12T07:51:18.681Z"
+      "id": "52c74964-d67b-4c07-9ec5-e49c0e699ae6",
+      "createTime": "2025-03-18T00:08:45.837Z"
     },
     {
       "changes": [
@@ -2086,8 +2714,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/private-catalog",
-      "id": "a920c80e-56a9-49f2-b48e-41c93e36d519",
-      "createTime": "2025-03-12T07:51:18.662Z"
+      "id": "6b9d0319-2d69-4323-b74e-dc9130ec023c",
+      "createTime": "2025-03-18T00:08:45.820Z"
     },
     {
       "changes": [
@@ -2107,11 +2735,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.6.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/policy-troubleshooter-iam",
-      "id": "141bc4a5-654a-41bd-a9cb-de7a82be14f6",
-      "createTime": "2025-03-12T07:51:18.645Z"
+      "id": "42bd1d1c-ae72-45a1-9693-6211010d9f4b",
+      "createTime": "2025-03-18T00:08:45.803Z"
     },
     {
       "changes": [
@@ -2134,8 +2762,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/policy-troubleshooter",
-      "id": "6ea53c95-177f-463d-a573-219f9f082fbf",
-      "createTime": "2025-03-12T07:51:18.628Z"
+      "id": "6987bd51-3cdf-4f65-baf0-e507193b7b23",
+      "createTime": "2025-03-18T00:08:45.784Z"
     },
     {
       "changes": [
@@ -2155,11 +2783,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.5.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/policysimulator",
-      "id": "21763b62-b649-4015-8e0b-16d5c49b1bc3",
-      "createTime": "2025-03-12T07:51:18.609Z"
+      "id": "877710d1-dfcc-4b5f-bbd0-211e755eef76",
+      "createTime": "2025-03-18T00:08:45.768Z"
     },
     {
       "changes": [
@@ -2182,8 +2810,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/phishing-protection",
-      "id": "bd5293ca-e1e0-4fcc-a372-557de14f43df",
-      "createTime": "2025-03-12T07:51:18.593Z"
+      "id": "25eca8d7-3be0-4718-b26b-11f984ac5a26",
+      "createTime": "2025-03-18T00:08:45.751Z"
     },
     {
       "changes": [
@@ -2206,8 +2834,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/os-login",
-      "id": "f986308b-87a8-4038-9855-c6fbe5fa80f5",
-      "createTime": "2025-03-12T07:51:18.576Z"
+      "id": "788650af-b8b8-4f24-85df-8f15f48909ab",
+      "createTime": "2025-03-18T00:08:45.732Z"
     },
     {
       "changes": [
@@ -2232,8 +2860,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/os-config",
-      "id": "1fbbdde7-2f19-48e4-9399-83ab0943e866",
-      "createTime": "2025-03-12T07:51:18.557Z"
+      "id": "0e6e3222-cec8-451b-9473-814ce2224c34",
+      "createTime": "2025-03-18T00:08:45.716Z"
     },
     {
       "changes": [
@@ -2258,8 +2886,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/org-policy",
-      "id": "fd97c90a-78ee-4a45-93a1-c3e15ae813b7",
-      "createTime": "2025-03-12T07:51:18.540Z"
+      "id": "e45283f2-6cd2-4851-bd9d-466a7bdd3e28",
+      "createTime": "2025-03-18T00:08:45.699Z"
     },
     {
       "changes": [
@@ -2276,8 +2904,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/orchestration-airflow",
-      "id": "a6aac6c2-1867-412c-bfc1-1f5f5e291e73",
-      "createTime": "2025-03-12T07:51:18.521Z"
+      "id": "2f78688d-926f-404e-9b08-1a8b53b95bd9",
+      "createTime": "2025-03-18T00:08:45.680Z"
     },
     {
       "changes": [
@@ -2302,8 +2930,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/notebooks",
-      "id": "62770c3c-b714-4556-8591-7c34d122751a",
-      "createTime": "2025-03-12T07:51:18.502Z"
+      "id": "f40aa79f-a53b-4651-a01b-ad9008644de9",
+      "createTime": "2025-03-18T00:08:45.664Z"
     },
     {
       "changes": [
@@ -2325,11 +2953,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.8.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/networkservices",
-      "id": "e8a6bc47-761f-477e-ba48-711b34d1522a",
-      "createTime": "2025-03-12T07:51:18.485Z"
+      "id": "a97b17e0-1fde-49af-bf96-2a09681323f2",
+      "createTime": "2025-03-18T00:08:45.647Z"
     },
     {
       "changes": [
@@ -2354,8 +2982,8 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/network-security",
-      "id": "9065fd03-ec98-4cf5-8e49-a37968d0e201",
-      "createTime": "2025-03-12T07:51:18.468Z"
+      "id": "802559e8-5deb-4b23-a00f-1241d0005637",
+      "createTime": "2025-03-18T00:08:45.629Z"
     },
     {
       "changes": [
@@ -2380,8 +3008,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/network-management",
-      "id": "0df5f7bb-6600-4050-817d-8e38489fd47b",
-      "createTime": "2025-03-12T07:51:18.449Z"
+      "id": "b00b0047-56b4-4bab-b62c-3a2fc9f1c51f",
+      "createTime": "2025-03-18T00:08:45.611Z"
     },
     {
       "changes": [
@@ -2406,8 +3034,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/network-connectivity",
-      "id": "9b38e685-e7d1-4cba-8f5a-ea4baef6f9e8",
-      "createTime": "2025-03-12T07:51:18.432Z"
+      "id": "4e6b9bae-b3f2-4e6b-b507-12776c8e7110",
+      "createTime": "2025-03-18T00:08:45.595Z"
     },
     {
       "changes": [
@@ -2429,11 +3057,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.10.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/netapp",
-      "id": "280f9813-5f2e-4a0f-b61b-4d1f50622f29",
-      "createTime": "2025-03-12T07:51:18.415Z"
+      "id": "d3812a06-9e9c-4d51-8ba7-e03d7de1f8fd",
+      "createTime": "2025-03-18T00:08:45.576Z"
     },
     {
       "changes": [
@@ -2450,8 +3078,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/monitoring",
-      "id": "ebb900b2-9f64-4594-ba38-99968170041a",
-      "createTime": "2025-03-12T07:51:18.396Z"
+      "id": "32438ea7-3a67-46e2-8df2-393d524df714",
+      "createTime": "2025-03-18T00:08:45.559Z"
     },
     {
       "changes": [
@@ -2476,8 +3104,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/migrationcenter",
-      "id": "e3d3acfc-e38e-4578-bffb-0f6c9ae0edf7",
-      "createTime": "2025-03-12T07:51:18.379Z"
+      "id": "278919b8-1bf0-4f21-acf1-9b9c34ac3730",
+      "createTime": "2025-03-18T00:08:45.543Z"
     },
     {
       "changes": [
@@ -2502,8 +3130,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dataproc-metastore",
-      "id": "9b462fd4-b628-43c4-9a3a-fe4507a1f10a",
-      "createTime": "2025-03-12T07:51:18.362Z"
+      "id": "88229ca7-ee39-4c8d-b8af-465f91e7d537",
+      "createTime": "2025-03-18T00:08:45.524Z"
     },
     {
       "changes": [
@@ -2528,8 +3156,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/memcache",
-      "id": "7d454e4b-d760-45ca-b051-e9c01235f373",
-      "createTime": "2025-03-12T07:51:18.344Z"
+      "id": "8601ef71-79ea-4f01-a71c-3c6c5d5cd172",
+      "createTime": "2025-03-18T00:08:45.507Z"
     },
     {
       "changes": [
@@ -2554,8 +3182,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/media-translation",
-      "id": "35cf7c1d-c7fc-4f47-b2e7-f664f3b16653",
-      "createTime": "2025-03-12T07:51:18.327Z"
+      "id": "c2a4d0de-dc5b-4bc8-b08c-e7f5c2a8f17a",
+      "createTime": "2025-03-18T00:08:45.490Z"
     },
     {
       "changes": [
@@ -2580,8 +3208,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/managed-identities",
-      "id": "3cb97b90-89ac-4747-b059-6821bbea702a",
-      "createTime": "2025-03-12T07:51:18.311Z"
+      "id": "3c8ad8e0-d774-4e79-9ac2-3bb0c163597a",
+      "createTime": "2025-03-18T00:08:45.471Z"
     },
     {
       "changes": [
@@ -2606,8 +3234,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/life-sciences",
-      "id": "b2511652-6c7d-4f46-b57f-cc7653235eb5",
-      "createTime": "2025-03-12T07:51:18.292Z"
+      "id": "33b43c7d-9850-4566-b7a8-1a9559d64e60",
+      "createTime": "2025-03-18T00:08:45.453Z"
     },
     {
       "changes": [
@@ -2632,8 +3260,8 @@
       "version": "7.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/language",
-      "id": "f2a9ef77-e5f5-415a-a211-9eb3b710f734",
-      "createTime": "2025-03-12T07:51:18.275Z"
+      "id": "dacf42c9-8b45-452c-ba8e-d352ff30c6cf",
+      "createTime": "2025-03-18T00:08:45.437Z"
     },
     {
       "changes": [
@@ -2664,8 +3292,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/kms-inventory",
-      "id": "1c6f39cf-57bb-4fb5-a49b-14847e7dd971",
-      "createTime": "2025-03-12T07:51:18.259Z"
+      "id": "beb06e27-bdce-4c52-bf89-27f832d95488",
+      "createTime": "2025-03-18T00:08:45.418Z"
     },
     {
       "changes": [
@@ -2696,8 +3324,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/kms",
-      "id": "475e1ddd-698a-4677-bd38-5c262dae45c6",
-      "createTime": "2025-03-12T07:51:18.239Z"
+      "id": "66affecb-67fc-44cd-b65d-fa1b86635251",
+      "createTime": "2025-03-18T00:08:45.402Z"
     },
     {
       "changes": [
@@ -2722,11 +3350,17 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/iot",
-      "id": "ed7f4ab7-b3aa-4092-8cdd-7704461aedac",
-      "createTime": "2025-03-12T07:51:18.223Z"
+      "id": "c3d21b4b-c9e0-4d4a-9995-46919f33e6e3",
+      "createTime": "2025-03-18T00:08:45.385Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2740,11 +3374,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/ids",
-      "id": "7193a9d5-b9d9-4612-b2de-da2bddc8b35a",
-      "createTime": "2025-03-12T07:51:18.207Z"
+      "id": "2e0634b7-a92d-4a92-9624-f586803f3eed",
+      "createTime": "2025-03-18T00:08:45.365Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2758,11 +3398,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/iap",
-      "id": "ab68eb27-aa99-4714-8762-c82abe8da406",
-      "createTime": "2025-03-12T07:51:18.188Z"
+      "id": "6be17436-b354-4ef5-b62b-a3764851ec42",
+      "createTime": "2025-03-18T00:08:45.348Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2776,11 +3422,17 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gsuiteaddons",
-      "id": "f567ef31-ccb5-4386-b8b5-be74be35e20e",
-      "createTime": "2025-03-12T07:51:18.172Z"
+      "id": "502031af-afbb-4a5a-a937-e4409ec0b61d",
+      "createTime": "2025-03-18T00:08:45.332Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2794,11 +3446,17 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gkemulticloud",
-      "id": "a41da0a0-ce69-4655-aa88-2378fa8ff7c6",
-      "createTime": "2025-03-12T07:51:18.155Z"
+      "id": "7cc6c771-a55c-471c-884c-0a3f89f6c9e6",
+      "createTime": "2025-03-18T00:08:45.314Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2812,11 +3470,17 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gke-hub",
-      "id": "3bbcc1dc-3a16-46b8-9842-68aaa8948ffa",
-      "createTime": "2025-03-12T07:51:18.137Z"
+      "id": "ce551e96-48eb-48a4-a003-2cda07baabca",
+      "createTime": "2025-03-18T00:08:45.298Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2839,11 +3503,17 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gke-connect-gateway",
-      "id": "207b069b-d2ed-4668-a13f-41acacda141d",
-      "createTime": "2025-03-12T07:51:18.121Z"
+      "id": "39d03a85-d40e-4e29-9863-f06cbbe777c6",
+      "createTime": "2025-03-18T00:08:45.282Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2857,11 +3527,17 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gke-backup",
-      "id": "0e525f60-530b-4f5b-b5c2-639f21cfa857",
-      "createTime": "2025-03-12T07:51:18.103Z"
+      "id": "e48bf8f8-3700-443f-bfcf-0d7207d05e37",
+      "createTime": "2025-03-18T00:08:45.264Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2875,11 +3551,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/functions",
-      "id": "baf3499e-8da8-466e-bc7f-aab226454f20",
-      "createTime": "2025-03-12T07:51:18.084Z"
+      "id": "d7beb0f2-3c01-4392-8922-17b57a439d02",
+      "createTime": "2025-03-18T00:08:45.248Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2901,11 +3583,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/filestore",
-      "id": "2a559c34-b64f-454a-9f56-30a3dbd7c942",
-      "createTime": "2025-03-12T07:51:18.068Z"
+      "id": "654694a4-9599-4923-a0f4-9d6b0c524b41",
+      "createTime": "2025-03-18T00:08:45.232Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2919,11 +3607,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/eventarc-publishing",
-      "id": "e7b3e581-169e-454b-aac6-aced81755992",
-      "createTime": "2025-03-12T07:51:18.052Z"
+      "id": "7f77891b-b4dd-4104-b3c3-f75165e66c3f",
+      "createTime": "2025-03-18T00:08:45.214Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2937,11 +3631,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/eventarc",
-      "id": "b3b76475-95d5-4758-ada4-e5fd107ceb8f",
-      "createTime": "2025-03-12T07:51:18.033Z"
+      "id": "3c0b17af-5238-4332-a204-66bd54709296",
+      "createTime": "2025-03-18T00:08:45.197Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2955,11 +3655,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/essential-contacts",
-      "id": "9baed48c-a70b-4e4e-b3e2-1a1904f42580",
-      "createTime": "2025-03-12T07:51:18.017Z"
+      "id": "0634bf3e-2b12-4e04-bbdb-2d38ddb89f82",
+      "createTime": "2025-03-18T00:08:45.182Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2970,14 +3676,20 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.6.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/edgecontainer",
-      "id": "d02d1e7e-34fa-42a6-945e-f80805d1ccaa",
-      "createTime": "2025-03-12T07:51:17.999Z"
+      "id": "63820dd0-027d-4247-be15-996e0f5a5200",
+      "createTime": "2025-03-18T00:08:45.162Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -2991,11 +3703,17 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/domains",
-      "id": "f75dc635-6d28-4caf-a377-cb1b40d29991",
-      "createTime": "2025-03-12T07:51:17.980Z"
+      "id": "eb997444-de4d-4f2c-b0ee-50484e7ab9eb",
+      "createTime": "2025-03-18T00:08:45.146Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -3009,11 +3727,20 @@
       "version": "9.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/documentai",
-      "id": "ab04d2ad-b408-4429-a1f2-d5120e7b9b61",
-      "createTime": "2025-03-12T07:51:17.963Z"
+      "id": "f40ce3e6-a2dd-4b01-978e-e13ceed1488a",
+      "createTime": "2025-03-18T00:08:45.130Z"
     },
     {
       "changes": [
+        {
+          "type": "fix",
+          "sha": "3e16acaf81165b03bfbb636ca8f24197c971443a",
+          "message": "Update dependency @google-cloud/paginator to v6",
+          "issues": [
+            "6128"
+          ],
+          "scope": "deps"
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -3027,11 +3754,17 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dns",
-      "id": "c6b43c30-c051-4ada-b142-e135efec98f5",
-      "createTime": "2025-03-12T07:51:17.947Z"
+      "id": "f5649cd7-0872-49c0-af55-38d3410f286d",
+      "createTime": "2025-03-18T00:08:45.111Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -3045,8 +3778,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/discoveryengine",
-      "id": "9cf0f2f1-fc50-411c-b739-f735701e237b",
-      "createTime": "2025-03-12T07:51:17.926Z"
+      "id": "1d2151e5-f636-4146-b339-7c195ebf8144",
+      "createTime": "2025-03-18T00:08:45.095Z"
     },
     {
       "changes": [
@@ -3071,11 +3804,17 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dialogflow-cx",
-      "id": "9834a53f-62d4-4508-bfd7-774e18f92070",
-      "createTime": "2025-03-12T07:51:17.906Z"
+      "id": "4cc463f1-6dd1-4345-800f-1ff085bbc648",
+      "createTime": "2025-03-18T00:08:45.078Z"
     },
     {
       "changes": [
+        {
+          "type": "feat",
+          "sha": "afcb5c07e82bc8349b9677766cd880f69a97f77f",
+          "message": "[Many APIs] add request/response debug logging to gapics",
+          "issues": []
+        },
         {
           "type": "chore",
           "sha": "eadae64d54e07aa2c65097ea52e65008d4e87436",
@@ -3097,8 +3836,8 @@
       "version": "7.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dialogflow",
-      "id": "424849a9-6178-4072-ab4a-11ad040ac2eb",
-      "createTime": "2025-03-12T07:51:17.889Z"
+      "id": "ddfe338c-9622-4341-b85f-ee3850aa6187",
+      "createTime": "2025-03-18T00:08:45.059Z"
     },
     {
       "changes": [
@@ -3121,8 +3860,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/deploy",
-      "id": "e22c7cfd-033f-41f2-af60-cb6b4be9dff7",
-      "createTime": "2025-03-12T07:51:17.865Z"
+      "id": "6fadf5e9-a3eb-4e21-931a-047ab0db58a3",
+      "createTime": "2025-03-18T00:08:45.043Z"
     },
     {
       "changes": [
@@ -3145,8 +3884,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/datastream",
-      "id": "50ab8350-03bb-4eb3-bfe2-cd782fae8eaa",
-      "createTime": "2025-03-12T07:51:17.849Z"
+      "id": "622f3c56-4ba4-49c7-b04f-d119f3d32060",
+      "createTime": "2025-03-18T00:08:45.027Z"
     },
     {
       "changes": [
@@ -3169,8 +3908,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/data-qna",
-      "id": "e294294a-3a03-4f4c-88f1-6179d3693c6e",
-      "createTime": "2025-03-12T07:51:17.833Z"
+      "id": "6d15de81-bbcd-4053-b232-f7e443b93259",
+      "createTime": "2025-03-18T00:08:45.008Z"
     },
     {
       "changes": [
@@ -3193,8 +3932,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dataproc",
-      "id": "2ef08515-eba0-45de-89f5-f466f86b1bc1",
-      "createTime": "2025-03-12T07:51:17.818Z"
+      "id": "68a5c116-9b42-4e50-9605-50babafa263c",
+      "createTime": "2025-03-18T00:08:44.992Z"
     },
     {
       "changes": [
@@ -3211,8 +3950,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dataplex",
-      "id": "f5d8b56c-9ae8-428e-906e-f8fcb38ce215",
-      "createTime": "2025-03-12T07:51:17.742Z"
+      "id": "284ee6ba-c620-42a4-9f48-9a366a1babad",
+      "createTime": "2025-03-18T00:08:44.975Z"
     },
     {
       "changes": [
@@ -3235,8 +3974,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/datalabeling",
-      "id": "cff77133-f91c-4af4-b761-64e625e3e995",
-      "createTime": "2025-03-12T07:51:17.707Z"
+      "id": "1936a6a8-8a7f-47b0-b771-0e82eb6b835b",
+      "createTime": "2025-03-18T00:08:44.954Z"
     },
     {
       "changes": [
@@ -3259,8 +3998,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/data-fusion",
-      "id": "b9815a41-3ac8-44fe-a737-8a0b9137d26e",
-      "createTime": "2025-03-12T07:51:17.681Z"
+      "id": "c2e263e4-367a-421e-b6e8-64486716ca45",
+      "createTime": "2025-03-18T00:08:44.933Z"
     },
     {
       "changes": [
@@ -3283,8 +4022,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dataform",
-      "id": "5c8d5c75-60d5-463c-9b8f-c8f9033a6b86",
-      "createTime": "2025-03-12T07:51:17.665Z"
+      "id": "3ca281f8-fac9-4d2c-a9b4-c622f7815039",
+      "createTime": "2025-03-18T00:08:44.915Z"
     },
     {
       "changes": [
@@ -3307,8 +4046,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/lineage",
-      "id": "4fd5b034-b2d4-4304-8efc-65dd9a92080f",
-      "createTime": "2025-03-12T07:51:17.649Z"
+      "id": "b40ea467-bd26-4e48-a861-ff88cc38e5d3",
+      "createTime": "2025-03-18T00:08:44.894Z"
     },
     {
       "changes": [
@@ -3325,8 +4064,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/datacatalog",
-      "id": "fe228fd0-ba8f-4ac4-82de-9323b004012c",
-      "createTime": "2025-03-12T07:51:17.630Z"
+      "id": "a3641a63-1729-4e0e-a7c5-54cfa7706864",
+      "createTime": "2025-03-18T00:08:44.878Z"
     },
     {
       "changes": [
@@ -3349,8 +4088,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/contentwarehouse",
-      "id": "4eba7fc7-1708-44a6-a0dc-9958bb9191e0",
-      "createTime": "2025-03-12T07:51:17.614Z"
+      "id": "1c30afca-1dbc-4eee-a9ea-d77535c19a73",
+      "createTime": "2025-03-18T00:08:44.862Z"
     },
     {
       "changes": [
@@ -3373,8 +4112,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/contact-center-insights",
-      "id": "ac2e2bb8-4cc1-4554-ae04-66de682d99d6",
-      "createTime": "2025-03-12T07:51:17.598Z"
+      "id": "da744194-af57-457e-addf-936834a485c2",
+      "createTime": "2025-03-18T00:08:44.846Z"
     },
     {
       "changes": [
@@ -3394,11 +4133,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.4.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/connectors",
-      "id": "22f9042a-951f-4c0e-b4c8-f7a3d4ca9604",
-      "createTime": "2025-03-12T07:51:17.579Z"
+      "id": "c28f33e1-96df-4e7d-be4f-9420ebddfc23",
+      "createTime": "2025-03-18T00:08:44.816Z"
     },
     {
       "changes": [
@@ -3418,11 +4157,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.8.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/config",
-      "id": "90dcbf25-2304-4d46-a6d8-abc8a49613c6",
-      "createTime": "2025-03-12T07:51:17.562Z"
+      "id": "a2dbd18b-77a0-492f-be23-e4d63507823b",
+      "createTime": "2025-03-18T00:08:44.784Z"
     },
     {
       "changes": [
@@ -3445,8 +4184,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/confidentialcomputing",
-      "id": "af15a935-a8fc-4f37-a7b9-e9f048cf8884",
-      "createTime": "2025-03-12T07:51:17.547Z"
+      "id": "6c7731ca-1721-417b-b1a9-e7f063a0c5a3",
+      "createTime": "2025-03-18T00:08:44.755Z"
     },
     {
       "changes": [
@@ -3469,8 +4208,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/compute",
-      "id": "f0f0437a-a344-4bee-8ccf-e5fbd1c674c2",
-      "createTime": "2025-03-12T07:51:17.528Z"
+      "id": "d2a8e1aa-cc1b-45ed-a798-842acb56f1e8",
+      "createTime": "2025-03-18T00:08:44.739Z"
     },
     {
       "changes": [
@@ -3490,11 +4229,11 @@
           "breakingChangeNote": "upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))"
         }
       ],
-      "version": "1.0.0",
+      "version": "0.6.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/procurement",
-      "id": "9710805b-e412-4384-8e69-33ae1234a320",
-      "createTime": "2025-03-12T07:51:17.512Z"
+      "id": "d251800a-3982-4c57-9710-6c44a648bbb8",
+      "createTime": "2025-03-18T00:08:44.723Z"
     },
     {
       "changes": [
@@ -3517,8 +4256,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/dms",
-      "id": "5746159b-d7fc-4c45-9940-7f484ca5a128",
-      "createTime": "2025-03-12T07:51:17.496Z"
+      "id": "be046d4e-e7c4-4157-a306-0c133699e5b8",
+      "createTime": "2025-03-18T00:08:44.705Z"
     },
     {
       "changes": [
@@ -3541,8 +4280,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/channel",
-      "id": "5e92076a-ec04-421b-9888-07337a693742",
-      "createTime": "2025-03-12T07:51:17.477Z"
+      "id": "02441a62-c75a-4f2c-88ad-4c92a9e8ee7b",
+      "createTime": "2025-03-18T00:08:44.689Z"
     },
     {
       "changes": [
@@ -3565,8 +4304,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/certificate-manager",
-      "id": "6a89767f-8985-4c7e-80bc-989c4764e4f3",
-      "createTime": "2025-03-12T07:51:17.461Z"
+      "id": "6eb20d16-83e7-4cca-94f8-21dbd7e78d46",
+      "createTime": "2025-03-18T00:08:44.673Z"
     },
     {
       "changes": [
@@ -3589,8 +4328,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/binary-authorization",
-      "id": "ebb403ac-c127-4510-9ebd-140a4d6f62c9",
-      "createTime": "2025-03-12T07:51:17.444Z"
+      "id": "bf5fc141-219c-4246-8908-e863603fbf56",
+      "createTime": "2025-03-18T00:08:44.655Z"
     },
     {
       "changes": [
@@ -3613,8 +4352,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/billing-budgets",
-      "id": "ab8b023b-8066-4dca-8210-3f9f3cd0503c",
-      "createTime": "2025-03-12T07:51:17.425Z"
+      "id": "3c0606ba-3421-4e60-9af3-6aa8aad76f7a",
+      "createTime": "2025-03-18T00:08:44.638Z"
     },
     {
       "changes": [
@@ -3637,8 +4376,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/billing",
-      "id": "5cb33878-9e38-48f0-b4c7-13dbcffe26ab",
-      "createTime": "2025-03-12T07:51:17.408Z"
+      "id": "9eb71d78-eeab-4ddd-8f0d-7f460a10d2cf",
+      "createTime": "2025-03-18T00:08:44.622Z"
     },
     {
       "changes": [
@@ -3661,8 +4400,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-reservation",
-      "id": "1ede27be-5219-4efb-bfa6-8c9a774d5506",
-      "createTime": "2025-03-12T07:51:17.392Z"
+      "id": "4b7fa157-13f3-49db-ad43-0561cb925ef8",
+      "createTime": "2025-03-18T00:08:44.604Z"
     },
     {
       "changes": [
@@ -3685,8 +4424,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-migration",
-      "id": "bebbe8cc-b602-405b-b284-ac9b3bdd7cad",
-      "createTime": "2025-03-12T07:51:17.374Z"
+      "id": "454527f1-a699-440f-a80a-7881d5c86dda",
+      "createTime": "2025-03-18T00:08:44.588Z"
     },
     {
       "changes": [
@@ -3709,8 +4448,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-data-transfer",
-      "id": "81bd3bda-f076-4687-bcfd-674b6c8ed910",
-      "createTime": "2025-03-12T07:51:17.358Z"
+      "id": "81414bc0-2e58-4e7c-865d-0c15b42b630e",
+      "createTime": "2025-03-18T00:08:44.572Z"
     },
     {
       "changes": [
@@ -3733,8 +4472,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-datapolicies",
-      "id": "043c4f64-6315-4640-8bbd-ed10edaf5ed4",
-      "createTime": "2025-03-12T07:51:17.342Z"
+      "id": "664d576d-f4f7-42af-a705-5bc1c24af761",
+      "createTime": "2025-03-18T00:08:44.553Z"
     },
     {
       "changes": [
@@ -3757,8 +4496,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-data-exchange",
-      "id": "317826aa-0ce1-4745-a5e8-088a1270bb68",
-      "createTime": "2025-03-12T07:51:17.323Z"
+      "id": "f87ba094-ff58-4ce8-a09d-def0c139148b",
+      "createTime": "2025-03-18T00:08:44.538Z"
     },
     {
       "changes": [
@@ -3781,8 +4520,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-connection",
-      "id": "017a4a75-7d84-4de8-8f8e-a4d520daf966",
-      "createTime": "2025-03-12T07:51:17.306Z"
+      "id": "9dba74ba-a3de-44fb-abe9-fa0658515347",
+      "createTime": "2025-03-18T00:08:44.522Z"
     },
     {
       "changes": [
@@ -3805,8 +4544,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bigquery-analyticshub",
-      "id": "efc9c822-e384-4e02-874c-271c0bf3d115",
-      "createTime": "2025-03-12T07:51:17.290Z"
+      "id": "89f302f6-b3db-46a2-a66b-cce3900d76e7",
+      "createTime": "2025-03-18T00:08:44.503Z"
     },
     {
       "changes": [
@@ -3829,8 +4568,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/clientgateways",
-      "id": "908a16f0-4147-4e3c-88d8-f66fac3bd06b",
-      "createTime": "2025-03-12T07:51:17.270Z"
+      "id": "1d42e24a-962a-42be-9484-863afa2b4d3d",
+      "createTime": "2025-03-18T00:08:44.488Z"
     },
     {
       "changes": [
@@ -3853,8 +4592,8 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/clientconnectorservices",
-      "id": "e84d2065-29f9-4e01-8989-65349296a112",
-      "createTime": "2025-03-12T07:51:17.254Z"
+      "id": "6baafc03-4974-41d0-af3a-488bfeb14db4",
+      "createTime": "2025-03-18T00:08:44.472Z"
     },
     {
       "changes": [
@@ -3877,8 +4616,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/appgateways",
-      "id": "e7eb6d87-609d-4937-b299-5a58efa05a9e",
-      "createTime": "2025-03-12T07:51:17.238Z"
+      "id": "5ae5428b-f8e2-416c-aef7-cccdc4a5d408",
+      "createTime": "2025-03-18T00:08:44.453Z"
     },
     {
       "changes": [
@@ -3901,8 +4640,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/appconnectors",
-      "id": "0fee10b2-6865-49d1-98af-b40f58f97f3b",
-      "createTime": "2025-03-12T07:51:17.219Z"
+      "id": "5e9fd971-bc2f-4af1-a43e-23ccd91b9cb6",
+      "createTime": "2025-03-18T00:08:44.437Z"
     },
     {
       "changes": [
@@ -3925,8 +4664,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/appconnections",
-      "id": "16aad06c-ce5d-4c52-956c-7418a723526e",
-      "createTime": "2025-03-12T07:51:17.202Z"
+      "id": "3e556aa7-f39f-45c3-8553-9c9c47e5ac4c",
+      "createTime": "2025-03-18T00:08:44.421Z"
     },
     {
       "changes": [
@@ -3949,8 +4688,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/batch",
-      "id": "d2ad3af5-2772-40f0-99c5-2fb29ac7d318",
-      "createTime": "2025-03-12T07:51:17.185Z"
+      "id": "31c4486c-d85c-49a1-8727-59fd97559a44",
+      "createTime": "2025-03-18T00:08:44.403Z"
     },
     {
       "changes": [
@@ -3973,8 +4712,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/bare-metal-solution",
-      "id": "1969eac9-2054-492c-b073-67e2768fb287",
-      "createTime": "2025-03-12T07:51:17.164Z"
+      "id": "d67e453f-ee4a-4ce8-90da-6ca16d4aded5",
+      "createTime": "2025-03-18T00:08:44.387Z"
     },
     {
       "changes": [
@@ -3997,8 +4736,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/automl",
-      "id": "893fc5c2-ca6c-496b-ac5d-1e33566cb18e",
-      "createTime": "2025-03-12T07:51:17.149Z"
+      "id": "31d086df-8f0c-40aa-a913-61ec61c90eb4",
+      "createTime": "2025-03-18T00:08:44.370Z"
     },
     {
       "changes": [
@@ -4021,8 +4760,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/assured-workloads",
-      "id": "1a186334-07d4-4299-8b6c-f410152acb98",
-      "createTime": "2025-03-12T07:51:17.133Z"
+      "id": "f2af3105-bdd4-47c2-be71-5801f55c1cbc",
+      "createTime": "2025-03-18T00:08:44.352Z"
     },
     {
       "changes": [
@@ -4045,8 +4784,8 @@
       "version": "6.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/asset",
-      "id": "03dc0412-7b7c-430f-889e-f8ccaead837a",
-      "createTime": "2025-03-12T07:51:17.114Z"
+      "id": "e2120778-2a91-4d25-b234-1016a4fede7b",
+      "createTime": "2025-03-18T00:08:44.336Z"
     },
     {
       "changes": [
@@ -4069,8 +4808,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/apigee-registry",
-      "id": "f40a4b92-13bd-4a22-b65d-e3831c12a08b",
-      "createTime": "2025-03-12T07:51:17.098Z"
+      "id": "83c9ade7-9060-4008-bc27-816d33e3f499",
+      "createTime": "2025-03-18T00:08:44.320Z"
     },
     {
       "changes": [
@@ -4093,8 +4832,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/apigee-connect",
-      "id": "a39da8ed-a133-464f-a224-6c60ddf3f070",
-      "createTime": "2025-03-12T07:51:17.082Z"
+      "id": "056a9f04-9726-4054-84a3-abe7524e6105",
+      "createTime": "2025-03-18T00:08:44.300Z"
     },
     {
       "changes": [
@@ -4117,8 +4856,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/api-gateway",
-      "id": "0f4367c6-fda1-471c-8a04-acf0f53ee985",
-      "createTime": "2025-03-12T07:51:17.063Z"
+      "id": "f6613eb5-4a64-41fa-a3e3-69b495bd65bb",
+      "createTime": "2025-03-18T00:08:44.284Z"
     },
     {
       "changes": [
@@ -4141,8 +4880,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/alloydb",
-      "id": "9f03bf6a-23ef-43b3-89f7-78b7206b2805",
-      "createTime": "2025-03-12T07:51:17.048Z"
+      "id": "393d9283-bd7d-4212-82b8-6aaa2e1fd43e",
+      "createTime": "2025-03-18T00:08:44.267Z"
     },
     {
       "changes": [
@@ -4159,8 +4898,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/aiplatform",
-      "id": "62258989-0b8c-4c11-af63-a6811f527edb",
-      "createTime": "2025-03-12T07:51:17.032Z"
+      "id": "2511874e-bcec-4ab5-aac7-37420a406af6",
+      "createTime": "2025-03-18T00:08:44.247Z"
     },
     {
       "changes": [
@@ -4183,8 +4922,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/advisorynotifications",
-      "id": "932334dc-37b8-4261-8fa7-71cb65d7ce07",
-      "createTime": "2025-03-12T07:51:17.013Z"
+      "id": "0741db41-7c9d-4577-af30-4321aa186ec8",
+      "createTime": "2025-03-18T00:08:44.231Z"
     },
     {
       "changes": [
@@ -4207,8 +4946,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/access-approval",
-      "id": "ec5181bc-4e99-4da9-8637-24498de81a66",
-      "createTime": "2025-03-12T07:51:16.997Z"
+      "id": "bb68b792-f8e0-4753-b880-b11a92ae6b85",
+      "createTime": "2025-03-18T00:08:44.215Z"
     },
     {
       "changes": [
@@ -4231,8 +4970,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google/area120-tables",
-      "id": "fa003635-04ef-46f1-990d-cc92ae519d0b",
-      "createTime": "2025-03-12T07:51:16.981Z"
+      "id": "4f50ad44-3825-4d3a-99a7-bb72f6d36b24",
+      "createTime": "2025-03-18T00:08:44.196Z"
     },
     {
       "changes": [
@@ -4255,8 +4994,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/appengine-admin",
-      "id": "de8ff3cb-8401-416a-ac3f-0eece4dfcf0d",
-      "createTime": "2025-03-12T07:51:16.962Z"
+      "id": "d196e670-f5bf-44a7-b01b-a5e010a84221",
+      "createTime": "2025-03-18T00:08:44.180Z"
     },
     {
       "changes": [
@@ -4279,8 +5018,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/service-usage",
-      "id": "e55642ae-d4ef-4925-a641-a5049c44ce5f",
-      "createTime": "2025-03-12T07:51:16.945Z"
+      "id": "88d00323-25e7-4d86-8099-3d373c00e651",
+      "createTime": "2025-03-18T00:08:44.163Z"
     },
     {
       "changes": [
@@ -4303,8 +5042,8 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/service-management",
-      "id": "bd1798d0-8834-435a-9f8e-f5d6c95fa34f",
-      "createTime": "2025-03-12T07:51:16.929Z"
+      "id": "05bab97f-fa2d-4878-818c-334536a99e84",
+      "createTime": "2025-03-18T00:08:44.144Z"
     },
     {
       "changes": [
@@ -4327,8 +5066,8 @@
       "version": "4.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/service-control",
-      "id": "f480d5ad-c35f-4cd7-a40b-84ba0522cff2",
-      "createTime": "2025-03-12T07:51:16.908Z"
+      "id": "0e88da68-2848-4ba9-857f-5d6aa4a3e4da",
+      "createTime": "2025-03-18T00:08:44.127Z"
     },
     {
       "changes": [
@@ -4351,8 +5090,8 @@
       "version": "2.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/apikeys",
-      "id": "2836bd1c-f109-4d4e-8bc3-300cc2d078a8",
-      "createTime": "2025-03-12T07:51:16.892Z"
+      "id": "ec43b79e-5725-47d7-9f9e-538307ee08f1",
+      "createTime": "2025-03-18T00:08:44.111Z"
     },
     {
       "changes": [
@@ -4375,8 +5114,8 @@
       "version": "5.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-analytics/data",
-      "id": "2fb43344-0d4e-4a13-af88-0c5809f34003",
-      "createTime": "2025-03-12T07:51:16.876Z"
+      "id": "3c4351a6-1fee-4291-abec-503cfe8dcef2",
+      "createTime": "2025-03-18T00:08:44.089Z"
     },
     {
       "changes": [
@@ -4407,8 +5146,8 @@
       "version": "8.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-analytics/admin",
-      "id": "19099f94-4a24-4f97-b59b-dfea6b90b8ff",
-      "createTime": "2025-03-12T07:51:16.860Z"
+      "id": "4e6653fd-3a93-4c66-84d2-2a3f66a7249d",
+      "createTime": "2025-03-18T00:08:44.070Z"
     },
     {
       "changes": [
@@ -4431,8 +5170,8 @@
       "version": "3.0.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-ai/generativelanguage",
-      "id": "9421f480-6778-45c8-833d-9c10ee93336a",
-      "createTime": "2025-03-12T07:51:16.837Z"
+      "id": "cb13fdd0-021f-4dbf-abdf-f560bc0fd023",
+      "createTime": "2025-03-18T00:08:44.050Z"
     },
     {
       "changes": [
@@ -45345,5 +46084,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-03-12T07:51:20.369Z"
+  "updateTime": "2025-03-18T00:08:47.591Z"
 }

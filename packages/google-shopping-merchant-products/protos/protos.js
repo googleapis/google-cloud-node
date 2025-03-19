@@ -141,6 +141,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.shopping.merchant.products.v1beta.ProductInputsService|updateProductInput}.
+                             * @memberof google.shopping.merchant.products.v1beta.ProductInputsService
+                             * @typedef UpdateProductInputCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.shopping.merchant.products.v1beta.ProductInput} [response] ProductInput
+                             */
+    
+                            /**
+                             * Calls UpdateProductInput.
+                             * @function updateProductInput
+                             * @memberof google.shopping.merchant.products.v1beta.ProductInputsService
+                             * @instance
+                             * @param {google.shopping.merchant.products.v1beta.IUpdateProductInputRequest} request UpdateProductInputRequest message or plain object
+                             * @param {google.shopping.merchant.products.v1beta.ProductInputsService.UpdateProductInputCallback} callback Node-style callback called with the error, if any, and ProductInput
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ProductInputsService.prototype.updateProductInput = function updateProductInput(request, callback) {
+                                return this.rpcCall(updateProductInput, $root.google.shopping.merchant.products.v1beta.UpdateProductInputRequest, $root.google.shopping.merchant.products.v1beta.ProductInput, request, callback);
+                            }, "name", { value: "UpdateProductInput" });
+    
+                            /**
+                             * Calls UpdateProductInput.
+                             * @function updateProductInput
+                             * @memberof google.shopping.merchant.products.v1beta.ProductInputsService
+                             * @instance
+                             * @param {google.shopping.merchant.products.v1beta.IUpdateProductInputRequest} request UpdateProductInputRequest message or plain object
+                             * @returns {Promise<google.shopping.merchant.products.v1beta.ProductInput>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.shopping.merchant.products.v1beta.ProductInputsService|deleteProductInput}.
                              * @memberof google.shopping.merchant.products.v1beta.ProductInputsService
                              * @typedef DeleteProductInputCallback
@@ -899,6 +932,266 @@
                             return InsertProductInputRequest;
                         })();
     
+                        v1beta.UpdateProductInputRequest = (function() {
+    
+                            /**
+                             * Properties of an UpdateProductInputRequest.
+                             * @memberof google.shopping.merchant.products.v1beta
+                             * @interface IUpdateProductInputRequest
+                             * @property {google.shopping.merchant.products.v1beta.IProductInput|null} [productInput] UpdateProductInputRequest productInput
+                             * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateProductInputRequest updateMask
+                             * @property {string|null} [dataSource] UpdateProductInputRequest dataSource
+                             */
+    
+                            /**
+                             * Constructs a new UpdateProductInputRequest.
+                             * @memberof google.shopping.merchant.products.v1beta
+                             * @classdesc Represents an UpdateProductInputRequest.
+                             * @implements IUpdateProductInputRequest
+                             * @constructor
+                             * @param {google.shopping.merchant.products.v1beta.IUpdateProductInputRequest=} [properties] Properties to set
+                             */
+                            function UpdateProductInputRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UpdateProductInputRequest productInput.
+                             * @member {google.shopping.merchant.products.v1beta.IProductInput|null|undefined} productInput
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @instance
+                             */
+                            UpdateProductInputRequest.prototype.productInput = null;
+    
+                            /**
+                             * UpdateProductInputRequest updateMask.
+                             * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @instance
+                             */
+                            UpdateProductInputRequest.prototype.updateMask = null;
+    
+                            /**
+                             * UpdateProductInputRequest dataSource.
+                             * @member {string} dataSource
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @instance
+                             */
+                            UpdateProductInputRequest.prototype.dataSource = "";
+    
+                            /**
+                             * Creates a new UpdateProductInputRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IUpdateProductInputRequest=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.products.v1beta.UpdateProductInputRequest} UpdateProductInputRequest instance
+                             */
+                            UpdateProductInputRequest.create = function create(properties) {
+                                return new UpdateProductInputRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateProductInputRequest message. Does not implicitly {@link google.shopping.merchant.products.v1beta.UpdateProductInputRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IUpdateProductInputRequest} message UpdateProductInputRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateProductInputRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.productInput != null && Object.hasOwnProperty.call(message, "productInput"))
+                                    $root.google.shopping.merchant.products.v1beta.ProductInput.encode(message.productInput, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                    $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataSource);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UpdateProductInputRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1beta.UpdateProductInputRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IUpdateProductInputRequest} message UpdateProductInputRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UpdateProductInputRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an UpdateProductInputRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.products.v1beta.UpdateProductInputRequest} UpdateProductInputRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateProductInputRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.products.v1beta.UpdateProductInputRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.productInput = $root.google.shopping.merchant.products.v1beta.ProductInput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dataSource = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an UpdateProductInputRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.products.v1beta.UpdateProductInputRequest} UpdateProductInputRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UpdateProductInputRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an UpdateProductInputRequest message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UpdateProductInputRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.productInput != null && message.hasOwnProperty("productInput")) {
+                                    var error = $root.google.shopping.merchant.products.v1beta.ProductInput.verify(message.productInput);
+                                    if (error)
+                                        return "productInput." + error;
+                                }
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                    var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                    if (error)
+                                        return "updateMask." + error;
+                                }
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    if (!$util.isString(message.dataSource))
+                                        return "dataSource: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an UpdateProductInputRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.products.v1beta.UpdateProductInputRequest} UpdateProductInputRequest
+                             */
+                            UpdateProductInputRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.products.v1beta.UpdateProductInputRequest)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.products.v1beta.UpdateProductInputRequest();
+                                if (object.productInput != null) {
+                                    if (typeof object.productInput !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.UpdateProductInputRequest.productInput: object expected");
+                                    message.productInput = $root.google.shopping.merchant.products.v1beta.ProductInput.fromObject(object.productInput);
+                                }
+                                if (object.updateMask != null) {
+                                    if (typeof object.updateMask !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.UpdateProductInputRequest.updateMask: object expected");
+                                    message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                                }
+                                if (object.dataSource != null)
+                                    message.dataSource = String(object.dataSource);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an UpdateProductInputRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.UpdateProductInputRequest} message UpdateProductInputRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UpdateProductInputRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.productInput = null;
+                                    object.updateMask = null;
+                                    object.dataSource = "";
+                                }
+                                if (message.productInput != null && message.hasOwnProperty("productInput"))
+                                    object.productInput = $root.google.shopping.merchant.products.v1beta.ProductInput.toObject(message.productInput, options);
+                                if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                    object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                                if (message.dataSource != null && message.hasOwnProperty("dataSource"))
+                                    object.dataSource = message.dataSource;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UpdateProductInputRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UpdateProductInputRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UpdateProductInputRequest
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.products.v1beta.UpdateProductInputRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UpdateProductInputRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.products.v1beta.UpdateProductInputRequest";
+                            };
+    
+                            return UpdateProductInputRequest;
+                        })();
+    
                         v1beta.DeleteProductInputRequest = (function() {
     
                             /**
@@ -1240,6 +1533,7 @@
                              * @property {google.shopping.merchant.products.v1beta.IProductStructuredTitle|null} [structuredTitle] Attributes structuredTitle
                              * @property {google.shopping.merchant.products.v1beta.IProductStructuredDescription|null} [structuredDescription] Attributes structuredDescription
                              * @property {google.shopping.type.IPrice|null} [autoPricingMinPrice] Attributes autoPricingMinPrice
+                             * @property {Array.<google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive>|null} [sustainabilityIncentives] Attributes sustainabilityIncentives
                              */
     
                             /**
@@ -1270,6 +1564,7 @@
                                 this.lifestyleImageLinks = [];
                                 this.cloudExportAdditionalProperties = [];
                                 this.certifications = [];
+                                this.sustainabilityIncentives = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -2011,6 +2306,14 @@
                              * @instance
                              */
                             Attributes.prototype.autoPricingMinPrice = null;
+    
+                            /**
+                             * Attributes sustainabilityIncentives.
+                             * @member {Array.<google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive>} sustainabilityIncentives
+                             * @memberof google.shopping.merchant.products.v1beta.Attributes
+                             * @instance
+                             */
+                            Attributes.prototype.sustainabilityIncentives = $util.emptyArray;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -2814,6 +3117,9 @@
                                 if (message.loyaltyPrograms != null && message.loyaltyPrograms.length)
                                     for (var i = 0; i < message.loyaltyPrograms.length; ++i)
                                         $root.google.shopping.merchant.products.v1beta.LoyaltyProgram.encode(message.loyaltyPrograms[i], writer.uint32(/* id 136, wireType 2 =*/1090).fork()).ldelim();
+                                if (message.sustainabilityIncentives != null && message.sustainabilityIncentives.length)
+                                    for (var i = 0; i < message.sustainabilityIncentives.length; ++i)
+                                        $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.encode(message.sustainabilityIncentives[i], writer.uint32(/* id 138, wireType 2 =*/1106).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3252,6 +3558,12 @@
                                         }
                                     case 124: {
                                             message.autoPricingMinPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 138: {
+                                            if (!(message.sustainabilityIncentives && message.sustainabilityIncentives.length))
+                                                message.sustainabilityIncentives = [];
+                                            message.sustainabilityIncentives.push($root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -3808,6 +4120,15 @@
                                     if (error)
                                         return "autoPricingMinPrice." + error;
                                 }
+                                if (message.sustainabilityIncentives != null && message.hasOwnProperty("sustainabilityIncentives")) {
+                                    if (!Array.isArray(message.sustainabilityIncentives))
+                                        return "sustainabilityIncentives: array expected";
+                                    for (var i = 0; i < message.sustainabilityIncentives.length; ++i) {
+                                        var error = $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.verify(message.sustainabilityIncentives[i]);
+                                        if (error)
+                                            return "sustainabilityIncentives." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -4220,6 +4541,16 @@
                                         throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.autoPricingMinPrice: object expected");
                                     message.autoPricingMinPrice = $root.google.shopping.type.Price.fromObject(object.autoPricingMinPrice);
                                 }
+                                if (object.sustainabilityIncentives) {
+                                    if (!Array.isArray(object.sustainabilityIncentives))
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.sustainabilityIncentives: array expected");
+                                    message.sustainabilityIncentives = [];
+                                    for (var i = 0; i < object.sustainabilityIncentives.length; ++i) {
+                                        if (typeof object.sustainabilityIncentives[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1beta.Attributes.sustainabilityIncentives: object expected");
+                                        message.sustainabilityIncentives[i] = $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.fromObject(object.sustainabilityIncentives[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -4256,6 +4587,7 @@
                                     object.certifications = [];
                                     object.freeShippingThreshold = [];
                                     object.loyaltyPrograms = [];
+                                    object.sustainabilityIncentives = [];
                                 }
                                 if (options.defaults) {
                                     object.expirationDate = null;
@@ -4688,6 +5020,11 @@
                                     object.loyaltyPrograms = [];
                                     for (var j = 0; j < message.loyaltyPrograms.length; ++j)
                                         object.loyaltyPrograms[j] = $root.google.shopping.merchant.products.v1beta.LoyaltyProgram.toObject(message.loyaltyPrograms[j], options);
+                                }
+                                if (message.sustainabilityIncentives && message.sustainabilityIncentives.length) {
+                                    object.sustainabilityIncentives = [];
+                                    for (var j = 0; j < message.sustainabilityIncentives.length; ++j)
+                                        object.sustainabilityIncentives[j] = $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.toObject(message.sustainabilityIncentives[j], options);
                                 }
                                 return object;
                             };
@@ -11534,6 +11871,340 @@
                             };
     
                             return CloudExportAdditionalProperties;
+                        })();
+    
+                        v1beta.ProductSustainabilityIncentive = (function() {
+    
+                            /**
+                             * Properties of a ProductSustainabilityIncentive.
+                             * @memberof google.shopping.merchant.products.v1beta
+                             * @interface IProductSustainabilityIncentive
+                             * @property {google.shopping.type.IPrice|null} [amount] ProductSustainabilityIncentive amount
+                             * @property {number|null} [percentage] ProductSustainabilityIncentive percentage
+                             * @property {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type|null} [type] ProductSustainabilityIncentive type
+                             */
+    
+                            /**
+                             * Constructs a new ProductSustainabilityIncentive.
+                             * @memberof google.shopping.merchant.products.v1beta
+                             * @classdesc Represents a ProductSustainabilityIncentive.
+                             * @implements IProductSustainabilityIncentive
+                             * @constructor
+                             * @param {google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive=} [properties] Properties to set
+                             */
+                            function ProductSustainabilityIncentive(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ProductSustainabilityIncentive amount.
+                             * @member {google.shopping.type.IPrice|null|undefined} amount
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @instance
+                             */
+                            ProductSustainabilityIncentive.prototype.amount = null;
+    
+                            /**
+                             * ProductSustainabilityIncentive percentage.
+                             * @member {number|null|undefined} percentage
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @instance
+                             */
+                            ProductSustainabilityIncentive.prototype.percentage = null;
+    
+                            /**
+                             * ProductSustainabilityIncentive type.
+                             * @member {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type|null|undefined} type
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @instance
+                             */
+                            ProductSustainabilityIncentive.prototype.type = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * ProductSustainabilityIncentive value.
+                             * @member {"amount"|"percentage"|undefined} value
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @instance
+                             */
+                            Object.defineProperty(ProductSustainabilityIncentive.prototype, "value", {
+                                get: $util.oneOfGetter($oneOfFields = ["amount", "percentage"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * ProductSustainabilityIncentive _type.
+                             * @member {"type"|undefined} _type
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @instance
+                             */
+                            Object.defineProperty(ProductSustainabilityIncentive.prototype, "_type", {
+                                get: $util.oneOfGetter($oneOfFields = ["type"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new ProductSustainabilityIncentive instance using the specified properties.
+                             * @function create
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive=} [properties] Properties to set
+                             * @returns {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive} ProductSustainabilityIncentive instance
+                             */
+                            ProductSustainabilityIncentive.create = function create(properties) {
+                                return new ProductSustainabilityIncentive(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ProductSustainabilityIncentive message. Does not implicitly {@link google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive} message ProductSustainabilityIncentive message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductSustainabilityIncentive.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
+                                    $root.google.shopping.type.Price.encode(message.amount, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.percentage != null && Object.hasOwnProperty.call(message, "percentage"))
+                                    writer.uint32(/* id 3, wireType 1 =*/25).double(message.percentage);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ProductSustainabilityIncentive message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.IProductSustainabilityIncentive} message ProductSustainabilityIncentive message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ProductSustainabilityIncentive.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ProductSustainabilityIncentive message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive} ProductSustainabilityIncentive
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductSustainabilityIncentive.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.amount = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.percentage = reader.double();
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ProductSustainabilityIncentive message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive} ProductSustainabilityIncentive
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ProductSustainabilityIncentive.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ProductSustainabilityIncentive message.
+                             * @function verify
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ProductSustainabilityIncentive.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.amount != null && message.hasOwnProperty("amount")) {
+                                    properties.value = 1;
+                                    {
+                                        var error = $root.google.shopping.type.Price.verify(message.amount);
+                                        if (error)
+                                            return "amount." + error;
+                                    }
+                                }
+                                if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                    if (properties.value === 1)
+                                        return "value: multiple values";
+                                    properties.value = 1;
+                                    if (typeof message.percentage !== "number")
+                                        return "percentage: number expected";
+                                }
+                                if (message.type != null && message.hasOwnProperty("type")) {
+                                    properties._type = 1;
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ProductSustainabilityIncentive message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive} ProductSustainabilityIncentive
+                             */
+                            ProductSustainabilityIncentive.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive)
+                                    return object;
+                                var message = new $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive();
+                                if (object.amount != null) {
+                                    if (typeof object.amount !== "object")
+                                        throw TypeError(".google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.amount: object expected");
+                                    message.amount = $root.google.shopping.type.Price.fromObject(object.amount);
+                                }
+                                if (object.percentage != null)
+                                    message.percentage = Number(object.percentage);
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "EV_TAX_CREDIT":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "EV_PRICE_DISCOUNT":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ProductSustainabilityIncentive message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive} message ProductSustainabilityIncentive
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ProductSustainabilityIncentive.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.type != null && message.hasOwnProperty("type")) {
+                                    object.type = options.enums === String ? $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type[message.type] === undefined ? message.type : $root.google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type[message.type] : message.type;
+                                    if (options.oneofs)
+                                        object._type = "type";
+                                }
+                                if (message.amount != null && message.hasOwnProperty("amount")) {
+                                    object.amount = $root.google.shopping.type.Price.toObject(message.amount, options);
+                                    if (options.oneofs)
+                                        object.value = "amount";
+                                }
+                                if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                    object.percentage = options.json && !isFinite(message.percentage) ? String(message.percentage) : message.percentage;
+                                    if (options.oneofs)
+                                        object.value = "percentage";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ProductSustainabilityIncentive to JSON.
+                             * @function toJSON
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ProductSustainabilityIncentive.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ProductSustainabilityIncentive
+                             * @function getTypeUrl
+                             * @memberof google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ProductSustainabilityIncentive.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive";
+                            };
+    
+                            /**
+                             * Type enum.
+                             * @name google.shopping.merchant.products.v1beta.ProductSustainabilityIncentive.Type
+                             * @enum {number}
+                             * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                             * @property {number} EV_TAX_CREDIT=1 EV_TAX_CREDIT value
+                             * @property {number} EV_PRICE_DISCOUNT=2 EV_PRICE_DISCOUNT value
+                             */
+                            ProductSustainabilityIncentive.Type = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "EV_TAX_CREDIT"] = 1;
+                                values[valuesById[2] = "EV_PRICE_DISCOUNT"] = 2;
+                                return values;
+                            })();
+    
+                            return ProductSustainabilityIncentive;
                         })();
     
                         v1beta.ProductsService = (function() {
@@ -32358,6 +33029,225 @@
                 };
     
                 return Empty;
+            })();
+    
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
             })();
     
             protobuf.Timestamp = (function() {

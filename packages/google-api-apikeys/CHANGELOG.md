@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/apikeys-v1.3.1...apikeys-v2.0.0) (2025-03-12)
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/apikeys-v1.3.1...apikeys-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

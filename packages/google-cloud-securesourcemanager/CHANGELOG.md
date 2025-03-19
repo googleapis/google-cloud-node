@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.4.1...securesourcemanager-v1.0.0) (2025-03-12)
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.4.1...securesourcemanager-v0.5.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

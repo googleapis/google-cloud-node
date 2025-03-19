@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.6.1...redis-cluster-v1.0.0) (2025-03-12)
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.6.1...redis-cluster-v0.7.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

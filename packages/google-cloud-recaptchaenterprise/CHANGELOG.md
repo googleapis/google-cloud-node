@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.13.0...recaptcha-enterprise-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.13.0...recaptcha-enterprise-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

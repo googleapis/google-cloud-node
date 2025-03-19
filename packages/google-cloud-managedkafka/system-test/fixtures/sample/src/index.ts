@@ -16,10 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ManagedKafkaClient} from '@google-cloud/managedkafka';
+import {
+  ManagedKafkaClient,
+  ManagedKafkaConnectClient,
+} from '@google-cloud/managedkafka';
 
 // check that the client class type name can be used
 function doStuffWithManagedKafkaClient(client: ManagedKafkaClient) {
+  client.close();
+}
+function doStuffWithManagedKafkaConnectClient(
+  client: ManagedKafkaConnectClient
+) {
   client.close();
 }
 
@@ -27,6 +35,9 @@ function main() {
   // check that the client instance can be created
   const managedKafkaClient = new ManagedKafkaClient();
   doStuffWithManagedKafkaClient(managedKafkaClient);
+  // check that the client instance can be created
+  const managedKafkaConnectClient = new ManagedKafkaConnectClient();
+  doStuffWithManagedKafkaConnectClient(managedKafkaConnectClient);
 }
 
 main();

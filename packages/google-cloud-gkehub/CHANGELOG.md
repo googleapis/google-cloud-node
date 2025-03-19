@@ -1,11 +1,16 @@
 # Changelog
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v5.0.1...gke-hub-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v5.0.1...gke-hub-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
 
 * upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
+
 
 ### Miscellaneous Chores
 

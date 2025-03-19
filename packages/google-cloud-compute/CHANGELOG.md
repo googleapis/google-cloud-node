@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
-## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.12.0...compute-v5.0.0) (2025-03-12)
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.12.0...compute-v5.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

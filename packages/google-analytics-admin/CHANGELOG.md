@@ -1,6 +1,6 @@
 # Changelog
 
-## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.6.0...admin-v8.0.0) (2025-03-12)
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.6.0...admin-v8.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

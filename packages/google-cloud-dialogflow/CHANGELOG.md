@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
-## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.14.0...dialogflow-v7.0.0) (2025-03-12)
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.14.0...dialogflow-v7.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
@@ -14,6 +14,7 @@
 ### Features
 
 * [dialogflow] Add new RPC IngestContextReferences, GenerateSuggestions ([#6111](https://github.com/googleapis/google-cloud-node/issues/6111)) ([9129d93](https://github.com/googleapis/google-cloud-node/commit/9129d93549847996346f7842ea0a650d5cc493fc))
+* [Many APIs] add request/response debug logging to gapics ([afcb5c0](https://github.com/googleapis/google-cloud-node/commit/afcb5c07e82bc8349b9677766cd880f69a97f77f))
 
 
 ### Miscellaneous Chores

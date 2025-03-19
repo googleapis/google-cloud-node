@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.7.1...asset-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.7.1...asset-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

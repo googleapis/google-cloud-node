@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v5.3.1...resource-manager-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/resource-manager-v5.3.1...resource-manager-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

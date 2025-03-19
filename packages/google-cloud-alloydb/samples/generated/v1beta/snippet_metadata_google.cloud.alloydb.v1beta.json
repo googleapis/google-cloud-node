@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-alloydb",
-        "version": "2.0.0",
+        "version": "1.10.2",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -216,6 +216,62 @@
                 "method": {
                     "shortName": "UpdateCluster",
                     "fullName": "google.cloud.alloydb.v1beta.AlloyDBAdmin.UpdateCluster",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1beta_generated_AlloyDBAdmin_ExportCluster_async",
+            "title": "AlloyDBAdmin exportCluster Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports data from the cluster. Imperative only.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.export_cluster.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 76,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportCluster",
+                "fullName": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ExportCluster",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_destination",
+                        "type": ".google.cloud.alloydb.v1beta.GcsDestination"
+                    },
+                    {
+                        "name": "csv_export_options",
+                        "type": ".google.cloud.alloydb.v1beta.ExportClusterRequest.CsvExportOptions"
+                    },
+                    {
+                        "name": "sql_export_options",
+                        "type": ".google.cloud.alloydb.v1beta.ExportClusterRequest.SqlExportOptions"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "database",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1beta.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "ExportCluster",
+                    "fullName": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ExportCluster",
                     "service": {
                         "shortName": "AlloyDBAdmin",
                         "fullName": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
