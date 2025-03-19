@@ -526,7 +526,9 @@ export class CustomTargetingKeyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomTargetingKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -671,7 +673,9 @@ export class CustomTargetingKeyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListCustomTargetingKeysRequest,
@@ -754,7 +758,9 @@ export class CustomTargetingKeyServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetingKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomTargetingKeys stream %j', request);
     return this.descriptors.page.listCustomTargetingKeys.createStream(
       this.innerApiCalls.listCustomTargetingKeys as GaxCall,
@@ -819,7 +825,9 @@ export class CustomTargetingKeyServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetingKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomTargetingKeys iterate %j', request);
     return this.descriptors.page.listCustomTargetingKeys.asyncIterate(
       this.innerApiCalls['listCustomTargetingKeys'] as GaxCall,

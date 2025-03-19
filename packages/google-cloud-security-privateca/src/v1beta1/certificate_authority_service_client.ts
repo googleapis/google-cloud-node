@@ -714,7 +714,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -839,7 +841,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -981,7 +985,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('revokeCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1123,7 +1129,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'certificate.name': request.certificate!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1255,7 +1263,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchCertificateAuthorityCsr request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1381,7 +1391,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCertificateAuthority request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1507,7 +1519,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCertificateRevocationList request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1632,7 +1646,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReusableConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1790,7 +1806,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1984,7 +2002,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2166,7 +2186,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2354,7 +2376,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2536,7 +2560,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2724,7 +2750,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2913,7 +2941,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'certificate_authority.name': request.certificateAuthority!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3097,7 +3127,9 @@ export class CertificateAuthorityServiceClient {
         'certificate_revocation_list.name':
           request.certificateRevocationList!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3281,7 +3313,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListCertificatesRequest,
@@ -3362,7 +3396,9 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCertificates stream %j', request);
     return this.descriptors.page.listCertificates.createStream(
       this.innerApiCalls.listCertificates as GaxCall,
@@ -3425,7 +3461,9 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCertificates iterate %j', request);
     return this.descriptors.page.listCertificates.asyncIterate(
       this.innerApiCalls['listCertificates'] as GaxCall,
@@ -3539,7 +3577,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListCertificateAuthoritiesRequest,
@@ -3616,7 +3656,9 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificateAuthorities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCertificateAuthorities stream %j', request);
     return this.descriptors.page.listCertificateAuthorities.createStream(
       this.innerApiCalls.listCertificateAuthorities as GaxCall,
@@ -3675,7 +3717,9 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listCertificateAuthorities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCertificateAuthorities iterate %j', request);
     return this.descriptors.page.listCertificateAuthorities.asyncIterate(
       this.innerApiCalls['listCertificateAuthorities'] as GaxCall,
@@ -3789,7 +3833,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListCertificateRevocationListsRequest,
@@ -3867,7 +3913,9 @@ export class CertificateAuthorityServiceClient {
     const defaultCallSettings =
       this._defaults['listCertificateRevocationLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCertificateRevocationLists stream %j', request);
     return this.descriptors.page.listCertificateRevocationLists.createStream(
       this.innerApiCalls.listCertificateRevocationLists as GaxCall,
@@ -3927,7 +3975,9 @@ export class CertificateAuthorityServiceClient {
     const defaultCallSettings =
       this._defaults['listCertificateRevocationLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCertificateRevocationLists iterate %j', request);
     return this.descriptors.page.listCertificateRevocationLists.asyncIterate(
       this.innerApiCalls['listCertificateRevocationLists'] as GaxCall,
@@ -4041,7 +4091,9 @@ export class CertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.security.privateca.v1beta1.IListReusableConfigsRequest,
@@ -4118,7 +4170,9 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listReusableConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReusableConfigs stream %j', request);
     return this.descriptors.page.listReusableConfigs.createStream(
       this.innerApiCalls.listReusableConfigs as GaxCall,
@@ -4177,7 +4231,9 @@ export class CertificateAuthorityServiceClient {
       });
     const defaultCallSettings = this._defaults['listReusableConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReusableConfigs iterate %j', request);
     return this.descriptors.page.listReusableConfigs.asyncIterate(
       this.innerApiCalls['listReusableConfigs'] as GaxCall,

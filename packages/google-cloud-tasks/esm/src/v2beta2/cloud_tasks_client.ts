@@ -533,7 +533,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -662,7 +664,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -798,7 +802,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         'queue.name': request.queue!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -921,7 +927,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1037,7 +1045,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('purgeQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1155,7 +1165,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1280,7 +1292,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeQueue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1400,7 +1414,9 @@ export class CloudTasksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('uploadQueueYaml request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1520,7 +1536,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1648,7 +1666,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1767,7 +1787,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1888,7 +1910,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2055,7 +2079,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2170,7 +2196,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2384,7 +2412,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('leaseTasks request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2520,7 +2550,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('acknowledgeTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2662,7 +2694,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('renewLease request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2798,7 +2832,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelLease request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2950,7 +2986,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('runTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3100,7 +3138,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
@@ -3197,7 +3237,9 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listQueues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQueues stream %j', request);
     return this.descriptors.page.listQueues.createStream(
       this.innerApiCalls.listQueues as GaxCall,
@@ -3276,7 +3318,9 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listQueues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQueues iterate %j', request);
     return this.descriptors.page.listQueues.asyncIterate(
       this.innerApiCalls['listQueues'] as GaxCall,
@@ -3410,7 +3454,9 @@ export class CloudTasksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tasks.v2beta2.IListTasksRequest,
@@ -3505,7 +3551,9 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
@@ -3582,7 +3630,9 @@ export class CloudTasksClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,

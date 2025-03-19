@@ -548,7 +548,9 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRuntimeProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -681,7 +683,9 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRuntimeProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -809,7 +813,9 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRuntimeProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -943,7 +949,9 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupRuntimeProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1105,7 +1113,9 @@ export class RuntimeProjectAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apihub.v1.IListRuntimeProjectAttachmentsRequest,
@@ -1199,7 +1209,9 @@ export class RuntimeProjectAttachmentServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeProjectAttachments stream %j', request);
     return this.descriptors.page.listRuntimeProjectAttachments.createStream(
       this.innerApiCalls.listRuntimeProjectAttachments as GaxCall,
@@ -1275,7 +1287,9 @@ export class RuntimeProjectAttachmentServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeProjectAttachments iterate %j', request);
     return this.descriptors.page.listRuntimeProjectAttachments.asyncIterate(
       this.innerApiCalls['listRuntimeProjectAttachments'] as GaxCall,

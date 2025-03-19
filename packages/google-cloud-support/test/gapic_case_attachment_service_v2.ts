@@ -268,7 +268,9 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.caseAttachmentServiceStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -365,7 +367,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -415,7 +417,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -447,7 +449,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -502,7 +504,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -552,7 +554,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -596,7 +598,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListAttachmentsRequest()
       );
@@ -633,7 +635,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('organizationCase', () => {
+    describe('organizationCase', async () => {
       const fakePath = '/rendered/path/organizationCase';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -644,7 +646,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -690,7 +692,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
-    describe('organizationCaseAttachmentId', () => {
+    describe('organizationCaseAttachmentId', async () => {
       const fakePath = '/rendered/path/organizationCaseAttachmentId';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -702,7 +704,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match =
@@ -772,7 +774,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
-    describe('organizationCaseComment', () => {
+    describe('organizationCaseComment', async () => {
       const fakePath = '/rendered/path/organizationCaseComment';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -784,7 +786,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCaseCommentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -852,7 +854,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
-    describe('projectCase', () => {
+    describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -863,7 +865,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -902,7 +904,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
-    describe('projectCaseAttachmentId', () => {
+    describe('projectCaseAttachmentId', async () => {
       const fakePath = '/rendered/path/projectCaseAttachmentId';
       const expectedParameters = {
         project: 'projectValue',
@@ -914,7 +916,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCaseAttachmentIdPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -982,7 +984,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
       });
     });
 
-    describe('projectCaseComment', () => {
+    describe('projectCaseComment', async () => {
       const fakePath = '/rendered/path/projectCaseComment';
       const expectedParameters = {
         project: 'projectValue',
@@ -994,7 +996,7 @@ describe('v2.CaseAttachmentServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCaseCommentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

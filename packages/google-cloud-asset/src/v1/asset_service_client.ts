@@ -651,7 +651,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchGetAssetsHistory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -775,7 +777,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -884,7 +888,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -992,7 +998,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeeds request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1106,7 +1114,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feed.name': request.feed!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1215,7 +1225,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1353,7 +1365,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'analysis_query.scope': request.analysisQuery!.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1477,7 +1491,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeMove request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1648,7 +1664,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryAssets request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1773,7 +1791,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSavedQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1885,7 +1905,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSavedQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2002,7 +2024,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'saved_query.name': request.savedQuery!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSavedQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2117,7 +2141,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSavedQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2255,7 +2281,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchGetEffectiveIamPolicies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2447,7 +2475,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2643,7 +2673,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'analysis_query.scope': request.analysisQuery!.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2855,7 +2887,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.IListAssetsRequest,
@@ -2969,7 +3003,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -3067,7 +3103,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -3336,7 +3374,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
@@ -3565,7 +3605,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllResources stream %j', request);
     return this.descriptors.page.searchAllResources.createStream(
       this.innerApiCalls.searchAllResources as GaxCall,
@@ -3776,7 +3818,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllResources iterate %j', request);
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
@@ -3971,7 +4015,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
@@ -4126,7 +4172,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllIamPolicies stream %j', request);
     return this.descriptors.page.searchAllIamPolicies.createStream(
       this.innerApiCalls.searchAllIamPolicies as GaxCall,
@@ -4263,7 +4311,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllIamPolicies iterate %j', request);
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,
@@ -4376,7 +4426,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.IListSavedQueriesRequest,
@@ -4458,7 +4510,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSavedQueries stream %j', request);
     return this.descriptors.page.listSavedQueries.createStream(
       this.innerApiCalls.listSavedQueries as GaxCall,
@@ -4522,7 +4576,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSavedQueries iterate %j', request);
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
@@ -4645,7 +4701,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.IAnalyzeOrgPoliciesRequest,
@@ -4731,7 +4789,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['analyzeOrgPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeOrgPolicies stream %j', request);
     return this.descriptors.page.analyzeOrgPolicies.createStream(
       this.innerApiCalls.analyzeOrgPolicies as GaxCall,
@@ -4799,7 +4859,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['analyzeOrgPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeOrgPolicies iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicies.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicies'] as GaxCall,
@@ -4925,7 +4987,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedContainersRequest,
@@ -5020,7 +5084,9 @@ export class AssetServiceClient {
     const defaultCallSettings =
       this._defaults['analyzeOrgPolicyGovernedContainers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeOrgPolicyGovernedContainers stream %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedContainers.createStream(
       this.innerApiCalls.analyzeOrgPolicyGovernedContainers as GaxCall,
@@ -5091,7 +5157,9 @@ export class AssetServiceClient {
     const defaultCallSettings =
       this._defaults['analyzeOrgPolicyGovernedContainers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeOrgPolicyGovernedContainers iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedContainers.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicyGovernedContainers'] as GaxCall,
@@ -5280,7 +5348,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1.IAnalyzeOrgPolicyGovernedAssetsRequest,
@@ -5385,7 +5455,9 @@ export class AssetServiceClient {
     const defaultCallSettings =
       this._defaults['analyzeOrgPolicyGovernedAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeOrgPolicyGovernedAssets stream %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedAssets.createStream(
       this.innerApiCalls.analyzeOrgPolicyGovernedAssets as GaxCall,
@@ -5472,7 +5544,9 @@ export class AssetServiceClient {
     const defaultCallSettings =
       this._defaults['analyzeOrgPolicyGovernedAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeOrgPolicyGovernedAssets iterate %j', request);
     return this.descriptors.page.analyzeOrgPolicyGovernedAssets.asyncIterate(
       this.innerApiCalls['analyzeOrgPolicyGovernedAssets'] as GaxCall,
@@ -5574,7 +5648,7 @@ export class AssetServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

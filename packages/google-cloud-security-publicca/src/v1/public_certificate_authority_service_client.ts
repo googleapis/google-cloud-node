@@ -482,7 +482,9 @@ export class PublicCertificateAuthorityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createExternalAccountKey request %j', request);
     const wrappedCallback:
       | Callback<

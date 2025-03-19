@@ -539,7 +539,9 @@ export class ApiHubDependenciesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDependency request %j', request);
     const wrappedCallback:
       | Callback<
@@ -650,7 +652,9 @@ export class ApiHubDependenciesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDependency request %j', request);
     const wrappedCallback:
       | Callback<
@@ -771,7 +775,9 @@ export class ApiHubDependenciesClient {
       this._gaxModule.routingHeader.fromParams({
         'dependency.name': request.dependency!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDependency request %j', request);
     const wrappedCallback:
       | Callback<
@@ -882,7 +888,9 @@ export class ApiHubDependenciesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDependency request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1049,7 +1057,9 @@ export class ApiHubDependenciesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apihub.v1.IListDependenciesRequest,
@@ -1157,7 +1167,9 @@ export class ApiHubDependenciesClient {
       });
     const defaultCallSettings = this._defaults['listDependencies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDependencies stream %j', request);
     return this.descriptors.page.listDependencies.createStream(
       this.innerApiCalls.listDependencies as GaxCall,
@@ -1247,7 +1259,9 @@ export class ApiHubDependenciesClient {
       });
     const defaultCallSettings = this._defaults['listDependencies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDependencies iterate %j', request);
     return this.descriptors.page.listDependencies.asyncIterate(
       this.innerApiCalls['listDependencies'] as GaxCall,

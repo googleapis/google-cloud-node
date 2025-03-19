@@ -646,7 +646,9 @@ export class ClientGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getClientGateway request %j', request);
     const wrappedCallback:
       | Callback<
@@ -802,7 +804,9 @@ export class ClientGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -986,7 +990,9 @@ export class ClientGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1153,7 +1159,9 @@ export class ClientGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.clientgateways.v1.IListClientGatewaysRequest,
@@ -1223,7 +1231,9 @@ export class ClientGatewaysServiceClient {
       });
     const defaultCallSettings = this._defaults['listClientGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClientGateways stream %j', request);
     return this.descriptors.page.listClientGateways.createStream(
       this.innerApiCalls.listClientGateways as GaxCall,
@@ -1275,7 +1285,9 @@ export class ClientGatewaysServiceClient {
       });
     const defaultCallSettings = this._defaults['listClientGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClientGateways iterate %j', request);
     return this.descriptors.page.listClientGateways.asyncIterate(
       this.innerApiCalls['listClientGateways'] as GaxCall,
@@ -1593,7 +1605,7 @@ export class ClientGatewaysServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

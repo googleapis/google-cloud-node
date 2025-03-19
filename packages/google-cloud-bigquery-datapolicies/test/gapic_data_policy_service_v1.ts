@@ -256,7 +256,9 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataPolicyServiceStub);
       client.close().then(() => {
         done();
@@ -315,7 +317,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
@@ -346,7 +348,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
@@ -393,7 +395,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
@@ -424,7 +426,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.CreateDataPolicyRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
@@ -477,7 +479,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
@@ -525,7 +527,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
@@ -557,7 +559,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.UpdateDataPolicyRequest()
       );
@@ -579,7 +581,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
       );
@@ -657,7 +659,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
       );
@@ -688,7 +690,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.RenameDataPolicyRequest()
       );
@@ -709,7 +711,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
@@ -740,7 +742,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
@@ -787,7 +789,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
@@ -818,7 +820,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.DeleteDataPolicyRequest()
       );
@@ -839,7 +841,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
@@ -870,7 +872,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
@@ -917,7 +919,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
@@ -948,7 +950,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.GetDataPolicyRequest()
       );
@@ -969,7 +971,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1000,7 +1002,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1047,7 +1049,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1078,7 +1080,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1177,7 +1179,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1261,7 +1263,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1308,7 +1310,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1399,7 +1401,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1456,7 +1458,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1487,7 +1489,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1550,7 +1552,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1652,7 +1654,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datapolicies.v1.ListDataPoliciesRequest()
       );
@@ -1690,7 +1692,7 @@ describe('v1.DataPolicyServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('dataPolicy', () => {
+    describe('dataPolicy', async () => {
       const fakePath = '/rendered/path/dataPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -1701,7 +1703,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1754,7 +1756,7 @@ describe('v1.DataPolicyServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1764,7 +1766,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1803,7 +1805,7 @@ describe('v1.DataPolicyServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1812,7 +1814,7 @@ describe('v1.DataPolicyServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

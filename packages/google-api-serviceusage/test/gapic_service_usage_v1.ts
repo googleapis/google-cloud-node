@@ -287,7 +287,9 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.serviceUsageStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
@@ -377,7 +379,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
@@ -424,7 +426,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
@@ -455,7 +457,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
@@ -507,7 +509,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
@@ -585,7 +587,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
@@ -606,7 +608,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
@@ -693,7 +695,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
@@ -724,7 +726,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
@@ -757,7 +759,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -779,7 +781,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -800,7 +802,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
@@ -833,7 +835,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
@@ -887,7 +889,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
@@ -918,7 +920,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
@@ -951,7 +953,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -973,7 +975,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -994,7 +996,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
@@ -1081,7 +1083,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
@@ -1112,7 +1114,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
@@ -1145,7 +1147,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1167,7 +1169,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1188,7 +1190,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1221,7 +1223,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1270,7 +1272,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1301,7 +1303,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1355,7 +1357,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1449,7 +1451,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
@@ -1490,7 +1492,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1569,7 +1571,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1649,7 +1651,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1745,8 +1747,7 @@ describe('v1.ServiceUsageClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1765,7 +1766,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1774,8 +1775,7 @@ describe('v1.ServiceUsageClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1791,7 +1791,7 @@ describe('v1.ServiceUsageClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderService', () => {
+    describe('folderService', async () => {
       const fakePath = '/rendered/path/folderService';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1801,7 +1801,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1840,7 +1840,7 @@ describe('v1.ServiceUsageClient', () => {
       });
     });
 
-    describe('organizationService', () => {
+    describe('organizationService', async () => {
       const fakePath = '/rendered/path/organizationService';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1850,7 +1850,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1902,7 +1902,7 @@ describe('v1.ServiceUsageClient', () => {
       });
     });
 
-    describe('projectService', () => {
+    describe('projectService', async () => {
       const fakePath = '/rendered/path/projectService';
       const expectedParameters = {
         project: 'projectValue',
@@ -1912,7 +1912,7 @@ describe('v1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

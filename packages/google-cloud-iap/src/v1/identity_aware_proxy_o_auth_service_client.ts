@@ -480,7 +480,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBrands request %j', request);
     const wrappedCallback:
       | Callback<
@@ -596,7 +598,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBrand request %j', request);
     const wrappedCallback:
       | Callback<
@@ -703,7 +707,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBrand request %j', request);
     const wrappedCallback:
       | Callback<
@@ -830,7 +836,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createIdentityAwareProxyClient request %j', request);
     const wrappedCallback:
       | Callback<
@@ -964,7 +972,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIdentityAwareProxyClient request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1092,7 +1102,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resetIdentityAwareProxyClientSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1227,7 +1239,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteIdentityAwareProxyClient request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1369,7 +1383,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.iap.v1.IListIdentityAwareProxyClientsRequest,
@@ -1443,7 +1459,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       });
     const defaultCallSettings = this._defaults['listIdentityAwareProxyClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIdentityAwareProxyClients stream %j', request);
     return this.descriptors.page.listIdentityAwareProxyClients.createStream(
       this.innerApiCalls.listIdentityAwareProxyClients as GaxCall,
@@ -1499,7 +1517,9 @@ export class IdentityAwareProxyOAuthServiceClient {
       });
     const defaultCallSettings = this._defaults['listIdentityAwareProxyClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIdentityAwareProxyClients iterate %j', request);
     return this.descriptors.page.listIdentityAwareProxyClients.asyncIterate(
       this.innerApiCalls['listIdentityAwareProxyClients'] as GaxCall,

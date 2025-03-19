@@ -253,7 +253,9 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.caseServiceStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.GetCaseRequest()
       );
@@ -343,7 +345,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.GetCaseRequest()
       );
@@ -390,7 +392,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.GetCaseRequest()
       );
@@ -418,7 +420,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.GetCaseRequest()
       );
@@ -439,7 +441,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCaseRequest()
       );
@@ -470,7 +472,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCaseRequest()
       );
@@ -517,7 +519,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCaseRequest()
       );
@@ -548,7 +550,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCaseRequest()
       );
@@ -569,7 +571,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.UpdateCaseRequest()
       );
@@ -601,7 +603,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.UpdateCaseRequest()
       );
@@ -649,7 +651,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.UpdateCaseRequest()
       );
@@ -681,7 +683,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.UpdateCaseRequest()
       );
@@ -703,7 +705,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.EscalateCaseRequest()
       );
@@ -734,7 +736,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.EscalateCaseRequest()
       );
@@ -781,7 +783,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.EscalateCaseRequest()
       );
@@ -812,7 +814,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.EscalateCaseRequest()
       );
@@ -833,7 +835,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CloseCaseRequest()
       );
@@ -864,7 +866,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CloseCaseRequest()
       );
@@ -911,7 +913,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CloseCaseRequest()
       );
@@ -939,7 +941,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CloseCaseRequest()
       );
@@ -960,7 +962,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -993,7 +995,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -1070,7 +1072,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -1121,7 +1123,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -1169,7 +1171,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -1211,7 +1213,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCasesRequest()
       );
@@ -1254,7 +1256,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1287,7 +1289,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1336,7 +1338,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1367,7 +1369,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1418,7 +1420,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1466,7 +1468,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1509,7 +1511,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCasesRequest()
       );
@@ -1553,7 +1555,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1579,7 +1581,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1620,7 +1622,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1640,7 +1642,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1691,7 +1693,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1731,7 +1733,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1769,7 +1771,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.SearchCaseClassificationsRequest()
       );
@@ -1795,7 +1797,7 @@ describe('v2.CaseServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1804,7 +1806,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1833,7 +1835,7 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
-    describe('organizationCase', () => {
+    describe('organizationCase', async () => {
       const fakePath = '/rendered/path/organizationCase';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1843,7 +1845,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1889,7 +1891,7 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
-    describe('organizationCaseAttachmentId', () => {
+    describe('organizationCaseAttachmentId', async () => {
       const fakePath = '/rendered/path/organizationCaseAttachmentId';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1900,7 +1902,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match =
@@ -1970,7 +1972,7 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
-    describe('organizationCaseComment', () => {
+    describe('organizationCaseComment', async () => {
       const fakePath = '/rendered/path/organizationCaseComment';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1981,7 +1983,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCaseCommentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2049,7 +2051,7 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
-    describe('projectCase', () => {
+    describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -2059,7 +2061,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2098,7 +2100,7 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
-    describe('projectCaseAttachmentId', () => {
+    describe('projectCaseAttachmentId', async () => {
       const fakePath = '/rendered/path/projectCaseAttachmentId';
       const expectedParameters = {
         project: 'projectValue',
@@ -2109,7 +2111,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCaseAttachmentIdPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2177,7 +2179,7 @@ describe('v2.CaseServiceClient', () => {
       });
     });
 
-    describe('projectCaseComment', () => {
+    describe('projectCaseComment', async () => {
       const fakePath = '/rendered/path/projectCaseComment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2188,7 +2190,7 @@ describe('v2.CaseServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCaseCommentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

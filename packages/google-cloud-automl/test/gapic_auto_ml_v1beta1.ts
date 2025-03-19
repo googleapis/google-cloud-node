@@ -282,7 +282,9 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.autoMlStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -372,7 +374,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -419,7 +421,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -450,7 +452,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateDatasetRequest()
       );
@@ -471,7 +473,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -502,7 +504,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -549,7 +551,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -580,7 +582,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetDatasetRequest()
       );
@@ -601,7 +603,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -633,7 +635,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -681,7 +683,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -713,7 +715,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateDatasetRequest()
       );
@@ -735,7 +737,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -766,7 +768,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -813,7 +815,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -844,7 +846,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetAnnotationSpecRequest()
       );
@@ -865,7 +867,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -896,7 +898,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -943,7 +945,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -974,7 +976,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetTableSpecRequest()
       );
@@ -995,7 +997,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1075,7 +1077,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1107,7 +1109,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateTableSpecRequest()
       );
@@ -1129,7 +1131,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1160,7 +1162,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1207,7 +1209,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1238,7 +1240,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetColumnSpecRequest()
       );
@@ -1259,7 +1261,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1291,7 +1293,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1371,7 +1373,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UpdateColumnSpecRequest()
       );
@@ -1393,7 +1395,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1424,7 +1426,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1471,7 +1473,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1499,7 +1501,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelRequest()
       );
@@ -1520,7 +1522,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1552,7 +1554,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1599,7 +1601,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1630,7 +1632,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.GetModelEvaluationRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1684,7 +1686,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1738,7 +1740,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1769,7 +1771,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteDatasetRequest()
       );
@@ -1802,7 +1804,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1824,7 +1826,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1845,7 +1847,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1877,7 +1879,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1931,7 +1933,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1962,7 +1964,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ImportDataRequest()
       );
@@ -1995,7 +1997,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2017,7 +2019,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2035,7 +2037,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2067,7 +2069,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2121,7 +2123,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2152,7 +2154,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportDataRequest()
       );
@@ -2185,7 +2187,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2207,7 +2209,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2225,7 +2227,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2257,7 +2259,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2311,7 +2313,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2342,7 +2344,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.CreateModelRequest()
       );
@@ -2375,7 +2377,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2397,7 +2399,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2415,7 +2417,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2447,7 +2449,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2501,7 +2503,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2532,7 +2534,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeleteModelRequest()
       );
@@ -2565,7 +2567,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2587,7 +2589,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2605,7 +2607,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2637,7 +2639,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2691,7 +2693,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2722,7 +2724,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.DeployModelRequest()
       );
@@ -2755,7 +2757,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2777,7 +2779,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2795,7 +2797,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2828,7 +2830,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2882,7 +2884,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2913,7 +2915,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.UndeployModelRequest()
       );
@@ -2946,7 +2948,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2968,7 +2970,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2989,7 +2991,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3021,7 +3023,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3075,7 +3077,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3106,7 +3108,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportModelRequest()
       );
@@ -3139,7 +3141,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3161,7 +3163,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3179,7 +3181,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3212,7 +3214,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3266,7 +3268,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3300,7 +3302,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest()
       );
@@ -3333,7 +3335,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3356,7 +3358,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3377,7 +3379,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3410,7 +3412,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3459,7 +3461,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3490,7 +3492,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3544,7 +3546,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3595,7 +3597,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3638,7 +3640,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListDatasetsRequest()
       );
@@ -3680,7 +3682,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3719,7 +3721,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3774,7 +3776,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3805,7 +3807,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3865,7 +3867,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3914,7 +3916,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -3963,7 +3965,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListTableSpecsRequest()
       );
@@ -4005,7 +4007,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4044,7 +4046,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4099,7 +4101,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4130,7 +4132,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4190,7 +4192,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4239,7 +4241,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4288,7 +4290,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListColumnSpecsRequest()
       );
@@ -4330,7 +4332,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4363,7 +4365,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4412,7 +4414,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4443,7 +4445,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4497,7 +4499,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4548,7 +4550,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4591,7 +4593,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelsRequest()
       );
@@ -4635,7 +4637,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4675,7 +4677,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4732,7 +4734,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4763,7 +4765,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4824,7 +4826,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4874,7 +4876,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4924,7 +4926,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ListModelEvaluationsRequest()
       );
@@ -4962,7 +4964,7 @@ describe('v1beta1.AutoMlClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('annotationSpec', () => {
+    describe('annotationSpec', async () => {
       const fakePath = '/rendered/path/annotationSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -4974,7 +4976,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5039,7 +5041,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('columnSpec', () => {
+    describe('columnSpec', async () => {
       const fakePath = '/rendered/path/columnSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -5052,7 +5054,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.columnSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5127,7 +5129,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -5138,7 +5140,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5191,7 +5193,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5201,7 +5203,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5240,7 +5242,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         project: 'projectValue',
@@ -5251,7 +5253,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5304,7 +5306,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('modelEvaluation', () => {
+    describe('modelEvaluation', async () => {
       const fakePath = '/rendered/path/modelEvaluation';
       const expectedParameters = {
         project: 'projectValue',
@@ -5316,7 +5318,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5381,7 +5383,7 @@ describe('v1beta1.AutoMlClient', () => {
       });
     });
 
-    describe('tableSpec', () => {
+    describe('tableSpec', async () => {
       const fakePath = '/rendered/path/tableSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -5393,7 +5395,7 @@ describe('v1beta1.AutoMlClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tableSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -216,7 +216,9 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.generativeServiceStub);
       client.close().then(() => {
         done();
@@ -275,7 +277,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -306,7 +308,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -353,7 +355,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -384,7 +386,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -405,7 +407,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.EmbedContentRequest()
       );
@@ -436,7 +438,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.EmbedContentRequest()
       );
@@ -483,7 +485,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.EmbedContentRequest()
       );
@@ -514,7 +516,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.EmbedContentRequest()
       );
@@ -535,7 +537,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.BatchEmbedContentsRequest()
       );
@@ -567,7 +569,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.BatchEmbedContentsRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.BatchEmbedContentsRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.BatchEmbedContentsRequest()
       );
@@ -666,7 +668,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.CountTokensRequest()
       );
@@ -697,7 +699,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.CountTokensRequest()
       );
@@ -744,7 +746,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.CountTokensRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.CountTokensRequest()
       );
@@ -796,7 +798,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -839,9 +841,11 @@ describe('v1.GenerativeServiceClient', () => {
 
     it('invokes streamGenerateContent without error and gaxServerStreamingRetries enabled', async () => {
       const client = new generativeserviceModule.v1.GenerativeServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -887,7 +891,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -932,7 +936,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1.GenerateContentRequest()
       );
@@ -970,7 +974,7 @@ describe('v1.GenerativeServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         model: 'modelValue',
@@ -979,7 +983,7 @@ describe('v1.GenerativeServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -513,7 +513,9 @@ export class AutokeyAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'autokey_config.name': request.autokeyConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAutokeyConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -625,7 +627,9 @@ export class AutokeyAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutokeyConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -743,7 +747,9 @@ export class AutokeyAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('showEffectiveAutokeyConfig request %j', request);
     const wrappedCallback:
       | Callback<

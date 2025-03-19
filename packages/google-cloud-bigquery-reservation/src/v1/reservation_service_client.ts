@@ -557,7 +557,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -683,7 +685,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -811,7 +815,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -938,7 +944,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'reservation.name': request.reservation!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1068,7 +1076,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('failoverReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1205,7 +1215,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCapacityCommitment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1331,7 +1343,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCapacityCommitment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1463,7 +1477,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCapacityCommitment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1596,7 +1612,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'capacity_commitment.name': request.capacityCommitment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCapacityCommitment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1731,7 +1749,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('splitCapacityCommitment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1869,7 +1889,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('mergeCapacityCommitments request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2036,7 +2058,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAssignment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2176,7 +2200,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAssignment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2316,7 +2342,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moveAssignment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2445,7 +2473,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'assignment.name': request.assignment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAssignment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2571,7 +2601,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBiReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2705,7 +2737,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'bi_reservation.name': request.biReservation!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBiReservation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2833,7 +2867,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.IListReservationsRequest,
@@ -2899,7 +2935,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReservations stream %j', request);
     return this.descriptors.page.listReservations.createStream(
       this.innerApiCalls.listReservations as GaxCall,
@@ -2947,7 +2985,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReservations iterate %j', request);
     return this.descriptors.page.listReservations.asyncIterate(
       this.innerApiCalls['listReservations'] as GaxCall,
@@ -3050,7 +3090,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.IListCapacityCommitmentsRequest,
@@ -3116,7 +3158,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listCapacityCommitments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCapacityCommitments stream %j', request);
     return this.descriptors.page.listCapacityCommitments.createStream(
       this.innerApiCalls.listCapacityCommitments as GaxCall,
@@ -3164,7 +3208,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listCapacityCommitments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCapacityCommitments iterate %j', request);
     return this.descriptors.page.listCapacityCommitments.asyncIterate(
       this.innerApiCalls['listCapacityCommitments'] as GaxCall,
@@ -3292,7 +3338,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.IListAssignmentsRequest,
@@ -3363,7 +3411,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssignments stream %j', request);
     return this.descriptors.page.listAssignments.createStream(
       this.innerApiCalls.listAssignments as GaxCall,
@@ -3416,7 +3466,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssignments iterate %j', request);
     return this.descriptors.page.listAssignments.asyncIterate(
       this.innerApiCalls['listAssignments'] as GaxCall,
@@ -3551,7 +3603,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ReservationService-$SearchAssignments',
       'SearchAssignments is deprecated and may be removed in a future version.',
@@ -3632,7 +3686,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ReservationService-$SearchAssignments',
       'SearchAssignments is deprecated and may be removed in a future version.',
@@ -3695,7 +3751,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ReservationService-$SearchAssignments',
       'SearchAssignments is deprecated and may be removed in a future version.',
@@ -3831,7 +3889,9 @@ export class ReservationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
@@ -3906,7 +3966,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllAssignments stream %j', request);
     return this.descriptors.page.searchAllAssignments.createStream(
       this.innerApiCalls.searchAllAssignments as GaxCall,
@@ -3963,7 +4025,9 @@ export class ReservationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllAssignments iterate %j', request);
     return this.descriptors.page.searchAllAssignments.asyncIterate(
       this.innerApiCalls['searchAllAssignments'] as GaxCall,
