@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dns-v5.0.0...dns-v5.1.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/promisify to v5 ([#6150](https://github.com/googleapis/google-cloud-node/issues/6150)) ([1135b86](https://github.com/googleapis/google-cloud-node/commit/1135b8610b2471249dc3aec47eb0f985ded13f93))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dns-v4.1.0...dns-v5.0.0) (2025-03-18)
 
 

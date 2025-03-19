@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v3.0.0...addressvalidation-v3.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/addressvalidation-v2.4.0...addressvalidation-v3.0.0) (2025-03-18)
 
 

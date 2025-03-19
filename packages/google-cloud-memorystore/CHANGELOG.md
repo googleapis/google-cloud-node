@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.2.0...memorystore-v0.2.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6186](https://github.com/googleapis/google-cloud-node/issues/6186)) ([dcfc7b4](https://github.com/googleapis/google-cloud-node/commit/dcfc7b492a2ac3fb86b93ae1375bac1c5153d049))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.1.1...memorystore-v0.2.0) (2025-03-18)
 
 

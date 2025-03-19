@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.2.0...areainsights-v0.2.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.1.0...areainsights-v0.2.0) (2025-03-18)
 
 

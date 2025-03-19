@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.4.0...managedkafka-v0.5.0) (2025-03-19)
+
+
+### Features
+
+* [managedkafka] add Managed Kafka Connect API ([#6176](https://github.com/googleapis/google-cloud-node/issues/6176)) ([63b6187](https://github.com/googleapis/google-cloud-node/commit/63b6187b833648213cff66adc29bebb6e3beb1e5))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6186](https://github.com/googleapis/google-cloud-node/issues/6186)) ([dcfc7b4](https://github.com/googleapis/google-cloud-node/commit/dcfc7b492a2ac3fb86b93ae1375bac1c5153d049))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.3.1...managedkafka-v0.4.0) (2025-03-18)
 
 

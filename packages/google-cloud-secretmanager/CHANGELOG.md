@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.0.0...secret-manager-v6.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6188](https://github.com/googleapis/google-cloud-node/issues/6188)) ([a73cdbf](https://github.com/googleapis/google-cloud-node/commit/a73cdbfe33d5ba9952f0c87cb9d5d12ee8753dd2))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.6.0...secret-manager-v6.0.0) (2025-03-18)
 
 
