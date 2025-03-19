@@ -774,7 +774,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversationModel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -901,7 +903,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversationModelEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1051,7 +1055,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1228,7 +1234,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1408,7 +1416,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1588,7 +1598,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1759,7 +1771,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1929,7 +1943,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListConversationModelsRequest,
@@ -1996,7 +2012,9 @@ export class ConversationModelsClient {
       });
     const defaultCallSettings = this._defaults['listConversationModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationModels stream %j', request);
     return this.descriptors.page.listConversationModels.createStream(
       this.innerApiCalls.listConversationModels as GaxCall,
@@ -2045,7 +2063,9 @@ export class ConversationModelsClient {
       });
     const defaultCallSettings = this._defaults['listConversationModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationModels iterate %j', request);
     return this.descriptors.page.listConversationModels.asyncIterate(
       this.innerApiCalls['listConversationModels'] as GaxCall,
@@ -2149,7 +2169,9 @@ export class ConversationModelsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListConversationModelEvaluationsRequest,
@@ -2220,7 +2242,9 @@ export class ConversationModelsClient {
     const defaultCallSettings =
       this._defaults['listConversationModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationModelEvaluations stream %j', request);
     return this.descriptors.page.listConversationModelEvaluations.createStream(
       this.innerApiCalls.listConversationModelEvaluations as GaxCall,
@@ -2270,7 +2294,9 @@ export class ConversationModelsClient {
     const defaultCallSettings =
       this._defaults['listConversationModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationModelEvaluations iterate %j', request);
     return this.descriptors.page.listConversationModelEvaluations.asyncIterate(
       this.innerApiCalls['listConversationModelEvaluations'] as GaxCall,
@@ -2450,7 +2476,7 @@ export class ConversationModelsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

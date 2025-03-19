@@ -645,7 +645,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDomains request %j', request);
     const wrappedCallback:
       | Callback<
@@ -770,7 +772,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('retrieveRegisterParameters request %j', request);
     const wrappedCallback:
       | Callback<
@@ -902,7 +906,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('retrieveTransferParameters request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1022,7 +1028,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRegistration request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1152,7 +1160,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('retrieveAuthorizationCode request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1281,7 +1291,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resetAuthorizationCode request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1443,7 +1455,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1652,7 +1666,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1828,7 +1844,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         'registration.name': request.registration!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2002,7 +2020,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2190,7 +2210,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2370,7 +2392,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2546,7 +2570,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2732,7 +2758,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2913,7 +2941,9 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
@@ -2997,7 +3027,9 @@ export class DomainsClient {
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRegistrations stream %j', request);
     return this.descriptors.page.listRegistrations.createStream(
       this.innerApiCalls.listRegistrations as GaxCall,
@@ -3063,7 +3095,9 @@ export class DomainsClient {
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRegistrations iterate %j', request);
     return this.descriptors.page.listRegistrations.asyncIterate(
       this.innerApiCalls['listRegistrations'] as GaxCall,

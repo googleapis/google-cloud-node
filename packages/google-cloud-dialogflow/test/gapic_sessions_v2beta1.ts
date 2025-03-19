@@ -226,7 +226,9 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sessionsStub);
       client.close().then(() => {
         done();
@@ -285,7 +287,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
       );
@@ -316,7 +318,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
       );
@@ -363,7 +365,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
       );
@@ -394,7 +396,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DetectIntentRequest()
       );
@@ -415,7 +417,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest()
       );
@@ -460,7 +462,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest()
       );
@@ -504,7 +506,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -534,7 +536,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -578,7 +580,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -613,7 +615,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -661,7 +663,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -698,7 +700,7 @@ describe('v2beta1.SessionsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('encryptionSpec', () => {
+    describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -708,7 +710,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.encryptionSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -750,7 +752,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('generator', () => {
+    describe('generator', async () => {
       const fakePath = '/rendered/path/generator';
       const expectedParameters = {
         project: 'projectValue',
@@ -761,7 +763,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -814,7 +816,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgent', () => {
+    describe('projectAgent', async () => {
       const fakePath = '/rendered/path/projectAgent';
       const expectedParameters = {
         project: 'projectValue',
@@ -823,7 +825,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -852,7 +854,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentEntityType', () => {
+    describe('projectAgentEntityType', async () => {
       const fakePath = '/rendered/path/projectAgentEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -862,7 +864,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEntityTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -915,7 +917,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironment', () => {
+    describe('projectAgentEnvironment', async () => {
       const fakePath = '/rendered/path/projectAgentEnvironment';
       const expectedParameters = {
         project: 'projectValue',
@@ -925,7 +927,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -978,7 +980,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironmentUserSession', () => {
+    describe('projectAgentEnvironmentUserSession', async () => {
       const fakePath = '/rendered/path/projectAgentEnvironmentUserSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -990,7 +992,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentUserSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentEnvironmentUserSessionPathTemplate.match =
@@ -1077,7 +1079,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironmentUserSessionContext', () => {
+    describe('projectAgentEnvironmentUserSessionContext', async () => {
       const fakePath =
         '/rendered/path/projectAgentEnvironmentUserSessionContext';
       const expectedParameters = {
@@ -1091,7 +1093,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match =
@@ -1203,7 +1205,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentEnvironmentUserSessionEntityType', () => {
+    describe('projectAgentEnvironmentUserSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectAgentEnvironmentUserSessionEntityType';
       const expectedParameters = {
@@ -1217,7 +1219,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match =
@@ -1329,7 +1331,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentFulfillment', () => {
+    describe('projectAgentFulfillment', async () => {
       const fakePath = '/rendered/path/projectAgentFulfillment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1338,7 +1340,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentFulfillmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1374,7 +1376,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentIntent', () => {
+    describe('projectAgentIntent', async () => {
       const fakePath = '/rendered/path/projectAgentIntent';
       const expectedParameters = {
         project: 'projectValue',
@@ -1384,7 +1386,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentIntentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1435,7 +1437,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentSession', () => {
+    describe('projectAgentSession', async () => {
       const fakePath = '/rendered/path/projectAgentSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -1445,7 +1447,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentSessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1496,7 +1498,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentSessionContext', () => {
+    describe('projectAgentSessionContext', async () => {
       const fakePath = '/rendered/path/projectAgentSessionContext';
       const expectedParameters = {
         project: 'projectValue',
@@ -1507,7 +1509,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentSessionContextPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1575,7 +1577,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentSessionEntityType', () => {
+    describe('projectAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -1586,7 +1588,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectAgentSessionEntityTypePathTemplate.match =
@@ -1652,7 +1654,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAgentVersion', () => {
+    describe('projectAgentVersion', async () => {
       const fakePath = '/rendered/path/projectAgentVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -1662,7 +1664,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAgentVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1713,7 +1715,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectAnswerRecord', () => {
+    describe('projectAnswerRecord', async () => {
       const fakePath = '/rendered/path/projectAnswerRecord';
       const expectedParameters = {
         project: 'projectValue',
@@ -1723,7 +1725,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAnswerRecordPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1775,7 +1777,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectConversation', () => {
+    describe('projectConversation', async () => {
       const fakePath = '/rendered/path/projectConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1785,7 +1787,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1837,7 +1839,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectConversationMessage', () => {
+    describe('projectConversationMessage', async () => {
       const fakePath = '/rendered/path/projectConversationMessage';
       const expectedParameters = {
         project: 'projectValue',
@@ -1848,7 +1850,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationMessagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1916,7 +1918,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectConversationParticipant', () => {
+    describe('projectConversationParticipant', async () => {
       const fakePath = '/rendered/path/projectConversationParticipant';
       const expectedParameters = {
         project: 'projectValue',
@@ -1927,7 +1929,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationParticipantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectConversationParticipantPathTemplate.match =
@@ -1997,7 +1999,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectConversationProfile', () => {
+    describe('projectConversationProfile', async () => {
       const fakePath = '/rendered/path/projectConversationProfile';
       const expectedParameters = {
         project: 'projectValue',
@@ -2007,7 +2009,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConversationProfilePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2062,7 +2064,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectKnowledgeBase', () => {
+    describe('projectKnowledgeBase', async () => {
       const fakePath = '/rendered/path/projectKnowledgeBase';
       const expectedParameters = {
         project: 'projectValue',
@@ -2072,7 +2074,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectKnowledgeBasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2125,7 +2127,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectKnowledgeBaseDocument', () => {
+    describe('projectKnowledgeBaseDocument', async () => {
       const fakePath = '/rendered/path/projectKnowledgeBaseDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -2136,7 +2138,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match =
@@ -2204,7 +2206,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgent', () => {
+    describe('projectLocationAgent', async () => {
       const fakePath = '/rendered/path/projectLocationAgent';
       const expectedParameters = {
         project: 'projectValue',
@@ -2214,7 +2216,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2267,7 +2269,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEntityType', () => {
+    describe('projectLocationAgentEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -2278,7 +2280,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEntityTypePathTemplate.match =
@@ -2346,7 +2348,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironment', () => {
+    describe('projectLocationAgentEnvironment', async () => {
       const fakePath = '/rendered/path/projectLocationAgentEnvironment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2357,7 +2359,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match =
@@ -2425,7 +2427,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentUserSession', () => {
+    describe('projectLocationAgentEnvironmentUserSession', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentUserSession';
       const expectedParameters = {
@@ -2439,7 +2441,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionPathTemplate.match =
@@ -2551,7 +2553,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentUserSessionContext', () => {
+    describe('projectLocationAgentEnvironmentUserSessionContext', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentUserSessionContext';
       const expectedParameters = {
@@ -2566,7 +2568,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match =
@@ -2697,7 +2699,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentUserSessionEntityType', () => {
+    describe('projectLocationAgentEnvironmentUserSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentUserSessionEntityType';
       const expectedParameters = {
@@ -2712,7 +2714,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match =
@@ -2843,7 +2845,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentFulfillment', () => {
+    describe('projectLocationAgentFulfillment', async () => {
       const fakePath = '/rendered/path/projectLocationAgentFulfillment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2853,7 +2855,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match =
@@ -2904,7 +2906,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentIntent', () => {
+    describe('projectLocationAgentIntent', async () => {
       const fakePath = '/rendered/path/projectLocationAgentIntent';
       const expectedParameters = {
         project: 'projectValue',
@@ -2915,7 +2917,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentIntentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2983,7 +2985,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSession', () => {
+    describe('projectLocationAgentSession', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -2994,7 +2996,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionPathTemplate.match = sinon
@@ -3061,7 +3063,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionContext', () => {
+    describe('projectLocationAgentSessionContext', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionContext';
       const expectedParameters = {
         project: 'projectValue',
@@ -3073,7 +3075,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionContextPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionContextPathTemplate.match =
@@ -3162,7 +3164,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionEntityType', () => {
+    describe('projectLocationAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3174,7 +3176,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
@@ -3268,7 +3270,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAgentVersion', () => {
+    describe('projectLocationAgentVersion', async () => {
       const fakePath = '/rendered/path/projectLocationAgentVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -3279,7 +3281,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentVersionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentVersionPathTemplate.match = sinon
@@ -3346,7 +3348,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationAnswerRecord', () => {
+    describe('projectLocationAnswerRecord', async () => {
       const fakePath = '/rendered/path/projectLocationAnswerRecord';
       const expectedParameters = {
         project: 'projectValue',
@@ -3357,7 +3359,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAnswerRecordPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAnswerRecordPathTemplate.match = sinon
@@ -3424,7 +3426,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationConversation', () => {
+    describe('projectLocationConversation', async () => {
       const fakePath = '/rendered/path/projectLocationConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -3435,7 +3437,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationPathTemplate.match = sinon
@@ -3502,7 +3504,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationConversationMessage', () => {
+    describe('projectLocationConversationMessage', async () => {
       const fakePath = '/rendered/path/projectLocationConversationMessage';
       const expectedParameters = {
         project: 'projectValue',
@@ -3514,7 +3516,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationMessagePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationMessagePathTemplate.match =
@@ -3603,7 +3605,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationConversationParticipant', () => {
+    describe('projectLocationConversationParticipant', async () => {
       const fakePath = '/rendered/path/projectLocationConversationParticipant';
       const expectedParameters = {
         project: 'projectValue',
@@ -3615,7 +3617,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationParticipantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationParticipantPathTemplate.match =
@@ -3709,7 +3711,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationConversationProfile', () => {
+    describe('projectLocationConversationProfile', async () => {
       const fakePath = '/rendered/path/projectLocationConversationProfile';
       const expectedParameters = {
         project: 'projectValue',
@@ -3720,7 +3722,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationProfilePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationProfilePathTemplate.match =
@@ -3792,7 +3794,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationKnowledgeBase', () => {
+    describe('projectLocationKnowledgeBase', async () => {
       const fakePath = '/rendered/path/projectLocationKnowledgeBase';
       const expectedParameters = {
         project: 'projectValue',
@@ -3803,7 +3805,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKnowledgeBasePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKnowledgeBasePathTemplate.match =
@@ -3871,7 +3873,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationKnowledgeBaseDocument', () => {
+    describe('projectLocationKnowledgeBaseDocument', async () => {
       const fakePath = '/rendered/path/projectLocationKnowledgeBaseDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -3883,7 +3885,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match =
@@ -3977,7 +3979,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectLocationPhoneNumber', () => {
+    describe('projectLocationPhoneNumber', async () => {
       const fakePath = '/rendered/path/projectLocationPhoneNumber';
       const expectedParameters = {
         project: 'projectValue',
@@ -3988,7 +3990,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationPhoneNumberPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4056,7 +4058,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('projectPhoneNumber', () => {
+    describe('projectPhoneNumber', async () => {
       const fakePath = '/rendered/path/projectPhoneNumber';
       const expectedParameters = {
         project: 'projectValue',
@@ -4066,7 +4068,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPhoneNumberPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4118,7 +4120,7 @@ describe('v2beta1.SessionsClient', () => {
       });
     });
 
-    describe('sipTrunk', () => {
+    describe('sipTrunk', async () => {
       const fakePath = '/rendered/path/sipTrunk';
       const expectedParameters = {
         project: 'projectValue',
@@ -4129,7 +4131,7 @@ describe('v2beta1.SessionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sipTrunkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

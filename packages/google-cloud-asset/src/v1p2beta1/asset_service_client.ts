@@ -483,7 +483,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -596,7 +598,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -708,7 +712,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeeds request %j', request);
     const wrappedCallback:
       | Callback<
@@ -826,7 +832,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feed.name': request.feed!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFeed request %j', request);
     const wrappedCallback:
       | Callback<
@@ -939,7 +947,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFeed request %j', request);
     const wrappedCallback:
       | Callback<

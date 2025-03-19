@@ -614,7 +614,9 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGenerator request %j', request);
     const wrappedCallback:
       | Callback<
@@ -737,7 +739,9 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createGenerator request %j', request);
     const wrappedCallback:
       | Callback<
@@ -861,7 +865,9 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         'generator.name': request.generator!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateGenerator request %j', request);
     const wrappedCallback:
       | Callback<
@@ -991,7 +997,9 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteGenerator request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1122,7 +1130,9 @@ export class GeneratorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListGeneratorsRequest,
@@ -1191,7 +1201,9 @@ export class GeneratorsClient {
       });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGenerators stream %j', request);
     return this.descriptors.page.listGenerators.createStream(
       this.innerApiCalls.listGenerators as GaxCall,
@@ -1242,7 +1254,9 @@ export class GeneratorsClient {
       });
     const defaultCallSettings = this._defaults['listGenerators'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGenerators iterate %j', request);
     return this.descriptors.page.listGenerators.asyncIterate(
       this.innerApiCalls['listGenerators'] as GaxCall,
@@ -1422,7 +1436,7 @@ export class GeneratorsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

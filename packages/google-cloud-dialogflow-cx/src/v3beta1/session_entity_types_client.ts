@@ -595,7 +595,9 @@ export class SessionEntityTypesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -728,7 +730,9 @@ export class SessionEntityTypesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -861,7 +865,9 @@ export class SessionEntityTypesClient {
       this._gaxModule.routingHeader.fromParams({
         'session_entity_type.name': request.sessionEntityType!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -992,7 +998,9 @@ export class SessionEntityTypesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSessionEntityType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1126,7 +1134,9 @@ export class SessionEntityTypesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListSessionEntityTypesRequest,
@@ -1198,7 +1208,9 @@ export class SessionEntityTypesClient {
       });
     const defaultCallSettings = this._defaults['listSessionEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessionEntityTypes stream %j', request);
     return this.descriptors.page.listSessionEntityTypes.createStream(
       this.innerApiCalls.listSessionEntityTypes as GaxCall,
@@ -1252,7 +1264,9 @@ export class SessionEntityTypesClient {
       });
     const defaultCallSettings = this._defaults['listSessionEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessionEntityTypes iterate %j', request);
     return this.descriptors.page.listSessionEntityTypes.asyncIterate(
       this.innerApiCalls['listSessionEntityTypes'] as GaxCall,

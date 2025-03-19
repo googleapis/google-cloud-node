@@ -503,7 +503,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createContact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -634,7 +636,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'contact.name': request.contact!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateContact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -756,7 +760,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getContact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -884,7 +890,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteContact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1022,7 +1030,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('sendTestMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1157,7 +1167,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
@@ -1230,7 +1242,9 @@ export class EssentialContactsServiceClient {
       });
     const defaultCallSettings = this._defaults['listContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContacts stream %j', request);
     return this.descriptors.page.listContacts.createStream(
       this.innerApiCalls.listContacts as GaxCall,
@@ -1285,7 +1299,9 @@ export class EssentialContactsServiceClient {
       });
     const defaultCallSettings = this._defaults['listContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContacts iterate %j', request);
     return this.descriptors.page.listContacts.asyncIterate(
       this.innerApiCalls['listContacts'] as GaxCall,
@@ -1401,7 +1417,9 @@ export class EssentialContactsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
@@ -1478,7 +1496,9 @@ export class EssentialContactsServiceClient {
       });
     const defaultCallSettings = this._defaults['computeContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeContacts stream %j', request);
     return this.descriptors.page.computeContacts.createStream(
       this.innerApiCalls.computeContacts as GaxCall,
@@ -1537,7 +1557,9 @@ export class EssentialContactsServiceClient {
       });
     const defaultCallSettings = this._defaults['computeContacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeContacts iterate %j', request);
     return this.descriptors.page.computeContacts.asyncIterate(
       this.innerApiCalls['computeContacts'] as GaxCall,

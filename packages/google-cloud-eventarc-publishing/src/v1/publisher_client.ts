@@ -493,7 +493,9 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         channel_connection: request.channelConnection ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('publishChannelConnectionEvents request %j', request);
     const wrappedCallback:
       | Callback<
@@ -634,7 +636,9 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         channel: request.channel ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('publishEvents request %j', request);
     const wrappedCallback:
       | Callback<
@@ -766,7 +770,9 @@ export class PublisherClient {
       this._gaxModule.routingHeader.fromParams({
         message_bus: request.messageBus ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('publish request %j', request);
     const wrappedCallback:
       | Callback<

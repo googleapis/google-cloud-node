@@ -265,7 +265,9 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.conversationHistoryStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
@@ -360,7 +362,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
@@ -408,7 +410,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
@@ -440,7 +442,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetConversationRequest()
       );
@@ -462,7 +464,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
@@ -495,7 +497,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
@@ -543,7 +545,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
@@ -575,7 +577,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteConversationRequest()
       );
@@ -597,7 +599,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -637,7 +639,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -695,7 +697,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -727,7 +729,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -791,7 +793,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -844,7 +846,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -895,7 +897,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListConversationsRequest()
       );
@@ -938,7 +940,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -969,7 +971,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1050,7 +1052,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1136,7 +1138,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('agent', () => {
+    describe('agent', async () => {
       const fakePath = '/rendered/path/agent';
       const expectedParameters = {
         project: 'projectValue',
@@ -1148,7 +1150,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1201,7 +1203,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('agentGenerativeSettings', () => {
+    describe('agentGenerativeSettings', async () => {
       const fakePath = '/rendered/path/agentGenerativeSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -1213,7 +1215,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1281,7 +1283,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('agentValidationResult', () => {
+    describe('agentValidationResult', async () => {
       const fakePath = '/rendered/path/agentValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -1293,7 +1295,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1360,7 +1362,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('changelog', () => {
+    describe('changelog', async () => {
       const fakePath = '/rendered/path/changelog';
       const expectedParameters = {
         project: 'projectValue',
@@ -1373,7 +1375,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.changelogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1437,7 +1439,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('continuousTestResult', () => {
+    describe('continuousTestResult', async () => {
       const fakePath = '/rendered/path/continuousTestResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -1451,7 +1453,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.continuousTestResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1550,7 +1552,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('conversation', () => {
+    describe('conversation', async () => {
       const fakePath = '/rendered/path/conversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1563,7 +1565,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.conversationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1627,7 +1629,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1641,7 +1643,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1716,7 +1718,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('entityType', () => {
+    describe('entityType', async () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -1729,7 +1731,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1793,7 +1795,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1806,7 +1808,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1870,7 +1872,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('example', () => {
+    describe('example', async () => {
       const fakePath = '/rendered/path/example';
       const expectedParameters = {
         project: 'projectValue',
@@ -1884,7 +1886,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.examplePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1959,7 +1961,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('experiment', () => {
+    describe('experiment', async () => {
       const fakePath = '/rendered/path/experiment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1973,7 +1975,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2048,7 +2050,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('flow', () => {
+    describe('flow', async () => {
       const fakePath = '/rendered/path/flow';
       const expectedParameters = {
         project: 'projectValue',
@@ -2061,7 +2063,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2125,7 +2127,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('flowValidationResult', () => {
+    describe('flowValidationResult', async () => {
       const fakePath = '/rendered/path/flowValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -2138,7 +2140,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2219,7 +2221,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('generator', () => {
+    describe('generator', async () => {
       const fakePath = '/rendered/path/generator';
       const expectedParameters = {
         project: 'projectValue',
@@ -2232,7 +2234,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2296,7 +2298,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('intent', () => {
+    describe('intent', async () => {
       const fakePath = '/rendered/path/intent';
       const expectedParameters = {
         project: 'projectValue',
@@ -2309,7 +2311,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2373,7 +2375,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2384,7 +2386,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2423,7 +2425,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('page', () => {
+    describe('page', async () => {
       const fakePath = '/rendered/path/page';
       const expectedParameters = {
         project: 'projectValue',
@@ -2437,7 +2439,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2512,7 +2514,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('playbook', () => {
+    describe('playbook', async () => {
       const fakePath = '/rendered/path/playbook';
       const expectedParameters = {
         project: 'projectValue',
@@ -2525,7 +2527,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.playbookPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2589,7 +2591,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('playbookVersion', () => {
+    describe('playbookVersion', async () => {
       const fakePath = '/rendered/path/playbookVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -2603,7 +2605,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.playbookVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2678,7 +2680,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2688,7 +2690,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2717,7 +2719,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentSessionEntityType', () => {
+    describe('projectLocationAgentEnvironmentSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentSessionEntityType';
       const expectedParameters = {
@@ -2733,7 +2735,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
@@ -2864,7 +2866,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('projectLocationAgentFlowTransitionRouteGroup', () => {
+    describe('projectLocationAgentFlowTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentFlowTransitionRouteGroup';
       const expectedParameters = {
@@ -2879,7 +2881,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
@@ -2991,7 +2993,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionEntityType', () => {
+    describe('projectLocationAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3005,7 +3007,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
@@ -3117,7 +3119,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('projectLocationAgentTransitionRouteGroup', () => {
+    describe('projectLocationAgentTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentTransitionRouteGroup';
       const expectedParameters = {
@@ -3131,7 +3133,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
@@ -3225,7 +3227,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('securitySettings', () => {
+    describe('securitySettings', async () => {
       const fakePath = '/rendered/path/securitySettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -3237,7 +3239,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3294,7 +3296,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('testCase', () => {
+    describe('testCase', async () => {
       const fakePath = '/rendered/path/testCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -3307,7 +3309,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3371,7 +3373,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('testCaseResult', () => {
+    describe('testCaseResult', async () => {
       const fakePath = '/rendered/path/testCaseResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3385,7 +3387,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3460,7 +3462,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('tool', () => {
+    describe('tool', async () => {
       const fakePath = '/rendered/path/tool';
       const expectedParameters = {
         project: 'projectValue',
@@ -3473,7 +3475,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.toolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3537,7 +3539,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('toolVersion', () => {
+    describe('toolVersion', async () => {
       const fakePath = '/rendered/path/toolVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -3551,7 +3553,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.toolVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3626,7 +3628,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -3640,7 +3642,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3715,7 +3717,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
       });
     });
 
-    describe('webhook', () => {
+    describe('webhook', async () => {
       const fakePath = '/rendered/path/webhook';
       const expectedParameters = {
         project: 'projectValue',
@@ -3728,7 +3730,7 @@ describe('v3beta1.ConversationHistoryClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

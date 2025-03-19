@@ -911,7 +911,9 @@ export class SearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         serving_config: request.servingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
@@ -1244,7 +1246,9 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
@@ -1559,7 +1563,9 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
@@ -1941,7 +1947,9 @@ export class SearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         serving_config: request.servingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.ISearchRequest,
@@ -2274,7 +2282,9 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['searchLite'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchLite stream %j', request);
     return this.descriptors.page.searchLite.createStream(
       this.innerApiCalls.searchLite as GaxCall,
@@ -2589,7 +2599,9 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['searchLite'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchLite iterate %j', request);
     return this.descriptors.page.searchLite.asyncIterate(
       this.innerApiCalls['searchLite'] as GaxCall,

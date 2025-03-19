@@ -639,7 +639,9 @@ export class SessionsClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('detectIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -777,7 +779,9 @@ export class SessionsClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('matchIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -914,7 +918,9 @@ export class SessionsClient {
         'match_intent_request.session':
           request.matchIntentRequest!.session ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fulfillIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1048,7 +1054,9 @@ export class SessionsClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('submitAnswerFeedback request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1135,7 +1143,9 @@ export class SessionsClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('serverStreamingDetectIntent stream %j', options);
     return this.innerApiCalls.serverStreamingDetectIntent(request, options);
   }
@@ -1161,7 +1171,9 @@ export class SessionsClient {
    * region_tag:dialogflow_v3beta1_generated_Sessions_StreamingDetectIntent_async
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingDetectIntent stream %j', options);
     return this.innerApiCalls.streamingDetectIntent(null, options);
   }

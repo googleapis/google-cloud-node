@@ -86,7 +86,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Document_processor_service.batch_process_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.batch_process_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.batch_process_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.batch_process_documents.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Document_processor_service.create_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.create_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.create_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.create_processor.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### Document_processor_service.delete_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.delete_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.delete_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.delete_processor.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### Document_processor_service.delete_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.delete_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.delete_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.delete_processor_version.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### Document_processor_service.deploy_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.deploy_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.deploy_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.deploy_processor_version.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### Document_processor_service.disable_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.disable_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.disable_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.disable_processor.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### Document_processor_service.enable_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.enable_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.enable_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.enable_processor.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### Document_processor_service.evaluate_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.evaluate_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.evaluate_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.evaluate_processor_version.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### Document_processor_service.fetch_processor_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.fetch_processor_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.fetch_processor_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.fetch_processor_types.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### Document_processor_service.get_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_evaluation.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### Document_processor_service.get_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### Document_processor_service.get_processor_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_type.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### Document_processor_service.get_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.get_processor_version.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### Document_processor_service.list_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_evaluations.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### Document_processor_service.list_processor_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processor_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processor_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processor_types.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### Document_processor_service.list_processor_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processor_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processor_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processor_versions.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### Document_processor_service.list_processors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.list_processors.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### Document_processor_service.process_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.process_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.process_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.process_document.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### Document_processor_service.review_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.review_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.review_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.review_document.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### Document_processor_service.set_default_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.set_default_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.set_default_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.set_default_processor_version.js,samples/README.md)
 
@@ -426,7 +426,7 @@ __Usage:__
 
 ### Document_processor_service.train_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.train_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.train_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.train_processor_version.js,samples/README.md)
 
@@ -443,7 +443,7 @@ __Usage:__
 
 ### Document_processor_service.undeploy_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.undeploy_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1/document_processor_service.undeploy_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1/document_processor_service.undeploy_processor_version.js,samples/README.md)
 
@@ -460,7 +460,7 @@ __Usage:__
 
 ### Document_understanding_service.batch_process_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta1/document_understanding_service.batch_process_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta1/document_understanding_service.batch_process_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta1/document_understanding_service.batch_process_documents.js,samples/README.md)
 
@@ -477,7 +477,7 @@ __Usage:__
 
 ### Document_understanding_service.batch_process_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta2/document_understanding_service.batch_process_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta2/document_understanding_service.batch_process_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta2/document_understanding_service.batch_process_documents.js,samples/README.md)
 
@@ -494,7 +494,7 @@ __Usage:__
 
 ### Document_understanding_service.process_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta2/document_understanding_service.process_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta2/document_understanding_service.process_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta2/document_understanding_service.process_document.js,samples/README.md)
 
@@ -511,7 +511,7 @@ __Usage:__
 
 ### Document_processor_service.batch_process_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.batch_process_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.batch_process_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.batch_process_documents.js,samples/README.md)
 
@@ -528,7 +528,7 @@ __Usage:__
 
 ### Document_processor_service.create_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.create_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.create_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.create_processor.js,samples/README.md)
 
@@ -545,7 +545,7 @@ __Usage:__
 
 ### Document_processor_service.delete_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.delete_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.delete_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.delete_processor.js,samples/README.md)
 
@@ -562,7 +562,7 @@ __Usage:__
 
 ### Document_processor_service.delete_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.delete_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.delete_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.delete_processor_version.js,samples/README.md)
 
@@ -579,7 +579,7 @@ __Usage:__
 
 ### Document_processor_service.deploy_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.deploy_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.deploy_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.deploy_processor_version.js,samples/README.md)
 
@@ -596,7 +596,7 @@ __Usage:__
 
 ### Document_processor_service.disable_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.disable_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.disable_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.disable_processor.js,samples/README.md)
 
@@ -613,7 +613,7 @@ __Usage:__
 
 ### Document_processor_service.enable_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.enable_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.enable_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.enable_processor.js,samples/README.md)
 
@@ -630,7 +630,7 @@ __Usage:__
 
 ### Document_processor_service.evaluate_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.evaluate_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.evaluate_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.evaluate_processor_version.js,samples/README.md)
 
@@ -647,7 +647,7 @@ __Usage:__
 
 ### Document_processor_service.fetch_processor_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.fetch_processor_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.fetch_processor_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.fetch_processor_types.js,samples/README.md)
 
@@ -664,7 +664,7 @@ __Usage:__
 
 ### Document_processor_service.get_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_evaluation.js,samples/README.md)
 
@@ -681,7 +681,7 @@ __Usage:__
 
 ### Document_processor_service.get_processor
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor.js,samples/README.md)
 
@@ -698,7 +698,7 @@ __Usage:__
 
 ### Document_processor_service.get_processor_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor_type.js,samples/README.md)
 
@@ -715,7 +715,7 @@ __Usage:__
 
 ### Document_processor_service.get_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.get_processor_version.js,samples/README.md)
 
@@ -732,7 +732,7 @@ __Usage:__
 
 ### Document_processor_service.import_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.import_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.import_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.import_processor_version.js,samples/README.md)
 
@@ -749,7 +749,7 @@ __Usage:__
 
 ### Document_processor_service.list_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_evaluations.js,samples/README.md)
 
@@ -766,7 +766,7 @@ __Usage:__
 
 ### Document_processor_service.list_processor_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processor_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processor_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processor_types.js,samples/README.md)
 
@@ -783,7 +783,7 @@ __Usage:__
 
 ### Document_processor_service.list_processor_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processor_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processor_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processor_versions.js,samples/README.md)
 
@@ -800,7 +800,7 @@ __Usage:__
 
 ### Document_processor_service.list_processors
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processors.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.list_processors.js,samples/README.md)
 
@@ -817,7 +817,7 @@ __Usage:__
 
 ### Document_processor_service.process_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.process_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.process_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.process_document.js,samples/README.md)
 
@@ -834,7 +834,7 @@ __Usage:__
 
 ### Document_processor_service.review_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.review_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.review_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.review_document.js,samples/README.md)
 
@@ -851,7 +851,7 @@ __Usage:__
 
 ### Document_processor_service.set_default_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.set_default_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.set_default_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.set_default_processor_version.js,samples/README.md)
 
@@ -868,7 +868,7 @@ __Usage:__
 
 ### Document_processor_service.train_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.train_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.train_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.train_processor_version.js,samples/README.md)
 
@@ -885,7 +885,7 @@ __Usage:__
 
 ### Document_processor_service.undeploy_processor_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.undeploy_processor_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.undeploy_processor_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_processor_service.undeploy_processor_version.js,samples/README.md)
 
@@ -902,7 +902,7 @@ __Usage:__
 
 ### Document_service.batch_delete_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.batch_delete_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.batch_delete_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.batch_delete_documents.js,samples/README.md)
 
@@ -919,7 +919,7 @@ __Usage:__
 
 ### Document_service.get_dataset_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_dataset_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_dataset_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_dataset_schema.js,samples/README.md)
 
@@ -936,7 +936,7 @@ __Usage:__
 
 ### Document_service.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.get_document.js,samples/README.md)
 
@@ -953,7 +953,7 @@ __Usage:__
 
 ### Document_service.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.import_documents.js,samples/README.md)
 
@@ -970,7 +970,7 @@ __Usage:__
 
 ### Document_service.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.list_documents.js,samples/README.md)
 
@@ -987,7 +987,7 @@ __Usage:__
 
 ### Document_service.update_dataset
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset.js,samples/README.md)
 
@@ -1004,7 +1004,7 @@ __Usage:__
 
 ### Document_service.update_dataset_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.update_dataset_schema.js,samples/README.md)
 
@@ -1021,7 +1021,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-documentai/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/quickstart.js,samples/README.md)
 

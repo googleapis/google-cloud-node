@@ -294,7 +294,9 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.functionServiceStub);
       client.close().then(() => {
         done();
@@ -353,7 +355,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GetFunctionRequest()
       );
@@ -384,7 +386,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GetFunctionRequest()
       );
@@ -431,7 +433,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GetFunctionRequest()
       );
@@ -462,7 +464,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GetFunctionRequest()
       );
@@ -483,7 +485,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateUploadUrlRequest()
       );
@@ -514,7 +516,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateUploadUrlRequest()
       );
@@ -561,7 +563,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateUploadUrlRequest()
       );
@@ -592,7 +594,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateUploadUrlRequest()
       );
@@ -613,7 +615,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateDownloadUrlRequest()
       );
@@ -645,7 +647,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateDownloadUrlRequest()
       );
@@ -692,7 +694,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateDownloadUrlRequest()
       );
@@ -723,7 +725,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.GenerateDownloadUrlRequest()
       );
@@ -744,7 +746,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListRuntimesRequest()
       );
@@ -775,7 +777,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListRuntimesRequest()
       );
@@ -822,7 +824,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListRuntimesRequest()
       );
@@ -853,7 +855,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListRuntimesRequest()
       );
@@ -874,7 +876,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.CreateFunctionRequest()
       );
@@ -907,7 +909,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.CreateFunctionRequest()
       );
@@ -961,7 +963,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.CreateFunctionRequest()
       );
@@ -992,7 +994,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.CreateFunctionRequest()
       );
@@ -1025,7 +1027,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1047,7 +1049,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1068,7 +1070,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.UpdateFunctionRequest()
       );
@@ -1102,7 +1104,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.UpdateFunctionRequest()
       );
@@ -1157,7 +1159,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.UpdateFunctionRequest()
       );
@@ -1189,7 +1191,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.UpdateFunctionRequest()
       );
@@ -1223,7 +1225,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1245,7 +1247,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1266,7 +1268,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.DeleteFunctionRequest()
       );
@@ -1299,7 +1301,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.DeleteFunctionRequest()
       );
@@ -1353,7 +1355,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.DeleteFunctionRequest()
       );
@@ -1384,7 +1386,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.DeleteFunctionRequest()
       );
@@ -1417,7 +1419,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1439,7 +1441,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1460,7 +1462,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1499,7 +1501,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1554,7 +1556,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1585,7 +1587,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1645,7 +1647,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1743,7 +1745,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.functions.v2beta.ListFunctionsRequest()
       );
@@ -1784,7 +1786,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1814,7 +1816,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1920,7 +1922,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1964,7 +1966,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1996,7 +1998,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2029,7 +2031,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2073,7 +2075,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2108,7 +2110,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2138,7 +2140,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2182,7 +2184,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2217,7 +2219,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2265,7 +2267,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2306,7 +2308,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2385,7 +2387,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2465,7 +2467,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2561,8 +2563,7 @@ describe('v2beta.FunctionServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2581,7 +2582,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2590,8 +2591,7 @@ describe('v2beta.FunctionServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2607,7 +2607,7 @@ describe('v2beta.FunctionServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('build', () => {
+    describe('build', async () => {
       const fakePath = '/rendered/path/build';
       const expectedParameters = {
         project: 'projectValue',
@@ -2618,7 +2618,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.buildPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2671,7 +2671,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('channel', () => {
+    describe('channel', async () => {
       const fakePath = '/rendered/path/channel';
       const expectedParameters = {
         project: 'projectValue',
@@ -2682,7 +2682,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.channelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2735,7 +2735,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('connector', () => {
+    describe('connector', async () => {
       const fakePath = '/rendered/path/connector';
       const expectedParameters = {
         project: 'projectValue',
@@ -2746,7 +2746,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2799,7 +2799,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -2811,7 +2811,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2875,7 +2875,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('function', () => {
+    describe('function', async () => {
       const fakePath = '/rendered/path/function';
       const expectedParameters = {
         project: 'projectValue',
@@ -2886,7 +2886,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.functionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2939,7 +2939,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2949,7 +2949,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2988,7 +2988,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2997,7 +2997,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3026,7 +3026,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('repository', () => {
+    describe('repository', async () => {
       const fakePath = '/rendered/path/repository';
       const expectedParameters = {
         project: 'projectValue',
@@ -3037,7 +3037,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.repositoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3090,7 +3090,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -3101,7 +3101,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3154,7 +3154,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('topic', () => {
+    describe('topic', async () => {
       const fakePath = '/rendered/path/topic';
       const expectedParameters = {
         project: 'projectValue',
@@ -3164,7 +3164,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.topicPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3203,7 +3203,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('trigger', () => {
+    describe('trigger', async () => {
       const fakePath = '/rendered/path/trigger';
       const expectedParameters = {
         project: 'projectValue',
@@ -3214,7 +3214,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.triggerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3267,7 +3267,7 @@ describe('v2beta.FunctionServiceClient', () => {
       });
     });
 
-    describe('workerPool', () => {
+    describe('workerPool', async () => {
       const fakePath = '/rendered/path/workerPool';
       const expectedParameters = {
         project: 'projectValue',
@@ -3278,7 +3278,7 @@ describe('v2beta.FunctionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workerPoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

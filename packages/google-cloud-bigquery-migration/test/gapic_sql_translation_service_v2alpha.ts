@@ -205,7 +205,9 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sqlTranslationServiceStub);
       client.close().then(() => {
         done();
@@ -268,7 +270,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest()
       );
@@ -300,7 +302,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest()
       );
@@ -348,7 +350,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest()
       );
@@ -380,7 +382,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.TranslateQueryRequest()
       );
@@ -396,7 +398,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -407,7 +409,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -446,7 +448,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       });
     });
 
-    describe('migrationSubtask', () => {
+    describe('migrationSubtask', async () => {
       const fakePath = '/rendered/path/migrationSubtask';
       const expectedParameters = {
         project: 'projectValue',
@@ -459,7 +461,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationSubtaskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -526,7 +528,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       });
     });
 
-    describe('migrationWorkflow', () => {
+    describe('migrationWorkflow', async () => {
       const fakePath = '/rendered/path/migrationWorkflow';
       const expectedParameters = {
         project: 'projectValue',
@@ -538,7 +540,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationWorkflowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -292,7 +292,9 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.developerConnectStub);
       client.close().then(() => {
         done();
@@ -351,7 +353,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetConnectionRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetConnectionRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetConnectionRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetConnectionRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetGitRepositoryLinkRequest()
       );
@@ -513,7 +515,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetGitRepositoryLinkRequest()
       );
@@ -560,7 +562,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetGitRepositoryLinkRequest()
       );
@@ -591,7 +593,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.GetGitRepositoryLinkRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadWriteTokenRequest()
       );
@@ -644,7 +646,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadWriteTokenRequest()
       );
@@ -691,7 +693,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadWriteTokenRequest()
       );
@@ -722,7 +724,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadWriteTokenRequest()
       );
@@ -743,7 +745,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadTokenRequest()
       );
@@ -774,7 +776,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadTokenRequest()
       );
@@ -821,7 +823,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadTokenRequest()
       );
@@ -852,7 +854,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchReadTokenRequest()
       );
@@ -873,7 +875,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsRequest()
       );
@@ -905,7 +907,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsRequest()
       );
@@ -952,7 +954,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsRequest()
       );
@@ -986,7 +988,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitHubInstallationsRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateConnectionRequest()
       );
@@ -1043,7 +1045,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateConnectionRequest()
       );
@@ -1097,7 +1099,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateConnectionRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateConnectionRequest()
       );
@@ -1161,7 +1163,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1183,7 +1185,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1204,7 +1206,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.UpdateConnectionRequest()
       );
@@ -1238,7 +1240,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.UpdateConnectionRequest()
       );
@@ -1293,7 +1295,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.UpdateConnectionRequest()
       );
@@ -1325,7 +1327,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.UpdateConnectionRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1381,7 +1383,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1402,7 +1404,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteConnectionRequest()
       );
@@ -1435,7 +1437,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteConnectionRequest()
       );
@@ -1489,7 +1491,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteConnectionRequest()
       );
@@ -1520,7 +1522,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteConnectionRequest()
       );
@@ -1553,7 +1555,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1575,7 +1577,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1596,7 +1598,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateGitRepositoryLinkRequest()
       );
@@ -1629,7 +1631,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateGitRepositoryLinkRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateGitRepositoryLinkRequest()
       );
@@ -1717,7 +1719,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.CreateGitRepositoryLinkRequest()
       );
@@ -1750,7 +1752,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1773,7 +1775,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1794,7 +1796,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteGitRepositoryLinkRequest()
       );
@@ -1827,7 +1829,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteGitRepositoryLinkRequest()
       );
@@ -1881,7 +1883,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteGitRepositoryLinkRequest()
       );
@@ -1915,7 +1917,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.DeleteGitRepositoryLinkRequest()
       );
@@ -1948,7 +1950,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1971,7 +1973,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1992,7 +1994,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2031,7 +2033,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2088,7 +2090,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2180,7 +2182,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2230,7 +2232,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListConnectionsRequest()
       );
@@ -2323,7 +2325,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2363,7 +2365,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2420,7 +2422,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2454,7 +2456,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2523,7 +2525,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2581,7 +2583,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2635,7 +2637,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.ListGitRepositoryLinksRequest()
       );
@@ -2682,7 +2684,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -2722,7 +2724,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -2779,7 +2781,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -2813,7 +2815,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -2885,7 +2887,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -2946,7 +2948,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -3000,7 +3002,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchLinkableGitRepositoriesRequest()
       );
@@ -3047,7 +3049,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3076,7 +3078,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3118,7 +3120,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3149,7 +3151,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3196,7 +3198,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3244,7 +3246,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3283,7 +3285,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.developerconnect.v1.FetchGitRefsRequest()
       );
@@ -3324,7 +3326,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3354,7 +3356,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3398,7 +3400,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3433,7 +3435,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3481,7 +3483,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3522,7 +3524,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3601,7 +3603,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3681,7 +3683,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3777,8 +3779,7 @@ describe('v1.DeveloperConnectClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3797,7 +3798,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3806,8 +3807,7 @@ describe('v1.DeveloperConnectClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3823,7 +3823,7 @@ describe('v1.DeveloperConnectClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('connection', () => {
+    describe('connection', async () => {
       const fakePath = '/rendered/path/connection';
       const expectedParameters = {
         project: 'projectValue',
@@ -3834,7 +3834,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3887,7 +3887,7 @@ describe('v1.DeveloperConnectClient', () => {
       });
     });
 
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -3899,7 +3899,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3963,7 +3963,7 @@ describe('v1.DeveloperConnectClient', () => {
       });
     });
 
-    describe('gitRepositoryLink', () => {
+    describe('gitRepositoryLink', async () => {
       const fakePath = '/rendered/path/gitRepositoryLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -3975,7 +3975,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.gitRepositoryLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4056,7 +4056,7 @@ describe('v1.DeveloperConnectClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4066,7 +4066,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4105,7 +4105,7 @@ describe('v1.DeveloperConnectClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4114,7 +4114,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4143,7 +4143,7 @@ describe('v1.DeveloperConnectClient', () => {
       });
     });
 
-    describe('secretVersion', () => {
+    describe('secretVersion', async () => {
       const fakePath = '/rendered/path/secretVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -4154,7 +4154,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.secretVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4207,7 +4207,7 @@ describe('v1.DeveloperConnectClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -4219,7 +4219,7 @@ describe('v1.DeveloperConnectClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

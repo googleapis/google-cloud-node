@@ -667,7 +667,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAzureClient request %j', request);
     const wrappedCallback:
       | Callback<
@@ -795,7 +797,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAzureCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -938,7 +942,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAzureClusterAgentToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1078,7 +1084,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAzureAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1206,7 +1214,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAzureNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1337,7 +1347,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAzureOpenIdConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1465,7 +1477,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         azure_cluster: request.azureCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAzureJsonWebKeys request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1599,7 +1613,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAzureServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1762,7 +1778,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1954,7 +1972,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2148,7 +2168,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2340,7 +2362,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'azure_cluster.name': request.azureCluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2544,7 +2568,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2740,7 +2766,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2922,7 +2950,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'azure_node_pool.name': request.azureNodePool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3125,7 +3155,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3302,7 +3334,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAzureClientsRequest,
@@ -3381,7 +3415,9 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAzureClients stream %j', request);
     return this.descriptors.page.listAzureClients.createStream(
       this.innerApiCalls.listAzureClients as GaxCall,
@@ -3442,7 +3478,9 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAzureClients iterate %j', request);
     return this.descriptors.page.listAzureClients.asyncIterate(
       this.innerApiCalls['listAzureClients'] as GaxCall,
@@ -3559,7 +3597,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAzureClustersRequest,
@@ -3638,7 +3678,9 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAzureClusters stream %j', request);
     return this.descriptors.page.listAzureClusters.createStream(
       this.innerApiCalls.listAzureClusters as GaxCall,
@@ -3699,7 +3741,9 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAzureClusters iterate %j', request);
     return this.descriptors.page.listAzureClusters.asyncIterate(
       this.innerApiCalls['listAzureClusters'] as GaxCall,
@@ -3818,7 +3862,9 @@ export class AzureClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAzureNodePoolsRequest,
@@ -3898,7 +3944,9 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAzureNodePools stream %j', request);
     return this.descriptors.page.listAzureNodePools.createStream(
       this.innerApiCalls.listAzureNodePools as GaxCall,
@@ -3960,7 +4008,9 @@ export class AzureClustersClient {
       });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAzureNodePools iterate %j', request);
     return this.descriptors.page.listAzureNodePools.asyncIterate(
       this.innerApiCalls['listAzureNodePools'] as GaxCall,
@@ -4062,7 +4112,7 @@ export class AzureClustersClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

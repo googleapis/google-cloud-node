@@ -686,7 +686,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('converseConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -817,7 +819,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -946,7 +950,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1084,7 +1090,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversation.name': request.conversation!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1210,7 +1218,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1394,7 +1404,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         serving_config: request.servingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('answerQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1514,7 +1526,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAnswer request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1636,7 +1650,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1759,7 +1775,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1890,7 +1908,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'session.name': request.session!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2010,7 +2030,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2155,7 +2177,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1.IListConversationsRequest,
@@ -2240,7 +2264,9 @@ export class ConversationalSearchServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
@@ -2307,7 +2333,9 @@ export class ConversationalSearchServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
@@ -2430,7 +2458,9 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1.IListSessionsRequest,
@@ -2515,7 +2545,9 @@ export class ConversationalSearchServiceClient {
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
@@ -2582,7 +2614,9 @@ export class ConversationalSearchServiceClient {
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,

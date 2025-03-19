@@ -677,7 +677,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -805,7 +807,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -950,7 +954,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1128,7 +1134,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         'environment.name': request.environment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1306,7 +1314,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1489,7 +1499,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1655,7 +1667,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsRequest,
@@ -1723,7 +1737,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments stream %j', request);
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as GaxCall,
@@ -1773,7 +1789,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments iterate %j', request);
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
@@ -1879,7 +1897,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryRequest,
@@ -1947,7 +1967,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['lookupEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupEnvironmentHistory stream %j', request);
     return this.descriptors.page.lookupEnvironmentHistory.createStream(
       this.innerApiCalls.lookupEnvironmentHistory as GaxCall,
@@ -1997,7 +2019,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['lookupEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupEnvironmentHistory iterate %j', request);
     return this.descriptors.page.lookupEnvironmentHistory.asyncIterate(
       this.innerApiCalls['lookupEnvironmentHistory'] as GaxCall,
@@ -2102,7 +2126,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
@@ -2170,7 +2196,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listContinuousTestResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContinuousTestResults stream %j', request);
     return this.descriptors.page.listContinuousTestResults.createStream(
       this.innerApiCalls.listContinuousTestResults as GaxCall,
@@ -2220,7 +2248,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listContinuousTestResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContinuousTestResults iterate %j', request);
     return this.descriptors.page.listContinuousTestResults.asyncIterate(
       this.innerApiCalls['listContinuousTestResults'] as GaxCall,
@@ -2400,7 +2430,7 @@ export class EnvironmentsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

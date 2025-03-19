@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Developer_connect.create_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.create_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.create_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.create_connection.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Developer_connect.create_git_repository_link
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.create_git_repository_link.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.create_git_repository_link.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.create_git_repository_link.js,samples/README.md)
 
@@ -79,7 +79,7 @@ __Usage:__
 
 ### Developer_connect.delete_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.delete_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.delete_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.delete_connection.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 ### Developer_connect.delete_git_repository_link
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.delete_git_repository_link.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.delete_git_repository_link.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.delete_git_repository_link.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Developer_connect.fetch_git_hub_installations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_git_hub_installations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_git_hub_installations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_git_hub_installations.js,samples/README.md)
 
@@ -130,7 +130,7 @@ __Usage:__
 
 ### Developer_connect.fetch_git_refs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_git_refs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_git_refs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_git_refs.js,samples/README.md)
 
@@ -147,7 +147,7 @@ __Usage:__
 
 ### Developer_connect.fetch_linkable_git_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_linkable_git_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_linkable_git_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_linkable_git_repositories.js,samples/README.md)
 
@@ -164,7 +164,7 @@ __Usage:__
 
 ### Developer_connect.fetch_read_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_token.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 ### Developer_connect.fetch_read_write_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_write_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_write_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.fetch_read_write_token.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 ### Developer_connect.get_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_connection.js,samples/README.md)
 
@@ -215,7 +215,7 @@ __Usage:__
 
 ### Developer_connect.get_git_repository_link
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_git_repository_link.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_git_repository_link.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.get_git_repository_link.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 ### Developer_connect.list_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_connections.js,samples/README.md)
 
@@ -249,7 +249,7 @@ __Usage:__
 
 ### Developer_connect.list_git_repository_links
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_git_repository_links.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_git_repository_links.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.list_git_repository_links.js,samples/README.md)
 
@@ -266,7 +266,7 @@ __Usage:__
 
 ### Developer_connect.update_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.update_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.update_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/generated/v1/developer_connect.update_connection.js,samples/README.md)
 
@@ -283,7 +283,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-developerconnect/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-developerconnect/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-developerconnect/samples/quickstart.js,samples/README.md)
 

@@ -308,7 +308,9 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.documentProcessorServiceStub);
       client.close().then(() => {
         done();
@@ -379,7 +381,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
       );
@@ -413,7 +415,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
       );
@@ -463,7 +465,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
       );
@@ -497,7 +499,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ProcessRequest()
       );
@@ -521,7 +523,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.FetchProcessorTypesRequest()
       );
@@ -556,7 +558,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.FetchProcessorTypesRequest()
       );
@@ -606,7 +608,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.FetchProcessorTypesRequest()
       );
@@ -640,7 +642,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.FetchProcessorTypesRequest()
       );
@@ -664,7 +666,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorTypeRequest()
       );
@@ -698,7 +700,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorTypeRequest()
       );
@@ -748,7 +750,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorTypeRequest()
       );
@@ -782,7 +784,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorTypeRequest()
       );
@@ -806,7 +808,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorRequest()
       );
@@ -840,7 +842,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorRequest()
       );
@@ -890,7 +892,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorRequest()
       );
@@ -924,7 +926,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorRequest()
       );
@@ -948,7 +950,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorVersionRequest()
       );
@@ -983,7 +985,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorVersionRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorVersionRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetProcessorVersionRequest()
       );
@@ -1091,7 +1093,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.CreateProcessorRequest()
       );
@@ -1125,7 +1127,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.CreateProcessorRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.CreateProcessorRequest()
       );
@@ -1209,7 +1211,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.CreateProcessorRequest()
       );
@@ -1233,7 +1235,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetEvaluationRequest()
       );
@@ -1267,7 +1269,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetEvaluationRequest()
       );
@@ -1317,7 +1319,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetEvaluationRequest()
       );
@@ -1351,7 +1353,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.GetEvaluationRequest()
       );
@@ -1375,7 +1377,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
       );
@@ -1411,7 +1413,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
       );
@@ -1468,7 +1470,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
       );
@@ -1505,7 +1507,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.BatchProcessRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1566,7 +1568,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1590,7 +1592,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.TrainProcessorVersionRequest()
       );
@@ -1626,7 +1628,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.TrainProcessorVersionRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.TrainProcessorVersionRequest()
       );
@@ -1720,7 +1722,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.TrainProcessorVersionRequest()
       );
@@ -1756,7 +1758,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1781,7 +1783,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1805,7 +1807,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorVersionRequest()
       );
@@ -1841,7 +1843,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorVersionRequest()
       );
@@ -1898,7 +1900,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorVersionRequest()
       );
@@ -1935,7 +1937,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorVersionRequest()
       );
@@ -1971,7 +1973,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1996,7 +1998,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2020,7 +2022,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeployProcessorVersionRequest()
       );
@@ -2056,7 +2058,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeployProcessorVersionRequest()
       );
@@ -2113,7 +2115,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeployProcessorVersionRequest()
       );
@@ -2150,7 +2152,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeployProcessorVersionRequest()
       );
@@ -2186,7 +2188,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2211,7 +2213,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2235,7 +2237,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.UndeployProcessorVersionRequest()
       );
@@ -2271,7 +2273,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.UndeployProcessorVersionRequest()
       );
@@ -2328,7 +2330,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.UndeployProcessorVersionRequest()
       );
@@ -2365,7 +2367,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.UndeployProcessorVersionRequest()
       );
@@ -2401,7 +2403,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2427,7 +2429,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2451,7 +2453,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorRequest()
       );
@@ -2487,7 +2489,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorRequest()
       );
@@ -2544,7 +2546,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorRequest()
       );
@@ -2578,7 +2580,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DeleteProcessorRequest()
       );
@@ -2614,7 +2616,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2639,7 +2641,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2663,7 +2665,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EnableProcessorRequest()
       );
@@ -2699,7 +2701,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EnableProcessorRequest()
       );
@@ -2756,7 +2758,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EnableProcessorRequest()
       );
@@ -2790,7 +2792,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EnableProcessorRequest()
       );
@@ -2826,7 +2828,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2851,7 +2853,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2875,7 +2877,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DisableProcessorRequest()
       );
@@ -2911,7 +2913,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DisableProcessorRequest()
       );
@@ -2968,7 +2970,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DisableProcessorRequest()
       );
@@ -3002,7 +3004,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.DisableProcessorRequest()
       );
@@ -3038,7 +3040,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3063,7 +3065,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3087,7 +3089,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.SetDefaultProcessorVersionRequest()
       );
@@ -3123,7 +3125,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.SetDefaultProcessorVersionRequest()
       );
@@ -3180,7 +3182,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.SetDefaultProcessorVersionRequest()
       );
@@ -3217,7 +3219,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.SetDefaultProcessorVersionRequest()
       );
@@ -3253,7 +3255,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3279,7 +3281,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3303,7 +3305,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
       );
@@ -3339,7 +3341,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
       );
@@ -3396,7 +3398,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
       );
@@ -3430,7 +3432,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ReviewDocumentRequest()
       );
@@ -3466,7 +3468,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3491,7 +3493,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3515,7 +3517,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionRequest()
       );
@@ -3551,7 +3553,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionRequest()
       );
@@ -3608,7 +3610,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionRequest()
       );
@@ -3645,7 +3647,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.EvaluateProcessorVersionRequest()
       );
@@ -3681,7 +3683,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3707,7 +3709,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3731,7 +3733,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
       );
@@ -3767,7 +3769,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
       );
@@ -3824,7 +3826,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
       );
@@ -3861,7 +3863,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ImportProcessorVersionRequest()
       );
@@ -3897,7 +3899,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3922,7 +3924,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3946,7 +3948,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -3989,7 +3991,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -4049,7 +4051,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -4083,7 +4085,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -4147,7 +4149,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -4200,7 +4202,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -4253,7 +4255,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorTypesRequest()
       );
@@ -4299,7 +4301,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4341,7 +4343,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4399,7 +4401,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4433,7 +4435,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4497,7 +4499,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4550,7 +4552,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4602,7 +4604,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorsRequest()
       );
@@ -4648,7 +4650,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -4691,7 +4693,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -4751,7 +4753,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -4788,7 +4790,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -4860,7 +4862,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -4921,7 +4923,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -4978,7 +4980,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListProcessorVersionsRequest()
       );
@@ -5028,7 +5030,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5070,7 +5072,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5128,7 +5130,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5162,7 +5164,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5226,7 +5228,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5279,7 +5281,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5332,7 +5334,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1beta3.ListEvaluationsRequest()
       );
@@ -5377,7 +5379,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5410,7 +5412,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5457,7 +5459,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5495,7 +5497,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5546,7 +5548,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5590,7 +5592,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -5678,7 +5680,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5767,7 +5769,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5872,8 +5874,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5895,7 +5896,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5904,8 +5905,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5921,7 +5921,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -5935,7 +5935,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5988,7 +5988,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('datasetSchema', () => {
+    describe('datasetSchema', async () => {
       const fakePath = '/rendered/path/datasetSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -6002,7 +6002,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetSchemaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6055,7 +6055,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('evaluation', () => {
+    describe('evaluation', async () => {
       const fakePath = '/rendered/path/evaluation';
       const expectedParameters = {
         project: 'projectValue',
@@ -6071,7 +6071,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.evaluationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6146,7 +6146,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('humanReviewConfig', () => {
+    describe('humanReviewConfig', async () => {
       const fakePath = '/rendered/path/humanReviewConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -6160,7 +6160,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.humanReviewConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6225,7 +6225,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -6238,7 +6238,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6277,7 +6277,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('processor', () => {
+    describe('processor', async () => {
       const fakePath = '/rendered/path/processor';
       const expectedParameters = {
         project: 'projectValue',
@@ -6291,7 +6291,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.processorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6344,7 +6344,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('processorType', () => {
+    describe('processorType', async () => {
       const fakePath = '/rendered/path/processorType';
       const expectedParameters = {
         project: 'projectValue',
@@ -6358,7 +6358,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.processorTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6411,7 +6411,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('processorVersion', () => {
+    describe('processorVersion', async () => {
       const fakePath = '/rendered/path/processorVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -6426,7 +6426,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.processorVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6494,7 +6494,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -6506,7 +6506,7 @@ describe('v1beta3.DocumentProcessorServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

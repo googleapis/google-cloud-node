@@ -471,7 +471,9 @@ export class SqlTranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('translateQuery request %j', request);
     const wrappedCallback:
       | Callback<

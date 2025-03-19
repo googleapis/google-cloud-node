@@ -46,7 +46,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Migration_service.create_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.create_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.create_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.create_migration_workflow.js,samples/README.md)
 
@@ -63,7 +63,7 @@ __Usage:__
 
 ### Migration_service.delete_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.delete_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.delete_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.delete_migration_workflow.js,samples/README.md)
 
@@ -80,7 +80,7 @@ __Usage:__
 
 ### Migration_service.get_migration_subtask
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_subtask.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_subtask.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_subtask.js,samples/README.md)
 
@@ -97,7 +97,7 @@ __Usage:__
 
 ### Migration_service.get_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_workflow.js,samples/README.md)
 
@@ -114,7 +114,7 @@ __Usage:__
 
 ### Migration_service.list_migration_subtasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_subtasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_subtasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_subtasks.js,samples/README.md)
 
@@ -131,7 +131,7 @@ __Usage:__
 
 ### Migration_service.list_migration_workflows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_workflows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_workflows.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_workflows.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Migration_service.start_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.start_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.start_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.start_migration_workflow.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Migration_service.create_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.create_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.create_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.create_migration_workflow.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Migration_service.delete_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.delete_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.delete_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.delete_migration_workflow.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Migration_service.get_migration_subtask
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_subtask.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_subtask.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_subtask.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Migration_service.get_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_workflow.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Migration_service.list_migration_subtasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_subtasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_subtasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_subtasks.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Migration_service.list_migration_workflows
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_workflows.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_workflows.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_workflows.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Migration_service.start_migration_workflow
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.start_migration_workflow.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.start_migration_workflow.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.start_migration_workflow.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Sql_translation_service.translate_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/sql_translation_service.translate_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/sql_translation_service.translate_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/sql_translation_service.translate_query.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-bigquery-migration/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/quickstart.js,samples/README.md)
 

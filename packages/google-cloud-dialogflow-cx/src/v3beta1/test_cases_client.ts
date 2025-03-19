@@ -703,7 +703,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchDeleteTestCases request %j', request);
     const wrappedCallback:
       | Callback<
@@ -824,7 +826,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTestCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -952,7 +956,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTestCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1083,7 +1089,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         'test_case.name': request.testCase!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTestCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1211,7 +1219,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         agent: request.agent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('calculateCoverage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1338,7 +1348,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTestCaseResult request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1484,7 +1496,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1667,7 +1681,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1858,7 +1874,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2061,7 +2079,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2228,7 +2248,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListTestCasesRequest,
@@ -2298,7 +2320,9 @@ export class TestCasesClient {
       });
     const defaultCallSettings = this._defaults['listTestCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTestCases stream %j', request);
     return this.descriptors.page.listTestCases.createStream(
       this.innerApiCalls.listTestCases as GaxCall,
@@ -2350,7 +2374,9 @@ export class TestCasesClient {
       });
     const defaultCallSettings = this._defaults['listTestCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTestCases iterate %j', request);
     return this.descriptors.page.listTestCases.asyncIterate(
       this.innerApiCalls['listTestCases'] as GaxCall,
@@ -2483,7 +2509,9 @@ export class TestCasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListTestCaseResultsRequest,
@@ -2578,7 +2606,9 @@ export class TestCasesClient {
       });
     const defaultCallSettings = this._defaults['listTestCaseResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTestCaseResults stream %j', request);
     return this.descriptors.page.listTestCaseResults.createStream(
       this.innerApiCalls.listTestCaseResults as GaxCall,
@@ -2655,7 +2685,9 @@ export class TestCasesClient {
       });
     const defaultCallSettings = this._defaults['listTestCaseResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTestCaseResults iterate %j', request);
     return this.descriptors.page.listTestCaseResults.asyncIterate(
       this.innerApiCalls['listTestCaseResults'] as GaxCall,
@@ -2835,7 +2867,7 @@ export class TestCasesClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

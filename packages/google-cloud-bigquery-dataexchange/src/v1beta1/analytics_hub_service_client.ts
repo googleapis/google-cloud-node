@@ -520,7 +520,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataExchange request %j', request);
     const wrappedCallback:
       | Callback<
@@ -654,7 +656,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDataExchange request %j', request);
     const wrappedCallback:
       | Callback<
@@ -783,7 +787,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_exchange.name': request.dataExchange!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataExchange request %j', request);
     const wrappedCallback:
       | Callback<
@@ -909,7 +915,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDataExchange request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1035,7 +1043,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getListing request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1169,7 +1179,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createListing request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1298,7 +1310,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'listing.name': request.listing!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateListing request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1424,7 +1438,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteListing request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1557,7 +1573,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('subscribeListing request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1672,7 +1690,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1790,7 +1810,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1902,7 +1924,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2027,7 +2051,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListDataExchangesRequest,
@@ -2095,7 +2121,9 @@ export class AnalyticsHubServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataExchanges stream %j', request);
     return this.descriptors.page.listDataExchanges.createStream(
       this.innerApiCalls.listDataExchanges as GaxCall,
@@ -2145,7 +2173,9 @@ export class AnalyticsHubServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataExchanges iterate %j', request);
     return this.descriptors.page.listDataExchanges.asyncIterate(
       this.innerApiCalls['listDataExchanges'] as GaxCall,
@@ -2251,7 +2281,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         organization: request.organization ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListOrgDataExchangesRequest,
@@ -2319,7 +2351,9 @@ export class AnalyticsHubServiceClient {
       });
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrgDataExchanges stream %j', request);
     return this.descriptors.page.listOrgDataExchanges.createStream(
       this.innerApiCalls.listOrgDataExchanges as GaxCall,
@@ -2369,7 +2403,9 @@ export class AnalyticsHubServiceClient {
       });
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrgDataExchanges iterate %j', request);
     return this.descriptors.page.listOrgDataExchanges.asyncIterate(
       this.innerApiCalls['listOrgDataExchanges'] as GaxCall,
@@ -2474,7 +2510,9 @@ export class AnalyticsHubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.dataexchange.v1beta1.IListListingsRequest,
@@ -2542,7 +2580,9 @@ export class AnalyticsHubServiceClient {
       });
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listListings stream %j', request);
     return this.descriptors.page.listListings.createStream(
       this.innerApiCalls.listListings as GaxCall,
@@ -2592,7 +2632,9 @@ export class AnalyticsHubServiceClient {
       });
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listListings iterate %j', request);
     return this.descriptors.page.listListings.asyncIterate(
       this.innerApiCalls['listListings'] as GaxCall,

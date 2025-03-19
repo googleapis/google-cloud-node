@@ -637,7 +637,9 @@ export class GroundedGenerationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         grounding_config: request.groundingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('checkGrounding request %j', request);
     const wrappedCallback:
       | Callback<
