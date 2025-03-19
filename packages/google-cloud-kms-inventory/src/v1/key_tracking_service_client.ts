@@ -507,7 +507,9 @@ export class KeyTrackingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProtectedResourcesSummary request %j', request);
     const wrappedCallback:
       | Callback<
@@ -663,7 +665,9 @@ export class KeyTrackingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest,
@@ -756,7 +760,9 @@ export class KeyTrackingServiceClient {
       });
     const defaultCallSettings = this._defaults['searchProtectedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchProtectedResources stream %j', request);
     return this.descriptors.page.searchProtectedResources.createStream(
       this.innerApiCalls.searchProtectedResources as GaxCall,
@@ -831,7 +837,9 @@ export class KeyTrackingServiceClient {
       });
     const defaultCallSettings = this._defaults['searchProtectedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchProtectedResources iterate %j', request);
     return this.descriptors.page.searchProtectedResources.asyncIterate(
       this.innerApiCalls['searchProtectedResources'] as GaxCall,

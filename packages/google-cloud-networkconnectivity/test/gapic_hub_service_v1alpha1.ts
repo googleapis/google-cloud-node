@@ -287,7 +287,9 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.hubServiceStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetHubRequest()
       );
@@ -377,7 +379,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetHubRequest()
       );
@@ -424,7 +426,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetHubRequest()
       );
@@ -452,7 +454,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetHubRequest()
       );
@@ -473,7 +475,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetSpokeRequest()
       );
@@ -504,7 +506,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetSpokeRequest()
       );
@@ -551,7 +553,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetSpokeRequest()
       );
@@ -579,7 +581,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.GetSpokeRequest()
       );
@@ -600,7 +602,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateHubRequest()
       );
@@ -632,7 +634,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateHubRequest()
       );
@@ -686,7 +688,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateHubRequest()
       );
@@ -717,7 +719,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateHubRequest()
       );
@@ -750,7 +752,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -772,7 +774,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -790,7 +792,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateHubRequest()
       );
@@ -823,7 +825,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateHubRequest()
       );
@@ -878,7 +880,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateHubRequest()
       );
@@ -910,7 +912,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateHubRequest()
       );
@@ -944,7 +946,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -966,7 +968,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -984,7 +986,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteHubRequest()
       );
@@ -1016,7 +1018,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteHubRequest()
       );
@@ -1070,7 +1072,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteHubRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteHubRequest()
       );
@@ -1134,7 +1136,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1156,7 +1158,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1174,7 +1176,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateSpokeRequest()
       );
@@ -1206,7 +1208,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateSpokeRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateSpokeRequest()
       );
@@ -1291,7 +1293,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.CreateSpokeRequest()
       );
@@ -1324,7 +1326,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1346,7 +1348,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1364,7 +1366,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateSpokeRequest()
       );
@@ -1397,7 +1399,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateSpokeRequest()
       );
@@ -1452,7 +1454,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateSpokeRequest()
       );
@@ -1484,7 +1486,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.UpdateSpokeRequest()
       );
@@ -1518,7 +1520,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1540,7 +1542,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1558,7 +1560,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteSpokeRequest()
       );
@@ -1590,7 +1592,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteSpokeRequest()
       );
@@ -1644,7 +1646,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteSpokeRequest()
       );
@@ -1675,7 +1677,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.DeleteSpokeRequest()
       );
@@ -1708,7 +1710,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1730,7 +1732,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1748,7 +1750,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -1787,7 +1789,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -1844,7 +1846,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -1872,7 +1874,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -1933,7 +1935,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -1985,7 +1987,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -2034,7 +2036,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListHubsRequest()
       );
@@ -2078,7 +2080,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2174,7 +2176,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2205,7 +2207,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2268,7 +2270,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2322,7 +2324,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2372,7 +2374,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.ListSpokesRequest()
       );
@@ -2412,7 +2414,7 @@ describe('v1alpha1.HubServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('hub', () => {
+    describe('hub', async () => {
       const fakePath = '/rendered/path/hub';
       const expectedParameters = {
         project: 'projectValue',
@@ -2422,7 +2424,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hubPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2461,7 +2463,7 @@ describe('v1alpha1.HubServiceClient', () => {
       });
     });
 
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -2472,7 +2474,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2525,7 +2527,7 @@ describe('v1alpha1.HubServiceClient', () => {
       });
     });
 
-    describe('interconnectAttachment', () => {
+    describe('interconnectAttachment', async () => {
       const fakePath = '/rendered/path/interconnectAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2536,7 +2538,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.interconnectAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2604,7 +2606,7 @@ describe('v1alpha1.HubServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2614,7 +2616,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2653,7 +2655,7 @@ describe('v1alpha1.HubServiceClient', () => {
       });
     });
 
-    describe('spoke', () => {
+    describe('spoke', async () => {
       const fakePath = '/rendered/path/spoke';
       const expectedParameters = {
         project: 'projectValue',
@@ -2664,7 +2666,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spokePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2717,7 +2719,7 @@ describe('v1alpha1.HubServiceClient', () => {
       });
     });
 
-    describe('vpnTunnel', () => {
+    describe('vpnTunnel', async () => {
       const fakePath = '/rendered/path/vpnTunnel';
       const expectedParameters = {
         project: 'projectValue',
@@ -2728,7 +2730,7 @@ describe('v1alpha1.HubServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vpnTunnelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

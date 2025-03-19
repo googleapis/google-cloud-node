@@ -638,7 +638,9 @@ export class AutokeyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKeyHandle request %j', request);
     const wrappedCallback:
       | Callback<
@@ -779,7 +781,9 @@ export class AutokeyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -947,7 +951,9 @@ export class AutokeyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.kms.v1.IListKeyHandlesRequest,
@@ -1024,7 +1030,9 @@ export class AutokeyClient {
       });
     const defaultCallSettings = this._defaults['listKeyHandles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeyHandles stream %j', request);
     return this.descriptors.page.listKeyHandles.createStream(
       this.innerApiCalls.listKeyHandles as GaxCall,
@@ -1085,7 +1093,9 @@ export class AutokeyClient {
       });
     const defaultCallSettings = this._defaults['listKeyHandles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeyHandles iterate %j', request);
     return this.descriptors.page.listKeyHandles.asyncIterate(
       this.innerApiCalls['listKeyHandles'] as GaxCall,
@@ -1403,7 +1413,7 @@ export class AutokeyClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

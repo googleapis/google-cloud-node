@@ -250,7 +250,9 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.ekmServiceStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
@@ -387,7 +389,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
@@ -549,7 +551,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
@@ -570,7 +572,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
@@ -603,7 +605,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
@@ -651,7 +653,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
@@ -683,7 +685,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
@@ -705,7 +707,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConfigRequest()
       );
@@ -736,7 +738,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConfigRequest()
       );
@@ -783,7 +785,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConfigRequest()
       );
@@ -814,7 +816,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConfigRequest()
       );
@@ -835,7 +837,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
       );
@@ -867,7 +869,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
       );
@@ -915,7 +917,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
       );
@@ -947,7 +949,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateEkmConfigRequest()
       );
@@ -969,7 +971,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
       );
@@ -1001,7 +1003,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
       );
@@ -1048,7 +1050,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
       );
@@ -1079,7 +1081,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.VerifyConnectivityRequest()
       );
@@ -1100,7 +1102,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1134,7 +1136,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1183,7 +1185,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1214,7 +1216,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1268,7 +1270,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1317,7 +1319,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
@@ -1401,7 +1403,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1431,7 +1433,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1507,7 +1509,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1537,7 +1539,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1581,7 +1583,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1613,7 +1615,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1690,7 +1692,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1725,7 +1727,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1755,7 +1757,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1799,7 +1801,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1834,7 +1836,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1882,7 +1884,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1919,7 +1921,7 @@ describe('v1.EkmServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('autokeyConfig', () => {
+    describe('autokeyConfig', async () => {
       const fakePath = '/rendered/path/autokeyConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1928,7 +1930,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autokeyConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1957,7 +1959,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -1969,7 +1971,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2033,7 +2035,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -2046,7 +2048,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2125,7 +2127,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('ekmConfig', () => {
+    describe('ekmConfig', async () => {
       const fakePath = '/rendered/path/ekmConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2135,7 +2137,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2174,7 +2176,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('ekmConnection', () => {
+    describe('ekmConnection', async () => {
       const fakePath = '/rendered/path/ekmConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -2185,7 +2187,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2238,7 +2240,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('importJob', () => {
+    describe('importJob', async () => {
       const fakePath = '/rendered/path/importJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -2250,7 +2252,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.importJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2314,7 +2316,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('keyHandle', () => {
+    describe('keyHandle', async () => {
       const fakePath = '/rendered/path/keyHandle';
       const expectedParameters = {
         project: 'projectValue',
@@ -2325,7 +2327,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyHandlePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2378,7 +2380,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('keyRing', () => {
+    describe('keyRing', async () => {
       const fakePath = '/rendered/path/keyRing';
       const expectedParameters = {
         project: 'projectValue',
@@ -2389,7 +2391,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyRingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2442,7 +2444,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2452,7 +2454,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2491,7 +2493,7 @@ describe('v1.EkmServiceClient', () => {
       });
     });
 
-    describe('publicKey', () => {
+    describe('publicKey', async () => {
       const fakePath = '/rendered/path/publicKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -2504,7 +2506,7 @@ describe('v1.EkmServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.publicKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

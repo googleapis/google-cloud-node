@@ -271,7 +271,9 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.identityAwareProxyOAuthServiceStub);
       client.close().then(() => {
         done();
@@ -342,7 +344,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
@@ -376,7 +378,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
@@ -484,7 +486,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
@@ -568,7 +570,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
@@ -602,7 +604,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
@@ -660,7 +662,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
@@ -765,7 +767,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
@@ -800,7 +802,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
@@ -850,7 +852,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
@@ -887,7 +889,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
@@ -914,7 +916,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
@@ -949,7 +951,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
@@ -1036,7 +1038,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
@@ -1063,7 +1065,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
@@ -1149,7 +1151,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
@@ -1186,7 +1188,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
@@ -1213,7 +1215,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
@@ -1335,7 +1337,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
@@ -1362,7 +1364,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1405,7 +1407,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1465,7 +1467,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1502,7 +1504,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1575,7 +1577,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1637,7 +1639,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
@@ -1736,7 +1738,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1748,7 +1750,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1777,7 +1779,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       });
     });
 
-    describe('tunnelDestGroup', () => {
+    describe('tunnelDestGroup', async () => {
       const fakePath = '/rendered/path/tunnelDestGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -1791,7 +1793,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunnelDestGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1844,7 +1846,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       });
     });
 
-    describe('tunnelLocation', () => {
+    describe('tunnelLocation', async () => {
       const fakePath = '/rendered/path/tunnelLocation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1857,7 +1859,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunnelLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -250,7 +250,9 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.modelArmorStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetTemplateRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetTemplateRequest()
       );
@@ -387,7 +389,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetTemplateRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetTemplateRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.CreateTemplateRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.CreateTemplateRequest()
       );
@@ -517,7 +519,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.CreateTemplateRequest()
       );
@@ -548,7 +550,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.CreateTemplateRequest()
       );
@@ -569,7 +571,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateTemplateRequest()
       );
@@ -601,7 +603,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateTemplateRequest()
       );
@@ -649,7 +651,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateTemplateRequest()
       );
@@ -681,7 +683,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateTemplateRequest()
       );
@@ -703,7 +705,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.DeleteTemplateRequest()
       );
@@ -734,7 +736,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.DeleteTemplateRequest()
       );
@@ -781,7 +783,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.DeleteTemplateRequest()
       );
@@ -812,7 +814,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.DeleteTemplateRequest()
       );
@@ -833,7 +835,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetFloorSettingRequest()
       );
@@ -864,7 +866,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetFloorSettingRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetFloorSettingRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.GetFloorSettingRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateFloorSettingRequest()
       );
@@ -996,7 +998,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateFloorSettingRequest()
       );
@@ -1044,7 +1046,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateFloorSettingRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.UpdateFloorSettingRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeUserPromptRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeUserPromptRequest()
       );
@@ -1177,7 +1179,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeUserPromptRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeUserPromptRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeModelResponseRequest()
       );
@@ -1261,7 +1263,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeModelResponseRequest()
       );
@@ -1308,7 +1310,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeModelResponseRequest()
       );
@@ -1342,7 +1344,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.SanitizeModelResponseRequest()
       );
@@ -1366,7 +1368,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1399,7 +1401,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1448,7 +1450,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1479,7 +1481,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1533,7 +1535,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1582,7 +1584,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1625,7 +1627,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.modelarmor.v1.ListTemplatesRequest()
       );
@@ -1666,7 +1668,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1696,7 +1698,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1775,7 +1777,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1823,7 +1825,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1860,7 +1862,7 @@ describe('v1.ModelArmorClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationFloorSetting', () => {
+    describe('folderLocationFloorSetting', async () => {
       const fakePath = '/rendered/path/folderLocationFloorSetting';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1870,7 +1872,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationFloorSettingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1923,7 +1925,7 @@ describe('v1.ModelArmorClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1933,7 +1935,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1972,7 +1974,7 @@ describe('v1.ModelArmorClient', () => {
       });
     });
 
-    describe('organizationLocationFloorSetting', () => {
+    describe('organizationLocationFloorSetting', async () => {
       const fakePath = '/rendered/path/organizationLocationFloorSetting';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1982,7 +1984,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationFloorSettingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationFloorSettingPathTemplate.match =
@@ -2037,7 +2039,7 @@ describe('v1.ModelArmorClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2046,7 +2048,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2075,7 +2077,7 @@ describe('v1.ModelArmorClient', () => {
       });
     });
 
-    describe('projectLocationFloorSetting', () => {
+    describe('projectLocationFloorSetting', async () => {
       const fakePath = '/rendered/path/projectLocationFloorSetting';
       const expectedParameters = {
         project: 'projectValue',
@@ -2085,7 +2087,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationFloorSettingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationFloorSettingPathTemplate.match = sinon
@@ -2137,7 +2139,7 @@ describe('v1.ModelArmorClient', () => {
       });
     });
 
-    describe('template', () => {
+    describe('template', async () => {
       const fakePath = '/rendered/path/template';
       const expectedParameters = {
         project: 'projectValue',
@@ -2148,7 +2150,7 @@ describe('v1.ModelArmorClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.templatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

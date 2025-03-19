@@ -1100,7 +1100,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStoragePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1208,7 +1210,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVolume request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1315,7 +1319,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1429,7 +1435,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getActiveDirectory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1537,7 +1545,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKmsConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1645,7 +1655,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('verifyKmsConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1756,7 +1768,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReplication request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1867,7 +1881,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupVault request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1976,7 +1992,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2085,7 +2103,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2193,7 +2213,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQuotaRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2327,7 +2349,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2500,7 +2524,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'storage_pool.name': request.storagePool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2667,7 +2693,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2837,7 +2865,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3005,7 +3035,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3179,7 +3211,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3352,7 +3386,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'volume.name': request.volume!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3523,7 +3559,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3697,7 +3735,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3872,7 +3912,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4040,7 +4082,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4210,7 +4254,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'snapshot.name': request.snapshot!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4385,7 +4431,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4558,7 +4606,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'active_directory.name': request.activeDirectory!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4725,7 +4775,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4899,7 +4951,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5072,7 +5126,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'kms_config.name': request.kmsConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5240,7 +5296,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5407,7 +5465,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5582,7 +5642,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5750,7 +5812,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5920,7 +5984,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'replication.name': request.replication!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6095,7 +6161,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6263,7 +6331,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6432,7 +6502,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6617,7 +6689,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6786,7 +6860,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6962,7 +7038,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7135,7 +7213,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_vault.name': request.backupVault!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7303,7 +7383,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7482,7 +7564,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7650,7 +7734,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7823,7 +7909,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7999,7 +8087,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -8172,7 +8262,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_policy.name': request.backupPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -8340,7 +8432,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -8514,7 +8608,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -8687,7 +8783,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         'quota_rule.name': request.quotaRule!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -8854,7 +8952,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -9022,7 +9122,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListStoragePoolsRequest,
@@ -9093,7 +9195,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listStoragePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listStoragePools stream %j', request);
     return this.descriptors.page.listStoragePools.createStream(
       this.innerApiCalls.listStoragePools as GaxCall,
@@ -9146,7 +9250,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listStoragePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listStoragePools iterate %j', request);
     return this.descriptors.page.listStoragePools.asyncIterate(
       this.innerApiCalls['listStoragePools'] as GaxCall,
@@ -9245,7 +9351,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListVolumesRequest,
@@ -9313,7 +9421,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumes stream %j', request);
     return this.descriptors.page.listVolumes.createStream(
       this.innerApiCalls.listVolumes as GaxCall,
@@ -9365,7 +9475,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumes iterate %j', request);
     return this.descriptors.page.listVolumes.asyncIterate(
       this.innerApiCalls['listVolumes'] as GaxCall,
@@ -9468,7 +9580,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListSnapshotsRequest,
@@ -9540,7 +9654,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSnapshots stream %j', request);
     return this.descriptors.page.listSnapshots.createStream(
       this.innerApiCalls.listSnapshots as GaxCall,
@@ -9594,7 +9710,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSnapshots iterate %j', request);
     return this.descriptors.page.listSnapshots.asyncIterate(
       this.innerApiCalls['listSnapshots'] as GaxCall,
@@ -9701,7 +9819,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListActiveDirectoriesRequest,
@@ -9771,7 +9891,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listActiveDirectories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listActiveDirectories stream %j', request);
     return this.descriptors.page.listActiveDirectories.createStream(
       this.innerApiCalls.listActiveDirectories as GaxCall,
@@ -9823,7 +9945,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listActiveDirectories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listActiveDirectories iterate %j', request);
     return this.descriptors.page.listActiveDirectories.asyncIterate(
       this.innerApiCalls['listActiveDirectories'] as GaxCall,
@@ -9924,7 +10048,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListKmsConfigsRequest,
@@ -9994,7 +10120,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listKmsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKmsConfigs stream %j', request);
     return this.descriptors.page.listKmsConfigs.createStream(
       this.innerApiCalls.listKmsConfigs as GaxCall,
@@ -10046,7 +10174,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listKmsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKmsConfigs iterate %j', request);
     return this.descriptors.page.listKmsConfigs.asyncIterate(
       this.innerApiCalls['listKmsConfigs'] as GaxCall,
@@ -10155,7 +10285,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListReplicationsRequest,
@@ -10227,7 +10359,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listReplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReplications stream %j', request);
     return this.descriptors.page.listReplications.createStream(
       this.innerApiCalls.listReplications as GaxCall,
@@ -10281,7 +10415,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listReplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReplications iterate %j', request);
     return this.descriptors.page.listReplications.asyncIterate(
       this.innerApiCalls['listReplications'] as GaxCall,
@@ -10390,7 +10526,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListBackupVaultsRequest,
@@ -10462,7 +10600,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupVaults stream %j', request);
     return this.descriptors.page.listBackupVaults.createStream(
       this.innerApiCalls.listBackupVaults as GaxCall,
@@ -10516,7 +10656,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupVaults iterate %j', request);
     return this.descriptors.page.listBackupVaults.asyncIterate(
       this.innerApiCalls['listBackupVaults'] as GaxCall,
@@ -10628,7 +10770,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListBackupsRequest,
@@ -10709,7 +10853,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
@@ -10774,7 +10920,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
@@ -10881,7 +11029,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListBackupPoliciesRequest,
@@ -10951,7 +11101,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPolicies stream %j', request);
     return this.descriptors.page.listBackupPolicies.createStream(
       this.innerApiCalls.listBackupPolicies as GaxCall,
@@ -11003,7 +11155,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listBackupPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPolicies iterate %j', request);
     return this.descriptors.page.listBackupPolicies.asyncIterate(
       this.innerApiCalls['listBackupPolicies'] as GaxCall,
@@ -11104,7 +11258,9 @@ export class NetAppClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.netapp.v1.IListQuotaRulesRequest,
@@ -11174,7 +11330,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listQuotaRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaRules stream %j', request);
     return this.descriptors.page.listQuotaRules.createStream(
       this.innerApiCalls.listQuotaRules as GaxCall,
@@ -11226,7 +11384,9 @@ export class NetAppClient {
       });
     const defaultCallSettings = this._defaults['listQuotaRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaRules iterate %j', request);
     return this.descriptors.page.listQuotaRules.asyncIterate(
       this.innerApiCalls['listQuotaRules'] as GaxCall,
@@ -11406,7 +11566,7 @@ export class NetAppClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
