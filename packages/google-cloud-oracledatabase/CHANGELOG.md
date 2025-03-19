@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.3.0...oracledatabase-v0.4.0) (2025-03-19)
+
+
+### Features
+
+* [oracledatabase] add enum value `State::NOT_APPROVED_IN_PRIVATE_MARKETPLACE` ([#6162](https://github.com/googleapis/google-cloud-node/issues/6162)) ([336ec31](https://github.com/googleapis/google-cloud-node/commit/336ec3119f2c1964b3d43ed23fba880ab4658b20))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.2.1...oracledatabase-v0.3.0) (2025-03-18)
 
 
