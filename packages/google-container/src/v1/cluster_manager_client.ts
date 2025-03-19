@@ -512,7 +512,9 @@ export class ClusterManagerClient {
         project_id: request.projectId ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters request %j', request);
     const wrappedCallback:
       | Callback<
@@ -634,7 +636,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -768,7 +772,9 @@ export class ClusterManagerClient {
         project_id: request.projectId ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -892,7 +898,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1115,7 +1123,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1252,7 +1262,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setNodePoolAutoscaling request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1390,7 +1402,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLoggingService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1534,7 +1548,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMonitoringService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1661,7 +1677,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setAddonsConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1795,7 +1813,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ClusterManager-$SetLocations',
       'SetLocations is deprecated and may be removed in a future version.',
@@ -1933,7 +1953,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateMaster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2061,7 +2083,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMasterAuth request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2191,7 +2215,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2310,7 +2336,9 @@ export class ClusterManagerClient {
         project_id: request.projectId ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOperations request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2432,7 +2460,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         operation_id: request.operationId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOperation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2554,7 +2584,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         operation_id: request.operationId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelOperation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2672,7 +2704,9 @@ export class ClusterManagerClient {
         project_id: request.projectId ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2780,7 +2814,9 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJSONWebKeys request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2902,7 +2938,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNodePools request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3029,7 +3067,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3154,7 +3194,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3281,7 +3323,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3398,7 +3442,9 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('completeNodePoolUpgrade request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3542,7 +3588,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rollbackNodePoolUpgrade request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3684,7 +3732,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setNodePoolManagement request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3817,7 +3867,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3941,7 +3993,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLegacyAbac request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4065,7 +4119,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startIPRotation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4189,7 +4245,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('completeIPRotation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4322,7 +4380,9 @@ export class ClusterManagerClient {
         cluster_id: request.clusterId ?? '',
         node_pool_id: request.nodePoolId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setNodePoolSize request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4448,7 +4508,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setNetworkPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4581,7 +4643,9 @@ export class ClusterManagerClient {
         zone: request.zone ?? '',
         cluster_id: request.clusterId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMaintenancePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4705,7 +4769,9 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('checkAutopilotCompatibility request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4842,7 +4908,9 @@ export class ClusterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.container.v1.IListUsableSubnetworksRequest,
@@ -4917,7 +4985,9 @@ export class ClusterManagerClient {
       });
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsableSubnetworks stream %j', request);
     return this.descriptors.page.listUsableSubnetworks.createStream(
       this.innerApiCalls.listUsableSubnetworks as GaxCall,
@@ -4974,7 +5044,9 @@ export class ClusterManagerClient {
       });
     const defaultCallSettings = this._defaults['listUsableSubnetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsableSubnetworks iterate %j', request);
     return this.descriptors.page.listUsableSubnetworks.asyncIterate(
       this.innerApiCalls['listUsableSubnetworks'] as GaxCall,

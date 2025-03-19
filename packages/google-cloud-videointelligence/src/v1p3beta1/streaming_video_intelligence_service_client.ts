@@ -402,7 +402,9 @@ export class StreamingVideoIntelligenceServiceClient {
    * region_tag:videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_async
    */
   streamingAnnotateVideo(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingAnnotateVideo stream %j', options);
     return this.innerApiCalls.streamingAnnotateVideo(null, options);
   }

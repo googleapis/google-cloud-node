@@ -484,7 +484,9 @@ export class TextToSpeechClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVoices request %j', request);
     const wrappedCallback:
       | Callback<
@@ -614,7 +616,9 @@ export class TextToSpeechClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('synthesizeSpeech request %j', request);
     const wrappedCallback:
       | Callback<
@@ -663,7 +667,9 @@ export class TextToSpeechClient {
    * region_tag:texttospeech_v1beta1_generated_TextToSpeech_StreamingSynthesize_async
    */
   streamingSynthesize(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingSynthesize stream %j', options);
     return this.innerApiCalls.streamingSynthesize(null, options);
   }

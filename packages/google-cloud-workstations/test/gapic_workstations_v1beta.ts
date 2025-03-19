@@ -293,7 +293,9 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.workstationsStub);
       client.close().then(() => {
         done();
@@ -352,7 +354,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationClusterRequest()
       );
@@ -384,7 +386,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationClusterRequest()
       );
@@ -431,7 +433,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationClusterRequest()
       );
@@ -465,7 +467,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationClusterRequest()
       );
@@ -489,7 +491,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationConfigRequest()
       );
@@ -521,7 +523,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationConfigRequest()
       );
@@ -568,7 +570,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationConfigRequest()
       );
@@ -599,7 +601,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationConfigRequest()
       );
@@ -620,7 +622,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationRequest()
       );
@@ -651,7 +653,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationRequest()
       );
@@ -698,7 +700,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationRequest()
       );
@@ -729,7 +731,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GetWorkstationRequest()
       );
@@ -750,7 +752,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GenerateAccessTokenRequest()
       );
@@ -782,7 +784,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GenerateAccessTokenRequest()
       );
@@ -829,7 +831,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GenerateAccessTokenRequest()
       );
@@ -860,7 +862,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.GenerateAccessTokenRequest()
       );
@@ -881,7 +883,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationClusterRequest()
       );
@@ -914,7 +916,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationClusterRequest()
       );
@@ -968,7 +970,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationClusterRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationClusterRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1058,7 +1060,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1079,7 +1081,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationClusterRequest()
       );
@@ -1113,7 +1115,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationClusterRequest()
       );
@@ -1168,7 +1170,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationClusterRequest()
       );
@@ -1203,7 +1205,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationClusterRequest()
       );
@@ -1237,7 +1239,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1260,7 +1262,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1281,7 +1283,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationClusterRequest()
       );
@@ -1314,7 +1316,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationClusterRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationClusterRequest()
       );
@@ -1402,7 +1404,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationClusterRequest()
       );
@@ -1435,7 +1437,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1458,7 +1460,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1479,7 +1481,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationConfigRequest()
       );
@@ -1512,7 +1514,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationConfigRequest()
       );
@@ -1566,7 +1568,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationConfigRequest()
       );
@@ -1600,7 +1602,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationConfigRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1656,7 +1658,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1677,7 +1679,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationConfigRequest()
       );
@@ -1711,7 +1713,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationConfigRequest()
       );
@@ -1766,7 +1768,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationConfigRequest()
       );
@@ -1801,7 +1803,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationConfigRequest()
       );
@@ -1835,7 +1837,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1858,7 +1860,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1879,7 +1881,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationConfigRequest()
       );
@@ -1912,7 +1914,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationConfigRequest()
       );
@@ -1966,7 +1968,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationConfigRequest()
       );
@@ -2000,7 +2002,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationConfigRequest()
       );
@@ -2033,7 +2035,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2056,7 +2058,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2077,7 +2079,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationRequest()
       );
@@ -2110,7 +2112,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationRequest()
       );
@@ -2164,7 +2166,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationRequest()
       );
@@ -2195,7 +2197,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.CreateWorkstationRequest()
       );
@@ -2228,7 +2230,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2250,7 +2252,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2271,7 +2273,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationRequest()
       );
@@ -2305,7 +2307,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationRequest()
       );
@@ -2360,7 +2362,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationRequest()
       );
@@ -2392,7 +2394,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.UpdateWorkstationRequest()
       );
@@ -2426,7 +2428,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2448,7 +2450,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2469,7 +2471,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationRequest()
       );
@@ -2502,7 +2504,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationRequest()
       );
@@ -2556,7 +2558,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationRequest()
       );
@@ -2587,7 +2589,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.DeleteWorkstationRequest()
       );
@@ -2620,7 +2622,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2642,7 +2644,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2663,7 +2665,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StartWorkstationRequest()
       );
@@ -2696,7 +2698,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StartWorkstationRequest()
       );
@@ -2750,7 +2752,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StartWorkstationRequest()
       );
@@ -2781,7 +2783,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StartWorkstationRequest()
       );
@@ -2814,7 +2816,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2836,7 +2838,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2857,7 +2859,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StopWorkstationRequest()
       );
@@ -2890,7 +2892,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StopWorkstationRequest()
       );
@@ -2944,7 +2946,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StopWorkstationRequest()
       );
@@ -2975,7 +2977,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.StopWorkstationRequest()
       );
@@ -3008,7 +3010,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3030,7 +3032,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3051,7 +3053,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3091,7 +3093,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3148,7 +3150,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3182,7 +3184,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3251,7 +3253,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3309,7 +3311,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3363,7 +3365,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationClustersRequest()
       );
@@ -3410,7 +3412,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3450,7 +3452,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3507,7 +3509,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3541,7 +3543,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3610,7 +3612,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3668,7 +3670,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3722,7 +3724,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationConfigsRequest()
       );
@@ -3769,7 +3771,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -3809,7 +3811,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -3866,7 +3868,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -3900,7 +3902,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -3972,7 +3974,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -4033,7 +4035,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -4087,7 +4089,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationConfigsRequest()
       );
@@ -4134,7 +4136,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4173,7 +4175,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4230,7 +4232,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4261,7 +4263,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4322,7 +4324,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4372,7 +4374,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4422,7 +4424,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListWorkstationsRequest()
       );
@@ -4465,7 +4467,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4505,7 +4507,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4562,7 +4564,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4596,7 +4598,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4663,7 +4665,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4719,7 +4721,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4773,7 +4775,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.workstations.v1beta.ListUsableWorkstationsRequest()
       );
@@ -4819,7 +4821,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4849,7 +4851,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4893,7 +4895,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4925,7 +4927,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -4955,7 +4957,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -4999,7 +5001,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -5031,7 +5033,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -5064,7 +5066,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -5108,7 +5110,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -5143,7 +5145,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5173,7 +5175,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5217,7 +5219,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5252,7 +5254,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5300,7 +5302,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5341,7 +5343,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -5420,7 +5422,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5500,7 +5502,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5596,8 +5598,7 @@ describe('v1beta.WorkstationsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5616,7 +5617,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5625,8 +5626,7 @@ describe('v1beta.WorkstationsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5642,7 +5642,7 @@ describe('v1beta.WorkstationsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5652,7 +5652,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5691,7 +5691,7 @@ describe('v1beta.WorkstationsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -5700,7 +5700,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5729,7 +5729,7 @@ describe('v1beta.WorkstationsClient', () => {
       });
     });
 
-    describe('workstation', () => {
+    describe('workstation', async () => {
       const fakePath = '/rendered/path/workstation';
       const expectedParameters = {
         project: 'projectValue',
@@ -5742,7 +5742,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workstationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5819,7 +5819,7 @@ describe('v1beta.WorkstationsClient', () => {
       });
     });
 
-    describe('workstationCluster', () => {
+    describe('workstationCluster', async () => {
       const fakePath = '/rendered/path/workstationCluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -5830,7 +5830,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workstationClusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5896,7 +5896,7 @@ describe('v1beta.WorkstationsClient', () => {
       });
     });
 
-    describe('workstationConfig', () => {
+    describe('workstationConfig', async () => {
       const fakePath = '/rendered/path/workstationConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -5908,7 +5908,7 @@ describe('v1beta.WorkstationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workstationConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

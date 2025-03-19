@@ -740,7 +740,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCdnKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -866,7 +868,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createVodSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -987,7 +991,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVodSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1114,7 +1120,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVodStitchDetail request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1241,7 +1249,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVodAdTagDetail request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1367,7 +1377,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLiveAdTagDetail request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1481,7 +1493,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSlate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1606,7 +1620,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createLiveSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1726,7 +1742,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLiveSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1848,7 +1866,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLiveConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1969,7 +1989,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVodConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2111,7 +2133,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2279,7 +2303,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2451,7 +2477,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'cdn_key.name': request.cdnKey!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2640,7 +2668,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2809,7 +2839,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'slate.name': request.slate!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2977,7 +3009,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3164,7 +3198,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3332,7 +3368,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3505,7 +3543,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'live_config.name': request.liveConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3692,7 +3732,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3860,7 +3902,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4033,7 +4077,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'vod_config.name': request.vodConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4201,7 +4247,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListCdnKeysRequest,
@@ -4272,7 +4320,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listCdnKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCdnKeys stream %j', request);
     return this.descriptors.page.listCdnKeys.createStream(
       this.innerApiCalls.listCdnKeys as GaxCall,
@@ -4325,7 +4375,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listCdnKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCdnKeys iterate %j', request);
     return this.descriptors.page.listCdnKeys.asyncIterate(
       this.innerApiCalls['listCdnKeys'] as GaxCall,
@@ -4429,7 +4481,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListVodStitchDetailsRequest,
@@ -4495,7 +4549,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listVodStitchDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVodStitchDetails stream %j', request);
     return this.descriptors.page.listVodStitchDetails.createStream(
       this.innerApiCalls.listVodStitchDetails as GaxCall,
@@ -4543,7 +4599,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listVodStitchDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVodStitchDetails iterate %j', request);
     return this.descriptors.page.listVodStitchDetails.asyncIterate(
       this.innerApiCalls['listVodStitchDetails'] as GaxCall,
@@ -4646,7 +4704,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListVodAdTagDetailsRequest,
@@ -4712,7 +4772,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listVodAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVodAdTagDetails stream %j', request);
     return this.descriptors.page.listVodAdTagDetails.createStream(
       this.innerApiCalls.listVodAdTagDetails as GaxCall,
@@ -4760,7 +4822,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listVodAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVodAdTagDetails iterate %j', request);
     return this.descriptors.page.listVodAdTagDetails.asyncIterate(
       this.innerApiCalls['listVodAdTagDetails'] as GaxCall,
@@ -4863,7 +4927,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListLiveAdTagDetailsRequest,
@@ -4929,7 +4995,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listLiveAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLiveAdTagDetails stream %j', request);
     return this.descriptors.page.listLiveAdTagDetails.createStream(
       this.innerApiCalls.listLiveAdTagDetails as GaxCall,
@@ -4977,7 +5045,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listLiveAdTagDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLiveAdTagDetails iterate %j', request);
     return this.descriptors.page.listLiveAdTagDetails.asyncIterate(
       this.innerApiCalls['listLiveAdTagDetails'] as GaxCall,
@@ -5085,7 +5155,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListSlatesRequest,
@@ -5156,7 +5228,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listSlates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSlates stream %j', request);
     return this.descriptors.page.listSlates.createStream(
       this.innerApiCalls.listSlates as GaxCall,
@@ -5209,7 +5283,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listSlates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSlates iterate %j', request);
     return this.descriptors.page.listSlates.asyncIterate(
       this.innerApiCalls['listSlates'] as GaxCall,
@@ -5320,7 +5396,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListLiveConfigsRequest,
@@ -5393,7 +5471,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listLiveConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLiveConfigs stream %j', request);
     return this.descriptors.page.listLiveConfigs.createStream(
       this.innerApiCalls.listLiveConfigs as GaxCall,
@@ -5448,7 +5528,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listLiveConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLiveConfigs iterate %j', request);
     return this.descriptors.page.listLiveConfigs.asyncIterate(
       this.innerApiCalls['listLiveConfigs'] as GaxCall,
@@ -5560,7 +5642,9 @@ export class VideoStitcherServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.stitcher.v1.IListVodConfigsRequest,
@@ -5634,7 +5718,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listVodConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVodConfigs stream %j', request);
     return this.descriptors.page.listVodConfigs.createStream(
       this.innerApiCalls.listVodConfigs as GaxCall,
@@ -5690,7 +5776,9 @@ export class VideoStitcherServiceClient {
       });
     const defaultCallSettings = this._defaults['listVodConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVodConfigs iterate %j', request);
     return this.descriptors.page.listVodConfigs.asyncIterate(
       this.innerApiCalls['listVodConfigs'] as GaxCall,
@@ -5792,7 +5880,7 @@ export class VideoStitcherServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

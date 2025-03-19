@@ -640,7 +640,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -760,7 +762,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -886,7 +890,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchReadWriteToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1006,7 +1012,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchReadToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1128,7 +1136,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         repository: request.repository ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchGitRefs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1265,7 +1275,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1444,7 +1456,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1618,7 +1632,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1794,7 +1810,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1966,7 +1984,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2140,7 +2160,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2303,7 +2325,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudbuild.v2.IListConnectionsRequest,
@@ -2369,7 +2393,9 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -2417,7 +2443,9 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -2525,7 +2553,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudbuild.v2.IListRepositoriesRequest,
@@ -2596,7 +2626,9 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
@@ -2649,7 +2681,9 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
@@ -2753,7 +2787,9 @@ export class RepositoryManagerClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudbuild.v2.IFetchLinkableRepositoriesRequest,
@@ -2819,7 +2855,9 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchLinkableRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableRepositories.createStream(
       this.innerApiCalls.fetchLinkableRepositories as GaxCall,
@@ -2867,7 +2905,9 @@ export class RepositoryManagerClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchLinkableRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableRepositories'] as GaxCall,
@@ -3185,7 +3225,7 @@ export class RepositoryManagerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

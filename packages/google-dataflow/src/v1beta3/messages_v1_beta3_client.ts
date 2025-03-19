@@ -498,7 +498,9 @@ export class MessagesV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.dataflow.v1beta3.IListJobMessagesRequest,
@@ -583,7 +585,9 @@ export class MessagesV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobMessages stream %j', request);
     return this.descriptors.page.listJobMessages.createStream(
       this.innerApiCalls.listJobMessages as GaxCall,
@@ -650,7 +654,9 @@ export class MessagesV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['listJobMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobMessages iterate %j', request);
     return this.descriptors.page.listJobMessages.asyncIterate(
       this.innerApiCalls['listJobMessages'] as GaxCall,

@@ -593,7 +593,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProductSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -719,7 +721,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProductSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -850,7 +854,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         'product_set.name': request.productSet!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProductSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -975,7 +981,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteProductSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1111,7 +1119,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProduct request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1237,7 +1247,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProduct request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1374,7 +1386,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         'product.name': request.product!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProduct request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1500,7 +1514,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteProduct request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1655,7 +1671,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createReferenceImage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1790,7 +1808,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteReferenceImage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1923,7 +1943,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReferenceImage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2063,7 +2085,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addProductToProductSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2197,7 +2221,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeProductFromProductSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2343,7 +2369,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2543,7 +2571,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2712,7 +2742,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.vision.v1p4beta1.IListProductSetsRequest,
@@ -2779,7 +2811,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listProductSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProductSets stream %j', request);
     return this.descriptors.page.listProductSets.createStream(
       this.innerApiCalls.listProductSets as GaxCall,
@@ -2828,7 +2862,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listProductSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProductSets iterate %j', request);
     return this.descriptors.page.listProductSets.asyncIterate(
       this.innerApiCalls['listProductSets'] as GaxCall,
@@ -2937,7 +2973,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.vision.v1p4beta1.IListProductsRequest,
@@ -3005,7 +3043,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProducts stream %j', request);
     return this.descriptors.page.listProducts.createStream(
       this.innerApiCalls.listProducts as GaxCall,
@@ -3055,7 +3095,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProducts iterate %j', request);
     return this.descriptors.page.listProducts.asyncIterate(
       this.innerApiCalls['listProducts'] as GaxCall,
@@ -3169,7 +3211,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.vision.v1p4beta1.IListReferenceImagesRequest,
@@ -3240,7 +3284,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listReferenceImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReferenceImages stream %j', request);
     return this.descriptors.page.listReferenceImages.createStream(
       this.innerApiCalls.listReferenceImages as GaxCall,
@@ -3293,7 +3339,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listReferenceImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReferenceImages iterate %j', request);
     return this.descriptors.page.listReferenceImages.asyncIterate(
       this.innerApiCalls['listReferenceImages'] as GaxCall,
@@ -3404,7 +3452,9 @@ export class ProductSearchClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.vision.v1p4beta1.IListProductsInProductSetRequest,
@@ -3472,7 +3522,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listProductsInProductSet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProductsInProductSet stream %j', request);
     return this.descriptors.page.listProductsInProductSet.createStream(
       this.innerApiCalls.listProductsInProductSet as GaxCall,
@@ -3522,7 +3574,9 @@ export class ProductSearchClient {
       });
     const defaultCallSettings = this._defaults['listProductsInProductSet'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProductsInProductSet iterate %j', request);
     return this.descriptors.page.listProductsInProductSet.asyncIterate(
       this.innerApiCalls['listProductsInProductSet'] as GaxCall,

@@ -1,9 +1,0 @@
-[
-  "../../protos/google/cloud/websecurityscanner/v1alpha/crawled_url.proto",
-  "../../protos/google/cloud/websecurityscanner/v1alpha/finding.proto",
-  "../../protos/google/cloud/websecurityscanner/v1alpha/finding_addon.proto",
-  "../../protos/google/cloud/websecurityscanner/v1alpha/finding_type_stats.proto",
-  "../../protos/google/cloud/websecurityscanner/v1alpha/scan_config.proto",
-  "../../protos/google/cloud/websecurityscanner/v1alpha/scan_run.proto",
-  "../../protos/google/cloud/websecurityscanner/v1alpha/web_security_scanner.proto"
-]

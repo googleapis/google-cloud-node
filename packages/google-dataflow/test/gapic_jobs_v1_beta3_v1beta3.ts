@@ -252,7 +252,9 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.jobsV1Beta3Stub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
@@ -347,7 +349,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
@@ -399,7 +401,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
@@ -432,7 +434,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
@@ -458,7 +460,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
@@ -499,7 +501,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
@@ -556,7 +558,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
@@ -594,7 +596,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
@@ -625,7 +627,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
@@ -666,7 +668,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
@@ -723,7 +725,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
@@ -761,7 +763,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
@@ -792,7 +794,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CheckActiveJobsRequest()
       );
@@ -809,7 +811,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CheckActiveJobsRequest()
       );
@@ -842,7 +844,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CheckActiveJobsRequest()
       );
@@ -859,7 +861,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CheckActiveJobsRequest()
       );
@@ -875,7 +877,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
@@ -916,7 +918,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
@@ -973,7 +975,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
@@ -1045,7 +1047,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1137,7 +1139,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1170,7 +1172,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1279,7 +1281,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1326,7 +1328,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1374,7 +1376,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1408,7 +1410,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1457,7 +1459,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1488,7 +1490,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1539,7 +1541,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1585,7 +1587,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1beta3.JobsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );

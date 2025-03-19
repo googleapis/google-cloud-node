@@ -194,7 +194,9 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.templatesServiceStub);
       client.close().then(() => {
         done();
@@ -253,7 +255,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -290,7 +292,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -342,7 +344,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -381,7 +383,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
@@ -410,7 +412,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -446,7 +448,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -498,7 +500,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -534,7 +536,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
@@ -560,7 +562,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
@@ -596,7 +598,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
@@ -648,7 +650,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
@@ -684,7 +686,7 @@ describe('v1beta3.TemplatesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );

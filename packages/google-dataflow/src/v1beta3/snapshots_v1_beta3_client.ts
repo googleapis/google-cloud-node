@@ -452,7 +452,9 @@ export class SnapshotsV1Beta3Client {
         location: request.location ?? '',
         snapshot_id: request.snapshotId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -566,7 +568,9 @@ export class SnapshotsV1Beta3Client {
         location: request.location ?? '',
         snapshot_id: request.snapshotId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -682,7 +686,9 @@ export class SnapshotsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSnapshots request %j', request);
     const wrappedCallback:
       | Callback<

@@ -282,7 +282,9 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudBuildStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
@@ -369,7 +371,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
@@ -413,7 +415,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
@@ -456,7 +458,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
@@ -484,7 +486,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
@@ -528,7 +530,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
@@ -574,7 +576,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
@@ -603,7 +605,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
@@ -675,7 +677,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
@@ -693,7 +695,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
@@ -721,7 +723,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
@@ -765,7 +767,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
@@ -811,7 +813,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
@@ -840,7 +842,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
@@ -930,7 +932,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
@@ -1007,7 +1009,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
@@ -1037,7 +1039,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
@@ -1057,7 +1059,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
@@ -1156,7 +1158,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
@@ -1200,7 +1202,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
@@ -1234,7 +1236,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
@@ -1306,7 +1308,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
@@ -1334,7 +1336,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
@@ -1381,7 +1383,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
@@ -1432,7 +1434,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
@@ -1460,7 +1462,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
@@ -1490,7 +1492,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1512,7 +1514,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1530,7 +1532,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
@@ -1559,7 +1561,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
@@ -1610,7 +1612,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
@@ -1638,7 +1640,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
@@ -1668,7 +1670,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1690,7 +1692,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1708,7 +1710,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
@@ -1737,7 +1739,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
@@ -1788,7 +1790,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
@@ -1816,7 +1818,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
@@ -1846,7 +1848,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1868,7 +1870,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1886,7 +1888,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
@@ -1916,7 +1918,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
@@ -1967,7 +1969,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
@@ -1995,7 +1997,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
@@ -2025,7 +2027,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2047,7 +2049,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2068,7 +2070,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
@@ -2098,7 +2100,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
@@ -2149,7 +2151,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
@@ -2177,7 +2179,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
@@ -2207,7 +2209,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2229,7 +2231,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2250,7 +2252,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
@@ -2331,7 +2333,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
@@ -2359,7 +2361,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
@@ -2389,7 +2391,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2411,7 +2413,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2432,7 +2434,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
@@ -2464,7 +2466,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
@@ -2517,7 +2519,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
@@ -2547,7 +2549,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
@@ -2579,7 +2581,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2601,7 +2603,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2622,7 +2624,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2652,7 +2654,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2698,7 +2700,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2726,7 +2728,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2777,7 +2779,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2825,7 +2827,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2865,7 +2867,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
@@ -2906,7 +2908,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -2942,7 +2944,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -2994,7 +2996,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -3022,7 +3024,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -3080,7 +3082,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -3127,7 +3129,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -3174,7 +3176,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
@@ -3214,7 +3216,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3250,7 +3252,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3302,7 +3304,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3330,7 +3332,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3387,7 +3389,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3433,7 +3435,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3479,7 +3481,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
@@ -3514,7 +3516,7 @@ describe('v1.CloudBuildClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -3526,7 +3528,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3590,7 +3592,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3600,7 +3602,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3639,7 +3641,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('network', () => {
+    describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         project: 'projectValue',
@@ -3649,7 +3651,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3688,7 +3690,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -3697,7 +3699,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3726,7 +3728,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('projectBuild', () => {
+    describe('projectBuild', async () => {
       const fakePath = '/rendered/path/projectBuild';
       const expectedParameters = {
         project: 'projectValue',
@@ -3736,7 +3738,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectBuildPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3775,7 +3777,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('projectConfig', () => {
+    describe('projectConfig', async () => {
       const fakePath = '/rendered/path/projectConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3785,7 +3787,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3824,7 +3826,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('projectLocationBuild', () => {
+    describe('projectLocationBuild', async () => {
       const fakePath = '/rendered/path/projectLocationBuild';
       const expectedParameters = {
         project: 'projectValue',
@@ -3835,7 +3837,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationBuildPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3902,7 +3904,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('projectLocationConfig', () => {
+    describe('projectLocationConfig', async () => {
       const fakePath = '/rendered/path/projectLocationConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3913,7 +3915,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3981,7 +3983,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('projectLocationTrigger', () => {
+    describe('projectLocationTrigger', async () => {
       const fakePath = '/rendered/path/projectLocationTrigger';
       const expectedParameters = {
         project: 'projectValue',
@@ -3992,7 +3994,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationTriggerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4060,7 +4062,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('projectTrigger', () => {
+    describe('projectTrigger', async () => {
       const fakePath = '/rendered/path/projectTrigger';
       const expectedParameters = {
         project: 'projectValue',
@@ -4070,7 +4072,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTriggerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4112,7 +4114,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('repository', () => {
+    describe('repository', async () => {
       const fakePath = '/rendered/path/repository';
       const expectedParameters = {
         project: 'projectValue',
@@ -4124,7 +4126,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.repositoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4188,7 +4190,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('secretVersion', () => {
+    describe('secretVersion', async () => {
       const fakePath = '/rendered/path/secretVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -4199,7 +4201,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.secretVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4252,7 +4254,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('serviceAccount', () => {
+    describe('serviceAccount', async () => {
       const fakePath = '/rendered/path/serviceAccount';
       const expectedParameters = {
         project: 'projectValue',
@@ -4262,7 +4264,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.serviceAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4305,7 +4307,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('subscription', () => {
+    describe('subscription', async () => {
       const fakePath = '/rendered/path/subscription';
       const expectedParameters = {
         project: 'projectValue',
@@ -4315,7 +4317,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.subscriptionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4357,7 +4359,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('topic', () => {
+    describe('topic', async () => {
       const fakePath = '/rendered/path/topic';
       const expectedParameters = {
         project: 'projectValue',
@@ -4367,7 +4369,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.topicPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4406,7 +4408,7 @@ describe('v1.CloudBuildClient', () => {
       });
     });
 
-    describe('workerPool', () => {
+    describe('workerPool', async () => {
       const fakePath = '/rendered/path/workerPool';
       const expectedParameters = {
         project: 'projectValue',
@@ -4417,7 +4419,7 @@ describe('v1.CloudBuildClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workerPoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -202,7 +202,9 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.webRiskServiceV1Beta1Stub);
       client.close().then(() => {
         done();
@@ -265,7 +267,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
@@ -284,7 +286,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
@@ -318,7 +320,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
@@ -339,7 +341,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
@@ -359,7 +361,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
@@ -377,7 +379,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
@@ -411,7 +413,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
@@ -429,7 +431,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
@@ -446,7 +448,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
@@ -464,7 +466,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
@@ -498,7 +500,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
@@ -516,7 +518,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
