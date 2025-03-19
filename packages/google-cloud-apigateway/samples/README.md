@@ -46,7 +46,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Api_gateway_service.create_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_api.js,samples/README.md)
 
@@ -63,7 +63,7 @@ __Usage:__
 
 ### Api_gateway_service.create_api_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_api_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_api_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_api_config.js,samples/README.md)
 
@@ -80,7 +80,7 @@ __Usage:__
 
 ### Api_gateway_service.create_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.create_gateway.js,samples/README.md)
 
@@ -97,7 +97,7 @@ __Usage:__
 
 ### Api_gateway_service.delete_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_api.js,samples/README.md)
 
@@ -114,7 +114,7 @@ __Usage:__
 
 ### Api_gateway_service.delete_api_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_api_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_api_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_api_config.js,samples/README.md)
 
@@ -131,7 +131,7 @@ __Usage:__
 
 ### Api_gateway_service.delete_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.delete_gateway.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Api_gateway_service.get_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_api.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Api_gateway_service.get_api_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_api_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_api_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_api_config.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Api_gateway_service.get_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.get_gateway.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Api_gateway_service.list_api_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_api_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_api_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_api_configs.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Api_gateway_service.list_apis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_apis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_apis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_apis.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Api_gateway_service.list_gateways
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_gateways.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_gateways.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.list_gateways.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Api_gateway_service.update_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_api.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Api_gateway_service.update_api_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_api_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_api_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_api_config.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Api_gateway_service.update_gateway
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_gateway.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_gateway.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/generated/v1/api_gateway_service.update_gateway.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigateway/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigateway/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigateway/samples/quickstart.js,samples/README.md)
 
