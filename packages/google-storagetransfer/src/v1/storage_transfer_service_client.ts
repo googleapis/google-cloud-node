@@ -556,7 +556,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGoogleServiceAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -671,7 +673,9 @@ export class StorageTransferServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTransferJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -825,7 +829,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         job_name: request.jobName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTransferJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -947,7 +953,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         job_name: request.jobName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTransferJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1069,7 +1077,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseTransferOperation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1194,7 +1204,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeTransferOperation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1317,7 +1329,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         job_name: request.jobName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTransferJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1453,7 +1467,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAgentPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1587,7 +1603,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'agent_pool.name': request.agentPool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAgentPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1697,7 +1715,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAgentPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1813,7 +1833,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAgentPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1948,7 +1970,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         job_name: request.jobName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2132,7 +2156,9 @@ export class StorageTransferServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.storagetransfer.v1.IListTransferJobsRequest,
@@ -2219,7 +2245,9 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTransferJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferJobs stream %j', request);
     return this.descriptors.page.listTransferJobs.createStream(
       this.innerApiCalls.listTransferJobs as GaxCall,
@@ -2288,7 +2316,9 @@ export class StorageTransferServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTransferJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferJobs iterate %j', request);
     return this.descriptors.page.listTransferJobs.asyncIterate(
       this.innerApiCalls['listTransferJobs'] as GaxCall,
@@ -2399,7 +2429,9 @@ export class StorageTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.storagetransfer.v1.IListAgentPoolsRequest,
@@ -2473,7 +2505,9 @@ export class StorageTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listAgentPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAgentPools stream %j', request);
     return this.descriptors.page.listAgentPools.createStream(
       this.innerApiCalls.listAgentPools as GaxCall,
@@ -2529,7 +2563,9 @@ export class StorageTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listAgentPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAgentPools iterate %j', request);
     return this.descriptors.page.listAgentPools.asyncIterate(
       this.innerApiCalls['listAgentPools'] as GaxCall,
@@ -2631,7 +2667,7 @@ export class StorageTransferServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

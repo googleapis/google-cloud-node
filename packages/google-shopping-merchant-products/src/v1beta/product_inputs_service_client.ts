@@ -489,7 +489,9 @@ export class ProductInputsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertProductInput request %j', request);
     const wrappedCallback:
       | Callback<
@@ -641,7 +643,9 @@ export class ProductInputsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'product_input.name': request.productInput!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProductInput request %j', request);
     const wrappedCallback:
       | Callback<
@@ -778,7 +782,9 @@ export class ProductInputsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteProductInput request %j', request);
     const wrappedCallback:
       | Callback<

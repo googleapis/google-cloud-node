@@ -499,7 +499,9 @@ export class LocalInventoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertLocalInventory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -630,7 +632,9 @@ export class LocalInventoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteLocalInventory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -774,7 +778,9 @@ export class LocalInventoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.inventories.v1beta.IListLocalInventoriesRequest,
@@ -851,7 +857,9 @@ export class LocalInventoryServiceClient {
       });
     const defaultCallSettings = this._defaults['listLocalInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLocalInventories stream %j', request);
     return this.descriptors.page.listLocalInventories.createStream(
       this.innerApiCalls.listLocalInventories as GaxCall,
@@ -910,7 +918,9 @@ export class LocalInventoryServiceClient {
       });
     const defaultCallSettings = this._defaults['listLocalInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLocalInventories iterate %j', request);
     return this.descriptors.page.listLocalInventories.asyncIterate(
       this.innerApiCalls['listLocalInventories'] as GaxCall,

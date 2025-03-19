@@ -485,7 +485,9 @@ export class NotificationsApiServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
@@ -624,7 +626,9 @@ export class NotificationsApiServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
@@ -759,7 +763,9 @@ export class NotificationsApiServiceClient {
         'notification_subscription.name':
           request.notificationSubscription!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
@@ -890,7 +896,9 @@ export class NotificationsApiServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteNotificationSubscription request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1027,7 +1035,9 @@ export class NotificationsApiServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.notifications.v1beta.IListNotificationSubscriptionsRequest,
@@ -1096,7 +1106,9 @@ export class NotificationsApiServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotificationSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotificationSubscriptions stream %j', request);
     return this.descriptors.page.listNotificationSubscriptions.createStream(
       this.innerApiCalls.listNotificationSubscriptions as GaxCall,
@@ -1147,7 +1159,9 @@ export class NotificationsApiServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotificationSubscriptions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotificationSubscriptions iterate %j', request);
     return this.descriptors.page.listNotificationSubscriptions.asyncIterate(
       this.innerApiCalls['listNotificationSubscriptions'] as GaxCall,
