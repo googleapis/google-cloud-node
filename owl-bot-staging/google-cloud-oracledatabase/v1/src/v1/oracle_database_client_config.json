@@ -1,0 +1,151 @@
+{
+  "interfaces": {
+    "google.cloud.oracledatabase.v1.OracleDatabase": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "deadline_exceeded_resource_exhausted_internal_unavailable": [
+          "DEADLINE_EXCEEDED",
+          "RESOURCE_EXHAUSTED",
+          "INTERNAL",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "ce5b960a6ed052e690863808e4f0deff3dc7d49f": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 10000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListCloudExadataInfrastructures": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetCloudExadataInfrastructure": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateCloudExadataInfrastructure": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteCloudExadataInfrastructure": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListCloudVmClusters": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetCloudVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateCloudVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteCloudVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListEntitlements": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListDbServers": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListDbNodes": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListGiVersions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListDbSystemShapes": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAutonomousDatabases": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RestoreAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GenerateAutonomousDatabaseWallet": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAutonomousDbVersions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAutonomousDatabaseCharacterSets": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListAutonomousDatabaseBackups": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        }
+      }
+    }
+  }
+}
