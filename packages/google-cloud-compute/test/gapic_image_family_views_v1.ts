@@ -202,7 +202,9 @@ describe('v1.ImageFamilyViewsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.imageFamilyViewsStub);
       client.close().then(() => {
         done();
@@ -261,7 +263,7 @@ describe('v1.ImageFamilyViewsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
@@ -301,7 +303,7 @@ describe('v1.ImageFamilyViewsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
@@ -356,7 +358,7 @@ describe('v1.ImageFamilyViewsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
@@ -393,7 +395,7 @@ describe('v1.ImageFamilyViewsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );

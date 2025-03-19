@@ -265,7 +265,9 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.zoneOperationsStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
@@ -623,7 +625,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
@@ -694,7 +696,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
@@ -786,7 +788,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
@@ -817,7 +819,7 @@ describe('v1.ZoneOperationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
@@ -854,7 +856,7 @@ describe('v1.ZoneOperationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
@@ -906,7 +908,7 @@ describe('v1.ZoneOperationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
@@ -938,7 +940,7 @@ describe('v1.ZoneOperationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.ZoneOperationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
@@ -1053,7 +1055,7 @@ describe('v1.ZoneOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
@@ -1100,7 +1102,7 @@ describe('v1.ZoneOperationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );

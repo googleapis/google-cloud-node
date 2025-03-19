@@ -493,7 +493,9 @@ export class RuleSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRuleSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -614,7 +616,9 @@ export class RuleSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRuleSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -738,7 +742,9 @@ export class RuleSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRuleSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -859,7 +865,9 @@ export class RuleSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRuleSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -994,7 +1002,9 @@ export class RuleSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListRuleSetsRequest,
@@ -1067,7 +1077,9 @@ export class RuleSetServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuleSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuleSets stream %j', request);
     return this.descriptors.page.listRuleSets.createStream(
       this.innerApiCalls.listRuleSets as GaxCall,
@@ -1122,7 +1134,9 @@ export class RuleSetServiceClient {
       });
     const defaultCallSettings = this._defaults['listRuleSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuleSets iterate %j', request);
     return this.descriptors.page.listRuleSets.asyncIterate(
       this.innerApiCalls['listRuleSets'] as GaxCall,

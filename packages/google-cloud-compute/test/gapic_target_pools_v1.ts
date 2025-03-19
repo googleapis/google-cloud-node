@@ -263,7 +263,9 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.targetPoolsStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
@@ -363,7 +365,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
@@ -420,7 +422,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
@@ -492,7 +494,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
@@ -533,7 +535,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
@@ -590,7 +592,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
@@ -631,7 +633,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
@@ -662,7 +664,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
@@ -703,7 +705,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
@@ -760,7 +762,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
@@ -798,7 +800,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
@@ -829,7 +831,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
@@ -869,7 +871,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
@@ -924,7 +926,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
@@ -992,7 +994,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
@@ -1090,7 +1092,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
@@ -1159,7 +1161,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
@@ -1195,7 +1197,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
@@ -1247,7 +1249,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
@@ -1306,7 +1308,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
@@ -1347,7 +1349,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
@@ -1404,7 +1406,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
@@ -1445,7 +1447,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
@@ -1476,7 +1478,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
@@ -1517,7 +1519,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
@@ -1615,7 +1617,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
@@ -1687,7 +1689,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
@@ -1744,7 +1746,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
@@ -1782,7 +1784,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
@@ -1813,7 +1815,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSecurityPolicyTargetPoolRequest()
       );
@@ -1854,7 +1856,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSecurityPolicyTargetPoolRequest()
       );
@@ -1911,7 +1913,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSecurityPolicyTargetPoolRequest()
       );
@@ -1952,7 +1954,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSecurityPolicyTargetPoolRequest()
       );
@@ -1983,7 +1985,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListTargetPoolsRequest()
       );
@@ -2043,7 +2045,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListTargetPoolsRequest()
       );
@@ -2087,7 +2089,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
@@ -2124,7 +2126,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
@@ -2176,7 +2178,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
@@ -2208,7 +2210,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
@@ -2267,7 +2269,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
@@ -2323,7 +2325,7 @@ describe('v1.TargetPoolsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
@@ -2370,7 +2372,7 @@ describe('v1.TargetPoolsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );

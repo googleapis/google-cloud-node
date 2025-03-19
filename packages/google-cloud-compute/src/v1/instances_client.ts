@@ -539,7 +539,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addAccessConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -679,7 +681,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addResourcePolicies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -821,7 +825,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('attachDisk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -958,7 +964,9 @@ export class InstancesClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('bulkInsert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1090,7 +1098,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1232,7 +1242,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAccessConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1372,7 +1384,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('detachDisk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1495,7 +1509,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1623,7 +1639,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEffectiveFirewalls request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1758,7 +1776,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGuestAttributes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1885,7 +1905,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2010,7 +2032,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getScreenshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2145,7 +2169,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSerialPortOutput request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2276,7 +2302,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getShieldedInstanceIdentity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2405,7 +2433,9 @@ export class InstancesClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2543,7 +2573,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('performMaintenance request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2683,7 +2715,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeResourcePolicies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2823,7 +2857,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('reportHostAsFaulty request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2955,7 +2991,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('reset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3087,7 +3125,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resume request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3224,7 +3264,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('sendDiagnosticInterrupt request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3358,7 +3400,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setDeletionProtection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3500,7 +3544,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setDiskAutoDelete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3633,7 +3679,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3767,7 +3815,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3907,7 +3957,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMachineResources request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4047,7 +4099,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMachineType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4187,7 +4241,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMetadata request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4327,7 +4383,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setMinCpuPlatform request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4461,7 +4519,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setName request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4601,7 +4661,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setScheduling request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4741,7 +4803,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setSecurityPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4881,7 +4945,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setServiceAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5021,7 +5087,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setShieldedInstanceIntegrityPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5158,7 +5226,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setTags request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5298,7 +5368,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('simulateMaintenanceEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5430,7 +5502,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('start request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5570,7 +5644,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startWithEncryptionKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5704,7 +5780,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stop request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5838,7 +5916,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suspend request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5977,7 +6057,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6111,7 +6193,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6253,7 +6337,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAccessConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6393,7 +6479,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDisplayDevice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6535,7 +6623,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateNetworkInterface request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6675,7 +6765,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateShieldedInstanceConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6767,7 +6859,9 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
@@ -6872,7 +6966,9 @@ export class InstancesClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListInstancesRequest,
@@ -6944,7 +7040,9 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -7000,7 +7098,9 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -7108,7 +7208,9 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
@@ -7185,7 +7287,9 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReferrers stream %j', request);
     return this.descriptors.page.listReferrers.createStream(
       this.innerApiCalls.listReferrers as GaxCall,
@@ -7244,7 +7348,9 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReferrers iterate %j', request);
     return this.descriptors.page.listReferrers.asyncIterate(
       this.innerApiCalls['listReferrers'] as GaxCall,

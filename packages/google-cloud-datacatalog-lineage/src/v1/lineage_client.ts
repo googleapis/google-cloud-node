@@ -603,7 +603,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('processOpenLineageRunEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -735,7 +737,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProcess request %j', request);
     const wrappedCallback:
       | Callback<
@@ -867,7 +871,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         'process.name': request.process!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProcess request %j', request);
     const wrappedCallback:
       | Callback<
@@ -986,7 +992,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProcess request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1111,7 +1119,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1240,7 +1250,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         'run.name': request.run!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1359,7 +1371,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1487,7 +1501,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createLineageEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1612,7 +1628,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLineageEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1740,7 +1758,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteLineageEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1875,7 +1895,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2045,7 +2067,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2216,7 +2240,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.lineage.v1.IListProcessesRequest,
@@ -2289,7 +2315,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcesses stream %j', request);
     return this.descriptors.page.listProcesses.createStream(
       this.innerApiCalls.listProcesses as GaxCall,
@@ -2344,7 +2372,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcesses iterate %j', request);
     return this.descriptors.page.listProcesses.asyncIterate(
       this.innerApiCalls['listProcesses'] as GaxCall,
@@ -2454,7 +2484,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.lineage.v1.IListRunsRequest,
@@ -2526,7 +2558,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuns stream %j', request);
     return this.descriptors.page.listRuns.createStream(
       this.innerApiCalls.listRuns as GaxCall,
@@ -2580,7 +2614,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuns iterate %j', request);
     return this.descriptors.page.listRuns.asyncIterate(
       this.innerApiCalls['listRuns'] as GaxCall,
@@ -2692,7 +2728,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.lineage.v1.IListLineageEventsRequest,
@@ -2766,7 +2804,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listLineageEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLineageEvents stream %j', request);
     return this.descriptors.page.listLineageEvents.createStream(
       this.innerApiCalls.listLineageEvents as GaxCall,
@@ -2822,7 +2862,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['listLineageEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLineageEvents iterate %j', request);
     return this.descriptors.page.listLineageEvents.asyncIterate(
       this.innerApiCalls['listLineageEvents'] as GaxCall,
@@ -2947,7 +2989,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.lineage.v1.ISearchLinksRequest,
@@ -3027,7 +3071,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['searchLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchLinks stream %j', request);
     return this.descriptors.page.searchLinks.createStream(
       this.innerApiCalls.searchLinks as GaxCall,
@@ -3089,7 +3135,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['searchLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchLinks iterate %j', request);
     return this.descriptors.page.searchLinks.asyncIterate(
       this.innerApiCalls['searchLinks'] as GaxCall,
@@ -3218,7 +3266,9 @@ export class LineageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesRequest,
@@ -3297,7 +3347,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['batchSearchLinkProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchSearchLinkProcesses stream %j', request);
     return this.descriptors.page.batchSearchLinkProcesses.createStream(
       this.innerApiCalls.batchSearchLinkProcesses as GaxCall,
@@ -3358,7 +3410,9 @@ export class LineageClient {
       });
     const defaultCallSettings = this._defaults['batchSearchLinkProcesses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchSearchLinkProcesses iterate %j', request);
     return this.descriptors.page.batchSearchLinkProcesses.asyncIterate(
       this.innerApiCalls['batchSearchLinkProcesses'] as GaxCall,
@@ -3460,7 +3514,7 @@ export class LineageClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

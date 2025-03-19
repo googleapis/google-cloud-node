@@ -202,7 +202,9 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.licenseCodesStub);
       client.close().then(() => {
         done();
@@ -261,7 +263,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
@@ -296,7 +298,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
@@ -346,7 +348,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
@@ -378,7 +380,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
@@ -404,7 +406,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
@@ -493,7 +495,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
@@ -529,7 +531,7 @@ describe('v1.LicenseCodesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );

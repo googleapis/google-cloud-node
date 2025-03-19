@@ -202,7 +202,9 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.autoSuggestionServiceStub);
       client.close().then(() => {
         done();
@@ -265,7 +267,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
@@ -297,7 +299,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
@@ -345,7 +347,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
@@ -377,7 +379,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.SuggestQueriesRequest()
       );
@@ -393,7 +395,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -404,7 +406,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -443,7 +445,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       });
     });
 
-    describe('question', () => {
+    describe('question', async () => {
       const fakePath = '/rendered/path/question';
       const expectedParameters = {
         project: 'projectValue',
@@ -455,7 +457,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.questionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -508,7 +510,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
       });
     });
 
-    describe('userFeedback', () => {
+    describe('userFeedback', async () => {
       const fakePath = '/rendered/path/userFeedback';
       const expectedParameters = {
         project: 'projectValue',
@@ -520,7 +522,7 @@ describe('v1alpha.AutoSuggestionServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userFeedbackPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

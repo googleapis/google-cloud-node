@@ -461,7 +461,9 @@ export class RegionOperationsClient {
         region: request.region ?? '',
         operation: request.operation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -596,7 +598,9 @@ export class RegionOperationsClient {
         region: request.region ?? '',
         operation: request.operation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('wait request %j', request);
     const wrappedCallback:
       | Callback<

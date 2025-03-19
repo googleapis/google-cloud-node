@@ -278,7 +278,9 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionHealthCheckServicesStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
@@ -830,7 +832,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
@@ -871,7 +873,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
@@ -965,7 +967,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
@@ -1100,7 +1102,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
@@ -1200,7 +1202,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
@@ -1258,7 +1260,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
@@ -1313,7 +1315,7 @@ describe('v1.RegionHealthCheckServicesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );

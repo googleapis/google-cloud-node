@@ -265,7 +265,9 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.securityPoliciesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
@@ -507,7 +509,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
@@ -559,7 +561,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
@@ -592,7 +594,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
@@ -618,7 +620,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
@@ -703,7 +705,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
@@ -761,7 +763,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
@@ -797,7 +799,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
@@ -849,7 +851,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
@@ -882,7 +884,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
@@ -908,7 +910,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
@@ -939,7 +941,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
@@ -986,7 +988,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
@@ -1114,7 +1116,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
@@ -1148,7 +1150,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
@@ -1172,7 +1174,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
@@ -1207,7 +1209,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
@@ -1257,7 +1259,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
@@ -1289,7 +1291,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
@@ -1315,7 +1317,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
@@ -1351,7 +1353,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
@@ -1403,7 +1405,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
@@ -1436,7 +1438,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
@@ -1462,7 +1464,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
@@ -1498,7 +1500,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
@@ -1550,7 +1552,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
@@ -1586,7 +1588,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
@@ -1612,7 +1614,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
@@ -1648,7 +1650,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
@@ -1700,7 +1702,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
@@ -1733,7 +1735,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
@@ -1759,7 +1761,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest()
       );
@@ -1819,7 +1821,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest()
       );
@@ -1863,7 +1865,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
@@ -1901,7 +1903,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
@@ -1954,7 +1956,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
@@ -1981,7 +1983,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
@@ -2041,7 +2043,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
@@ -2092,7 +2094,7 @@ describe('v1.SecurityPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
@@ -2140,7 +2142,7 @@ describe('v1.SecurityPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );

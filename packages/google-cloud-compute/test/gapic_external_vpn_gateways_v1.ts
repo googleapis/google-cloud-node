@@ -276,7 +276,9 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.externalVpnGatewaysStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
@@ -381,7 +383,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
@@ -435,7 +437,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
@@ -498,7 +500,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
@@ -535,7 +537,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
@@ -621,7 +623,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
@@ -649,7 +651,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
@@ -682,7 +684,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
@@ -731,7 +733,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
@@ -761,7 +763,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
@@ -876,7 +878,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
@@ -939,7 +941,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
@@ -978,7 +980,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
@@ -1070,7 +1072,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
@@ -1138,7 +1140,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
@@ -1193,7 +1195,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
@@ -1222,7 +1224,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
@@ -1285,7 +1287,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
