@@ -664,7 +664,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -790,7 +792,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -916,7 +920,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         'agent.name': request.agent!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1036,7 +1042,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1166,7 +1174,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('validateAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1296,7 +1306,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAgentValidationResult request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1424,7 +1436,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGenerativeSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1552,7 +1566,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         'generative_settings.name': request.generativeSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateGenerativeSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1716,7 +1732,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1916,7 +1934,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2077,7 +2097,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest,
@@ -2144,7 +2166,9 @@ export class AgentsClient {
       });
     const defaultCallSettings = this._defaults['listAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAgents stream %j', request);
     return this.descriptors.page.listAgents.createStream(
       this.innerApiCalls.listAgents as GaxCall,
@@ -2193,7 +2217,9 @@ export class AgentsClient {
       });
     const defaultCallSettings = this._defaults['listAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAgents iterate %j', request);
     return this.descriptors.page.listAgents.asyncIterate(
       this.innerApiCalls['listAgents'] as GaxCall,
@@ -2373,7 +2399,7 @@ export class AgentsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

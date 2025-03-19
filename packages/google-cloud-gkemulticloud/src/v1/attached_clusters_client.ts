@@ -617,7 +617,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAttachedCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -751,7 +753,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAttachedServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -907,7 +911,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'generateAttachedClusterInstallManifest request %j',
       request
@@ -1057,7 +1063,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         attached_cluster: request.attachedCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAttachedClusterAgentToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1223,7 +1231,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1413,7 +1423,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'attached_cluster.name': request.attachedCluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1612,7 +1624,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1814,7 +1828,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1991,7 +2007,9 @@ export class AttachedClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAttachedClustersRequest,
@@ -2070,7 +2088,9 @@ export class AttachedClustersClient {
       });
     const defaultCallSettings = this._defaults['listAttachedClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttachedClusters stream %j', request);
     return this.descriptors.page.listAttachedClusters.createStream(
       this.innerApiCalls.listAttachedClusters as GaxCall,
@@ -2131,7 +2151,9 @@ export class AttachedClustersClient {
       });
     const defaultCallSettings = this._defaults['listAttachedClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttachedClusters iterate %j', request);
     return this.descriptors.page.listAttachedClusters.asyncIterate(
       this.innerApiCalls['listAttachedClusters'] as GaxCall,
@@ -2233,7 +2255,7 @@ export class AttachedClustersClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

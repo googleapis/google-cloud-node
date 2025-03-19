@@ -646,7 +646,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'serving_config.name': request.servingConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -774,7 +776,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -905,7 +909,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.IListServingConfigsRequest,
@@ -974,7 +980,9 @@ export class ServingConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServingConfigs stream %j', request);
     return this.descriptors.page.listServingConfigs.createStream(
       this.innerApiCalls.listServingConfigs as GaxCall,
@@ -1025,7 +1033,9 @@ export class ServingConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServingConfigs iterate %j', request);
     return this.descriptors.page.listServingConfigs.asyncIterate(
       this.innerApiCalls['listServingConfigs'] as GaxCall,

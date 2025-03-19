@@ -597,7 +597,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPlaybook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -724,7 +726,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePlaybook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -845,7 +849,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPlaybook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -973,7 +979,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         'playbook.name': request.playbook!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePlaybook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1102,7 +1110,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPlaybookVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1229,7 +1239,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPlaybookVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1356,7 +1368,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePlaybookVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1485,7 +1499,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybooksRequest,
@@ -1552,7 +1568,9 @@ export class PlaybooksClient {
       });
     const defaultCallSettings = this._defaults['listPlaybooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPlaybooks stream %j', request);
     return this.descriptors.page.listPlaybooks.createStream(
       this.innerApiCalls.listPlaybooks as GaxCall,
@@ -1601,7 +1619,9 @@ export class PlaybooksClient {
       });
     const defaultCallSettings = this._defaults['listPlaybooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPlaybooks iterate %j', request);
     return this.descriptors.page.listPlaybooks.asyncIterate(
       this.innerApiCalls['listPlaybooks'] as GaxCall,
@@ -1706,7 +1726,9 @@ export class PlaybooksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListPlaybookVersionsRequest,
@@ -1774,7 +1796,9 @@ export class PlaybooksClient {
       });
     const defaultCallSettings = this._defaults['listPlaybookVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPlaybookVersions stream %j', request);
     return this.descriptors.page.listPlaybookVersions.createStream(
       this.innerApiCalls.listPlaybookVersions as GaxCall,
@@ -1824,7 +1848,9 @@ export class PlaybooksClient {
       });
     const defaultCallSettings = this._defaults['listPlaybookVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPlaybookVersions iterate %j', request);
     return this.descriptors.page.listPlaybookVersions.asyncIterate(
       this.innerApiCalls['listPlaybookVersions'] as GaxCall,

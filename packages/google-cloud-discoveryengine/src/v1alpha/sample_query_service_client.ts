@@ -780,7 +780,9 @@ export class SampleQueryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -928,7 +930,9 @@ export class SampleQueryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1063,7 +1067,9 @@ export class SampleQueryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'sample_query.name': request.sampleQuery!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1197,7 +1203,9 @@ export class SampleQueryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSampleQuery request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1349,7 +1357,9 @@ export class SampleQueryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1532,7 +1542,9 @@ export class SampleQueryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1alpha.IListSampleQueriesRequest,
@@ -1617,7 +1629,9 @@ export class SampleQueryServiceClient {
       });
     const defaultCallSettings = this._defaults['listSampleQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSampleQueries stream %j', request);
     return this.descriptors.page.listSampleQueries.createStream(
       this.innerApiCalls.listSampleQueries as GaxCall,
@@ -1684,7 +1698,9 @@ export class SampleQueryServiceClient {
       });
     const defaultCallSettings = this._defaults['listSampleQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSampleQueries iterate %j', request);
     return this.descriptors.page.listSampleQueries.asyncIterate(
       this.innerApiCalls['listSampleQueries'] as GaxCall,
@@ -1864,7 +1880,7 @@ export class SampleQueryServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

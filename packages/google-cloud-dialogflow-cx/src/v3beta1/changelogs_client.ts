@@ -581,7 +581,9 @@ export class ChangelogsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChangelog request %j', request);
     const wrappedCallback:
       | Callback<
@@ -731,7 +733,9 @@ export class ChangelogsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListChangelogsRequest,
@@ -819,7 +823,9 @@ export class ChangelogsClient {
       });
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChangelogs stream %j', request);
     return this.descriptors.page.listChangelogs.createStream(
       this.innerApiCalls.listChangelogs as GaxCall,
@@ -889,7 +895,9 @@ export class ChangelogsClient {
       });
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChangelogs iterate %j', request);
     return this.descriptors.page.listChangelogs.asyncIterate(
       this.innerApiCalls['listChangelogs'] as GaxCall,

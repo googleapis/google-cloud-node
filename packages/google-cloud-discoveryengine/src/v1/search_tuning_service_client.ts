@@ -728,7 +728,9 @@ export class SearchTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         data_store: request.dataStore ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomModels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -873,7 +875,9 @@ export class SearchTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         data_store: request.dataStore ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1113,7 +1117,7 @@ export class SearchTuningServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

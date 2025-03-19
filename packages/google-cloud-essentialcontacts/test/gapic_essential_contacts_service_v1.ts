@@ -268,7 +268,9 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.essentialContactsServiceStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
@@ -363,7 +365,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
@@ -411,7 +413,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
@@ -465,7 +467,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
@@ -498,7 +500,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
@@ -547,7 +549,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
@@ -603,7 +605,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
@@ -635,7 +637,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
@@ -683,7 +685,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
@@ -715,7 +717,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
@@ -737,7 +739,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
@@ -817,7 +819,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
@@ -849,7 +851,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
@@ -871,7 +873,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
@@ -903,7 +905,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
@@ -951,7 +953,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
@@ -983,7 +985,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1045,7 +1047,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1195,7 +1197,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
@@ -1342,7 +1344,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1382,7 +1384,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1438,7 +1440,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1532,7 +1534,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1583,7 +1585,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
@@ -1671,7 +1673,7 @@ describe('v1.EssentialContactsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderContact', () => {
+    describe('folderContact', async () => {
       const fakePath = '/rendered/path/folderContact';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1682,7 +1684,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderContactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1721,7 +1723,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       });
     });
 
-    describe('organizationContact', () => {
+    describe('organizationContact', async () => {
       const fakePath = '/rendered/path/organizationContact';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1732,7 +1734,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationContactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1784,7 +1786,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1794,7 +1796,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1823,7 +1825,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       });
     });
 
-    describe('projectContact', () => {
+    describe('projectContact', async () => {
       const fakePath = '/rendered/path/projectContact';
       const expectedParameters = {
         project: 'projectValue',
@@ -1834,7 +1836,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectContactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

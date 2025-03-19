@@ -909,7 +909,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSiteSearchEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1044,7 +1046,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTargetSite request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1178,7 +1182,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchSitemaps request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1315,7 +1321,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1489,7 +1497,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1662,7 +1672,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'target_site.name': request.targetSite!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1839,7 +1851,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2012,7 +2026,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2188,7 +2204,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2358,7 +2376,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         site_search_engine: request.siteSearchEngine ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2528,7 +2548,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         site_search_engine: request.siteSearchEngine ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2707,7 +2729,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         site_search_engine: request.siteSearchEngine ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2877,7 +2901,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3054,7 +3080,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.IListTargetSitesRequest,
@@ -3133,7 +3161,9 @@ export class SiteSearchEngineServiceClient {
       });
     const defaultCallSettings = this._defaults['listTargetSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTargetSites stream %j', request);
     return this.descriptors.page.listTargetSites.createStream(
       this.innerApiCalls.listTargetSites as GaxCall,
@@ -3194,7 +3224,9 @@ export class SiteSearchEngineServiceClient {
       });
     const defaultCallSettings = this._defaults['listTargetSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTargetSites iterate %j', request);
     return this.descriptors.page.listTargetSites.asyncIterate(
       this.innerApiCalls['listTargetSites'] as GaxCall,
@@ -3309,7 +3341,9 @@ export class SiteSearchEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         site_search_engine: request.siteSearchEngine ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.IFetchDomainVerificationStatusRequest,
@@ -3385,7 +3419,9 @@ export class SiteSearchEngineServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchDomainVerificationStatus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchDomainVerificationStatus stream %j', request);
     return this.descriptors.page.fetchDomainVerificationStatus.createStream(
       this.innerApiCalls.fetchDomainVerificationStatus as GaxCall,
@@ -3443,7 +3479,9 @@ export class SiteSearchEngineServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchDomainVerificationStatus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchDomainVerificationStatus iterate %j', request);
     return this.descriptors.page.fetchDomainVerificationStatus.asyncIterate(
       this.innerApiCalls['fetchDomainVerificationStatus'] as GaxCall,
@@ -3623,7 +3661,7 @@ export class SiteSearchEngineServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

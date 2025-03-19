@@ -638,7 +638,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -763,7 +765,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGitRepositoryLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -889,7 +893,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchReadWriteToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1015,7 +1021,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchReadToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1144,7 +1152,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchGitHubInstallations request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1298,7 +1308,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1493,7 +1505,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1680,7 +1694,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1874,7 +1890,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2061,7 +2079,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2228,7 +2248,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.developerconnect.v1.IListConnectionsRequest,
@@ -2298,7 +2320,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -2350,7 +2374,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -2457,7 +2483,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.developerconnect.v1.IListGitRepositoryLinksRequest,
@@ -2527,7 +2555,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGitRepositoryLinks stream %j', request);
     return this.descriptors.page.listGitRepositoryLinks.createStream(
       this.innerApiCalls.listGitRepositoryLinks as GaxCall,
@@ -2579,7 +2609,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGitRepositoryLinks iterate %j', request);
     return this.descriptors.page.listGitRepositoryLinks.asyncIterate(
       this.innerApiCalls['listGitRepositoryLinks'] as GaxCall,
@@ -2683,7 +2715,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.developerconnect.v1.IFetchLinkableGitRepositoriesRequest,
@@ -2749,7 +2783,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchLinkableGitRepositories stream %j', request);
     return this.descriptors.page.fetchLinkableGitRepositories.createStream(
       this.innerApiCalls.fetchLinkableGitRepositories as GaxCall,
@@ -2797,7 +2833,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchLinkableGitRepositories iterate %j', request);
     return this.descriptors.page.fetchLinkableGitRepositories.asyncIterate(
       this.innerApiCalls['fetchLinkableGitRepositories'] as GaxCall,
@@ -2902,7 +2940,9 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.developerconnect.v1.IFetchGitRefsRequest,
@@ -2970,7 +3010,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchGitRefs stream %j', request);
     return this.descriptors.page.fetchGitRefs.createStream(
       this.innerApiCalls.fetchGitRefs as GaxCall,
@@ -3020,7 +3062,9 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchGitRefs iterate %j', request);
     return this.descriptors.page.fetchGitRefs.asyncIterate(
       this.innerApiCalls['fetchGitRefs'] as GaxCall,
@@ -3200,7 +3244,7 @@ export class DeveloperConnectClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

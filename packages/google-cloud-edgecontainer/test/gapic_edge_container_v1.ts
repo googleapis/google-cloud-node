@@ -292,7 +292,9 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.edgeContainerStub);
       client.close().then(() => {
         done();
@@ -351,7 +353,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetClusterRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
       );
@@ -513,7 +515,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
       );
@@ -560,7 +562,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
       );
@@ -591,7 +593,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateAccessTokenRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
       );
@@ -644,7 +646,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
       );
@@ -691,7 +693,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
       );
@@ -725,7 +727,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
       );
@@ -780,7 +782,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
       );
@@ -827,7 +829,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
       );
@@ -858,7 +860,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetNodePoolRequest()
       );
@@ -879,7 +881,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
       );
@@ -910,7 +912,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
       );
@@ -957,7 +959,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
       );
@@ -988,7 +990,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetMachineRequest()
       );
@@ -1009,7 +1011,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
       );
@@ -1040,7 +1042,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
       );
@@ -1118,7 +1120,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetVpnConnectionRequest()
       );
@@ -1139,7 +1141,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
       );
@@ -1170,7 +1172,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.GetServerConfigRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
       );
@@ -1356,7 +1358,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
       );
@@ -1387,7 +1389,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateClusterRequest()
       );
@@ -1420,7 +1422,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1442,7 +1444,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1463,7 +1465,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
       );
@@ -1497,7 +1499,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
       );
@@ -1552,7 +1554,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
       );
@@ -1584,7 +1586,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateClusterRequest()
       );
@@ -1618,7 +1620,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1640,7 +1642,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1661,7 +1663,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
       );
@@ -1748,7 +1750,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
       );
@@ -1779,7 +1781,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpgradeClusterRequest()
       );
@@ -1812,7 +1814,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1834,7 +1836,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1855,7 +1857,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
       );
@@ -1942,7 +1944,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
       );
@@ -1973,7 +1975,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteClusterRequest()
       );
@@ -2006,7 +2008,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2028,7 +2030,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2049,7 +2051,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
       );
@@ -2082,7 +2084,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
       );
@@ -2136,7 +2138,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
       );
@@ -2167,7 +2169,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateNodePoolRequest()
       );
@@ -2200,7 +2202,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2222,7 +2224,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2243,7 +2245,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
       );
@@ -2277,7 +2279,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
       );
@@ -2332,7 +2334,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
       );
@@ -2364,7 +2366,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.UpdateNodePoolRequest()
       );
@@ -2398,7 +2400,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2420,7 +2422,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2441,7 +2443,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
       );
@@ -2474,7 +2476,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
       );
@@ -2528,7 +2530,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
       );
@@ -2559,7 +2561,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteNodePoolRequest()
       );
@@ -2592,7 +2594,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2614,7 +2616,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2635,7 +2637,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
       );
@@ -2668,7 +2670,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
       );
@@ -2722,7 +2724,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
       );
@@ -2753,7 +2755,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.CreateVpnConnectionRequest()
       );
@@ -2786,7 +2788,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2808,7 +2810,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2829,7 +2831,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
       );
@@ -2862,7 +2864,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
       );
@@ -2916,7 +2918,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
       );
@@ -2947,7 +2949,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.DeleteVpnConnectionRequest()
       );
@@ -2980,7 +2982,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3002,7 +3004,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3023,7 +3025,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3062,7 +3064,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3117,7 +3119,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3148,7 +3150,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3208,7 +3210,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3259,7 +3261,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3308,7 +3310,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListClustersRequest()
       );
@@ -3350,7 +3352,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3389,7 +3391,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3444,7 +3446,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3475,7 +3477,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3535,7 +3537,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3584,7 +3586,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3633,7 +3635,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListNodePoolsRequest()
       );
@@ -3675,7 +3677,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -3714,7 +3716,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -3769,7 +3771,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -3800,7 +3802,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -3860,7 +3862,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -3911,7 +3913,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -3960,7 +3962,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListMachinesRequest()
       );
@@ -4002,7 +4004,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4042,7 +4044,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4099,7 +4101,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4130,7 +4132,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4191,7 +4193,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4241,7 +4243,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4291,7 +4293,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.edgecontainer.v1.ListVpnConnectionsRequest()
       );
@@ -4333,7 +4335,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4363,7 +4365,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4407,7 +4409,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4442,7 +4444,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -4490,7 +4492,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -4531,7 +4533,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -4610,7 +4612,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -4690,7 +4692,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -4786,8 +4788,7 @@ describe('v1.EdgeContainerClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -4806,7 +4807,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -4815,8 +4816,7 @@ describe('v1.EdgeContainerClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -4832,7 +4832,7 @@ describe('v1.EdgeContainerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cluster', () => {
+    describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -4843,7 +4843,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4896,7 +4896,7 @@ describe('v1.EdgeContainerClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4906,7 +4906,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4945,7 +4945,7 @@ describe('v1.EdgeContainerClient', () => {
       });
     });
 
-    describe('machine', () => {
+    describe('machine', async () => {
       const fakePath = '/rendered/path/machine';
       const expectedParameters = {
         project: 'projectValue',
@@ -4956,7 +4956,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.machinePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5009,7 +5009,7 @@ describe('v1.EdgeContainerClient', () => {
       });
     });
 
-    describe('nodePool', () => {
+    describe('nodePool', async () => {
       const fakePath = '/rendered/path/nodePool';
       const expectedParameters = {
         project: 'projectValue',
@@ -5021,7 +5021,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nodePoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5085,7 +5085,7 @@ describe('v1.EdgeContainerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -5094,7 +5094,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5123,7 +5123,7 @@ describe('v1.EdgeContainerClient', () => {
       });
     });
 
-    describe('vpnConnection', () => {
+    describe('vpnConnection', async () => {
       const fakePath = '/rendered/path/vpnConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -5134,7 +5134,7 @@ describe('v1.EdgeContainerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vpnConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

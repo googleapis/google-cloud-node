@@ -795,7 +795,9 @@ export class DataStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataStore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -934,7 +936,9 @@ export class DataStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_store.name': request.dataStore!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataStore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1061,7 +1065,9 @@ export class DataStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDocumentProcessingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1212,7 +1218,9 @@ export class DataStoreServiceClient {
         'document_processing_config.name':
           request.documentProcessingConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDocumentProcessingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1385,7 +1393,9 @@ export class DataStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1561,7 +1571,9 @@ export class DataStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1747,7 +1759,9 @@ export class DataStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1alpha.IListDataStoresRequest,
@@ -1835,7 +1849,9 @@ export class DataStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataStores stream %j', request);
     return this.descriptors.page.listDataStores.createStream(
       this.innerApiCalls.listDataStores as GaxCall,
@@ -1905,7 +1921,9 @@ export class DataStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataStores iterate %j', request);
     return this.descriptors.page.listDataStores.asyncIterate(
       this.innerApiCalls['listDataStores'] as GaxCall,
@@ -2085,7 +2103,7 @@ export class DataStoreServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

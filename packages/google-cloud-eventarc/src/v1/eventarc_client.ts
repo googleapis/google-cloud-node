@@ -954,7 +954,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTrigger request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1060,7 +1062,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChannel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1168,7 +1172,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProvider request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1284,7 +1290,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChannelConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1409,7 +1417,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGoogleChannelConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1538,7 +1548,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'google_channel_config.name': request.googleChannelConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateGoogleChannelConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1651,7 +1663,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMessageBus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1761,7 +1775,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnrollment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1871,7 +1887,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPipeline request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1987,7 +2005,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGoogleApiSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2126,7 +2146,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2303,7 +2325,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'trigger.name': request.trigger!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2479,7 +2503,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2653,7 +2679,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2827,7 +2855,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'channel.name': request.channel!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2997,7 +3027,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3168,7 +3200,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3335,7 +3369,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3510,7 +3546,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3687,7 +3725,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'message_bus.name': request.messageBus!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3863,7 +3903,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4038,7 +4080,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4215,7 +4259,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'enrollment.name': request.enrollment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4391,7 +4437,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4565,7 +4613,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4742,7 +4792,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'pipeline.name': request.pipeline!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4918,7 +4970,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5093,7 +5147,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5271,7 +5327,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         'google_api_source.name': request.googleApiSource!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5447,7 +5505,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5618,7 +5678,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListTriggersRequest,
@@ -5698,7 +5760,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTriggers stream %j', request);
     return this.descriptors.page.listTriggers.createStream(
       this.innerApiCalls.listTriggers as GaxCall,
@@ -5760,7 +5824,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTriggers iterate %j', request);
     return this.descriptors.page.listTriggers.asyncIterate(
       this.innerApiCalls['listTriggers'] as GaxCall,
@@ -5867,7 +5933,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListChannelsRequest,
@@ -5943,7 +6011,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChannels stream %j', request);
     return this.descriptors.page.listChannels.createStream(
       this.innerApiCalls.listChannels as GaxCall,
@@ -6001,7 +6071,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChannels iterate %j', request);
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
@@ -6108,7 +6180,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListProvidersRequest,
@@ -6184,7 +6258,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProviders stream %j', request);
     return this.descriptors.page.listProviders.createStream(
       this.innerApiCalls.listProviders as GaxCall,
@@ -6242,7 +6318,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProviders iterate %j', request);
     return this.descriptors.page.listProviders.asyncIterate(
       this.innerApiCalls['listProviders'] as GaxCall,
@@ -6350,7 +6428,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListChannelConnectionsRequest,
@@ -6421,7 +6501,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannelConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChannelConnections stream %j', request);
     return this.descriptors.page.listChannelConnections.createStream(
       this.innerApiCalls.listChannelConnections as GaxCall,
@@ -6474,7 +6556,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listChannelConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChannelConnections iterate %j', request);
     return this.descriptors.page.listChannelConnections.asyncIterate(
       this.innerApiCalls['listChannelConnections'] as GaxCall,
@@ -6590,7 +6674,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListMessageBusesRequest,
@@ -6669,7 +6755,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBuses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessageBuses stream %j', request);
     return this.descriptors.page.listMessageBuses.createStream(
       this.innerApiCalls.listMessageBuses as GaxCall,
@@ -6730,7 +6818,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBuses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessageBuses iterate %j', request);
     return this.descriptors.page.listMessageBuses.asyncIterate(
       this.innerApiCalls['listMessageBuses'] as GaxCall,
@@ -6838,7 +6928,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListMessageBusEnrollmentsRequest,
@@ -6909,7 +7001,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBusEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessageBusEnrollments stream %j', request);
     return this.descriptors.page.listMessageBusEnrollments.createStream(
       this.innerApiCalls.listMessageBusEnrollments as GaxCall,
@@ -6962,7 +7056,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listMessageBusEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessageBusEnrollments iterate %j', request);
     return this.descriptors.page.listMessageBusEnrollments.asyncIterate(
       this.innerApiCalls['listMessageBusEnrollments'] as GaxCall,
@@ -7078,7 +7174,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListEnrollmentsRequest,
@@ -7157,7 +7255,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnrollments stream %j', request);
     return this.descriptors.page.listEnrollments.createStream(
       this.innerApiCalls.listEnrollments as GaxCall,
@@ -7218,7 +7318,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listEnrollments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnrollments iterate %j', request);
     return this.descriptors.page.listEnrollments.asyncIterate(
       this.innerApiCalls['listEnrollments'] as GaxCall,
@@ -7328,7 +7430,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListPipelinesRequest,
@@ -7407,7 +7511,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPipelines stream %j', request);
     return this.descriptors.page.listPipelines.createStream(
       this.innerApiCalls.listPipelines as GaxCall,
@@ -7468,7 +7574,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPipelines iterate %j', request);
     return this.descriptors.page.listPipelines.asyncIterate(
       this.innerApiCalls['listPipelines'] as GaxCall,
@@ -7584,7 +7692,9 @@ export class EventarcClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.eventarc.v1.IListGoogleApiSourcesRequest,
@@ -7663,7 +7773,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listGoogleApiSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGoogleApiSources stream %j', request);
     return this.descriptors.page.listGoogleApiSources.createStream(
       this.innerApiCalls.listGoogleApiSources as GaxCall,
@@ -7724,7 +7836,9 @@ export class EventarcClient {
       });
     const defaultCallSettings = this._defaults['listGoogleApiSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGoogleApiSources iterate %j', request);
     return this.descriptors.page.listGoogleApiSources.asyncIterate(
       this.innerApiCalls['listGoogleApiSources'] as GaxCall,
@@ -8042,7 +8156,7 @@ export class EventarcClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

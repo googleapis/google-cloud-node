@@ -725,7 +725,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -847,7 +849,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         'agent.parent': request.agent!.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -965,7 +969,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAgent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1099,7 +1105,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getValidationResult request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1246,7 +1254,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1433,7 +1443,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1639,7 +1651,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1840,7 +1854,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2007,7 +2023,9 @@ export class AgentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.ISearchAgentsRequest,
@@ -2075,7 +2093,9 @@ export class AgentsClient {
       });
     const defaultCallSettings = this._defaults['searchAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAgents stream %j', request);
     return this.descriptors.page.searchAgents.createStream(
       this.innerApiCalls.searchAgents as GaxCall,
@@ -2125,7 +2145,9 @@ export class AgentsClient {
       });
     const defaultCallSettings = this._defaults['searchAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAgents iterate %j', request);
     return this.descriptors.page.searchAgents.asyncIterate(
       this.innerApiCalls['searchAgents'] as GaxCall,
@@ -2305,7 +2327,7 @@ export class AgentsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

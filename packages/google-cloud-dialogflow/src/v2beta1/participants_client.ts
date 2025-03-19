@@ -666,7 +666,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createParticipant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -787,7 +789,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getParticipant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -914,7 +918,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         'participant.name': request.participant!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateParticipant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1102,7 +1108,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         participant: request.participant ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1250,7 +1258,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suggestArticles request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1390,7 +1400,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suggestFaqAnswers request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1532,7 +1544,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suggestSmartReplies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1674,7 +1688,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suggestKnowledgeAssist request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1826,7 +1842,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$Participants-$CompileSuggestion',
       'CompileSuggestion is deprecated and may be removed in a future version.',
@@ -1893,7 +1911,9 @@ export class ParticipantsClient {
    * region_tag:dialogflow_v2beta1_generated_Participants_StreamingAnalyzeContent_async
    */
   streamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingAnalyzeContent stream %j', options);
     return this.innerApiCalls.streamingAnalyzeContent(null, options);
   }
@@ -1995,7 +2015,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListParticipantsRequest,
@@ -2063,7 +2085,9 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParticipants stream %j', request);
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as GaxCall,
@@ -2113,7 +2137,9 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParticipants iterate %j', request);
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
@@ -2247,7 +2273,9 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$Participants-$ListSuggestions',
       'ListSuggestions is deprecated and may be removed in a future version.',
@@ -2330,7 +2358,9 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listSuggestions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$Participants-$ListSuggestions',
       'ListSuggestions is deprecated and may be removed in a future version.',
@@ -2395,7 +2425,9 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listSuggestions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$Participants-$ListSuggestions',
       'ListSuggestions is deprecated and may be removed in a future version.',

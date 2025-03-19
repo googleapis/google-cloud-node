@@ -652,7 +652,9 @@ export class SampleQuerySetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -803,7 +805,9 @@ export class SampleQuerySetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -940,7 +944,9 @@ export class SampleQuerySetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'sample_query_set.name': request.sampleQuerySet!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1077,7 +1083,9 @@ export class SampleQuerySetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSampleQuerySet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1225,7 +1233,9 @@ export class SampleQuerySetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.IListSampleQuerySetsRequest,
@@ -1310,7 +1320,9 @@ export class SampleQuerySetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSampleQuerySets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSampleQuerySets stream %j', request);
     return this.descriptors.page.listSampleQuerySets.createStream(
       this.innerApiCalls.listSampleQuerySets as GaxCall,
@@ -1377,7 +1389,9 @@ export class SampleQuerySetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSampleQuerySets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSampleQuerySets iterate %j', request);
     return this.descriptors.page.listSampleQuerySets.asyncIterate(
       this.innerApiCalls['listSampleQuerySets'] as GaxCall,
