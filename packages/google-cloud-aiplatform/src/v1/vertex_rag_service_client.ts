@@ -644,7 +644,9 @@ export class VertexRagServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('retrieveContexts request %j', request);
     const wrappedCallback:
       | Callback<
@@ -773,7 +775,9 @@ export class VertexRagServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('augmentPrompt request %j', request);
     const wrappedCallback:
       | Callback<
@@ -903,7 +907,9 @@ export class VertexRagServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('corroborateContent request %j', request);
     const wrappedCallback:
       | Callback<

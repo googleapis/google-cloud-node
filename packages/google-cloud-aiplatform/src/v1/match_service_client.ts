@@ -647,7 +647,9 @@ export class MatchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('findNeighbors request %j', request);
     const wrappedCallback:
       | Callback<
@@ -770,7 +772,9 @@ export class MatchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('readIndexDatapoints request %j', request);
     const wrappedCallback:
       | Callback<

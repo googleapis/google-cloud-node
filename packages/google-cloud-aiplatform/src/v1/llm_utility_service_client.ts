@@ -649,7 +649,9 @@ export class LlmUtilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('countTokens request %j', request);
     const wrappedCallback:
       | Callback<
@@ -776,7 +778,9 @@ export class LlmUtilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeTokens request %j', request);
     const wrappedCallback:
       | Callback<

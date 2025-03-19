@@ -671,7 +671,9 @@ export class ReasoningEngineExecutionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryReasoningEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -740,7 +742,9 @@ export class ReasoningEngineExecutionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamQueryReasoningEngine stream %j', options);
     return this.innerApiCalls.streamQueryReasoningEngine(request, options);
   }

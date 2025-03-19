@@ -2326,7 +2326,9 @@ export class DeploymentResourcePoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeploymentResourcePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2468,7 +2470,9 @@ export class DeploymentResourcePoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2649,7 +2653,9 @@ export class DeploymentResourcePoolServiceClient {
         'deployment_resource_pool.name':
           request.deploymentResourcePool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2824,7 +2830,9 @@ export class DeploymentResourcePoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2999,7 +3007,9 @@ export class DeploymentResourcePoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListDeploymentResourcePoolsRequest,
@@ -3071,7 +3081,9 @@ export class DeploymentResourcePoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentResourcePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeploymentResourcePools stream %j', request);
     return this.descriptors.page.listDeploymentResourcePools.createStream(
       this.innerApiCalls.listDeploymentResourcePools as GaxCall,
@@ -3125,7 +3137,9 @@ export class DeploymentResourcePoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentResourcePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeploymentResourcePools iterate %j', request);
     return this.descriptors.page.listDeploymentResourcePools.asyncIterate(
       this.innerApiCalls['listDeploymentResourcePools'] as GaxCall,
@@ -3235,7 +3249,9 @@ export class DeploymentResourcePoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         deployment_resource_pool: request.deploymentResourcePool ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IQueryDeployedModelsRequest,
@@ -3308,7 +3324,9 @@ export class DeploymentResourcePoolServiceClient {
       });
     const defaultCallSettings = this._defaults['queryDeployedModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryDeployedModels stream %j', request);
     return this.descriptors.page.queryDeployedModels.createStream(
       this.innerApiCalls.queryDeployedModels as GaxCall,
@@ -3363,7 +3381,9 @@ export class DeploymentResourcePoolServiceClient {
       });
     const defaultCallSettings = this._defaults['queryDeployedModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryDeployedModels iterate %j', request);
     return this.descriptors.page.queryDeployedModels.asyncIterate(
       this.innerApiCalls['queryDeployedModels'] as GaxCall,
@@ -3681,7 +3701,7 @@ export class DeploymentResourcePoolServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

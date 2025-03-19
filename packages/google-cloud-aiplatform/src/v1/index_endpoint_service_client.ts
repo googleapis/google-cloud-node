@@ -2322,7 +2322,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIndexEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2444,7 +2446,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'index_endpoint.name': request.indexEndpoint!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateIndexEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2579,7 +2583,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2748,7 +2754,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2921,7 +2929,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3094,7 +3104,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3269,7 +3281,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3458,7 +3472,9 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
@@ -3550,7 +3566,9 @@ export class IndexEndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIndexEndpoints stream %j', request);
     return this.descriptors.page.listIndexEndpoints.createStream(
       this.innerApiCalls.listIndexEndpoints as GaxCall,
@@ -3624,7 +3642,9 @@ export class IndexEndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIndexEndpoints iterate %j', request);
     return this.descriptors.page.listIndexEndpoints.asyncIterate(
       this.innerApiCalls['listIndexEndpoints'] as GaxCall,
@@ -3942,7 +3962,7 @@ export class IndexEndpointServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

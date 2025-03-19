@@ -2387,7 +2387,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2511,7 +2513,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'dataset.name': request.dataset!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2639,7 +2643,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'dataset_version.name': request.datasetVersion!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDatasetVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2762,7 +2768,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDatasetVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2885,7 +2893,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAnnotationSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3020,7 +3030,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3189,7 +3201,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3361,7 +3375,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3532,7 +3548,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3705,7 +3723,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3874,7 +3894,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4043,7 +4065,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4212,7 +4236,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4400,7 +4426,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
@@ -4491,7 +4519,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
@@ -4564,7 +4594,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
@@ -4675,7 +4707,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
@@ -4749,7 +4783,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasetVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasetVersions stream %j', request);
     return this.descriptors.page.listDatasetVersions.createStream(
       this.innerApiCalls.listDatasetVersions as GaxCall,
@@ -4805,7 +4841,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listDatasetVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasetVersions iterate %j', request);
     return this.descriptors.page.listDatasetVersions.asyncIterate(
       this.innerApiCalls['listDatasetVersions'] as GaxCall,
@@ -4916,7 +4954,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
@@ -4990,7 +5030,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataItems stream %j', request);
     return this.descriptors.page.listDataItems.createStream(
       this.innerApiCalls.listDataItems as GaxCall,
@@ -5046,7 +5088,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataItems iterate %j', request);
     return this.descriptors.page.listDataItems.asyncIterate(
       this.innerApiCalls['listDataItems'] as GaxCall,
@@ -5205,7 +5249,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         dataset: request.dataset ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.ISearchDataItemsRequest,
@@ -5327,7 +5373,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDataItems stream %j', request);
     return this.descriptors.page.searchDataItems.createStream(
       this.innerApiCalls.searchDataItems as GaxCall,
@@ -5431,7 +5479,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchDataItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDataItems iterate %j', request);
     return this.descriptors.page.searchDataItems.asyncIterate(
       this.innerApiCalls['searchDataItems'] as GaxCall,
@@ -5542,7 +5592,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
@@ -5616,7 +5668,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSavedQueries stream %j', request);
     return this.descriptors.page.listSavedQueries.createStream(
       this.innerApiCalls.listSavedQueries as GaxCall,
@@ -5672,7 +5726,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSavedQueries iterate %j', request);
     return this.descriptors.page.listSavedQueries.asyncIterate(
       this.innerApiCalls['listSavedQueries'] as GaxCall,
@@ -5785,7 +5841,9 @@ export class DatasetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,
@@ -5859,7 +5917,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAnnotations stream %j', request);
     return this.descriptors.page.listAnnotations.createStream(
       this.innerApiCalls.listAnnotations as GaxCall,
@@ -5915,7 +5975,9 @@ export class DatasetServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAnnotations iterate %j', request);
     return this.descriptors.page.listAnnotations.asyncIterate(
       this.innerApiCalls['listAnnotations'] as GaxCall,
@@ -6233,7 +6295,7 @@ export class DatasetServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

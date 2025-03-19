@@ -2305,7 +2305,9 @@ export class ReasoningEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReasoningEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2440,7 +2442,9 @@ export class ReasoningEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2609,7 +2613,9 @@ export class ReasoningEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'reasoning_engine.name': request.reasoningEngine!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2778,7 +2784,9 @@ export class ReasoningEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2944,7 +2952,9 @@ export class ReasoningEngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListReasoningEnginesRequest,
@@ -3013,7 +3023,9 @@ export class ReasoningEngineServiceClient {
       });
     const defaultCallSettings = this._defaults['listReasoningEngines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReasoningEngines stream %j', request);
     return this.descriptors.page.listReasoningEngines.createStream(
       this.innerApiCalls.listReasoningEngines as GaxCall,
@@ -3064,7 +3076,9 @@ export class ReasoningEngineServiceClient {
       });
     const defaultCallSettings = this._defaults['listReasoningEngines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReasoningEngines iterate %j', request);
     return this.descriptors.page.listReasoningEngines.asyncIterate(
       this.innerApiCalls['listReasoningEngines'] as GaxCall,
@@ -3382,7 +3396,7 @@ export class ReasoningEngineServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

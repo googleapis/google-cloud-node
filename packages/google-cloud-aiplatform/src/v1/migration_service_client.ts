@@ -2292,7 +2292,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2473,7 +2475,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest,
@@ -2555,7 +2559,9 @@ export class MigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchMigratableResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchMigratableResources stream %j', request);
     return this.descriptors.page.searchMigratableResources.createStream(
       this.innerApiCalls.searchMigratableResources as GaxCall,
@@ -2619,7 +2625,9 @@ export class MigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['searchMigratableResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchMigratableResources iterate %j', request);
     return this.descriptors.page.searchMigratableResources.asyncIterate(
       this.innerApiCalls['searchMigratableResources'] as GaxCall,
@@ -2937,7 +2945,7 @@ export class MigrationServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

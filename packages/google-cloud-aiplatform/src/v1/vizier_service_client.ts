@@ -2305,7 +2305,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createStudy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2414,7 +2416,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStudy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2523,7 +2527,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteStudy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2637,7 +2643,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupStudy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2750,7 +2758,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTrial request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2860,7 +2870,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTrial request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2979,7 +2991,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         trial_name: request.trialName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addTrialMeasurement request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3110,7 +3124,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('completeTrial request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3222,7 +3238,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTrial request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3334,7 +3352,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopTrial request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3453,7 +3473,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOptimalTrials request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3636,7 +3658,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3808,7 +3832,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         trial_name: request.trialName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3973,7 +3999,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListStudiesRequest,
@@ -4041,7 +4069,9 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listStudies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listStudies stream %j', request);
     return this.descriptors.page.listStudies.createStream(
       this.innerApiCalls.listStudies as GaxCall,
@@ -4091,7 +4121,9 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listStudies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listStudies iterate %j', request);
     return this.descriptors.page.listStudies.asyncIterate(
       this.innerApiCalls['listStudies'] as GaxCall,
@@ -4190,7 +4222,9 @@ export class VizierServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListTrialsRequest,
@@ -4258,7 +4292,9 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrials'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTrials stream %j', request);
     return this.descriptors.page.listTrials.createStream(
       this.innerApiCalls.listTrials as GaxCall,
@@ -4308,7 +4344,9 @@ export class VizierServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrials'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTrials iterate %j', request);
     return this.descriptors.page.listTrials.asyncIterate(
       this.innerApiCalls['listTrials'] as GaxCall,
@@ -4626,7 +4664,7 @@ export class VizierServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -2279,7 +2279,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSchedule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2391,7 +2393,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSchedule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2512,7 +2516,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseSchedule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2644,7 +2650,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeSchedule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2774,7 +2782,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'schedule.name': request.schedule!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSchedule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2905,7 +2915,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3123,7 +3135,9 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
@@ -3244,7 +3258,9 @@ export class ScheduleServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSchedules stream %j', request);
     return this.descriptors.page.listSchedules.createStream(
       this.innerApiCalls.listSchedules as GaxCall,
@@ -3347,7 +3363,9 @@ export class ScheduleServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSchedules iterate %j', request);
     return this.descriptors.page.listSchedules.asyncIterate(
       this.innerApiCalls['listSchedules'] as GaxCall,
@@ -3665,7 +3683,7 @@ export class ScheduleServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

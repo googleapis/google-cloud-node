@@ -709,7 +709,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('predict request %j', request);
     const wrappedCallback:
       | Callback<
@@ -845,7 +847,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rawPredict request %j', request);
     const wrappedCallback:
       | Callback<
@@ -968,7 +972,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('directPredict request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1097,7 +1103,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('directRawPredict request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1249,7 +1257,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('explain request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1409,7 +1419,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1471,7 +1483,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamRawPredict stream %j', options);
     return this.innerApiCalls.streamRawPredict(request, options);
   }
@@ -1492,7 +1506,9 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1_generated_PredictionService_StreamDirectPredict_async
    */
   streamDirectPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamDirectPredict stream %j', options);
     return this.innerApiCalls.streamDirectPredict(null, options);
   }
@@ -1513,7 +1529,9 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1_generated_PredictionService_StreamDirectRawPredict_async
    */
   streamDirectRawPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamDirectRawPredict stream %j', options);
     return this.innerApiCalls.streamDirectRawPredict(null, options);
   }
@@ -1534,7 +1552,9 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1_generated_PredictionService_StreamingPredict_async
    */
   streamingPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingPredict stream %j', options);
     return this.innerApiCalls.streamingPredict(null, options);
   }
@@ -1574,7 +1594,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('serverStreamingPredict stream %j', options);
     return this.innerApiCalls.serverStreamingPredict(request, options);
   }
@@ -1594,7 +1616,9 @@ export class PredictionServiceClient {
    * region_tag:aiplatform_v1_generated_PredictionService_StreamingRawPredict_async
    */
   streamingRawPredict(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingRawPredict stream %j', options);
     return this.innerApiCalls.streamingRawPredict(null, options);
   }
@@ -1673,7 +1697,9 @@ export class PredictionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamGenerateContent stream %j', options);
     return this.innerApiCalls.streamGenerateContent(request, options);
   }

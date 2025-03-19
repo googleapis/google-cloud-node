@@ -2370,7 +2370,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeatureOnlineStore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2491,7 +2493,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeatureView request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2608,7 +2612,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('syncFeatureView request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2726,7 +2732,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeatureViewSync request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2870,7 +2878,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3055,7 +3065,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature_online_store.name': request.featureOnlineStore!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3229,7 +3241,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3413,7 +3427,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3603,7 +3619,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature_view.name': request.featureView!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3772,7 +3790,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3970,7 +3990,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeatureOnlineStoresRequest,
@@ -4071,7 +4093,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureOnlineStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureOnlineStores stream %j', request);
     return this.descriptors.page.listFeatureOnlineStores.createStream(
       this.innerApiCalls.listFeatureOnlineStores as GaxCall,
@@ -4154,7 +4178,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureOnlineStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureOnlineStores iterate %j', request);
     return this.descriptors.page.listFeatureOnlineStores.asyncIterate(
       this.innerApiCalls['listFeatureOnlineStores'] as GaxCall,
@@ -4295,7 +4321,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeatureViewsRequest,
@@ -4399,7 +4427,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureViews stream %j', request);
     return this.descriptors.page.listFeatureViews.createStream(
       this.innerApiCalls.listFeatureViews as GaxCall,
@@ -4485,7 +4515,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureViews iterate %j', request);
     return this.descriptors.page.listFeatureViews.asyncIterate(
       this.innerApiCalls['listFeatureViews'] as GaxCall,
@@ -4616,7 +4648,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeatureViewSyncsRequest,
@@ -4710,7 +4744,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViewSyncs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureViewSyncs stream %j', request);
     return this.descriptors.page.listFeatureViewSyncs.createStream(
       this.innerApiCalls.listFeatureViewSyncs as GaxCall,
@@ -4786,7 +4822,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureViewSyncs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureViewSyncs iterate %j', request);
     return this.descriptors.page.listFeatureViewSyncs.asyncIterate(
       this.innerApiCalls['listFeatureViewSyncs'] as GaxCall,
@@ -5104,7 +5142,7 @@ export class FeatureOnlineStoreAdminServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
