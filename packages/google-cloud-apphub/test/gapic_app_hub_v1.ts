@@ -6586,7 +6586,7 @@ describe('v1.AppHubClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+      const responses: operationsProtos.google.longrunning.IOperation[] =
         [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
@@ -6608,7 +6608,7 @@ describe('v1.AppHubClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
+        new operationsProtos.google.longrunning.IOperation()
       );
       const expectedError = new Error('expected');
       client.operationsClient.descriptor.listOperations.asyncIterate =
