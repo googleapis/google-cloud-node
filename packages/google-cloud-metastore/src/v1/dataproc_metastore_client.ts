@@ -765,7 +765,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -884,7 +886,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMetadataImport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -998,7 +1002,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1152,7 +1158,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1341,7 +1349,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         'service.name': request.service!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1524,7 +1534,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1718,7 +1730,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1908,7 +1922,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         'metadata_import.name': request.metadataImport!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2098,7 +2114,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         service: request.service ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2288,7 +2306,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         service: request.service ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2481,7 +2501,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2664,7 +2686,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2837,7 +2861,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         service: request.service ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3013,7 +3039,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         service: request.service ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3196,7 +3224,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         service: request.service ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3378,7 +3408,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.metastore.v1.IListServicesRequest,
@@ -3463,7 +3495,9 @@ export class DataprocMetastoreClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -3530,7 +3564,9 @@ export class DataprocMetastoreClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -3651,7 +3687,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
@@ -3735,7 +3773,9 @@ export class DataprocMetastoreClient {
       });
     const defaultCallSettings = this._defaults['listMetadataImports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMetadataImports stream %j', request);
     return this.descriptors.page.listMetadataImports.createStream(
       this.innerApiCalls.listMetadataImports as GaxCall,
@@ -3801,7 +3841,9 @@ export class DataprocMetastoreClient {
       });
     const defaultCallSettings = this._defaults['listMetadataImports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMetadataImports iterate %j', request);
     return this.descriptors.page.listMetadataImports.asyncIterate(
       this.innerApiCalls['listMetadataImports'] as GaxCall,
@@ -3916,7 +3958,9 @@ export class DataprocMetastoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.metastore.v1.IListBackupsRequest,
@@ -4000,7 +4044,9 @@ export class DataprocMetastoreClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
@@ -4066,7 +4112,9 @@ export class DataprocMetastoreClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
@@ -4384,7 +4432,7 @@ export class DataprocMetastoreClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

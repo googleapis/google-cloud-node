@@ -268,7 +268,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.secretManagerServiceStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
@@ -363,7 +365,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
@@ -411,7 +413,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
@@ -443,7 +445,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.CreateSecretRequest()
       );
@@ -465,7 +467,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
@@ -497,7 +499,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
@@ -545,7 +547,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
@@ -577,7 +579,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AddSecretVersionRequest()
       );
@@ -599,7 +601,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
@@ -631,7 +633,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
@@ -679,7 +681,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
@@ -708,7 +710,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretRequest()
       );
@@ -730,7 +732,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
@@ -763,7 +765,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
@@ -812,7 +814,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
@@ -845,7 +847,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.UpdateSecretRequest()
       );
@@ -868,7 +870,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
@@ -900,7 +902,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
@@ -948,7 +950,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
@@ -980,7 +982,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DeleteSecretRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
@@ -1034,7 +1036,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
@@ -1082,7 +1084,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
@@ -1114,7 +1116,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.GetSecretVersionRequest()
       );
@@ -1136,7 +1138,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
@@ -1169,7 +1171,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
@@ -1249,7 +1251,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.AccessSecretVersionRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
@@ -1304,7 +1306,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
@@ -1384,7 +1386,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DisableSecretVersionRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
@@ -1487,7 +1489,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.EnableSecretVersionRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
@@ -1622,7 +1624,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
@@ -1654,7 +1656,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.DestroySecretVersionRequest()
       );
@@ -1676,7 +1678,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1708,7 +1710,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1756,7 +1758,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1788,7 +1790,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1810,7 +1812,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1842,7 +1844,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1922,7 +1924,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1944,7 +1946,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1977,7 +1979,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2025,7 +2027,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2057,7 +2059,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2079,7 +2081,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2175,7 +2177,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2207,7 +2209,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2269,7 +2271,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2322,7 +2324,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2372,7 +2374,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretsRequest()
       );
@@ -2418,7 +2420,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2459,7 +2461,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2517,7 +2519,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2549,7 +2551,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2613,7 +2615,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2666,7 +2668,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2717,7 +2719,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1beta2.ListSecretVersionsRequest()
       );
@@ -2760,7 +2762,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2791,7 +2793,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2836,7 +2838,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2872,7 +2874,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2921,7 +2923,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2958,7 +2960,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2968,7 +2970,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2997,7 +2999,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('projectLocationSecret', () => {
+    describe('projectLocationSecret', async () => {
       const fakePath = '/rendered/path/projectLocationSecret';
       const expectedParameters = {
         project: 'projectValue',
@@ -3009,7 +3011,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationSecretPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3077,7 +3079,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('projectLocationSecretSecretVersion', () => {
+    describe('projectLocationSecretSecretVersion', async () => {
       const fakePath = '/rendered/path/projectLocationSecretSecretVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -3090,7 +3092,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match =
@@ -3179,7 +3181,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('projectSecret', () => {
+    describe('projectSecret', async () => {
       const fakePath = '/rendered/path/projectSecret';
       const expectedParameters = {
         project: 'projectValue',
@@ -3190,7 +3192,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSecretPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3229,7 +3231,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('projectSecretSecretVersion', () => {
+    describe('projectSecretSecretVersion', async () => {
       const fakePath = '/rendered/path/projectSecretSecretVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -3241,7 +3243,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSecretSecretVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3309,7 +3311,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       });
     });
 
-    describe('topic', () => {
+    describe('topic', async () => {
       const fakePath = '/rendered/path/topic';
       const expectedParameters = {
         project: 'projectValue',
@@ -3320,7 +3322,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.topicPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -494,7 +494,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -622,7 +624,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -748,7 +752,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -877,7 +883,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startMigrationWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1005,7 +1013,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMigrationSubtask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1140,7 +1150,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.migration.v2alpha.IListMigrationWorkflowsRequest,
@@ -1213,7 +1225,9 @@ export class MigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMigrationWorkflows stream %j', request);
     return this.descriptors.page.listMigrationWorkflows.createStream(
       this.innerApiCalls.listMigrationWorkflows as GaxCall,
@@ -1268,7 +1282,9 @@ export class MigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMigrationWorkflows iterate %j', request);
     return this.descriptors.page.listMigrationWorkflows.asyncIterate(
       this.innerApiCalls['listMigrationWorkflows'] as GaxCall,
@@ -1382,7 +1398,9 @@ export class MigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.migration.v2alpha.IListMigrationSubtasksRequest,
@@ -1459,7 +1477,9 @@ export class MigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationSubtasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMigrationSubtasks stream %j', request);
     return this.descriptors.page.listMigrationSubtasks.createStream(
       this.innerApiCalls.listMigrationSubtasks as GaxCall,
@@ -1518,7 +1538,9 @@ export class MigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationSubtasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMigrationSubtasks iterate %j', request);
     return this.descriptors.page.listMigrationSubtasks.asyncIterate(
       this.innerApiCalls['listMigrationSubtasks'] as GaxCall,

@@ -266,7 +266,9 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataTransferServiceStub);
       client.close().then(() => {
         done();
@@ -333,7 +335,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
@@ -366,7 +368,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
@@ -415,7 +417,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
@@ -448,7 +450,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
@@ -695,7 +697,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
@@ -729,7 +731,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
@@ -753,7 +755,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
@@ -787,7 +789,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
@@ -836,7 +838,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
@@ -869,7 +871,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
@@ -892,7 +894,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
@@ -925,7 +927,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
@@ -974,7 +976,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
@@ -1007,7 +1009,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
@@ -1118,7 +1120,7 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
@@ -1153,7 +1155,7 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
@@ -1177,7 +1179,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
@@ -1211,7 +1213,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
@@ -1296,7 +1298,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
@@ -1322,7 +1324,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
@@ -1355,7 +1357,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
@@ -1404,7 +1406,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
@@ -1437,7 +1439,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
@@ -1460,7 +1462,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
@@ -1493,7 +1495,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
@@ -1542,7 +1544,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
@@ -1575,7 +1577,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
@@ -1598,7 +1600,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
@@ -1631,7 +1633,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
@@ -1680,7 +1682,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
@@ -1713,7 +1715,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
@@ -1736,7 +1738,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
@@ -1769,7 +1771,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
@@ -1818,7 +1820,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
@@ -1851,7 +1853,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
@@ -1874,7 +1876,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
       );
@@ -1908,7 +1910,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
       );
@@ -1957,7 +1959,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
       );
@@ -1990,7 +1992,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UnenrollDataSourcesRequest()
       );
@@ -2013,7 +2015,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2054,7 +2056,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2113,7 +2115,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2146,7 +2148,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2211,7 +2213,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2265,7 +2267,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2317,7 +2319,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
@@ -2362,7 +2364,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2404,7 +2406,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2463,7 +2465,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2496,7 +2498,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2561,7 +2563,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2615,7 +2617,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2667,7 +2669,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
@@ -2712,7 +2714,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -2753,7 +2755,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -2812,7 +2814,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -2845,7 +2847,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -2910,7 +2912,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -2964,7 +2966,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -3016,7 +3018,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
@@ -3061,7 +3063,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3102,7 +3104,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3161,7 +3163,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3194,7 +3196,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3259,7 +3261,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3313,7 +3315,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3365,7 +3367,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
@@ -3409,7 +3411,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3441,7 +3443,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3487,7 +3489,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3524,7 +3526,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3574,7 +3576,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3611,7 +3613,7 @@ describe('v1.DataTransferServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -3622,7 +3624,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3651,7 +3653,7 @@ describe('v1.DataTransferServiceClient', () => {
       });
     });
 
-    describe('projectDataSource', () => {
+    describe('projectDataSource', async () => {
       const fakePath = '/rendered/path/projectDataSource';
       const expectedParameters = {
         project: 'projectValue',
@@ -3663,7 +3665,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectDataSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3715,7 +3717,7 @@ describe('v1.DataTransferServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataSource', () => {
+    describe('projectLocationDataSource', async () => {
       const fakePath = '/rendered/path/projectLocationDataSource';
       const expectedParameters = {
         project: 'projectValue',
@@ -3728,7 +3730,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDataSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3796,7 +3798,7 @@ describe('v1.DataTransferServiceClient', () => {
       });
     });
 
-    describe('projectLocationTransferConfig', () => {
+    describe('projectLocationTransferConfig', async () => {
       const fakePath = '/rendered/path/projectLocationTransferConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3809,7 +3811,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationTransferConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationTransferConfigPathTemplate.match =
@@ -3877,7 +3879,7 @@ describe('v1.DataTransferServiceClient', () => {
       });
     });
 
-    describe('projectLocationTransferConfigRun', () => {
+    describe('projectLocationTransferConfigRun', async () => {
       const fakePath = '/rendered/path/projectLocationTransferConfigRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -3891,7 +3893,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationTransferConfigRunPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationTransferConfigRunPathTemplate.match =
@@ -3976,7 +3978,7 @@ describe('v1.DataTransferServiceClient', () => {
       });
     });
 
-    describe('projectTransferConfig', () => {
+    describe('projectTransferConfig', async () => {
       const fakePath = '/rendered/path/projectTransferConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3988,7 +3990,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTransferConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4041,7 +4043,7 @@ describe('v1.DataTransferServiceClient', () => {
       });
     });
 
-    describe('projectTransferConfigRun', () => {
+    describe('projectTransferConfigRun', async () => {
       const fakePath = '/rendered/path/projectTransferConfigRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -4054,7 +4056,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTransferConfigRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

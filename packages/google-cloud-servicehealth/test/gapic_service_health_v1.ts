@@ -255,7 +255,9 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.serviceHealthStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -345,7 +347,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -392,7 +394,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -420,7 +422,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetEventRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -473,7 +475,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -520,7 +522,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -551,7 +553,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationEventRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -604,7 +606,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -651,7 +653,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.GetOrganizationImpactRequest()
       );
@@ -709,7 +711,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -791,7 +793,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -876,7 +878,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -970,7 +972,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListEventsRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1054,7 +1056,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1145,7 +1147,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1214,7 +1216,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1272,7 +1274,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1326,7 +1328,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationEventsRequest()
       );
@@ -1373,7 +1375,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1413,7 +1415,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1504,7 +1506,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1573,7 +1575,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1631,7 +1633,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1685,7 +1687,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicehealth.v1.ListOrganizationImpactsRequest()
       );
@@ -1731,7 +1733,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1761,7 +1763,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1805,7 +1807,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1840,7 +1842,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1925,7 +1927,7 @@ describe('v1.ServiceHealthClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('event', () => {
+    describe('event', async () => {
       const fakePath = '/rendered/path/event';
       const expectedParameters = {
         project: 'projectValue',
@@ -1936,7 +1938,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.eventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1989,7 +1991,7 @@ describe('v1.ServiceHealthClient', () => {
       });
     });
 
-    describe('organizationEvent', () => {
+    describe('organizationEvent', async () => {
       const fakePath = '/rendered/path/organizationEvent';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2000,7 +2002,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationEventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2066,7 +2068,7 @@ describe('v1.ServiceHealthClient', () => {
       });
     });
 
-    describe('organizationImpact', () => {
+    describe('organizationImpact', async () => {
       const fakePath = '/rendered/path/organizationImpact';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2077,7 +2079,7 @@ describe('v1.ServiceHealthClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationImpactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

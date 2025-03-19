@@ -517,7 +517,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAuthorization request %j', request);
     const wrappedCallback:
       | Callback<
@@ -643,7 +645,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -762,7 +766,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         'deployment.name': request.deployment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('replaceDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -883,7 +889,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1004,7 +1012,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1127,7 +1137,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('installDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1256,7 +1268,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('uninstallDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1377,7 +1391,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInstallStatus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1513,7 +1529,9 @@ export class GSuiteAddOnsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gsuiteaddons.v1.IListDeploymentsRequest,
@@ -1587,7 +1605,9 @@ export class GSuiteAddOnsClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
@@ -1643,7 +1663,9 @@ export class GSuiteAddOnsClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,

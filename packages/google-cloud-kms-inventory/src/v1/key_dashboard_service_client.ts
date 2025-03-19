@@ -506,7 +506,9 @@ export class KeyDashboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.kms.inventory.v1.IListCryptoKeysRequest,
@@ -575,7 +577,9 @@ export class KeyDashboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCryptoKeys stream %j', request);
     return this.descriptors.page.listCryptoKeys.createStream(
       this.innerApiCalls.listCryptoKeys as GaxCall,
@@ -626,7 +630,9 @@ export class KeyDashboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listCryptoKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCryptoKeys iterate %j', request);
     return this.descriptors.page.listCryptoKeys.asyncIterate(
       this.innerApiCalls['listCryptoKeys'] as GaxCall,

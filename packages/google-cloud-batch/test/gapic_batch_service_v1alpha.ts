@@ -289,7 +289,9 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.batchServiceStub);
       client.close().then(() => {
         done();
@@ -348,7 +350,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateJobRequest()
       );
@@ -379,7 +381,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateJobRequest()
       );
@@ -426,7 +428,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateJobRequest()
       );
@@ -454,7 +456,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateJobRequest()
       );
@@ -475,7 +477,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetJobRequest()
       );
@@ -506,7 +508,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetJobRequest()
       );
@@ -553,7 +555,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetJobRequest()
       );
@@ -581,7 +583,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetJobRequest()
       );
@@ -602,7 +604,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
       );
@@ -634,7 +636,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
       );
@@ -682,7 +684,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
       );
@@ -711,7 +713,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateJobRequest()
       );
@@ -733,7 +735,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetTaskRequest()
       );
@@ -764,7 +766,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetTaskRequest()
       );
@@ -811,7 +813,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetTaskRequest()
       );
@@ -839,7 +841,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetTaskRequest()
       );
@@ -860,7 +862,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
       );
@@ -892,7 +894,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
       );
@@ -939,7 +941,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
       );
@@ -973,7 +975,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CreateResourceAllowanceRequest()
       );
@@ -997,7 +999,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
       );
@@ -1107,7 +1109,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.GetResourceAllowanceRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
       );
@@ -1161,7 +1163,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
       );
@@ -1209,7 +1211,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
       );
@@ -1244,7 +1246,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.UpdateResourceAllowanceRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteJobRequest()
       );
@@ -1301,7 +1303,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteJobRequest()
       );
@@ -1355,7 +1357,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteJobRequest()
       );
@@ -1386,7 +1388,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteJobRequest()
       );
@@ -1419,7 +1421,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1441,7 +1443,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1459,7 +1461,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CancelJobRequest()
       );
@@ -1491,7 +1493,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CancelJobRequest()
       );
@@ -1545,7 +1547,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CancelJobRequest()
       );
@@ -1576,7 +1578,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.CancelJobRequest()
       );
@@ -1609,7 +1611,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1631,7 +1633,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1649,7 +1651,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
       );
@@ -1682,7 +1684,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
       );
@@ -1736,7 +1738,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
       );
@@ -1770,7 +1772,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.DeleteResourceAllowanceRequest()
       );
@@ -1803,7 +1805,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1826,7 +1828,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1847,7 +1849,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -1880,7 +1882,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -1929,7 +1931,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -1957,7 +1959,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -2008,7 +2010,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -2056,7 +2058,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -2098,7 +2100,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListJobsRequest()
       );
@@ -2141,7 +2143,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2174,7 +2176,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2223,7 +2225,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2251,7 +2253,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2305,7 +2307,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2356,7 +2358,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2398,7 +2400,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListTasksRequest()
       );
@@ -2441,7 +2443,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2481,7 +2483,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2538,7 +2540,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2572,7 +2574,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2639,7 +2641,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2695,7 +2697,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2749,7 +2751,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.batch.v1alpha.ListResourceAllowancesRequest()
       );
@@ -2795,7 +2797,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2825,7 +2827,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2869,7 +2871,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2904,7 +2906,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2952,7 +2954,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2993,7 +2995,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3072,7 +3074,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3152,7 +3154,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3248,8 +3250,7 @@ describe('v1alpha.BatchServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3268,7 +3269,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3277,8 +3278,7 @@ describe('v1alpha.BatchServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3294,7 +3294,7 @@ describe('v1alpha.BatchServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -3305,7 +3305,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3358,7 +3358,7 @@ describe('v1alpha.BatchServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3368,7 +3368,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3407,7 +3407,7 @@ describe('v1alpha.BatchServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -3416,7 +3416,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3445,7 +3445,7 @@ describe('v1alpha.BatchServiceClient', () => {
       });
     });
 
-    describe('resourceAllowance', () => {
+    describe('resourceAllowance', async () => {
       const fakePath = '/rendered/path/resourceAllowance';
       const expectedParameters = {
         project: 'projectValue',
@@ -3456,7 +3456,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.resourceAllowancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3522,7 +3522,7 @@ describe('v1alpha.BatchServiceClient', () => {
       });
     });
 
-    describe('task', () => {
+    describe('task', async () => {
       const fakePath = '/rendered/path/task';
       const expectedParameters = {
         project: 'projectValue',
@@ -3535,7 +3535,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3610,7 +3610,7 @@ describe('v1alpha.BatchServiceClient', () => {
       });
     });
 
-    describe('taskGroup', () => {
+    describe('taskGroup', async () => {
       const fakePath = '/rendered/path/taskGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -3622,7 +3622,7 @@ describe('v1alpha.BatchServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

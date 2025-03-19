@@ -502,7 +502,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addServerCa request %j', request);
     const wrappedCallback:
       | Callback<
@@ -627,7 +629,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('clone request %j', request);
     const wrappedCallback:
       | Callback<
@@ -746,7 +750,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -876,7 +882,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('demoteMaster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1001,7 +1009,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('demote request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1125,7 +1135,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('export request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1255,7 +1267,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('failover request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1379,7 +1393,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('reencrypt request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1501,7 +1517,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1622,7 +1640,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('import request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1743,7 +1763,9 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1880,7 +1902,9 @@ export class SqlInstancesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2009,7 +2033,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServerCas request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2133,7 +2159,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2268,7 +2296,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('promoteReplica request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2401,7 +2431,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('switchover request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2530,7 +2562,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resetSslConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2652,7 +2686,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('restart request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2782,7 +2818,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('restoreBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2912,7 +2950,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rotateServerCa request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3040,7 +3080,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startReplica request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3168,7 +3210,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopReplica request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3298,7 +3342,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('truncateLog request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3422,7 +3468,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3554,7 +3602,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEphemeral request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3683,7 +3733,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rescheduleMaintenance request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3826,7 +3878,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('verifyExternalSyncSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3967,7 +4021,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startExternalSync request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4097,7 +4153,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('performDiskShrink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4225,7 +4283,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDiskShrinkConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4353,7 +4413,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resetReplicaSize request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4481,7 +4543,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLatestRecoveryTime request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4615,7 +4679,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('acquireSsrsLease request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4747,7 +4813,9 @@ export class SqlInstancesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('releaseSsrsLease request %j', request);
     const wrappedCallback:
       | Callback<

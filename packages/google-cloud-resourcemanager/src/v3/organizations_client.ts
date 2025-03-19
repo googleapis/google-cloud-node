@@ -499,7 +499,9 @@ export class OrganizationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrganization request %j', request);
     const wrappedCallback:
       | Callback<
@@ -619,7 +621,9 @@ export class OrganizationsClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -742,7 +746,9 @@ export class OrganizationsClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -858,7 +864,9 @@ export class OrganizationsClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1003,7 +1011,9 @@ export class OrganizationsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.resourcemanager.v3.ISearchOrganizationsRequest,
@@ -1085,7 +1095,9 @@ export class OrganizationsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchOrganizations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchOrganizations stream %j', request);
     return this.descriptors.page.searchOrganizations.createStream(
       this.innerApiCalls.searchOrganizations as GaxCall,
@@ -1149,7 +1161,9 @@ export class OrganizationsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchOrganizations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchOrganizations iterate %j', request);
     return this.descriptors.page.searchOrganizations.asyncIterate(
       this.innerApiCalls['searchOrganizations'] as GaxCall,

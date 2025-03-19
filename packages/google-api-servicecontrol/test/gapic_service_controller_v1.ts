@@ -193,7 +193,9 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.serviceControllerStub);
       client.close().then(() => {
         done();
@@ -252,7 +254,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.CheckRequest()
       );
@@ -282,7 +284,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.CheckRequest()
       );
@@ -327,7 +329,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.CheckRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.CheckRequest()
       );
@@ -375,7 +377,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.ReportRequest()
       );
@@ -406,7 +408,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.ReportRequest()
       );
@@ -453,7 +455,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.ReportRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.ServiceControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.ReportRequest()
       );

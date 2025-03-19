@@ -601,7 +601,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -722,7 +724,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -849,7 +853,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -974,7 +980,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         'connector.name': request.connector!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1095,7 +1103,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1216,7 +1226,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1337,7 +1349,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1458,7 +1472,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('restartConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1579,7 +1595,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1735,7 +1753,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1924,7 +1944,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         'connect_cluster.name': request.connectCluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2108,7 +2130,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2281,7 +2305,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.managedkafka.v1.IListConnectClustersRequest,
@@ -2357,7 +2383,9 @@ export class ManagedKafkaConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnectClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectClusters stream %j', request);
     return this.descriptors.page.listConnectClusters.createStream(
       this.innerApiCalls.listConnectClusters as GaxCall,
@@ -2415,7 +2443,9 @@ export class ManagedKafkaConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnectClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectClusters iterate %j', request);
     return this.descriptors.page.listConnectClusters.asyncIterate(
       this.innerApiCalls['listConnectClusters'] as GaxCall,
@@ -2525,7 +2555,9 @@ export class ManagedKafkaConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.managedkafka.v1.IListConnectorsRequest,
@@ -2598,7 +2630,9 @@ export class ManagedKafkaConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectors stream %j', request);
     return this.descriptors.page.listConnectors.createStream(
       this.innerApiCalls.listConnectors as GaxCall,
@@ -2653,7 +2687,9 @@ export class ManagedKafkaConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectors iterate %j', request);
     return this.descriptors.page.listConnectors.asyncIterate(
       this.innerApiCalls['listConnectors'] as GaxCall,
@@ -2833,7 +2869,7 @@ export class ManagedKafkaConnectClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
