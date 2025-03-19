@@ -1,0 +1,307 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.edgenetwork.v1",
+  "libraryPackage": "@google-cloud/edgenetwork",
+  "services": {
+    "EdgeNetwork": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EdgeNetworkClient",
+          "rpcs": {
+            "InitializeZone": {
+              "methods": [
+                "initializeZone"
+              ]
+            },
+            "GetZone": {
+              "methods": [
+                "getZone"
+              ]
+            },
+            "GetNetwork": {
+              "methods": [
+                "getNetwork"
+              ]
+            },
+            "DiagnoseNetwork": {
+              "methods": [
+                "diagnoseNetwork"
+              ]
+            },
+            "GetSubnet": {
+              "methods": [
+                "getSubnet"
+              ]
+            },
+            "GetInterconnect": {
+              "methods": [
+                "getInterconnect"
+              ]
+            },
+            "DiagnoseInterconnect": {
+              "methods": [
+                "diagnoseInterconnect"
+              ]
+            },
+            "GetInterconnectAttachment": {
+              "methods": [
+                "getInterconnectAttachment"
+              ]
+            },
+            "GetRouter": {
+              "methods": [
+                "getRouter"
+              ]
+            },
+            "DiagnoseRouter": {
+              "methods": [
+                "diagnoseRouter"
+              ]
+            },
+            "CreateNetwork": {
+              "methods": [
+                "createNetwork"
+              ]
+            },
+            "DeleteNetwork": {
+              "methods": [
+                "deleteNetwork"
+              ]
+            },
+            "CreateSubnet": {
+              "methods": [
+                "createSubnet"
+              ]
+            },
+            "UpdateSubnet": {
+              "methods": [
+                "updateSubnet"
+              ]
+            },
+            "DeleteSubnet": {
+              "methods": [
+                "deleteSubnet"
+              ]
+            },
+            "CreateInterconnectAttachment": {
+              "methods": [
+                "createInterconnectAttachment"
+              ]
+            },
+            "DeleteInterconnectAttachment": {
+              "methods": [
+                "deleteInterconnectAttachment"
+              ]
+            },
+            "CreateRouter": {
+              "methods": [
+                "createRouter"
+              ]
+            },
+            "UpdateRouter": {
+              "methods": [
+                "updateRouter"
+              ]
+            },
+            "DeleteRouter": {
+              "methods": [
+                "deleteRouter"
+              ]
+            },
+            "ListZones": {
+              "methods": [
+                "listZones",
+                "listZonesStream",
+                "listZonesAsync"
+              ]
+            },
+            "ListNetworks": {
+              "methods": [
+                "listNetworks",
+                "listNetworksStream",
+                "listNetworksAsync"
+              ]
+            },
+            "ListSubnets": {
+              "methods": [
+                "listSubnets",
+                "listSubnetsStream",
+                "listSubnetsAsync"
+              ]
+            },
+            "ListInterconnects": {
+              "methods": [
+                "listInterconnects",
+                "listInterconnectsStream",
+                "listInterconnectsAsync"
+              ]
+            },
+            "ListInterconnectAttachments": {
+              "methods": [
+                "listInterconnectAttachments",
+                "listInterconnectAttachmentsStream",
+                "listInterconnectAttachmentsAsync"
+              ]
+            },
+            "ListRouters": {
+              "methods": [
+                "listRouters",
+                "listRoutersStream",
+                "listRoutersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EdgeNetworkClient",
+          "rpcs": {
+            "InitializeZone": {
+              "methods": [
+                "initializeZone"
+              ]
+            },
+            "GetZone": {
+              "methods": [
+                "getZone"
+              ]
+            },
+            "GetNetwork": {
+              "methods": [
+                "getNetwork"
+              ]
+            },
+            "DiagnoseNetwork": {
+              "methods": [
+                "diagnoseNetwork"
+              ]
+            },
+            "GetSubnet": {
+              "methods": [
+                "getSubnet"
+              ]
+            },
+            "GetInterconnect": {
+              "methods": [
+                "getInterconnect"
+              ]
+            },
+            "DiagnoseInterconnect": {
+              "methods": [
+                "diagnoseInterconnect"
+              ]
+            },
+            "GetInterconnectAttachment": {
+              "methods": [
+                "getInterconnectAttachment"
+              ]
+            },
+            "GetRouter": {
+              "methods": [
+                "getRouter"
+              ]
+            },
+            "DiagnoseRouter": {
+              "methods": [
+                "diagnoseRouter"
+              ]
+            },
+            "CreateNetwork": {
+              "methods": [
+                "createNetwork"
+              ]
+            },
+            "DeleteNetwork": {
+              "methods": [
+                "deleteNetwork"
+              ]
+            },
+            "CreateSubnet": {
+              "methods": [
+                "createSubnet"
+              ]
+            },
+            "UpdateSubnet": {
+              "methods": [
+                "updateSubnet"
+              ]
+            },
+            "DeleteSubnet": {
+              "methods": [
+                "deleteSubnet"
+              ]
+            },
+            "CreateInterconnectAttachment": {
+              "methods": [
+                "createInterconnectAttachment"
+              ]
+            },
+            "DeleteInterconnectAttachment": {
+              "methods": [
+                "deleteInterconnectAttachment"
+              ]
+            },
+            "CreateRouter": {
+              "methods": [
+                "createRouter"
+              ]
+            },
+            "UpdateRouter": {
+              "methods": [
+                "updateRouter"
+              ]
+            },
+            "DeleteRouter": {
+              "methods": [
+                "deleteRouter"
+              ]
+            },
+            "ListZones": {
+              "methods": [
+                "listZones",
+                "listZonesStream",
+                "listZonesAsync"
+              ]
+            },
+            "ListNetworks": {
+              "methods": [
+                "listNetworks",
+                "listNetworksStream",
+                "listNetworksAsync"
+              ]
+            },
+            "ListSubnets": {
+              "methods": [
+                "listSubnets",
+                "listSubnetsStream",
+                "listSubnetsAsync"
+              ]
+            },
+            "ListInterconnects": {
+              "methods": [
+                "listInterconnects",
+                "listInterconnectsStream",
+                "listInterconnectsAsync"
+              ]
+            },
+            "ListInterconnectAttachments": {
+              "methods": [
+                "listInterconnectAttachments",
+                "listInterconnectAttachmentsStream",
+                "listInterconnectAttachmentsAsync"
+              ]
+            },
+            "ListRouters": {
+              "methods": [
+                "listRouters",
+                "listRoutersStream",
+                "listRoutersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
