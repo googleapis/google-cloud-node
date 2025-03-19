@@ -1,0 +1,111 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.shopping.merchant.datasources.v1beta",
+  "libraryPackage": "@google-shopping/datasources",
+  "services": {
+    "DataSourcesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataSourcesServiceClient",
+          "rpcs": {
+            "GetDataSource": {
+              "methods": [
+                "getDataSource"
+              ]
+            },
+            "CreateDataSource": {
+              "methods": [
+                "createDataSource"
+              ]
+            },
+            "UpdateDataSource": {
+              "methods": [
+                "updateDataSource"
+              ]
+            },
+            "DeleteDataSource": {
+              "methods": [
+                "deleteDataSource"
+              ]
+            },
+            "FetchDataSource": {
+              "methods": [
+                "fetchDataSource"
+              ]
+            },
+            "ListDataSources": {
+              "methods": [
+                "listDataSources",
+                "listDataSourcesStream",
+                "listDataSourcesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataSourcesServiceClient",
+          "rpcs": {
+            "GetDataSource": {
+              "methods": [
+                "getDataSource"
+              ]
+            },
+            "CreateDataSource": {
+              "methods": [
+                "createDataSource"
+              ]
+            },
+            "UpdateDataSource": {
+              "methods": [
+                "updateDataSource"
+              ]
+            },
+            "DeleteDataSource": {
+              "methods": [
+                "deleteDataSource"
+              ]
+            },
+            "FetchDataSource": {
+              "methods": [
+                "fetchDataSource"
+              ]
+            },
+            "ListDataSources": {
+              "methods": [
+                "listDataSources",
+                "listDataSourcesStream",
+                "listDataSourcesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FileUploadsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FileUploadsServiceClient",
+          "rpcs": {
+            "GetFileUpload": {
+              "methods": [
+                "getFileUpload"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FileUploadsServiceClient",
+          "rpcs": {
+            "GetFileUpload": {
+              "methods": [
+                "getFileUpload"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
