@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.7.0...cloudprofiler-v0.7.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6189](https://github.com/googleapis/google-cloud-node/issues/6189)) ([0eab6d4](https://github.com/googleapis/google-cloud-node/commit/0eab6d40a12aa7f387a4621c6611aa4cbc86e178))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/cloudprofiler-v0.6.0...cloudprofiler-v0.7.0) (2025-03-18)
 
 

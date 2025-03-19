@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v4.0.0...workflows-v4.1.0) (2025-03-19)
+
+
+### Features
+
+* [workflows] add ListWorkflowRevisions method ([#6165](https://github.com/googleapis/google-cloud-node/issues/6165)) ([9930467](https://github.com/googleapis/google-cloud-node/commit/9930467ade72fb91b7933b8fb343131009e40d84))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6189](https://github.com/googleapis/google-cloud-node/issues/6189)) ([0eab6d4](https://github.com/googleapis/google-cloud-node/commit/0eab6d40a12aa7f387a4621c6611aa4cbc86e178))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v3.4.1...workflows-v4.0.0) (2025-03-18)
 
 

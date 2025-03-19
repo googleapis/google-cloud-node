@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.14.0...chat-v0.15.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
 ## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.13.0...chat-v0.14.0) (2025-03-18)
 
 
