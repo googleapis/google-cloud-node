@@ -66,7 +66,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cloud_functions_service.call_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.call_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.call_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.call_function.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Cloud_functions_service.create_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.create_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.create_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.create_function.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Cloud_functions_service.delete_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.delete_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.delete_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.delete_function.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Cloud_functions_service.generate_download_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.generate_download_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.generate_download_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.generate_download_url.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Cloud_functions_service.generate_upload_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.generate_upload_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.generate_upload_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.generate_upload_url.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Cloud_functions_service.get_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.get_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.get_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.get_function.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Cloud_functions_service.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.get_iam_policy.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Cloud_functions_service.list_functions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.list_functions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.list_functions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.list_functions.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Cloud_functions_service.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.set_iam_policy.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Cloud_functions_service.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.test_iam_permissions.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Cloud_functions_service.update_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.update_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.update_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.update_function.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Function_service.create_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.create_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.create_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.create_function.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Function_service.delete_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.delete_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.delete_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.delete_function.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Function_service.generate_download_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.generate_download_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.generate_download_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.generate_download_url.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Function_service.generate_upload_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.generate_upload_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.generate_upload_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.generate_upload_url.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Function_service.get_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.get_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.get_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.get_function.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Function_service.list_functions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.list_functions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.list_functions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.list_functions.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Function_service.list_runtimes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.list_runtimes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.list_runtimes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.list_runtimes.js,samples/README.md)
 
@@ -372,7 +372,7 @@ __Usage:__
 
 ### Function_service.update_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2/function_service.update_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.update_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2/function_service.update_function.js,samples/README.md)
 
@@ -389,7 +389,7 @@ __Usage:__
 
 ### Function_service.create_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.create_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.create_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.create_function.js,samples/README.md)
 
@@ -406,7 +406,7 @@ __Usage:__
 
 ### Function_service.delete_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.delete_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.delete_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.delete_function.js,samples/README.md)
 
@@ -423,7 +423,7 @@ __Usage:__
 
 ### Function_service.generate_download_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_download_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_download_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_download_url.js,samples/README.md)
 
@@ -440,7 +440,7 @@ __Usage:__
 
 ### Function_service.generate_upload_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_upload_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_upload_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_upload_url.js,samples/README.md)
 
@@ -457,7 +457,7 @@ __Usage:__
 
 ### Function_service.get_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.get_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.get_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.get_function.js,samples/README.md)
 
@@ -474,7 +474,7 @@ __Usage:__
 
 ### Function_service.list_functions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_functions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_functions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_functions.js,samples/README.md)
 
@@ -491,7 +491,7 @@ __Usage:__
 
 ### Function_service.list_runtimes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_runtimes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_runtimes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_runtimes.js,samples/README.md)
 
@@ -508,7 +508,7 @@ __Usage:__
 
 ### Function_service.update_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2alpha/function_service.update_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.update_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2alpha/function_service.update_function.js,samples/README.md)
 
@@ -525,7 +525,7 @@ __Usage:__
 
 ### Function_service.create_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.create_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.create_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.create_function.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 ### Function_service.delete_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.delete_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.delete_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.delete_function.js,samples/README.md)
 
@@ -559,7 +559,7 @@ __Usage:__
 
 ### Function_service.generate_download_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_download_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_download_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_download_url.js,samples/README.md)
 
@@ -576,7 +576,7 @@ __Usage:__
 
 ### Function_service.generate_upload_url
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_upload_url.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_upload_url.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_upload_url.js,samples/README.md)
 
@@ -593,7 +593,7 @@ __Usage:__
 
 ### Function_service.get_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.get_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.get_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.get_function.js,samples/README.md)
 
@@ -610,7 +610,7 @@ __Usage:__
 
 ### Function_service.list_functions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.list_functions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.list_functions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.list_functions.js,samples/README.md)
 
@@ -627,7 +627,7 @@ __Usage:__
 
 ### Function_service.list_runtimes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.list_runtimes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.list_runtimes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.list_runtimes.js,samples/README.md)
 
@@ -644,7 +644,7 @@ __Usage:__
 
 ### Function_service.update_function
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/generated/v2beta/function_service.update_function.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.update_function.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/generated/v2beta/function_service.update_function.js,samples/README.md)
 
@@ -661,7 +661,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-functions/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-functions/samples/quickstart.js,samples/README.md)
 

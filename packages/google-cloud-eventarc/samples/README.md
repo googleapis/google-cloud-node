@@ -70,7 +70,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Eventarc.create_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_channel.js,samples/README.md)
 
@@ -87,7 +87,7 @@ __Usage:__
 
 ### Eventarc.create_channel_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_channel_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_channel_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_channel_connection.js,samples/README.md)
 
@@ -104,7 +104,7 @@ __Usage:__
 
 ### Eventarc.create_enrollment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_enrollment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_enrollment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_enrollment.js,samples/README.md)
 
@@ -121,7 +121,7 @@ __Usage:__
 
 ### Eventarc.create_google_api_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_google_api_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_google_api_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_google_api_source.js,samples/README.md)
 
@@ -138,7 +138,7 @@ __Usage:__
 
 ### Eventarc.create_message_bus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_message_bus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_message_bus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_message_bus.js,samples/README.md)
 
@@ -155,7 +155,7 @@ __Usage:__
 
 ### Eventarc.create_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_pipeline.js,samples/README.md)
 
@@ -172,7 +172,7 @@ __Usage:__
 
 ### Eventarc.create_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.create_trigger.js,samples/README.md)
 
@@ -189,7 +189,7 @@ __Usage:__
 
 ### Eventarc.delete_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_channel.js,samples/README.md)
 
@@ -206,7 +206,7 @@ __Usage:__
 
 ### Eventarc.delete_channel_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_channel_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_channel_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_channel_connection.js,samples/README.md)
 
@@ -223,7 +223,7 @@ __Usage:__
 
 ### Eventarc.delete_enrollment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_enrollment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_enrollment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_enrollment.js,samples/README.md)
 
@@ -240,7 +240,7 @@ __Usage:__
 
 ### Eventarc.delete_google_api_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_google_api_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_google_api_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_google_api_source.js,samples/README.md)
 
@@ -257,7 +257,7 @@ __Usage:__
 
 ### Eventarc.delete_message_bus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_message_bus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_message_bus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_message_bus.js,samples/README.md)
 
@@ -274,7 +274,7 @@ __Usage:__
 
 ### Eventarc.delete_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_pipeline.js,samples/README.md)
 
@@ -291,7 +291,7 @@ __Usage:__
 
 ### Eventarc.delete_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.delete_trigger.js,samples/README.md)
 
@@ -308,7 +308,7 @@ __Usage:__
 
 ### Eventarc.get_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_channel.js,samples/README.md)
 
@@ -325,7 +325,7 @@ __Usage:__
 
 ### Eventarc.get_channel_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_channel_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_channel_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_channel_connection.js,samples/README.md)
 
@@ -342,7 +342,7 @@ __Usage:__
 
 ### Eventarc.get_enrollment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_enrollment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_enrollment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_enrollment.js,samples/README.md)
 
@@ -359,7 +359,7 @@ __Usage:__
 
 ### Eventarc.get_google_api_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_google_api_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_google_api_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_google_api_source.js,samples/README.md)
 
@@ -376,7 +376,7 @@ __Usage:__
 
 ### Eventarc.get_google_channel_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_google_channel_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_google_channel_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_google_channel_config.js,samples/README.md)
 
@@ -393,7 +393,7 @@ __Usage:__
 
 ### Eventarc.get_message_bus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_message_bus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_message_bus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_message_bus.js,samples/README.md)
 
@@ -410,7 +410,7 @@ __Usage:__
 
 ### Eventarc.get_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_pipeline.js,samples/README.md)
 
@@ -427,7 +427,7 @@ __Usage:__
 
 ### Eventarc.get_provider
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_provider.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_provider.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_provider.js,samples/README.md)
 
@@ -444,7 +444,7 @@ __Usage:__
 
 ### Eventarc.get_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.get_trigger.js,samples/README.md)
 
@@ -461,7 +461,7 @@ __Usage:__
 
 ### Eventarc.list_channel_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_channel_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_channel_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_channel_connections.js,samples/README.md)
 
@@ -478,7 +478,7 @@ __Usage:__
 
 ### Eventarc.list_channels
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_channels.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_channels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_channels.js,samples/README.md)
 
@@ -495,7 +495,7 @@ __Usage:__
 
 ### Eventarc.list_enrollments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_enrollments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_enrollments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_enrollments.js,samples/README.md)
 
@@ -512,7 +512,7 @@ __Usage:__
 
 ### Eventarc.list_google_api_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_google_api_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_google_api_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_google_api_sources.js,samples/README.md)
 
@@ -529,7 +529,7 @@ __Usage:__
 
 ### Eventarc.list_message_bus_enrollments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_message_bus_enrollments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_message_bus_enrollments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_message_bus_enrollments.js,samples/README.md)
 
@@ -546,7 +546,7 @@ __Usage:__
 
 ### Eventarc.list_message_buses
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_message_buses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_message_buses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_message_buses.js,samples/README.md)
 
@@ -563,7 +563,7 @@ __Usage:__
 
 ### Eventarc.list_pipelines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_pipelines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_pipelines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_pipelines.js,samples/README.md)
 
@@ -580,7 +580,7 @@ __Usage:__
 
 ### Eventarc.list_providers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_providers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_providers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_providers.js,samples/README.md)
 
@@ -597,7 +597,7 @@ __Usage:__
 
 ### Eventarc.list_triggers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_triggers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_triggers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.list_triggers.js,samples/README.md)
 
@@ -614,7 +614,7 @@ __Usage:__
 
 ### Eventarc.update_channel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_channel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_channel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_channel.js,samples/README.md)
 
@@ -631,7 +631,7 @@ __Usage:__
 
 ### Eventarc.update_enrollment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_enrollment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_enrollment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_enrollment.js,samples/README.md)
 
@@ -648,7 +648,7 @@ __Usage:__
 
 ### Eventarc.update_google_api_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_google_api_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_google_api_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_google_api_source.js,samples/README.md)
 
@@ -665,7 +665,7 @@ __Usage:__
 
 ### Eventarc.update_google_channel_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_google_channel_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_google_channel_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_google_channel_config.js,samples/README.md)
 
@@ -682,7 +682,7 @@ __Usage:__
 
 ### Eventarc.update_message_bus
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_message_bus.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_message_bus.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_message_bus.js,samples/README.md)
 
@@ -699,7 +699,7 @@ __Usage:__
 
 ### Eventarc.update_pipeline
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_pipeline.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_pipeline.js,samples/README.md)
 
@@ -716,7 +716,7 @@ __Usage:__
 
 ### Eventarc.update_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/generated/v1/eventarc.update_trigger.js,samples/README.md)
 
@@ -733,7 +733,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-eventarc/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-eventarc/samples/quickstart.js,samples/README.md)
 

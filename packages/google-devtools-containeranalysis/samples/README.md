@@ -72,7 +72,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Container_analysis.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.get_iam_policy.js,samples/README.md)
 
@@ -89,7 +89,7 @@ __Usage:__
 
 ### Container_analysis.get_vulnerability_occurrences_summary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.get_vulnerability_occurrences_summary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.get_vulnerability_occurrences_summary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.get_vulnerability_occurrences_summary.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### Container_analysis.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.set_iam_policy.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### Container_analysis.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/container_analysis.test_iam_permissions.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### Grafeas.batch_create_notes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.batch_create_notes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.batch_create_notes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.batch_create_notes.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Grafeas.batch_create_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.batch_create_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.batch_create_occurrences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.batch_create_occurrences.js,samples/README.md)
 
@@ -174,7 +174,7 @@ __Usage:__
 
 ### Grafeas.create_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.create_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.create_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.create_note.js,samples/README.md)
 
@@ -191,7 +191,7 @@ __Usage:__
 
 ### Grafeas.create_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.create_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.create_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.create_occurrence.js,samples/README.md)
 
@@ -208,7 +208,7 @@ __Usage:__
 
 ### Grafeas.delete_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.delete_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.delete_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.delete_note.js,samples/README.md)
 
@@ -225,7 +225,7 @@ __Usage:__
 
 ### Grafeas.delete_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.delete_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.delete_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.delete_occurrence.js,samples/README.md)
 
@@ -242,7 +242,7 @@ __Usage:__
 
 ### Grafeas.get_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_note.js,samples/README.md)
 
@@ -259,7 +259,7 @@ __Usage:__
 
 ### Grafeas.get_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_occurrence.js,samples/README.md)
 
@@ -276,7 +276,7 @@ __Usage:__
 
 ### Grafeas.get_occurrence_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_occurrence_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_occurrence_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.get_occurrence_note.js,samples/README.md)
 
@@ -293,7 +293,7 @@ __Usage:__
 
 ### Grafeas.list_note_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_note_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_note_occurrences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_note_occurrences.js,samples/README.md)
 
@@ -310,7 +310,7 @@ __Usage:__
 
 ### Grafeas.list_notes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_notes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_notes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_notes.js,samples/README.md)
 
@@ -327,7 +327,7 @@ __Usage:__
 
 ### Grafeas.list_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_occurrences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.list_occurrences.js,samples/README.md)
 
@@ -344,7 +344,7 @@ __Usage:__
 
 ### Grafeas.update_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_note.js,samples/README.md)
 
@@ -361,7 +361,7 @@ __Usage:__
 
 ### Grafeas.update_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1/grafeas.update_occurrence.js,samples/README.md)
 
@@ -378,7 +378,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.export_s_b_o_m
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.export_s_b_o_m.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.export_s_b_o_m.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.export_s_b_o_m.js,samples/README.md)
 
@@ -395,7 +395,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.generate_packages_summary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.generate_packages_summary.js,samples/README.md)
 
@@ -412,7 +412,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.get_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_iam_policy.js,samples/README.md)
 
@@ -429,7 +429,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.get_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.get_scan_config.js,samples/README.md)
 
@@ -446,7 +446,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.list_scan_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.list_scan_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.list_scan_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.list_scan_configs.js,samples/README.md)
 
@@ -463,7 +463,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.set_iam_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.set_iam_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.set_iam_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.set_iam_policy.js,samples/README.md)
 
@@ -480,7 +480,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.test_iam_permissions.js,samples/README.md)
 
@@ -497,7 +497,7 @@ __Usage:__
 
 ### Container_analysis_v1_beta1.update_scan_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.update_scan_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.update_scan_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/container_analysis_v1_beta1.update_scan_config.js,samples/README.md)
 
@@ -514,7 +514,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.batch_create_notes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.batch_create_notes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.batch_create_notes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.batch_create_notes.js,samples/README.md)
 
@@ -531,7 +531,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.batch_create_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.batch_create_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.batch_create_occurrences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.batch_create_occurrences.js,samples/README.md)
 
@@ -548,7 +548,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.create_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.create_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.create_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.create_note.js,samples/README.md)
 
@@ -565,7 +565,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.create_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.create_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.create_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.create_occurrence.js,samples/README.md)
 
@@ -582,7 +582,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.delete_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.delete_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.delete_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.delete_note.js,samples/README.md)
 
@@ -599,7 +599,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.delete_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.delete_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.delete_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.delete_occurrence.js,samples/README.md)
 
@@ -616,7 +616,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.get_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_note.js,samples/README.md)
 
@@ -633,7 +633,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.get_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence.js,samples/README.md)
 
@@ -650,7 +650,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.get_occurrence_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence_note.js,samples/README.md)
 
@@ -667,7 +667,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.get_vulnerability_occurrences_summary
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_vulnerability_occurrences_summary.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_vulnerability_occurrences_summary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.get_vulnerability_occurrences_summary.js,samples/README.md)
 
@@ -684,7 +684,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.list_note_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_note_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_note_occurrences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_note_occurrences.js,samples/README.md)
 
@@ -701,7 +701,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.list_notes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_notes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_notes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_notes.js,samples/README.md)
 
@@ -718,7 +718,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.list_occurrences
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_occurrences.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_occurrences.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.list_occurrences.js,samples/README.md)
 
@@ -735,7 +735,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.update_note
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_note.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_note.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_note.js,samples/README.md)
 
@@ -752,7 +752,7 @@ __Usage:__
 
 ### Grafeas_v1_beta1.update_occurrence
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js,samples/README.md)
 
@@ -769,7 +769,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-devtools-containeranalysis/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-containeranalysis/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-devtools-containeranalysis/samples/quickstart.js,samples/README.md)
 

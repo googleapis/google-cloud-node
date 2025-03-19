@@ -58,7 +58,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### App_hub.create_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_application.js,samples/README.md)
 
@@ -75,7 +75,7 @@ __Usage:__
 
 ### App_hub.create_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 ### App_hub.create_service_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service_project_attachment.js,samples/README.md)
 
@@ -109,7 +109,7 @@ __Usage:__
 
 ### App_hub.create_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_workload.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### App_hub.delete_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_application.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### App_hub.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### App_hub.delete_service_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service_project_attachment.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### App_hub.delete_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_workload.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### App_hub.detach_service_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.detach_service_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.detach_service_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.detach_service_project_attachment.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### App_hub.get_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_application.js,samples/README.md)
 
@@ -228,7 +228,7 @@ __Usage:__
 
 ### App_hub.get_discovered_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_service.js,samples/README.md)
 
@@ -245,7 +245,7 @@ __Usage:__
 
 ### App_hub.get_discovered_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_workload.js,samples/README.md)
 
@@ -262,7 +262,7 @@ __Usage:__
 
 ### App_hub.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service.js,samples/README.md)
 
@@ -279,7 +279,7 @@ __Usage:__
 
 ### App_hub.get_service_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service_project_attachment.js,samples/README.md)
 
@@ -296,7 +296,7 @@ __Usage:__
 
 ### App_hub.get_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_workload.js,samples/README.md)
 
@@ -313,7 +313,7 @@ __Usage:__
 
 ### App_hub.list_applications
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_applications.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_applications.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_applications.js,samples/README.md)
 
@@ -330,7 +330,7 @@ __Usage:__
 
 ### App_hub.list_discovered_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_services.js,samples/README.md)
 
@@ -347,7 +347,7 @@ __Usage:__
 
 ### App_hub.list_discovered_workloads
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_workloads.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_workloads.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_workloads.js,samples/README.md)
 
@@ -364,7 +364,7 @@ __Usage:__
 
 ### App_hub.list_service_project_attachments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_service_project_attachments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_service_project_attachments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_service_project_attachments.js,samples/README.md)
 
@@ -381,7 +381,7 @@ __Usage:__
 
 ### App_hub.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_services.js,samples/README.md)
 
@@ -398,7 +398,7 @@ __Usage:__
 
 ### App_hub.list_workloads
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_workloads.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_workloads.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_workloads.js,samples/README.md)
 
@@ -415,7 +415,7 @@ __Usage:__
 
 ### App_hub.lookup_discovered_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_service.js,samples/README.md)
 
@@ -432,7 +432,7 @@ __Usage:__
 
 ### App_hub.lookup_discovered_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_workload.js,samples/README.md)
 
@@ -449,7 +449,7 @@ __Usage:__
 
 ### App_hub.lookup_service_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_service_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_service_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_service_project_attachment.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 ### App_hub.update_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.update_application.js,samples/README.md)
 
@@ -483,7 +483,7 @@ __Usage:__
 
 ### App_hub.update_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.update_service.js,samples/README.md)
 
@@ -500,7 +500,7 @@ __Usage:__
 
 ### App_hub.update_workload
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_workload.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_workload.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.update_workload.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apphub/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/quickstart.js,samples/README.md)
 
