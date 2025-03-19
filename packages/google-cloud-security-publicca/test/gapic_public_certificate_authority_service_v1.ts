@@ -211,7 +211,9 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.publicCertificateAuthorityServiceStub);
       client.close().then(() => {
         done();
@@ -285,7 +287,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.publicca.v1.CreateExternalAccountKeyRequest()
       );
@@ -320,7 +322,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.publicca.v1.CreateExternalAccountKeyRequest()
       );
@@ -370,7 +372,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.publicca.v1.CreateExternalAccountKeyRequest()
       );
@@ -407,7 +409,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.publicca.v1.CreateExternalAccountKeyRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('externalAccountKey', () => {
+    describe('externalAccountKey', async () => {
       const fakePath = '/rendered/path/externalAccountKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -440,7 +442,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalAccountKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -506,7 +508,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -519,7 +521,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -558,7 +560,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -570,7 +572,7 @@ describe('v1.PublicCertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

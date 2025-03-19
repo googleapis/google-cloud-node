@@ -483,7 +483,9 @@ export class NetworkEdgeSecurityServicesClient {
         region: request.region ?? '',
         network_edge_security_service: request.networkEdgeSecurityService ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -620,7 +622,9 @@ export class NetworkEdgeSecurityServicesClient {
         region: request.region ?? '',
         network_edge_security_service: request.networkEdgeSecurityService ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -753,7 +757,9 @@ export class NetworkEdgeSecurityServicesClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -896,7 +902,9 @@ export class NetworkEdgeSecurityServicesClient {
         region: request.region ?? '',
         network_edge_security_service: request.networkEdgeSecurityService ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -988,7 +996,9 @@ export class NetworkEdgeSecurityServicesClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,

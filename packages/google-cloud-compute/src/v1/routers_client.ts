@@ -507,7 +507,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -647,7 +649,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -770,7 +774,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -892,7 +898,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNatIpInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1016,7 +1024,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1141,7 +1151,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRouterStatus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1266,7 +1278,9 @@ export class RoutersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1398,7 +1412,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1536,7 +1552,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patchRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1663,7 +1681,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('preview request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1788,7 +1808,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1928,7 +1950,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRoutePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2017,7 +2041,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
@@ -2135,7 +2161,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IGetNatMappingInfoRoutersRequest,
@@ -2214,7 +2242,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNatMappingInfo stream %j', request);
     return this.descriptors.page.getNatMappingInfo.createStream(
       this.innerApiCalls.getNatMappingInfo as GaxCall,
@@ -2275,7 +2305,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNatMappingInfo iterate %j', request);
     return this.descriptors.page.getNatMappingInfo.asyncIterate(
       this.innerApiCalls['getNatMappingInfo'] as GaxCall,
@@ -2378,7 +2410,9 @@ export class RoutersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListRoutersRequest,
@@ -2450,7 +2484,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -2506,7 +2542,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -2626,7 +2664,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListBgpRoutesRoutersRequest,
@@ -2715,7 +2755,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBgpRoutes stream %j', request);
     return this.descriptors.page.listBgpRoutes.createStream(
       this.innerApiCalls.listBgpRoutes as GaxCall,
@@ -2786,7 +2828,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBgpRoutes iterate %j', request);
     return this.descriptors.page.listBgpRoutes.asyncIterate(
       this.innerApiCalls['listBgpRoutes'] as GaxCall,
@@ -2900,7 +2944,9 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListRoutePoliciesRoutersRequest,
@@ -2977,7 +3023,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRoutePolicies stream %j', request);
     return this.descriptors.page.listRoutePolicies.createStream(
       this.innerApiCalls.listRoutePolicies as GaxCall,
@@ -3036,7 +3084,9 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRoutePolicies iterate %j', request);
     return this.descriptors.page.listRoutePolicies.asyncIterate(
       this.innerApiCalls['listRoutePolicies'] as GaxCall,

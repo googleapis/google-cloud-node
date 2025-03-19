@@ -263,7 +263,9 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.diskTypesStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
@@ -362,7 +364,7 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
@@ -417,7 +419,7 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
@@ -454,7 +456,7 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
@@ -485,7 +487,7 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListDiskTypesRequest()
       );
@@ -545,7 +547,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListDiskTypesRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
@@ -678,7 +680,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
@@ -825,7 +827,7 @@ describe('v1.DiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.DiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );

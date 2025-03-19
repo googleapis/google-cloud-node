@@ -255,7 +255,9 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudCatalogStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -333,7 +335,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -368,7 +370,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -385,7 +387,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -464,7 +466,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -494,7 +496,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListServicesRequest()
       );
@@ -523,7 +525,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -605,7 +607,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -633,7 +635,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -684,7 +686,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -732,7 +734,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -774,7 +776,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
@@ -812,7 +814,7 @@ describe('v1.CloudCatalogClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('billingAccount', () => {
+    describe('billingAccount', async () => {
       const fakePath = '/rendered/path/billingAccount';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -821,7 +823,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -851,7 +853,7 @@ describe('v1.CloudCatalogClient', () => {
       });
     });
 
-    describe('organizationBillingAccount', () => {
+    describe('organizationBillingAccount', async () => {
       const fakePath = '/rendered/path/organizationBillingAccount';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -861,7 +863,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationBillingAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -916,7 +918,7 @@ describe('v1.CloudCatalogClient', () => {
       });
     });
 
-    describe('projectBillingInfo', () => {
+    describe('projectBillingInfo', async () => {
       const fakePath = '/rendered/path/projectBillingInfo';
       const expectedParameters = {
         project: 'projectValue',
@@ -925,7 +927,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectBillingInfoPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -960,7 +962,7 @@ describe('v1.CloudCatalogClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         service: 'serviceValue',
@@ -969,7 +971,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -998,7 +1000,7 @@ describe('v1.CloudCatalogClient', () => {
       });
     });
 
-    describe('sku', () => {
+    describe('sku', async () => {
       const fakePath = '/rendered/path/sku';
       const expectedParameters = {
         service: 'serviceValue',
@@ -1008,7 +1010,7 @@ describe('v1.CloudCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.skuPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

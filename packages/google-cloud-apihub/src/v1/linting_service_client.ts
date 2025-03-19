@@ -508,7 +508,9 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStyleGuide request %j', request);
     const wrappedCallback:
       | Callback<
@@ -620,7 +622,9 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'style_guide.name': request.styleGuide!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateStyleGuide request %j', request);
     const wrappedCallback:
       | Callback<
@@ -739,7 +743,9 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStyleGuideContents request %j', request);
     const wrappedCallback:
       | Callback<
@@ -854,7 +860,9 @@ export class LintingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lintSpec request %j', request);
     const wrappedCallback:
       | Callback<

@@ -207,7 +207,9 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionOperationsStub);
       client.close().then(() => {
         done();
@@ -266,7 +268,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
@@ -306,7 +308,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
@@ -361,7 +363,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
@@ -398,7 +400,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
@@ -429,7 +431,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
@@ -469,7 +471,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
@@ -524,7 +526,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
@@ -561,7 +563,7 @@ describe('v1small.RegionOperationsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );

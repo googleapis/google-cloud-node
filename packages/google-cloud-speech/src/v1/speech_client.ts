@@ -521,7 +521,9 @@ export class SpeechClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('recognize request %j', request);
     const wrappedCallback:
       | Callback<
@@ -565,7 +567,9 @@ export class SpeechClient {
    * region_tag:speech_v1_generated_Speech_StreamingRecognize_async
    */
   _streamingRecognize(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingRecognize stream %j', options);
     return this.innerApiCalls.streamingRecognize(null, options);
   }
@@ -675,7 +679,9 @@ export class SpeechClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -837,7 +843,7 @@ export class SpeechClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

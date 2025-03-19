@@ -256,7 +256,9 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.grafeasV1Beta1Stub);
       client.close().then(() => {
         done();
@@ -315,7 +317,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceRequest()
       );
@@ -346,7 +348,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceRequest()
       );
@@ -393,7 +395,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceRequest()
       );
@@ -424,7 +426,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceRequest()
       );
@@ -445,7 +447,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
       );
@@ -476,7 +478,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
       );
@@ -523,7 +525,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
       );
@@ -554,7 +556,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteOccurrenceRequest()
       );
@@ -575,7 +577,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateOccurrenceRequest()
       );
@@ -606,7 +608,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateOccurrenceRequest()
       );
@@ -653,7 +655,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateOccurrenceRequest()
       );
@@ -684,7 +686,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateOccurrenceRequest()
       );
@@ -705,7 +707,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
       );
@@ -737,7 +739,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
       );
@@ -784,7 +786,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
       );
@@ -818,7 +820,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateOccurrencesRequest()
       );
@@ -842,7 +844,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
       );
@@ -873,7 +875,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
       );
@@ -920,7 +922,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
       );
@@ -951,7 +953,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateOccurrenceRequest()
       );
@@ -972,7 +974,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
       );
@@ -1003,7 +1005,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
       );
@@ -1050,7 +1052,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
       );
@@ -1081,7 +1083,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetOccurrenceNoteRequest()
       );
@@ -1102,7 +1104,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetNoteRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetNoteRequest()
       );
@@ -1180,7 +1182,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetNoteRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetNoteRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteNoteRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteNoteRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteNoteRequest()
       );
@@ -1338,7 +1340,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.DeleteNoteRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateNoteRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateNoteRequest()
       );
@@ -1437,7 +1439,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateNoteRequest()
       );
@@ -1468,7 +1470,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.CreateNoteRequest()
       );
@@ -1489,7 +1491,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateNotesRequest()
       );
@@ -1520,7 +1522,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateNotesRequest()
       );
@@ -1567,7 +1569,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateNotesRequest()
       );
@@ -1598,7 +1600,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.BatchCreateNotesRequest()
       );
@@ -1619,7 +1621,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateNoteRequest()
       );
@@ -1650,7 +1652,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateNoteRequest()
       );
@@ -1697,7 +1699,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateNoteRequest()
       );
@@ -1728,7 +1730,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.UpdateNoteRequest()
       );
@@ -1749,7 +1751,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -1782,7 +1784,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -1829,7 +1831,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -1863,7 +1865,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -1887,7 +1889,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -1920,7 +1922,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -1969,7 +1971,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -2000,7 +2002,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -2051,7 +2053,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -2097,7 +2099,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -2140,7 +2142,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListOccurrencesRequest()
       );
@@ -2182,7 +2184,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2215,7 +2217,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2264,7 +2266,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2292,7 +2294,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2343,7 +2345,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2391,7 +2393,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2433,7 +2435,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNotesRequest()
       );
@@ -2476,7 +2478,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );
@@ -2510,7 +2512,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );
@@ -2559,7 +2561,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );
@@ -2590,7 +2592,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );
@@ -2641,7 +2643,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );
@@ -2687,7 +2689,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );
@@ -2730,7 +2732,7 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.grafeas.v1beta1.ListNoteOccurrencesRequest()
       );

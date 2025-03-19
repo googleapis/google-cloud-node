@@ -461,7 +461,9 @@ export class SqlUsersServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -579,7 +581,9 @@ export class SqlUsersServiceClient {
         instance: request.instance ?? '',
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -693,7 +697,9 @@ export class SqlUsersServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -806,7 +812,9 @@ export class SqlUsersServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list request %j', request);
     const wrappedCallback:
       | Callback<
@@ -924,7 +932,9 @@ export class SqlUsersServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<

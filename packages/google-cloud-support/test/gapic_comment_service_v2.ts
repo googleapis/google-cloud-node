@@ -255,7 +255,9 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.commentServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCommentRequest()
       );
@@ -345,7 +347,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCommentRequest()
       );
@@ -392,7 +394,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCommentRequest()
       );
@@ -423,7 +425,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.CreateCommentRequest()
       );
@@ -444,7 +446,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -477,7 +479,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -526,7 +528,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -557,7 +559,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -611,7 +613,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -662,7 +664,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -705,7 +707,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.support.v2.ListCommentsRequest()
       );
@@ -742,7 +744,7 @@ describe('v2.CommentServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('organizationCase', () => {
+    describe('organizationCase', async () => {
       const fakePath = '/rendered/path/organizationCase';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -752,7 +754,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -798,7 +800,7 @@ describe('v2.CommentServiceClient', () => {
       });
     });
 
-    describe('organizationCaseAttachmentId', () => {
+    describe('organizationCaseAttachmentId', async () => {
       const fakePath = '/rendered/path/organizationCaseAttachmentId';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -809,7 +811,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationCaseAttachmentIdPathTemplate.match =
@@ -879,7 +881,7 @@ describe('v2.CommentServiceClient', () => {
       });
     });
 
-    describe('organizationCaseComment', () => {
+    describe('organizationCaseComment', async () => {
       const fakePath = '/rendered/path/organizationCaseComment';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -890,7 +892,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationCaseCommentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -958,7 +960,7 @@ describe('v2.CommentServiceClient', () => {
       });
     });
 
-    describe('projectCase', () => {
+    describe('projectCase', async () => {
       const fakePath = '/rendered/path/projectCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -968,7 +970,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1007,7 +1009,7 @@ describe('v2.CommentServiceClient', () => {
       });
     });
 
-    describe('projectCaseAttachmentId', () => {
+    describe('projectCaseAttachmentId', async () => {
       const fakePath = '/rendered/path/projectCaseAttachmentId';
       const expectedParameters = {
         project: 'projectValue',
@@ -1018,7 +1020,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCaseAttachmentIdPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1086,7 +1088,7 @@ describe('v2.CommentServiceClient', () => {
       });
     });
 
-    describe('projectCaseComment', () => {
+    describe('projectCaseComment', async () => {
       const fakePath = '/rendered/path/projectCaseComment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1097,7 +1099,7 @@ describe('v2.CommentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCaseCommentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

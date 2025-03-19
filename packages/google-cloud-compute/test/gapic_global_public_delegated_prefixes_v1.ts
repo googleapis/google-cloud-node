@@ -284,7 +284,9 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.globalPublicDelegatedPrefixesStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
@@ -394,7 +396,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
@@ -449,7 +451,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
@@ -485,7 +487,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
@@ -514,7 +516,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
@@ -552,7 +554,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
@@ -605,7 +607,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
@@ -640,7 +642,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
@@ -669,7 +671,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
@@ -703,7 +705,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
@@ -753,7 +755,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
@@ -808,7 +810,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
@@ -846,7 +848,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
@@ -899,7 +901,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
@@ -934,7 +936,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
@@ -1004,7 +1006,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
@@ -1062,7 +1064,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
@@ -1092,7 +1094,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
@@ -1156,7 +1158,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
@@ -1211,7 +1213,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
@@ -1263,7 +1265,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );

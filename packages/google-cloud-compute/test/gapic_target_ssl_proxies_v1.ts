@@ -265,7 +265,9 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.targetSslProxiesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
@@ -506,7 +508,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
@@ -692,7 +694,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
@@ -777,7 +779,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
@@ -829,7 +831,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
@@ -891,7 +893,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
@@ -979,7 +981,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
@@ -1015,7 +1017,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
@@ -1077,7 +1079,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
@@ -1129,7 +1131,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
@@ -1191,7 +1193,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
@@ -1228,7 +1230,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
@@ -1316,7 +1318,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
@@ -1342,7 +1344,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
@@ -1378,7 +1380,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
@@ -1430,7 +1432,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
@@ -1466,7 +1468,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1.TargetSslProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
@@ -1530,7 +1532,7 @@ describe('v1.TargetSslProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
@@ -1583,7 +1585,7 @@ describe('v1.TargetSslProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
@@ -1610,7 +1612,7 @@ describe('v1.TargetSslProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
@@ -1670,7 +1672,7 @@ describe('v1.TargetSslProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
@@ -1721,7 +1723,7 @@ describe('v1.TargetSslProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
@@ -1769,7 +1771,7 @@ describe('v1.TargetSslProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );

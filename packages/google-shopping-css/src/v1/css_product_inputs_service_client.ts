@@ -486,7 +486,9 @@ export class CssProductInputsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertCssProductInput request %j', request);
     const wrappedCallback:
       | Callback<
@@ -626,7 +628,9 @@ export class CssProductInputsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'css_product_input.name': request.cssProductInput!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCssProductInput request %j', request);
     const wrappedCallback:
       | Callback<
@@ -754,7 +758,9 @@ export class CssProductInputsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCssProductInput request %j', request);
     const wrappedCallback:
       | Callback<

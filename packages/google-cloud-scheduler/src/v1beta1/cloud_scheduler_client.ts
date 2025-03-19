@@ -486,7 +486,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -610,7 +612,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -741,7 +745,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         'job.name': request.job!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -862,7 +868,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -983,7 +991,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1110,7 +1120,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1228,7 +1240,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('runJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1380,7 +1394,9 @@ export class CloudSchedulerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.scheduler.v1beta1.IListJobsRequest,
@@ -1473,7 +1489,9 @@ export class CloudSchedulerClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -1548,7 +1566,9 @@ export class CloudSchedulerClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,

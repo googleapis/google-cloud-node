@@ -280,7 +280,9 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.marketingplatformAdminServiceStub);
       client.close().then(() => {
         done();
@@ -351,7 +353,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.GetOrganizationRequest()
       );
@@ -385,7 +387,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.GetOrganizationRequest()
       );
@@ -435,7 +437,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.GetOrganizationRequest()
       );
@@ -469,7 +471,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.GetOrganizationRequest()
       );
@@ -493,7 +495,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.CreateAnalyticsAccountLinkRequest()
       );
@@ -528,7 +530,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.CreateAnalyticsAccountLinkRequest()
       );
@@ -578,7 +580,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.CreateAnalyticsAccountLinkRequest()
       );
@@ -615,7 +617,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.CreateAnalyticsAccountLinkRequest()
       );
@@ -642,7 +644,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.DeleteAnalyticsAccountLinkRequest()
       );
@@ -677,7 +679,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.DeleteAnalyticsAccountLinkRequest()
       );
@@ -727,7 +729,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.DeleteAnalyticsAccountLinkRequest()
       );
@@ -764,7 +766,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.DeleteAnalyticsAccountLinkRequest()
       );
@@ -791,7 +793,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelRequest()
       );
@@ -826,7 +828,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelRequest()
       );
@@ -876,7 +878,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelRequest()
       );
@@ -913,7 +915,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelRequest()
       );
@@ -940,7 +942,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -983,7 +985,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -1043,7 +1045,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -1152,7 +1154,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -1213,7 +1215,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -1270,7 +1272,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('analyticsAccountLink', () => {
+    describe('analyticsAccountLink', async () => {
       const fakePath = '/rendered/path/analyticsAccountLink';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1325,7 +1327,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.analyticsAccountLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1380,7 +1382,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1392,7 +1394,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1421,7 +1423,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
       });
     });
 
-    describe('property', () => {
+    describe('property', async () => {
       const fakePath = '/rendered/path/property';
       const expectedParameters = {
         property: 'propertyValue',
@@ -1433,7 +1435,7 @@ describe('v1alpha.MarketingplatformAdminServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.propertyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

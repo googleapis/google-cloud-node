@@ -250,7 +250,9 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.tasksStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetTaskRequest()
       );
@@ -340,7 +342,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetTaskRequest()
       );
@@ -387,7 +389,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetTaskRequest()
       );
@@ -415,7 +417,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.GetTaskRequest()
       );
@@ -436,7 +438,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -469,7 +471,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -518,7 +520,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -546,7 +548,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -597,7 +599,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -645,7 +647,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -687,7 +689,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.ListTasksRequest()
       );
@@ -729,7 +731,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -759,7 +761,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -803,7 +805,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -838,7 +840,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -886,7 +888,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -923,7 +925,7 @@ describe('v2.TasksClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -935,7 +937,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -999,7 +1001,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('execution', () => {
+    describe('execution', async () => {
       const fakePath = '/rendered/path/execution';
       const expectedParameters = {
         project: 'projectValue',
@@ -1011,7 +1013,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1075,7 +1077,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -1086,7 +1088,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1139,7 +1141,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1149,7 +1151,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1188,7 +1190,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1197,7 +1199,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1226,7 +1228,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('revision', () => {
+    describe('revision', async () => {
       const fakePath = '/rendered/path/revision';
       const expectedParameters = {
         project: 'projectValue',
@@ -1238,7 +1240,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.revisionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1302,7 +1304,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -1313,7 +1315,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1366,7 +1368,7 @@ describe('v2.TasksClient', () => {
       });
     });
 
-    describe('task', () => {
+    describe('task', async () => {
       const fakePath = '/rendered/path/task';
       const expectedParameters = {
         project: 'projectValue',
@@ -1379,7 +1381,7 @@ describe('v2.TasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

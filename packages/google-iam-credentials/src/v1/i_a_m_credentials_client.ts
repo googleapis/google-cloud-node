@@ -482,7 +482,9 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -621,7 +623,9 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateIdToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -745,7 +749,9 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('signBlob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -867,7 +873,9 @@ export class IAMCredentialsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('signJwt request %j', request);
     const wrappedCallback:
       | Callback<

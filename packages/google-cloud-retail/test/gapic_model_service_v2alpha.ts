@@ -289,7 +289,9 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.modelServiceStub);
       client.close().then(() => {
         done();
@@ -348,7 +350,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetModelRequest()
       );
@@ -379,7 +381,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetModelRequest()
       );
@@ -426,7 +428,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetModelRequest()
       );
@@ -454,7 +456,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetModelRequest()
       );
@@ -475,7 +477,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PauseModelRequest()
       );
@@ -506,7 +508,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PauseModelRequest()
       );
@@ -553,7 +555,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PauseModelRequest()
       );
@@ -584,7 +586,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PauseModelRequest()
       );
@@ -605,7 +607,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
       );
@@ -636,7 +638,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
       );
@@ -683,7 +685,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
       );
@@ -714,7 +716,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ResumeModelRequest()
       );
@@ -735,7 +737,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
       );
@@ -766,7 +768,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
       );
@@ -813,7 +815,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
       );
@@ -844,7 +846,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteModelRequest()
       );
@@ -865,7 +867,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
       );
@@ -897,7 +899,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
       );
@@ -945,7 +947,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
       );
@@ -977,7 +979,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateModelRequest()
       );
@@ -999,7 +1001,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateModelRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateModelRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateModelRequest()
       );
@@ -1116,7 +1118,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateModelRequest()
       );
@@ -1149,7 +1151,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1171,7 +1173,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1189,7 +1191,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.TuneModelRequest()
       );
@@ -1221,7 +1223,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.TuneModelRequest()
       );
@@ -1275,7 +1277,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.TuneModelRequest()
       );
@@ -1306,7 +1308,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.TuneModelRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1361,7 +1363,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1379,7 +1381,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1412,7 +1414,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1461,7 +1463,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1546,7 +1548,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1597,7 +1599,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1640,7 +1642,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListModelsRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1713,7 +1715,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1757,7 +1759,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1792,7 +1794,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1840,7 +1842,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1881,7 +1883,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1960,7 +1962,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2040,7 +2042,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2136,8 +2138,7 @@ describe('v2alpha.ModelServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2156,7 +2157,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2165,8 +2166,7 @@ describe('v2alpha.ModelServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2182,7 +2182,7 @@ describe('v2alpha.ModelServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('alertConfig', () => {
+    describe('alertConfig', async () => {
       const fakePath = '/rendered/path/alertConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2191,7 +2191,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.alertConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2220,7 +2220,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('attributesConfig', () => {
+    describe('attributesConfig', async () => {
       const fakePath = '/rendered/path/attributesConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2231,7 +2231,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attributesConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2287,7 +2287,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('branch', () => {
+    describe('branch', async () => {
       const fakePath = '/rendered/path/branch';
       const expectedParameters = {
         project: 'projectValue',
@@ -2299,7 +2299,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.branchPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2363,7 +2363,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('catalog', () => {
+    describe('catalog', async () => {
       const fakePath = '/rendered/path/catalog';
       const expectedParameters = {
         project: 'projectValue',
@@ -2374,7 +2374,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.catalogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2427,7 +2427,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('completionConfig', () => {
+    describe('completionConfig', async () => {
       const fakePath = '/rendered/path/completionConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2438,7 +2438,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.completionConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2494,7 +2494,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('control', () => {
+    describe('control', async () => {
       const fakePath = '/rendered/path/control';
       const expectedParameters = {
         project: 'projectValue',
@@ -2506,7 +2506,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.controlPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2570,7 +2570,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('loggingConfig', () => {
+    describe('loggingConfig', async () => {
       const fakePath = '/rendered/path/loggingConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2579,7 +2579,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.loggingConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2608,7 +2608,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('merchantCenterAccountLink', () => {
+    describe('merchantCenterAccountLink', async () => {
       const fakePath = '/rendered/path/merchantCenterAccountLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -2620,7 +2620,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.merchantCenterAccountLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2705,7 +2705,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         project: 'projectValue',
@@ -2717,7 +2717,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2781,7 +2781,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         project: 'projectValue',
@@ -2794,7 +2794,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2869,7 +2869,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('retailProject', () => {
+    describe('retailProject', async () => {
       const fakePath = '/rendered/path/retailProject';
       const expectedParameters = {
         project: 'projectValue',
@@ -2878,7 +2878,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.retailProjectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2907,7 +2907,7 @@ describe('v2alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('servingConfig', () => {
+    describe('servingConfig', async () => {
       const fakePath = '/rendered/path/servingConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2919,7 +2919,7 @@ describe('v2alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servingConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

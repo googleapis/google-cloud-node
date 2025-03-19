@@ -520,7 +520,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConferenceRecord request %j', request);
     const wrappedCallback:
       | Callback<
@@ -628,7 +630,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getParticipant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -742,7 +746,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getParticipantSession request %j', request);
     const wrappedCallback:
       | Callback<
@@ -850,7 +856,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRecording request %j', request);
     const wrappedCallback:
       | Callback<
@@ -956,7 +964,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTranscript request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1068,7 +1078,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTranscriptEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1207,7 +1219,9 @@ export class ConferenceRecordsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2.IListConferenceRecordsRequest,
@@ -1286,7 +1300,9 @@ export class ConferenceRecordsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listConferenceRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConferenceRecords stream %j', request);
     return this.descriptors.page.listConferenceRecords.createStream(
       this.innerApiCalls.listConferenceRecords as GaxCall,
@@ -1347,7 +1363,9 @@ export class ConferenceRecordsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listConferenceRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConferenceRecords iterate %j', request);
     return this.descriptors.page.listConferenceRecords.asyncIterate(
       this.innerApiCalls['listConferenceRecords'] as GaxCall,
@@ -1461,7 +1479,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2.IListParticipantsRequest,
@@ -1540,7 +1560,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParticipants stream %j', request);
     return this.descriptors.page.listParticipants.createStream(
       this.innerApiCalls.listParticipants as GaxCall,
@@ -1601,7 +1623,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParticipants iterate %j', request);
     return this.descriptors.page.listParticipants.asyncIterate(
       this.innerApiCalls['listParticipants'] as GaxCall,
@@ -1721,7 +1745,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2.IListParticipantSessionsRequest,
@@ -1800,7 +1826,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listParticipantSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParticipantSessions stream %j', request);
     return this.descriptors.page.listParticipantSessions.createStream(
       this.innerApiCalls.listParticipantSessions as GaxCall,
@@ -1861,7 +1889,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listParticipantSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParticipantSessions iterate %j', request);
     return this.descriptors.page.listParticipantSessions.asyncIterate(
       this.innerApiCalls['listParticipantSessions'] as GaxCall,
@@ -1960,7 +1990,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2.IListRecordingsRequest,
@@ -2027,7 +2059,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listRecordings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRecordings stream %j', request);
     return this.descriptors.page.listRecordings.createStream(
       this.innerApiCalls.listRecordings as GaxCall,
@@ -2078,7 +2112,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listRecordings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRecordings iterate %j', request);
     return this.descriptors.page.listRecordings.asyncIterate(
       this.innerApiCalls['listRecordings'] as GaxCall,
@@ -2179,7 +2215,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2.IListTranscriptsRequest,
@@ -2248,7 +2286,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listTranscripts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTranscripts stream %j', request);
     return this.descriptors.page.listTranscripts.createStream(
       this.innerApiCalls.listTranscripts as GaxCall,
@@ -2299,7 +2339,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listTranscripts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTranscripts iterate %j', request);
     return this.descriptors.page.listTranscripts.asyncIterate(
       this.innerApiCalls['listTranscripts'] as GaxCall,
@@ -2411,7 +2453,9 @@ export class ConferenceRecordsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2.IListTranscriptEntriesRequest,
@@ -2481,7 +2525,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listTranscriptEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTranscriptEntries stream %j', request);
     return this.descriptors.page.listTranscriptEntries.createStream(
       this.innerApiCalls.listTranscriptEntries as GaxCall,
@@ -2533,7 +2579,9 @@ export class ConferenceRecordsServiceClient {
       });
     const defaultCallSettings = this._defaults['listTranscriptEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTranscriptEntries iterate %j', request);
     return this.descriptors.page.listTranscriptEntries.asyncIterate(
       this.innerApiCalls['listTranscriptEntries'] as GaxCall,

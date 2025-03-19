@@ -250,7 +250,9 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.firewallStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
@@ -341,7 +343,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
@@ -388,7 +390,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
@@ -446,7 +448,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
@@ -477,7 +479,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
@@ -524,7 +526,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
@@ -555,7 +557,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
@@ -576,7 +578,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
@@ -607,7 +609,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
@@ -706,7 +708,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
@@ -737,7 +739,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
@@ -815,7 +817,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
@@ -836,7 +838,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
@@ -867,7 +869,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
@@ -914,7 +916,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
@@ -945,7 +947,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
@@ -966,7 +968,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -1048,7 +1050,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -1079,7 +1081,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -1182,7 +1184,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -1225,7 +1227,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1.FirewallClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         app: 'appValue',
@@ -1274,7 +1276,7 @@ describe('v1.FirewallClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

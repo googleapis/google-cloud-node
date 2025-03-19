@@ -284,7 +284,9 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.globalNetworkEndpointGroupsStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -395,7 +397,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -450,7 +452,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -492,7 +494,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -524,7 +526,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
@@ -563,7 +565,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
@@ -618,7 +620,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
@@ -683,7 +685,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -723,7 +725,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -778,7 +780,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -820,7 +822,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
@@ -852,7 +854,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
@@ -890,7 +892,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
@@ -943,7 +945,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
@@ -978,7 +980,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
@@ -1007,7 +1009,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
@@ -1091,7 +1093,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
@@ -1122,7 +1124,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1187,7 +1189,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1245,7 +1247,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1275,7 +1277,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1394,7 +1396,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1446,7 +1448,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
@@ -1493,7 +1495,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
@@ -1606,7 +1608,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
@@ -1645,7 +1647,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
@@ -1716,7 +1718,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
@@ -1776,7 +1778,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
@@ -1834,7 +1836,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );

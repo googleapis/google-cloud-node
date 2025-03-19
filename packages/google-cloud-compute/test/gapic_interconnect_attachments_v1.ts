@@ -278,7 +278,9 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.interconnectAttachmentsStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
@@ -830,7 +832,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
@@ -871,7 +873,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
@@ -965,7 +967,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
@@ -1097,7 +1099,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
@@ -1136,7 +1138,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
@@ -1168,7 +1170,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest()
       );
@@ -1232,7 +1234,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
@@ -1324,7 +1326,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
@@ -1385,7 +1387,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
@@ -1418,7 +1420,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
@@ -1485,7 +1487,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
@@ -1543,7 +1545,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
@@ -1598,7 +1600,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );

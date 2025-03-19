@@ -265,7 +265,9 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.authorizedCertificatesStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -409,7 +411,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -502,7 +504,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -550,7 +552,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -585,7 +587,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -643,7 +645,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -691,7 +693,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -726,7 +728,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -832,7 +834,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -867,7 +869,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
@@ -892,7 +894,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -989,7 +991,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1024,7 +1026,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1092,7 +1094,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1149,7 +1151,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1203,7 +1205,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
@@ -1245,7 +1247,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         app: 'appValue',
@@ -1258,7 +1260,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

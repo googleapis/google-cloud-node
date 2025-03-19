@@ -300,7 +300,9 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.managedIdentitiesServiceStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
@@ -396,7 +398,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ResetAdminPasswordRequest()
       );
@@ -498,7 +500,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
@@ -530,7 +532,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
@@ -578,7 +580,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
@@ -607,7 +609,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.GetDomainRequest()
       );
@@ -629,7 +631,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
@@ -663,7 +665,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
@@ -718,7 +720,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
@@ -753,7 +755,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.CreateMicrosoftAdDomainRequest()
       );
@@ -787,7 +789,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -811,7 +813,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -833,7 +835,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
@@ -867,7 +869,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
@@ -923,7 +925,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
@@ -956,7 +958,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.UpdateDomainRequest()
       );
@@ -991,7 +993,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1014,7 +1016,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1033,7 +1035,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
@@ -1066,7 +1068,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
@@ -1121,7 +1123,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
@@ -1153,7 +1155,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DeleteDomainRequest()
       );
@@ -1187,7 +1189,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1210,7 +1212,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1229,7 +1231,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
@@ -1317,7 +1319,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
@@ -1349,7 +1351,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.AttachTrustRequest()
       );
@@ -1383,7 +1385,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1406,7 +1408,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1425,7 +1427,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
@@ -1459,7 +1461,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
@@ -1514,7 +1516,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
@@ -1546,7 +1548,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ReconfigureTrustRequest()
       );
@@ -1580,7 +1582,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1603,7 +1605,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1625,7 +1627,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
@@ -1658,7 +1660,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
@@ -1713,7 +1715,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
@@ -1745,7 +1747,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.DetachTrustRequest()
       );
@@ -1779,7 +1781,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1802,7 +1804,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1821,7 +1823,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
@@ -1855,7 +1857,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
@@ -1942,7 +1944,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ValidateTrustRequest()
       );
@@ -1976,7 +1978,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1999,7 +2001,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2021,7 +2023,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2061,7 +2063,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2149,7 +2151,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2210,7 +2212,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2262,7 +2264,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2312,7 +2314,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1.ListDomainsRequest()
       );
@@ -2352,7 +2354,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('domain', () => {
+    describe('domain', async () => {
       const fakePath = '/rendered/path/domain';
       const expectedParameters = {
         project: 'projectValue',
@@ -2364,7 +2366,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.domainPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2417,7 +2419,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2428,7 +2430,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2467,7 +2469,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2477,7 +2479,7 @@ describe('v1.ManagedIdentitiesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -476,7 +476,9 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -593,7 +595,9 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -711,7 +715,9 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -832,7 +838,9 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generatePackagesSummary request %j', request);
     const wrappedCallback:
       | Callback<
@@ -958,7 +966,9 @@ export class ContainerAnalysisV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('exportSBOM request %j', request);
     const wrappedCallback:
       | Callback<

@@ -699,7 +699,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resetAdminPassword request %j', request);
     const wrappedCallback:
       | Callback<
@@ -819,7 +821,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDomain request %j', request);
     const wrappedCallback:
       | Callback<
@@ -967,7 +971,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1142,7 +1148,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'domain.name': request.domain!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1310,7 +1318,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1480,7 +1490,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1654,7 +1666,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1824,7 +1838,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1995,7 +2011,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2172,7 +2190,9 @@ export class ManagedIdentitiesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.managedidentities.v1.IListDomainsRequest,
@@ -2252,7 +2272,9 @@ export class ManagedIdentitiesServiceClient {
       });
     const defaultCallSettings = this._defaults['listDomains'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDomains stream %j', request);
     return this.descriptors.page.listDomains.createStream(
       this.innerApiCalls.listDomains as GaxCall,
@@ -2314,7 +2336,9 @@ export class ManagedIdentitiesServiceClient {
       });
     const defaultCallSettings = this._defaults['listDomains'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDomains iterate %j', request);
     return this.descriptors.page.listDomains.asyncIterate(
       this.innerApiCalls['listDomains'] as GaxCall,

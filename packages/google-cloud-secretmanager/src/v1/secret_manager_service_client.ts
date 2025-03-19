@@ -537,7 +537,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -661,7 +663,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addSecretVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -776,7 +780,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -896,7 +902,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'secret.name': request.secret!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1018,7 +1026,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1146,7 +1156,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSecretVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1283,7 +1295,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('accessSecretVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1420,7 +1434,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('disableSecretVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1557,7 +1573,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enableSecretVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1695,7 +1713,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('destroySecretVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1824,7 +1844,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1935,7 +1957,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2053,7 +2077,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2186,7 +2212,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.secretmanager.v1.IListSecretsRequest,
@@ -2262,7 +2290,9 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecrets stream %j', request);
     return this.descriptors.page.listSecrets.createStream(
       this.innerApiCalls.listSecrets as GaxCall,
@@ -2320,7 +2350,9 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecrets iterate %j', request);
     return this.descriptors.page.listSecrets.asyncIterate(
       this.innerApiCalls['listSecrets'] as GaxCall,
@@ -2435,7 +2467,9 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.secretmanager.v1.IListSecretVersionsRequest,
@@ -2512,7 +2546,9 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecretVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecretVersions stream %j', request);
     return this.descriptors.page.listSecretVersions.createStream(
       this.innerApiCalls.listSecretVersions as GaxCall,
@@ -2571,7 +2607,9 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecretVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecretVersions iterate %j', request);
     return this.descriptors.page.listSecretVersions.asyncIterate(
       this.innerApiCalls['listSecretVersions'] as GaxCall,

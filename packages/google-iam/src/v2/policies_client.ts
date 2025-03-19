@@ -528,7 +528,9 @@ export class PoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -672,7 +674,9 @@ export class PoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -853,7 +857,9 @@ export class PoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1036,7 +1042,9 @@ export class PoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1207,7 +1215,9 @@ export class PoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.iam.v2.IListPoliciesRequest,
@@ -1283,7 +1293,9 @@ export class PoliciesClient {
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicies stream %j', request);
     return this.descriptors.page.listPolicies.createStream(
       this.innerApiCalls.listPolicies as GaxCall,
@@ -1343,7 +1355,9 @@ export class PoliciesClient {
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicies iterate %j', request);
     return this.descriptors.page.listPolicies.asyncIterate(
       this.innerApiCalls['listPolicies'] as GaxCall,
@@ -1445,7 +1459,7 @@ export class PoliciesClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

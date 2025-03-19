@@ -498,7 +498,9 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -629,7 +631,9 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrganizationEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -763,7 +767,9 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrganizationImpact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -923,7 +929,9 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.servicehealth.v1.IListEventsRequest,
@@ -1021,7 +1029,9 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
@@ -1101,7 +1111,9 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
@@ -1241,7 +1253,9 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.servicehealth.v1.IListOrganizationEventsRequest,
@@ -1344,7 +1358,9 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrganizationEvents stream %j', request);
     return this.descriptors.page.listOrganizationEvents.createStream(
       this.innerApiCalls.listOrganizationEvents as GaxCall,
@@ -1429,7 +1445,9 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrganizationEvents iterate %j', request);
     return this.descriptors.page.listOrganizationEvents.asyncIterate(
       this.innerApiCalls['listOrganizationEvents'] as GaxCall,
@@ -1568,7 +1586,9 @@ export class ServiceHealthClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.servicehealth.v1.IListOrganizationImpactsRequest,
@@ -1669,7 +1689,9 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationImpacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrganizationImpacts stream %j', request);
     return this.descriptors.page.listOrganizationImpacts.createStream(
       this.innerApiCalls.listOrganizationImpacts as GaxCall,
@@ -1752,7 +1774,9 @@ export class ServiceHealthClient {
       });
     const defaultCallSettings = this._defaults['listOrganizationImpacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrganizationImpacts iterate %j', request);
     return this.descriptors.page.listOrganizationImpacts.asyncIterate(
       this.innerApiCalls['listOrganizationImpacts'] as GaxCall,

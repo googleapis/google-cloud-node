@@ -480,7 +480,9 @@ export class ConfidentialComputingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createChallenge request %j', request);
     const wrappedCallback:
       | Callback<
@@ -625,7 +627,9 @@ export class ConfidentialComputingClient {
       this._gaxModule.routingHeader.fromParams({
         challenge: request.challenge ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('verifyAttestation request %j', request);
     const wrappedCallback:
       | Callback<

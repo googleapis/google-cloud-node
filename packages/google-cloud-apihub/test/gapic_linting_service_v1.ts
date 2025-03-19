@@ -225,7 +225,9 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.lintingServiceStub);
       client.close().then(() => {
         done();
@@ -284,7 +286,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideRequest()
       );
@@ -315,7 +317,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideRequest()
       );
@@ -362,7 +364,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideRequest()
       );
@@ -393,7 +395,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideRequest()
       );
@@ -414,7 +416,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateStyleGuideRequest()
       );
@@ -446,7 +448,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateStyleGuideRequest()
       );
@@ -494,7 +496,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateStyleGuideRequest()
       );
@@ -526,7 +528,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateStyleGuideRequest()
       );
@@ -548,7 +550,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideContentsRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideContentsRequest()
       );
@@ -627,7 +629,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideContentsRequest()
       );
@@ -661,7 +663,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetStyleGuideContentsRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LintSpecRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LintSpecRequest()
       );
@@ -763,7 +765,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LintSpecRequest()
       );
@@ -791,7 +793,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LintSpecRequest()
       );
@@ -811,7 +813,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -885,7 +887,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.LintingServiceClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -968,7 +970,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.LintingServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('api', () => {
+    describe('api', async () => {
       const fakePath = '/rendered/path/api';
       const expectedParameters = {
         project: 'projectValue',
@@ -1016,7 +1018,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1069,7 +1071,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('apiHubInstance', () => {
+    describe('apiHubInstance', async () => {
       const fakePath = '/rendered/path/apiHubInstance';
       const expectedParameters = {
         project: 'projectValue',
@@ -1080,7 +1082,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiHubInstancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1134,7 +1136,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('apiOperation', () => {
+    describe('apiOperation', async () => {
       const fakePath = '/rendered/path/apiOperation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1147,7 +1149,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiOperationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1222,7 +1224,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('attribute', () => {
+    describe('attribute', async () => {
       const fakePath = '/rendered/path/attribute';
       const expectedParameters = {
         project: 'projectValue',
@@ -1233,7 +1235,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attributePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1286,7 +1288,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('definition', () => {
+    describe('definition', async () => {
       const fakePath = '/rendered/path/definition';
       const expectedParameters = {
         project: 'projectValue',
@@ -1299,7 +1301,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.definitionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1374,7 +1376,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('dependency', () => {
+    describe('dependency', async () => {
       const fakePath = '/rendered/path/dependency';
       const expectedParameters = {
         project: 'projectValue',
@@ -1385,7 +1387,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dependencyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1438,7 +1440,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1449,7 +1451,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1502,7 +1504,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('externalApi', () => {
+    describe('externalApi', async () => {
       const fakePath = '/rendered/path/externalApi';
       const expectedParameters = {
         project: 'projectValue',
@@ -1513,7 +1515,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalApiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1566,7 +1568,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('hostProjectRegistration', () => {
+    describe('hostProjectRegistration', async () => {
       const fakePath = '/rendered/path/hostProjectRegistration';
       const expectedParameters = {
         project: 'projectValue',
@@ -1577,7 +1579,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hostProjectRegistrationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1647,7 +1649,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('plugin', () => {
+    describe('plugin', async () => {
       const fakePath = '/rendered/path/plugin';
       const expectedParameters = {
         project: 'projectValue',
@@ -1658,7 +1660,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pluginPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1711,7 +1713,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('runtimeProjectAttachment', () => {
+    describe('runtimeProjectAttachment', async () => {
       const fakePath = '/rendered/path/runtimeProjectAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1722,7 +1724,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.runtimeProjectAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1792,7 +1794,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('spec', () => {
+    describe('spec', async () => {
       const fakePath = '/rendered/path/spec';
       const expectedParameters = {
         project: 'projectValue',
@@ -1805,7 +1807,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.specPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1880,7 +1882,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('styleGuide', () => {
+    describe('styleGuide', async () => {
       const fakePath = '/rendered/path/styleGuide';
       const expectedParameters = {
         project: 'projectValue',
@@ -1891,7 +1893,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.styleGuidePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1944,7 +1946,7 @@ describe('v1.LintingServiceClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -1956,7 +1958,7 @@ describe('v1.LintingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
