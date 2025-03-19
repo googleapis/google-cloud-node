@@ -540,7 +540,9 @@ export class VpcAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -674,7 +676,9 @@ export class VpcAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -842,7 +846,9 @@ export class VpcAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1004,7 +1010,9 @@ export class VpcAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
@@ -1069,7 +1077,9 @@ export class VpcAccessServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectors stream %j', request);
     return this.descriptors.page.listConnectors.createStream(
       this.innerApiCalls.listConnectors as GaxCall,
@@ -1116,7 +1126,9 @@ export class VpcAccessServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectors iterate %j', request);
     return this.descriptors.page.listConnectors.asyncIterate(
       this.innerApiCalls['listConnectors'] as GaxCall,
@@ -1296,7 +1308,7 @@ export class VpcAccessServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

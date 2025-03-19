@@ -578,7 +578,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -721,7 +723,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -891,7 +895,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1065,7 +1071,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         'workflow.name': request.workflow!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1253,7 +1261,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workflows.v1.IListWorkflowsRequest,
@@ -1343,7 +1353,9 @@ export class WorkflowsClient {
       });
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkflows stream %j', request);
     return this.descriptors.page.listWorkflows.createStream(
       this.innerApiCalls.listWorkflows as GaxCall,
@@ -1415,7 +1427,9 @@ export class WorkflowsClient {
       });
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkflows iterate %j', request);
     return this.descriptors.page.listWorkflows.asyncIterate(
       this.innerApiCalls['listWorkflows'] as GaxCall,
@@ -1521,7 +1535,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
@@ -1590,7 +1606,9 @@ export class WorkflowsClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkflowRevisions stream %j', request);
     return this.descriptors.page.listWorkflowRevisions.createStream(
       this.innerApiCalls.listWorkflowRevisions as GaxCall,
@@ -1641,7 +1659,9 @@ export class WorkflowsClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkflowRevisions iterate %j', request);
     return this.descriptors.page.listWorkflowRevisions.asyncIterate(
       this.innerApiCalls['listWorkflowRevisions'] as GaxCall,
@@ -1821,7 +1841,7 @@ export class WorkflowsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

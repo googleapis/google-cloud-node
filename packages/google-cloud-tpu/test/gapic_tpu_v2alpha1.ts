@@ -287,7 +287,9 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.tpuStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
@@ -377,7 +379,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
@@ -424,7 +426,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
@@ -452,7 +454,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
@@ -473,7 +475,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest()
       );
@@ -504,7 +506,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest()
       );
@@ -551,7 +553,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest()
       );
@@ -582,7 +584,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetQueuedResourceRequest()
       );
@@ -603,7 +605,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
@@ -635,7 +637,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
@@ -682,7 +684,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
@@ -716,7 +718,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
@@ -740,7 +742,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
@@ -772,7 +774,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
@@ -819,7 +821,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
@@ -850,7 +852,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
@@ -871,7 +873,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
@@ -902,7 +904,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
@@ -949,7 +951,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
@@ -980,7 +982,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
@@ -1001,7 +1003,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
@@ -1132,7 +1134,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
@@ -1164,7 +1166,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
@@ -1218,7 +1220,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
@@ -1249,7 +1251,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
@@ -1282,7 +1284,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1304,7 +1306,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1322,7 +1324,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
@@ -1354,7 +1356,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
@@ -1408,7 +1410,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
@@ -1472,7 +1474,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1494,7 +1496,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1512,7 +1514,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
@@ -1544,7 +1546,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
@@ -1598,7 +1600,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
@@ -1629,7 +1631,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
@@ -1662,7 +1664,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1684,7 +1686,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1702,7 +1704,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
@@ -1734,7 +1736,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
@@ -1788,7 +1790,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
@@ -1819,7 +1821,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
@@ -1852,7 +1854,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1874,7 +1876,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1892,7 +1894,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
@@ -1925,7 +1927,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
@@ -1980,7 +1982,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
@@ -2012,7 +2014,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
@@ -2046,7 +2048,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2068,7 +2070,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2086,7 +2088,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
       );
@@ -2173,7 +2175,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
       );
@@ -2204,7 +2206,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceRequest()
       );
@@ -2237,7 +2239,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2259,7 +2261,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2280,7 +2282,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest()
       );
@@ -2313,7 +2315,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest()
       );
@@ -2367,7 +2369,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest()
       );
@@ -2398,7 +2400,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateQueuedResourceRequest()
       );
@@ -2431,7 +2433,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2453,7 +2455,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2474,7 +2476,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest()
       );
@@ -2507,7 +2509,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest()
       );
@@ -2561,7 +2563,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest()
       );
@@ -2592,7 +2594,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteQueuedResourceRequest()
       );
@@ -2625,7 +2627,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2647,7 +2649,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2668,7 +2670,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest()
       );
@@ -2701,7 +2703,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest()
       );
@@ -2755,7 +2757,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest()
       );
@@ -2786,7 +2788,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest()
       );
@@ -2819,7 +2821,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2841,7 +2843,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2862,7 +2864,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
       );
@@ -2896,7 +2898,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
       );
@@ -2950,7 +2952,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
       );
@@ -2982,7 +2984,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.PerformMaintenanceQueuedResourceRequest()
       );
@@ -3013,7 +3015,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3036,7 +3038,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3057,7 +3059,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest()
       );
@@ -3090,7 +3092,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest()
       );
@@ -3144,7 +3146,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest()
       );
@@ -3178,7 +3180,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.SimulateMaintenanceEventRequest()
       );
@@ -3211,7 +3213,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3234,7 +3236,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3255,7 +3257,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3288,7 +3290,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3337,7 +3339,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3365,7 +3367,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3416,7 +3418,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3464,7 +3466,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3506,7 +3508,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
@@ -3549,7 +3551,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3589,7 +3591,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3644,7 +3646,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3675,7 +3677,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3735,7 +3737,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3784,7 +3786,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3833,7 +3835,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListQueuedResourcesRequest()
       );
@@ -3876,7 +3878,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -3916,7 +3918,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -3971,7 +3973,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -4002,7 +4004,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -4063,7 +4065,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -4113,7 +4115,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -4162,7 +4164,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
@@ -4205,7 +4207,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4245,7 +4247,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4300,7 +4302,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4331,7 +4333,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4391,7 +4393,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4440,7 +4442,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4489,7 +4491,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
@@ -4532,7 +4534,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4571,7 +4573,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4626,7 +4628,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4657,7 +4659,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4717,7 +4719,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4766,7 +4768,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4815,7 +4817,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListReservationsRequest()
       );
@@ -4856,7 +4858,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4886,7 +4888,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4930,7 +4932,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4965,7 +4967,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5013,7 +5015,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5054,7 +5056,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -5133,7 +5135,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5213,7 +5215,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5309,8 +5311,7 @@ describe('v2alpha1.TpuClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5329,7 +5330,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5338,8 +5339,7 @@ describe('v2alpha1.TpuClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5355,7 +5355,7 @@ describe('v2alpha1.TpuClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('acceleratorType', () => {
+    describe('acceleratorType', async () => {
       const fakePath = '/rendered/path/acceleratorType';
       const expectedParameters = {
         project: 'projectValue',
@@ -5366,7 +5366,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.acceleratorTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5420,7 +5420,7 @@ describe('v2alpha1.TpuClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5430,7 +5430,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5469,7 +5469,7 @@ describe('v2alpha1.TpuClient', () => {
       });
     });
 
-    describe('node', () => {
+    describe('node', async () => {
       const fakePath = '/rendered/path/node';
       const expectedParameters = {
         project: 'projectValue',
@@ -5480,7 +5480,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nodePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5533,7 +5533,7 @@ describe('v2alpha1.TpuClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -5542,7 +5542,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5571,7 +5571,7 @@ describe('v2alpha1.TpuClient', () => {
       });
     });
 
-    describe('queuedResource', () => {
+    describe('queuedResource', async () => {
       const fakePath = '/rendered/path/queuedResource';
       const expectedParameters = {
         project: 'projectValue',
@@ -5582,7 +5582,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.queuedResourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5636,7 +5636,7 @@ describe('v2alpha1.TpuClient', () => {
       });
     });
 
-    describe('reservation', () => {
+    describe('reservation', async () => {
       const fakePath = '/rendered/path/reservation';
       const expectedParameters = {
         project: 'projectValue',
@@ -5647,7 +5647,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reservationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5700,7 +5700,7 @@ describe('v2alpha1.TpuClient', () => {
       });
     });
 
-    describe('runtimeVersion', () => {
+    describe('runtimeVersion', async () => {
       const fakePath = '/rendered/path/runtimeVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -5711,7 +5711,7 @@ describe('v2alpha1.TpuClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.runtimeVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

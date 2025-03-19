@@ -743,7 +743,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChannel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -863,7 +865,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInput request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1000,7 +1004,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1120,7 +1126,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1251,7 +1259,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1371,7 +1381,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getClip request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1488,7 +1500,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAsset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1605,7 +1619,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1756,7 +1772,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1943,7 +1961,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2145,7 +2165,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'channel.name': request.channel!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2328,7 +2350,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2511,7 +2535,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2699,7 +2725,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2881,7 +2909,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3075,7 +3105,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'input.name': request.input!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3264,7 +3296,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3447,7 +3481,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3636,7 +3672,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3818,7 +3856,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4007,7 +4047,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'pool.name': request.pool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4179,7 +4221,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.livestream.v1.IListChannelsRequest,
@@ -4254,7 +4298,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChannels stream %j', request);
     return this.descriptors.page.listChannels.createStream(
       this.innerApiCalls.listChannels as GaxCall,
@@ -4311,7 +4357,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listChannels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChannels iterate %j', request);
     return this.descriptors.page.listChannels.asyncIterate(
       this.innerApiCalls['listChannels'] as GaxCall,
@@ -4423,7 +4471,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.livestream.v1.IListInputsRequest,
@@ -4498,7 +4548,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listInputs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInputs stream %j', request);
     return this.descriptors.page.listInputs.createStream(
       this.innerApiCalls.listInputs as GaxCall,
@@ -4555,7 +4607,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listInputs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInputs iterate %j', request);
     return this.descriptors.page.listInputs.asyncIterate(
       this.innerApiCalls['listInputs'] as GaxCall,
@@ -4667,7 +4721,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.livestream.v1.IListEventsRequest,
@@ -4742,7 +4798,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvents stream %j', request);
     return this.descriptors.page.listEvents.createStream(
       this.innerApiCalls.listEvents as GaxCall,
@@ -4799,7 +4857,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvents iterate %j', request);
     return this.descriptors.page.listEvents.asyncIterate(
       this.innerApiCalls['listEvents'] as GaxCall,
@@ -4906,7 +4966,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.livestream.v1.IListClipsRequest,
@@ -4976,7 +5038,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listClips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClips stream %j', request);
     return this.descriptors.page.listClips.createStream(
       this.innerApiCalls.listClips as GaxCall,
@@ -5028,7 +5092,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listClips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClips iterate %j', request);
     return this.descriptors.page.listClips.asyncIterate(
       this.innerApiCalls['listClips'] as GaxCall,
@@ -5136,7 +5202,9 @@ export class LivestreamServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.livestream.v1.IListAssetsRequest,
@@ -5207,7 +5275,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -5260,7 +5330,9 @@ export class LivestreamServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -5440,7 +5512,7 @@ export class LivestreamServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -208,7 +208,9 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.textToSpeechStub);
       client.close().then(() => {
         done();
@@ -267,7 +269,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
@@ -284,7 +286,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
@@ -317,7 +319,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
@@ -334,7 +336,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
@@ -350,7 +352,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
@@ -367,7 +369,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
@@ -400,7 +402,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
@@ -417,7 +419,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
@@ -433,7 +435,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.StreamingSynthesizeRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.StreamingSynthesizeRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.TextToSpeechClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         project: 'projectValue',
@@ -529,7 +531,7 @@ describe('v1.TextToSpeechClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

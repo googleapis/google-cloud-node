@@ -290,7 +290,9 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.livestreamServiceStub);
       client.close().then(() => {
         done();
@@ -349,7 +351,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
@@ -380,7 +382,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
@@ -427,7 +429,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
@@ -458,7 +460,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetChannelRequest()
       );
@@ -479,7 +481,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
@@ -510,7 +512,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
@@ -557,7 +559,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
@@ -585,7 +587,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetInputRequest()
       );
@@ -606,7 +608,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
@@ -637,7 +639,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
@@ -684,7 +686,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
@@ -715,7 +717,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateEventRequest()
       );
@@ -736,7 +738,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
@@ -767,7 +769,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
@@ -814,7 +816,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
@@ -842,7 +844,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetEventRequest()
       );
@@ -863,7 +865,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
@@ -894,7 +896,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
@@ -941,7 +943,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
@@ -972,7 +974,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteEventRequest()
       );
@@ -993,7 +995,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetClipRequest()
       );
@@ -1024,7 +1026,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetClipRequest()
       );
@@ -1071,7 +1073,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetClipRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetClipRequest()
       );
@@ -1120,7 +1122,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetAssetRequest()
       );
@@ -1151,7 +1153,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetAssetRequest()
       );
@@ -1198,7 +1200,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetAssetRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetAssetRequest()
       );
@@ -1247,7 +1249,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetPoolRequest()
       );
@@ -1278,7 +1280,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetPoolRequest()
       );
@@ -1325,7 +1327,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetPoolRequest()
       );
@@ -1353,7 +1355,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.GetPoolRequest()
       );
@@ -1374,7 +1376,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
@@ -1407,7 +1409,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
@@ -1461,7 +1463,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateChannelRequest()
       );
@@ -1525,7 +1527,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1547,7 +1549,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1568,7 +1570,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
@@ -1601,7 +1603,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
@@ -1655,7 +1657,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
@@ -1686,7 +1688,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteChannelRequest()
       );
@@ -1719,7 +1721,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1741,7 +1743,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1762,7 +1764,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
@@ -1796,7 +1798,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
@@ -1851,7 +1853,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
@@ -1883,7 +1885,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateChannelRequest()
       );
@@ -1917,7 +1919,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1939,7 +1941,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1960,7 +1962,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
@@ -1992,7 +1994,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
@@ -2046,7 +2048,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
@@ -2077,7 +2079,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StartChannelRequest()
       );
@@ -2110,7 +2112,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2132,7 +2134,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2150,7 +2152,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
@@ -2182,7 +2184,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
@@ -2236,7 +2238,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
@@ -2267,7 +2269,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.StopChannelRequest()
       );
@@ -2300,7 +2302,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2322,7 +2324,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2340,7 +2342,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
@@ -2372,7 +2374,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
@@ -2426,7 +2428,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
@@ -2457,7 +2459,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateInputRequest()
       );
@@ -2490,7 +2492,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2512,7 +2514,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2530,7 +2532,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
@@ -2562,7 +2564,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
@@ -2616,7 +2618,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
@@ -2647,7 +2649,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteInputRequest()
       );
@@ -2680,7 +2682,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2702,7 +2704,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2720,7 +2722,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
@@ -2753,7 +2755,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
@@ -2808,7 +2810,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
@@ -2840,7 +2842,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdateInputRequest()
       );
@@ -2874,7 +2876,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2896,7 +2898,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2914,7 +2916,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateClipRequest()
       );
@@ -2946,7 +2948,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateClipRequest()
       );
@@ -3000,7 +3002,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateClipRequest()
       );
@@ -3031,7 +3033,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateClipRequest()
       );
@@ -3064,7 +3066,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3086,7 +3088,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3104,7 +3106,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
       );
@@ -3136,7 +3138,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
       );
@@ -3190,7 +3192,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
       );
@@ -3221,7 +3223,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
       );
@@ -3254,7 +3256,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3276,7 +3278,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3294,7 +3296,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
       );
@@ -3326,7 +3328,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
       );
@@ -3380,7 +3382,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
       );
@@ -3411,7 +3413,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.CreateAssetRequest()
       );
@@ -3444,7 +3446,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3466,7 +3468,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3484,7 +3486,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
       );
@@ -3516,7 +3518,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
       );
@@ -3570,7 +3572,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
       );
@@ -3601,7 +3603,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.DeleteAssetRequest()
       );
@@ -3634,7 +3636,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3656,7 +3658,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3674,7 +3676,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
       );
@@ -3707,7 +3709,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
       );
@@ -3762,7 +3764,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
       );
@@ -3794,7 +3796,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.UpdatePoolRequest()
       );
@@ -3828,7 +3830,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3850,7 +3852,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3868,7 +3870,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -3907,7 +3909,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -3962,7 +3964,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -3993,7 +3995,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -4053,7 +4055,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -4104,7 +4106,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -4153,7 +4155,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListChannelsRequest()
       );
@@ -4196,7 +4198,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4235,7 +4237,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4290,7 +4292,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4321,7 +4323,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4381,7 +4383,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4432,7 +4434,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4481,7 +4483,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListInputsRequest()
       );
@@ -4525,7 +4527,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4564,7 +4566,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4619,7 +4621,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4650,7 +4652,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4710,7 +4712,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4761,7 +4763,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4810,7 +4812,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListEventsRequest()
       );
@@ -4854,7 +4856,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -4893,7 +4895,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -4948,7 +4950,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -4976,7 +4978,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -5036,7 +5038,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -5087,7 +5089,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -5135,7 +5137,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListClipsRequest()
       );
@@ -5178,7 +5180,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5217,7 +5219,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5272,7 +5274,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5303,7 +5305,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5363,7 +5365,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5414,7 +5416,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5463,7 +5465,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.livestream.v1.ListAssetsRequest()
       );
@@ -5506,7 +5508,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5536,7 +5538,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5580,7 +5582,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5615,7 +5617,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5663,7 +5665,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5704,7 +5706,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -5783,7 +5785,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5863,7 +5865,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5959,8 +5961,7 @@ describe('v1.LivestreamServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5979,7 +5980,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5988,8 +5989,7 @@ describe('v1.LivestreamServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -6005,7 +6005,7 @@ describe('v1.LivestreamServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('asset', () => {
+    describe('asset', async () => {
       const fakePath = '/rendered/path/asset';
       const expectedParameters = {
         project: 'projectValue',
@@ -6016,7 +6016,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.assetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6069,7 +6069,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('channel', () => {
+    describe('channel', async () => {
       const fakePath = '/rendered/path/channel';
       const expectedParameters = {
         project: 'projectValue',
@@ -6080,7 +6080,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.channelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6133,7 +6133,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('clip', () => {
+    describe('clip', async () => {
       const fakePath = '/rendered/path/clip';
       const expectedParameters = {
         project: 'projectValue',
@@ -6145,7 +6145,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clipPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6209,7 +6209,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('event', () => {
+    describe('event', async () => {
       const fakePath = '/rendered/path/event';
       const expectedParameters = {
         project: 'projectValue',
@@ -6221,7 +6221,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.eventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6285,7 +6285,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('input', () => {
+    describe('input', async () => {
       const fakePath = '/rendered/path/input';
       const expectedParameters = {
         project: 'projectValue',
@@ -6296,7 +6296,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.inputPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6349,7 +6349,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -6359,7 +6359,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6398,7 +6398,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('pool', () => {
+    describe('pool', async () => {
       const fakePath = '/rendered/path/pool';
       const expectedParameters = {
         project: 'projectValue',
@@ -6409,7 +6409,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.poolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6462,7 +6462,7 @@ describe('v1.LivestreamServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -6471,7 +6471,7 @@ describe('v1.LivestreamServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

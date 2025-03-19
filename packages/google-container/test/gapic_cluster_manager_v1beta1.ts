@@ -253,7 +253,9 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.clusterManagerStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListClustersRequest()
       );
@@ -353,7 +355,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListClustersRequest()
       );
@@ -410,7 +412,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListClustersRequest()
       );
@@ -451,7 +453,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListClustersRequest()
       );
@@ -482,7 +484,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetClusterRequest()
       );
@@ -528,7 +530,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetClusterRequest()
       );
@@ -590,7 +592,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetClusterRequest()
       );
@@ -636,7 +638,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetClusterRequest()
       );
@@ -672,7 +674,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateClusterRequest()
       );
@@ -713,7 +715,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateClusterRequest()
       );
@@ -770,7 +772,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateClusterRequest()
       );
@@ -811,7 +813,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateClusterRequest()
       );
@@ -842,7 +844,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateClusterRequest()
       );
@@ -888,7 +890,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateClusterRequest()
       );
@@ -950,7 +952,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateClusterRequest()
       );
@@ -996,7 +998,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateClusterRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateNodePoolRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateNodePoolRequest()
       );
@@ -1150,7 +1152,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateNodePoolRequest()
       );
@@ -1201,7 +1203,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateNodePoolRequest()
       );
@@ -1242,7 +1244,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolAutoscalingRequest()
       );
@@ -1294,7 +1296,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolAutoscalingRequest()
       );
@@ -1361,7 +1363,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolAutoscalingRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolAutoscalingRequest()
       );
@@ -1459,7 +1461,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLoggingServiceRequest()
       );
@@ -1505,7 +1507,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLoggingServiceRequest()
       );
@@ -1567,7 +1569,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLoggingServiceRequest()
       );
@@ -1613,7 +1615,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLoggingServiceRequest()
       );
@@ -1649,7 +1651,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMonitoringServiceRequest()
       );
@@ -1696,7 +1698,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMonitoringServiceRequest()
       );
@@ -1758,7 +1760,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMonitoringServiceRequest()
       );
@@ -1804,7 +1806,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMonitoringServiceRequest()
       );
@@ -1840,7 +1842,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetAddonsConfigRequest()
       );
@@ -1886,7 +1888,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetAddonsConfigRequest()
       );
@@ -1948,7 +1950,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetAddonsConfigRequest()
       );
@@ -1994,7 +1996,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetAddonsConfigRequest()
       );
@@ -2031,7 +2033,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLocationsRequest()
       );
@@ -2079,7 +2081,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLocationsRequest()
       );
@@ -2143,7 +2145,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLocationsRequest()
       );
@@ -2191,7 +2193,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLocationsRequest()
       );
@@ -2228,7 +2230,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateMasterRequest()
       );
@@ -2274,7 +2276,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateMasterRequest()
       );
@@ -2336,7 +2338,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateMasterRequest()
       );
@@ -2382,7 +2384,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.UpdateMasterRequest()
       );
@@ -2418,7 +2420,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMasterAuthRequest()
       );
@@ -2464,7 +2466,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMasterAuthRequest()
       );
@@ -2526,7 +2528,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMasterAuthRequest()
       );
@@ -2572,7 +2574,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMasterAuthRequest()
       );
@@ -2608,7 +2610,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteClusterRequest()
       );
@@ -2654,7 +2656,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteClusterRequest()
       );
@@ -2716,7 +2718,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteClusterRequest()
       );
@@ -2762,7 +2764,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteClusterRequest()
       );
@@ -2798,7 +2800,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListOperationsRequest()
       );
@@ -2839,7 +2841,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListOperationsRequest()
       );
@@ -2896,7 +2898,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListOperationsRequest()
       );
@@ -2937,7 +2939,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListOperationsRequest()
       );
@@ -2968,7 +2970,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetOperationRequest()
       );
@@ -3014,7 +3016,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetOperationRequest()
       );
@@ -3076,7 +3078,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetOperationRequest()
       );
@@ -3122,7 +3124,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetOperationRequest()
       );
@@ -3158,7 +3160,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CancelOperationRequest()
       );
@@ -3204,7 +3206,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CancelOperationRequest()
       );
@@ -3266,7 +3268,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CancelOperationRequest()
       );
@@ -3312,7 +3314,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CancelOperationRequest()
       );
@@ -3348,7 +3350,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetServerConfigRequest()
       );
@@ -3389,7 +3391,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetServerConfigRequest()
       );
@@ -3446,7 +3448,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetServerConfigRequest()
       );
@@ -3487,7 +3489,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetServerConfigRequest()
       );
@@ -3518,7 +3520,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetJSONWebKeysRequest()
       );
@@ -3549,7 +3551,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetJSONWebKeysRequest()
       );
@@ -3596,7 +3598,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetJSONWebKeysRequest()
       );
@@ -3627,7 +3629,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetJSONWebKeysRequest()
       );
@@ -3648,7 +3650,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListNodePoolsRequest()
       );
@@ -3694,7 +3696,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListNodePoolsRequest()
       );
@@ -3756,7 +3758,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListNodePoolsRequest()
       );
@@ -3802,7 +3804,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListNodePoolsRequest()
       );
@@ -3838,7 +3840,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetNodePoolRequest()
       );
@@ -3889,7 +3891,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetNodePoolRequest()
       );
@@ -3956,7 +3958,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetNodePoolRequest()
       );
@@ -4007,7 +4009,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.GetNodePoolRequest()
       );
@@ -4048,7 +4050,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateNodePoolRequest()
       );
@@ -4094,7 +4096,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateNodePoolRequest()
       );
@@ -4156,7 +4158,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateNodePoolRequest()
       );
@@ -4202,7 +4204,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CreateNodePoolRequest()
       );
@@ -4238,7 +4240,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteNodePoolRequest()
       );
@@ -4289,7 +4291,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteNodePoolRequest()
       );
@@ -4356,7 +4358,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteNodePoolRequest()
       );
@@ -4407,7 +4409,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.DeleteNodePoolRequest()
       );
@@ -4448,7 +4450,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteNodePoolUpgradeRequest()
       );
@@ -4480,7 +4482,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteNodePoolUpgradeRequest()
       );
@@ -4527,7 +4529,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteNodePoolUpgradeRequest()
       );
@@ -4561,7 +4563,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteNodePoolUpgradeRequest()
       );
@@ -4585,7 +4587,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.RollbackNodePoolUpgradeRequest()
       );
@@ -4637,7 +4639,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.RollbackNodePoolUpgradeRequest()
       );
@@ -4704,7 +4706,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.RollbackNodePoolUpgradeRequest()
       );
@@ -4758,7 +4760,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.RollbackNodePoolUpgradeRequest()
       );
@@ -4802,7 +4804,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolManagementRequest()
       );
@@ -4854,7 +4856,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolManagementRequest()
       );
@@ -4921,7 +4923,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolManagementRequest()
       );
@@ -4975,7 +4977,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolManagementRequest()
       );
@@ -5019,7 +5021,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLabelsRequest()
       );
@@ -5065,7 +5067,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLabelsRequest()
       );
@@ -5127,7 +5129,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLabelsRequest()
       );
@@ -5170,7 +5172,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLabelsRequest()
       );
@@ -5206,7 +5208,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLegacyAbacRequest()
       );
@@ -5252,7 +5254,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLegacyAbacRequest()
       );
@@ -5314,7 +5316,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLegacyAbacRequest()
       );
@@ -5360,7 +5362,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetLegacyAbacRequest()
       );
@@ -5396,7 +5398,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.StartIPRotationRequest()
       );
@@ -5442,7 +5444,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.StartIPRotationRequest()
       );
@@ -5504,7 +5506,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.StartIPRotationRequest()
       );
@@ -5550,7 +5552,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.StartIPRotationRequest()
       );
@@ -5586,7 +5588,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteIPRotationRequest()
       );
@@ -5633,7 +5635,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteIPRotationRequest()
       );
@@ -5695,7 +5697,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteIPRotationRequest()
       );
@@ -5741,7 +5743,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CompleteIPRotationRequest()
       );
@@ -5777,7 +5779,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolSizeRequest()
       );
@@ -5828,7 +5830,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolSizeRequest()
       );
@@ -5895,7 +5897,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolSizeRequest()
       );
@@ -5946,7 +5948,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNodePoolSizeRequest()
       );
@@ -5987,7 +5989,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNetworkPolicyRequest()
       );
@@ -6033,7 +6035,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNetworkPolicyRequest()
       );
@@ -6095,7 +6097,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNetworkPolicyRequest()
       );
@@ -6141,7 +6143,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetNetworkPolicyRequest()
       );
@@ -6177,7 +6179,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMaintenancePolicyRequest()
       );
@@ -6224,7 +6226,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMaintenancePolicyRequest()
       );
@@ -6286,7 +6288,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMaintenancePolicyRequest()
       );
@@ -6332,7 +6334,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.SetMaintenancePolicyRequest()
       );
@@ -6368,7 +6370,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CheckAutopilotCompatibilityRequest()
       );
@@ -6400,7 +6402,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CheckAutopilotCompatibilityRequest()
       );
@@ -6447,7 +6449,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CheckAutopilotCompatibilityRequest()
       );
@@ -6481,7 +6483,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.CheckAutopilotCompatibilityRequest()
       );
@@ -6505,7 +6507,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListLocationsRequest()
       );
@@ -6536,7 +6538,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListLocationsRequest()
       );
@@ -6583,7 +6585,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListLocationsRequest()
       );
@@ -6614,7 +6616,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListLocationsRequest()
       );
@@ -6635,7 +6637,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );
@@ -6675,7 +6677,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );
@@ -6730,7 +6732,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );
@@ -6764,7 +6766,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );
@@ -6831,7 +6833,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );
@@ -6887,7 +6889,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );
@@ -6940,7 +6942,7 @@ describe('v1beta1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1beta1.ListUsableSubnetworksRequest()
       );

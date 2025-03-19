@@ -297,7 +297,9 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.artifactRegistryStub);
       client.close().then(() => {
         done();
@@ -356,7 +358,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
@@ -387,7 +389,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
@@ -434,7 +436,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
@@ -465,7 +467,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetRepositoryRequest()
       );
@@ -486,7 +488,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
@@ -518,7 +520,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
@@ -566,7 +568,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
@@ -598,7 +600,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateRepositoryRequest()
       );
@@ -620,7 +622,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
@@ -651,7 +653,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
@@ -698,7 +700,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
@@ -729,7 +731,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetPackageRequest()
       );
@@ -750,7 +752,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
@@ -781,7 +783,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
@@ -828,7 +830,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
@@ -859,7 +861,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetVersionRequest()
       );
@@ -880,7 +882,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
@@ -911,7 +913,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
@@ -958,7 +960,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
@@ -986,7 +988,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetFileRequest()
       );
@@ -1007,7 +1009,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
@@ -1038,7 +1040,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
@@ -1113,7 +1115,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetTagRequest()
       );
@@ -1134,7 +1136,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
@@ -1212,7 +1214,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
@@ -1240,7 +1242,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateTagRequest()
       );
@@ -1261,7 +1263,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
@@ -1293,7 +1295,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
@@ -1341,7 +1343,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
@@ -1370,7 +1372,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateTagRequest()
       );
@@ -1392,7 +1394,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
@@ -1423,7 +1425,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
@@ -1498,7 +1500,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteTagRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1550,7 +1552,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1597,7 +1599,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1649,7 +1651,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1680,7 +1682,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1727,7 +1729,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1758,7 +1760,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1779,7 +1781,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1811,7 +1813,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1889,7 +1891,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
@@ -1942,7 +1944,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
@@ -1989,7 +1991,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
@@ -2020,7 +2022,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.GetProjectSettingsRequest()
       );
@@ -2041,7 +2043,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
       );
@@ -2074,7 +2076,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
       );
@@ -2122,7 +2124,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
       );
@@ -2157,7 +2159,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.UpdateProjectSettingsRequest()
       );
@@ -2182,7 +2184,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
@@ -2215,7 +2217,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
@@ -2269,7 +2271,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
@@ -2300,7 +2302,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportAptArtifactsRequest()
       );
@@ -2333,7 +2335,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2355,7 +2357,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2376,7 +2378,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
@@ -2409,7 +2411,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
@@ -2463,7 +2465,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
@@ -2494,7 +2496,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ImportYumArtifactsRequest()
       );
@@ -2527,7 +2529,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2549,7 +2551,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2570,7 +2572,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
@@ -2603,7 +2605,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
@@ -2657,7 +2659,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
@@ -2688,7 +2690,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.CreateRepositoryRequest()
       );
@@ -2721,7 +2723,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2743,7 +2745,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2764,7 +2766,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
@@ -2797,7 +2799,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
@@ -2851,7 +2853,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
@@ -2882,7 +2884,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteRepositoryRequest()
       );
@@ -2915,7 +2917,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2937,7 +2939,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2958,7 +2960,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
@@ -2991,7 +2993,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
@@ -3045,7 +3047,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
@@ -3076,7 +3078,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeletePackageRequest()
       );
@@ -3109,7 +3111,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3131,7 +3133,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3152,7 +3154,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
@@ -3185,7 +3187,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
@@ -3239,7 +3241,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
@@ -3270,7 +3272,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.DeleteVersionRequest()
       );
@@ -3303,7 +3305,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3325,7 +3327,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3346,7 +3348,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3385,7 +3387,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3442,7 +3444,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3473,7 +3475,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3536,7 +3538,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3588,7 +3590,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3638,7 +3640,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest()
       );
@@ -3681,7 +3683,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -3720,7 +3722,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -3777,7 +3779,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -3808,7 +3810,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -3871,7 +3873,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -3925,7 +3927,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -3975,7 +3977,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListPackagesRequest()
       );
@@ -4018,7 +4020,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4057,7 +4059,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4114,7 +4116,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4145,7 +4147,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4208,7 +4210,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4262,7 +4264,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4312,7 +4314,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListVersionsRequest()
       );
@@ -4355,7 +4357,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4394,7 +4396,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4451,7 +4453,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4479,7 +4481,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4540,7 +4542,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4592,7 +4594,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4641,7 +4643,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListFilesRequest()
       );
@@ -4685,7 +4687,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -4724,7 +4726,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -4781,7 +4783,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -4809,7 +4811,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -4870,7 +4872,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -4922,7 +4924,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -4971,7 +4973,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.artifactregistry.v1beta2.ListTagsRequest()
       );
@@ -5014,7 +5016,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5044,7 +5046,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5088,7 +5090,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5123,7 +5125,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5171,7 +5173,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5208,7 +5210,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('aptArtifact', () => {
+    describe('aptArtifact', async () => {
       const fakePath = '/rendered/path/aptArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -5220,7 +5222,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.aptArtifactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5284,7 +5286,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
-    describe('file', () => {
+    describe('file', async () => {
       const fakePath = '/rendered/path/file';
       const expectedParameters = {
         project: 'projectValue',
@@ -5296,7 +5298,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.filePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5360,7 +5362,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
-    describe('projectSettings', () => {
+    describe('projectSettings', async () => {
       const fakePath = '/rendered/path/projectSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -5369,7 +5371,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5398,7 +5400,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
-    describe('repository', () => {
+    describe('repository', async () => {
       const fakePath = '/rendered/path/repository';
       const expectedParameters = {
         project: 'projectValue',
@@ -5409,7 +5411,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.repositoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5462,7 +5464,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
-    describe('tag', () => {
+    describe('tag', async () => {
       const fakePath = '/rendered/path/tag';
       const expectedParameters = {
         project: 'projectValue',
@@ -5475,7 +5477,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5550,7 +5552,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -5563,7 +5565,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5638,7 +5640,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
       });
     });
 
-    describe('yumArtifact', () => {
+    describe('yumArtifact', async () => {
       const fakePath = '/rendered/path/yumArtifact';
       const expectedParameters = {
         project: 'projectValue',
@@ -5650,7 +5652,7 @@ describe('v1beta2.ArtifactRegistryClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.yumArtifactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

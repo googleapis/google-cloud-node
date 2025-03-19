@@ -710,7 +710,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNode request %j', request);
     const wrappedCallback:
       | Callback<
@@ -824,7 +826,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQueuedResource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -949,7 +953,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateServiceIdentity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1068,7 +1074,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAcceleratorType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1187,7 +1195,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRuntimeVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1311,7 +1321,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGuestAttributes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1449,7 +1461,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1618,7 +1632,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1785,7 +1801,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1952,7 +1970,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2123,7 +2143,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         'node.name': request.node!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2290,7 +2312,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2464,7 +2488,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2639,7 +2665,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2806,7 +2834,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2976,7 +3006,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3154,7 +3186,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3310,7 +3344,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tpu.v2alpha1.IListNodesRequest,
@@ -3375,7 +3411,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNodes stream %j', request);
     return this.descriptors.page.listNodes.createStream(
       this.innerApiCalls.listNodes as GaxCall,
@@ -3422,7 +3460,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNodes iterate %j', request);
     return this.descriptors.page.listNodes.asyncIterate(
       this.innerApiCalls['listNodes'] as GaxCall,
@@ -3524,7 +3564,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest,
@@ -3589,7 +3631,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listQueuedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQueuedResources stream %j', request);
     return this.descriptors.page.listQueuedResources.createStream(
       this.innerApiCalls.listQueuedResources as GaxCall,
@@ -3636,7 +3680,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listQueuedResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQueuedResources iterate %j', request);
     return this.descriptors.page.listQueuedResources.asyncIterate(
       this.innerApiCalls['listQueuedResources'] as GaxCall,
@@ -3742,7 +3788,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesRequest,
@@ -3811,7 +3859,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listAcceleratorTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAcceleratorTypes stream %j', request);
     return this.descriptors.page.listAcceleratorTypes.createStream(
       this.innerApiCalls.listAcceleratorTypes as GaxCall,
@@ -3862,7 +3912,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listAcceleratorTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAcceleratorTypes iterate %j', request);
     return this.descriptors.page.listAcceleratorTypes.asyncIterate(
       this.innerApiCalls['listAcceleratorTypes'] as GaxCall,
@@ -3968,7 +4020,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsRequest,
@@ -4037,7 +4091,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeVersions stream %j', request);
     return this.descriptors.page.listRuntimeVersions.createStream(
       this.innerApiCalls.listRuntimeVersions as GaxCall,
@@ -4088,7 +4144,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeVersions iterate %j', request);
     return this.descriptors.page.listRuntimeVersions.asyncIterate(
       this.innerApiCalls['listRuntimeVersions'] as GaxCall,
@@ -4191,7 +4249,9 @@ export class TpuClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.tpu.v2alpha1.IListReservationsRequest,
@@ -4257,7 +4317,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReservations stream %j', request);
     return this.descriptors.page.listReservations.createStream(
       this.innerApiCalls.listReservations as GaxCall,
@@ -4305,7 +4367,9 @@ export class TpuClient {
       });
     const defaultCallSettings = this._defaults['listReservations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReservations iterate %j', request);
     return this.descriptors.page.listReservations.asyncIterate(
       this.innerApiCalls['listReservations'] as GaxCall,
@@ -4485,7 +4549,7 @@ export class TpuClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

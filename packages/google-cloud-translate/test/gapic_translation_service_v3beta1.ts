@@ -295,7 +295,9 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.translationServiceStub);
       client.close().then(() => {
         done();
@@ -358,7 +360,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateTextRequest()
       );
@@ -390,7 +392,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateTextRequest()
       );
@@ -438,7 +440,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateTextRequest()
       );
@@ -470,7 +472,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateTextRequest()
       );
@@ -492,7 +494,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DetectLanguageRequest()
       );
@@ -524,7 +526,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DetectLanguageRequest()
       );
@@ -572,7 +574,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DetectLanguageRequest()
       );
@@ -604,7 +606,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DetectLanguageRequest()
       );
@@ -626,7 +628,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetSupportedLanguagesRequest()
       );
@@ -659,7 +661,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetSupportedLanguagesRequest()
       );
@@ -707,7 +709,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetSupportedLanguagesRequest()
       );
@@ -742,7 +744,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetSupportedLanguagesRequest()
       );
@@ -767,7 +769,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateDocumentRequest()
       );
@@ -799,7 +801,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateDocumentRequest()
       );
@@ -847,7 +849,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateDocumentRequest()
       );
@@ -879,7 +881,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.TranslateDocumentRequest()
       );
@@ -901,7 +903,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetGlossaryRequest()
       );
@@ -933,7 +935,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetGlossaryRequest()
       );
@@ -981,7 +983,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetGlossaryRequest()
       );
@@ -1013,7 +1015,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.GetGlossaryRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateTextRequest()
       );
@@ -1069,7 +1071,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateTextRequest()
       );
@@ -1124,7 +1126,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateTextRequest()
       );
@@ -1156,7 +1158,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateTextRequest()
       );
@@ -1190,7 +1192,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1213,7 +1215,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1235,7 +1237,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateDocumentRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateDocumentRequest()
       );
@@ -1324,7 +1326,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateDocumentRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.BatchTranslateDocumentRequest()
       );
@@ -1393,7 +1395,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1416,7 +1418,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1438,7 +1440,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.CreateGlossaryRequest()
       );
@@ -1472,7 +1474,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.CreateGlossaryRequest()
       );
@@ -1527,7 +1529,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.CreateGlossaryRequest()
       );
@@ -1559,7 +1561,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.CreateGlossaryRequest()
       );
@@ -1593,7 +1595,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1616,7 +1618,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1638,7 +1640,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DeleteGlossaryRequest()
       );
@@ -1672,7 +1674,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DeleteGlossaryRequest()
       );
@@ -1727,7 +1729,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DeleteGlossaryRequest()
       );
@@ -1759,7 +1761,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.DeleteGlossaryRequest()
       );
@@ -1793,7 +1795,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1816,7 +1818,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1838,7 +1840,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -1878,7 +1880,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -1934,7 +1936,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -1966,7 +1968,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -2028,7 +2030,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -2079,7 +2081,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -2129,7 +2131,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.translation.v3beta1.ListGlossariesRequest()
       );
@@ -2167,7 +2169,7 @@ describe('v3beta1.TranslationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('glossary', () => {
+    describe('glossary', async () => {
       const fakePath = '/rendered/path/glossary';
       const expectedParameters = {
         project: 'projectValue',
@@ -2179,7 +2181,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.glossaryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2232,7 +2234,7 @@ describe('v3beta1.TranslationServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2243,7 +2245,7 @@ describe('v3beta1.TranslationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

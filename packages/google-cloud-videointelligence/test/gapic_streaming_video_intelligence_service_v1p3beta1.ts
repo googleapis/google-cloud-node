@@ -215,7 +215,9 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.streamingVideoIntelligenceServiceStub);
       client.close().then(() => {
         done();
@@ -289,7 +291,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest()
       );
@@ -337,7 +339,7 @@ describe('v1p3beta1.StreamingVideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest()
       );

@@ -790,7 +790,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDockerImage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -915,7 +917,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMavenArtifact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1040,7 +1044,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNpmPackage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1165,7 +1171,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPythonPackage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1290,7 +1298,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1419,7 +1429,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'repository.name': request.repository!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1538,7 +1550,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPackage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1659,7 +1673,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1788,7 +1804,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'version.name': request.version!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1907,7 +1925,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2030,7 +2050,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'file.name': request.file!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2149,7 +2171,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2269,7 +2293,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2392,7 +2418,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'tag.name': request.tag!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2511,7 +2539,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2634,7 +2664,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2753,7 +2785,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2876,7 +2910,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'rule.name': request.rule!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2995,7 +3031,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3118,7 +3156,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3228,7 +3268,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3340,7 +3382,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3460,7 +3504,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProjectSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3587,7 +3633,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'project_settings.name': request.projectSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProjectSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3712,7 +3760,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVPCSCConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3839,7 +3889,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'vpcsc_config.name': request.vpcscConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateVPCSCConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3968,7 +4020,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'package.name': request.package!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePackage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4093,7 +4147,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4230,7 +4286,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4402,7 +4460,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4575,7 +4635,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4744,7 +4806,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4912,7 +4976,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5083,7 +5149,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5256,7 +5324,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5425,7 +5495,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5598,7 +5670,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5767,7 +5841,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5932,7 +6008,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListDockerImagesRequest,
@@ -6000,7 +6078,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listDockerImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDockerImages stream %j', request);
     return this.descriptors.page.listDockerImages.createStream(
       this.innerApiCalls.listDockerImages as GaxCall,
@@ -6050,7 +6130,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listDockerImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDockerImages iterate %j', request);
     return this.descriptors.page.listDockerImages.asyncIterate(
       this.innerApiCalls['listDockerImages'] as GaxCall,
@@ -6153,7 +6235,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListMavenArtifactsRequest,
@@ -6219,7 +6303,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listMavenArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMavenArtifacts stream %j', request);
     return this.descriptors.page.listMavenArtifacts.createStream(
       this.innerApiCalls.listMavenArtifacts as GaxCall,
@@ -6267,7 +6353,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listMavenArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMavenArtifacts iterate %j', request);
     return this.descriptors.page.listMavenArtifacts.asyncIterate(
       this.innerApiCalls['listMavenArtifacts'] as GaxCall,
@@ -6370,7 +6458,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListNpmPackagesRequest,
@@ -6436,7 +6526,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listNpmPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNpmPackages stream %j', request);
     return this.descriptors.page.listNpmPackages.createStream(
       this.innerApiCalls.listNpmPackages as GaxCall,
@@ -6484,7 +6576,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listNpmPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNpmPackages iterate %j', request);
     return this.descriptors.page.listNpmPackages.asyncIterate(
       this.innerApiCalls['listNpmPackages'] as GaxCall,
@@ -6587,7 +6681,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListPythonPackagesRequest,
@@ -6653,7 +6749,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listPythonPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPythonPackages stream %j', request);
     return this.descriptors.page.listPythonPackages.createStream(
       this.innerApiCalls.listPythonPackages as GaxCall,
@@ -6701,7 +6799,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listPythonPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPythonPackages iterate %j', request);
     return this.descriptors.page.listPythonPackages.asyncIterate(
       this.innerApiCalls['listPythonPackages'] as GaxCall,
@@ -6826,7 +6926,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListRepositoriesRequest,
@@ -6914,7 +7016,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
@@ -6984,7 +7088,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
@@ -7134,7 +7240,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListPackagesRequest,
@@ -7247,7 +7355,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPackages stream %j', request);
     return this.descriptors.page.listPackages.createStream(
       this.innerApiCalls.listPackages as GaxCall,
@@ -7342,7 +7452,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listPackages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPackages iterate %j', request);
     return this.descriptors.page.listPackages.asyncIterate(
       this.innerApiCalls['listPackages'] as GaxCall,
@@ -7494,7 +7606,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListVersionsRequest,
@@ -7609,7 +7723,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
@@ -7706,7 +7822,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,
@@ -7862,7 +7980,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListFilesRequest,
@@ -7981,7 +8101,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
@@ -8082,7 +8204,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,
@@ -8214,7 +8338,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListTagsRequest,
@@ -8309,7 +8435,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTags stream %j', request);
     return this.descriptors.page.listTags.createStream(
       this.innerApiCalls.listTags as GaxCall,
@@ -8386,7 +8514,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTags iterate %j', request);
     return this.descriptors.page.listTags.asyncIterate(
       this.innerApiCalls['listTags'] as GaxCall,
@@ -8490,7 +8620,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListRulesRequest,
@@ -8557,7 +8689,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRules stream %j', request);
     return this.descriptors.page.listRules.createStream(
       this.innerApiCalls.listRules as GaxCall,
@@ -8606,7 +8740,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRules iterate %j', request);
     return this.descriptors.page.listRules.asyncIterate(
       this.innerApiCalls['listRules'] as GaxCall,
@@ -8715,7 +8851,9 @@ export class ArtifactRegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.artifactregistry.v1.IListAttachmentsRequest,
@@ -8787,7 +8925,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttachments stream %j', request);
     return this.descriptors.page.listAttachments.createStream(
       this.innerApiCalls.listAttachments as GaxCall,
@@ -8841,7 +8981,9 @@ export class ArtifactRegistryClient {
       });
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttachments iterate %j', request);
     return this.descriptors.page.listAttachments.asyncIterate(
       this.innerApiCalls['listAttachments'] as GaxCall,
@@ -9021,7 +9163,7 @@ export class ArtifactRegistryClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

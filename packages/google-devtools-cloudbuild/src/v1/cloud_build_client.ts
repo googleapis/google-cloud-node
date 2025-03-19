@@ -685,7 +685,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBuild request %j', request);
     const wrappedCallback:
       | Callback<
@@ -819,7 +821,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelBuild request %j', request);
     const wrappedCallback:
       | Callback<
@@ -959,7 +963,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1098,7 +1104,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1243,7 +1251,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1391,7 +1401,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBuildTrigger request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1528,7 +1540,9 @@ export class CloudBuildClient {
         trigger: request.trigger ?? '',
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('receiveTriggerWebhook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1663,7 +1677,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkerPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1815,7 +1831,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2026,7 +2044,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2214,7 +2234,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2408,7 +2430,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2598,7 +2622,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2791,7 +2817,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2981,7 +3009,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3170,7 +3200,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
@@ -3259,7 +3291,9 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBuilds stream %j', request);
     return this.descriptors.page.listBuilds.createStream(
       this.innerApiCalls.listBuilds as GaxCall,
@@ -3330,7 +3364,9 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBuilds iterate %j', request);
     return this.descriptors.page.listBuilds.asyncIterate(
       this.innerApiCalls['listBuilds'] as GaxCall,
@@ -3448,7 +3484,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
@@ -3527,7 +3565,9 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBuildTriggers stream %j', request);
     return this.descriptors.page.listBuildTriggers.createStream(
       this.innerApiCalls.listBuildTriggers as GaxCall,
@@ -3588,7 +3628,9 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBuildTriggers iterate %j', request);
     return this.descriptors.page.listBuildTriggers.asyncIterate(
       this.innerApiCalls['listBuildTriggers'] as GaxCall,
@@ -3704,7 +3746,9 @@ export class CloudBuildClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
@@ -3783,7 +3827,9 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkerPools stream %j', request);
     return this.descriptors.page.listWorkerPools.createStream(
       this.innerApiCalls.listWorkerPools as GaxCall,
@@ -3844,7 +3890,9 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkerPools iterate %j', request);
     return this.descriptors.page.listWorkerPools.asyncIterate(
       this.innerApiCalls['listWorkerPools'] as GaxCall,

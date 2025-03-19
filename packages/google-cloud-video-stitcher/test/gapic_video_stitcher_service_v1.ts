@@ -298,7 +298,9 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.videoStitcherServiceStub);
       client.close().then(() => {
         done();
@@ -361,7 +363,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
@@ -393,7 +395,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetCdnKeyRequest()
       );
@@ -492,7 +494,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
@@ -524,7 +526,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
@@ -604,7 +606,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodSessionRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
@@ -658,7 +660,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
@@ -706,7 +708,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodSessionRequest()
       );
@@ -760,7 +762,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
@@ -873,7 +875,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodStitchDetailRequest()
       );
@@ -895,7 +897,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
@@ -975,7 +977,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
@@ -1007,7 +1009,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodAdTagDetailRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
@@ -1062,7 +1064,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
@@ -1110,7 +1112,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
@@ -1142,7 +1144,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveAdTagDetailRequest()
       );
@@ -1164,7 +1166,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
@@ -1196,7 +1198,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
@@ -1244,7 +1246,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
@@ -1273,7 +1275,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetSlateRequest()
       );
@@ -1295,7 +1297,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
@@ -1375,7 +1377,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
@@ -1407,7 +1409,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveSessionRequest()
       );
@@ -1429,7 +1431,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
@@ -1461,7 +1463,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
@@ -1509,7 +1511,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveSessionRequest()
       );
@@ -1563,7 +1565,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
       );
@@ -1595,7 +1597,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
       );
@@ -1643,7 +1645,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
       );
@@ -1675,7 +1677,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetLiveConfigRequest()
       );
@@ -1697,7 +1699,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
       );
@@ -1729,7 +1731,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
       );
@@ -1777,7 +1779,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
       );
@@ -1809,7 +1811,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.GetVodConfigRequest()
       );
@@ -1831,7 +1833,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
@@ -1864,7 +1866,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
@@ -1919,7 +1921,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
@@ -1951,7 +1953,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateCdnKeyRequest()
       );
@@ -1985,7 +1987,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2008,7 +2010,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2027,7 +2029,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
@@ -2060,7 +2062,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
@@ -2115,7 +2117,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
@@ -2147,7 +2149,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteCdnKeyRequest()
       );
@@ -2181,7 +2183,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2204,7 +2206,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2223,7 +2225,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
@@ -2257,7 +2259,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
@@ -2313,7 +2315,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
@@ -2346,7 +2348,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateCdnKeyRequest()
       );
@@ -2381,7 +2383,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2404,7 +2406,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2423,7 +2425,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
@@ -2456,7 +2458,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
@@ -2511,7 +2513,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
@@ -2543,7 +2545,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateSlateRequest()
       );
@@ -2577,7 +2579,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2600,7 +2602,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2619,7 +2621,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
@@ -2653,7 +2655,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
@@ -2709,7 +2711,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
@@ -2742,7 +2744,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateSlateRequest()
       );
@@ -2777,7 +2779,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2800,7 +2802,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2819,7 +2821,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
@@ -2852,7 +2854,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
@@ -2907,7 +2909,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
@@ -2939,7 +2941,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteSlateRequest()
       );
@@ -2973,7 +2975,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2996,7 +2998,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3015,7 +3017,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
       );
@@ -3049,7 +3051,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
       );
@@ -3104,7 +3106,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
       );
@@ -3136,7 +3138,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateLiveConfigRequest()
       );
@@ -3170,7 +3172,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3193,7 +3195,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3215,7 +3217,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
       );
@@ -3249,7 +3251,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
       );
@@ -3304,7 +3306,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
       );
@@ -3336,7 +3338,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteLiveConfigRequest()
       );
@@ -3370,7 +3372,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3393,7 +3395,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3415,7 +3417,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
       );
@@ -3450,7 +3452,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
       );
@@ -3506,7 +3508,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
       );
@@ -3539,7 +3541,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateLiveConfigRequest()
       );
@@ -3574,7 +3576,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3597,7 +3599,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3619,7 +3621,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
       );
@@ -3653,7 +3655,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
       );
@@ -3708,7 +3710,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
       );
@@ -3740,7 +3742,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.CreateVodConfigRequest()
       );
@@ -3774,7 +3776,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3797,7 +3799,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3819,7 +3821,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
       );
@@ -3853,7 +3855,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
       );
@@ -3908,7 +3910,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
       );
@@ -3940,7 +3942,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.DeleteVodConfigRequest()
       );
@@ -3974,7 +3976,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3997,7 +3999,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4019,7 +4021,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
       );
@@ -4054,7 +4056,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
       );
@@ -4110,7 +4112,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
       );
@@ -4143,7 +4145,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.UpdateVodConfigRequest()
       );
@@ -4178,7 +4180,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4201,7 +4203,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4223,7 +4225,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4263,7 +4265,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4319,7 +4321,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4351,7 +4353,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4412,7 +4414,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4464,7 +4466,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4514,7 +4516,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListCdnKeysRequest()
       );
@@ -4559,7 +4561,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4600,7 +4602,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4658,7 +4660,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4690,7 +4692,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4752,7 +4754,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4803,7 +4805,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4854,7 +4856,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodStitchDetailsRequest()
       );
@@ -4898,7 +4900,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -4939,7 +4941,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -4997,7 +4999,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -5029,7 +5031,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -5091,7 +5093,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -5142,7 +5144,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -5193,7 +5195,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodAdTagDetailsRequest()
       );
@@ -5237,7 +5239,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5278,7 +5280,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5336,7 +5338,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5368,7 +5370,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5430,7 +5432,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5481,7 +5483,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5532,7 +5534,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveAdTagDetailsRequest()
       );
@@ -5576,7 +5578,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5616,7 +5618,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5672,7 +5674,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5704,7 +5706,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5765,7 +5767,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5817,7 +5819,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5867,7 +5869,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListSlatesRequest()
       );
@@ -5912,7 +5914,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -5952,7 +5954,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -6008,7 +6010,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -6040,7 +6042,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -6102,7 +6104,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -6153,7 +6155,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -6203,7 +6205,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListLiveConfigsRequest()
       );
@@ -6247,7 +6249,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6287,7 +6289,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6343,7 +6345,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6375,7 +6377,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6436,7 +6438,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6486,7 +6488,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6536,7 +6538,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.video.stitcher.v1.ListVodConfigsRequest()
       );
@@ -6579,7 +6581,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -6661,7 +6663,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -6744,7 +6746,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -6843,8 +6845,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -6864,7 +6865,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -6873,8 +6874,7 @@ describe('v1.VideoStitcherServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -6890,7 +6890,7 @@ describe('v1.VideoStitcherServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cdnKey', () => {
+    describe('cdnKey', async () => {
       const fakePath = '/rendered/path/cdnKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -6902,7 +6902,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cdnKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6955,7 +6955,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('liveAdTagDetail', () => {
+    describe('liveAdTagDetail', async () => {
       const fakePath = '/rendered/path/liveAdTagDetail';
       const expectedParameters = {
         project: 'projectValue',
@@ -6968,7 +6968,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.liveAdTagDetailPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7033,7 +7033,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('liveConfig', () => {
+    describe('liveConfig', async () => {
       const fakePath = '/rendered/path/liveConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -7045,7 +7045,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.liveConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7098,7 +7098,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('liveSession', () => {
+    describe('liveSession', async () => {
       const fakePath = '/rendered/path/liveSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -7110,7 +7110,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.liveSessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7163,7 +7163,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -7174,7 +7174,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7213,7 +7213,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7223,7 +7223,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7252,7 +7252,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('slate', () => {
+    describe('slate', async () => {
       const fakePath = '/rendered/path/slate';
       const expectedParameters = {
         project: 'projectValue',
@@ -7264,7 +7264,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.slatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7317,7 +7317,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('vodAdTagDetail', () => {
+    describe('vodAdTagDetail', async () => {
       const fakePath = '/rendered/path/vodAdTagDetail';
       const expectedParameters = {
         project: 'projectValue',
@@ -7330,7 +7330,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vodAdTagDetailPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7395,7 +7395,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('vodConfig', () => {
+    describe('vodConfig', async () => {
       const fakePath = '/rendered/path/vodConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -7407,7 +7407,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vodConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7460,7 +7460,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('vodSession', () => {
+    describe('vodSession', async () => {
       const fakePath = '/rendered/path/vodSession';
       const expectedParameters = {
         project: 'projectValue',
@@ -7472,7 +7472,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vodSessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7525,7 +7525,7 @@ describe('v1.VideoStitcherServiceClient', () => {
       });
     });
 
-    describe('vodStitchDetail', () => {
+    describe('vodStitchDetail', async () => {
       const fakePath = '/rendered/path/vodStitchDetail';
       const expectedParameters = {
         project: 'projectValue',
@@ -7538,7 +7538,7 @@ describe('v1.VideoStitcherServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vodStitchDetailPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

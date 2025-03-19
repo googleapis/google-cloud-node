@@ -484,7 +484,9 @@ export class MetricsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJobMetrics request %j', request);
     const wrappedCallback:
       | Callback<
@@ -616,7 +618,9 @@ export class MetricsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.dataflow.v1beta3.IGetJobExecutionDetailsRequest,
@@ -693,7 +697,9 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJobExecutionDetails stream %j', request);
     return this.descriptors.page.getJobExecutionDetails.createStream(
       this.innerApiCalls.getJobExecutionDetails as GaxCall,
@@ -752,7 +758,9 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getJobExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJobExecutionDetails iterate %j', request);
     return this.descriptors.page.getJobExecutionDetails.asyncIterate(
       this.innerApiCalls['getJobExecutionDetails'] as GaxCall,
@@ -870,7 +878,9 @@ export class MetricsV1Beta3Client {
         job_id: request.jobId ?? '',
         stage_id: request.stageId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.dataflow.v1beta3.IGetStageExecutionDetailsRequest,
@@ -954,7 +964,9 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStageExecutionDetails stream %j', request);
     return this.descriptors.page.getStageExecutionDetails.createStream(
       this.innerApiCalls.getStageExecutionDetails as GaxCall,
@@ -1020,7 +1032,9 @@ export class MetricsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['getStageExecutionDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStageExecutionDetails iterate %j', request);
     return this.descriptors.page.getStageExecutionDetails.asyncIterate(
       this.innerApiCalls['getStageExecutionDetails'] as GaxCall,

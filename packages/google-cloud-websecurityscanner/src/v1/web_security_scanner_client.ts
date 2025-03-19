@@ -509,7 +509,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -635,7 +637,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -761,7 +765,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -892,7 +898,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         'scan_config.name': request.scanConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateScanConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1018,7 +1026,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startScanRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1139,7 +1149,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getScanRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1260,7 +1272,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopScanRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1381,7 +1395,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFinding request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1508,7 +1524,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFindingTypeStats request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1640,7 +1658,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.websecurityscanner.v1.IListScanConfigsRequest,
@@ -1710,7 +1730,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listScanConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listScanConfigs stream %j', request);
     return this.descriptors.page.listScanConfigs.createStream(
       this.innerApiCalls.listScanConfigs as GaxCall,
@@ -1762,7 +1784,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listScanConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listScanConfigs iterate %j', request);
     return this.descriptors.page.listScanConfigs.asyncIterate(
       this.innerApiCalls['listScanConfigs'] as GaxCall,
@@ -1870,7 +1894,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.websecurityscanner.v1.IListScanRunsRequest,
@@ -1940,7 +1966,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listScanRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listScanRuns stream %j', request);
     return this.descriptors.page.listScanRuns.createStream(
       this.innerApiCalls.listScanRuns as GaxCall,
@@ -1992,7 +2020,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listScanRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listScanRuns iterate %j', request);
     return this.descriptors.page.listScanRuns.asyncIterate(
       this.innerApiCalls['listScanRuns'] as GaxCall,
@@ -2100,7 +2130,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.websecurityscanner.v1.IListCrawledUrlsRequest,
@@ -2171,7 +2203,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listCrawledUrls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCrawledUrls stream %j', request);
     return this.descriptors.page.listCrawledUrls.createStream(
       this.innerApiCalls.listCrawledUrls as GaxCall,
@@ -2224,7 +2258,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listCrawledUrls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCrawledUrls iterate %j', request);
     return this.descriptors.page.listCrawledUrls.asyncIterate(
       this.innerApiCalls['listCrawledUrls'] as GaxCall,
@@ -2337,7 +2373,9 @@ export class WebSecurityScannerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.websecurityscanner.v1.IListFindingsRequest,
@@ -2413,7 +2451,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
@@ -2471,7 +2511,9 @@ export class WebSecurityScannerClient {
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,

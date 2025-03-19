@@ -253,7 +253,9 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.metricsV1Beta3Stub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -353,7 +355,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -410,7 +412,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -451,7 +453,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
@@ -482,7 +484,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -532,7 +534,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -597,7 +599,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -641,7 +643,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -717,7 +719,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -782,7 +784,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -845,7 +847,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
@@ -901,7 +903,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -956,7 +958,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1026,7 +1028,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1075,7 +1077,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1156,7 +1158,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
@@ -1294,7 +1296,7 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
