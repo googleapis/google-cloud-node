@@ -1,0 +1,141 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.parametermanager.v1",
+  "libraryPackage": "@google-cloud/parametermanager",
+  "services": {
+    "ParameterManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ParameterManagerClient",
+          "rpcs": {
+            "GetParameter": {
+              "methods": [
+                "getParameter"
+              ]
+            },
+            "CreateParameter": {
+              "methods": [
+                "createParameter"
+              ]
+            },
+            "UpdateParameter": {
+              "methods": [
+                "updateParameter"
+              ]
+            },
+            "DeleteParameter": {
+              "methods": [
+                "deleteParameter"
+              ]
+            },
+            "GetParameterVersion": {
+              "methods": [
+                "getParameterVersion"
+              ]
+            },
+            "RenderParameterVersion": {
+              "methods": [
+                "renderParameterVersion"
+              ]
+            },
+            "CreateParameterVersion": {
+              "methods": [
+                "createParameterVersion"
+              ]
+            },
+            "UpdateParameterVersion": {
+              "methods": [
+                "updateParameterVersion"
+              ]
+            },
+            "DeleteParameterVersion": {
+              "methods": [
+                "deleteParameterVersion"
+              ]
+            },
+            "ListParameters": {
+              "methods": [
+                "listParameters",
+                "listParametersStream",
+                "listParametersAsync"
+              ]
+            },
+            "ListParameterVersions": {
+              "methods": [
+                "listParameterVersions",
+                "listParameterVersionsStream",
+                "listParameterVersionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ParameterManagerClient",
+          "rpcs": {
+            "GetParameter": {
+              "methods": [
+                "getParameter"
+              ]
+            },
+            "CreateParameter": {
+              "methods": [
+                "createParameter"
+              ]
+            },
+            "UpdateParameter": {
+              "methods": [
+                "updateParameter"
+              ]
+            },
+            "DeleteParameter": {
+              "methods": [
+                "deleteParameter"
+              ]
+            },
+            "GetParameterVersion": {
+              "methods": [
+                "getParameterVersion"
+              ]
+            },
+            "RenderParameterVersion": {
+              "methods": [
+                "renderParameterVersion"
+              ]
+            },
+            "CreateParameterVersion": {
+              "methods": [
+                "createParameterVersion"
+              ]
+            },
+            "UpdateParameterVersion": {
+              "methods": [
+                "updateParameterVersion"
+              ]
+            },
+            "DeleteParameterVersion": {
+              "methods": [
+                "deleteParameterVersion"
+              ]
+            },
+            "ListParameters": {
+              "methods": [
+                "listParameters",
+                "listParametersStream",
+                "listParametersAsync"
+              ]
+            },
+            "ListParameterVersions": {
+              "methods": [
+                "listParameterVersions",
+                "listParameterVersionsStream",
+                "listParameterVersionsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
