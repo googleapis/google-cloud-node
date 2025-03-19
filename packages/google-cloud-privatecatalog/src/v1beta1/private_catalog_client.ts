@@ -527,7 +527,9 @@ export class PrivateCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest,
@@ -601,7 +603,9 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchCatalogs stream %j', request);
     return this.descriptors.page.searchCatalogs.createStream(
       this.innerApiCalls.searchCatalogs as GaxCall,
@@ -657,7 +661,9 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchCatalogs iterate %j', request);
     return this.descriptors.page.searchCatalogs.asyncIterate(
       this.innerApiCalls['searchCatalogs'] as GaxCall,
@@ -770,7 +776,9 @@ export class PrivateCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest,
@@ -845,7 +853,9 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchProducts stream %j', request);
     return this.descriptors.page.searchProducts.createStream(
       this.innerApiCalls.searchProducts as GaxCall,
@@ -902,7 +912,9 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchProducts iterate %j', request);
     return this.descriptors.page.searchProducts.asyncIterate(
       this.innerApiCalls['searchProducts'] as GaxCall,
@@ -1015,7 +1027,9 @@ export class PrivateCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest,
@@ -1090,7 +1104,9 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchVersions stream %j', request);
     return this.descriptors.page.searchVersions.createStream(
       this.innerApiCalls.searchVersions as GaxCall,
@@ -1147,7 +1163,9 @@ export class PrivateCatalogClient {
       });
     const defaultCallSettings = this._defaults['searchVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchVersions iterate %j', request);
     return this.descriptors.page.searchVersions.asyncIterate(
       this.innerApiCalls['searchVersions'] as GaxCall,

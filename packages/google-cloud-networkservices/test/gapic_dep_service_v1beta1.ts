@@ -287,7 +287,9 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.depServiceStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbTrafficExtensionRequest()
       );
@@ -378,7 +380,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbTrafficExtensionRequest()
       );
@@ -425,7 +427,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbTrafficExtensionRequest()
       );
@@ -459,7 +461,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbTrafficExtensionRequest()
       );
@@ -483,7 +485,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbRouteExtensionRequest()
       );
@@ -515,7 +517,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbRouteExtensionRequest()
       );
@@ -562,7 +564,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbRouteExtensionRequest()
       );
@@ -593,7 +595,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetLbRouteExtensionRequest()
       );
@@ -614,7 +616,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbTrafficExtensionRequest()
       );
@@ -647,7 +649,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbTrafficExtensionRequest()
       );
@@ -701,7 +703,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbTrafficExtensionRequest()
       );
@@ -735,7 +737,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbTrafficExtensionRequest()
       );
@@ -768,7 +770,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -791,7 +793,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -812,7 +814,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbTrafficExtensionRequest()
       );
@@ -846,7 +848,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbTrafficExtensionRequest()
       );
@@ -901,7 +903,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbTrafficExtensionRequest()
       );
@@ -936,7 +938,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbTrafficExtensionRequest()
       );
@@ -970,7 +972,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -993,7 +995,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1014,7 +1016,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbTrafficExtensionRequest()
       );
@@ -1047,7 +1049,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbTrafficExtensionRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbTrafficExtensionRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbTrafficExtensionRequest()
       );
@@ -1168,7 +1170,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1191,7 +1193,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1212,7 +1214,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbRouteExtensionRequest()
       );
@@ -1245,7 +1247,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbRouteExtensionRequest()
       );
@@ -1299,7 +1301,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbRouteExtensionRequest()
       );
@@ -1333,7 +1335,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateLbRouteExtensionRequest()
       );
@@ -1366,7 +1368,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1388,7 +1390,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1409,7 +1411,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbRouteExtensionRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbRouteExtensionRequest()
       );
@@ -1498,7 +1500,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbRouteExtensionRequest()
       );
@@ -1533,7 +1535,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateLbRouteExtensionRequest()
       );
@@ -1567,7 +1569,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1589,7 +1591,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1610,7 +1612,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbRouteExtensionRequest()
       );
@@ -1643,7 +1645,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbRouteExtensionRequest()
       );
@@ -1697,7 +1699,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbRouteExtensionRequest()
       );
@@ -1731,7 +1733,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteLbRouteExtensionRequest()
       );
@@ -1764,7 +1766,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1786,7 +1788,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1807,7 +1809,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -1847,7 +1849,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -1904,7 +1906,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -1938,7 +1940,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -2007,7 +2009,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -2065,7 +2067,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbTrafficExtensionsRequest()
       );
@@ -2166,7 +2168,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2206,7 +2208,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2263,7 +2265,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2297,7 +2299,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2366,7 +2368,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2424,7 +2426,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2478,7 +2480,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListLbRouteExtensionsRequest()
       );
@@ -2520,7 +2522,7 @@ describe('v1beta1.DepServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('endpointPolicy', () => {
+    describe('endpointPolicy', async () => {
       const fakePath = '/rendered/path/endpointPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -2531,7 +2533,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.endpointPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2585,7 +2587,7 @@ describe('v1beta1.DepServiceClient', () => {
       });
     });
 
-    describe('lbRouteExtension', () => {
+    describe('lbRouteExtension', async () => {
       const fakePath = '/rendered/path/lbRouteExtension';
       const expectedParameters = {
         project: 'projectValue',
@@ -2596,7 +2598,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lbRouteExtensionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2653,7 +2655,7 @@ describe('v1beta1.DepServiceClient', () => {
       });
     });
 
-    describe('lbTrafficExtension', () => {
+    describe('lbTrafficExtension', async () => {
       const fakePath = '/rendered/path/lbTrafficExtension';
       const expectedParameters = {
         project: 'projectValue',
@@ -2664,7 +2666,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lbTrafficExtensionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2730,7 +2732,7 @@ describe('v1beta1.DepServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2740,7 +2742,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2779,7 +2781,7 @@ describe('v1beta1.DepServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2788,7 +2790,7 @@ describe('v1beta1.DepServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

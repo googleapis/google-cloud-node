@@ -189,7 +189,9 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.osLoginServiceStub);
       client.close().then(() => {
         done();
@@ -248,7 +250,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
       );
@@ -280,7 +282,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
       );
@@ -327,7 +329,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.CreateSshPublicKeyRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
       );
@@ -411,7 +413,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
       );
@@ -458,7 +460,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
       );
@@ -489,7 +491,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeletePosixAccountRequest()
       );
@@ -510,7 +512,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
       );
@@ -542,7 +544,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
       );
@@ -620,7 +622,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.DeleteSshPublicKeyRequest()
       );
@@ -641,7 +643,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
       );
@@ -672,7 +674,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
       );
@@ -719,7 +721,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
       );
@@ -750,7 +752,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetLoginProfileRequest()
       );
@@ -771,7 +773,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
       );
@@ -802,7 +804,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
       );
@@ -849,7 +851,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
       );
@@ -880,7 +882,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.GetSshPublicKeyRequest()
       );
@@ -901,7 +903,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
       );
@@ -980,7 +982,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
       );
@@ -1011,7 +1013,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.ImportSshPublicKeyRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
       );
@@ -1064,7 +1066,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
       );
@@ -1142,7 +1144,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1.UpdateSshPublicKeyRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.OsLoginServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('posixAccount', () => {
+    describe('posixAccount', async () => {
       const fakePath = '/rendered/path/posixAccount';
       const expectedParameters = {
         user: 'userValue',
@@ -1168,7 +1170,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.posixAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1207,7 +1209,7 @@ describe('v1.OsLoginServiceClient', () => {
       });
     });
 
-    describe('sshPublicKey', () => {
+    describe('sshPublicKey', async () => {
       const fakePath = '/rendered/path/sshPublicKey';
       const expectedParameters = {
         user: 'userValue',
@@ -1217,7 +1219,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sshPublicKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1256,7 +1258,7 @@ describe('v1.OsLoginServiceClient', () => {
       });
     });
 
-    describe('user', () => {
+    describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
         user: 'userValue',
@@ -1265,7 +1267,7 @@ describe('v1.OsLoginServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

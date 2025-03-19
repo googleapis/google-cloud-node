@@ -289,7 +289,9 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.networkServicesStub);
       client.close().then(() => {
         done();
@@ -348,7 +350,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetEndpointPolicyRequest()
       );
@@ -379,7 +381,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetEndpointPolicyRequest()
       );
@@ -426,7 +428,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetEndpointPolicyRequest()
       );
@@ -457,7 +459,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.GetEndpointPolicyRequest()
       );
@@ -478,7 +480,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateEndpointPolicyRequest()
       );
@@ -511,7 +513,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateEndpointPolicyRequest()
       );
@@ -565,7 +567,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateEndpointPolicyRequest()
       );
@@ -596,7 +598,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.CreateEndpointPolicyRequest()
       );
@@ -629,7 +631,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -651,7 +653,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -672,7 +674,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateEndpointPolicyRequest()
       );
@@ -706,7 +708,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateEndpointPolicyRequest()
       );
@@ -761,7 +763,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateEndpointPolicyRequest()
       );
@@ -793,7 +795,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.UpdateEndpointPolicyRequest()
       );
@@ -827,7 +829,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -849,7 +851,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -870,7 +872,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteEndpointPolicyRequest()
       );
@@ -903,7 +905,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteEndpointPolicyRequest()
       );
@@ -957,7 +959,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteEndpointPolicyRequest()
       );
@@ -988,7 +990,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.DeleteEndpointPolicyRequest()
       );
@@ -1021,7 +1023,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1043,7 +1045,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1064,7 +1066,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1104,7 +1106,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1161,7 +1163,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1192,7 +1194,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1255,7 +1257,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1357,7 +1359,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networkservices.v1beta1.ListEndpointPoliciesRequest()
       );
@@ -1395,7 +1397,7 @@ describe('v1beta1.NetworkServicesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('endpointPolicy', () => {
+    describe('endpointPolicy', async () => {
       const fakePath = '/rendered/path/endpointPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -1406,7 +1408,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.endpointPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1460,7 +1462,7 @@ describe('v1beta1.NetworkServicesClient', () => {
       });
     });
 
-    describe('lbRouteExtension', () => {
+    describe('lbRouteExtension', async () => {
       const fakePath = '/rendered/path/lbRouteExtension';
       const expectedParameters = {
         project: 'projectValue',
@@ -1471,7 +1473,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lbRouteExtensionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1528,7 +1530,7 @@ describe('v1beta1.NetworkServicesClient', () => {
       });
     });
 
-    describe('lbTrafficExtension', () => {
+    describe('lbTrafficExtension', async () => {
       const fakePath = '/rendered/path/lbTrafficExtension';
       const expectedParameters = {
         project: 'projectValue',
@@ -1539,7 +1541,7 @@ describe('v1beta1.NetworkServicesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lbTrafficExtensionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

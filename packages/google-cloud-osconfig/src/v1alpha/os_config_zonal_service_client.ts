@@ -618,7 +618,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOSPolicyAssignment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -753,7 +755,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$GetInstanceOSPoliciesCompliance',
       'GetInstanceOSPoliciesCompliance is deprecated and may be removed in a future version.',
@@ -898,7 +902,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOSPolicyAssignmentReport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1028,7 +1034,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInventory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1158,7 +1166,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVulnerabilityReport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1310,7 +1320,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1487,7 +1499,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'os_policy_assignment.name': request.osPolicyAssignment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1665,7 +1679,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1831,7 +1847,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentsRequest,
@@ -1898,7 +1916,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSPolicyAssignments stream %j', request);
     return this.descriptors.page.listOSPolicyAssignments.createStream(
       this.innerApiCalls.listOsPolicyAssignments as GaxCall,
@@ -1947,7 +1967,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSPolicyAssignments iterate %j', request);
     return this.descriptors.page.listOSPolicyAssignments.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignments'] as GaxCall,
@@ -2051,7 +2073,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentRevisionsRequest,
@@ -2119,7 +2143,9 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSPolicyAssignmentRevisions stream %j', request);
     return this.descriptors.page.listOSPolicyAssignmentRevisions.createStream(
       this.innerApiCalls.listOsPolicyAssignmentRevisions as GaxCall,
@@ -2169,7 +2195,9 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSPolicyAssignmentRevisions iterate %j', request);
     return this.descriptors.page.listOSPolicyAssignmentRevisions.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignmentRevisions'] as GaxCall,
@@ -2283,7 +2311,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
       'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
@@ -2368,7 +2398,9 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listInstanceOsPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
       'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
@@ -2432,7 +2464,9 @@ export class OsConfigZonalServiceClient {
     const defaultCallSettings =
       this._defaults['listInstanceOsPoliciesCompliances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$OsConfigZonalService-$ListInstanceOSPoliciesCompliances',
       'ListInstanceOSPoliciesCompliances is deprecated and may be removed in a future version.',
@@ -2565,7 +2599,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.osconfig.v1alpha.IListOSPolicyAssignmentReportsRequest,
@@ -2655,7 +2691,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSPolicyAssignmentReports stream %j', request);
     return this.descriptors.page.listOSPolicyAssignmentReports.createStream(
       this.innerApiCalls.listOsPolicyAssignmentReports as GaxCall,
@@ -2727,7 +2765,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSPolicyAssignmentReports iterate %j', request);
     return this.descriptors.page.listOSPolicyAssignmentReports.asyncIterate(
       this.innerApiCalls['listOsPolicyAssignmentReports'] as GaxCall,
@@ -2841,7 +2881,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.osconfig.v1alpha.IListInventoriesRequest,
@@ -2918,7 +2960,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInventories stream %j', request);
     return this.descriptors.page.listInventories.createStream(
       this.innerApiCalls.listInventories as GaxCall,
@@ -2977,7 +3021,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInventories iterate %j', request);
     return this.descriptors.page.listInventories.asyncIterate(
       this.innerApiCalls['listInventories'] as GaxCall,
@@ -3088,7 +3134,9 @@ export class OsConfigZonalServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.osconfig.v1alpha.IListVulnerabilityReportsRequest,
@@ -3162,7 +3210,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVulnerabilityReports stream %j', request);
     return this.descriptors.page.listVulnerabilityReports.createStream(
       this.innerApiCalls.listVulnerabilityReports as GaxCall,
@@ -3218,7 +3268,9 @@ export class OsConfigZonalServiceClient {
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVulnerabilityReports iterate %j', request);
     return this.descriptors.page.listVulnerabilityReports.asyncIterate(
       this.innerApiCalls['listVulnerabilityReports'] as GaxCall,

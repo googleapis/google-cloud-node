@@ -749,7 +749,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCloudExadataInfrastructure request %j', request);
     const wrappedCallback:
       | Callback<
@@ -875,7 +877,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCloudVmCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1001,7 +1005,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutonomousDatabase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1136,7 +1142,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAutonomousDatabaseWallet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1291,7 +1299,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1479,7 +1489,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1669,7 +1681,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1850,7 +1864,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2034,7 +2050,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2211,7 +2229,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2381,7 +2401,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2546,7 +2568,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListCloudExadataInfrastructuresRequest,
@@ -2615,7 +2639,9 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listCloudExadataInfrastructures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCloudExadataInfrastructures stream %j', request);
     return this.descriptors.page.listCloudExadataInfrastructures.createStream(
       this.innerApiCalls.listCloudExadataInfrastructures as GaxCall,
@@ -2666,7 +2692,9 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listCloudExadataInfrastructures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCloudExadataInfrastructures iterate %j', request);
     return this.descriptors.page.listCloudExadataInfrastructures.asyncIterate(
       this.innerApiCalls['listCloudExadataInfrastructures'] as GaxCall,
@@ -2773,7 +2801,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListCloudVmClustersRequest,
@@ -2843,7 +2873,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listCloudVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCloudVmClusters stream %j', request);
     return this.descriptors.page.listCloudVmClusters.createStream(
       this.innerApiCalls.listCloudVmClusters as GaxCall,
@@ -2895,7 +2927,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listCloudVmClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCloudVmClusters iterate %j', request);
     return this.descriptors.page.listCloudVmClusters.asyncIterate(
       this.innerApiCalls['listCloudVmClusters'] as GaxCall,
@@ -3000,7 +3034,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListEntitlementsRequest,
@@ -3068,7 +3104,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitlements stream %j', request);
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as GaxCall,
@@ -3118,7 +3156,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitlements iterate %j', request);
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
@@ -3223,7 +3263,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListDbServersRequest,
@@ -3291,7 +3333,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDbServers stream %j', request);
     return this.descriptors.page.listDbServers.createStream(
       this.innerApiCalls.listDbServers as GaxCall,
@@ -3341,7 +3385,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDbServers iterate %j', request);
     return this.descriptors.page.listDbServers.asyncIterate(
       this.innerApiCalls['listDbServers'] as GaxCall,
@@ -3446,7 +3492,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListDbNodesRequest,
@@ -3514,7 +3562,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDbNodes stream %j', request);
     return this.descriptors.page.listDbNodes.createStream(
       this.innerApiCalls.listDbNodes as GaxCall,
@@ -3564,7 +3614,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbNodes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDbNodes iterate %j', request);
     return this.descriptors.page.listDbNodes.asyncIterate(
       this.innerApiCalls['listDbNodes'] as GaxCall,
@@ -3671,7 +3723,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListGiVersionsRequest,
@@ -3740,7 +3794,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGiVersions stream %j', request);
     return this.descriptors.page.listGiVersions.createStream(
       this.innerApiCalls.listGiVersions as GaxCall,
@@ -3791,7 +3847,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listGiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGiVersions iterate %j', request);
     return this.descriptors.page.listGiVersions.asyncIterate(
       this.innerApiCalls['listGiVersions'] as GaxCall,
@@ -3896,7 +3954,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListDbSystemShapesRequest,
@@ -3964,7 +4024,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbSystemShapes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDbSystemShapes stream %j', request);
     return this.descriptors.page.listDbSystemShapes.createStream(
       this.innerApiCalls.listDbSystemShapes as GaxCall,
@@ -4014,7 +4076,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listDbSystemShapes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDbSystemShapes iterate %j', request);
     return this.descriptors.page.listDbSystemShapes.asyncIterate(
       this.innerApiCalls['listDbSystemShapes'] as GaxCall,
@@ -4123,7 +4187,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDatabasesRequest,
@@ -4195,7 +4261,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDatabases stream %j', request);
     return this.descriptors.page.listAutonomousDatabases.createStream(
       this.innerApiCalls.listAutonomousDatabases as GaxCall,
@@ -4249,7 +4317,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDatabases iterate %j', request);
     return this.descriptors.page.listAutonomousDatabases.asyncIterate(
       this.innerApiCalls['listAutonomousDatabases'] as GaxCall,
@@ -4355,7 +4425,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDbVersionsRequest,
@@ -4423,7 +4495,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDbVersions stream %j', request);
     return this.descriptors.page.listAutonomousDbVersions.createStream(
       this.innerApiCalls.listAutonomousDbVersions as GaxCall,
@@ -4473,7 +4547,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDbVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDbVersions iterate %j', request);
     return this.descriptors.page.listAutonomousDbVersions.asyncIterate(
       this.innerApiCalls['listAutonomousDbVersions'] as GaxCall,
@@ -4583,7 +4659,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseCharacterSetsRequest,
@@ -4663,7 +4741,9 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listAutonomousDatabaseCharacterSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDatabaseCharacterSets stream %j', request);
     return this.descriptors.page.listAutonomousDatabaseCharacterSets.createStream(
       this.innerApiCalls.listAutonomousDatabaseCharacterSets as GaxCall,
@@ -4719,7 +4799,9 @@ export class OracleDatabaseClient {
     const defaultCallSettings =
       this._defaults['listAutonomousDatabaseCharacterSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDatabaseCharacterSets iterate %j', request);
     return this.descriptors.page.listAutonomousDatabaseCharacterSets.asyncIterate(
       this.innerApiCalls['listAutonomousDatabaseCharacterSets'] as GaxCall,
@@ -4832,7 +4914,9 @@ export class OracleDatabaseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.oracledatabase.v1.IListAutonomousDatabaseBackupsRequest,
@@ -4908,7 +4992,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabaseBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDatabaseBackups stream %j', request);
     return this.descriptors.page.listAutonomousDatabaseBackups.createStream(
       this.innerApiCalls.listAutonomousDatabaseBackups as GaxCall,
@@ -4966,7 +5052,9 @@ export class OracleDatabaseClient {
       });
     const defaultCallSettings = this._defaults['listAutonomousDatabaseBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutonomousDatabaseBackups iterate %j', request);
     return this.descriptors.page.listAutonomousDatabaseBackups.asyncIterate(
       this.innerApiCalls['listAutonomousDatabaseBackups'] as GaxCall,
@@ -5146,7 +5234,7 @@ export class OracleDatabaseClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

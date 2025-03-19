@@ -569,7 +569,9 @@ export class SimulatorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReplay request %j', request);
     const wrappedCallback:
       | Callback<
@@ -706,7 +708,9 @@ export class SimulatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -885,7 +889,9 @@ export class SimulatorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.policysimulator.v1.IListReplayResultsRequest,
@@ -966,7 +972,9 @@ export class SimulatorClient {
       });
     const defaultCallSettings = this._defaults['listReplayResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReplayResults stream %j', request);
     return this.descriptors.page.listReplayResults.createStream(
       this.innerApiCalls.listReplayResults as GaxCall,
@@ -1029,7 +1037,9 @@ export class SimulatorClient {
       });
     const defaultCallSettings = this._defaults['listReplayResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReplayResults iterate %j', request);
     return this.descriptors.page.listReplayResults.asyncIterate(
       this.innerApiCalls['listReplayResults'] as GaxCall,
@@ -1131,7 +1141,7 @@ export class SimulatorClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

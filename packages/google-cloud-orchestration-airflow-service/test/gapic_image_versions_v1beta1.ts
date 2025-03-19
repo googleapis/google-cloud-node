@@ -252,7 +252,9 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.imageVersionsStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -350,7 +352,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -407,7 +409,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -438,7 +440,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -501,7 +503,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -553,7 +555,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -603,7 +605,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListImageVersionsRequest()
       );
@@ -641,7 +643,7 @@ describe('v1beta1.ImageVersionsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -652,7 +654,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -705,7 +707,7 @@ describe('v1beta1.ImageVersionsClient', () => {
       });
     });
 
-    describe('userWorkloadsConfigMap', () => {
+    describe('userWorkloadsConfigMap', async () => {
       const fakePath = '/rendered/path/userWorkloadsConfigMap';
       const expectedParameters = {
         project: 'projectValue',
@@ -717,7 +719,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userWorkloadsConfigMapPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -802,7 +804,7 @@ describe('v1beta1.ImageVersionsClient', () => {
       });
     });
 
-    describe('userWorkloadsSecret', () => {
+    describe('userWorkloadsSecret', async () => {
       const fakePath = '/rendered/path/userWorkloadsSecret';
       const expectedParameters = {
         project: 'projectValue',
@@ -814,7 +816,7 @@ describe('v1beta1.ImageVersionsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userWorkloadsSecretPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

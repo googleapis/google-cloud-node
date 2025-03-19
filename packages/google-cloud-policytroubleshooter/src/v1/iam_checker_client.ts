@@ -452,7 +452,9 @@ export class IamCheckerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('troubleshootIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<

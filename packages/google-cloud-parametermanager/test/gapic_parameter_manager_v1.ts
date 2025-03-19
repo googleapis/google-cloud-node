@@ -255,7 +255,9 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.parameterManagerStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterRequest()
       );
@@ -345,7 +347,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterRequest()
       );
@@ -392,7 +394,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterRequest()
       );
@@ -423,7 +425,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterRequest()
       );
@@ -475,7 +477,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterRequest()
       );
@@ -522,7 +524,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterRequest()
       );
@@ -574,7 +576,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterRequest()
       );
@@ -606,7 +608,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterRequest()
       );
@@ -686,7 +688,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterRequest()
       );
@@ -708,7 +710,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterRequest()
       );
@@ -786,7 +788,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterRequest()
       );
@@ -817,7 +819,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterRequest()
       );
@@ -838,7 +840,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterVersionRequest()
       );
@@ -870,7 +872,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterVersionRequest()
       );
@@ -917,7 +919,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterVersionRequest()
       );
@@ -948,7 +950,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.GetParameterVersionRequest()
       );
@@ -969,7 +971,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.RenderParameterVersionRequest()
       );
@@ -1001,7 +1003,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.RenderParameterVersionRequest()
       );
@@ -1048,7 +1050,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.RenderParameterVersionRequest()
       );
@@ -1082,7 +1084,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.RenderParameterVersionRequest()
       );
@@ -1106,7 +1108,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterVersionRequest()
       );
@@ -1138,7 +1140,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterVersionRequest()
       );
@@ -1185,7 +1187,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterVersionRequest()
       );
@@ -1219,7 +1221,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.CreateParameterVersionRequest()
       );
@@ -1243,7 +1245,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterVersionRequest()
       );
@@ -1276,7 +1278,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterVersionRequest()
       );
@@ -1324,7 +1326,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterVersionRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.UpdateParameterVersionRequest()
       );
@@ -1384,7 +1386,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterVersionRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterVersionRequest()
       );
@@ -1463,7 +1465,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterVersionRequest()
       );
@@ -1497,7 +1499,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.DeleteParameterVersionRequest()
       );
@@ -1521,7 +1523,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1560,7 +1562,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1615,7 +1617,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1707,7 +1709,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1757,7 +1759,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1807,7 +1809,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParametersRequest()
       );
@@ -1850,7 +1852,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -1947,7 +1949,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -1981,7 +1983,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -2050,7 +2052,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -2108,7 +2110,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -2162,7 +2164,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parametermanager.v1.ListParameterVersionsRequest()
       );
@@ -2208,7 +2210,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2238,7 +2240,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2282,7 +2284,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2317,7 +2319,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2365,7 +2367,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2402,7 +2404,7 @@ describe('v1.ParameterManagerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2412,7 +2414,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2451,7 +2453,7 @@ describe('v1.ParameterManagerClient', () => {
       });
     });
 
-    describe('parameter', () => {
+    describe('parameter', async () => {
       const fakePath = '/rendered/path/parameter';
       const expectedParameters = {
         project: 'projectValue',
@@ -2462,7 +2464,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.parameterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2515,7 +2517,7 @@ describe('v1.ParameterManagerClient', () => {
       });
     });
 
-    describe('parameterVersion', () => {
+    describe('parameterVersion', async () => {
       const fakePath = '/rendered/path/parameterVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -2527,7 +2529,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.parameterVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2595,7 +2597,7 @@ describe('v1.ParameterManagerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2604,7 +2606,7 @@ describe('v1.ParameterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

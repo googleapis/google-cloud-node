@@ -472,7 +472,9 @@ export class PhishingProtectionServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('reportPhishing request %j', request);
     const wrappedCallback:
       | Callback<

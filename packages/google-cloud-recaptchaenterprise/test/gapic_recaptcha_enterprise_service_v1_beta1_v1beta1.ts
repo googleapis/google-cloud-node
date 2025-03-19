@@ -214,7 +214,9 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.recaptchaEnterpriseServiceV1Beta1Stub);
       client.close().then(() => {
         done();
@@ -288,7 +290,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
@@ -322,7 +324,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
@@ -372,7 +374,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
@@ -406,7 +408,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
@@ -430,7 +432,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
@@ -465,7 +467,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
@@ -515,7 +517,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
@@ -549,7 +551,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
@@ -565,7 +567,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
   });
 
   describe('Path templates', () => {
-    describe('assessment', () => {
+    describe('assessment', async () => {
       const fakePath = '/rendered/path/assessment';
       const expectedParameters = {
         project: 'projectValue',
@@ -578,7 +580,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.assessmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -617,7 +619,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -629,7 +631,7 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
