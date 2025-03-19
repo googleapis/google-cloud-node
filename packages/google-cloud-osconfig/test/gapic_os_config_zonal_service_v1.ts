@@ -295,7 +295,9 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.osConfigZonalServiceStub);
       client.close().then(() => {
         done();
@@ -358,7 +360,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
       );
@@ -391,7 +393,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
       );
@@ -474,7 +476,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentRequest()
       );
@@ -499,7 +501,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
       );
@@ -532,7 +534,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
       );
@@ -615,7 +617,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetOSPolicyAssignmentReportRequest()
       );
@@ -640,7 +642,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetInventoryRequest()
       );
@@ -672,7 +674,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetInventoryRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetInventoryRequest()
       );
@@ -752,7 +754,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetInventoryRequest()
       );
@@ -774,7 +776,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetVulnerabilityReportRequest()
       );
@@ -807,7 +809,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetVulnerabilityReportRequest()
       );
@@ -855,7 +857,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetVulnerabilityReportRequest()
       );
@@ -890,7 +892,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetVulnerabilityReportRequest()
       );
@@ -915,7 +917,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
       );
@@ -949,7 +951,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
       );
@@ -1004,7 +1006,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CreateOSPolicyAssignmentRequest()
       );
@@ -1073,7 +1075,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1097,7 +1099,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1119,7 +1121,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
       );
@@ -1154,7 +1156,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
       );
@@ -1210,7 +1212,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
       );
@@ -1246,7 +1248,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.UpdateOSPolicyAssignmentRequest()
       );
@@ -1281,7 +1283,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1305,7 +1307,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1327,7 +1329,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
       );
@@ -1361,7 +1363,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
       );
@@ -1451,7 +1453,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.DeleteOSPolicyAssignmentRequest()
       );
@@ -1485,7 +1487,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1509,7 +1511,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1531,7 +1533,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1572,7 +1574,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1630,7 +1632,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1665,7 +1667,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1733,7 +1735,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1790,7 +1792,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1845,7 +1847,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentsRequest()
       );
@@ -1893,7 +1895,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -1934,7 +1936,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -1992,7 +1994,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -2027,7 +2029,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -2098,7 +2100,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -2158,7 +2160,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -2213,7 +2215,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentRevisionsRequest()
       );
@@ -2261,7 +2263,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2302,7 +2304,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2360,7 +2362,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2395,7 +2397,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2468,7 +2470,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2530,7 +2532,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2585,7 +2587,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListOSPolicyAssignmentReportsRequest()
       );
@@ -2633,7 +2635,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2667,7 +2669,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2717,7 +2719,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2749,7 +2751,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2804,7 +2806,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2854,7 +2856,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2898,7 +2900,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListInventoriesRequest()
       );
@@ -2941,7 +2943,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -2982,7 +2984,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -3040,7 +3042,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -3075,7 +3077,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -3143,7 +3145,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -3200,7 +3202,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -3255,7 +3257,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListVulnerabilityReportsRequest()
       );
@@ -3297,7 +3299,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('inventory', () => {
+    describe('inventory', async () => {
       const fakePath = '/rendered/path/inventory';
       const expectedParameters = {
         project: 'projectValue',
@@ -3309,7 +3311,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.inventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3362,7 +3364,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       });
     });
 
-    describe('oSPolicyAssignment', () => {
+    describe('oSPolicyAssignment', async () => {
       const fakePath = '/rendered/path/oSPolicyAssignment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3374,7 +3376,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.oSPolicyAssignmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3440,7 +3442,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       });
     });
 
-    describe('oSPolicyAssignmentReport', () => {
+    describe('oSPolicyAssignmentReport', async () => {
       const fakePath = '/rendered/path/oSPolicyAssignmentReport';
       const expectedParameters = {
         project: 'projectValue',
@@ -3453,7 +3455,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.oSPolicyAssignmentReportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3536,7 +3538,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       });
     });
 
-    describe('patchDeployment', () => {
+    describe('patchDeployment', async () => {
       const fakePath = '/rendered/path/patchDeployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3547,7 +3549,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.patchDeploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3590,7 +3592,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       });
     });
 
-    describe('patchJob', () => {
+    describe('patchJob', async () => {
       const fakePath = '/rendered/path/patchJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -3601,7 +3603,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.patchJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3640,7 +3642,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       });
     });
 
-    describe('vulnerabilityReport', () => {
+    describe('vulnerabilityReport', async () => {
       const fakePath = '/rendered/path/vulnerabilityReport';
       const expectedParameters = {
         project: 'projectValue',
@@ -3652,7 +3654,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vulnerabilityReportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -253,7 +253,9 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.osConfigServiceStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ExecutePatchJobRequest()
       );
@@ -343,7 +345,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ExecutePatchJobRequest()
       );
@@ -390,7 +392,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ExecutePatchJobRequest()
       );
@@ -421,7 +423,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ExecutePatchJobRequest()
       );
@@ -442,7 +444,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchJobRequest()
       );
@@ -473,7 +475,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchJobRequest()
       );
@@ -520,7 +522,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchJobRequest()
       );
@@ -551,7 +553,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchJobRequest()
       );
@@ -572,7 +574,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CancelPatchJobRequest()
       );
@@ -603,7 +605,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CancelPatchJobRequest()
       );
@@ -650,7 +652,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CancelPatchJobRequest()
       );
@@ -681,7 +683,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CancelPatchJobRequest()
       );
@@ -702,7 +704,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreatePatchDeploymentRequest()
       );
@@ -734,7 +736,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreatePatchDeploymentRequest()
       );
@@ -781,7 +783,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreatePatchDeploymentRequest()
       );
@@ -815,7 +817,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreatePatchDeploymentRequest()
       );
@@ -839,7 +841,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchDeploymentRequest()
       );
@@ -871,7 +873,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchDeploymentRequest()
       );
@@ -918,7 +920,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchDeploymentRequest()
       );
@@ -949,7 +951,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetPatchDeploymentRequest()
       );
@@ -970,7 +972,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeletePatchDeploymentRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeletePatchDeploymentRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeletePatchDeploymentRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeletePatchDeploymentRequest()
       );
@@ -1107,7 +1109,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdatePatchDeploymentRequest()
       );
@@ -1140,7 +1142,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdatePatchDeploymentRequest()
       );
@@ -1188,7 +1190,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdatePatchDeploymentRequest()
       );
@@ -1223,7 +1225,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdatePatchDeploymentRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.PausePatchDeploymentRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.PausePatchDeploymentRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.PausePatchDeploymentRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.PausePatchDeploymentRequest()
       );
@@ -1379,7 +1381,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ResumePatchDeploymentRequest()
       );
@@ -1411,7 +1413,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ResumePatchDeploymentRequest()
       );
@@ -1458,7 +1460,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ResumePatchDeploymentRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ResumePatchDeploymentRequest()
       );
@@ -1516,7 +1518,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreateGuestPolicyRequest()
       );
@@ -1547,7 +1549,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreateGuestPolicyRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreateGuestPolicyRequest()
       );
@@ -1625,7 +1627,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.CreateGuestPolicyRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetGuestPolicyRequest()
       );
@@ -1677,7 +1679,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetGuestPolicyRequest()
       );
@@ -1724,7 +1726,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetGuestPolicyRequest()
       );
@@ -1755,7 +1757,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.GetGuestPolicyRequest()
       );
@@ -1776,7 +1778,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdateGuestPolicyRequest()
       );
@@ -1808,7 +1810,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdateGuestPolicyRequest()
       );
@@ -1856,7 +1858,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdateGuestPolicyRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.UpdateGuestPolicyRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeleteGuestPolicyRequest()
       );
@@ -1941,7 +1943,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeleteGuestPolicyRequest()
       );
@@ -1988,7 +1990,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeleteGuestPolicyRequest()
       );
@@ -2019,7 +2021,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.DeleteGuestPolicyRequest()
       );
@@ -2040,7 +2042,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.LookupEffectiveGuestPolicyRequest()
       );
@@ -2072,7 +2074,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.LookupEffectiveGuestPolicyRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.LookupEffectiveGuestPolicyRequest()
       );
@@ -2153,7 +2155,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.LookupEffectiveGuestPolicyRequest()
       );
@@ -2177,7 +2179,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2216,7 +2218,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2271,7 +2273,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2302,7 +2304,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2362,7 +2364,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2411,7 +2413,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2460,7 +2462,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobsRequest()
       );
@@ -2502,7 +2504,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2542,7 +2544,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2599,7 +2601,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2633,7 +2635,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2702,7 +2704,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2760,7 +2762,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2814,7 +2816,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsRequest()
       );
@@ -2861,7 +2863,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -2901,7 +2903,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -2958,7 +2960,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -2989,7 +2991,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -3050,7 +3052,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -3100,7 +3102,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -3150,7 +3152,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListPatchDeploymentsRequest()
       );
@@ -3193,7 +3195,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3232,7 +3234,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3287,7 +3289,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3318,7 +3320,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3378,7 +3380,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3427,7 +3429,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3476,7 +3478,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1beta.ListGuestPoliciesRequest()
       );
@@ -3514,7 +3516,7 @@ describe('v1beta.OsConfigServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('guestPolicy', () => {
+    describe('guestPolicy', async () => {
       const fakePath = '/rendered/path/guestPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -3524,7 +3526,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.guestPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3566,7 +3568,7 @@ describe('v1beta.OsConfigServiceClient', () => {
       });
     });
 
-    describe('patchDeployment', () => {
+    describe('patchDeployment', async () => {
       const fakePath = '/rendered/path/patchDeployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3576,7 +3578,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.patchDeploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3619,7 +3621,7 @@ describe('v1beta.OsConfigServiceClient', () => {
       });
     });
 
-    describe('patchJob', () => {
+    describe('patchJob', async () => {
       const fakePath = '/rendered/path/patchJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -3629,7 +3631,7 @@ describe('v1beta.OsConfigServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.patchJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

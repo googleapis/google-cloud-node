@@ -486,7 +486,9 @@ export class ImageVersionsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orchestration.airflow.service.v1.IListImageVersionsRequest,
@@ -554,7 +556,9 @@ export class ImageVersionsClient {
       });
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listImageVersions stream %j', request);
     return this.descriptors.page.listImageVersions.createStream(
       this.innerApiCalls.listImageVersions as GaxCall,
@@ -604,7 +608,9 @@ export class ImageVersionsClient {
       });
     const defaultCallSettings = this._defaults['listImageVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listImageVersions iterate %j', request);
     return this.descriptors.page.listImageVersions.asyncIterate(
       this.innerApiCalls['listImageVersions'] as GaxCall,

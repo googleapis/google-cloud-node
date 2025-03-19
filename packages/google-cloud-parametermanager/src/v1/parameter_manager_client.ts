@@ -503,7 +503,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getParameter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -647,7 +649,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createParameter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -793,7 +797,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'parameter.name': request.parameter!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateParameter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -933,7 +939,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteParameter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1063,7 +1071,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getParameterVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1188,7 +1198,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('renderParameterVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1332,7 +1344,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createParameterVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1478,7 +1492,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'parameter_version.name': request.parameterVersion!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateParameterVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1618,7 +1634,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteParameterVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1751,7 +1769,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.parametermanager.v1.IListParametersRequest,
@@ -1822,7 +1842,9 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParameters stream %j', request);
     return this.descriptors.page.listParameters.createStream(
       this.innerApiCalls.listParameters as GaxCall,
@@ -1875,7 +1897,9 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParameters iterate %j', request);
     return this.descriptors.page.listParameters.asyncIterate(
       this.innerApiCalls['listParameters'] as GaxCall,
@@ -1983,7 +2007,9 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.parametermanager.v1.IListParameterVersionsRequest,
@@ -2054,7 +2080,9 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameterVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParameterVersions stream %j', request);
     return this.descriptors.page.listParameterVersions.createStream(
       this.innerApiCalls.listParameterVersions as GaxCall,
@@ -2107,7 +2135,9 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameterVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listParameterVersions iterate %j', request);
     return this.descriptors.page.listParameterVersions.asyncIterate(
       this.innerApiCalls['listParameterVersions'] as GaxCall,

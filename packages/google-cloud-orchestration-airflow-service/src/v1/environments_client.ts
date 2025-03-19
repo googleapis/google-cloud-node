@@ -637,7 +637,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -772,7 +774,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('executeAirflowCommand request %j', request);
     const wrappedCallback:
       | Callback<
@@ -907,7 +911,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopAirflowCommand request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1041,7 +1047,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pollAirflowCommand request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1172,7 +1180,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createUserWorkloadsSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1302,7 +1312,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getUserWorkloadsSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1430,7 +1442,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         'user_workloads_secret.name': request.userWorkloadsSecret!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateUserWorkloadsSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1559,7 +1573,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteUserWorkloadsSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1690,7 +1706,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createUserWorkloadsConfigMap request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1819,7 +1837,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getUserWorkloadsConfigMap request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1948,7 +1968,9 @@ export class EnvironmentsClient {
         'user_workloads_config_map.name':
           request.userWorkloadsConfigMap!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateUserWorkloadsConfigMap request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2077,7 +2099,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteUserWorkloadsConfigMap request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2203,7 +2227,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchDatabaseProperties request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2338,7 +2364,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2633,7 +2661,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2801,7 +2831,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2997,7 +3029,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3171,7 +3205,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3357,7 +3393,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3525,7 +3563,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3688,7 +3728,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orchestration.airflow.service.v1.IListEnvironmentsRequest,
@@ -3754,7 +3796,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments stream %j', request);
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as GaxCall,
@@ -3802,7 +3846,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments iterate %j', request);
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
@@ -3917,7 +3963,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest,
@@ -3991,7 +4039,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
@@ -4047,7 +4097,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
@@ -4154,7 +4206,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsSecretsRequest,
@@ -4221,7 +4275,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUserWorkloadsSecrets stream %j', request);
     return this.descriptors.page.listUserWorkloadsSecrets.createStream(
       this.innerApiCalls.listUserWorkloadsSecrets as GaxCall,
@@ -4270,7 +4326,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUserWorkloadsSecrets iterate %j', request);
     return this.descriptors.page.listUserWorkloadsSecrets.asyncIterate(
       this.innerApiCalls['listUserWorkloadsSecrets'] as GaxCall,
@@ -4377,7 +4435,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orchestration.airflow.service.v1.IListUserWorkloadsConfigMapsRequest,
@@ -4444,7 +4504,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUserWorkloadsConfigMaps stream %j', request);
     return this.descriptors.page.listUserWorkloadsConfigMaps.createStream(
       this.innerApiCalls.listUserWorkloadsConfigMaps as GaxCall,
@@ -4493,7 +4555,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUserWorkloadsConfigMaps iterate %j', request);
     return this.descriptors.page.listUserWorkloadsConfigMaps.asyncIterate(
       this.innerApiCalls['listUserWorkloadsConfigMaps'] as GaxCall,
@@ -4595,7 +4659,7 @@ export class EnvironmentsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
