@@ -543,7 +543,9 @@ export class GenerativeQuestionServiceClient {
         'generative_questions_feature_config.catalog':
           request.generativeQuestionsFeatureConfig!.catalog ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'updateGenerativeQuestionsFeatureConfig request %j',
       request
@@ -679,7 +681,9 @@ export class GenerativeQuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         catalog: request.catalog ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGenerativeQuestionsFeatureConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -811,7 +815,9 @@ export class GenerativeQuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGenerativeQuestionConfigs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -945,7 +951,9 @@ export class GenerativeQuestionServiceClient {
         'generative_question_config.catalog':
           request.generativeQuestionConfig!.catalog ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateGenerativeQuestionConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1079,7 +1087,9 @@ export class GenerativeQuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdateGenerativeQuestionConfigs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1290,7 +1300,7 @@ export class GenerativeQuestionServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -559,7 +559,9 @@ export class RevisionsClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRevision request %j', request);
     const wrappedCallback:
       | Callback<
@@ -705,7 +707,9 @@ export class RevisionsClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -877,7 +881,9 @@ export class RevisionsClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.run.v2.IListRevisionsRequest,
@@ -957,7 +963,9 @@ export class RevisionsClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRevisions stream %j', request);
     return this.descriptors.page.listRevisions.createStream(
       this.innerApiCalls.listRevisions as GaxCall,
@@ -1021,7 +1029,9 @@ export class RevisionsClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRevisions iterate %j', request);
     return this.descriptors.page.listRevisions.asyncIterate(
       this.innerApiCalls['listRevisions'] as GaxCall,
@@ -1201,7 +1211,7 @@ export class RevisionsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -498,7 +498,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -609,7 +611,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -725,7 +729,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'case.name': request.case!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -841,7 +847,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('escalateCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -949,7 +957,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('closeCase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1087,7 +1097,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.support.v2.IListCasesRequest,
@@ -1169,7 +1181,9 @@ export class CaseServiceClient {
       });
     const defaultCallSettings = this._defaults['listCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCases stream %j', request);
     return this.descriptors.page.listCases.createStream(
       this.innerApiCalls.listCases as GaxCall,
@@ -1235,7 +1249,9 @@ export class CaseServiceClient {
       });
     const defaultCallSettings = this._defaults['listCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCases iterate %j', request);
     return this.descriptors.page.listCases.asyncIterate(
       this.innerApiCalls['listCases'] as GaxCall,
@@ -1369,7 +1385,9 @@ export class CaseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.support.v2.ISearchCasesRequest,
@@ -1472,7 +1490,9 @@ export class CaseServiceClient {
       });
     const defaultCallSettings = this._defaults['searchCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchCases stream %j', request);
     return this.descriptors.page.searchCases.createStream(
       this.innerApiCalls.searchCases as GaxCall,
@@ -1557,7 +1577,9 @@ export class CaseServiceClient {
       });
     const defaultCallSettings = this._defaults['searchCases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchCases iterate %j', request);
     return this.descriptors.page.searchCases.asyncIterate(
       this.innerApiCalls['searchCases'] as GaxCall,
@@ -1661,7 +1683,9 @@ export class CaseServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.support.v2.ISearchCaseClassificationsRequest,
@@ -1725,7 +1749,9 @@ export class CaseServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchCaseClassifications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchCaseClassifications stream %j', request);
     return this.descriptors.page.searchCaseClassifications.createStream(
       this.innerApiCalls.searchCaseClassifications as GaxCall,
@@ -1771,7 +1797,9 @@ export class CaseServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchCaseClassifications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchCaseClassifications iterate %j', request);
     return this.descriptors.page.searchCaseClassifications.asyncIterate(
       this.innerApiCalls['searchCaseClassifications'] as GaxCall,

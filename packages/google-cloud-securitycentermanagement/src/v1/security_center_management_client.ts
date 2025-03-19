@@ -621,7 +621,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'getEffectiveSecurityHealthAnalyticsCustomModule request %j',
       request
@@ -761,7 +763,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'getSecurityHealthAnalyticsCustomModule request %j',
       request
@@ -921,7 +925,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'createSecurityHealthAnalyticsCustomModule request %j',
       request
@@ -1088,7 +1094,9 @@ export class SecurityCenterManagementClient {
         'security_health_analytics_custom_module.name':
           request.securityHealthAnalyticsCustomModule!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'updateSecurityHealthAnalyticsCustomModule request %j',
       request
@@ -1248,7 +1256,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'deleteSecurityHealthAnalyticsCustomModule request %j',
       request
@@ -1395,7 +1405,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'simulateSecurityHealthAnalyticsCustomModule request %j',
       request
@@ -1549,7 +1561,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'getEffectiveEventThreatDetectionCustomModule request %j',
       request
@@ -1692,7 +1706,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEventThreatDetectionCustomModule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1848,7 +1864,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'createEventThreatDetectionCustomModule request %j',
       request
@@ -2004,7 +2022,9 @@ export class SecurityCenterManagementClient {
         'event_threat_detection_custom_module.name':
           request.eventThreatDetectionCustomModule!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'updateEventThreatDetectionCustomModule request %j',
       request
@@ -2159,7 +2179,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'deleteEventThreatDetectionCustomModule request %j',
       request
@@ -2301,7 +2323,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'validateEventThreatDetectionCustomModule request %j',
       request
@@ -2455,7 +2479,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSecurityCenterService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2602,7 +2628,9 @@ export class SecurityCenterManagementClient {
         'security_center_service.name':
           request.securityCenterService!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSecurityCenterService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2743,7 +2771,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
@@ -2832,7 +2862,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listEffectiveSecurityHealthAnalyticsCustomModules stream %j',
       request
@@ -2894,7 +2926,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listEffectiveSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listEffectiveSecurityHealthAnalyticsCustomModules iterate %j',
       request
@@ -3015,7 +3049,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListSecurityHealthAnalyticsCustomModulesRequest,
@@ -3104,7 +3140,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listSecurityHealthAnalyticsCustomModules stream %j',
       request
@@ -3165,7 +3203,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listSecurityHealthAnalyticsCustomModules iterate %j',
       request
@@ -3283,7 +3323,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListDescendantSecurityHealthAnalyticsCustomModulesRequest,
@@ -3372,7 +3414,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listDescendantSecurityHealthAnalyticsCustomModules stream %j',
       request
@@ -3434,7 +3478,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listDescendantSecurityHealthAnalyticsCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listDescendantSecurityHealthAnalyticsCustomModules iterate %j',
       request
@@ -3553,7 +3599,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListEffectiveEventThreatDetectionCustomModulesRequest,
@@ -3642,7 +3690,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listEffectiveEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listEffectiveEventThreatDetectionCustomModules stream %j',
       request
@@ -3704,7 +3754,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listEffectiveEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listEffectiveEventThreatDetectionCustomModules iterate %j',
       request
@@ -3824,7 +3876,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListEventThreatDetectionCustomModulesRequest,
@@ -3907,7 +3961,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEventThreatDetectionCustomModules stream %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.createStream(
       this.innerApiCalls.listEventThreatDetectionCustomModules as GaxCall,
@@ -3966,7 +4022,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEventThreatDetectionCustomModules iterate %j', request);
     return this.descriptors.page.listEventThreatDetectionCustomModules.asyncIterate(
       this.innerApiCalls['listEventThreatDetectionCustomModules'] as GaxCall,
@@ -4080,7 +4138,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListDescendantEventThreatDetectionCustomModulesRequest,
@@ -4170,7 +4230,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listDescendantEventThreatDetectionCustomModules stream %j',
       request
@@ -4233,7 +4295,9 @@ export class SecurityCenterManagementClient {
     const defaultCallSettings =
       this._defaults['listDescendantEventThreatDetectionCustomModules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'listDescendantEventThreatDetectionCustomModules iterate %j',
       request
@@ -4354,7 +4418,9 @@ export class SecurityCenterManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycentermanagement.v1.IListSecurityCenterServicesRequest,
@@ -4432,7 +4498,9 @@ export class SecurityCenterManagementClient {
       });
     const defaultCallSettings = this._defaults['listSecurityCenterServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecurityCenterServices stream %j', request);
     return this.descriptors.page.listSecurityCenterServices.createStream(
       this.innerApiCalls.listSecurityCenterServices as GaxCall,
@@ -4492,7 +4560,9 @@ export class SecurityCenterManagementClient {
       });
     const defaultCallSettings = this._defaults['listSecurityCenterServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecurityCenterServices iterate %j', request);
     return this.descriptors.page.listSecurityCenterServices.asyncIterate(
       this.innerApiCalls['listSecurityCenterServices'] as GaxCall,

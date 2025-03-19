@@ -225,7 +225,9 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sqlBackupRunsServiceStub);
       client.close().then(() => {
         done();
@@ -288,7 +290,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsDeleteRequest()
       );
@@ -330,7 +332,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsDeleteRequest()
       );
@@ -388,7 +390,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsDeleteRequest()
       );
@@ -427,7 +429,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsDeleteRequest()
       );
@@ -459,7 +461,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsGetRequest()
       );
@@ -500,7 +502,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsGetRequest()
       );
@@ -556,7 +558,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsGetRequest()
       );
@@ -594,7 +596,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsGetRequest()
       );
@@ -626,7 +628,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsInsertRequest()
       );
@@ -663,7 +665,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsInsertRequest()
       );
@@ -716,7 +718,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsInsertRequest()
       );
@@ -750,7 +752,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsInsertRequest()
       );
@@ -777,7 +779,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsListRequest()
       );
@@ -813,7 +815,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsListRequest()
       );
@@ -864,7 +866,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsListRequest()
       );
@@ -897,7 +899,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlBackupRunsListRequest()
       );
@@ -923,7 +925,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -954,7 +956,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1084,7 +1086,7 @@ describe('v1beta4.SqlBackupRunsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );

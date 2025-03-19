@@ -285,7 +285,9 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.tagValuesStub);
       client.close().then(() => {
         done();
@@ -344,7 +346,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagValueRequest()
       );
@@ -375,7 +377,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagValueRequest()
       );
@@ -422,7 +424,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagValueRequest()
       );
@@ -453,7 +455,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagValueRequest()
       );
@@ -474,7 +476,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest()
       );
@@ -492,7 +494,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest()
       );
@@ -525,7 +527,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest()
       );
@@ -545,7 +547,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest()
       );
@@ -564,7 +566,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -595,7 +597,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -642,7 +644,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -673,7 +675,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -694,7 +696,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -725,7 +727,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -772,7 +774,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -803,7 +805,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -824,7 +826,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -856,7 +858,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -903,7 +905,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -934,7 +936,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -955,7 +957,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
@@ -974,7 +976,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.CreateTagValueRequest()
       );
@@ -1050,7 +1052,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1072,7 +1074,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1093,7 +1095,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UpdateTagValueRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UpdateTagValueRequest()
       );
@@ -1182,7 +1184,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UpdateTagValueRequest()
       );
@@ -1214,7 +1216,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UpdateTagValueRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1270,7 +1272,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1291,7 +1293,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagValueRequest()
       );
@@ -1324,7 +1326,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagValueRequest()
       );
@@ -1378,7 +1380,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagValueRequest()
       );
@@ -1409,7 +1411,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagValueRequest()
       );
@@ -1442,7 +1444,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1464,7 +1466,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1485,7 +1487,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1510,7 +1512,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1551,7 +1553,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1568,7 +1570,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1615,7 +1617,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1687,7 +1689,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.ListTagValuesRequest()
       );
@@ -1716,7 +1718,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1795,7 +1797,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1875,7 +1877,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1971,8 +1973,7 @@ describe('v3.TagValuesClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1991,7 +1992,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2000,8 +2001,7 @@ describe('v3.TagValuesClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2017,7 +2017,7 @@ describe('v3.TagValuesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folder', () => {
+    describe('folder', async () => {
       const fakePath = '/rendered/path/folder';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2026,7 +2026,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2055,7 +2055,7 @@ describe('v3.TagValuesClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2064,7 +2064,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2093,7 +2093,7 @@ describe('v3.TagValuesClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2102,7 +2102,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2131,7 +2131,7 @@ describe('v3.TagValuesClient', () => {
       });
     });
 
-    describe('tagBinding', () => {
+    describe('tagBinding', async () => {
       const fakePath = '/rendered/path/tagBinding';
       const expectedParameters = {
         tag_binding: 'tagBindingValue',
@@ -2140,7 +2140,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagBindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2169,7 +2169,7 @@ describe('v3.TagValuesClient', () => {
       });
     });
 
-    describe('tagHold', () => {
+    describe('tagHold', async () => {
       const fakePath = '/rendered/path/tagHold';
       const expectedParameters = {
         tag_value: 'tagValueValue',
@@ -2179,7 +2179,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagHoldPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2218,7 +2218,7 @@ describe('v3.TagValuesClient', () => {
       });
     });
 
-    describe('tagKey', () => {
+    describe('tagKey', async () => {
       const fakePath = '/rendered/path/tagKey';
       const expectedParameters = {
         tag_key: 'tagKeyValue',
@@ -2227,7 +2227,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2256,7 +2256,7 @@ describe('v3.TagValuesClient', () => {
       });
     });
 
-    describe('tagValue', () => {
+    describe('tagValue', async () => {
       const fakePath = '/rendered/path/tagValue';
       const expectedParameters = {
         tag_value: 'tagValueValue',
@@ -2265,7 +2265,7 @@ describe('v3.TagValuesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagValuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
