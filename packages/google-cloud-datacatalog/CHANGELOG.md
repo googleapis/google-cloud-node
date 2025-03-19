@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v5.0.0...datacatalog-v5.1.0) (2025-03-19)
+
+
+### Features
+
+* [datacatalog] await/catch promises, and update listOperationsAsync return type ([#6156](https://github.com/googleapis/google-cloud-node/issues/6156)) ([f79da88](https://github.com/googleapis/google-cloud-node/commit/f79da88b29303a18c00e8081434af4859ad91225))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6184](https://github.com/googleapis/google-cloud-node/issues/6184)) ([2fcd202](https://github.com/googleapis/google-cloud-node/commit/2fcd2029c35e8fb2199d03ac6e61e2d821ddf72e))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.7.0...datacatalog-v5.0.0) (2025-03-18)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.0.0...documentai-v9.1.0) (2025-03-19)
+
+
+### Features
+
+* [documentai] Added config options to enable LLM layout parsing ([#6180](https://github.com/googleapis/google-cloud-node/issues/6180)) ([f0f3e3a](https://github.com/googleapis/google-cloud-node/commit/f0f3e3a7956143160cb36d8cba96e669c76e3c2e))
+
 ## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.12.0...documentai-v9.0.0) (2025-03-18)
 
 

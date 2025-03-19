@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.6.0...procurement-v0.6.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6184](https://github.com/googleapis/google-cloud-node/issues/6184)) ([2fcd202](https://github.com/googleapis/google-cloud-node/commit/2fcd2029c35e8fb2199d03ac6e61e2d821ddf72e))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.5.0...procurement-v0.6.0) (2025-03-18)
 
 
