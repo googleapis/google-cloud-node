@@ -670,7 +670,9 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('readFeatureValues request %j', request);
     const wrappedCallback:
       | Callback<
@@ -801,7 +803,9 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('writeFeatureValues request %j', request);
     const wrappedCallback:
       | Callback<
@@ -876,7 +880,9 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingReadFeatureValues stream %j', options);
     return this.innerApiCalls.streamingReadFeatureValues(request, options);
   }

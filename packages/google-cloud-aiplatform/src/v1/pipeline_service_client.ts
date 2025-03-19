@@ -2345,7 +2345,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTrainingPipeline request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2466,7 +2468,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTrainingPipeline request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2606,7 +2610,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelTrainingPipeline request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2735,7 +2741,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPipelineJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2856,7 +2864,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPipelineJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2986,7 +2996,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelPipelineJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3120,7 +3132,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3289,7 +3303,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3464,7 +3480,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3643,7 +3661,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3834,7 +3854,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
@@ -3928,7 +3950,9 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTrainingPipelines stream %j', request);
     return this.descriptors.page.listTrainingPipelines.createStream(
       this.innerApiCalls.listTrainingPipelines as GaxCall,
@@ -4004,7 +4028,9 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTrainingPipelines iterate %j', request);
     return this.descriptors.page.listTrainingPipelines.asyncIterate(
       this.innerApiCalls['listTrainingPipelines'] as GaxCall,
@@ -4163,7 +4189,9 @@ export class PipelineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
@@ -4285,7 +4313,9 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPipelineJobs stream %j', request);
     return this.descriptors.page.listPipelineJobs.createStream(
       this.innerApiCalls.listPipelineJobs as GaxCall,
@@ -4389,7 +4419,9 @@ export class PipelineServiceClient {
       });
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPipelineJobs iterate %j', request);
     return this.descriptors.page.listPipelineJobs.asyncIterate(
       this.innerApiCalls['listPipelineJobs'] as GaxCall,
@@ -4707,7 +4739,7 @@ export class PipelineServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

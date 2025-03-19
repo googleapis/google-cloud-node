@@ -642,7 +642,9 @@ export class FeatureOnlineStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchFeatureValues request %j', request);
     const wrappedCallback:
       | Callback<
@@ -777,7 +779,9 @@ export class FeatureOnlineStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         feature_view: request.featureView ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchNearestEntities request %j', request);
     const wrappedCallback:
       | Callback<

@@ -2304,7 +2304,9 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpecialistPool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2439,7 +2441,9 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2611,7 +2615,9 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2780,7 +2786,9 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'specialist_pool.name': request.specialistPool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2950,7 +2958,9 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListSpecialistPoolsRequest,
@@ -3023,7 +3033,9 @@ export class SpecialistPoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpecialistPools stream %j', request);
     return this.descriptors.page.listSpecialistPools.createStream(
       this.innerApiCalls.listSpecialistPools as GaxCall,
@@ -3078,7 +3090,9 @@ export class SpecialistPoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpecialistPools iterate %j', request);
     return this.descriptors.page.listSpecialistPools.asyncIterate(
       this.innerApiCalls['listSpecialistPools'] as GaxCall,
@@ -3396,7 +3410,7 @@ export class SpecialistPoolServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

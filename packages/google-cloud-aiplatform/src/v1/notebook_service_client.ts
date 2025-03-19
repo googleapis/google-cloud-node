@@ -2414,7 +2414,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNotebookRuntimeTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2547,7 +2549,9 @@ export class NotebookServiceClient {
         'notebook_runtime_template.name':
           request.notebookRuntimeTemplate!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateNotebookRuntimeTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2669,7 +2673,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNotebookRuntime request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2796,7 +2802,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNotebookExecutionJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2933,7 +2941,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3108,7 +3118,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3291,7 +3303,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3461,7 +3475,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3631,7 +3647,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3801,7 +3819,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3971,7 +3991,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4143,7 +4165,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4310,7 +4334,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4516,7 +4542,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNotebookRuntimeTemplatesRequest,
@@ -4625,7 +4653,9 @@ export class NotebookServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotebookRuntimeTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotebookRuntimeTemplates stream %j', request);
     return this.descriptors.page.listNotebookRuntimeTemplates.createStream(
       this.innerApiCalls.listNotebookRuntimeTemplates as GaxCall,
@@ -4716,7 +4746,9 @@ export class NotebookServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotebookRuntimeTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotebookRuntimeTemplates iterate %j', request);
     return this.descriptors.page.listNotebookRuntimeTemplates.asyncIterate(
       this.innerApiCalls['listNotebookRuntimeTemplates'] as GaxCall,
@@ -4876,7 +4908,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNotebookRuntimesRequest,
@@ -4999,7 +5033,9 @@ export class NotebookServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotebookRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotebookRuntimes stream %j', request);
     return this.descriptors.page.listNotebookRuntimes.createStream(
       this.innerApiCalls.listNotebookRuntimes as GaxCall,
@@ -5104,7 +5140,9 @@ export class NotebookServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotebookRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotebookRuntimes iterate %j', request);
     return this.descriptors.page.listNotebookRuntimes.asyncIterate(
       this.innerApiCalls['listNotebookRuntimes'] as GaxCall,
@@ -5237,7 +5275,9 @@ export class NotebookServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNotebookExecutionJobsRequest,
@@ -5333,7 +5373,9 @@ export class NotebookServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotebookExecutionJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotebookExecutionJobs stream %j', request);
     return this.descriptors.page.listNotebookExecutionJobs.createStream(
       this.innerApiCalls.listNotebookExecutionJobs as GaxCall,
@@ -5411,7 +5453,9 @@ export class NotebookServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotebookExecutionJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotebookExecutionJobs iterate %j', request);
     return this.descriptors.page.listNotebookExecutionJobs.asyncIterate(
       this.innerApiCalls['listNotebookExecutionJobs'] as GaxCall,
@@ -5729,7 +5773,7 @@ export class NotebookServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

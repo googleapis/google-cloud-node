@@ -2432,7 +2432,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeaturestore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2550,7 +2552,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEntityType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2689,7 +2693,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entity_type.name': request.entityType!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEntityType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2806,7 +2812,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeature request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2941,7 +2949,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature.name': request.feature!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFeature request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3082,7 +3092,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3266,7 +3278,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'featurestore.name': request.featurestore!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3440,7 +3454,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3619,7 +3635,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3792,7 +3810,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3973,7 +3993,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4149,7 +4171,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4319,7 +4343,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4536,7 +4562,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4754,7 +4782,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         featurestore: request.featurestore ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4935,7 +4965,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5118,7 +5150,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5321,7 +5355,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeaturestoresRequest,
@@ -5427,7 +5463,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeaturestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeaturestores stream %j', request);
     return this.descriptors.page.listFeaturestores.createStream(
       this.innerApiCalls.listFeaturestores as GaxCall,
@@ -5515,7 +5553,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeaturestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeaturestores iterate %j', request);
     return this.descriptors.page.listFeaturestores.asyncIterate(
       this.innerApiCalls['listFeaturestores'] as GaxCall,
@@ -5658,7 +5698,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListEntityTypesRequest,
@@ -5764,7 +5806,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntityTypes stream %j', request);
     return this.descriptors.page.listEntityTypes.createStream(
       this.innerApiCalls.listEntityTypes as GaxCall,
@@ -5852,7 +5896,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntityTypes iterate %j', request);
     return this.descriptors.page.listEntityTypes.asyncIterate(
       this.innerApiCalls['listEntityTypes'] as GaxCall,
@@ -6011,7 +6057,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeaturesRequest,
@@ -6133,7 +6181,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
@@ -6237,7 +6287,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
@@ -6411,7 +6463,9 @@ export class FeaturestoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.ISearchFeaturesRequest,
@@ -6548,7 +6602,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['searchFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchFeatures stream %j', request);
     return this.descriptors.page.searchFeatures.createStream(
       this.innerApiCalls.searchFeatures as GaxCall,
@@ -6667,7 +6723,9 @@ export class FeaturestoreServiceClient {
       });
     const defaultCallSettings = this._defaults['searchFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchFeatures iterate %j', request);
     return this.descriptors.page.searchFeatures.asyncIterate(
       this.innerApiCalls['searchFeatures'] as GaxCall,
@@ -6985,7 +7043,7 @@ export class FeaturestoreServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

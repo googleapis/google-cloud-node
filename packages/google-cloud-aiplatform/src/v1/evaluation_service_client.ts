@@ -691,7 +691,9 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('evaluateInstances request %j', request);
     const wrappedCallback:
       | Callback<

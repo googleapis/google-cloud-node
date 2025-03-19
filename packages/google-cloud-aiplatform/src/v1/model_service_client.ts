@@ -2369,7 +2369,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getModel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2498,7 +2500,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'model.name': request.model!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateModel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2630,7 +2634,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('mergeVersionAliases request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2758,7 +2764,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('importModelEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2887,7 +2895,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchImportModelEvaluationSlices request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3022,7 +3032,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchImportEvaluatedAnnotations request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3149,7 +3161,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getModelEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3276,7 +3290,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getModelEvaluationSlice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3428,7 +3444,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3598,7 +3616,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3773,7 +3793,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3949,7 +3971,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4123,7 +4147,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4313,7 +4339,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4507,7 +4535,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelsRequest,
@@ -4610,7 +4640,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
@@ -4695,7 +4727,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
@@ -4825,7 +4859,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelVersionsRequest,
@@ -4918,7 +4954,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelVersions stream %j', request);
     return this.descriptors.page.listModelVersions.createStream(
       this.innerApiCalls.listModelVersions as GaxCall,
@@ -4993,7 +5031,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelVersions iterate %j', request);
     return this.descriptors.page.listModelVersions.asyncIterate(
       this.innerApiCalls['listModelVersions'] as GaxCall,
@@ -5106,7 +5146,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelVersionCheckpointsRequest,
@@ -5182,7 +5224,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelVersionCheckpoints stream %j', request);
     return this.descriptors.page.listModelVersionCheckpoints.createStream(
       this.innerApiCalls.listModelVersionCheckpoints as GaxCall,
@@ -5240,7 +5284,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelVersionCheckpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelVersionCheckpoints iterate %j', request);
     return this.descriptors.page.listModelVersionCheckpoints.asyncIterate(
       this.innerApiCalls['listModelVersionCheckpoints'] as GaxCall,
@@ -5352,7 +5398,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelEvaluationsRequest,
@@ -5427,7 +5475,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelEvaluations stream %j', request);
     return this.descriptors.page.listModelEvaluations.createStream(
       this.innerApiCalls.listModelEvaluations as GaxCall,
@@ -5484,7 +5534,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelEvaluations iterate %j', request);
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,
@@ -5599,7 +5651,9 @@ export class ModelServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelEvaluationSlicesRequest,
@@ -5677,7 +5731,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluationSlices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelEvaluationSlices stream %j', request);
     return this.descriptors.page.listModelEvaluationSlices.createStream(
       this.innerApiCalls.listModelEvaluationSlices as GaxCall,
@@ -5737,7 +5793,9 @@ export class ModelServiceClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluationSlices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelEvaluationSlices iterate %j', request);
     return this.descriptors.page.listModelEvaluationSlices.asyncIterate(
       this.innerApiCalls['listModelEvaluationSlices'] as GaxCall,
@@ -6055,7 +6113,7 @@ export class ModelServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

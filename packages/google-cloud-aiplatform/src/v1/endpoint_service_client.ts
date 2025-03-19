@@ -2332,7 +2332,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2451,7 +2453,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint.name': request.endpoint!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2598,7 +2602,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2767,7 +2773,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint.name': request.endpoint!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2936,7 +2944,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3125,7 +3135,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3305,7 +3317,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3493,7 +3507,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         endpoint: request.endpoint ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3693,7 +3709,9 @@ export class EndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListEndpointsRequest,
@@ -3796,7 +3814,9 @@ export class EndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEndpoints stream %j', request);
     return this.descriptors.page.listEndpoints.createStream(
       this.innerApiCalls.listEndpoints as GaxCall,
@@ -3881,7 +3901,9 @@ export class EndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEndpoints iterate %j', request);
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
@@ -4199,7 +4221,7 @@ export class EndpointServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

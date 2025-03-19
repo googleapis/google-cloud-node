@@ -2432,7 +2432,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCustomJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2544,7 +2546,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2674,7 +2678,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelCustomJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2799,7 +2805,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDataLabelingJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2920,7 +2928,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataLabelingJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3047,7 +3057,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelDataLabelingJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3176,7 +3188,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createHyperparameterTuningJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3303,7 +3317,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHyperparameterTuningJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3443,7 +3459,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelHyperparameterTuningJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3559,7 +3577,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createNasJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3671,7 +3691,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNasJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3795,7 +3817,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelNasJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3913,7 +3937,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNasTrialDetail request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4042,7 +4068,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBatchPredictionJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4169,7 +4197,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBatchPredictionJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4307,7 +4337,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelBatchPredictionJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4436,7 +4468,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createModelDeploymentMonitoringJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4569,7 +4603,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getModelDeploymentMonitoringJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4705,7 +4741,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseModelDeploymentMonitoringJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4840,7 +4878,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeModelDeploymentMonitoringJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4980,7 +5020,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5149,7 +5191,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5318,7 +5362,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5493,7 +5539,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5663,7 +5711,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5859,7 +5909,9 @@ export class JobServiceClient {
         'model_deployment_monitoring_job.name':
           request.modelDeploymentMonitoringJob!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6034,7 +6086,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6231,7 +6285,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
@@ -6325,7 +6381,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomJobs stream %j', request);
     return this.descriptors.page.listCustomJobs.createStream(
       this.innerApiCalls.listCustomJobs as GaxCall,
@@ -6401,7 +6459,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomJobs iterate %j', request);
     return this.descriptors.page.listCustomJobs.asyncIterate(
       this.innerApiCalls['listCustomJobs'] as GaxCall,
@@ -6534,7 +6594,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
@@ -6630,7 +6692,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataLabelingJobs stream %j', request);
     return this.descriptors.page.listDataLabelingJobs.createStream(
       this.innerApiCalls.listDataLabelingJobs as GaxCall,
@@ -6708,7 +6772,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataLabelingJobs iterate %j', request);
     return this.descriptors.page.listDataLabelingJobs.asyncIterate(
       this.innerApiCalls['listDataLabelingJobs'] as GaxCall,
@@ -6840,7 +6906,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
@@ -6935,7 +7003,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHyperparameterTuningJobs stream %j', request);
     return this.descriptors.page.listHyperparameterTuningJobs.createStream(
       this.innerApiCalls.listHyperparameterTuningJobs as GaxCall,
@@ -7012,7 +7082,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHyperparameterTuningJobs iterate %j', request);
     return this.descriptors.page.listHyperparameterTuningJobs.asyncIterate(
       this.innerApiCalls['listHyperparameterTuningJobs'] as GaxCall,
@@ -7137,7 +7209,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNasJobsRequest,
@@ -7231,7 +7305,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listNasJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasJobs stream %j', request);
     return this.descriptors.page.listNasJobs.createStream(
       this.innerApiCalls.listNasJobs as GaxCall,
@@ -7307,7 +7383,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listNasJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasJobs iterate %j', request);
     return this.descriptors.page.listNasJobs.asyncIterate(
       this.innerApiCalls['listNasJobs'] as GaxCall,
@@ -7416,7 +7494,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListNasTrialDetailsRequest,
@@ -7488,7 +7568,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listNasTrialDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasTrialDetails stream %j', request);
     return this.descriptors.page.listNasTrialDetails.createStream(
       this.innerApiCalls.listNasTrialDetails as GaxCall,
@@ -7542,7 +7624,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listNasTrialDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNasTrialDetails iterate %j', request);
     return this.descriptors.page.listNasTrialDetails.asyncIterate(
       this.innerApiCalls['listNasTrialDetails'] as GaxCall,
@@ -7674,7 +7758,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
@@ -7769,7 +7855,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBatchPredictionJobs stream %j', request);
     return this.descriptors.page.listBatchPredictionJobs.createStream(
       this.innerApiCalls.listBatchPredictionJobs as GaxCall,
@@ -7846,7 +7934,9 @@ export class JobServiceClient {
       });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBatchPredictionJobs iterate %j', request);
     return this.descriptors.page.listBatchPredictionJobs.asyncIterate(
       this.innerApiCalls['listBatchPredictionJobs'] as GaxCall,
@@ -7969,7 +8059,9 @@ export class JobServiceClient {
         model_deployment_monitoring_job:
           request.modelDeploymentMonitoringJob ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
@@ -8069,7 +8161,9 @@ export class JobServiceClient {
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'searchModelDeploymentMonitoringStatsAnomalies stream %j',
       request
@@ -8142,7 +8236,9 @@ export class JobServiceClient {
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'searchModelDeploymentMonitoringStatsAnomalies iterate %j',
       request
@@ -8273,7 +8369,9 @@ export class JobServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
@@ -8366,7 +8464,9 @@ export class JobServiceClient {
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelDeploymentMonitoringJobs stream %j', request);
     return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
       this.innerApiCalls.listModelDeploymentMonitoringJobs as GaxCall,
@@ -8438,7 +8538,9 @@ export class JobServiceClient {
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelDeploymentMonitoringJobs iterate %j', request);
     return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
       this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
@@ -8756,7 +8858,7 @@ export class JobServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

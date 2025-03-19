@@ -2277,7 +2277,9 @@ export class GenAiTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTuningJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2388,7 +2390,9 @@ export class GenAiTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTuningJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2516,7 +2520,9 @@ export class GenAiTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelTuningJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2657,7 +2663,9 @@ export class GenAiTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2825,7 +2833,9 @@ export class GenAiTuningServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListTuningJobsRequest,
@@ -2896,7 +2906,9 @@ export class GenAiTuningServiceClient {
       });
     const defaultCallSettings = this._defaults['listTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTuningJobs stream %j', request);
     return this.descriptors.page.listTuningJobs.createStream(
       this.innerApiCalls.listTuningJobs as GaxCall,
@@ -2949,7 +2961,9 @@ export class GenAiTuningServiceClient {
       });
     const defaultCallSettings = this._defaults['listTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTuningJobs iterate %j', request);
     return this.descriptors.page.listTuningJobs.asyncIterate(
       this.innerApiCalls['listTuningJobs'] as GaxCall,
@@ -3267,7 +3281,7 @@ export class GenAiTuningServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

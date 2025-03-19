@@ -2356,7 +2356,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeatureGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2470,7 +2472,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFeature request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2611,7 +2615,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2795,7 +2801,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature_group.name': request.featureGroup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2968,7 +2976,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3149,7 +3159,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3325,7 +3337,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3511,7 +3525,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'feature.name': request.feature!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3681,7 +3697,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3879,7 +3897,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeatureGroupsRequest,
@@ -3980,7 +4000,9 @@ export class FeatureRegistryServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureGroups stream %j', request);
     return this.descriptors.page.listFeatureGroups.createStream(
       this.innerApiCalls.listFeatureGroups as GaxCall,
@@ -4063,7 +4085,9 @@ export class FeatureRegistryServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatureGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatureGroups iterate %j', request);
     return this.descriptors.page.listFeatureGroups.asyncIterate(
       this.innerApiCalls['listFeatureGroups'] as GaxCall,
@@ -4222,7 +4246,9 @@ export class FeatureRegistryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListFeaturesRequest,
@@ -4344,7 +4370,9 @@ export class FeatureRegistryServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatures stream %j', request);
     return this.descriptors.page.listFeatures.createStream(
       this.innerApiCalls.listFeatures as GaxCall,
@@ -4448,7 +4476,9 @@ export class FeatureRegistryServiceClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFeatures iterate %j', request);
     return this.descriptors.page.listFeatures.asyncIterate(
       this.innerApiCalls['listFeatures'] as GaxCall,
@@ -4766,7 +4796,7 @@ export class FeatureRegistryServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

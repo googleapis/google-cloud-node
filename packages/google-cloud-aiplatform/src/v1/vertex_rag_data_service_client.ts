@@ -2323,7 +2323,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRagCorpus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2446,7 +2448,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('uploadRagFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2558,7 +2562,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRagFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2690,7 +2696,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2857,7 +2865,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'rag_corpus.name': request.ragCorpus!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3030,7 +3040,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3203,7 +3215,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3372,7 +3386,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3540,7 +3556,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListRagCorporaRequest,
@@ -3611,7 +3629,9 @@ export class VertexRagDataServiceClient {
       });
     const defaultCallSettings = this._defaults['listRagCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagCorpora stream %j', request);
     return this.descriptors.page.listRagCorpora.createStream(
       this.innerApiCalls.listRagCorpora as GaxCall,
@@ -3664,7 +3684,9 @@ export class VertexRagDataServiceClient {
       });
     const defaultCallSettings = this._defaults['listRagCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagCorpora iterate %j', request);
     return this.descriptors.page.listRagCorpora.asyncIterate(
       this.innerApiCalls['listRagCorpora'] as GaxCall,
@@ -3773,7 +3795,9 @@ export class VertexRagDataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.aiplatform.v1.IListRagFilesRequest,
@@ -3845,7 +3869,9 @@ export class VertexRagDataServiceClient {
       });
     const defaultCallSettings = this._defaults['listRagFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagFiles stream %j', request);
     return this.descriptors.page.listRagFiles.createStream(
       this.innerApiCalls.listRagFiles as GaxCall,
@@ -3899,7 +3925,9 @@ export class VertexRagDataServiceClient {
       });
     const defaultCallSettings = this._defaults['listRagFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRagFiles iterate %j', request);
     return this.descriptors.page.listRagFiles.asyncIterate(
       this.innerApiCalls['listRagFiles'] as GaxCall,
@@ -4217,7 +4245,7 @@ export class VertexRagDataServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
