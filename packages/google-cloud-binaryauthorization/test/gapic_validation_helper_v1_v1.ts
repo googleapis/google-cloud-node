@@ -194,7 +194,9 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.validationHelperV1Stub);
       client.close().then(() => {
         done();
@@ -253,7 +255,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
@@ -285,7 +287,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
@@ -332,7 +334,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
@@ -366,7 +368,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
@@ -385,7 +387,7 @@ describe('v1.ValidationHelperV1Client', () => {
   });
 
   describe('Path templates', () => {
-    describe('attestor', () => {
+    describe('attestor', async () => {
       const fakePath = '/rendered/path/attestor';
       const expectedParameters = {
         project: 'projectValue',
@@ -395,7 +397,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attestorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -434,7 +436,7 @@ describe('v1.ValidationHelperV1Client', () => {
       });
     });
 
-    describe('locationPolicy', () => {
+    describe('locationPolicy', async () => {
       const fakePath = '/rendered/path/locationPolicy';
       const expectedParameters = {
         location: 'locationValue',
@@ -443,7 +445,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -472,7 +474,7 @@ describe('v1.ValidationHelperV1Client', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -481,7 +483,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -510,7 +512,7 @@ describe('v1.ValidationHelperV1Client', () => {
       });
     });
 
-    describe('projectPolicy', () => {
+    describe('projectPolicy', async () => {
       const fakePath = '/rendered/path/projectPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -519,7 +521,7 @@ describe('v1.ValidationHelperV1Client', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

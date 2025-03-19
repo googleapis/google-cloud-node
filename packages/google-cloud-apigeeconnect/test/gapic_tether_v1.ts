@@ -191,7 +191,9 @@ describe('v1.TetherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.tetherStub);
       client.close().then(() => {
         done();
@@ -250,7 +252,7 @@ describe('v1.TetherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.EgressResponse()
       );
@@ -290,7 +292,7 @@ describe('v1.TetherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.EgressResponse()
       );

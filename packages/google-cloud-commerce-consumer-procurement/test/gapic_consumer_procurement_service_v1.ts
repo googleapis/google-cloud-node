@@ -324,7 +324,9 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.consumerProcurementServiceStub);
       client.close().then(() => {
         done();
@@ -395,7 +397,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetOrderRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetOrderRequest()
       );
@@ -479,7 +481,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetOrderRequest()
       );
@@ -510,7 +512,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetOrderRequest()
       );
@@ -534,7 +536,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.PlaceOrderRequest()
       );
@@ -569,7 +571,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.PlaceOrderRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.PlaceOrderRequest()
       );
@@ -660,7 +662,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.PlaceOrderRequest()
       );
@@ -696,7 +698,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -721,7 +723,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -742,7 +744,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
       );
@@ -777,7 +779,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
       );
@@ -834,7 +836,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
       );
@@ -904,7 +906,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -929,7 +931,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -950,7 +952,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
       );
@@ -985,7 +987,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
       );
@@ -1112,7 +1114,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1137,7 +1139,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1158,7 +1160,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1200,7 +1202,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1294,7 +1296,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1417,7 +1419,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.ListOrdersRequest()
       );
@@ -1517,7 +1519,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1605,7 +1607,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1799,8 +1801,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1822,7 +1823,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1831,8 +1832,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1848,7 +1848,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('billingAccount', () => {
+    describe('billingAccount', async () => {
       const fakePath = '/rendered/path/billingAccount';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1860,7 +1860,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1890,7 +1890,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
       });
     });
 
-    describe('licensePool', () => {
+    describe('licensePool', async () => {
       const fakePath = '/rendered/path/licensePool';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1903,7 +1903,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.licensePoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1945,7 +1945,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
       });
     });
 
-    describe('order', () => {
+    describe('order', async () => {
       const fakePath = '/rendered/path/order';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1958,7 +1958,7 @@ describe('v1.ConsumerProcurementServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.orderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

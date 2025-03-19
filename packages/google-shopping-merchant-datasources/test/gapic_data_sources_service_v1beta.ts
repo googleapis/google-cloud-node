@@ -263,7 +263,9 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataSourcesServiceStub);
       client.close().then(() => {
         done();
@@ -326,7 +328,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest()
       );
@@ -358,7 +360,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest()
       );
@@ -406,7 +408,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest()
       );
@@ -438,7 +440,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetDataSourceRequest()
       );
@@ -460,7 +462,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest()
       );
@@ -492,7 +494,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest()
       );
@@ -540,7 +542,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest()
       );
@@ -572,7 +574,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.CreateDataSourceRequest()
       );
@@ -594,7 +596,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest()
       );
@@ -627,7 +629,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest()
       );
@@ -676,7 +678,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest()
       );
@@ -709,7 +711,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.UpdateDataSourceRequest()
       );
@@ -732,7 +734,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest()
       );
@@ -764,7 +766,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest()
       );
@@ -812,7 +814,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest()
       );
@@ -844,7 +846,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.DeleteDataSourceRequest()
       );
@@ -866,7 +868,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest()
       );
@@ -898,7 +900,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest()
       );
@@ -946,7 +948,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest()
       );
@@ -978,7 +980,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.FetchDataSourceRequest()
       );
@@ -1000,7 +1002,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1040,7 +1042,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1194,7 +1196,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1247,7 +1249,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.ListDataSourcesRequest()
       );
@@ -1336,7 +1338,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -1346,7 +1348,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1375,7 +1377,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
       });
     });
 
-    describe('dataSource', () => {
+    describe('dataSource', async () => {
       const fakePath = '/rendered/path/dataSource';
       const expectedParameters = {
         account: 'accountValue',
@@ -1386,7 +1388,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1425,7 +1427,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
       });
     });
 
-    describe('fileUpload', () => {
+    describe('fileUpload', async () => {
       const fakePath = '/rendered/path/fileUpload';
       const expectedParameters = {
         account: 'accountValue',
@@ -1437,7 +1439,7 @@ describe('v1beta.DataSourcesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.fileUploadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

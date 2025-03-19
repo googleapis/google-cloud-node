@@ -266,7 +266,9 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionAutoscalersStub);
       client.close().then(() => {
         done();
@@ -325,7 +327,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
@@ -366,7 +368,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
@@ -423,7 +425,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
@@ -492,7 +494,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
@@ -532,7 +534,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
@@ -624,7 +626,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
@@ -655,7 +657,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
@@ -691,7 +693,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
@@ -743,7 +745,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
@@ -802,7 +804,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
@@ -837,7 +839,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
@@ -887,7 +889,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
@@ -919,7 +921,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
@@ -945,7 +947,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
@@ -981,7 +983,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
@@ -1066,7 +1068,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
@@ -1092,7 +1094,7 @@ describe('v1.RegionAutoscalersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
@@ -1129,7 +1131,7 @@ describe('v1.RegionAutoscalersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
@@ -1181,7 +1183,7 @@ describe('v1.RegionAutoscalersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
@@ -1213,7 +1215,7 @@ describe('v1.RegionAutoscalersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
@@ -1272,7 +1274,7 @@ describe('v1.RegionAutoscalersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
@@ -1328,7 +1330,7 @@ describe('v1.RegionAutoscalersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
@@ -1375,7 +1377,7 @@ describe('v1.RegionAutoscalersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );

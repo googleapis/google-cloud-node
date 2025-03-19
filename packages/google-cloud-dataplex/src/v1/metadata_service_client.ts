@@ -827,7 +827,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEntity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -940,7 +942,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entity.name': request.entity!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEntity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1054,7 +1058,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteEntity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1166,7 +1172,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEntity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1286,7 +1294,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPartition request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1408,7 +1418,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePartition request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1521,7 +1533,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPartition request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1657,7 +1671,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListEntitiesRequest,
@@ -1740,7 +1756,9 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntities stream %j', request);
     return this.descriptors.page.listEntities.createStream(
       this.innerApiCalls.listEntities as GaxCall,
@@ -1805,7 +1823,9 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntities iterate %j', request);
     return this.descriptors.page.listEntities.asyncIterate(
       this.innerApiCalls['listEntities'] as GaxCall,
@@ -1934,7 +1954,9 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListPartitionsRequest,
@@ -2026,7 +2048,9 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listPartitions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPartitions stream %j', request);
     return this.descriptors.page.listPartitions.createStream(
       this.innerApiCalls.listPartitions as GaxCall,
@@ -2100,7 +2124,9 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listPartitions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPartitions iterate %j', request);
     return this.descriptors.page.listPartitions.asyncIterate(
       this.innerApiCalls['listPartitions'] as GaxCall,
@@ -2280,7 +2306,7 @@ export class MetadataServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

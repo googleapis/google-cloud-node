@@ -514,7 +514,9 @@ export class ShippingSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getShippingSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -643,7 +645,9 @@ export class ShippingSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertShippingSettings request %j', request);
     const wrappedCallback:
       | Callback<

@@ -519,7 +519,9 @@ export class EmailPreferencesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEmailPreferences request %j', request);
     const wrappedCallback:
       | Callback<
@@ -656,7 +658,9 @@ export class EmailPreferencesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'email_preferences.name': request.emailPreferences!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEmailPreferences request %j', request);
     const wrappedCallback:
       | Callback<

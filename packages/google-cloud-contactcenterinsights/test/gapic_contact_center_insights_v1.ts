@@ -300,7 +300,9 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.contactCenterInsightsStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -396,7 +398,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateConversationRequest()
       );
@@ -498,7 +500,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -532,7 +534,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateConversationRequest()
       );
@@ -637,7 +639,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -669,7 +671,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -717,7 +719,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetConversationRequest()
       );
@@ -771,7 +773,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -804,7 +806,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -852,7 +854,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteConversationRequest()
       );
@@ -906,7 +908,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -938,7 +940,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -986,7 +988,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -1018,7 +1020,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRequest()
       );
@@ -1040,7 +1042,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1072,7 +1074,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1120,7 +1122,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1152,7 +1154,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest()
       );
@@ -1174,7 +1176,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1207,7 +1209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1256,7 +1258,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1289,7 +1291,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1344,7 +1346,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1392,7 +1394,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1424,7 +1426,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueModelRequest()
       );
@@ -1446,7 +1448,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1478,7 +1480,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1526,7 +1528,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1558,7 +1560,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssueModelsRequest()
       );
@@ -1580,7 +1582,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1612,7 +1614,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1660,7 +1662,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1689,7 +1691,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetIssueRequest()
       );
@@ -1711,7 +1713,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1743,7 +1745,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1791,7 +1793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1823,7 +1825,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListIssuesRequest()
       );
@@ -1845,7 +1847,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1878,7 +1880,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1927,7 +1929,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1960,7 +1962,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateIssueRequest()
       );
@@ -1983,7 +1985,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2015,7 +2017,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2063,7 +2065,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2095,7 +2097,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2150,7 +2152,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2198,7 +2200,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2233,7 +2235,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateIssueModelStatsRequest()
       );
@@ -2258,7 +2260,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2291,7 +2293,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2339,7 +2341,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2371,7 +2373,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreatePhraseMatcherRequest()
       );
@@ -2393,7 +2395,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2425,7 +2427,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2473,7 +2475,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2505,7 +2507,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest()
       );
@@ -2527,7 +2529,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2560,7 +2562,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2608,7 +2610,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2640,7 +2642,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest()
       );
@@ -2662,7 +2664,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2696,7 +2698,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2745,7 +2747,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2778,7 +2780,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest()
       );
@@ -2801,7 +2803,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2833,7 +2835,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2881,7 +2883,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2913,7 +2915,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CalculateStatsRequest()
       );
@@ -2935,7 +2937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -2967,7 +2969,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -3015,7 +3017,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -3047,7 +3049,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetSettingsRequest()
       );
@@ -3069,7 +3071,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3102,7 +3104,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3151,7 +3153,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3184,7 +3186,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateSettingsRequest()
       );
@@ -3207,7 +3209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3240,7 +3242,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3288,7 +3290,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3320,7 +3322,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRuleRequest()
       );
@@ -3342,7 +3344,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3374,7 +3376,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3422,7 +3424,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3454,7 +3456,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetAnalysisRuleRequest()
       );
@@ -3476,7 +3478,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3510,7 +3512,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3559,7 +3561,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3592,7 +3594,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateAnalysisRuleRequest()
       );
@@ -3615,7 +3617,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3648,7 +3650,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3696,7 +3698,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3728,7 +3730,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteAnalysisRuleRequest()
       );
@@ -3750,7 +3752,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3782,7 +3784,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3830,7 +3832,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3862,7 +3864,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest()
       );
@@ -3884,7 +3886,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -3916,7 +3918,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -3964,7 +3966,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -3996,7 +3998,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateViewRequest()
       );
@@ -4018,7 +4020,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4050,7 +4052,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4098,7 +4100,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4127,7 +4129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetViewRequest()
       );
@@ -4149,7 +4151,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4182,7 +4184,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4231,7 +4233,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4264,7 +4266,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateViewRequest()
       );
@@ -4287,7 +4289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4319,7 +4321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4367,7 +4369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4399,7 +4401,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteViewRequest()
       );
@@ -4421,7 +4423,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4453,7 +4455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4501,7 +4503,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4533,7 +4535,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaQuestionRequest()
       );
@@ -4555,7 +4557,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4587,7 +4589,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4635,7 +4637,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4667,7 +4669,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaQuestionRequest()
       );
@@ -4689,7 +4691,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4722,7 +4724,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4771,7 +4773,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4804,7 +4806,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaQuestionRequest()
       );
@@ -4827,7 +4829,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4859,7 +4861,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4907,7 +4909,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4939,7 +4941,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaQuestionRequest()
       );
@@ -4961,7 +4963,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -4993,7 +4995,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -5041,7 +5043,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -5073,7 +5075,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRequest()
       );
@@ -5095,7 +5097,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5127,7 +5129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5175,7 +5177,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5207,7 +5209,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRequest()
       );
@@ -5229,7 +5231,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5262,7 +5264,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5311,7 +5313,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5344,7 +5346,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateQaScorecardRequest()
       );
@@ -5367,7 +5369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5399,7 +5401,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5447,7 +5449,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5479,7 +5481,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRequest()
       );
@@ -5501,7 +5503,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5534,7 +5536,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5582,7 +5584,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5617,7 +5619,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateQaScorecardRevisionRequest()
       );
@@ -5642,7 +5644,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5675,7 +5677,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5723,7 +5725,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5758,7 +5760,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetQaScorecardRevisionRequest()
       );
@@ -5783,7 +5785,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5816,7 +5818,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5864,7 +5866,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5899,7 +5901,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployQaScorecardRevisionRequest()
       );
@@ -5924,7 +5926,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -5957,7 +5959,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -6005,7 +6007,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -6040,7 +6042,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployQaScorecardRevisionRequest()
       );
@@ -6065,7 +6067,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6098,7 +6100,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6146,7 +6148,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6181,7 +6183,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteQaScorecardRevisionRequest()
       );
@@ -6206,7 +6208,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6239,7 +6241,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6287,7 +6289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6319,7 +6321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateFeedbackLabelRequest()
       );
@@ -6341,7 +6343,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6373,7 +6375,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6421,7 +6423,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6453,7 +6455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.GetFeedbackLabelRequest()
       );
@@ -6475,7 +6477,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6509,7 +6511,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6558,7 +6560,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6591,7 +6593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UpdateFeedbackLabelRequest()
       );
@@ -6614,7 +6616,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6647,7 +6649,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6695,7 +6697,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6727,7 +6729,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteFeedbackLabelRequest()
       );
@@ -6749,7 +6751,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6783,7 +6785,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6838,7 +6840,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6870,7 +6872,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UploadConversationRequest()
       );
@@ -6904,7 +6906,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6927,7 +6929,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6949,7 +6951,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -6983,7 +6985,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -7038,7 +7040,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -7070,7 +7072,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateAnalysisRequest()
       );
@@ -7104,7 +7106,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7127,7 +7129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7149,7 +7151,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7183,7 +7185,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7238,7 +7240,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7273,7 +7275,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsRequest()
       );
@@ -7307,7 +7309,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7331,7 +7333,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7353,7 +7355,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7387,7 +7389,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7442,7 +7444,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7477,7 +7479,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDeleteConversationsRequest()
       );
@@ -7511,7 +7513,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7535,7 +7537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7557,7 +7559,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7591,7 +7593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7646,7 +7648,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7678,7 +7680,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.IngestConversationsRequest()
       );
@@ -7712,7 +7714,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7735,7 +7737,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7757,7 +7759,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7791,7 +7793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7846,7 +7848,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7878,7 +7880,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest()
       );
@@ -7912,7 +7914,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7935,7 +7937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7957,7 +7959,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -7991,7 +7993,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -8046,7 +8048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -8078,7 +8080,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest()
       );
@@ -8112,7 +8114,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8135,7 +8137,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8157,7 +8159,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8191,7 +8193,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8246,7 +8248,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8278,7 +8280,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest()
       );
@@ -8312,7 +8314,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8335,7 +8337,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8357,7 +8359,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8391,7 +8393,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8446,7 +8448,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8478,7 +8480,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest()
       );
@@ -8512,7 +8514,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8535,7 +8537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8557,7 +8559,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8591,7 +8593,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8646,7 +8648,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8678,7 +8680,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest()
       );
@@ -8712,7 +8714,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8735,7 +8737,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8757,7 +8759,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8791,7 +8793,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8846,7 +8848,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8878,7 +8880,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest()
       );
@@ -8912,7 +8914,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8935,7 +8937,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8957,7 +8959,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -8991,7 +8993,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -9046,7 +9048,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -9078,7 +9080,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest()
       );
@@ -9112,7 +9114,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9135,7 +9137,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9157,7 +9159,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9192,7 +9194,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9248,7 +9250,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9284,7 +9286,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest()
       );
@@ -9319,7 +9321,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9343,7 +9345,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9365,7 +9367,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9398,7 +9400,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9453,7 +9455,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9485,7 +9487,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.QueryMetricsRequest()
       );
@@ -9519,7 +9521,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9542,7 +9544,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9561,7 +9563,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9595,7 +9597,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9650,7 +9652,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9685,7 +9687,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionRequest()
       );
@@ -9719,7 +9721,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9743,7 +9745,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9765,7 +9767,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9799,7 +9801,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9854,7 +9856,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9889,7 +9891,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest()
       );
@@ -9923,7 +9925,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9947,7 +9949,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9969,7 +9971,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10003,7 +10005,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10058,7 +10060,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10093,7 +10095,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest()
       );
@@ -10127,7 +10129,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -10151,7 +10153,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -10173,7 +10175,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10213,7 +10215,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10271,7 +10273,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10303,7 +10305,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10367,7 +10369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10420,7 +10422,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10471,7 +10473,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListConversationsRequest()
       );
@@ -10515,7 +10517,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10555,7 +10557,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10613,7 +10615,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10645,7 +10647,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10707,7 +10709,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10760,7 +10762,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10811,7 +10813,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysesRequest()
       );
@@ -10855,7 +10857,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10896,7 +10898,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10954,7 +10956,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -10986,7 +10988,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11050,7 +11052,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11103,7 +11105,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11154,7 +11156,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListPhraseMatchersRequest()
       );
@@ -11198,7 +11200,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11238,7 +11240,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11296,7 +11298,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11328,7 +11330,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11392,7 +11394,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11445,7 +11447,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11496,7 +11498,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAnalysisRulesRequest()
       );
@@ -11540,7 +11542,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11580,7 +11582,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11636,7 +11638,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11665,7 +11667,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11727,7 +11729,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11780,7 +11782,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11830,7 +11832,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListViewsRequest()
       );
@@ -11875,7 +11877,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -11915,7 +11917,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -11973,7 +11975,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12005,7 +12007,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12069,7 +12071,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12122,7 +12124,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12173,7 +12175,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaQuestionsRequest()
       );
@@ -12217,7 +12219,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12257,7 +12259,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12315,7 +12317,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12347,7 +12349,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12411,7 +12413,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12464,7 +12466,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12515,7 +12517,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardsRequest()
       );
@@ -12559,7 +12561,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12600,7 +12602,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12658,7 +12660,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12693,7 +12695,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12763,7 +12765,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12822,7 +12824,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12877,7 +12879,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListQaScorecardRevisionsRequest()
       );
@@ -12925,7 +12927,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -12966,7 +12968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13024,7 +13026,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13056,7 +13058,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13120,7 +13122,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13173,7 +13175,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13224,7 +13226,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListFeedbackLabelsRequest()
       );
@@ -13268,7 +13270,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13309,7 +13311,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13367,7 +13369,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13402,7 +13404,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13472,7 +13474,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13531,7 +13533,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13586,7 +13588,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contactcenterinsights.v1.ListAllFeedbackLabelsRequest()
       );
@@ -13633,7 +13635,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -13664,7 +13666,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -13709,7 +13711,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -13742,7 +13744,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -13773,7 +13775,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -13818,7 +13820,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -13851,7 +13853,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -13885,7 +13887,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -13930,7 +13932,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -13966,7 +13968,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -14048,7 +14050,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -14131,7 +14133,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -14230,8 +14232,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -14251,7 +14252,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -14260,8 +14261,7 @@ describe('v1.ContactCenterInsightsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -14277,7 +14277,7 @@ describe('v1.ContactCenterInsightsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('analysisRule', () => {
+    describe('analysisRule', async () => {
       const fakePath = '/rendered/path/analysisRule';
       const expectedParameters = {
         project: 'projectValue',
@@ -14289,7 +14289,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.analysisRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14342,7 +14342,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('encryptionSpec', () => {
+    describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
         project: 'projectValue',
@@ -14353,7 +14353,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.encryptionSpecPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14395,7 +14395,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('issue', () => {
+    describe('issue', async () => {
       const fakePath = '/rendered/path/issue';
       const expectedParameters = {
         project: 'projectValue',
@@ -14408,7 +14408,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.issuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14472,7 +14472,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('issueModel', () => {
+    describe('issueModel', async () => {
       const fakePath = '/rendered/path/issueModel';
       const expectedParameters = {
         project: 'projectValue',
@@ -14484,7 +14484,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.issueModelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14537,7 +14537,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -14548,7 +14548,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14587,7 +14587,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('phraseMatcher', () => {
+    describe('phraseMatcher', async () => {
       const fakePath = '/rendered/path/phraseMatcher';
       const expectedParameters = {
         project: 'projectValue',
@@ -14599,7 +14599,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.phraseMatcherPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -14652,7 +14652,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationAuthorizedViewSetAuthorizedViewConversation', () => {
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversation', async () => {
       const fakePath =
         '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversation';
       const expectedParameters = {
@@ -14667,7 +14667,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationPathTemplate.match =
@@ -14780,7 +14780,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis', () => {
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis', async () => {
       const fakePath =
         '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysis';
       const expectedParameters = {
@@ -14796,7 +14796,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationAnalysisPathTemplate.match =
@@ -14927,7 +14927,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel', () => {
+    describe('projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel', async () => {
       const fakePath =
         '/rendered/path/projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabel';
       const expectedParameters = {
@@ -14943,7 +14943,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAuthorizedViewSetAuthorizedViewConversationFeedbackLabelPathTemplate.match =
@@ -15074,7 +15074,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationConversation', () => {
+    describe('projectLocationConversation', async () => {
       const fakePath = '/rendered/path/projectLocationConversation';
       const expectedParameters = {
         project: 'projectValue',
@@ -15086,7 +15086,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationPathTemplate.match = sinon
@@ -15153,7 +15153,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationConversationAnalysis', () => {
+    describe('projectLocationConversationAnalysis', async () => {
       const fakePath = '/rendered/path/projectLocationConversationAnalysis';
       const expectedParameters = {
         project: 'projectValue',
@@ -15166,7 +15166,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationAnalysisPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationAnalysisPathTemplate.match =
@@ -15255,7 +15255,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('projectLocationConversationFeedbackLabel', () => {
+    describe('projectLocationConversationFeedbackLabel', async () => {
       const fakePath =
         '/rendered/path/projectLocationConversationFeedbackLabel';
       const expectedParameters = {
@@ -15269,7 +15269,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationConversationFeedbackLabelPathTemplate.match =
@@ -15363,7 +15363,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaQuestion', () => {
+    describe('qaQuestion', async () => {
       const fakePath = '/rendered/path/qaQuestion';
       const expectedParameters = {
         project: 'projectValue',
@@ -15377,7 +15377,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaQuestionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15452,7 +15452,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaScorecard', () => {
+    describe('qaScorecard', async () => {
       const fakePath = '/rendered/path/qaScorecard';
       const expectedParameters = {
         project: 'projectValue',
@@ -15464,7 +15464,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaScorecardPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15517,7 +15517,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaScorecardResult', () => {
+    describe('qaScorecardResult', async () => {
       const fakePath = '/rendered/path/qaScorecardResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -15529,7 +15529,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaScorecardResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15595,7 +15595,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('qaScorecardRevision', () => {
+    describe('qaScorecardRevision', async () => {
       const fakePath = '/rendered/path/qaScorecardRevision';
       const expectedParameters = {
         project: 'projectValue',
@@ -15608,7 +15608,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.qaScorecardRevisionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15690,7 +15690,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('settings', () => {
+    describe('settings', async () => {
       const fakePath = '/rendered/path/settings';
       const expectedParameters = {
         project: 'projectValue',
@@ -15701,7 +15701,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.settingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -15740,7 +15740,7 @@ describe('v1.ContactCenterInsightsClient', () => {
       });
     });
 
-    describe('view', () => {
+    describe('view', async () => {
       const fakePath = '/rendered/path/view';
       const expectedParameters = {
         project: 'projectValue',
@@ -15752,7 +15752,7 @@ describe('v1.ContactCenterInsightsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.viewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

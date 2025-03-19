@@ -532,7 +532,9 @@ export class RegionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRegion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -664,7 +666,9 @@ export class RegionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRegion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -794,7 +798,9 @@ export class RegionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'region.name': request.region!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRegion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -921,7 +927,9 @@ export class RegionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRegion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1056,7 +1064,9 @@ export class RegionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListRegionsRequest,
@@ -1129,7 +1139,9 @@ export class RegionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listRegions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRegions stream %j', request);
     return this.descriptors.page.listRegions.createStream(
       this.innerApiCalls.listRegions as GaxCall,
@@ -1184,7 +1196,9 @@ export class RegionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listRegions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRegions iterate %j', request);
     return this.descriptors.page.listRegions.asyncIterate(
       this.innerApiCalls['listRegions'] as GaxCall,

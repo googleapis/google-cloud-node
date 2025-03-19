@@ -674,7 +674,9 @@ export class JobControllerClient {
         project_id: request.projectId ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('submitJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -787,7 +789,9 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -909,7 +913,9 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1026,7 +1032,9 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1140,7 +1148,9 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1286,7 +1296,9 @@ export class JobControllerClient {
         project_id: request.projectId ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1468,7 +1480,9 @@ export class JobControllerClient {
         project_id: request.projectId ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListJobsRequest,
@@ -1559,7 +1573,9 @@ export class JobControllerClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -1634,7 +1650,9 @@ export class JobControllerClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -1874,7 +1892,7 @@ export class JobControllerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

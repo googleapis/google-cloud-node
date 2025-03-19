@@ -894,7 +894,7 @@
                             "sdpFilterResult",
                             "piAndJailbreakFilterResult",
                             "maliciousUriFilterResult",
-                            "csamFilterResult",
+                            "csamFilterFilterResult",
                             "virusScanFilterResult"
                           ]
                         }
@@ -916,7 +916,7 @@
                           "type": "MaliciousUriFilterResult",
                           "id": 4
                         },
-                        "csamFilterResult": {
+                        "csamFilterFilterResult": {
                           "type": "CsamFilterResult",
                           "id": 5
                         },

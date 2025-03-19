@@ -501,7 +501,9 @@ export class DashboardsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDashboard request %j', request);
     const wrappedCallback:
       | Callback<
@@ -628,7 +630,9 @@ export class DashboardsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDashboard request %j', request);
     const wrappedCallback:
       | Callback<
@@ -753,7 +757,9 @@ export class DashboardsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDashboard request %j', request);
     const wrappedCallback:
       | Callback<
@@ -879,7 +885,9 @@ export class DashboardsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'dashboard.name': request.dashboard!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDashboard request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1016,7 +1024,9 @@ export class DashboardsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
@@ -1087,7 +1097,9 @@ export class DashboardsServiceClient {
       });
     const defaultCallSettings = this._defaults['listDashboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDashboards stream %j', request);
     return this.descriptors.page.listDashboards.createStream(
       this.innerApiCalls.listDashboards as GaxCall,
@@ -1140,7 +1152,9 @@ export class DashboardsServiceClient {
       });
     const defaultCallSettings = this._defaults['listDashboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDashboards iterate %j', request);
     return this.descriptors.page.listDashboards.asyncIterate(
       this.innerApiCalls['listDashboards'] as GaxCall,

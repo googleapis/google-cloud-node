@@ -284,7 +284,9 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionNetworkFirewallPoliciesStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -399,7 +401,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -459,7 +461,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -503,7 +505,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -537,7 +539,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -641,7 +643,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -682,7 +684,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
@@ -760,7 +762,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
@@ -820,7 +822,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
@@ -864,7 +866,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CloneRulesRegionNetworkFirewallPolicyRequest()
       );
@@ -898,7 +900,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
@@ -1043,7 +1045,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkFirewallPolicyRequest()
       );
@@ -1077,7 +1079,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
@@ -1120,7 +1122,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
@@ -1178,7 +1180,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
@@ -1218,7 +1220,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkFirewallPolicyRequest()
       );
@@ -1252,7 +1254,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -1296,7 +1298,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -1356,7 +1358,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -1400,7 +1402,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -1434,7 +1436,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
@@ -1474,7 +1476,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
@@ -1529,7 +1531,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
@@ -1571,7 +1573,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest()
       );
@@ -1603,7 +1605,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -1647,7 +1649,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -1707,7 +1709,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -1751,7 +1753,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -1785,7 +1787,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -1829,7 +1831,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -1889,7 +1891,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -1930,7 +1932,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -1964,7 +1966,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
@@ -2003,7 +2005,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
@@ -2058,7 +2060,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
@@ -2094,7 +2096,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkFirewallPolicyRequest()
       );
@@ -2123,7 +2125,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
@@ -2166,7 +2168,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
@@ -2224,7 +2226,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
@@ -2264,7 +2266,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest()
       );
@@ -2298,7 +2300,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2342,7 +2344,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2402,7 +2404,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2443,7 +2445,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2477,7 +2479,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -2521,7 +2523,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -2581,7 +2583,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -2625,7 +2627,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveAssociationRegionNetworkFirewallPolicyRequest()
       );
@@ -2659,7 +2661,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2703,7 +2705,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2763,7 +2765,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2807,7 +2809,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveRuleRegionNetworkFirewallPolicyRequest()
       );
@@ -2841,7 +2843,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -2885,7 +2887,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -2945,7 +2947,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -2989,7 +2991,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest()
       );
@@ -3023,7 +3025,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
@@ -3068,7 +3070,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
@@ -3128,7 +3130,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
@@ -3172,7 +3174,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionNetworkFirewallPolicyRequest()
       );
@@ -3206,7 +3208,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
@@ -3252,7 +3254,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
@@ -3313,7 +3315,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
@@ -3348,7 +3350,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
@@ -3416,7 +3418,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
@@ -3475,7 +3477,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );
@@ -3531,7 +3533,7 @@ describe('v1.RegionNetworkFirewallPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkFirewallPoliciesRequest()
       );

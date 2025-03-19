@@ -490,7 +490,9 @@ export class ConversionSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createConversionSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -619,7 +621,9 @@ export class ConversionSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversion_source.name': request.conversionSource!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConversionSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -748,7 +752,9 @@ export class ConversionSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteConversionSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -875,7 +881,9 @@ export class ConversionSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('undeleteConversionSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1001,7 +1009,9 @@ export class ConversionSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversionSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1135,7 +1145,9 @@ export class ConversionSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.conversions.v1beta.IListConversionSourcesRequest,
@@ -1207,7 +1219,9 @@ export class ConversionSourcesServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversionSources stream %j', request);
     return this.descriptors.page.listConversionSources.createStream(
       this.innerApiCalls.listConversionSources as GaxCall,
@@ -1261,7 +1275,9 @@ export class ConversionSourcesServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversionSources iterate %j', request);
     return this.descriptors.page.listConversionSources.asyncIterate(
       this.innerApiCalls['listConversionSources'] as GaxCall,

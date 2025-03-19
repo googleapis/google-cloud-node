@@ -481,7 +481,9 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQuestion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -600,7 +602,9 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createQuestion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -722,7 +726,9 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('executeQuestion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -843,7 +849,9 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getUserFeedback request %j', request);
     const wrappedCallback:
       | Callback<
@@ -974,7 +982,9 @@ export class QuestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'user_feedback.name': request.userFeedback!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateUserFeedback request %j', request);
     const wrappedCallback:
       | Callback<

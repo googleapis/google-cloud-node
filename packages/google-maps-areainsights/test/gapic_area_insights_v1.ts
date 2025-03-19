@@ -192,7 +192,9 @@ describe('v1.AreaInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.areaInsightsStub);
       client.close().then(() => {
         done();
@@ -251,7 +253,7 @@ describe('v1.AreaInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.areainsights.v1.ComputeInsightsRequest()
       );
@@ -268,7 +270,7 @@ describe('v1.AreaInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.areainsights.v1.ComputeInsightsRequest()
       );
@@ -301,7 +303,7 @@ describe('v1.AreaInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.areainsights.v1.ComputeInsightsRequest()
       );
@@ -318,7 +320,7 @@ describe('v1.AreaInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.areainsights.v1.ComputeInsightsRequest()
       );
@@ -329,7 +331,7 @@ describe('v1.AreaInsightsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('place', () => {
+    describe('place', async () => {
       const fakePath = '/rendered/path/place';
       const expectedParameters = {
         place_id: 'placeIdValue',
@@ -338,7 +340,7 @@ describe('v1.AreaInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.placePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

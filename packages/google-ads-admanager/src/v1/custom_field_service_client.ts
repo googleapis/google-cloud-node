@@ -517,7 +517,9 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomField request %j', request);
     const wrappedCallback:
       | Callback<
@@ -659,7 +661,9 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListCustomFieldsRequest,
@@ -742,7 +746,9 @@ export class CustomFieldServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomFields'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomFields stream %j', request);
     return this.descriptors.page.listCustomFields.createStream(
       this.innerApiCalls.listCustomFields as GaxCall,
@@ -807,7 +813,9 @@ export class CustomFieldServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomFields'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomFields iterate %j', request);
     return this.descriptors.page.listCustomFields.asyncIterate(
       this.innerApiCalls['listCustomFields'] as GaxCall,

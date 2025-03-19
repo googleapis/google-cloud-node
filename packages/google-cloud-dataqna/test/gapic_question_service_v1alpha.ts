@@ -191,7 +191,9 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.questionServiceStub);
       client.close().then(() => {
         done();
@@ -250,7 +252,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
@@ -281,7 +283,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
@@ -328,7 +330,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
@@ -359,7 +361,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
@@ -380,7 +382,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
@@ -411,7 +413,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
@@ -458,7 +460,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
@@ -489,7 +491,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
@@ -510,7 +512,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
@@ -541,7 +543,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
@@ -588,7 +590,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
@@ -619,7 +621,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
@@ -640,7 +642,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
@@ -671,7 +673,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
@@ -718,7 +720,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
@@ -749,7 +751,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
@@ -770,7 +772,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
@@ -803,7 +805,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
@@ -851,7 +853,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
@@ -883,7 +885,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
@@ -900,7 +902,7 @@ describe('v1alpha.QuestionServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -910,7 +912,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -949,7 +951,7 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
     });
 
-    describe('question', () => {
+    describe('question', async () => {
       const fakePath = '/rendered/path/question';
       const expectedParameters = {
         project: 'projectValue',
@@ -960,7 +962,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.questionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1013,7 +1015,7 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
     });
 
-    describe('userFeedback', () => {
+    describe('userFeedback', async () => {
       const fakePath = '/rendered/path/userFeedback';
       const expectedParameters = {
         project: 'projectValue',
@@ -1024,7 +1026,7 @@ describe('v1alpha.QuestionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userFeedbackPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -514,7 +514,9 @@ export class AutofeedSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutofeedSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -641,7 +643,9 @@ export class AutofeedSettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'autofeed_settings.name': request.autofeedSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAutofeedSettings request %j', request);
     const wrappedCallback:
       | Callback<

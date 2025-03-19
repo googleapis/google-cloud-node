@@ -200,7 +200,9 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.fileUploadsServiceStub);
       client.close().then(() => {
         done();
@@ -263,7 +265,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest()
       );
@@ -295,7 +297,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest()
       );
@@ -343,7 +345,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest()
       );
@@ -375,7 +377,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.datasources.v1beta.GetFileUploadRequest()
       );
@@ -391,7 +393,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('dataSource', () => {
+    describe('dataSource', async () => {
       const fakePath = '/rendered/path/dataSource';
       const expectedParameters = {
         account: 'accountValue',
@@ -402,7 +404,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -441,7 +443,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
       });
     });
 
-    describe('fileUpload', () => {
+    describe('fileUpload', async () => {
       const fakePath = '/rendered/path/fileUpload';
       const expectedParameters = {
         account: 'accountValue',
@@ -453,7 +455,7 @@ describe('v1beta.FileUploadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.fileUploadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

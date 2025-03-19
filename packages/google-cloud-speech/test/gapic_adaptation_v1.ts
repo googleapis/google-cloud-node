@@ -250,7 +250,9 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.adaptationStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
@@ -387,7 +389,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
@@ -517,7 +519,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
@@ -548,7 +550,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
@@ -569,7 +571,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
@@ -601,7 +603,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
@@ -649,7 +651,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
@@ -681,7 +683,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
@@ -703,7 +705,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
@@ -734,7 +736,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
@@ -781,7 +783,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
@@ -812,7 +814,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
@@ -833,7 +835,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
@@ -864,7 +866,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
@@ -994,7 +996,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
@@ -1072,7 +1074,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
@@ -1093,7 +1095,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
@@ -1125,7 +1127,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
@@ -1173,7 +1175,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
@@ -1205,7 +1207,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
@@ -1227,7 +1229,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
@@ -1258,7 +1260,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
@@ -1305,7 +1307,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
@@ -1336,7 +1338,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
@@ -1357,7 +1359,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1524,7 +1526,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1573,7 +1575,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1616,7 +1618,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
@@ -1658,7 +1660,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1691,7 +1693,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1771,7 +1773,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1825,7 +1827,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1874,7 +1876,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1917,7 +1919,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
@@ -1954,7 +1956,7 @@ describe('v1.AdaptationClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('customClass', () => {
+    describe('customClass', async () => {
       const fakePath = '/rendered/path/customClass';
       const expectedParameters = {
         project: 'projectValue',
@@ -1965,7 +1967,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customClassPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2018,7 +2020,7 @@ describe('v1.AdaptationClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2028,7 +2030,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2067,7 +2069,7 @@ describe('v1.AdaptationClient', () => {
       });
     });
 
-    describe('phraseSet', () => {
+    describe('phraseSet', async () => {
       const fakePath = '/rendered/path/phraseSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -2078,7 +2080,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.phraseSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2131,7 +2133,7 @@ describe('v1.AdaptationClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2140,7 +2142,7 @@ describe('v1.AdaptationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

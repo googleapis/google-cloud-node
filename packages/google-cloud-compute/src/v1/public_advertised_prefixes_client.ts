@@ -482,7 +482,9 @@ export class PublicAdvertisedPrefixesClient {
         project: request.project ?? '',
         public_advertised_prefix: request.publicAdvertisedPrefix ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('announce request %j', request);
     const wrappedCallback:
       | Callback<
@@ -617,7 +619,9 @@ export class PublicAdvertisedPrefixesClient {
         project: request.project ?? '',
         public_advertised_prefix: request.publicAdvertisedPrefix ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -751,7 +755,9 @@ export class PublicAdvertisedPrefixesClient {
         project: request.project ?? '',
         public_advertised_prefix: request.publicAdvertisedPrefix ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -879,7 +885,9 @@ export class PublicAdvertisedPrefixesClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1016,7 +1024,9 @@ export class PublicAdvertisedPrefixesClient {
         project: request.project ?? '',
         public_advertised_prefix: request.publicAdvertisedPrefix ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1151,7 +1161,9 @@ export class PublicAdvertisedPrefixesClient {
         project: request.project ?? '',
         public_advertised_prefix: request.publicAdvertisedPrefix ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('withdraw request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1290,7 +1302,9 @@ export class PublicAdvertisedPrefixesClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListPublicAdvertisedPrefixesRequest,
@@ -1361,7 +1375,9 @@ export class PublicAdvertisedPrefixesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1414,7 +1430,9 @@ export class PublicAdvertisedPrefixesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

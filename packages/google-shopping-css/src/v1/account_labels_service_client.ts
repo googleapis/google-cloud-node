@@ -485,7 +485,9 @@ export class AccountLabelsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAccountLabel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -601,7 +603,9 @@ export class AccountLabelsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account_label.name': request.accountLabel!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAccountLabel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -718,7 +722,9 @@ export class AccountLabelsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAccountLabel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -850,7 +856,9 @@ export class AccountLabelsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.css.v1.IListAccountLabelsRequest,
@@ -923,7 +931,9 @@ export class AccountLabelsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountLabels stream %j', request);
     return this.descriptors.page.listAccountLabels.createStream(
       this.innerApiCalls.listAccountLabels as GaxCall,
@@ -978,7 +988,9 @@ export class AccountLabelsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountLabels iterate %j', request);
     return this.descriptors.page.listAccountLabels.asyncIterate(
       this.innerApiCalls['listAccountLabels'] as GaxCall,

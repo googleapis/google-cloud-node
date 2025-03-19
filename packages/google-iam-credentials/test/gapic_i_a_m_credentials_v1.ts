@@ -192,7 +192,9 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.iAMCredentialsStub);
       client.close().then(() => {
         done();
@@ -251,7 +253,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -283,7 +285,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -330,7 +332,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -413,7 +415,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -543,7 +545,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -590,7 +592,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -618,7 +620,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
@@ -670,7 +672,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
@@ -717,7 +719,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
@@ -745,7 +747,7 @@ describe('v1.IAMCredentialsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );

@@ -211,7 +211,9 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.containerAnalysisV1Beta1Stub);
       client.close().then(() => {
         done();
@@ -282,7 +284,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -316,7 +318,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -366,7 +368,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -400,7 +402,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -424,7 +426,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -458,7 +460,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -508,7 +510,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -542,7 +544,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -566,7 +568,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -601,7 +603,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -651,7 +653,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -685,7 +687,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -709,7 +711,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -744,7 +746,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -794,7 +796,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -831,7 +833,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.GeneratePackagesSummaryRequest()
       );
@@ -858,7 +860,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );
@@ -892,7 +894,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );
@@ -942,7 +944,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );
@@ -976,7 +978,7 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
       );

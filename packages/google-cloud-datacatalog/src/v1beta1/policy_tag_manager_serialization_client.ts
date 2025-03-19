@@ -495,7 +495,9 @@ export class PolicyTagManagerSerializationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('importTaxonomies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -628,7 +630,9 @@ export class PolicyTagManagerSerializationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('exportTaxonomies request %j', request);
     const wrappedCallback:
       | Callback<

@@ -298,7 +298,9 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.alphaAnalyticsDataStub);
       client.close().then(() => {
         done();
@@ -361,7 +363,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
@@ -393,7 +395,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
@@ -441,7 +443,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
@@ -473,7 +475,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
@@ -495,7 +497,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
       );
@@ -527,7 +529,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
       );
@@ -575,7 +577,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
       );
@@ -607,7 +609,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryAudienceListRequest()
       );
@@ -629,7 +631,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
       );
@@ -662,7 +664,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
       );
@@ -710,7 +712,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
       );
@@ -745,7 +747,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.SheetExportAudienceListRequest()
       );
@@ -770,7 +772,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
       );
@@ -802,7 +804,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
       );
@@ -850,7 +852,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
       );
@@ -882,7 +884,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetAudienceListRequest()
       );
@@ -904,7 +906,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
       );
@@ -937,7 +939,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
       );
@@ -985,7 +987,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
       );
@@ -1020,7 +1022,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateRecurringAudienceListRequest()
       );
@@ -1045,7 +1047,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
       );
@@ -1078,7 +1080,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
       );
@@ -1161,7 +1163,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetRecurringAudienceListRequest()
       );
@@ -1186,7 +1188,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest()
       );
@@ -1219,7 +1221,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest()
       );
@@ -1267,7 +1269,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
       );
@@ -1407,7 +1409,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.QueryReportTaskRequest()
       );
@@ -1461,7 +1463,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
       );
@@ -1493,7 +1495,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
       );
@@ -1573,7 +1575,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.GetReportTaskRequest()
       );
@@ -1595,7 +1597,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
       );
@@ -1629,7 +1631,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
       );
@@ -1684,7 +1686,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
       );
@@ -1716,7 +1718,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateAudienceListRequest()
       );
@@ -1750,7 +1752,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1773,7 +1775,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1795,7 +1797,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
       );
@@ -1829,7 +1831,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
       );
@@ -1884,7 +1886,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
       );
@@ -1916,7 +1918,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.CreateReportTaskRequest()
       );
@@ -1950,7 +1952,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1973,7 +1975,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1995,7 +1997,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2035,7 +2037,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2091,7 +2093,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2123,7 +2125,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2185,7 +2187,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2236,7 +2238,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2287,7 +2289,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListAudienceListsRequest()
       );
@@ -2331,7 +2333,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2372,7 +2374,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2430,7 +2432,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2465,7 +2467,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2535,7 +2537,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2594,7 +2596,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2649,7 +2651,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListRecurringAudienceListsRequest()
       );
@@ -2697,7 +2699,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -2737,7 +2739,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -2793,7 +2795,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -2825,7 +2827,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -2886,7 +2888,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -2936,7 +2938,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -2986,7 +2988,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.ListReportTasksRequest()
       );
@@ -3029,7 +3031,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3111,7 +3113,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3194,7 +3196,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3293,8 +3295,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3314,7 +3315,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3323,8 +3324,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3340,7 +3340,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('audienceList', () => {
+    describe('audienceList', async () => {
       const fakePath = '/rendered/path/audienceList';
       const expectedParameters = {
         property: 'propertyValue',
@@ -3351,7 +3351,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.audienceListPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3393,7 +3393,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       });
     });
 
-    describe('property', () => {
+    describe('property', async () => {
       const fakePath = '/rendered/path/property';
       const expectedParameters = {
         property: 'propertyValue',
@@ -3403,7 +3403,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.propertyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3432,7 +3432,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       });
     });
 
-    describe('propertyQuotasSnapshot', () => {
+    describe('propertyQuotasSnapshot', async () => {
       const fakePath = '/rendered/path/propertyQuotasSnapshot';
       const expectedParameters = {
         property: 'propertyValue',
@@ -3442,7 +3442,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.propertyQuotasSnapshotPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3478,7 +3478,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       });
     });
 
-    describe('recurringAudienceList', () => {
+    describe('recurringAudienceList', async () => {
       const fakePath = '/rendered/path/recurringAudienceList';
       const expectedParameters = {
         property: 'propertyValue',
@@ -3489,7 +3489,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.recurringAudienceListPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3544,7 +3544,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       });
     });
 
-    describe('reportTask', () => {
+    describe('reportTask', async () => {
       const fakePath = '/rendered/path/reportTask';
       const expectedParameters = {
         property: 'propertyValue',
@@ -3555,7 +3555,7 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reportTaskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
