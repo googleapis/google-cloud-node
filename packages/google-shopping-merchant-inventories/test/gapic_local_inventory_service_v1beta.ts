@@ -265,7 +265,9 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.localInventoryServiceStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -361,7 +363,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -409,7 +411,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -441,7 +443,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.InsertLocalInventoryRequest()
       );
@@ -463,7 +465,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -496,7 +498,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -544,7 +546,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -576,7 +578,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.DeleteLocalInventoryRequest()
       );
@@ -598,7 +600,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -639,7 +641,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -697,7 +699,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -729,7 +731,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -793,7 +795,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -846,7 +848,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -897,7 +899,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.inventories.v1beta.ListLocalInventoriesRequest()
       );
@@ -935,7 +937,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('localInventory', () => {
+    describe('localInventory', async () => {
       const fakePath = '/rendered/path/localInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -947,7 +949,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.localInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1000,7 +1002,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         account: 'accountValue',
@@ -1011,7 +1013,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1050,7 +1052,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
       });
     });
 
-    describe('regionalInventory', () => {
+    describe('regionalInventory', async () => {
       const fakePath = '/rendered/path/regionalInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -1062,7 +1064,7 @@ describe('v1beta.LocalInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.regionalInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

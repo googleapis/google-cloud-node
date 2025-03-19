@@ -252,7 +252,9 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.reportServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );
@@ -350,7 +352,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );
@@ -407,7 +409,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );
@@ -435,7 +437,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );
@@ -498,7 +500,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );
@@ -552,7 +554,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );
@@ -601,7 +603,7 @@ describe('v1beta.ReportServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.reports.v1beta.SearchRequest()
       );

@@ -563,7 +563,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFolder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -698,7 +700,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFolder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -831,7 +835,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFolder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -966,7 +972,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStorageLayout request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1105,7 +1113,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createManagedFolder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1254,7 +1264,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteManagedFolder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1398,7 +1410,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getManagedFolder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1557,7 +1571,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1746,7 +1762,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.storage.control.v2.IListFoldersRequest,
@@ -1843,7 +1861,9 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFolders stream %j', request);
     return this.descriptors.page.listFolders.createStream(
       this.innerApiCalls.listFolders as GaxCall,
@@ -1922,7 +1942,9 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFolders iterate %j', request);
     return this.descriptors.page.listFolders.asyncIterate(
       this.innerApiCalls['listFolders'] as GaxCall,
@@ -2044,7 +2066,9 @@ export class StorageControlClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.storage.control.v2.IListManagedFoldersRequest,
@@ -2129,7 +2153,9 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listManagedFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listManagedFolders stream %j', request);
     return this.descriptors.page.listManagedFolders.createStream(
       this.innerApiCalls.listManagedFolders as GaxCall,
@@ -2196,7 +2222,9 @@ export class StorageControlClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listManagedFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listManagedFolders iterate %j', request);
     return this.descriptors.page.listManagedFolders.asyncIterate(
       this.innerApiCalls['listManagedFolders'] as GaxCall,
@@ -2298,7 +2326,7 @@ export class StorageControlClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

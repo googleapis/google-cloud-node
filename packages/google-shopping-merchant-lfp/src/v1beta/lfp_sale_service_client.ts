@@ -473,7 +473,9 @@ export class LfpSaleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertLfpSale request %j', request);
     const wrappedCallback:
       | Callback<

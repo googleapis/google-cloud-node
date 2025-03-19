@@ -253,7 +253,9 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.productsServiceStub);
       client.close().then(() => {
         done();
@@ -312,7 +314,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.GetProductRequest()
       );
@@ -343,7 +345,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.GetProductRequest()
       );
@@ -390,7 +392,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.GetProductRequest()
       );
@@ -421,7 +423,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.GetProductRequest()
       );
@@ -442,7 +444,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -481,7 +483,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -538,7 +540,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -569,7 +571,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -632,7 +634,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -686,7 +688,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -736,7 +738,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.products.v1beta.ListProductsRequest()
       );
@@ -774,7 +776,7 @@ describe('v1beta.ProductsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -783,7 +785,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -812,7 +814,7 @@ describe('v1beta.ProductsServiceClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         account: 'accountValue',
@@ -822,7 +824,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -861,7 +863,7 @@ describe('v1beta.ProductsServiceClient', () => {
       });
     });
 
-    describe('productInput', () => {
+    describe('productInput', async () => {
       const fakePath = '/rendered/path/productInput';
       const expectedParameters = {
         account: 'accountValue',
@@ -871,7 +873,7 @@ describe('v1beta.ProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productInputPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -202,7 +202,9 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.lfpInventoryServiceStub);
       client.close().then(() => {
         done();
@@ -265,7 +267,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
       );
@@ -298,7 +300,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
       );
@@ -346,7 +348,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
       );
@@ -378,7 +380,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.lfp.v1beta.InsertLfpInventoryRequest()
       );
@@ -394,7 +396,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -404,7 +406,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -433,7 +435,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
       });
     });
 
-    describe('lfpInventory', () => {
+    describe('lfpInventory', async () => {
       const fakePath = '/rendered/path/lfpInventory';
       const expectedParameters = {
         account: 'accountValue',
@@ -446,7 +448,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lfpInventoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -510,7 +512,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
       });
     });
 
-    describe('lfpSale', () => {
+    describe('lfpSale', async () => {
       const fakePath = '/rendered/path/lfpSale';
       const expectedParameters = {
         account: 'accountValue',
@@ -521,7 +523,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lfpSalePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -560,7 +562,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
       });
     });
 
-    describe('lfpStore', () => {
+    describe('lfpStore', async () => {
       const fakePath = '/rendered/path/lfpStore';
       const expectedParameters = {
         account: 'accountValue',
@@ -572,7 +574,7 @@ describe('v1beta.LfpInventoryServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lfpStorePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
