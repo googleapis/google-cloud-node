@@ -89,7 +89,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Api_hub.create_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### Api_hub.create_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_attribute.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### Api_hub.create_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_deployment.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### Api_hub.create_external_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_external_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_external_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_external_api.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Api_hub.create_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_spec.js,samples/README.md)
 
@@ -174,7 +174,7 @@ __Usage:__
 
 ### Api_hub.create_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_version.js,samples/README.md)
 
@@ -191,7 +191,7 @@ __Usage:__
 
 ### Api_hub.delete_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api.js,samples/README.md)
 
@@ -208,7 +208,7 @@ __Usage:__
 
 ### Api_hub.delete_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_attribute.js,samples/README.md)
 
@@ -225,7 +225,7 @@ __Usage:__
 
 ### Api_hub.delete_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_deployment.js,samples/README.md)
 
@@ -242,7 +242,7 @@ __Usage:__
 
 ### Api_hub.delete_external_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_external_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_external_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_external_api.js,samples/README.md)
 
@@ -259,7 +259,7 @@ __Usage:__
 
 ### Api_hub.delete_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_spec.js,samples/README.md)
 
@@ -276,7 +276,7 @@ __Usage:__
 
 ### Api_hub.delete_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_version.js,samples/README.md)
 
@@ -293,7 +293,7 @@ __Usage:__
 
 ### Api_hub.get_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_api.js,samples/README.md)
 
@@ -310,7 +310,7 @@ __Usage:__
 
 ### Api_hub.get_api_operation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_api_operation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_api_operation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_api_operation.js,samples/README.md)
 
@@ -327,7 +327,7 @@ __Usage:__
 
 ### Api_hub.get_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_attribute.js,samples/README.md)
 
@@ -344,7 +344,7 @@ __Usage:__
 
 ### Api_hub.get_definition
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_definition.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_definition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_definition.js,samples/README.md)
 
@@ -361,7 +361,7 @@ __Usage:__
 
 ### Api_hub.get_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_deployment.js,samples/README.md)
 
@@ -378,7 +378,7 @@ __Usage:__
 
 ### Api_hub.get_external_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_external_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_external_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_external_api.js,samples/README.md)
 
@@ -395,7 +395,7 @@ __Usage:__
 
 ### Api_hub.get_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_spec.js,samples/README.md)
 
@@ -412,7 +412,7 @@ __Usage:__
 
 ### Api_hub.get_spec_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_spec_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_spec_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_spec_contents.js,samples/README.md)
 
@@ -429,7 +429,7 @@ __Usage:__
 
 ### Api_hub.get_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.get_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.get_version.js,samples/README.md)
 
@@ -446,7 +446,7 @@ __Usage:__
 
 ### Api_hub.list_api_operations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_api_operations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_api_operations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_api_operations.js,samples/README.md)
 
@@ -463,7 +463,7 @@ __Usage:__
 
 ### Api_hub.list_apis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_apis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_apis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_apis.js,samples/README.md)
 
@@ -480,7 +480,7 @@ __Usage:__
 
 ### Api_hub.list_attributes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_attributes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_attributes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_attributes.js,samples/README.md)
 
@@ -497,7 +497,7 @@ __Usage:__
 
 ### Api_hub.list_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_deployments.js,samples/README.md)
 
@@ -514,7 +514,7 @@ __Usage:__
 
 ### Api_hub.list_external_apis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_external_apis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_external_apis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_external_apis.js,samples/README.md)
 
@@ -531,7 +531,7 @@ __Usage:__
 
 ### Api_hub.list_specs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_specs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_specs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_specs.js,samples/README.md)
 
@@ -548,7 +548,7 @@ __Usage:__
 
 ### Api_hub.list_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.list_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.list_versions.js,samples/README.md)
 
@@ -565,7 +565,7 @@ __Usage:__
 
 ### Api_hub.search_resources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.search_resources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.search_resources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.search_resources.js,samples/README.md)
 
@@ -582,7 +582,7 @@ __Usage:__
 
 ### Api_hub.update_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_api.js,samples/README.md)
 
@@ -599,7 +599,7 @@ __Usage:__
 
 ### Api_hub.update_attribute
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_attribute.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_attribute.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_attribute.js,samples/README.md)
 
@@ -616,7 +616,7 @@ __Usage:__
 
 ### Api_hub.update_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_deployment.js,samples/README.md)
 
@@ -633,7 +633,7 @@ __Usage:__
 
 ### Api_hub.update_external_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_external_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_external_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_external_api.js,samples/README.md)
 
@@ -650,7 +650,7 @@ __Usage:__
 
 ### Api_hub.update_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_spec.js,samples/README.md)
 
@@ -667,7 +667,7 @@ __Usage:__
 
 ### Api_hub.update_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_version.js,samples/README.md)
 
@@ -684,7 +684,7 @@ __Usage:__
 
 ### Api_hub_dependencies.create_dependency
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.create_dependency.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.create_dependency.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.create_dependency.js,samples/README.md)
 
@@ -701,7 +701,7 @@ __Usage:__
 
 ### Api_hub_dependencies.delete_dependency
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.delete_dependency.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.delete_dependency.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.delete_dependency.js,samples/README.md)
 
@@ -718,7 +718,7 @@ __Usage:__
 
 ### Api_hub_dependencies.get_dependency
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.get_dependency.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.get_dependency.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.get_dependency.js,samples/README.md)
 
@@ -735,7 +735,7 @@ __Usage:__
 
 ### Api_hub_dependencies.list_dependencies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.list_dependencies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.list_dependencies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.list_dependencies.js,samples/README.md)
 
@@ -752,7 +752,7 @@ __Usage:__
 
 ### Api_hub_dependencies.update_dependency
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.update_dependency.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.update_dependency.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_dependencies.update_dependency.js,samples/README.md)
 
@@ -769,7 +769,7 @@ __Usage:__
 
 ### Api_hub_plugin.disable_plugin
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin.js,samples/README.md)
 
@@ -786,7 +786,7 @@ __Usage:__
 
 ### Api_hub_plugin.enable_plugin
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.enable_plugin.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.enable_plugin.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.enable_plugin.js,samples/README.md)
 
@@ -803,7 +803,7 @@ __Usage:__
 
 ### Api_hub_plugin.get_plugin
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin.js,samples/README.md)
 
@@ -820,7 +820,7 @@ __Usage:__
 
 ### Host_project_registration_service.create_host_project_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.create_host_project_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.create_host_project_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.create_host_project_registration.js,samples/README.md)
 
@@ -837,7 +837,7 @@ __Usage:__
 
 ### Host_project_registration_service.get_host_project_registration
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.get_host_project_registration.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.get_host_project_registration.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.get_host_project_registration.js,samples/README.md)
 
@@ -854,7 +854,7 @@ __Usage:__
 
 ### Host_project_registration_service.list_host_project_registrations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.list_host_project_registrations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.list_host_project_registrations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/host_project_registration_service.list_host_project_registrations.js,samples/README.md)
 
@@ -871,7 +871,7 @@ __Usage:__
 
 ### Linting_service.get_style_guide
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/linting_service.get_style_guide.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/linting_service.get_style_guide.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/linting_service.get_style_guide.js,samples/README.md)
 
@@ -888,7 +888,7 @@ __Usage:__
 
 ### Linting_service.get_style_guide_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/linting_service.get_style_guide_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/linting_service.get_style_guide_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/linting_service.get_style_guide_contents.js,samples/README.md)
 
@@ -905,7 +905,7 @@ __Usage:__
 
 ### Linting_service.lint_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/linting_service.lint_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/linting_service.lint_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/linting_service.lint_spec.js,samples/README.md)
 
@@ -922,7 +922,7 @@ __Usage:__
 
 ### Linting_service.update_style_guide
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/linting_service.update_style_guide.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/linting_service.update_style_guide.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/linting_service.update_style_guide.js,samples/README.md)
 
@@ -939,7 +939,7 @@ __Usage:__
 
 ### Provisioning.create_api_hub_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/provisioning.create_api_hub_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/provisioning.create_api_hub_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/provisioning.create_api_hub_instance.js,samples/README.md)
 
@@ -956,7 +956,7 @@ __Usage:__
 
 ### Provisioning.get_api_hub_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/provisioning.get_api_hub_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/provisioning.get_api_hub_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/provisioning.get_api_hub_instance.js,samples/README.md)
 
@@ -973,7 +973,7 @@ __Usage:__
 
 ### Provisioning.lookup_api_hub_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/provisioning.lookup_api_hub_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/provisioning.lookup_api_hub_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/provisioning.lookup_api_hub_instance.js,samples/README.md)
 
@@ -990,7 +990,7 @@ __Usage:__
 
 ### Runtime_project_attachment_service.create_runtime_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.create_runtime_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.create_runtime_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.create_runtime_project_attachment.js,samples/README.md)
 
@@ -1007,7 +1007,7 @@ __Usage:__
 
 ### Runtime_project_attachment_service.delete_runtime_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.delete_runtime_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.delete_runtime_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.delete_runtime_project_attachment.js,samples/README.md)
 
@@ -1024,7 +1024,7 @@ __Usage:__
 
 ### Runtime_project_attachment_service.get_runtime_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.get_runtime_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.get_runtime_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.get_runtime_project_attachment.js,samples/README.md)
 
@@ -1041,7 +1041,7 @@ __Usage:__
 
 ### Runtime_project_attachment_service.list_runtime_project_attachments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.list_runtime_project_attachments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.list_runtime_project_attachments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.list_runtime_project_attachments.js,samples/README.md)
 
@@ -1058,7 +1058,7 @@ __Usage:__
 
 ### Runtime_project_attachment_service.lookup_runtime_project_attachment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.lookup_runtime_project_attachment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.lookup_runtime_project_attachment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/runtime_project_attachment_service.lookup_runtime_project_attachment.js,samples/README.md)
 
@@ -1075,7 +1075,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apihub/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/quickstart.js,samples/README.md)
 

@@ -495,7 +495,9 @@ export class FirewallClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdateIngressRules request %j', request);
     const wrappedCallback:
       | Callback<
@@ -620,7 +622,9 @@ export class FirewallClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createIngressRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -729,7 +733,9 @@ export class FirewallClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIngressRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -842,7 +848,9 @@ export class FirewallClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateIngressRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -953,7 +961,9 @@ export class FirewallClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteIngressRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1076,7 +1086,9 @@ export class FirewallClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.appengine.v1.IListIngressRulesRequest,
@@ -1146,7 +1158,9 @@ export class FirewallClient {
       });
     const defaultCallSettings = this._defaults['listIngressRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIngressRules stream %j', request);
     return this.descriptors.page.listIngressRules.createStream(
       this.innerApiCalls.listIngressRules as GaxCall,
@@ -1198,7 +1212,9 @@ export class FirewallClient {
       });
     const defaultCallSettings = this._defaults['listIngressRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIngressRules iterate %j', request);
     return this.descriptors.page.listIngressRules.asyncIterate(
       this.innerApiCalls['listIngressRules'] as GaxCall,

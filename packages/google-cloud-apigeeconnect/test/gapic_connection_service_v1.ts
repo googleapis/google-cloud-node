@@ -256,7 +256,9 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.connectionServiceStub);
       client.close().then(() => {
         done();
@@ -315,7 +317,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -354,7 +356,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -409,7 +411,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -440,7 +442,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -500,7 +502,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -549,7 +551,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -598,7 +600,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apigeeconnect.v1.ListConnectionsRequest()
       );
@@ -636,7 +638,7 @@ describe('v1.ConnectionServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('endpoint', () => {
+    describe('endpoint', async () => {
       const fakePath = '/rendered/path/endpoint';
       const expectedParameters = {
         project: 'projectValue',
@@ -646,7 +648,7 @@ describe('v1.ConnectionServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

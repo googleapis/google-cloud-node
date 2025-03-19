@@ -69,7 +69,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Provisioning.create_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.create_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.create_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.create_instance.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Provisioning.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.delete_instance.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Provisioning.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/provisioning.get_instance.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### Registry.create_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### Registry.create_api_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_deployment.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### Registry.create_api_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_spec.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### Registry.create_api_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_api_version.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### Registry.create_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.create_artifact.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### Registry.delete_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### Registry.delete_api_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_deployment.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### Registry.delete_api_deployment_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_deployment_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_deployment_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_deployment_revision.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### Registry.delete_api_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_spec.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### Registry.delete_api_spec_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_spec_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_spec_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_spec_revision.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### Registry.delete_api_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_api_version.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### Registry.delete_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.delete_artifact.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### Registry.get_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### Registry.get_api_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_deployment.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### Registry.get_api_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_spec.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### Registry.get_api_spec_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_spec_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_spec_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_spec_contents.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### Registry.get_api_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_api_version.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### Registry.get_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_artifact.js,samples/README.md)
 
@@ -426,7 +426,7 @@ __Usage:__
 
 ### Registry.get_artifact_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_artifact_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_artifact_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.get_artifact_contents.js,samples/README.md)
 
@@ -443,7 +443,7 @@ __Usage:__
 
 ### Registry.list_api_deployment_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_deployment_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_deployment_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_deployment_revisions.js,samples/README.md)
 
@@ -460,7 +460,7 @@ __Usage:__
 
 ### Registry.list_api_deployments
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_deployments.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_deployments.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_deployments.js,samples/README.md)
 
@@ -477,7 +477,7 @@ __Usage:__
 
 ### Registry.list_api_spec_revisions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_spec_revisions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_spec_revisions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_spec_revisions.js,samples/README.md)
 
@@ -494,7 +494,7 @@ __Usage:__
 
 ### Registry.list_api_specs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_specs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_specs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_specs.js,samples/README.md)
 
@@ -511,7 +511,7 @@ __Usage:__
 
 ### Registry.list_api_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_api_versions.js,samples/README.md)
 
@@ -528,7 +528,7 @@ __Usage:__
 
 ### Registry.list_apis
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_apis.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_apis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_apis.js,samples/README.md)
 
@@ -545,7 +545,7 @@ __Usage:__
 
 ### Registry.list_artifacts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_artifacts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_artifacts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.list_artifacts.js,samples/README.md)
 
@@ -562,7 +562,7 @@ __Usage:__
 
 ### Registry.replace_artifact
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.replace_artifact.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.replace_artifact.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.replace_artifact.js,samples/README.md)
 
@@ -579,7 +579,7 @@ __Usage:__
 
 ### Registry.rollback_api_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.rollback_api_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.rollback_api_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.rollback_api_deployment.js,samples/README.md)
 
@@ -596,7 +596,7 @@ __Usage:__
 
 ### Registry.rollback_api_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.rollback_api_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.rollback_api_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.rollback_api_spec.js,samples/README.md)
 
@@ -613,7 +613,7 @@ __Usage:__
 
 ### Registry.tag_api_deployment_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.tag_api_deployment_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.tag_api_deployment_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.tag_api_deployment_revision.js,samples/README.md)
 
@@ -630,7 +630,7 @@ __Usage:__
 
 ### Registry.tag_api_spec_revision
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.tag_api_spec_revision.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.tag_api_spec_revision.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.tag_api_spec_revision.js,samples/README.md)
 
@@ -647,7 +647,7 @@ __Usage:__
 
 ### Registry.update_api
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api.js,samples/README.md)
 
@@ -664,7 +664,7 @@ __Usage:__
 
 ### Registry.update_api_deployment
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_deployment.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_deployment.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_deployment.js,samples/README.md)
 
@@ -681,7 +681,7 @@ __Usage:__
 
 ### Registry.update_api_spec
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_spec.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_spec.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_spec.js,samples/README.md)
 
@@ -698,7 +698,7 @@ __Usage:__
 
 ### Registry.update_api_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/generated/v1/registry.update_api_version.js,samples/README.md)
 
@@ -715,7 +715,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apigeeregistry/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-apigeeregistry/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apigeeregistry/samples/quickstart.js,samples/README.md)
 

@@ -65,7 +65,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Applications.create_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/applications.create_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/applications.create_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/applications.create_application.js,samples/README.md)
 
@@ -82,7 +82,7 @@ __Usage:__
 
 ### Applications.get_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/applications.get_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/applications.get_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/applications.get_application.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 ### Applications.repair_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/applications.repair_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/applications.repair_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/applications.repair_application.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Applications.update_application
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/applications.update_application.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/applications.update_application.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/applications.update_application.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Authorized_certificates.create_authorized_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/authorized_certificates.create_authorized_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/authorized_certificates.create_authorized_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/authorized_certificates.create_authorized_certificate.js,samples/README.md)
 
@@ -150,7 +150,7 @@ __Usage:__
 
 ### Authorized_certificates.delete_authorized_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/authorized_certificates.delete_authorized_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/authorized_certificates.delete_authorized_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/authorized_certificates.delete_authorized_certificate.js,samples/README.md)
 
@@ -167,7 +167,7 @@ __Usage:__
 
 ### Authorized_certificates.get_authorized_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/authorized_certificates.get_authorized_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/authorized_certificates.get_authorized_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/authorized_certificates.get_authorized_certificate.js,samples/README.md)
 
@@ -184,7 +184,7 @@ __Usage:__
 
 ### Authorized_certificates.list_authorized_certificates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/authorized_certificates.list_authorized_certificates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/authorized_certificates.list_authorized_certificates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/authorized_certificates.list_authorized_certificates.js,samples/README.md)
 
@@ -201,7 +201,7 @@ __Usage:__
 
 ### Authorized_certificates.update_authorized_certificate
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/authorized_certificates.update_authorized_certificate.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/authorized_certificates.update_authorized_certificate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/authorized_certificates.update_authorized_certificate.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 ### Authorized_domains.list_authorized_domains
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/authorized_domains.list_authorized_domains.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/authorized_domains.list_authorized_domains.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/authorized_domains.list_authorized_domains.js,samples/README.md)
 
@@ -235,7 +235,7 @@ __Usage:__
 
 ### Domain_mappings.create_domain_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/domain_mappings.create_domain_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/domain_mappings.create_domain_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/domain_mappings.create_domain_mapping.js,samples/README.md)
 
@@ -252,7 +252,7 @@ __Usage:__
 
 ### Domain_mappings.delete_domain_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/domain_mappings.delete_domain_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/domain_mappings.delete_domain_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/domain_mappings.delete_domain_mapping.js,samples/README.md)
 
@@ -269,7 +269,7 @@ __Usage:__
 
 ### Domain_mappings.get_domain_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/domain_mappings.get_domain_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/domain_mappings.get_domain_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/domain_mappings.get_domain_mapping.js,samples/README.md)
 
@@ -286,7 +286,7 @@ __Usage:__
 
 ### Domain_mappings.list_domain_mappings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/domain_mappings.list_domain_mappings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/domain_mappings.list_domain_mappings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/domain_mappings.list_domain_mappings.js,samples/README.md)
 
@@ -303,7 +303,7 @@ __Usage:__
 
 ### Domain_mappings.update_domain_mapping
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/domain_mappings.update_domain_mapping.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/domain_mappings.update_domain_mapping.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/domain_mappings.update_domain_mapping.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 ### Firewall.batch_update_ingress_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/firewall.batch_update_ingress_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/firewall.batch_update_ingress_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/firewall.batch_update_ingress_rules.js,samples/README.md)
 
@@ -337,7 +337,7 @@ __Usage:__
 
 ### Firewall.create_ingress_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/firewall.create_ingress_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/firewall.create_ingress_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/firewall.create_ingress_rule.js,samples/README.md)
 
@@ -354,7 +354,7 @@ __Usage:__
 
 ### Firewall.delete_ingress_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/firewall.delete_ingress_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/firewall.delete_ingress_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/firewall.delete_ingress_rule.js,samples/README.md)
 
@@ -371,7 +371,7 @@ __Usage:__
 
 ### Firewall.get_ingress_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/firewall.get_ingress_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/firewall.get_ingress_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/firewall.get_ingress_rule.js,samples/README.md)
 
@@ -388,7 +388,7 @@ __Usage:__
 
 ### Firewall.list_ingress_rules
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/firewall.list_ingress_rules.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/firewall.list_ingress_rules.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/firewall.list_ingress_rules.js,samples/README.md)
 
@@ -405,7 +405,7 @@ __Usage:__
 
 ### Firewall.update_ingress_rule
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/firewall.update_ingress_rule.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/firewall.update_ingress_rule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/firewall.update_ingress_rule.js,samples/README.md)
 
@@ -422,7 +422,7 @@ __Usage:__
 
 ### Instances.debug_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/instances.debug_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/instances.debug_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/instances.debug_instance.js,samples/README.md)
 
@@ -439,7 +439,7 @@ __Usage:__
 
 ### Instances.delete_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/instances.delete_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/instances.delete_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/instances.delete_instance.js,samples/README.md)
 
@@ -456,7 +456,7 @@ __Usage:__
 
 ### Instances.get_instance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/instances.get_instance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/instances.get_instance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/instances.get_instance.js,samples/README.md)
 
@@ -473,7 +473,7 @@ __Usage:__
 
 ### Instances.list_instances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/instances.list_instances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/instances.list_instances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/instances.list_instances.js,samples/README.md)
 
@@ -490,7 +490,7 @@ __Usage:__
 
 ### Services.delete_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.delete_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/services.delete_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/services.delete_service.js,samples/README.md)
 
@@ -507,7 +507,7 @@ __Usage:__
 
 ### Services.get_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.get_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/services.get_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/services.get_service.js,samples/README.md)
 
@@ -524,7 +524,7 @@ __Usage:__
 
 ### Services.list_services
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.list_services.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/services.list_services.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/services.list_services.js,samples/README.md)
 
@@ -541,7 +541,7 @@ __Usage:__
 
 ### Services.update_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/services.update_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/services.update_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/services.update_service.js,samples/README.md)
 
@@ -558,7 +558,7 @@ __Usage:__
 
 ### Versions.create_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.create_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/versions.create_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/versions.create_version.js,samples/README.md)
 
@@ -575,7 +575,7 @@ __Usage:__
 
 ### Versions.delete_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.delete_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/versions.delete_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/versions.delete_version.js,samples/README.md)
 
@@ -592,7 +592,7 @@ __Usage:__
 
 ### Versions.get_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.get_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/versions.get_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/versions.get_version.js,samples/README.md)
 
@@ -609,7 +609,7 @@ __Usage:__
 
 ### Versions.list_versions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.list_versions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/versions.list_versions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/versions.list_versions.js,samples/README.md)
 
@@ -626,7 +626,7 @@ __Usage:__
 
 ### Versions.update_version
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/generated/v1/versions.update_version.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/generated/v1/versions.update_version.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/generated/v1/versions.update_version.js,samples/README.md)
 
@@ -643,7 +643,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-appengine/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-appengine/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-appengine/samples/quickstart.js,samples/README.md)
 

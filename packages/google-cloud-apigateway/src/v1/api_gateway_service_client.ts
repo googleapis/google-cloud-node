@@ -685,7 +685,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGateway request %j', request);
     const wrappedCallback:
       | Callback<
@@ -794,7 +796,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApi request %j', request);
     const wrappedCallback:
       | Callback<
@@ -906,7 +910,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApiConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1041,7 +1047,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1214,7 +1222,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'gateway.name': request.gateway!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1382,7 +1392,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1555,7 +1567,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1728,7 +1742,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'api.name': request.api!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1896,7 +1912,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2069,7 +2087,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2242,7 +2262,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'api_config.name': request.apiConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2410,7 +2432,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2577,7 +2601,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigateway.v1.IListGatewaysRequest,
@@ -2647,7 +2673,9 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGateways stream %j', request);
     return this.descriptors.page.listGateways.createStream(
       this.innerApiCalls.listGateways as GaxCall,
@@ -2699,7 +2727,9 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGateways iterate %j', request);
     return this.descriptors.page.listGateways.asyncIterate(
       this.innerApiCalls['listGateways'] as GaxCall,
@@ -2800,7 +2830,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigateway.v1.IListApisRequest,
@@ -2870,7 +2902,9 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApis stream %j', request);
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as GaxCall,
@@ -2922,7 +2956,9 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApis iterate %j', request);
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
@@ -3029,7 +3065,9 @@ export class ApiGatewayServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigateway.v1.IListApiConfigsRequest,
@@ -3099,7 +3137,9 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApiConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiConfigs stream %j', request);
     return this.descriptors.page.listApiConfigs.createStream(
       this.innerApiCalls.listApiConfigs as GaxCall,
@@ -3151,7 +3191,9 @@ export class ApiGatewayServiceClient {
       });
     const defaultCallSettings = this._defaults['listApiConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiConfigs iterate %j', request);
     return this.descriptors.page.listApiConfigs.asyncIterate(
       this.innerApiCalls['listApiConfigs'] as GaxCall,
