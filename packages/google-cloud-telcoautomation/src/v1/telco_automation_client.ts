@@ -691,7 +691,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrchestrationCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -810,7 +812,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEdgeSlm request %j', request);
     const wrappedCallback:
       | Callback<
@@ -938,7 +942,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1066,7 +1072,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         'blueprint.name': request.blueprint!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1192,7 +1200,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1320,7 +1330,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1446,7 +1458,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('approveBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1571,7 +1585,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('proposeBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1696,7 +1712,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rejectBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1823,7 +1841,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('discardBlueprintChanges request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1948,7 +1968,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPublicBlueprint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2079,7 +2101,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2207,7 +2231,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         'deployment.name': request.deployment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2334,7 +2360,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2460,7 +2488,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2587,7 +2617,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('discardDeploymentChanges request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2712,7 +2744,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('applyDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2837,7 +2871,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeDeploymentStatus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2965,7 +3001,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rollbackDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3090,7 +3128,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHydratedDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3218,7 +3258,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         'hydrated_deployment.name': request.hydratedDeployment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateHydratedDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3343,7 +3385,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('applyHydratedDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3495,7 +3539,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3676,7 +3722,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3863,7 +3911,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4044,7 +4094,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4211,7 +4263,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListOrchestrationClustersRequest,
@@ -4281,7 +4335,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listOrchestrationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrchestrationClusters stream %j', request);
     return this.descriptors.page.listOrchestrationClusters.createStream(
       this.innerApiCalls.listOrchestrationClusters as GaxCall,
@@ -4333,7 +4389,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listOrchestrationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrchestrationClusters iterate %j', request);
     return this.descriptors.page.listOrchestrationClusters.asyncIterate(
       this.innerApiCalls['listOrchestrationClusters'] as GaxCall,
@@ -4440,7 +4498,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListEdgeSlmsRequest,
@@ -4510,7 +4570,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listEdgeSlms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEdgeSlms stream %j', request);
     return this.descriptors.page.listEdgeSlms.createStream(
       this.innerApiCalls.listEdgeSlms as GaxCall,
@@ -4562,7 +4624,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listEdgeSlms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEdgeSlms iterate %j', request);
     return this.descriptors.page.listEdgeSlms.asyncIterate(
       this.innerApiCalls['listEdgeSlms'] as GaxCall,
@@ -4671,7 +4735,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListBlueprintsRequest,
@@ -4743,7 +4809,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBlueprints stream %j', request);
     return this.descriptors.page.listBlueprints.createStream(
       this.innerApiCalls.listBlueprints as GaxCall,
@@ -4797,7 +4865,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBlueprints iterate %j', request);
     return this.descriptors.page.listBlueprints.asyncIterate(
       this.innerApiCalls['listBlueprints'] as GaxCall,
@@ -4900,7 +4970,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListBlueprintRevisionsRequest,
@@ -4966,7 +5038,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBlueprintRevisions stream %j', request);
     return this.descriptors.page.listBlueprintRevisions.createStream(
       this.innerApiCalls.listBlueprintRevisions as GaxCall,
@@ -5014,7 +5088,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBlueprintRevisions iterate %j', request);
     return this.descriptors.page.listBlueprintRevisions.asyncIterate(
       this.innerApiCalls['listBlueprintRevisions'] as GaxCall,
@@ -5128,7 +5204,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.ISearchBlueprintRevisionsRequest,
@@ -5205,7 +5283,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['searchBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchBlueprintRevisions stream %j', request);
     return this.descriptors.page.searchBlueprintRevisions.createStream(
       this.innerApiCalls.searchBlueprintRevisions as GaxCall,
@@ -5264,7 +5344,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['searchBlueprintRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchBlueprintRevisions iterate %j', request);
     return this.descriptors.page.searchBlueprintRevisions.asyncIterate(
       this.innerApiCalls['searchBlueprintRevisions'] as GaxCall,
@@ -5379,7 +5461,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.ISearchDeploymentRevisionsRequest,
@@ -5457,7 +5541,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['searchDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDeploymentRevisions stream %j', request);
     return this.descriptors.page.searchDeploymentRevisions.createStream(
       this.innerApiCalls.searchDeploymentRevisions as GaxCall,
@@ -5517,7 +5603,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['searchDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDeploymentRevisions iterate %j', request);
     return this.descriptors.page.searchDeploymentRevisions.asyncIterate(
       this.innerApiCalls['searchDeploymentRevisions'] as GaxCall,
@@ -5623,7 +5711,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListPublicBlueprintsRequest,
@@ -5691,7 +5781,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listPublicBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPublicBlueprints stream %j', request);
     return this.descriptors.page.listPublicBlueprints.createStream(
       this.innerApiCalls.listPublicBlueprints as GaxCall,
@@ -5741,7 +5833,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listPublicBlueprints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPublicBlueprints iterate %j', request);
     return this.descriptors.page.listPublicBlueprints.asyncIterate(
       this.innerApiCalls['listPublicBlueprints'] as GaxCall,
@@ -5850,7 +5944,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListDeploymentsRequest,
@@ -5922,7 +6018,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
@@ -5976,7 +6074,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
@@ -6079,7 +6179,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListDeploymentRevisionsRequest,
@@ -6145,7 +6247,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeploymentRevisions stream %j', request);
     return this.descriptors.page.listDeploymentRevisions.createStream(
       this.innerApiCalls.listDeploymentRevisions as GaxCall,
@@ -6193,7 +6297,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeploymentRevisions iterate %j', request);
     return this.descriptors.page.listDeploymentRevisions.asyncIterate(
       this.innerApiCalls['listDeploymentRevisions'] as GaxCall,
@@ -6299,7 +6405,9 @@ export class TelcoAutomationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.telcoautomation.v1.IListHydratedDeploymentsRequest,
@@ -6368,7 +6476,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listHydratedDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHydratedDeployments stream %j', request);
     return this.descriptors.page.listHydratedDeployments.createStream(
       this.innerApiCalls.listHydratedDeployments as GaxCall,
@@ -6419,7 +6529,9 @@ export class TelcoAutomationClient {
       });
     const defaultCallSettings = this._defaults['listHydratedDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHydratedDeployments iterate %j', request);
     return this.descriptors.page.listHydratedDeployments.asyncIterate(
       this.innerApiCalls['listHydratedDeployments'] as GaxCall,
@@ -6599,7 +6711,7 @@ export class TelcoAutomationClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

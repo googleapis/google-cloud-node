@@ -1,1 +1,0 @@
-Resourcemanager: Nodejs Client

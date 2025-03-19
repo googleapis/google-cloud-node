@@ -568,7 +568,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'catalog.name': request.catalog!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCatalog request %j', request);
     const wrappedCallback:
       | Callback<
@@ -737,7 +739,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         catalog: request.catalog ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setDefaultBranch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -859,7 +863,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         catalog: request.catalog ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDefaultBranch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -979,7 +985,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCompletionConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1124,7 +1132,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'completion_config.name': request.completionConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCompletionConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1244,7 +1254,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAttributesConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1386,7 +1398,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'attributes_config.name': request.attributesConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAttributesConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1514,7 +1528,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addCatalogAttribute request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1648,7 +1664,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeCatalogAttribute request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1781,7 +1799,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchRemoveCatalogAttributes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1925,7 +1945,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         attributes_config: request.attributesConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('replaceCatalogAttribute request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2071,7 +2093,9 @@ export class CatalogServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.retail.v2beta.IListCatalogsRequest,
@@ -2154,7 +2178,9 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCatalogs stream %j', request);
     return this.descriptors.page.listCatalogs.createStream(
       this.innerApiCalls.listCatalogs as GaxCall,
@@ -2219,7 +2245,9 @@ export class CatalogServiceClient {
       });
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCatalogs iterate %j', request);
     return this.descriptors.page.listCatalogs.asyncIterate(
       this.innerApiCalls['listCatalogs'] as GaxCall,
@@ -2399,7 +2427,7 @@ export class CatalogServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

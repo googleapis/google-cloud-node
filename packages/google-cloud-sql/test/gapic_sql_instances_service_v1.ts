@@ -223,7 +223,9 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sqlInstancesServiceStub);
       client.close().then(() => {
         done();
@@ -290,7 +292,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAddServerCaRequest()
       );
@@ -328,7 +330,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAddServerCaRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAddServerCaRequest()
       );
@@ -420,7 +422,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAddServerCaRequest()
       );
@@ -448,7 +450,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCloneRequest()
       );
@@ -485,7 +487,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCloneRequest()
       );
@@ -537,7 +539,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCloneRequest()
       );
@@ -571,7 +573,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCloneRequest()
       );
@@ -599,7 +601,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDeleteRequest()
       );
@@ -637,7 +639,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDeleteRequest()
       );
@@ -691,7 +693,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDeleteRequest()
       );
@@ -726,7 +728,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDeleteRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteMasterRequest()
       );
@@ -792,7 +794,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteMasterRequest()
       );
@@ -846,7 +848,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteMasterRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteMasterRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteRequest()
       );
@@ -950,7 +952,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteRequest()
       );
@@ -1004,7 +1006,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesDemoteRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesExportRequest()
       );
@@ -1105,7 +1107,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesExportRequest()
       );
@@ -1159,7 +1161,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesExportRequest()
       );
@@ -1194,7 +1196,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesExportRequest()
       );
@@ -1222,7 +1224,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesFailoverRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesFailoverRequest()
       );
@@ -1314,7 +1316,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesFailoverRequest()
       );
@@ -1349,7 +1351,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesFailoverRequest()
       );
@@ -1377,7 +1379,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReencryptRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReencryptRequest()
       );
@@ -1469,7 +1471,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReencryptRequest()
       );
@@ -1504,7 +1506,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReencryptRequest()
       );
@@ -1532,7 +1534,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetRequest()
       );
@@ -1569,7 +1571,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetRequest()
       );
@@ -1621,7 +1623,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetRequest()
       );
@@ -1655,7 +1657,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesImportRequest()
       );
@@ -1721,7 +1723,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesImportRequest()
       );
@@ -1775,7 +1777,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesImportRequest()
       );
@@ -1810,7 +1812,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesImportRequest()
       );
@@ -1838,7 +1840,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesInsertRequest()
       );
@@ -1871,7 +1873,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesInsertRequest()
       );
@@ -1920,7 +1922,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesInsertRequest()
       );
@@ -1950,7 +1952,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesInsertRequest()
       );
@@ -1973,7 +1975,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListRequest()
       );
@@ -2005,7 +2007,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListRequest()
       );
@@ -2052,7 +2054,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListRequest()
       );
@@ -2081,7 +2083,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListRequest()
       );
@@ -2104,7 +2106,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListServerCasRequest()
       );
@@ -2142,7 +2144,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListServerCasRequest()
       );
@@ -2196,7 +2198,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListServerCasRequest()
       );
@@ -2234,7 +2236,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesListServerCasRequest()
       );
@@ -2262,7 +2264,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPatchRequest()
       );
@@ -2299,7 +2301,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPatchRequest()
       );
@@ -2351,7 +2353,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPatchRequest()
       );
@@ -2385,7 +2387,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPatchRequest()
       );
@@ -2413,7 +2415,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPromoteReplicaRequest()
       );
@@ -2451,7 +2453,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPromoteReplicaRequest()
       );
@@ -2505,7 +2507,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPromoteReplicaRequest()
       );
@@ -2543,7 +2545,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPromoteReplicaRequest()
       );
@@ -2571,7 +2573,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesSwitchoverRequest()
       );
@@ -2609,7 +2611,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesSwitchoverRequest()
       );
@@ -2663,7 +2665,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesSwitchoverRequest()
       );
@@ -2701,7 +2703,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesSwitchoverRequest()
       );
@@ -2729,7 +2731,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetSslConfigRequest()
       );
@@ -2767,7 +2769,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetSslConfigRequest()
       );
@@ -2821,7 +2823,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetSslConfigRequest()
       );
@@ -2859,7 +2861,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetSslConfigRequest()
       );
@@ -2887,7 +2889,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestartRequest()
       );
@@ -2925,7 +2927,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestartRequest()
       );
@@ -2979,7 +2981,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestartRequest()
       );
@@ -3014,7 +3016,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestartRequest()
       );
@@ -3042,7 +3044,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestoreBackupRequest()
       );
@@ -3080,7 +3082,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestoreBackupRequest()
       );
@@ -3134,7 +3136,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestoreBackupRequest()
       );
@@ -3172,7 +3174,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRestoreBackupRequest()
       );
@@ -3200,7 +3202,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRotateServerCaRequest()
       );
@@ -3238,7 +3240,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRotateServerCaRequest()
       );
@@ -3292,7 +3294,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRotateServerCaRequest()
       );
@@ -3330,7 +3332,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRotateServerCaRequest()
       );
@@ -3358,7 +3360,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartReplicaRequest()
       );
@@ -3396,7 +3398,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartReplicaRequest()
       );
@@ -3450,7 +3452,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartReplicaRequest()
       );
@@ -3488,7 +3490,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartReplicaRequest()
       );
@@ -3516,7 +3518,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStopReplicaRequest()
       );
@@ -3554,7 +3556,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStopReplicaRequest()
       );
@@ -3608,7 +3610,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStopReplicaRequest()
       );
@@ -3646,7 +3648,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStopReplicaRequest()
       );
@@ -3674,7 +3676,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesTruncateLogRequest()
       );
@@ -3712,7 +3714,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesTruncateLogRequest()
       );
@@ -3766,7 +3768,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesTruncateLogRequest()
       );
@@ -3804,7 +3806,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesTruncateLogRequest()
       );
@@ -3832,7 +3834,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesUpdateRequest()
       );
@@ -3870,7 +3872,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesUpdateRequest()
       );
@@ -3924,7 +3926,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesUpdateRequest()
       );
@@ -3959,7 +3961,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesUpdateRequest()
       );
@@ -3987,7 +3989,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCreateEphemeralCertRequest()
       );
@@ -4025,7 +4027,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCreateEphemeralCertRequest()
       );
@@ -4079,7 +4081,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCreateEphemeralCertRequest()
       );
@@ -4117,7 +4119,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesCreateEphemeralCertRequest()
       );
@@ -4145,7 +4147,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRescheduleMaintenanceRequest()
       );
@@ -4184,7 +4186,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRescheduleMaintenanceRequest()
       );
@@ -4238,7 +4240,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRescheduleMaintenanceRequest()
       );
@@ -4279,7 +4281,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesRescheduleMaintenanceRequest()
       );
@@ -4310,7 +4312,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest()
       );
@@ -4349,7 +4351,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest()
       );
@@ -4403,7 +4405,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest()
       );
@@ -4444,7 +4446,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesVerifyExternalSyncSettingsRequest()
       );
@@ -4475,7 +4477,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest()
       );
@@ -4513,7 +4515,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest()
       );
@@ -4567,7 +4569,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest()
       );
@@ -4605,7 +4607,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest()
       );
@@ -4633,7 +4635,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPerformDiskShrinkRequest()
       );
@@ -4671,7 +4673,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPerformDiskShrinkRequest()
       );
@@ -4725,7 +4727,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPerformDiskShrinkRequest()
       );
@@ -4763,7 +4765,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesPerformDiskShrinkRequest()
       );
@@ -4791,7 +4793,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetDiskShrinkConfigRequest()
       );
@@ -4830,7 +4832,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetDiskShrinkConfigRequest()
       );
@@ -4884,7 +4886,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetDiskShrinkConfigRequest()
       );
@@ -4922,7 +4924,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetDiskShrinkConfigRequest()
       );
@@ -4950,7 +4952,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetReplicaSizeRequest()
       );
@@ -4988,7 +4990,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetReplicaSizeRequest()
       );
@@ -5042,7 +5044,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetReplicaSizeRequest()
       );
@@ -5080,7 +5082,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesResetReplicaSizeRequest()
       );
@@ -5108,7 +5110,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
       );
@@ -5147,7 +5149,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
       );
@@ -5201,7 +5203,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
       );
@@ -5242,7 +5244,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
       );
@@ -5273,7 +5275,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
       );
@@ -5311,7 +5313,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
       );
@@ -5365,7 +5367,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
       );
@@ -5403,7 +5405,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesAcquireSsrsLeaseRequest()
       );
@@ -5431,7 +5433,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
       );
@@ -5469,7 +5471,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
       );
@@ -5523,7 +5525,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
       );
@@ -5561,7 +5563,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1.SqlInstancesReleaseSsrsLeaseRequest()
       );
@@ -5588,7 +5590,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5620,7 +5622,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5666,7 +5668,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5703,7 +5705,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5753,7 +5755,7 @@ describe('v1.SqlInstancesServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
