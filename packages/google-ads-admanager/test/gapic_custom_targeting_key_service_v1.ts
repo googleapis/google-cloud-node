@@ -278,7 +278,9 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.customTargetingKeyServiceStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.GetCustomTargetingKeyRequest()
       );
@@ -374,7 +376,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.GetCustomTargetingKeyRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.GetCustomTargetingKeyRequest()
       );
@@ -457,7 +459,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.GetCustomTargetingKeyRequest()
       );
@@ -482,7 +484,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -523,7 +525,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -579,7 +581,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -682,7 +684,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -794,7 +796,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ads.admanager.v1.ListCustomTargetingKeysRequest()
       );
@@ -836,7 +838,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('adUnit', () => {
+    describe('adUnit', async () => {
       const fakePath = '/rendered/path/adUnit';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -847,7 +849,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.adUnitPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -886,7 +888,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('company', () => {
+    describe('company', async () => {
       const fakePath = '/rendered/path/company';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -897,7 +899,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.companyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -936,7 +938,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('contact', () => {
+    describe('contact', async () => {
       const fakePath = '/rendered/path/contact';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -947,7 +949,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.contactPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -986,7 +988,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('customField', () => {
+    describe('customField', async () => {
       const fakePath = '/rendered/path/customField';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -997,7 +999,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customFieldPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1039,7 +1041,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('customTargetingKey', () => {
+    describe('customTargetingKey', async () => {
       const fakePath = '/rendered/path/customTargetingKey';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1050,7 +1052,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customTargetingKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1103,7 +1105,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('customTargetingValue', () => {
+    describe('customTargetingValue', async () => {
       const fakePath = '/rendered/path/customTargetingValue';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1115,7 +1117,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customTargetingValuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1185,7 +1187,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('entitySignalsMapping', () => {
+    describe('entitySignalsMapping', async () => {
       const fakePath = '/rendered/path/entitySignalsMapping';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1196,7 +1198,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entitySignalsMappingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1251,7 +1253,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('label', () => {
+    describe('label', async () => {
       const fakePath = '/rendered/path/label';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1262,7 +1264,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.labelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1301,7 +1303,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('network', () => {
+    describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1311,7 +1313,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1340,7 +1342,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('order', () => {
+    describe('order', async () => {
       const fakePath = '/rendered/path/order';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1351,7 +1353,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.orderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1390,7 +1392,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('placement', () => {
+    describe('placement', async () => {
       const fakePath = '/rendered/path/placement';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1401,7 +1403,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.placementPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1443,7 +1445,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('report', () => {
+    describe('report', async () => {
       const fakePath = '/rendered/path/report';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1454,7 +1456,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1493,7 +1495,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('role', () => {
+    describe('role', async () => {
       const fakePath = '/rendered/path/role';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1504,7 +1506,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.rolePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1543,7 +1545,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('taxonomyCategory', () => {
+    describe('taxonomyCategory', async () => {
       const fakePath = '/rendered/path/taxonomyCategory';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1554,7 +1556,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taxonomyCategoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1601,7 +1603,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('team', () => {
+    describe('team', async () => {
       const fakePath = '/rendered/path/team';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1612,7 +1614,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.teamPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1651,7 +1653,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
       });
     });
 
-    describe('user', () => {
+    describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
         network_code: 'networkCodeValue',
@@ -1662,7 +1664,7 @@ describe('v1.CustomTargetingKeyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

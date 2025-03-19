@@ -517,7 +517,9 @@ export class DiscussServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -649,7 +651,9 @@ export class DiscussServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('countMessageTokens request %j', request);
     const wrappedCallback:
       | Callback<
