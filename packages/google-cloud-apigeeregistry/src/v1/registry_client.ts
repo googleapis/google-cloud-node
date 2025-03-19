@@ -577,7 +577,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApi request %j', request);
     const wrappedCallback:
       | Callback<
@@ -704,7 +706,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createApi request %j', request);
     const wrappedCallback:
       | Callback<
@@ -831,7 +835,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'api.name': request.api!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateApi request %j', request);
     const wrappedCallback:
       | Callback<
@@ -952,7 +958,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteApi request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1069,7 +1077,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApiVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1205,7 +1215,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createApiVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1341,7 +1353,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'api_version.name': request.apiVersion!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateApiVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1471,7 +1485,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteApiVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1591,7 +1607,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApiSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1717,7 +1735,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApiSpecContents request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1847,7 +1867,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createApiSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1977,7 +1999,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'api_spec.name': request.apiSpec!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateApiSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2101,7 +2125,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteApiSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2229,7 +2255,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('tagApiSpecRevision request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2354,7 +2382,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rollbackApiSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2483,7 +2513,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteApiSpecRevision request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2609,7 +2641,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApiDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2745,7 +2779,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createApiDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2881,7 +2917,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'api_deployment.name': request.apiDeployment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateApiDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3011,7 +3049,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteApiDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3140,7 +3180,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('tagApiDeploymentRevision request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3271,7 +3313,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rollbackApiDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3400,7 +3444,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteApiDeploymentRevision request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3520,7 +3566,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getArtifact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3646,7 +3694,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getArtifactContents request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3776,7 +3826,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createArtifact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3898,7 +3950,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         'artifact.name': request.artifact!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('replaceArtifact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4018,7 +4072,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteArtifact request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4156,7 +4212,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListApisRequest,
@@ -4232,7 +4290,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApis stream %j', request);
     return this.descriptors.page.listApis.createStream(
       this.innerApiCalls.listApis as GaxCall,
@@ -4290,7 +4350,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApis iterate %j', request);
     return this.descriptors.page.listApis.asyncIterate(
       this.innerApiCalls['listApis'] as GaxCall,
@@ -4403,7 +4465,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListApiVersionsRequest,
@@ -4479,7 +4543,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiVersions stream %j', request);
     return this.descriptors.page.listApiVersions.createStream(
       this.innerApiCalls.listApiVersions as GaxCall,
@@ -4537,7 +4603,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiVersions iterate %j', request);
     return this.descriptors.page.listApiVersions.asyncIterate(
       this.innerApiCalls['listApiVersions'] as GaxCall,
@@ -4650,7 +4718,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListApiSpecsRequest,
@@ -4726,7 +4796,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiSpecs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiSpecs stream %j', request);
     return this.descriptors.page.listApiSpecs.createStream(
       this.innerApiCalls.listApiSpecs as GaxCall,
@@ -4784,7 +4856,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiSpecs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiSpecs iterate %j', request);
     return this.descriptors.page.listApiSpecs.asyncIterate(
       this.innerApiCalls['listApiSpecs'] as GaxCall,
@@ -4888,7 +4962,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsRequest,
@@ -4954,7 +5030,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiSpecRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiSpecRevisions stream %j', request);
     return this.descriptors.page.listApiSpecRevisions.createStream(
       this.innerApiCalls.listApiSpecRevisions as GaxCall,
@@ -5002,7 +5080,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiSpecRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiSpecRevisions iterate %j', request);
     return this.descriptors.page.listApiSpecRevisions.asyncIterate(
       this.innerApiCalls['listApiSpecRevisions'] as GaxCall,
@@ -5115,7 +5195,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsRequest,
@@ -5191,7 +5273,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiDeployments stream %j', request);
     return this.descriptors.page.listApiDeployments.createStream(
       this.innerApiCalls.listApiDeployments as GaxCall,
@@ -5249,7 +5333,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiDeployments iterate %j', request);
     return this.descriptors.page.listApiDeployments.asyncIterate(
       this.innerApiCalls['listApiDeployments'] as GaxCall,
@@ -5353,7 +5439,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsRequest,
@@ -5419,7 +5507,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiDeploymentRevisions stream %j', request);
     return this.descriptors.page.listApiDeploymentRevisions.createStream(
       this.innerApiCalls.listApiDeploymentRevisions as GaxCall,
@@ -5467,7 +5557,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listApiDeploymentRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApiDeploymentRevisions iterate %j', request);
     return this.descriptors.page.listApiDeploymentRevisions.asyncIterate(
       this.innerApiCalls['listApiDeploymentRevisions'] as GaxCall,
@@ -5580,7 +5672,9 @@ export class RegistryClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apigeeregistry.v1.IListArtifactsRequest,
@@ -5656,7 +5750,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listArtifacts stream %j', request);
     return this.descriptors.page.listArtifacts.createStream(
       this.innerApiCalls.listArtifacts as GaxCall,
@@ -5714,7 +5810,9 @@ export class RegistryClient {
       });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listArtifacts iterate %j', request);
     return this.descriptors.page.listArtifacts.asyncIterate(
       this.innerApiCalls['listArtifacts'] as GaxCall,

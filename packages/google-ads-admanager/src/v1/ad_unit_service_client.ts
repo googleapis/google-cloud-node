@@ -521,7 +521,9 @@ export class AdUnitServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAdUnit request %j', request);
     const wrappedCallback:
       | Callback<
@@ -655,7 +657,9 @@ export class AdUnitServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListAdUnitsRequest,
@@ -738,7 +742,9 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAdUnits stream %j', request);
     return this.descriptors.page.listAdUnits.createStream(
       this.innerApiCalls.listAdUnits as GaxCall,
@@ -803,7 +809,9 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAdUnits iterate %j', request);
     return this.descriptors.page.listAdUnits.asyncIterate(
       this.innerApiCalls['listAdUnits'] as GaxCall,
@@ -923,7 +931,9 @@ export class AdUnitServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListAdUnitSizesRequest,
@@ -1006,7 +1016,9 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnitSizes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAdUnitSizes stream %j', request);
     return this.descriptors.page.listAdUnitSizes.createStream(
       this.innerApiCalls.listAdUnitSizes as GaxCall,
@@ -1071,7 +1083,9 @@ export class AdUnitServiceClient {
       });
     const defaultCallSettings = this._defaults['listAdUnitSizes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAdUnitSizes iterate %j', request);
     return this.descriptors.page.listAdUnitSizes.asyncIterate(
       this.innerApiCalls['listAdUnitSizes'] as GaxCall,

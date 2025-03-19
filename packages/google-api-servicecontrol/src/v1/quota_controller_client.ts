@@ -470,7 +470,9 @@ export class QuotaControllerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('allocateQuota request %j', request);
     const wrappedCallback:
       | Callback<

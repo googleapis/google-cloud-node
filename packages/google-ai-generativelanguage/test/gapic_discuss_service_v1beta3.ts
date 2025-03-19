@@ -193,7 +193,9 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.discussServiceStub);
       client.close().then(() => {
         done();
@@ -252,7 +254,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.GenerateMessageRequest()
       );
@@ -283,7 +285,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.GenerateMessageRequest()
       );
@@ -330,7 +332,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.GenerateMessageRequest()
       );
@@ -361,7 +363,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.GenerateMessageRequest()
       );
@@ -382,7 +384,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.CountMessageTokensRequest()
       );
@@ -414,7 +416,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.CountMessageTokensRequest()
       );
@@ -461,7 +463,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.CountMessageTokensRequest()
       );
@@ -492,7 +494,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1beta3.CountMessageTokensRequest()
       );
@@ -508,7 +510,7 @@ describe('v1beta3.DiscussServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         model: 'modelValue',
@@ -517,7 +519,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -546,7 +548,7 @@ describe('v1beta3.DiscussServiceClient', () => {
       });
     });
 
-    describe('permission', () => {
+    describe('permission', async () => {
       const fakePath = '/rendered/path/permission';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -556,7 +558,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.permissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -598,7 +600,7 @@ describe('v1beta3.DiscussServiceClient', () => {
       });
     });
 
-    describe('tunedModel', () => {
+    describe('tunedModel', async () => {
       const fakePath = '/rendered/path/tunedModel';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -607,7 +609,7 @@ describe('v1beta3.DiscussServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

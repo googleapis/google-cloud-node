@@ -192,7 +192,9 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.textServiceStub);
       client.close().then(() => {
         done();
@@ -251,7 +253,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GenerateTextRequest()
       );
@@ -282,7 +284,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GenerateTextRequest()
       );
@@ -329,7 +331,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GenerateTextRequest()
       );
@@ -360,7 +362,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GenerateTextRequest()
       );
@@ -381,7 +383,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.EmbedTextRequest()
       );
@@ -412,7 +414,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.EmbedTextRequest()
       );
@@ -459,7 +461,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.EmbedTextRequest()
       );
@@ -487,7 +489,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.EmbedTextRequest()
       );
@@ -508,7 +510,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.BatchEmbedTextRequest()
       );
@@ -539,7 +541,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.BatchEmbedTextRequest()
       );
@@ -586,7 +588,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.BatchEmbedTextRequest()
       );
@@ -617,7 +619,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.BatchEmbedTextRequest()
       );
@@ -638,7 +640,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CountTextTokensRequest()
       );
@@ -669,7 +671,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CountTextTokensRequest()
       );
@@ -716,7 +718,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CountTextTokensRequest()
       );
@@ -747,7 +749,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CountTextTokensRequest()
       );
@@ -763,7 +765,7 @@ describe('v1alpha.TextServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cachedContent', () => {
+    describe('cachedContent', async () => {
       const fakePath = '/rendered/path/cachedContent';
       const expectedParameters = {
         id: 'idValue',
@@ -772,7 +774,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cachedContentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -801,7 +803,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('chunk', () => {
+    describe('chunk', async () => {
       const fakePath = '/rendered/path/chunk';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -812,7 +814,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.chunkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -865,7 +867,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('corpus', () => {
+    describe('corpus', async () => {
       const fakePath = '/rendered/path/corpus';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -874,7 +876,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.corpusPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -903,7 +905,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('corpusPermission', () => {
+    describe('corpusPermission', async () => {
       const fakePath = '/rendered/path/corpusPermission';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -913,7 +915,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.corpusPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -958,7 +960,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('document', () => {
+    describe('document', async () => {
       const fakePath = '/rendered/path/document';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -968,7 +970,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1007,7 +1009,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('file', () => {
+    describe('file', async () => {
       const fakePath = '/rendered/path/file';
       const expectedParameters = {
         file: 'fileValue',
@@ -1016,7 +1018,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.filePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1045,7 +1047,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         model: 'modelValue',
@@ -1054,7 +1056,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1083,7 +1085,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('tunedModel', () => {
+    describe('tunedModel', async () => {
       const fakePath = '/rendered/path/tunedModel';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -1092,7 +1094,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1121,7 +1123,7 @@ describe('v1alpha.TextServiceClient', () => {
       });
     });
 
-    describe('tunedModelPermission', () => {
+    describe('tunedModelPermission', async () => {
       const fakePath = '/rendered/path/tunedModelPermission';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -1131,7 +1133,7 @@ describe('v1alpha.TextServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
