@@ -592,7 +592,9 @@ export class RoutesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeRoutes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -748,7 +750,9 @@ export class RoutesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeRouteMatrix stream %j', options);
     return this.innerApiCalls.computeRouteMatrix(request, options);
   }

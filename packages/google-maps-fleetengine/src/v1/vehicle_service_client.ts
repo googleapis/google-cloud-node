@@ -486,7 +486,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('createVehicle request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.IVehicle,
@@ -602,7 +602,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('getVehicle request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.IVehicle,
@@ -710,7 +710,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteVehicle request %j', request);
     const wrappedCallback: Callback<
         protos.google.protobuf.IEmpty,
@@ -851,7 +851,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('updateVehicle request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.IVehicle,
@@ -962,7 +962,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('updateVehicleAttributes request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
@@ -1192,7 +1192,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('searchVehicles request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.ISearchVehiclesResponse,
@@ -1414,7 +1414,7 @@ export class VehicleServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
       protos.maps.fleetengine.v1.IListVehiclesRequest,
       protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
@@ -1596,7 +1596,7 @@ export class VehicleServiceClient {
     );
     const defaultCallSettings = this._defaults['listVehicles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('listVehicles stream %j', request);
     return this.descriptors.page.listVehicles.createStream(
       this.innerApiCalls.listVehicles as GaxCall,
@@ -1767,7 +1767,7 @@ export class VehicleServiceClient {
     );
     const defaultCallSettings = this._defaults['listVehicles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('listVehicles iterate %j', request);
     return this.descriptors.page.listVehicles.asyncIterate(
       this.innerApiCalls['listVehicles'] as GaxCall,

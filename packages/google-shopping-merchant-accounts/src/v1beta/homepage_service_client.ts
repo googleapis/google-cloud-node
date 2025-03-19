@@ -514,7 +514,9 @@ export class HomepageServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHomepage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -641,7 +643,9 @@ export class HomepageServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'homepage.name': request.homepage!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateHomepage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -780,7 +784,9 @@ export class HomepageServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('claimHomepage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -906,7 +912,9 @@ export class HomepageServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('unclaimHomepage request %j', request);
     const wrappedCallback:
       | Callback<

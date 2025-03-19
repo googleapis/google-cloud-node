@@ -208,7 +208,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            client.initialize().catch(err => {throw err});
             assert(client.tripServiceStub);
             client.close().then(() => {
                 done();
@@ -265,7 +265,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.CreateTripRequest()
             );
@@ -291,7 +291,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.CreateTripRequest()
             );
@@ -328,7 +328,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.CreateTripRequest()
             );
@@ -351,7 +351,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.CreateTripRequest()
             );
@@ -369,7 +369,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.GetTripRequest()
             );
@@ -395,7 +395,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.GetTripRequest()
             );
@@ -432,7 +432,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.GetTripRequest()
             );
@@ -455,7 +455,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.GetTripRequest()
             );
@@ -473,7 +473,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.DeleteTripRequest()
             );
@@ -499,7 +499,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.DeleteTripRequest()
             );
@@ -536,7 +536,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.DeleteTripRequest()
             );
@@ -559,7 +559,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.DeleteTripRequest()
             );
@@ -577,7 +577,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.ReportBillableTripRequest()
             );
@@ -603,7 +603,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.ReportBillableTripRequest()
             );
@@ -640,7 +640,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.ReportBillableTripRequest()
             );
@@ -663,7 +663,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.ReportBillableTripRequest()
             );
@@ -681,7 +681,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.UpdateTripRequest()
             );
@@ -707,7 +707,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.UpdateTripRequest()
             );
@@ -744,7 +744,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.UpdateTripRequest()
             );
@@ -767,7 +767,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.UpdateTripRequest()
             );
@@ -785,7 +785,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -812,7 +812,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -850,7 +850,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -873,7 +873,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -916,7 +916,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -954,7 +954,7 @@ describe('v1.TripServiceClient', () => {
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -989,7 +989,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             const request = generateSampleMessage(
               new protos.maps.fleetengine.v1.SearchTripsRequest()
             );
@@ -1019,7 +1019,7 @@ describe('v1.TripServiceClient', () => {
 
     describe('Path templates', () => {
 
-        describe('trip', () => {
+        describe('trip', async () => {
             const fakePath = "/rendered/path/trip";
             const expectedParameters = {
                 provider: "providerValue",
@@ -1029,7 +1029,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             client.pathTemplates.tripPathTemplate.render =
                 sinon.stub().returns(fakePath);
             client.pathTemplates.tripPathTemplate.match =
@@ -1057,7 +1057,7 @@ describe('v1.TripServiceClient', () => {
             });
         });
 
-        describe('vehicle', () => {
+        describe('vehicle', async () => {
             const fakePath = "/rendered/path/vehicle";
             const expectedParameters = {
                 provider: "providerValue",
@@ -1067,7 +1067,7 @@ describe('v1.TripServiceClient', () => {
                 credentials: {client_email: 'bogus', private_key: 'bogus'},
                 projectId: 'bogus',
             });
-            client.initialize();
+            await client.initialize();
             client.pathTemplates.vehiclePathTemplate.render =
                 sinon.stub().returns(fakePath);
             client.pathTemplates.vehiclePathTemplate.match =

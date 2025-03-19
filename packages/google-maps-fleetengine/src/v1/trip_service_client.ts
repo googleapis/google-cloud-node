@@ -468,7 +468,7 @@ export class TripServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('createTrip request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.ITrip,
@@ -602,7 +602,7 @@ export class TripServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('getTrip request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.ITrip,
@@ -709,7 +709,7 @@ export class TripServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('deleteTrip request %j', request);
     const wrappedCallback: Callback<
         protos.google.protobuf.IEmpty,
@@ -825,7 +825,7 @@ export class TripServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('reportBillableTrip request %j', request);
     const wrappedCallback: Callback<
         protos.google.protobuf.IEmpty,
@@ -974,7 +974,7 @@ export class TripServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('updateTrip request %j', request);
     const wrappedCallback: Callback<
         protos.maps.fleetengine.v1.ITrip,
@@ -1103,7 +1103,7 @@ export class TripServiceClient {
     ] = this._gaxModule.routingHeader.fromParams(
       routingParameter
     );
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     const wrappedCallback: PaginationCallback<
       protos.maps.fleetengine.v1.ISearchTripsRequest,
       protos.maps.fleetengine.v1.ISearchTripsResponse|null|undefined,
@@ -1193,7 +1193,7 @@ export class TripServiceClient {
     );
     const defaultCallSettings = this._defaults['searchTrips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('searchTrips stream %j', request);
     return this.descriptors.page.searchTrips.createStream(
       this.innerApiCalls.searchTrips as GaxCall,
@@ -1272,7 +1272,7 @@ export class TripServiceClient {
     );
     const defaultCallSettings = this._defaults['searchTrips'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {throw err});
     this._log.info('searchTrips iterate %j', request);
     return this.descriptors.page.searchTrips.asyncIterate(
       this.innerApiCalls['searchTrips'] as GaxCall,

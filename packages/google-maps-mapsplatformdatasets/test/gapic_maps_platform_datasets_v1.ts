@@ -266,7 +266,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.mapsPlatformDatasetsStub);
       client.close().then(() => {
         done();
@@ -329,7 +331,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -409,7 +411,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.CreateDatasetRequest()
       );
@@ -463,7 +465,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -497,7 +499,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -546,7 +548,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -582,7 +584,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.UpdateDatasetMetadataRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -640,7 +642,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -688,7 +690,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.GetDatasetRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -774,7 +776,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -854,7 +856,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.DeleteDatasetRequest()
       );
@@ -876,7 +878,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -958,7 +960,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -990,7 +992,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1089,7 +1091,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
       );
@@ -1176,7 +1178,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1216,7 +1218,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1274,7 +1276,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1306,7 +1308,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1421,7 +1423,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1472,7 +1474,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.mapsplatformdatasets.v1.ListDatasetsRequest()
       );
@@ -1510,7 +1512,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -1521,7 +1523,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

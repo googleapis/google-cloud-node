@@ -512,7 +512,9 @@ export class BusinessInfoServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBusinessInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -640,7 +642,9 @@ export class BusinessInfoServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'business_info.name': request.businessInfo!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBusinessInfo request %j', request);
     const wrappedCallback:
       | Callback<

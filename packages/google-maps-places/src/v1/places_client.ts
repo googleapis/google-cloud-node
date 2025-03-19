@@ -562,7 +562,9 @@ export class PlacesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchNearby request %j', request);
     const wrappedCallback:
       | Callback<
@@ -732,7 +734,9 @@ export class PlacesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -873,7 +877,9 @@ export class PlacesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPhotoMedia request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1023,7 +1029,9 @@ export class PlacesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPlace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1217,7 +1225,9 @@ export class PlacesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('autocompletePlaces request %j', request);
     const wrappedCallback:
       | Callback<
