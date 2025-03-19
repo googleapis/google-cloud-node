@@ -404,7 +404,9 @@ export class TetherClient {
    * region_tag:apigeeconnect_v1_generated_Tether_Egress_async
    */
   egress(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('egress stream %j', options);
     return this.innerApiCalls.egress(null, options);
   }

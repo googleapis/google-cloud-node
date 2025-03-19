@@ -502,7 +502,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
@@ -590,7 +592,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllResources stream %j', request);
     return this.descriptors.page.searchAllResources.createStream(
       this.innerApiCalls.searchAllResources as GaxCall,
@@ -660,7 +664,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllResources iterate %j', request);
     return this.descriptors.page.searchAllResources.asyncIterate(
       this.innerApiCalls['searchAllResources'] as GaxCall,
@@ -785,7 +791,9 @@ export class AssetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         scope: request.scope ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
@@ -868,7 +876,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllIamPolicies stream %j', request);
     return this.descriptors.page.searchAllIamPolicies.createStream(
       this.innerApiCalls.searchAllIamPolicies as GaxCall,
@@ -933,7 +943,9 @@ export class AssetServiceClient {
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchAllIamPolicies iterate %j', request);
     return this.descriptors.page.searchAllIamPolicies.asyncIterate(
       this.innerApiCalls['searchAllIamPolicies'] as GaxCall,

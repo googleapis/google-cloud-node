@@ -561,7 +561,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProject request %j', request);
     const wrappedCallback:
       | Callback<
@@ -675,7 +677,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('acceptTerms request %j', request);
     const wrappedCallback:
       | Callback<
@@ -798,7 +802,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnrolledSolutions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -919,7 +925,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLoggingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1062,7 +1070,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'logging_config.name': request.loggingConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateLoggingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1183,7 +1193,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAlertConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1311,7 +1323,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'alert_config.name': request.alertConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAlertConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1453,7 +1467,9 @@ export class ProjectServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1693,7 +1709,7 @@ export class ProjectServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

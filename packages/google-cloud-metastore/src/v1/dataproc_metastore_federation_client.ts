@@ -634,7 +634,9 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFederation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -790,7 +792,9 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -979,7 +983,9 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         'federation.name': request.federation!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1162,7 +1168,9 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1342,7 +1350,9 @@ export class DataprocMetastoreFederationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.metastore.v1.IListFederationsRequest,
@@ -1425,7 +1435,9 @@ export class DataprocMetastoreFederationClient {
       });
     const defaultCallSettings = this._defaults['listFederations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFederations stream %j', request);
     return this.descriptors.page.listFederations.createStream(
       this.innerApiCalls.listFederations as GaxCall,
@@ -1490,7 +1502,9 @@ export class DataprocMetastoreFederationClient {
       });
     const defaultCallSettings = this._defaults['listFederations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFederations iterate %j', request);
     return this.descriptors.page.listFederations.asyncIterate(
       this.innerApiCalls['listFederations'] as GaxCall,
@@ -1808,7 +1822,7 @@ export class DataprocMetastoreFederationClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

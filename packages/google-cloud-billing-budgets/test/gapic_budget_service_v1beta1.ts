@@ -255,7 +255,9 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.budgetServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest()
       );
@@ -345,7 +347,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest()
       );
@@ -392,7 +394,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest()
       );
@@ -423,7 +425,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.CreateBudgetRequest()
       );
@@ -444,7 +446,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest()
       );
@@ -476,7 +478,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest()
       );
@@ -524,7 +526,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest()
       );
@@ -556,7 +558,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.UpdateBudgetRequest()
       );
@@ -578,7 +580,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.GetBudgetRequest()
       );
@@ -609,7 +611,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.GetBudgetRequest()
       );
@@ -656,7 +658,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.GetBudgetRequest()
       );
@@ -684,7 +686,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.GetBudgetRequest()
       );
@@ -705,7 +707,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest()
       );
@@ -736,7 +738,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest()
       );
@@ -783,7 +785,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest()
       );
@@ -814,7 +816,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.DeleteBudgetRequest()
       );
@@ -835,7 +837,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -874,7 +876,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -931,7 +933,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -962,7 +964,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -1023,7 +1025,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -1075,7 +1077,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -1125,7 +1127,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1beta1.ListBudgetsRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1beta1.BudgetServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('billingAccount', () => {
+    describe('billingAccount', async () => {
       const fakePath = '/rendered/path/billingAccount';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1174,7 +1176,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1204,7 +1206,7 @@ describe('v1beta1.BudgetServiceClient', () => {
       });
     });
 
-    describe('budget', () => {
+    describe('budget', async () => {
       const fakePath = '/rendered/path/budget';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1214,7 +1216,7 @@ describe('v1beta1.BudgetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.budgetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

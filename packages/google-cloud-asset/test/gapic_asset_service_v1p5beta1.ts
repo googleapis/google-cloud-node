@@ -252,7 +252,9 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.assetServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -344,7 +346,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -393,7 +395,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -424,7 +426,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -478,7 +480,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -529,7 +531,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -572,7 +574,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
@@ -611,7 +613,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('accessLevel', () => {
+    describe('accessLevel', async () => {
       const fakePath = '/rendered/path/accessLevel';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -621,7 +623,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessLevelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -663,7 +665,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('accessPolicy', () => {
+    describe('accessPolicy', async () => {
       const fakePath = '/rendered/path/accessPolicy';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -672,7 +674,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -701,7 +703,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('servicePerimeter', () => {
+    describe('servicePerimeter', async () => {
       const fakePath = '/rendered/path/servicePerimeter';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -711,7 +713,7 @@ describe('v1p5beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePerimeterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

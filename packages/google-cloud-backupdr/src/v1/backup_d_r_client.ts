@@ -807,7 +807,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getManagementServer request %j', request);
     const wrappedCallback:
       | Callback<
@@ -924,7 +926,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupVault request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1035,7 +1039,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1147,7 +1153,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1257,7 +1265,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupPlan request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1380,7 +1390,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupPlanAssociation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1534,7 +1546,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1715,7 +1729,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1905,7 +1921,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2098,7 +2116,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_vault.name': request.backupVault!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2295,7 +2315,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2484,7 +2506,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         'data_source.name': request.dataSource!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2671,7 +2695,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2852,7 +2878,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3038,7 +3066,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3228,7 +3258,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3411,7 +3443,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3599,7 +3633,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3787,7 +3823,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3977,7 +4015,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4164,7 +4204,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4336,7 +4378,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListManagementServersRequest,
@@ -4411,7 +4455,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listManagementServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listManagementServers stream %j', request);
     return this.descriptors.page.listManagementServers.createStream(
       this.innerApiCalls.listManagementServers as GaxCall,
@@ -4468,7 +4514,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listManagementServers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listManagementServers iterate %j', request);
     return this.descriptors.page.listManagementServers.asyncIterate(
       this.innerApiCalls['listManagementServers'] as GaxCall,
@@ -4583,7 +4631,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListBackupVaultsRequest,
@@ -4661,7 +4711,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupVaults stream %j', request);
     return this.descriptors.page.listBackupVaults.createStream(
       this.innerApiCalls.listBackupVaults as GaxCall,
@@ -4721,7 +4773,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupVaults iterate %j', request);
     return this.descriptors.page.listBackupVaults.asyncIterate(
       this.innerApiCalls['listBackupVaults'] as GaxCall,
@@ -4835,7 +4889,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IFetchUsableBackupVaultsRequest,
@@ -4910,7 +4966,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['fetchUsableBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchUsableBackupVaults stream %j', request);
     return this.descriptors.page.fetchUsableBackupVaults.createStream(
       this.innerApiCalls.fetchUsableBackupVaults as GaxCall,
@@ -4967,7 +5025,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['fetchUsableBackupVaults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchUsableBackupVaults iterate %j', request);
     return this.descriptors.page.fetchUsableBackupVaults.asyncIterate(
       this.innerApiCalls['fetchUsableBackupVaults'] as GaxCall,
@@ -5079,7 +5139,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListDataSourcesRequest,
@@ -5154,7 +5216,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataSources stream %j', request);
     return this.descriptors.page.listDataSources.createStream(
       this.innerApiCalls.listDataSources as GaxCall,
@@ -5211,7 +5275,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataSources iterate %j', request);
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,
@@ -5320,7 +5386,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListBackupsRequest,
@@ -5398,7 +5466,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
@@ -5458,7 +5528,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
@@ -5578,7 +5650,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListBackupPlansRequest,
@@ -5661,7 +5735,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPlans stream %j', request);
     return this.descriptors.page.listBackupPlans.createStream(
       this.innerApiCalls.listBackupPlans as GaxCall,
@@ -5726,7 +5802,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPlans iterate %j', request);
     return this.descriptors.page.listBackupPlans.asyncIterate(
       this.innerApiCalls['listBackupPlans'] as GaxCall,
@@ -5836,7 +5914,9 @@ export class BackupDRClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.backupdr.v1.IListBackupPlanAssociationsRequest,
@@ -5909,7 +5989,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlanAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPlanAssociations stream %j', request);
     return this.descriptors.page.listBackupPlanAssociations.createStream(
       this.innerApiCalls.listBackupPlanAssociations as GaxCall,
@@ -5964,7 +6046,9 @@ export class BackupDRClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlanAssociations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPlanAssociations iterate %j', request);
     return this.descriptors.page.listBackupPlanAssociations.asyncIterate(
       this.innerApiCalls['listBackupPlanAssociations'] as GaxCall,
@@ -6282,7 +6366,7 @@ export class BackupDRClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

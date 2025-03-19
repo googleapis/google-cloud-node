@@ -250,7 +250,9 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.chatServiceStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMessageRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMessageRequest()
       );
@@ -387,7 +389,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMessageRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMessageRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMembershipRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMembershipRequest()
       );
@@ -517,7 +519,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMembershipRequest()
       );
@@ -548,7 +550,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMembershipRequest()
       );
@@ -569,7 +571,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMessageRequest()
       );
@@ -600,7 +602,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMessageRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMessageRequest()
       );
@@ -678,7 +680,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetMessageRequest()
       );
@@ -699,7 +701,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMessageRequest()
       );
@@ -731,7 +733,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMessageRequest()
       );
@@ -779,7 +781,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMessageRequest()
       );
@@ -811,7 +813,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMessageRequest()
       );
@@ -833,7 +835,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMessageRequest()
       );
@@ -864,7 +866,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMessageRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMessageRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMessageRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetAttachmentRequest()
       );
@@ -994,7 +996,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetAttachmentRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetAttachmentRequest()
       );
@@ -1072,7 +1074,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetAttachmentRequest()
       );
@@ -1093,7 +1095,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UploadAttachmentRequest()
       );
@@ -1124,7 +1126,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UploadAttachmentRequest()
       );
@@ -1171,7 +1173,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UploadAttachmentRequest()
       );
@@ -1202,7 +1204,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UploadAttachmentRequest()
       );
@@ -1223,7 +1225,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceRequest()
       );
@@ -1254,7 +1256,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceRequest()
       );
@@ -1301,7 +1303,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceRequest()
       );
@@ -1329,7 +1331,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceRequest()
       );
@@ -1350,7 +1352,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateSpaceRequest()
       );
@@ -1367,7 +1369,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateSpaceRequest()
       );
@@ -1400,7 +1402,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateSpaceRequest()
       );
@@ -1417,7 +1419,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateSpaceRequest()
       );
@@ -1433,7 +1435,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SetUpSpaceRequest()
       );
@@ -1450,7 +1452,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SetUpSpaceRequest()
       );
@@ -1483,7 +1485,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SetUpSpaceRequest()
       );
@@ -1500,7 +1502,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SetUpSpaceRequest()
       );
@@ -1516,7 +1518,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceRequest()
       );
@@ -1596,7 +1598,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceRequest()
       );
@@ -1650,7 +1652,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteSpaceRequest()
       );
@@ -1681,7 +1683,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteSpaceRequest()
       );
@@ -1728,7 +1730,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteSpaceRequest()
       );
@@ -1759,7 +1761,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteSpaceRequest()
       );
@@ -1780,7 +1782,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CompleteImportSpaceRequest()
       );
@@ -1812,7 +1814,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CompleteImportSpaceRequest()
       );
@@ -1859,7 +1861,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CompleteImportSpaceRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CompleteImportSpaceRequest()
       );
@@ -1911,7 +1913,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.FindDirectMessageRequest()
       );
@@ -1928,7 +1930,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.FindDirectMessageRequest()
       );
@@ -1961,7 +1963,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.FindDirectMessageRequest()
       );
@@ -1978,7 +1980,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.FindDirectMessageRequest()
       );
@@ -1994,7 +1996,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMembershipRequest()
       );
@@ -2025,7 +2027,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMembershipRequest()
       );
@@ -2072,7 +2074,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMembershipRequest()
       );
@@ -2103,7 +2105,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateMembershipRequest()
       );
@@ -2124,7 +2126,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMembershipRequest()
       );
@@ -2156,7 +2158,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMembershipRequest()
       );
@@ -2204,7 +2206,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMembershipRequest()
       );
@@ -2236,7 +2238,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateMembershipRequest()
       );
@@ -2258,7 +2260,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMembershipRequest()
       );
@@ -2289,7 +2291,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMembershipRequest()
       );
@@ -2336,7 +2338,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMembershipRequest()
       );
@@ -2367,7 +2369,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteMembershipRequest()
       );
@@ -2388,7 +2390,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateReactionRequest()
       );
@@ -2419,7 +2421,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateReactionRequest()
       );
@@ -2466,7 +2468,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateReactionRequest()
       );
@@ -2497,7 +2499,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.CreateReactionRequest()
       );
@@ -2518,7 +2520,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteReactionRequest()
       );
@@ -2549,7 +2551,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteReactionRequest()
       );
@@ -2596,7 +2598,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteReactionRequest()
       );
@@ -2627,7 +2629,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.DeleteReactionRequest()
       );
@@ -2648,7 +2650,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceReadStateRequest()
       );
@@ -2679,7 +2681,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceReadStateRequest()
       );
@@ -2726,7 +2728,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceReadStateRequest()
       );
@@ -2757,7 +2759,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceReadStateRequest()
       );
@@ -2778,7 +2780,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceReadStateRequest()
       );
@@ -2811,7 +2813,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceReadStateRequest()
       );
@@ -2859,7 +2861,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceReadStateRequest()
       );
@@ -2891,7 +2893,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceReadStateRequest()
       );
@@ -2913,7 +2915,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetThreadReadStateRequest()
       );
@@ -2945,7 +2947,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetThreadReadStateRequest()
       );
@@ -2992,7 +2994,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetThreadReadStateRequest()
       );
@@ -3023,7 +3025,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetThreadReadStateRequest()
       );
@@ -3044,7 +3046,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceEventRequest()
       );
@@ -3075,7 +3077,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceEventRequest()
       );
@@ -3122,7 +3124,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceEventRequest()
       );
@@ -3153,7 +3155,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceEventRequest()
       );
@@ -3174,7 +3176,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceNotificationSettingRequest()
       );
@@ -3206,7 +3208,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceNotificationSettingRequest()
       );
@@ -3253,7 +3255,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceNotificationSettingRequest()
       );
@@ -3287,7 +3289,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.GetSpaceNotificationSettingRequest()
       );
@@ -3311,7 +3313,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceNotificationSettingRequest()
       );
@@ -3344,7 +3346,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceNotificationSettingRequest()
       );
@@ -3392,7 +3394,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceNotificationSettingRequest()
       );
@@ -3427,7 +3429,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.UpdateSpaceNotificationSettingRequest()
       );
@@ -3452,7 +3454,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3485,7 +3487,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3534,7 +3536,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3565,7 +3567,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3616,7 +3618,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3664,7 +3666,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3707,7 +3709,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMessagesRequest()
       );
@@ -3749,7 +3751,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -3782,7 +3784,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -3831,7 +3833,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -3862,7 +3864,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -3913,7 +3915,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -3959,7 +3961,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -4002,7 +4004,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListMembershipsRequest()
       );
@@ -4044,7 +4046,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4063,7 +4065,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4098,7 +4100,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4115,7 +4117,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4153,7 +4155,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4188,7 +4190,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4218,7 +4220,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpacesRequest()
       );
@@ -4249,7 +4251,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4268,7 +4270,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4303,7 +4305,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4320,7 +4322,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4358,7 +4360,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4393,7 +4395,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4423,7 +4425,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.SearchSpacesRequest()
       );
@@ -4452,7 +4454,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4485,7 +4487,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4534,7 +4536,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4565,7 +4567,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4616,7 +4618,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4662,7 +4664,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4705,7 +4707,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListReactionsRequest()
       );
@@ -4747,7 +4749,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -4780,7 +4782,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -4829,7 +4831,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -4860,7 +4862,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -4911,7 +4913,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -4957,7 +4959,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -5000,7 +5002,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.chat.v1.ListSpaceEventsRequest()
       );
@@ -5037,7 +5039,7 @@ describe('v1.ChatServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('attachment', () => {
+    describe('attachment', async () => {
       const fakePath = '/rendered/path/attachment';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5048,7 +5050,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5101,7 +5103,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('membership', () => {
+    describe('membership', async () => {
       const fakePath = '/rendered/path/membership';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5111,7 +5113,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.membershipPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5150,7 +5152,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('message', () => {
+    describe('message', async () => {
       const fakePath = '/rendered/path/message';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5160,7 +5162,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.messagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5199,7 +5201,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('quotedMessageMetadata', () => {
+    describe('quotedMessageMetadata', async () => {
       const fakePath = '/rendered/path/quotedMessageMetadata';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5210,7 +5212,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.quotedMessageMetadataPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5279,7 +5281,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('reaction', () => {
+    describe('reaction', async () => {
       const fakePath = '/rendered/path/reaction';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5290,7 +5292,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reactionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5343,7 +5345,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('space', () => {
+    describe('space', async () => {
       const fakePath = '/rendered/path/space';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5352,7 +5354,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5381,7 +5383,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('spaceEvent', () => {
+    describe('spaceEvent', async () => {
       const fakePath = '/rendered/path/spaceEvent';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5391,7 +5393,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spaceEventPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5430,7 +5432,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('spaceNotificationSetting', () => {
+    describe('spaceNotificationSetting', async () => {
       const fakePath = '/rendered/path/spaceNotificationSetting';
       const expectedParameters = {
         user: 'userValue',
@@ -5440,7 +5442,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spaceNotificationSettingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5493,7 +5495,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('spaceReadState', () => {
+    describe('spaceReadState', async () => {
       const fakePath = '/rendered/path/spaceReadState';
       const expectedParameters = {
         user: 'userValue',
@@ -5503,7 +5505,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spaceReadStatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5542,7 +5544,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('thread', () => {
+    describe('thread', async () => {
       const fakePath = '/rendered/path/thread';
       const expectedParameters = {
         space: 'spaceValue',
@@ -5552,7 +5554,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.threadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5591,7 +5593,7 @@ describe('v1.ChatServiceClient', () => {
       });
     });
 
-    describe('threadReadState', () => {
+    describe('threadReadState', async () => {
       const fakePath = '/rendered/path/threadReadState';
       const expectedParameters = {
         user: 'userValue',
@@ -5602,7 +5604,7 @@ describe('v1.ChatServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.threadReadStatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

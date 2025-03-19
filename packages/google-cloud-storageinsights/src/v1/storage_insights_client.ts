@@ -503,7 +503,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReportConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -644,7 +646,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createReportConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -789,7 +793,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'report_config.name': request.reportConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateReportConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -930,7 +936,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteReportConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1055,7 +1063,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReportDetail request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1187,7 +1197,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.storageinsights.v1.IListReportConfigsRequest,
@@ -1257,7 +1269,9 @@ export class StorageInsightsClient {
       });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportConfigs stream %j', request);
     return this.descriptors.page.listReportConfigs.createStream(
       this.innerApiCalls.listReportConfigs as GaxCall,
@@ -1309,7 +1323,9 @@ export class StorageInsightsClient {
       });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportConfigs iterate %j', request);
     return this.descriptors.page.listReportConfigs.asyncIterate(
       this.innerApiCalls['listReportConfigs'] as GaxCall,
@@ -1416,7 +1432,9 @@ export class StorageInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.storageinsights.v1.IListReportDetailsRequest,
@@ -1486,7 +1504,9 @@ export class StorageInsightsClient {
       });
     const defaultCallSettings = this._defaults['listReportDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportDetails stream %j', request);
     return this.descriptors.page.listReportDetails.createStream(
       this.innerApiCalls.listReportDetails as GaxCall,
@@ -1538,7 +1558,9 @@ export class StorageInsightsClient {
       });
     const defaultCallSettings = this._defaults['listReportDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportDetails iterate %j', request);
     return this.descriptors.page.listReportDetails.asyncIterate(
       this.innerApiCalls['listReportDetails'] as GaxCall,

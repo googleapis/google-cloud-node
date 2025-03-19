@@ -489,7 +489,9 @@ export class CompletionClient {
       this._gaxModule.routingHeader.fromParams({
         tenant: request.tenant ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('completeQuery request %j', request);
     const wrappedCallback:
       | Callback<

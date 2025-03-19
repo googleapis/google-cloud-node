@@ -649,7 +649,9 @@ export class PolicyBasedRoutingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPolicyBasedRoute request %j', request);
     const wrappedCallback:
       | Callback<
@@ -799,7 +801,9 @@ export class PolicyBasedRoutingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -980,7 +984,9 @@ export class PolicyBasedRoutingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1146,7 +1152,9 @@ export class PolicyBasedRoutingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkconnectivity.v1.IListPolicyBasedRoutesRequest,
@@ -1215,7 +1223,9 @@ export class PolicyBasedRoutingServiceClient {
       });
     const defaultCallSettings = this._defaults['listPolicyBasedRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicyBasedRoutes stream %j', request);
     return this.descriptors.page.listPolicyBasedRoutes.createStream(
       this.innerApiCalls.listPolicyBasedRoutes as GaxCall,
@@ -1266,7 +1276,9 @@ export class PolicyBasedRoutingServiceClient {
       });
     const defaultCallSettings = this._defaults['listPolicyBasedRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicyBasedRoutes iterate %j', request);
     return this.descriptors.page.listPolicyBasedRoutes.asyncIterate(
       this.innerApiCalls['listPolicyBasedRoutes'] as GaxCall,
@@ -1584,7 +1596,7 @@ export class PolicyBasedRoutingServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

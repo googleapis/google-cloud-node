@@ -615,7 +615,9 @@ export class VpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVpcFlowLogsConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -766,7 +768,9 @@ export class VpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -950,7 +954,9 @@ export class VpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'vpc_flow_logs_config.name': request.vpcFlowLogsConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1118,7 +1124,9 @@ export class VpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1288,7 +1296,9 @@ export class VpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkmanagement.v1.IListVpcFlowLogsConfigsRequest,
@@ -1361,7 +1371,9 @@ export class VpcFlowLogsServiceClient {
       });
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVpcFlowLogsConfigs stream %j', request);
     return this.descriptors.page.listVpcFlowLogsConfigs.createStream(
       this.innerApiCalls.listVpcFlowLogsConfigs as GaxCall,
@@ -1416,7 +1428,9 @@ export class VpcFlowLogsServiceClient {
       });
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVpcFlowLogsConfigs iterate %j', request);
     return this.descriptors.page.listVpcFlowLogsConfigs.asyncIterate(
       this.innerApiCalls['listVpcFlowLogsConfigs'] as GaxCall,
@@ -1734,7 +1748,7 @@ export class VpcFlowLogsServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

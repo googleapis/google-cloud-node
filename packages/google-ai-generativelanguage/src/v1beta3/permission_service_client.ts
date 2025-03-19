@@ -489,7 +489,9 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPermission request %j', request);
     const wrappedCallback:
       | Callback<
@@ -616,7 +618,9 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPermission request %j', request);
     const wrappedCallback:
       | Callback<
@@ -746,7 +750,9 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'permission.name': request.permission!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePermission request %j', request);
     const wrappedCallback:
       | Callback<
@@ -872,7 +878,9 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePermission request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1004,7 +1012,9 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('transferOwnership request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1143,7 +1153,9 @@ export class PermissionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta3.IListPermissionsRequest,
@@ -1220,7 +1232,9 @@ export class PermissionServiceClient {
       });
     const defaultCallSettings = this._defaults['listPermissions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPermissions stream %j', request);
     return this.descriptors.page.listPermissions.createStream(
       this.innerApiCalls.listPermissions as GaxCall,
@@ -1279,7 +1293,9 @@ export class PermissionServiceClient {
       });
     const defaultCallSettings = this._defaults['listPermissions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPermissions iterate %j', request);
     return this.descriptors.page.listPermissions.asyncIterate(
       this.innerApiCalls['listPermissions'] as GaxCall,

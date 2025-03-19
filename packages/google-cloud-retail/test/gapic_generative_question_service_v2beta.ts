@@ -231,7 +231,9 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.generativeQuestionServiceStub);
       client.close().then(() => {
         done();
@@ -302,7 +304,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionsFeatureConfigRequest()
       );
@@ -339,7 +341,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionsFeatureConfigRequest()
       );
@@ -390,7 +392,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionsFeatureConfigRequest()
       );
@@ -426,7 +428,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionsFeatureConfigRequest()
       );
@@ -454,7 +456,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetGenerativeQuestionsFeatureConfigRequest()
       );
@@ -490,7 +492,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetGenerativeQuestionsFeatureConfigRequest()
       );
@@ -540,7 +542,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetGenerativeQuestionsFeatureConfigRequest()
       );
@@ -577,7 +579,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetGenerativeQuestionsFeatureConfigRequest()
       );
@@ -604,7 +606,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListGenerativeQuestionConfigsRequest()
       );
@@ -639,7 +641,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListGenerativeQuestionConfigsRequest()
       );
@@ -689,7 +691,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListGenerativeQuestionConfigsRequest()
       );
@@ -726,7 +728,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListGenerativeQuestionConfigsRequest()
       );
@@ -753,7 +755,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionConfigRequest()
       );
@@ -789,7 +791,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionConfigRequest()
       );
@@ -840,7 +842,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionConfigRequest()
       );
@@ -878,7 +880,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateGenerativeQuestionConfigRequest()
       );
@@ -906,7 +908,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.BatchUpdateGenerativeQuestionConfigsRequest()
       );
@@ -942,7 +944,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.BatchUpdateGenerativeQuestionConfigsRequest()
       );
@@ -992,7 +994,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.BatchUpdateGenerativeQuestionConfigsRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.BatchUpdateGenerativeQuestionConfigsRequest()
       );
@@ -1053,7 +1055,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1086,7 +1088,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1171,7 +1173,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1222,7 +1224,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1266,7 +1268,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1354,7 +1356,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1548,8 +1550,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1571,7 +1572,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1580,8 +1581,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1597,7 +1597,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('alertConfig', () => {
+    describe('alertConfig', async () => {
       const fakePath = '/rendered/path/alertConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -1609,7 +1609,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.alertConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1638,7 +1638,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('attributesConfig', () => {
+    describe('attributesConfig', async () => {
       const fakePath = '/rendered/path/attributesConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -1652,7 +1652,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attributesConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1708,7 +1708,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('catalog', () => {
+    describe('catalog', async () => {
       const fakePath = '/rendered/path/catalog';
       const expectedParameters = {
         project: 'projectValue',
@@ -1722,7 +1722,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.catalogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1775,7 +1775,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('completionConfig', () => {
+    describe('completionConfig', async () => {
       const fakePath = '/rendered/path/completionConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -1789,7 +1789,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.completionConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1845,7 +1845,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('control', () => {
+    describe('control', async () => {
       const fakePath = '/rendered/path/control';
       const expectedParameters = {
         project: 'projectValue',
@@ -1860,7 +1860,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.controlPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1924,7 +1924,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         project: 'projectValue',
@@ -1939,7 +1939,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2003,7 +2003,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         project: 'projectValue',
@@ -2019,7 +2019,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2094,7 +2094,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
       });
     });
 
-    describe('servingConfig', () => {
+    describe('servingConfig', async () => {
       const fakePath = '/rendered/path/servingConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -2109,7 +2109,7 @@ describe('v2beta.GenerativeQuestionServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servingConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

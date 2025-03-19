@@ -282,7 +282,9 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.instancesStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetInstanceRequest()
       );
@@ -372,7 +374,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetInstanceRequest()
       );
@@ -419,7 +421,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetInstanceRequest()
       );
@@ -450,7 +452,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetInstanceRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteInstanceRequest()
       );
@@ -504,7 +506,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteInstanceRequest()
       );
@@ -558,7 +560,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteInstanceRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteInstanceRequest()
       );
@@ -622,7 +624,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -644,7 +646,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -665,7 +667,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DebugInstanceRequest()
       );
@@ -698,7 +700,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DebugInstanceRequest()
       );
@@ -752,7 +754,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DebugInstanceRequest()
       );
@@ -783,7 +785,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DebugInstanceRequest()
       );
@@ -816,7 +818,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -838,7 +840,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -859,7 +861,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -892,7 +894,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -941,7 +943,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -972,7 +974,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -1023,7 +1025,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -1069,7 +1071,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -1112,7 +1114,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListInstancesRequest()
       );
@@ -1149,7 +1151,7 @@ describe('v1.InstancesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         app: 'appValue',
@@ -1161,7 +1163,7 @@ describe('v1.InstancesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

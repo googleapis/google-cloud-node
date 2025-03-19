@@ -657,7 +657,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHub request %j', request);
     const wrappedCallback:
       | Callback<
@@ -782,7 +784,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpoke request %j', request);
     const wrappedCallback:
       | Callback<
@@ -932,7 +936,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1119,7 +1125,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'hub.name': request.hub!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1300,7 +1308,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1485,7 +1495,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1672,7 +1684,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'spoke.name': request.spoke!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1853,7 +1867,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2019,7 +2035,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkconnectivity.v1alpha1.IListHubsRequest,
@@ -2088,7 +2106,9 @@ export class HubServiceClient {
       });
     const defaultCallSettings = this._defaults['listHubs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHubs stream %j', request);
     return this.descriptors.page.listHubs.createStream(
       this.innerApiCalls.listHubs as GaxCall,
@@ -2139,7 +2159,9 @@ export class HubServiceClient {
       });
     const defaultCallSettings = this._defaults['listHubs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHubs iterate %j', request);
     return this.descriptors.page.listHubs.asyncIterate(
       this.innerApiCalls['listHubs'] as GaxCall,
@@ -2245,7 +2267,9 @@ export class HubServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkconnectivity.v1alpha1.IListSpokesRequest,
@@ -2314,7 +2338,9 @@ export class HubServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpokes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpokes stream %j', request);
     return this.descriptors.page.listSpokes.createStream(
       this.innerApiCalls.listSpokes as GaxCall,
@@ -2365,7 +2391,9 @@ export class HubServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpokes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpokes iterate %j', request);
     return this.descriptors.page.listSpokes.asyncIterate(
       this.innerApiCalls['listSpokes'] as GaxCall,
