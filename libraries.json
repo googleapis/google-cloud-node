@@ -3370,6 +3370,24 @@
     "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
   },
   {
+    "name": "modelarmor",
+    "name_pretty": "Model Armor API",
+    "product_documentation": "https://cloud.google.com/security-command-center/docs/model-armor-overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/modelarmor/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/modelarmor",
+    "api_id": "modelarmor.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "modelarmor",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-modelarmor",
+    "support_documentation": "https://cloud.google.com/security-command-center/docs/getting-support"
+  },
+  {
     "name": "oracledatabase",
     "name_pretty": "Oracle Database@Google Cloud API",
     "product_documentation": "https://cloud.google.com/oracle/database/docs",
