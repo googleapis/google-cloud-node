@@ -550,7 +550,9 @@ export class HostProjectRegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createHostProjectRegistration request %j', request);
     const wrappedCallback:
       | Callback<
@@ -676,7 +678,9 @@ export class HostProjectRegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHostProjectRegistration request %j', request);
     const wrappedCallback:
       | Callback<
@@ -832,7 +836,9 @@ export class HostProjectRegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apihub.v1.IListHostProjectRegistrationsRequest,
@@ -926,7 +932,9 @@ export class HostProjectRegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listHostProjectRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHostProjectRegistrations stream %j', request);
     return this.descriptors.page.listHostProjectRegistrations.createStream(
       this.innerApiCalls.listHostProjectRegistrations as GaxCall,
@@ -1002,7 +1010,9 @@ export class HostProjectRegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listHostProjectRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHostProjectRegistrations iterate %j', request);
     return this.descriptors.page.listHostProjectRegistrations.asyncIterate(
       this.innerApiCalls['listHostProjectRegistrations'] as GaxCall,

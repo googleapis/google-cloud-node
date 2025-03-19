@@ -532,7 +532,9 @@ export class CustomTargetingValueServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomTargetingValue request %j', request);
     const wrappedCallback:
       | Callback<
@@ -680,7 +682,9 @@ export class CustomTargetingValueServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListCustomTargetingValuesRequest,
@@ -766,7 +770,9 @@ export class CustomTargetingValueServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetingValues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomTargetingValues stream %j', request);
     return this.descriptors.page.listCustomTargetingValues.createStream(
       this.innerApiCalls.listCustomTargetingValues as GaxCall,
@@ -834,7 +840,9 @@ export class CustomTargetingValueServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetingValues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomTargetingValues iterate %j', request);
     return this.descriptors.page.listCustomTargetingValues.asyncIterate(
       this.innerApiCalls['listCustomTargetingValues'] as GaxCall,

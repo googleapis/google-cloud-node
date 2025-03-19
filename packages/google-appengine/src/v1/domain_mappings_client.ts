@@ -548,7 +548,9 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDomainMapping request %j', request);
     const wrappedCallback:
       | Callback<
@@ -684,7 +686,9 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -860,7 +864,9 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1030,7 +1036,9 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1186,7 +1194,9 @@ export class DomainMappingsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.appengine.v1.IListDomainMappingsRequest,
@@ -1251,7 +1261,9 @@ export class DomainMappingsClient {
       });
     const defaultCallSettings = this._defaults['listDomainMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDomainMappings stream %j', request);
     return this.descriptors.page.listDomainMappings.createStream(
       this.innerApiCalls.listDomainMappings as GaxCall,
@@ -1298,7 +1310,9 @@ export class DomainMappingsClient {
       });
     const defaultCallSettings = this._defaults['listDomainMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDomainMappings iterate %j', request);
     return this.descriptors.page.listDomainMappings.asyncIterate(
       this.innerApiCalls['listDomainMappings'] as GaxCall,

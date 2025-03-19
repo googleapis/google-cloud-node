@@ -558,7 +558,9 @@ export class TextServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -680,7 +682,9 @@ export class TextServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('embedText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -815,7 +819,9 @@ export class TextServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchEmbedText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -947,7 +953,9 @@ export class TextServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('countTextTokens request %j', request);
     const wrappedCallback:
       | Callback<

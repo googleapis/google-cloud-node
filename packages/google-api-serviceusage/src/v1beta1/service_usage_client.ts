@@ -688,7 +688,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$GetService',
       'GetService is deprecated and may be removed in a future version.',
@@ -820,7 +822,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConsumerQuotaMetric request %j', request);
     const wrappedCallback:
       | Callback<
@@ -950,7 +954,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConsumerQuotaLimit request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1095,7 +1101,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$EnableService',
       'EnableService is deprecated and may be removed in a future version.',
@@ -1288,7 +1296,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$DisableService',
       'DisableService is deprecated and may be removed in a future version.',
@@ -1492,7 +1502,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$BatchEnableServices',
       'BatchEnableServices is deprecated and may be removed in a future version.',
@@ -1690,7 +1702,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1875,7 +1889,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2054,7 +2070,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2237,7 +2255,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2423,7 +2443,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2608,7 +2630,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2787,7 +2811,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2970,7 +2996,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3145,7 +3173,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3324,7 +3354,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$ListServices',
       'ListServices is deprecated and may be removed in a future version.',
@@ -3405,7 +3437,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$ListServices',
       'ListServices is deprecated and may be removed in a future version.',
@@ -3468,7 +3502,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$ServiceUsage-$ListServices',
       'ListServices is deprecated and may be removed in a future version.',
@@ -3587,7 +3623,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.serviceusage.v1beta1.IListConsumerQuotaMetricsRequest,
@@ -3660,7 +3698,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConsumerQuotaMetrics stream %j', request);
     return this.descriptors.page.listConsumerQuotaMetrics.createStream(
       this.innerApiCalls.listConsumerQuotaMetrics as GaxCall,
@@ -3715,7 +3755,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerQuotaMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConsumerQuotaMetrics iterate %j', request);
     return this.descriptors.page.listConsumerQuotaMetrics.asyncIterate(
       this.innerApiCalls['listConsumerQuotaMetrics'] as GaxCall,
@@ -3822,7 +3864,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.serviceusage.v1beta1.IListAdminOverridesRequest,
@@ -3892,7 +3936,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listAdminOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAdminOverrides stream %j', request);
     return this.descriptors.page.listAdminOverrides.createStream(
       this.innerApiCalls.listAdminOverrides as GaxCall,
@@ -3944,7 +3990,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listAdminOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAdminOverrides iterate %j', request);
     return this.descriptors.page.listAdminOverrides.asyncIterate(
       this.innerApiCalls['listAdminOverrides'] as GaxCall,
@@ -4051,7 +4099,9 @@ export class ServiceUsageClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.serviceusage.v1beta1.IListConsumerOverridesRequest,
@@ -4121,7 +4171,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConsumerOverrides stream %j', request);
     return this.descriptors.page.listConsumerOverrides.createStream(
       this.innerApiCalls.listConsumerOverrides as GaxCall,
@@ -4173,7 +4225,9 @@ export class ServiceUsageClient {
       });
     const defaultCallSettings = this._defaults['listConsumerOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConsumerOverrides iterate %j', request);
     return this.descriptors.page.listConsumerOverrides.asyncIterate(
       this.innerApiCalls['listConsumerOverrides'] as GaxCall,
@@ -4275,7 +4329,7 @@ export class ServiceUsageClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
