@@ -484,7 +484,9 @@ export class QuotaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.quota.v1beta.IListQuotaGroupsRequest,
@@ -552,7 +554,9 @@ export class QuotaServiceClient {
       });
     const defaultCallSettings = this._defaults['listQuotaGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaGroups stream %j', request);
     return this.descriptors.page.listQuotaGroups.createStream(
       this.innerApiCalls.listQuotaGroups as GaxCall,
@@ -602,7 +606,9 @@ export class QuotaServiceClient {
       });
     const defaultCallSettings = this._defaults['listQuotaGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaGroups iterate %j', request);
     return this.descriptors.page.listQuotaGroups.asyncIterate(
       this.innerApiCalls['listQuotaGroups'] as GaxCall,

@@ -500,7 +500,9 @@ export class RegionalInventoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertRegionalInventory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -631,7 +633,9 @@ export class RegionalInventoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRegionalInventory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -774,7 +778,9 @@ export class RegionalInventoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.inventories.v1beta.IListRegionalInventoriesRequest,
@@ -850,7 +856,9 @@ export class RegionalInventoryServiceClient {
       });
     const defaultCallSettings = this._defaults['listRegionalInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRegionalInventories stream %j', request);
     return this.descriptors.page.listRegionalInventories.createStream(
       this.innerApiCalls.listRegionalInventories as GaxCall,
@@ -908,7 +916,9 @@ export class RegionalInventoryServiceClient {
       });
     const defaultCallSettings = this._defaults['listRegionalInventories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRegionalInventories iterate %j', request);
     return this.descriptors.page.listRegionalInventories.asyncIterate(
       this.innerApiCalls['listRegionalInventories'] as GaxCall,

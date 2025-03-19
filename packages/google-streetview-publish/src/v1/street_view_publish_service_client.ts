@@ -532,7 +532,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startUpload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -661,7 +663,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPhoto request %j', request);
     const wrappedCallback:
       | Callback<
@@ -792,7 +796,9 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         photo_id: request.photoId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPhoto request %j', request);
     const wrappedCallback:
       | Callback<
@@ -930,7 +936,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchGetPhotos request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1096,7 +1104,9 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'photo.photo_id.id': request.photo!.photoId!.id ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePhoto request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1241,7 +1251,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdatePhotos request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1367,7 +1379,9 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         photo_id: request.photoId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePhoto request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1496,7 +1510,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchDeletePhotos request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1610,7 +1626,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startPhotoSequenceUpload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1741,7 +1759,9 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         sequence_id: request.sequenceId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePhotoSequence request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1890,7 +1910,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2088,7 +2110,9 @@ export class StreetViewPublishServiceClient {
       this._gaxModule.routingHeader.fromParams({
         sequence_id: request.sequenceId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2272,7 +2296,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.streetview.publish.v1.IListPhotosRequest,
@@ -2355,7 +2381,9 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhotos stream %j', request);
     return this.descriptors.page.listPhotos.createStream(
       this.innerApiCalls.listPhotos as GaxCall,
@@ -2420,7 +2448,9 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhotos iterate %j', request);
     return this.descriptors.page.listPhotos.asyncIterate(
       this.innerApiCalls['listPhotos'] as GaxCall,
@@ -2536,7 +2566,9 @@ export class StreetViewPublishServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.streetview.publish.v1.IListPhotoSequencesRequest,
@@ -2614,7 +2646,9 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotoSequences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhotoSequences stream %j', request);
     return this.descriptors.page.listPhotoSequences.createStream(
       this.innerApiCalls.listPhotoSequences as GaxCall,
@@ -2674,7 +2708,9 @@ export class StreetViewPublishServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listPhotoSequences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhotoSequences iterate %j', request);
     return this.descriptors.page.listPhotoSequences.asyncIterate(
       this.innerApiCalls['listPhotoSequences'] as GaxCall,

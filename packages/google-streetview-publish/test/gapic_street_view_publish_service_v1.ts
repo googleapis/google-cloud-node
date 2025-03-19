@@ -300,7 +300,9 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.streetViewPublishServiceStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.UploadRef()
@@ -379,7 +381,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.UploadRef()
@@ -411,7 +413,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('expected');
       client.innerApiCalls.startUpload = stubSimpleCall(
@@ -427,7 +429,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -442,7 +444,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoRequest()
       );
@@ -494,7 +496,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoRequest()
       );
@@ -529,7 +531,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoRequest()
       );
@@ -561,7 +563,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoRequest()
       );
@@ -638,7 +640,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoRequest()
       );
@@ -660,7 +662,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchGetPhotosRequest()
       );
@@ -678,7 +680,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchGetPhotosRequest()
       );
@@ -712,7 +714,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchGetPhotosRequest()
       );
@@ -730,7 +732,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchGetPhotosRequest()
       );
@@ -747,7 +749,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.UpdatePhotoRequest()
       );
@@ -781,7 +783,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.UpdatePhotoRequest()
       );
@@ -831,7 +833,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.UpdatePhotoRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.UpdatePhotoRequest()
       );
@@ -889,7 +891,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchUpdatePhotosRequest()
       );
@@ -907,7 +909,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchUpdatePhotosRequest()
       );
@@ -941,7 +943,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchUpdatePhotosRequest()
       );
@@ -959,7 +961,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchUpdatePhotosRequest()
       );
@@ -976,7 +978,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoRequest()
       );
@@ -1008,7 +1010,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoRequest()
       );
@@ -1056,7 +1058,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoRequest()
       );
@@ -1088,7 +1090,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoRequest()
       );
@@ -1110,7 +1112,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchDeletePhotosRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchDeletePhotosRequest()
       );
@@ -1162,7 +1164,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchDeletePhotosRequest()
       );
@@ -1180,7 +1182,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.BatchDeletePhotosRequest()
       );
@@ -1197,7 +1199,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.UploadRef()
@@ -1214,7 +1216,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedResponse = generateSampleMessage(
         new protos.google.streetview.publish.v1.UploadRef()
@@ -1246,7 +1248,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('expected');
       client.innerApiCalls.startPhotoSequenceUpload = stubSimpleCall(
@@ -1265,7 +1267,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1283,7 +1285,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoSequenceRequest()
       );
@@ -1316,7 +1318,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoSequenceRequest()
       );
@@ -1364,7 +1366,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoSequenceRequest()
       );
@@ -1396,7 +1398,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.DeletePhotoSequenceRequest()
       );
@@ -1418,7 +1420,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoSequenceRequest()
       );
@@ -1438,7 +1440,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoSequenceRequest()
       );
@@ -1479,7 +1481,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoSequenceRequest()
       );
@@ -1497,7 +1499,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.CreatePhotoSequenceRequest()
       );
@@ -1517,7 +1519,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1540,7 +1542,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1562,7 +1564,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoSequenceRequest()
       );
@@ -1596,7 +1598,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoSequenceRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoSequenceRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.GetPhotoSequenceRequest()
       );
@@ -1717,7 +1719,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1740,7 +1742,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1762,7 +1764,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1782,7 +1784,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1818,7 +1820,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1836,7 +1838,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1878,7 +1880,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1917,7 +1919,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1948,7 +1950,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotosRequest()
       );
@@ -1980,7 +1982,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );
@@ -2001,7 +2003,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );
@@ -2037,7 +2039,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );
@@ -2055,7 +2057,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );
@@ -2094,7 +2096,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );
@@ -2128,7 +2130,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );
@@ -2159,7 +2161,7 @@ describe('v1.StreetViewPublishServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.streetview.publish.v1.ListPhotoSequencesRequest()
       );

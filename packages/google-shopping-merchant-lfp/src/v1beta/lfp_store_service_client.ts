@@ -492,7 +492,9 @@ export class LfpStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLfpStore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -621,7 +623,9 @@ export class LfpStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertLfpStore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -747,7 +751,9 @@ export class LfpStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteLfpStore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -887,7 +893,9 @@ export class LfpStoreServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.lfp.v1beta.IListLfpStoresRequest,
@@ -964,7 +972,9 @@ export class LfpStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listLfpStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLfpStores stream %j', request);
     return this.descriptors.page.listLfpStores.createStream(
       this.innerApiCalls.listLfpStores as GaxCall,
@@ -1023,7 +1033,9 @@ export class LfpStoreServiceClient {
       });
     const defaultCallSettings = this._defaults['listLfpStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLfpStores iterate %j', request);
     return this.descriptors.page.listLfpStores.asyncIterate(
       this.innerApiCalls['listLfpStores'] as GaxCall,

@@ -488,7 +488,9 @@ export class ProductReviewsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProductReview request %j', request);
     const wrappedCallback:
       | Callback<
@@ -619,7 +621,9 @@ export class ProductReviewsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertProductReview request %j', request);
     const wrappedCallback:
       | Callback<
@@ -745,7 +749,9 @@ export class ProductReviewsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteProductReview request %j', request);
     const wrappedCallback:
       | Callback<
@@ -878,7 +884,9 @@ export class ProductReviewsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.reviews.v1beta.IListProductReviewsRequest,
@@ -949,7 +957,9 @@ export class ProductReviewsServiceClient {
       });
     const defaultCallSettings = this._defaults['listProductReviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProductReviews stream %j', request);
     return this.descriptors.page.listProductReviews.createStream(
       this.innerApiCalls.listProductReviews as GaxCall,
@@ -1002,7 +1012,9 @@ export class ProductReviewsServiceClient {
       });
     const defaultCallSettings = this._defaults['listProductReviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProductReviews iterate %j', request);
     return this.descriptors.page.listProductReviews.asyncIterate(
       this.innerApiCalls['listProductReviews'] as GaxCall,

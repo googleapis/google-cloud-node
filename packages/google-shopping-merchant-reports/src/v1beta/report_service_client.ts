@@ -481,7 +481,9 @@ export class ReportServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.reports.v1beta.ISearchRequest,
@@ -557,7 +559,9 @@ export class ReportServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
@@ -615,7 +619,9 @@ export class ReportServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,

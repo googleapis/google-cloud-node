@@ -488,7 +488,9 @@ export class PromotionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insertPromotion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -617,7 +619,9 @@ export class PromotionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPromotion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -757,7 +761,9 @@ export class PromotionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.promotions.v1beta.IListPromotionsRequest,
@@ -830,7 +836,9 @@ export class PromotionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPromotions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPromotions stream %j', request);
     return this.descriptors.page.listPromotions.createStream(
       this.innerApiCalls.listPromotions as GaxCall,
@@ -885,7 +893,9 @@ export class PromotionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPromotions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPromotions iterate %j', request);
     return this.descriptors.page.listPromotions.asyncIterate(
       this.innerApiCalls['listPromotions'] as GaxCall,
