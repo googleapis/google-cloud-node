@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/privilegedaccessmanager-v0.2.1...privilegedaccessmanager-v1.0.0) (2025-03-12)
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/privilegedaccessmanager-v0.2.1...privilegedaccessmanager-v0.3.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

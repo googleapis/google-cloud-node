@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/clientgateways-v1.3.1...clientgateways-v2.0.0) (2025-03-12)
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/clientgateways-v1.3.1...clientgateways-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

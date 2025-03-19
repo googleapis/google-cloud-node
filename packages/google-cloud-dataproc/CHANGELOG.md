@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.13.0...dataproc-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.13.0...dataproc-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

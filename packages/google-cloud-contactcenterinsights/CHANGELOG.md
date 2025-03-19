@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.9.0...contact-center-insights-v4.0.0) (2025-03-12)
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.9.0...contact-center-insights-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

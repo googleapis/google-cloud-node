@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/service-usage-v3.4.1...service-usage-v4.0.0) (2025-03-12)
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/service-usage-v3.4.1...service-usage-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

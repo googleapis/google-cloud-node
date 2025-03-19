@@ -1,11 +1,21 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.1.0...areainsights-v1.0.0) (2025-03-12)
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.1.0...areainsights-v0.2.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
 
 * upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([#1671](https://github.com/googleapis/google-cloud-node/issues/1671)) ([7a23322](https://github.com/googleapis/google-cloud-node/commit/7a23322530b610eec2fe4c18fe1854048f31c811))
+
+
+### Bug Fixes
+
+* Add json files to tsconfig templates ([#1692](https://github.com/googleapis/google-cloud-node/issues/1692)) (ba6be1d) ([7a23322](https://github.com/googleapis/google-cloud-node/commit/7a23322530b610eec2fe4c18fe1854048f31c811))
+
 
 ### Miscellaneous Chores
 

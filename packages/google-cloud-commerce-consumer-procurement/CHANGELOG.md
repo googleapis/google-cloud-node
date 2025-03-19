@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.5.0...procurement-v1.0.0) (2025-03-12)
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.5.0...procurement-v0.6.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -170,6 +170,168 @@
           }
         }
       }
+    },
+    "ManagedKafkaConnect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ManagedKafkaConnectClient",
+          "rpcs": {
+            "GetConnectCluster": {
+              "methods": [
+                "getConnectCluster"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "getConnector"
+              ]
+            },
+            "CreateConnector": {
+              "methods": [
+                "createConnector"
+              ]
+            },
+            "UpdateConnector": {
+              "methods": [
+                "updateConnector"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "deleteConnector"
+              ]
+            },
+            "PauseConnector": {
+              "methods": [
+                "pauseConnector"
+              ]
+            },
+            "ResumeConnector": {
+              "methods": [
+                "resumeConnector"
+              ]
+            },
+            "RestartConnector": {
+              "methods": [
+                "restartConnector"
+              ]
+            },
+            "StopConnector": {
+              "methods": [
+                "stopConnector"
+              ]
+            },
+            "CreateConnectCluster": {
+              "methods": [
+                "createConnectCluster"
+              ]
+            },
+            "UpdateConnectCluster": {
+              "methods": [
+                "updateConnectCluster"
+              ]
+            },
+            "DeleteConnectCluster": {
+              "methods": [
+                "deleteConnectCluster"
+              ]
+            },
+            "ListConnectClusters": {
+              "methods": [
+                "listConnectClusters",
+                "listConnectClustersStream",
+                "listConnectClustersAsync"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "listConnectors",
+                "listConnectorsStream",
+                "listConnectorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ManagedKafkaConnectClient",
+          "rpcs": {
+            "GetConnectCluster": {
+              "methods": [
+                "getConnectCluster"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "getConnector"
+              ]
+            },
+            "CreateConnector": {
+              "methods": [
+                "createConnector"
+              ]
+            },
+            "UpdateConnector": {
+              "methods": [
+                "updateConnector"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "deleteConnector"
+              ]
+            },
+            "PauseConnector": {
+              "methods": [
+                "pauseConnector"
+              ]
+            },
+            "ResumeConnector": {
+              "methods": [
+                "resumeConnector"
+              ]
+            },
+            "RestartConnector": {
+              "methods": [
+                "restartConnector"
+              ]
+            },
+            "StopConnector": {
+              "methods": [
+                "stopConnector"
+              ]
+            },
+            "CreateConnectCluster": {
+              "methods": [
+                "createConnectCluster"
+              ]
+            },
+            "UpdateConnectCluster": {
+              "methods": [
+                "updateConnectCluster"
+              ]
+            },
+            "DeleteConnectCluster": {
+              "methods": [
+                "deleteConnectCluster"
+              ]
+            },
+            "ListConnectClusters": {
+              "methods": [
+                "listConnectClusters",
+                "listConnectClustersStream",
+                "listConnectClustersAsync"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "listConnectors",
+                "listConnectorsStream",
+                "listConnectorsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

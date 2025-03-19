@@ -4,7 +4,7 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
-## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.5.0...language-v7.0.0) (2025-03-12)
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.5.0...language-v7.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -3508,6 +3508,147 @@ describe('v1.ManagedKafkaClient', () => {
       });
     });
 
+    describe('connectCluster', () => {
+      const fakePath = '/rendered/path/connectCluster';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        connect_cluster: 'connectClusterValue',
+      };
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.connectClusterPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.connectClusterPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('connectClusterPath', () => {
+        const result = client.connectClusterPath(
+          'projectValue',
+          'locationValue',
+          'connectClusterValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.connectClusterPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConnectClusterName', () => {
+        const result = client.matchProjectFromConnectClusterName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConnectClusterName', () => {
+        const result = client.matchLocationFromConnectClusterName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectClusterFromConnectClusterName', () => {
+        const result =
+          client.matchConnectClusterFromConnectClusterName(fakePath);
+        assert.strictEqual(result, 'connectClusterValue');
+        assert(
+          (client.pathTemplates.connectClusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('connector', () => {
+      const fakePath = '/rendered/path/connector';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        connect_cluster: 'connectClusterValue',
+        connector: 'connectorValue',
+      };
+      const client = new managedkafkaModule.v1.ManagedKafkaClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.connectorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.connectorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('connectorPath', () => {
+        const result = client.connectorPath(
+          'projectValue',
+          'locationValue',
+          'connectClusterValue',
+          'connectorValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.connectorPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromConnectorName', () => {
+        const result = client.matchProjectFromConnectorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromConnectorName', () => {
+        const result = client.matchLocationFromConnectorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectClusterFromConnectorName', () => {
+        const result = client.matchConnectClusterFromConnectorName(fakePath);
+        assert.strictEqual(result, 'connectClusterValue');
+        assert(
+          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectorFromConnectorName', () => {
+        const result = client.matchConnectorFromConnectorName(fakePath);
+        assert.strictEqual(result, 'connectorValue');
+        assert(
+          (client.pathTemplates.connectorPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('consumerGroup', () => {
       const fakePath = '/rendered/path/consumerGroup';
       const expectedParameters = {

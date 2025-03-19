@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.6.1...orchestration-airflow-v4.0.0) (2025-03-12)
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.6.1...orchestration-airflow-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

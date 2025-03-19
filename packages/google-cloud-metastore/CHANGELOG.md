@@ -1,6 +1,6 @@
 # Changelog
 
-## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v4.4.1...dataproc-metastore-v5.0.0) (2025-03-12)
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-metastore-v4.4.1...dataproc-metastore-v5.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -15,6 +15,11 @@
                 "insertProductInput"
               ]
             },
+            "UpdateProductInput": {
+              "methods": [
+                "updateProductInput"
+              ]
+            },
             "DeleteProductInput": {
               "methods": [
                 "deleteProductInput"
@@ -28,6 +33,11 @@
             "InsertProductInput": {
               "methods": [
                 "insertProductInput"
+              ]
+            },
+            "UpdateProductInput": {
+              "methods": [
+                "updateProductInput"
               ]
             },
             "DeleteProductInput": {

@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.7.1...parallelstore-v1.0.0) (2025-03-12)
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.7.1...parallelstore-v0.8.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

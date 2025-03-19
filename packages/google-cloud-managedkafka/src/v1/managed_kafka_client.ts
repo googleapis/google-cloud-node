@@ -216,6 +216,12 @@ export class ManagedKafkaClient {
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
       ),
+      connectClusterPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connectClusters/{connect_cluster}'
+      ),
+      connectorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connectClusters/{connect_cluster}/connectors/{connector}'
+      ),
       consumerGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}/consumerGroups/{consumer_group}'
       ),
@@ -3111,6 +3117,136 @@ export class ManagedKafkaClient {
    */
   matchClusterFromClusterName(clusterName: string) {
     return this.pathTemplates.clusterPathTemplate.match(clusterName).cluster;
+  }
+
+  /**
+   * Return a fully-qualified connectCluster resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connect_cluster
+   * @returns {string} Resource name string.
+   */
+  connectClusterPath(
+    project: string,
+    location: string,
+    connectCluster: string
+  ) {
+    return this.pathTemplates.connectClusterPathTemplate.render({
+      project: project,
+      location: location,
+      connect_cluster: connectCluster,
+    });
+  }
+
+  /**
+   * Parse the project from ConnectCluster resource.
+   *
+   * @param {string} connectClusterName
+   *   A fully-qualified path representing ConnectCluster resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConnectClusterName(connectClusterName: string) {
+    return this.pathTemplates.connectClusterPathTemplate.match(
+      connectClusterName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ConnectCluster resource.
+   *
+   * @param {string} connectClusterName
+   *   A fully-qualified path representing ConnectCluster resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConnectClusterName(connectClusterName: string) {
+    return this.pathTemplates.connectClusterPathTemplate.match(
+      connectClusterName
+    ).location;
+  }
+
+  /**
+   * Parse the connect_cluster from ConnectCluster resource.
+   *
+   * @param {string} connectClusterName
+   *   A fully-qualified path representing ConnectCluster resource.
+   * @returns {string} A string representing the connect_cluster.
+   */
+  matchConnectClusterFromConnectClusterName(connectClusterName: string) {
+    return this.pathTemplates.connectClusterPathTemplate.match(
+      connectClusterName
+    ).connect_cluster;
+  }
+
+  /**
+   * Return a fully-qualified connector resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connect_cluster
+   * @param {string} connector
+   * @returns {string} Resource name string.
+   */
+  connectorPath(
+    project: string,
+    location: string,
+    connectCluster: string,
+    connector: string
+  ) {
+    return this.pathTemplates.connectorPathTemplate.render({
+      project: project,
+      location: location,
+      connect_cluster: connectCluster,
+      connector: connector,
+    });
+  }
+
+  /**
+   * Parse the project from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .location;
+  }
+
+  /**
+   * Parse the connect_cluster from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the connect_cluster.
+   */
+  matchConnectClusterFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .connect_cluster;
+  }
+
+  /**
+   * Parse the connector from Connector resource.
+   *
+   * @param {string} connectorName
+   *   A fully-qualified path representing Connector resource.
+   * @returns {string} A string representing the connector.
+   */
+  matchConnectorFromConnectorName(connectorName: string) {
+    return this.pathTemplates.connectorPathTemplate.match(connectorName)
+      .connector;
   }
 
   /**

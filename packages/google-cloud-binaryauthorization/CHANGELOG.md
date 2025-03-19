@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.7.0...binary-authorization-v4.0.0) (2025-03-12)
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.7.0...binary-authorization-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
