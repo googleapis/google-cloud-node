@@ -268,7 +268,9 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.registrationServiceStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
@@ -363,7 +365,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
@@ -411,7 +413,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
@@ -443,7 +445,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
@@ -465,7 +467,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
@@ -497,7 +499,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
@@ -545,7 +547,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
@@ -577,7 +579,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
@@ -599,7 +601,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
@@ -632,7 +634,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
@@ -681,7 +683,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
@@ -714,7 +716,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
@@ -737,7 +739,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
@@ -769,7 +771,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
@@ -817,7 +819,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
@@ -849,7 +851,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
@@ -871,7 +873,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
@@ -903,7 +905,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
@@ -951,7 +953,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
@@ -983,7 +985,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
@@ -1037,7 +1039,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
@@ -1117,7 +1119,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
@@ -1139,7 +1141,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
@@ -1172,7 +1174,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
@@ -1221,7 +1223,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
@@ -1254,7 +1256,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
@@ -1277,7 +1279,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
@@ -1309,7 +1311,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
@@ -1357,7 +1359,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
@@ -1389,7 +1391,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
@@ -1411,7 +1413,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
@@ -1491,7 +1493,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
@@ -1523,7 +1525,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
@@ -1545,7 +1547,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
@@ -1577,7 +1579,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
@@ -1625,7 +1627,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
@@ -1657,7 +1659,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
@@ -1679,7 +1681,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
@@ -1712,7 +1714,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
@@ -1761,7 +1763,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
@@ -1794,7 +1796,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
@@ -1817,7 +1819,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
@@ -1849,7 +1851,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
@@ -1897,7 +1899,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
@@ -1929,7 +1931,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
@@ -1951,7 +1953,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1983,7 +1985,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2031,7 +2033,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2063,7 +2065,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2085,7 +2087,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2165,7 +2167,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2197,7 +2199,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2219,7 +2221,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2252,7 +2254,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2300,7 +2302,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2332,7 +2334,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2354,7 +2356,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2394,7 +2396,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2452,7 +2454,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2484,7 +2486,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2548,7 +2550,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2601,7 +2603,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2652,7 +2654,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
@@ -2696,7 +2698,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -2736,7 +2738,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -2794,7 +2796,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -2826,7 +2828,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -2888,7 +2890,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -2941,7 +2943,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -2992,7 +2994,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
@@ -3036,7 +3038,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3076,7 +3078,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3134,7 +3136,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3166,7 +3168,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3228,7 +3230,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3279,7 +3281,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3330,7 +3332,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
@@ -3373,7 +3375,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3404,7 +3406,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3449,7 +3451,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3485,7 +3487,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3534,7 +3536,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3571,7 +3573,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('endpoint', () => {
+    describe('endpoint', async () => {
       const fakePath = '/rendered/path/endpoint';
       const expectedParameters = {
         project: 'projectValue',
@@ -3585,7 +3587,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3660,7 +3662,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3671,7 +3673,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3710,7 +3712,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
       });
     });
 
-    describe('namespace', () => {
+    describe('namespace', async () => {
       const fakePath = '/rendered/path/namespace';
       const expectedParameters = {
         project: 'projectValue',
@@ -3722,7 +3724,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.namespacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3775,7 +3777,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -3788,7 +3790,7 @@ describe('v1beta1.RegistrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

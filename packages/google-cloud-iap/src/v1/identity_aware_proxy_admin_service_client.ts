@@ -494,7 +494,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -607,7 +609,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -722,7 +726,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -830,7 +836,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIapSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -948,7 +956,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'iap_settings.name': request.iapSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateIapSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1074,7 +1084,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTunnelDestGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1186,7 +1198,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTunnelDestGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1304,7 +1318,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTunnelDestGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1424,7 +1440,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tunnel_dest_group.name': request.tunnelDestGroup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTunnelDestGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1561,7 +1579,9 @@ export class IdentityAwareProxyAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.iap.v1.IListTunnelDestGroupsRequest,
@@ -1637,7 +1657,9 @@ export class IdentityAwareProxyAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTunnelDestGroups stream %j', request);
     return this.descriptors.page.listTunnelDestGroups.createStream(
       this.innerApiCalls.listTunnelDestGroups as GaxCall,
@@ -1695,7 +1717,9 @@ export class IdentityAwareProxyAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTunnelDestGroups iterate %j', request);
     return this.descriptors.page.listTunnelDestGroups.asyncIterate(
       this.innerApiCalls['listTunnelDestGroups'] as GaxCall,

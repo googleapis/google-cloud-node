@@ -479,7 +479,9 @@ export class ExternalVpnGatewaysClient {
         project: request.project ?? '',
         external_vpn_gateway: request.externalVpnGateway ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -607,7 +609,9 @@ export class ExternalVpnGatewaysClient {
         project: request.project ?? '',
         external_vpn_gateway: request.externalVpnGateway ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -735,7 +739,9 @@ export class ExternalVpnGatewaysClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -870,7 +876,9 @@ export class ExternalVpnGatewaysClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1006,7 +1014,9 @@ export class ExternalVpnGatewaysClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1133,7 +1143,9 @@ export class ExternalVpnGatewaysClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListExternalVpnGatewaysRequest,
@@ -1204,7 +1216,9 @@ export class ExternalVpnGatewaysClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1257,7 +1271,9 @@ export class ExternalVpnGatewaysClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

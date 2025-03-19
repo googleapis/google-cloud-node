@@ -265,7 +265,9 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.forwardingRulesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteForwardingRuleRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
@@ -623,7 +625,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetForwardingRuleRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertForwardingRuleRequest()
       );
@@ -801,7 +803,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
@@ -896,7 +898,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchForwardingRuleRequest()
       );
@@ -964,7 +966,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
@@ -1062,7 +1064,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
@@ -1100,7 +1102,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsForwardingRuleRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
@@ -1172,7 +1174,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
@@ -1267,7 +1269,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetForwardingRuleRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListForwardingRulesRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListForwardingRulesRequest()
       );
@@ -1402,7 +1404,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
@@ -1445,7 +1447,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
@@ -1503,7 +1505,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
@@ -1535,7 +1537,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
@@ -1600,7 +1602,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
@@ -1656,7 +1658,7 @@ describe('v1.ForwardingRulesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );
@@ -1709,7 +1711,7 @@ describe('v1.ForwardingRulesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListForwardingRulesRequest()
       );

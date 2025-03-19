@@ -968,7 +968,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$GetDataTaxonomy',
       'GetDataTaxonomy is deprecated and may be removed in a future version.',
@@ -1097,7 +1099,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$GetDataAttributeBinding',
       'GetDataAttributeBinding is deprecated and may be removed in a future version.',
@@ -1223,7 +1227,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$GetDataAttribute',
       'GetDataAttribute is deprecated and may be removed in a future version.',
@@ -1369,7 +1375,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$CreateDataTaxonomy',
       'CreateDataTaxonomy is deprecated and may be removed in a future version.',
@@ -1553,7 +1561,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_taxonomy.name': request.dataTaxonomy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$UpdateDataTaxonomy',
       'UpdateDataTaxonomy is deprecated and may be removed in a future version.',
@@ -1737,7 +1747,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$DeleteDataTaxonomy',
       'DeleteDataTaxonomy is deprecated and may be removed in a future version.',
@@ -1929,7 +1941,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$CreateDataAttributeBinding',
       'CreateDataAttributeBinding is deprecated and may be removed in a future version.',
@@ -2113,7 +2127,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_attribute_binding.name': request.dataAttributeBinding!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$UpdateDataAttributeBinding',
       'UpdateDataAttributeBinding is deprecated and may be removed in a future version.',
@@ -2300,7 +2316,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$DeleteDataAttributeBinding',
       'DeleteDataAttributeBinding is deprecated and may be removed in a future version.',
@@ -2492,7 +2510,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$CreateDataAttribute',
       'CreateDataAttribute is deprecated and may be removed in a future version.',
@@ -2676,7 +2696,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_attribute.name': request.dataAttribute!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$UpdateDataAttribute',
       'UpdateDataAttribute is deprecated and may be removed in a future version.',
@@ -2859,7 +2881,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$DeleteDataAttribute',
       'DeleteDataAttribute is deprecated and may be removed in a future version.',
@@ -3045,7 +3069,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataTaxonomies',
       'ListDataTaxonomies is deprecated and may be removed in a future version.',
@@ -3128,7 +3154,9 @@ export class DataTaxonomyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataTaxonomies',
       'ListDataTaxonomies is deprecated and may be removed in a future version.',
@@ -3193,7 +3221,9 @@ export class DataTaxonomyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataTaxonomies',
       'ListDataTaxonomies is deprecated and may be removed in a future version.',
@@ -3316,7 +3346,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataAttributeBindings',
       'ListDataAttributeBindings is deprecated and may be removed in a future version.',
@@ -3402,7 +3434,9 @@ export class DataTaxonomyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAttributeBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataAttributeBindings',
       'ListDataAttributeBindings is deprecated and may be removed in a future version.',
@@ -3470,7 +3504,9 @@ export class DataTaxonomyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAttributeBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataAttributeBindings',
       'ListDataAttributeBindings is deprecated and may be removed in a future version.',
@@ -3589,7 +3625,9 @@ export class DataTaxonomyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataAttributes',
       'ListDataAttributes is deprecated and may be removed in a future version.',
@@ -3671,7 +3709,9 @@ export class DataTaxonomyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAttributes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataAttributes',
       'ListDataAttributes is deprecated and may be removed in a future version.',
@@ -3735,7 +3775,9 @@ export class DataTaxonomyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAttributes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTaxonomyService-$ListDataAttributes',
       'ListDataAttributes is deprecated and may be removed in a future version.',
@@ -3920,7 +3962,7 @@ export class DataTaxonomyServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

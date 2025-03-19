@@ -263,7 +263,9 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.keyManagementServiceStub);
       client.close().then(() => {
         done();
@@ -326,7 +328,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
@@ -406,7 +408,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
@@ -492,7 +494,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
@@ -540,7 +542,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
@@ -594,7 +596,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
@@ -627,7 +629,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
@@ -675,7 +677,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
@@ -707,7 +709,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
@@ -729,7 +731,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
@@ -761,7 +763,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
@@ -809,7 +811,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
@@ -863,7 +865,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
@@ -895,7 +897,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
@@ -943,7 +945,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
@@ -975,7 +977,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
@@ -1077,7 +1079,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
@@ -1109,7 +1111,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
@@ -1163,7 +1165,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
@@ -1211,7 +1213,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
@@ -1243,7 +1245,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
@@ -1265,7 +1267,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
@@ -1346,7 +1348,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
@@ -1381,7 +1383,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
@@ -1487,7 +1489,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
@@ -1522,7 +1524,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
@@ -1547,7 +1549,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
@@ -1579,7 +1581,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
@@ -1627,7 +1629,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
@@ -1659,7 +1661,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
@@ -1681,7 +1683,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
@@ -1714,7 +1716,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
@@ -1763,7 +1765,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
@@ -1796,7 +1798,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
@@ -1819,7 +1821,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
@@ -1853,7 +1855,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
@@ -1902,7 +1904,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
@@ -1938,7 +1940,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
@@ -1964,7 +1966,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
@@ -1997,7 +1999,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
@@ -2045,7 +2047,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
@@ -2080,7 +2082,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
@@ -2105,7 +2107,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
@@ -2138,7 +2140,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
@@ -2186,7 +2188,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
@@ -2221,7 +2223,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
@@ -2246,7 +2248,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
@@ -2279,7 +2281,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
@@ -2327,7 +2329,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
@@ -2362,7 +2364,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
@@ -2387,7 +2389,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
@@ -2419,7 +2421,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
@@ -2467,7 +2469,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
@@ -2496,7 +2498,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
@@ -2518,7 +2520,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
@@ -2550,7 +2552,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
@@ -2598,7 +2600,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
@@ -2627,7 +2629,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
@@ -2649,7 +2651,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawEncryptRequest()
       );
@@ -2681,7 +2683,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawEncryptRequest()
       );
@@ -2729,7 +2731,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawEncryptRequest()
       );
@@ -2761,7 +2763,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawEncryptRequest()
       );
@@ -2783,7 +2785,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawDecryptRequest()
       );
@@ -2815,7 +2817,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawDecryptRequest()
       );
@@ -2863,7 +2865,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawDecryptRequest()
       );
@@ -2895,7 +2897,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RawDecryptRequest()
       );
@@ -2917,7 +2919,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
@@ -2949,7 +2951,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
@@ -2997,7 +2999,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
@@ -3029,7 +3031,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
@@ -3051,7 +3053,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
@@ -3083,7 +3085,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
@@ -3131,7 +3133,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
@@ -3163,7 +3165,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
@@ -3185,7 +3187,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
@@ -3217,7 +3219,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
@@ -3265,7 +3267,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
@@ -3294,7 +3296,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
@@ -3316,7 +3318,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
@@ -3348,7 +3350,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
@@ -3396,7 +3398,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
@@ -3425,7 +3427,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
@@ -3447,7 +3449,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
@@ -3480,7 +3482,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
@@ -3528,7 +3530,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
@@ -3560,7 +3562,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
@@ -3582,7 +3584,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3616,7 +3618,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3666,7 +3668,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3698,7 +3700,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3750,7 +3752,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3799,7 +3801,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3843,7 +3845,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
@@ -3886,7 +3888,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -3920,7 +3922,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -3970,7 +3972,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -4002,7 +4004,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -4054,7 +4056,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -4101,7 +4103,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -4145,7 +4147,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
@@ -4188,7 +4190,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4229,7 +4231,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4285,7 +4287,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4320,7 +4322,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4387,7 +4389,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4443,7 +4445,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4497,7 +4499,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
@@ -4544,7 +4546,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4578,7 +4580,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4628,7 +4630,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4660,7 +4662,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4712,7 +4714,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4759,7 +4761,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4803,7 +4805,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
@@ -4845,7 +4847,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4876,7 +4878,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4921,7 +4923,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4954,7 +4956,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -4985,7 +4987,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -5030,7 +5032,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -5063,7 +5065,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -5097,7 +5099,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -5142,7 +5144,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -5178,7 +5180,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5209,7 +5211,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5254,7 +5256,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -5290,7 +5292,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5339,7 +5341,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -5376,7 +5378,7 @@ describe('v1.KeyManagementServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('autokeyConfig', () => {
+    describe('autokeyConfig', async () => {
       const fakePath = '/rendered/path/autokeyConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -5386,7 +5388,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autokeyConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5415,7 +5417,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -5428,7 +5430,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5492,7 +5494,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -5506,7 +5508,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5585,7 +5587,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('ekmConfig', () => {
+    describe('ekmConfig', async () => {
       const fakePath = '/rendered/path/ekmConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -5596,7 +5598,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5635,7 +5637,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('ekmConnection', () => {
+    describe('ekmConnection', async () => {
       const fakePath = '/rendered/path/ekmConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -5647,7 +5649,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5700,7 +5702,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('importJob', () => {
+    describe('importJob', async () => {
       const fakePath = '/rendered/path/importJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -5713,7 +5715,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.importJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5777,7 +5779,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('keyHandle', () => {
+    describe('keyHandle', async () => {
       const fakePath = '/rendered/path/keyHandle';
       const expectedParameters = {
         project: 'projectValue',
@@ -5789,7 +5791,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyHandlePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5842,7 +5844,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('keyRing', () => {
+    describe('keyRing', async () => {
       const fakePath = '/rendered/path/keyRing';
       const expectedParameters = {
         project: 'projectValue',
@@ -5854,7 +5856,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyRingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5907,7 +5909,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5918,7 +5920,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5957,7 +5959,7 @@ describe('v1.KeyManagementServiceClient', () => {
       });
     });
 
-    describe('publicKey', () => {
+    describe('publicKey', async () => {
       const fakePath = '/rendered/path/publicKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -5971,7 +5973,7 @@ describe('v1.KeyManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.publicKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

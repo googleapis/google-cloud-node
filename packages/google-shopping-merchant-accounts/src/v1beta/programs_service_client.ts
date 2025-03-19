@@ -537,7 +537,9 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProgram request %j', request);
     const wrappedCallback:
       | Callback<
@@ -664,7 +666,9 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enableProgram request %j', request);
     const wrappedCallback:
       | Callback<
@@ -791,7 +795,9 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('disableProgram request %j', request);
     const wrappedCallback:
       | Callback<
@@ -922,7 +928,9 @@ export class ProgramsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListProgramsRequest,
@@ -991,7 +999,9 @@ export class ProgramsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrograms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPrograms stream %j', request);
     return this.descriptors.page.listPrograms.createStream(
       this.innerApiCalls.listPrograms as GaxCall,
@@ -1042,7 +1052,9 @@ export class ProgramsServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrograms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPrograms iterate %j', request);
     return this.descriptors.page.listPrograms.asyncIterate(
       this.innerApiCalls['listPrograms'] as GaxCall,

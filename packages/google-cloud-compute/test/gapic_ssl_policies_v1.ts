@@ -263,7 +263,9 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.sslPoliciesStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
@@ -410,7 +412,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
@@ -504,7 +506,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
@@ -643,7 +645,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
@@ -718,7 +720,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
@@ -771,7 +773,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
@@ -818,7 +820,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
@@ -852,7 +854,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
@@ -876,7 +878,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
@@ -993,7 +995,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
@@ -1019,7 +1021,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListSslPoliciesRequest()
       );
@@ -1079,7 +1081,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListSslPoliciesRequest()
       );
@@ -1123,7 +1125,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
@@ -1155,7 +1157,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
@@ -1202,7 +1204,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
@@ -1283,7 +1285,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
@@ -1334,7 +1336,7 @@ describe('v1.SslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
@@ -1376,7 +1378,7 @@ describe('v1.SslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );

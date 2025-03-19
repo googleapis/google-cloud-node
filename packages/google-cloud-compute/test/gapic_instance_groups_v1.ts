@@ -265,7 +265,9 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.instanceGroupsStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstancesInstanceGroupRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstancesInstanceGroupRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstancesInstanceGroupRequest()
       );
@@ -463,7 +465,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddInstancesInstanceGroupRequest()
       );
@@ -494,7 +496,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupRequest()
       );
@@ -535,7 +537,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupRequest()
       );
@@ -592,7 +594,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupRequest()
       );
@@ -630,7 +632,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupRequest()
       );
@@ -661,7 +663,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupRequest()
       );
@@ -701,7 +703,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupRequest()
       );
@@ -756,7 +758,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupRequest()
       );
@@ -824,7 +826,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupRequest()
       );
@@ -860,7 +862,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupRequest()
       );
@@ -945,7 +947,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupRequest()
       );
@@ -971,7 +973,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstancesInstanceGroupRequest()
       );
@@ -1012,7 +1014,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstancesInstanceGroupRequest()
       );
@@ -1069,7 +1071,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstancesInstanceGroupRequest()
       );
@@ -1110,7 +1112,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveInstancesInstanceGroupRequest()
       );
@@ -1141,7 +1143,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetNamedPortsInstanceGroupRequest()
       );
@@ -1182,7 +1184,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetNamedPortsInstanceGroupRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetNamedPortsInstanceGroupRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetNamedPortsInstanceGroupRequest()
       );
@@ -1311,7 +1313,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInstanceGroupsRequest()
       );
@@ -1371,7 +1373,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInstanceGroupsRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1458,7 +1460,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1516,7 +1518,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1613,7 +1615,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1669,7 +1671,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1722,7 +1724,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupsRequest()
       );
@@ -1770,7 +1772,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );
@@ -1819,7 +1821,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );
@@ -1886,7 +1888,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );
@@ -1927,7 +1929,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );
@@ -1998,7 +2000,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );
@@ -2058,7 +2060,7 @@ describe('v1.InstanceGroupsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );
@@ -2118,7 +2120,7 @@ describe('v1.InstanceGroupsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesInstanceGroupsRequest()
       );

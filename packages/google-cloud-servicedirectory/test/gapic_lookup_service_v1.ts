@@ -215,7 +215,9 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.lookupServiceStub);
       client.close().then(() => {
         done();
@@ -274,7 +276,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.ResolveServiceRequest()
       );
@@ -305,7 +307,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.ResolveServiceRequest()
       );
@@ -352,7 +354,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.ResolveServiceRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1.ResolveServiceRequest()
       );
@@ -403,7 +405,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -433,7 +435,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -477,7 +479,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -560,7 +562,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -597,7 +599,7 @@ describe('v1.LookupServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('endpoint', () => {
+    describe('endpoint', async () => {
       const fakePath = '/rendered/path/endpoint';
       const expectedParameters = {
         project: 'projectValue',
@@ -610,7 +612,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -685,7 +687,7 @@ describe('v1.LookupServiceClient', () => {
       });
     });
 
-    describe('namespace', () => {
+    describe('namespace', async () => {
       const fakePath = '/rendered/path/namespace';
       const expectedParameters = {
         project: 'projectValue',
@@ -696,7 +698,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.namespacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -749,7 +751,7 @@ describe('v1.LookupServiceClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -761,7 +763,7 @@ describe('v1.LookupServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

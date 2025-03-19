@@ -266,7 +266,9 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.keyDashboardServiceStub);
       client.close().then(() => {
         done();
@@ -333,7 +335,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -368,7 +370,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -419,7 +421,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -452,7 +454,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -598,7 +600,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.ListCryptoKeysRequest()
       );
@@ -635,7 +637,7 @@ describe('v1.KeyDashboardServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -649,7 +651,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -713,7 +715,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -728,7 +730,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -807,7 +809,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('importJob', () => {
+    describe('importJob', async () => {
       const fakePath = '/rendered/path/importJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -821,7 +823,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.importJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -885,7 +887,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('keyRing', () => {
+    describe('keyRing', async () => {
       const fakePath = '/rendered/path/keyRing';
       const expectedParameters = {
         project: 'projectValue',
@@ -898,7 +900,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyRingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -951,7 +953,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -962,7 +964,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -991,7 +993,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', () => {
+    describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', async () => {
       const fakePath =
         '/rendered/path/projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary';
       const expectedParameters = {
@@ -1007,7 +1009,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match =
@@ -1120,7 +1122,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('projectLocationKeyRingCryptoKeyProtectedResourcesSummary', () => {
+    describe('projectLocationKeyRingCryptoKeyProtectedResourcesSummary', async () => {
       const fakePath =
         '/rendered/path/projectLocationKeyRingCryptoKeyProtectedResourcesSummary';
       const expectedParameters = {
@@ -1135,7 +1137,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match =
@@ -1230,7 +1232,7 @@ describe('v1.KeyDashboardServiceClient', () => {
       });
     });
 
-    describe('publicKey', () => {
+    describe('publicKey', async () => {
       const fakePath = '/rendered/path/publicKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -1245,7 +1247,7 @@ describe('v1.KeyDashboardServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.publicKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

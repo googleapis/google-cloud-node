@@ -271,7 +271,9 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.conversionSourcesServiceStub);
       client.close().then(() => {
         done();
@@ -342,7 +344,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest()
       );
@@ -377,7 +379,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest()
       );
@@ -427,7 +429,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest()
       );
@@ -464,7 +466,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.CreateConversionSourceRequest()
       );
@@ -491,7 +493,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest()
       );
@@ -527,7 +529,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest()
       );
@@ -578,7 +580,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest()
       );
@@ -616,7 +618,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UpdateConversionSourceRequest()
       );
@@ -644,7 +646,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest()
       );
@@ -679,7 +681,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest()
       );
@@ -729,7 +731,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest()
       );
@@ -766,7 +768,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.DeleteConversionSourceRequest()
       );
@@ -793,7 +795,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest()
       );
@@ -828,7 +830,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest()
       );
@@ -878,7 +880,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest()
       );
@@ -915,7 +917,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.UndeleteConversionSourceRequest()
       );
@@ -942,7 +944,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest()
       );
@@ -977,7 +979,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest()
       );
@@ -1061,7 +1063,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.GetConversionSourceRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1188,7 +1190,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1225,7 +1227,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1297,7 +1299,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.conversions.v1beta.ListConversionSourcesRequest()
       );
@@ -1457,7 +1459,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -1469,7 +1471,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1498,7 +1500,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
       });
     });
 
-    describe('conversionSource', () => {
+    describe('conversionSource', async () => {
       const fakePath = '/rendered/path/conversionSource';
       const expectedParameters = {
         account: 'accountValue',
@@ -1511,7 +1513,7 @@ describe('v1beta.ConversionSourcesServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.conversionSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

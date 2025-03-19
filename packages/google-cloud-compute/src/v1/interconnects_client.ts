@@ -481,7 +481,9 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -603,7 +605,9 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -728,7 +732,9 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDiagnostics request %j', request);
     const wrappedCallback:
       | Callback<
@@ -856,7 +862,9 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMacsecConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -984,7 +992,9 @@ export class InterconnectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1121,7 +1131,9 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1256,7 +1268,9 @@ export class InterconnectsClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1387,7 +1401,9 @@ export class InterconnectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListInterconnectsRequest,
@@ -1456,7 +1472,9 @@ export class InterconnectsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1509,7 +1527,9 @@ export class InterconnectsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

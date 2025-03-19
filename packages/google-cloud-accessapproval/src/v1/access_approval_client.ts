@@ -548,7 +548,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
@@ -678,7 +680,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('approveApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
@@ -812,7 +816,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('dismissApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
@@ -944,7 +950,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('invalidateApprovalRequest request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1070,7 +1078,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccessApprovalSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1207,7 +1217,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         'settings.name': request.settings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAccessApprovalSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1337,7 +1349,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAccessApprovalSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1463,7 +1477,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccessApprovalServiceAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1612,7 +1628,9 @@ export class AccessApprovalClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage,
@@ -1691,7 +1709,9 @@ export class AccessApprovalClient {
       });
     const defaultCallSettings = this._defaults['listApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApprovalRequests stream %j', request);
     return this.descriptors.page.listApprovalRequests.createStream(
       this.innerApiCalls.listApprovalRequests as GaxCall,
@@ -1752,7 +1772,9 @@ export class AccessApprovalClient {
       });
     const defaultCallSettings = this._defaults['listApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApprovalRequests iterate %j', request);
     return this.descriptors.page.listApprovalRequests.asyncIterate(
       this.innerApiCalls['listApprovalRequests'] as GaxCall,

@@ -453,7 +453,9 @@ export class InstanceSettingsServiceClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -583,7 +585,9 @@ export class InstanceSettingsServiceClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<

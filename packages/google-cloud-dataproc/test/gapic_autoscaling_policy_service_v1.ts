@@ -265,7 +265,9 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.autoscalingPolicyServiceStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
@@ -409,7 +411,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
@@ -503,7 +505,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
@@ -552,7 +554,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
@@ -695,7 +697,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
@@ -727,7 +729,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
@@ -782,7 +784,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
@@ -830,7 +832,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
@@ -890,7 +892,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -931,7 +933,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -987,7 +989,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -1022,7 +1024,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -1090,7 +1092,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -1147,7 +1149,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -1202,7 +1204,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
@@ -1249,7 +1251,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1325,7 +1327,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1389,7 +1391,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1434,7 +1436,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1467,7 +1469,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1501,7 +1503,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1546,7 +1548,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1577,7 +1579,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('batch', () => {
+    describe('batch', async () => {
       const fakePath = '/rendered/path/batch';
       const expectedParameters = {
         project: 'projectValue',
@@ -1589,7 +1591,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.batchPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1642,7 +1644,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1653,7 +1655,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1692,7 +1694,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('nodeGroup', () => {
+    describe('nodeGroup', async () => {
       const fakePath = '/rendered/path/nodeGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -1705,7 +1707,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nodeGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1769,7 +1771,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1779,7 +1781,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1808,7 +1810,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('projectLocationAutoscalingPolicy', () => {
+    describe('projectLocationAutoscalingPolicy', async () => {
       const fakePath = '/rendered/path/projectLocationAutoscalingPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -1820,7 +1822,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match =
@@ -1890,7 +1892,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('projectLocationWorkflowTemplate', () => {
+    describe('projectLocationWorkflowTemplate', async () => {
       const fakePath = '/rendered/path/projectLocationWorkflowTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -1902,7 +1904,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match =
@@ -1970,7 +1972,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('projectRegionAutoscalingPolicy', () => {
+    describe('projectRegionAutoscalingPolicy', async () => {
       const fakePath = '/rendered/path/projectRegionAutoscalingPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -1982,7 +1984,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match =
@@ -2050,7 +2052,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('projectRegionWorkflowTemplate', () => {
+    describe('projectRegionWorkflowTemplate', async () => {
       const fakePath = '/rendered/path/projectRegionWorkflowTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -2062,7 +2064,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match =
@@ -2130,7 +2132,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('session', () => {
+    describe('session', async () => {
       const fakePath = '/rendered/path/session';
       const expectedParameters = {
         project: 'projectValue',
@@ -2142,7 +2144,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2195,7 +2197,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       });
     });
 
-    describe('sessionTemplate', () => {
+    describe('sessionTemplate', async () => {
       const fakePath = '/rendered/path/sessionTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -2207,7 +2209,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sessionTemplatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -511,7 +511,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBillingAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -638,7 +640,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBillingAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -779,7 +783,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBillingAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -903,7 +909,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProjectBillingInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1065,7 +1073,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProjectBillingInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1183,7 +1193,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1305,7 +1317,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1419,7 +1433,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1541,7 +1557,9 @@ export class CloudBillingClient {
         name: request.name ?? '',
         destination_parent: request.destinationParent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moveBillingAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1683,7 +1701,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.billing.v1.IListBillingAccountsRequest,
@@ -1764,7 +1784,9 @@ export class CloudBillingClient {
       });
     const defaultCallSettings = this._defaults['listBillingAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBillingAccounts stream %j', request);
     return this.descriptors.page.listBillingAccounts.createStream(
       this.innerApiCalls.listBillingAccounts as GaxCall,
@@ -1827,7 +1849,9 @@ export class CloudBillingClient {
       });
     const defaultCallSettings = this._defaults['listBillingAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBillingAccounts iterate %j', request);
     return this.descriptors.page.listBillingAccounts.asyncIterate(
       this.innerApiCalls['listBillingAccounts'] as GaxCall,
@@ -1937,7 +1961,9 @@ export class CloudBillingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.billing.v1.IListProjectBillingInfoRequest,
@@ -2007,7 +2033,9 @@ export class CloudBillingClient {
       });
     const defaultCallSettings = this._defaults['listProjectBillingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProjectBillingInfo stream %j', request);
     return this.descriptors.page.listProjectBillingInfo.createStream(
       this.innerApiCalls.listProjectBillingInfo as GaxCall,
@@ -2059,7 +2087,9 @@ export class CloudBillingClient {
       });
     const defaultCallSettings = this._defaults['listProjectBillingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProjectBillingInfo iterate %j', request);
     return this.descriptors.page.listProjectBillingInfo.asyncIterate(
       this.innerApiCalls['listProjectBillingInfo'] as GaxCall,

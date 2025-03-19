@@ -289,7 +289,9 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.policyBindingsStub);
       client.close().then(() => {
         done();
@@ -348,7 +350,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPolicyBindingRequest()
       );
@@ -379,7 +381,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPolicyBindingRequest()
       );
@@ -426,7 +428,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPolicyBindingRequest()
       );
@@ -457,7 +459,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPolicyBindingRequest()
       );
@@ -478,7 +480,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePolicyBindingRequest()
       );
@@ -511,7 +513,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePolicyBindingRequest()
       );
@@ -565,7 +567,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePolicyBindingRequest()
       );
@@ -596,7 +598,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePolicyBindingRequest()
       );
@@ -629,7 +631,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -651,7 +653,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -672,7 +674,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePolicyBindingRequest()
       );
@@ -706,7 +708,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePolicyBindingRequest()
       );
@@ -761,7 +763,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePolicyBindingRequest()
       );
@@ -793,7 +795,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePolicyBindingRequest()
       );
@@ -827,7 +829,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -849,7 +851,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -870,7 +872,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePolicyBindingRequest()
       );
@@ -903,7 +905,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePolicyBindingRequest()
       );
@@ -957,7 +959,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePolicyBindingRequest()
       );
@@ -988,7 +990,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePolicyBindingRequest()
       );
@@ -1021,7 +1023,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1043,7 +1045,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1064,7 +1066,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1147,7 +1149,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1178,7 +1180,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1275,7 +1277,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1318,7 +1320,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPolicyBindingsRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1394,7 +1396,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1477,7 +1479,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1534,7 +1536,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1586,7 +1588,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchTargetPolicyBindingsRequest()
       );
@@ -1678,7 +1680,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1708,7 +1710,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1752,7 +1754,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1787,7 +1789,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1835,7 +1837,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1876,7 +1878,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1955,7 +1957,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2035,7 +2037,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2131,8 +2133,7 @@ describe('v3.PolicyBindingsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2151,7 +2152,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2160,8 +2161,7 @@ describe('v3.PolicyBindingsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2177,7 +2177,7 @@ describe('v3.PolicyBindingsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationPolicyBinding', () => {
+    describe('folderLocationPolicyBinding', async () => {
       const fakePath = '/rendered/path/folderLocationPolicyBinding';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2188,7 +2188,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationPolicyBindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationPolicyBindingPathTemplate.match = sinon
@@ -2257,7 +2257,7 @@ describe('v3.PolicyBindingsClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2266,7 +2266,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2295,7 +2295,7 @@ describe('v3.PolicyBindingsClient', () => {
       });
     });
 
-    describe('organizationLocation', () => {
+    describe('organizationLocation', async () => {
       const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2305,7 +2305,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2358,7 +2358,7 @@ describe('v3.PolicyBindingsClient', () => {
       });
     });
 
-    describe('organizationLocationPolicyBinding', () => {
+    describe('organizationLocationPolicyBinding', async () => {
       const fakePath = '/rendered/path/organizationLocationPolicyBinding';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2369,7 +2369,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPolicyBindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationPolicyBindingPathTemplate.match =
@@ -2441,7 +2441,7 @@ describe('v3.PolicyBindingsClient', () => {
       });
     });
 
-    describe('principalAccessBoundaryPolicy', () => {
+    describe('principalAccessBoundaryPolicy', async () => {
       const fakePath = '/rendered/path/principalAccessBoundaryPolicy';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2452,7 +2452,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.principalAccessBoundaryPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match =
@@ -2522,7 +2522,7 @@ describe('v3.PolicyBindingsClient', () => {
       });
     });
 
-    describe('projectLocationPolicyBinding', () => {
+    describe('projectLocationPolicyBinding', async () => {
       const fakePath = '/rendered/path/projectLocationPolicyBinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -2533,7 +2533,7 @@ describe('v3.PolicyBindingsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationPolicyBindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationPolicyBindingPathTemplate.match =

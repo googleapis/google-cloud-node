@@ -255,7 +255,9 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudBillingStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
@@ -345,7 +347,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
@@ -392,7 +394,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
@@ -423,7 +425,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
@@ -523,7 +525,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
@@ -575,7 +577,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
@@ -607,7 +609,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.CreateBillingAccountRequest()
       );
@@ -706,7 +708,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
@@ -785,7 +787,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
@@ -819,7 +821,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
@@ -843,7 +845,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
@@ -875,7 +877,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
@@ -922,7 +924,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
@@ -956,7 +958,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
@@ -980,7 +982,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1011,7 +1013,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1058,7 +1060,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1089,7 +1091,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1110,7 +1112,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1141,7 +1143,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1188,7 +1190,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1219,7 +1221,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1240,7 +1242,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1272,7 +1274,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1319,7 +1321,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1350,7 +1352,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1371,7 +1373,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.MoveBillingAccountRequest()
       );
@@ -1408,7 +1410,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.MoveBillingAccountRequest()
       );
@@ -1460,7 +1462,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.MoveBillingAccountRequest()
       );
@@ -1496,7 +1498,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.MoveBillingAccountRequest()
       );
@@ -1522,7 +1524,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1562,7 +1564,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1617,7 +1619,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1648,7 +1650,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1708,7 +1710,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1757,7 +1759,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1806,7 +1808,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListBillingAccountsRequest()
       );
@@ -1848,7 +1850,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -1943,7 +1945,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -1977,7 +1979,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -2044,7 +2046,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -2100,7 +2102,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -2154,7 +2156,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
@@ -2196,7 +2198,7 @@ describe('v1.CloudBillingClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('billingAccount', () => {
+    describe('billingAccount', async () => {
       const fakePath = '/rendered/path/billingAccount';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -2205,7 +2207,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2235,7 +2237,7 @@ describe('v1.CloudBillingClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2244,7 +2246,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2273,7 +2275,7 @@ describe('v1.CloudBillingClient', () => {
       });
     });
 
-    describe('organizationBillingAccount', () => {
+    describe('organizationBillingAccount', async () => {
       const fakePath = '/rendered/path/organizationBillingAccount';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2283,7 +2285,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationBillingAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2338,7 +2340,7 @@ describe('v1.CloudBillingClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2347,7 +2349,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2376,7 +2378,7 @@ describe('v1.CloudBillingClient', () => {
       });
     });
 
-    describe('projectBillingInfo', () => {
+    describe('projectBillingInfo', async () => {
       const fakePath = '/rendered/path/projectBillingInfo';
       const expectedParameters = {
         project: 'projectValue',
@@ -2385,7 +2387,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectBillingInfoPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2420,7 +2422,7 @@ describe('v1.CloudBillingClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         service: 'serviceValue',
@@ -2429,7 +2431,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2458,7 +2460,7 @@ describe('v1.CloudBillingClient', () => {
       });
     });
 
-    describe('sku', () => {
+    describe('sku', async () => {
       const fakePath = '/rendered/path/sku';
       const expectedParameters = {
         service: 'serviceValue',
@@ -2468,7 +2470,7 @@ describe('v1.CloudBillingClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.skuPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

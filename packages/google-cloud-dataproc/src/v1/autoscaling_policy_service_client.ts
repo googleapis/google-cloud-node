@@ -529,7 +529,9 @@ export class AutoscalingPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAutoscalingPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -657,7 +659,9 @@ export class AutoscalingPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAutoscalingPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -785,7 +789,9 @@ export class AutoscalingPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutoscalingPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -920,7 +926,9 @@ export class AutoscalingPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAutoscalingPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1058,7 +1066,9 @@ export class AutoscalingPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListAutoscalingPoliciesRequest,
@@ -1134,7 +1144,9 @@ export class AutoscalingPolicyServiceClient {
       });
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutoscalingPolicies stream %j', request);
     return this.descriptors.page.listAutoscalingPolicies.createStream(
       this.innerApiCalls.listAutoscalingPolicies as GaxCall,
@@ -1192,7 +1204,9 @@ export class AutoscalingPolicyServiceClient {
       });
     const defaultCallSettings = this._defaults['listAutoscalingPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutoscalingPolicies iterate %j', request);
     return this.descriptors.page.listAutoscalingPolicies.asyncIterate(
       this.innerApiCalls['listAutoscalingPolicies'] as GaxCall,

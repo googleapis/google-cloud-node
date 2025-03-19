@@ -456,7 +456,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeSentiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -575,7 +577,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeEntities request %j', request);
     const wrappedCallback:
       | Callback<
@@ -701,7 +705,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeEntitySentiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -820,7 +826,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeSyntax request %j', request);
     const wrappedCallback:
       | Callback<
@@ -938,7 +946,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('classifyText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1050,7 +1060,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moderateText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1167,7 +1179,9 @@ export class LanguageServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('annotateText request %j', request);
     const wrappedCallback:
       | Callback<

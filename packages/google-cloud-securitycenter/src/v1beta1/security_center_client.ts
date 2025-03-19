@@ -592,7 +592,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -726,7 +728,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFinding request %j', request);
     const wrappedCallback:
       | Callback<
@@ -841,7 +845,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -962,7 +968,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrganizationSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1082,7 +1090,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1214,7 +1224,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setFindingState request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1337,7 +1349,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1449,7 +1463,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1578,7 +1594,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'finding.name': request.finding!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFinding request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1705,7 +1723,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'organization_settings.name': request.organizationSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateOrganizationSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1832,7 +1852,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'source.name': request.source!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1961,7 +1983,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'security_marks.name': request.securityMarks!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSecurityMarks request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2084,7 +2108,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2318,7 +2344,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IGroupAssetsRequest,
@@ -2457,7 +2485,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('groupAssets stream %j', request);
     return this.descriptors.page.groupAssets.createStream(
       this.innerApiCalls.groupAssets as GaxCall,
@@ -2578,7 +2608,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('groupAssets iterate %j', request);
     return this.descriptors.page.groupAssets.asyncIterate(
       this.innerApiCalls['groupAssets'] as GaxCall,
@@ -2733,7 +2765,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IGroupFindingsRequest,
@@ -2847,7 +2881,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('groupFindings stream %j', request);
     return this.descriptors.page.groupFindings.createStream(
       this.innerApiCalls.groupFindings as GaxCall,
@@ -2943,7 +2979,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('groupFindings iterate %j', request);
     return this.descriptors.page.groupFindings.asyncIterate(
       this.innerApiCalls['groupFindings'] as GaxCall,
@@ -3119,7 +3157,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListAssetsRequest,
@@ -3258,7 +3298,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -3379,7 +3421,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -3533,7 +3577,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListFindingsRequest,
@@ -3647,7 +3693,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFindings stream %j', request);
     return this.descriptors.page.listFindings.createStream(
       this.innerApiCalls.listFindings as GaxCall,
@@ -3743,7 +3791,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFindings iterate %j', request);
     return this.descriptors.page.listFindings.asyncIterate(
       this.innerApiCalls['listFindings'] as GaxCall,
@@ -3849,7 +3899,9 @@ export class SecurityCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.securitycenter.v1beta1.IListSourcesRequest,
@@ -3918,7 +3970,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
@@ -3969,7 +4023,9 @@ export class SecurityCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,

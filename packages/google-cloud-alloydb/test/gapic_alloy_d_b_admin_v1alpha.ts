@@ -290,7 +290,9 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.alloyDBAdminStub);
       client.close().then(() => {
         done();
@@ -349,7 +351,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetClusterRequest()
       );
@@ -380,7 +382,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetClusterRequest()
       );
@@ -427,7 +429,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetClusterRequest()
       );
@@ -458,7 +460,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetClusterRequest()
       );
@@ -479,7 +481,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetInstanceRequest()
       );
@@ -510,7 +512,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetInstanceRequest()
       );
@@ -557,7 +559,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetInstanceRequest()
       );
@@ -588,7 +590,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetInstanceRequest()
       );
@@ -609,7 +611,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ExecuteSqlRequest()
       );
@@ -640,7 +642,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ExecuteSqlRequest()
       );
@@ -687,7 +689,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ExecuteSqlRequest()
       );
@@ -718,7 +720,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ExecuteSqlRequest()
       );
@@ -739,7 +741,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetBackupRequest()
       );
@@ -770,7 +772,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetBackupRequest()
       );
@@ -817,7 +819,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetBackupRequest()
       );
@@ -845,7 +847,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetBackupRequest()
       );
@@ -866,7 +868,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GenerateClientCertificateRequest()
       );
@@ -898,7 +900,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GenerateClientCertificateRequest()
       );
@@ -945,7 +947,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GenerateClientCertificateRequest()
       );
@@ -979,7 +981,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GenerateClientCertificateRequest()
       );
@@ -1003,7 +1005,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetConnectionInfoRequest()
       );
@@ -1034,7 +1036,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetConnectionInfoRequest()
       );
@@ -1081,7 +1083,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetConnectionInfoRequest()
       );
@@ -1112,7 +1114,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetConnectionInfoRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetUserRequest()
       );
@@ -1164,7 +1166,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetUserRequest()
       );
@@ -1211,7 +1213,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetUserRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.GetUserRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateUserRequest()
       );
@@ -1291,7 +1293,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateUserRequest()
       );
@@ -1338,7 +1340,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateUserRequest()
       );
@@ -1369,7 +1371,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateUserRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateUserRequest()
       );
@@ -1422,7 +1424,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateUserRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateUserRequest()
       );
@@ -1502,7 +1504,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateUserRequest()
       );
@@ -1524,7 +1526,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteUserRequest()
       );
@@ -1555,7 +1557,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteUserRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteUserRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteUserRequest()
       );
@@ -1654,7 +1656,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateClusterRequest()
       );
@@ -1687,7 +1689,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateClusterRequest()
       );
@@ -1741,7 +1743,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateClusterRequest()
       );
@@ -1772,7 +1774,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateClusterRequest()
       );
@@ -1805,7 +1807,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1827,7 +1829,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1848,7 +1850,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateClusterRequest()
       );
@@ -1882,7 +1884,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateClusterRequest()
       );
@@ -1937,7 +1939,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateClusterRequest()
       );
@@ -1969,7 +1971,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateClusterRequest()
       );
@@ -2003,7 +2005,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2025,7 +2027,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2046,7 +2048,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpgradeClusterRequest()
       );
@@ -2079,7 +2081,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpgradeClusterRequest()
       );
@@ -2133,7 +2135,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpgradeClusterRequest()
       );
@@ -2164,7 +2166,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpgradeClusterRequest()
       );
@@ -2197,7 +2199,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2219,7 +2221,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2240,7 +2242,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteClusterRequest()
       );
@@ -2273,7 +2275,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteClusterRequest()
       );
@@ -2327,7 +2329,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteClusterRequest()
       );
@@ -2358,7 +2360,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteClusterRequest()
       );
@@ -2391,7 +2393,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2413,7 +2415,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2434,7 +2436,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.PromoteClusterRequest()
       );
@@ -2467,7 +2469,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.PromoteClusterRequest()
       );
@@ -2521,7 +2523,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.PromoteClusterRequest()
       );
@@ -2552,7 +2554,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.PromoteClusterRequest()
       );
@@ -2585,7 +2587,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2607,7 +2609,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2628,7 +2630,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.SwitchoverClusterRequest()
       );
@@ -2661,7 +2663,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.SwitchoverClusterRequest()
       );
@@ -2715,7 +2717,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.SwitchoverClusterRequest()
       );
@@ -2746,7 +2748,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.SwitchoverClusterRequest()
       );
@@ -2779,7 +2781,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2801,7 +2803,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2822,7 +2824,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestoreClusterRequest()
       );
@@ -2855,7 +2857,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestoreClusterRequest()
       );
@@ -2909,7 +2911,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestoreClusterRequest()
       );
@@ -2940,7 +2942,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestoreClusterRequest()
       );
@@ -2973,7 +2975,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2995,7 +2997,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3016,7 +3018,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryClusterRequest()
       );
@@ -3049,7 +3051,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryClusterRequest()
       );
@@ -3103,7 +3105,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryClusterRequest()
       );
@@ -3137,7 +3139,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryClusterRequest()
       );
@@ -3170,7 +3172,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3192,7 +3194,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3213,7 +3215,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateInstanceRequest()
       );
@@ -3246,7 +3248,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateInstanceRequest()
       );
@@ -3300,7 +3302,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateInstanceRequest()
       );
@@ -3331,7 +3333,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateInstanceRequest()
       );
@@ -3364,7 +3366,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3386,7 +3388,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3407,7 +3409,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryInstanceRequest()
       );
@@ -3440,7 +3442,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryInstanceRequest()
       );
@@ -3494,7 +3496,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryInstanceRequest()
       );
@@ -3528,7 +3530,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateSecondaryInstanceRequest()
       );
@@ -3561,7 +3563,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3584,7 +3586,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3605,7 +3607,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.BatchCreateInstancesRequest()
       );
@@ -3638,7 +3640,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.BatchCreateInstancesRequest()
       );
@@ -3692,7 +3694,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.BatchCreateInstancesRequest()
       );
@@ -3723,7 +3725,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.BatchCreateInstancesRequest()
       );
@@ -3756,7 +3758,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3778,7 +3780,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3799,7 +3801,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateInstanceRequest()
       );
@@ -3833,7 +3835,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateInstanceRequest()
       );
@@ -3888,7 +3890,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateInstanceRequest()
       );
@@ -3920,7 +3922,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateInstanceRequest()
       );
@@ -3954,7 +3956,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3976,7 +3978,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3997,7 +3999,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteInstanceRequest()
       );
@@ -4030,7 +4032,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteInstanceRequest()
       );
@@ -4084,7 +4086,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteInstanceRequest()
       );
@@ -4115,7 +4117,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteInstanceRequest()
       );
@@ -4148,7 +4150,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4170,7 +4172,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4191,7 +4193,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.FailoverInstanceRequest()
       );
@@ -4224,7 +4226,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.FailoverInstanceRequest()
       );
@@ -4278,7 +4280,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.FailoverInstanceRequest()
       );
@@ -4309,7 +4311,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.FailoverInstanceRequest()
       );
@@ -4342,7 +4344,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4364,7 +4366,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4385,7 +4387,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.InjectFaultRequest()
       );
@@ -4417,7 +4419,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.InjectFaultRequest()
       );
@@ -4471,7 +4473,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.InjectFaultRequest()
       );
@@ -4502,7 +4504,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.InjectFaultRequest()
       );
@@ -4535,7 +4537,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4557,7 +4559,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4575,7 +4577,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestartInstanceRequest()
       );
@@ -4608,7 +4610,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestartInstanceRequest()
       );
@@ -4662,7 +4664,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestartInstanceRequest()
       );
@@ -4693,7 +4695,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.RestartInstanceRequest()
       );
@@ -4726,7 +4728,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4748,7 +4750,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4769,7 +4771,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateBackupRequest()
       );
@@ -4801,7 +4803,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateBackupRequest()
       );
@@ -4855,7 +4857,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateBackupRequest()
       );
@@ -4886,7 +4888,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.CreateBackupRequest()
       );
@@ -4919,7 +4921,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4941,7 +4943,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4959,7 +4961,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateBackupRequest()
       );
@@ -4992,7 +4994,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateBackupRequest()
       );
@@ -5047,7 +5049,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateBackupRequest()
       );
@@ -5079,7 +5081,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.UpdateBackupRequest()
       );
@@ -5113,7 +5115,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5135,7 +5137,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5153,7 +5155,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteBackupRequest()
       );
@@ -5185,7 +5187,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteBackupRequest()
       );
@@ -5239,7 +5241,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteBackupRequest()
       );
@@ -5270,7 +5272,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.DeleteBackupRequest()
       );
@@ -5303,7 +5305,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5325,7 +5327,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5343,7 +5345,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5382,7 +5384,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5437,7 +5439,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5468,7 +5470,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5528,7 +5530,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5579,7 +5581,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5628,7 +5630,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListClustersRequest()
       );
@@ -5670,7 +5672,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5709,7 +5711,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5764,7 +5766,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5795,7 +5797,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5855,7 +5857,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5904,7 +5906,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5953,7 +5955,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListInstancesRequest()
       );
@@ -5995,7 +5997,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6028,7 +6030,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6077,7 +6079,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6108,7 +6110,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6162,7 +6164,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6213,7 +6215,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6256,7 +6258,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListBackupsRequest()
       );
@@ -6300,7 +6302,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6340,7 +6342,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6397,7 +6399,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6431,7 +6433,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6500,7 +6502,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6558,7 +6560,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6612,7 +6614,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListSupportedDatabaseFlagsRequest()
       );
@@ -6659,7 +6661,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6692,7 +6694,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6741,7 +6743,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6769,7 +6771,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6823,7 +6825,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6874,7 +6876,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6916,7 +6918,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListUsersRequest()
       );
@@ -6959,7 +6961,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -6998,7 +7000,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -7053,7 +7055,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -7084,7 +7086,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -7144,7 +7146,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -7193,7 +7195,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -7242,7 +7244,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.alloydb.v1alpha.ListDatabasesRequest()
       );
@@ -7283,7 +7285,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -7313,7 +7315,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -7357,7 +7359,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -7389,7 +7391,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -7419,7 +7421,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -7463,7 +7465,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -7495,7 +7497,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -7528,7 +7530,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -7572,7 +7574,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -7607,7 +7609,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7637,7 +7639,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7681,7 +7683,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7716,7 +7718,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -7764,7 +7766,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -7805,7 +7807,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -7884,7 +7886,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -7964,7 +7966,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -8060,8 +8062,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -8080,7 +8081,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -8089,8 +8090,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -8106,7 +8106,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('backup', () => {
+    describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
         project: 'projectValue',
@@ -8117,7 +8117,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8170,7 +8170,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('cluster', () => {
+    describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -8181,7 +8181,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8234,7 +8234,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('connectionInfo', () => {
+    describe('connectionInfo', async () => {
       const fakePath = '/rendered/path/connectionInfo';
       const expectedParameters = {
         project: 'projectValue',
@@ -8246,7 +8246,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectionInfoPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8310,7 +8310,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('database', () => {
+    describe('database', async () => {
       const fakePath = '/rendered/path/database';
       const expectedParameters = {
         project: 'projectValue',
@@ -8322,7 +8322,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.databasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8386,7 +8386,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -8398,7 +8398,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8462,7 +8462,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -8472,7 +8472,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8511,7 +8511,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -8520,7 +8520,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8549,7 +8549,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('supportedDatabaseFlag', () => {
+    describe('supportedDatabaseFlag', async () => {
       const fakePath = '/rendered/path/supportedDatabaseFlag';
       const expectedParameters = {
         project: 'projectValue',
@@ -8560,7 +8560,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.supportedDatabaseFlagPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8627,7 +8627,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
       });
     });
 
-    describe('user', () => {
+    describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
         project: 'projectValue',
@@ -8639,7 +8639,7 @@ describe('v1alpha.AlloyDBAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

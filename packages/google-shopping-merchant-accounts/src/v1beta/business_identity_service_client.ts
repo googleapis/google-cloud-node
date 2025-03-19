@@ -514,7 +514,9 @@ export class BusinessIdentityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBusinessIdentity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -642,7 +644,9 @@ export class BusinessIdentityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'business_identity.name': request.businessIdentity!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBusinessIdentity request %j', request);
     const wrappedCallback:
       | Callback<

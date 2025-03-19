@@ -399,7 +399,9 @@ export class SpeechTranslationServiceClient {
    * region_tag:mediatranslation_v1beta1_generated_SpeechTranslationService_StreamingTranslateSpeech_async
    */
   streamingTranslateSpeech(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingTranslateSpeech stream %j', options);
     return this.innerApiCalls.streamingTranslateSpeech(null, options);
   }

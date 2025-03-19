@@ -255,7 +255,9 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.organizationsStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetOrganizationRequest()
       );
@@ -345,7 +347,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetOrganizationRequest()
       );
@@ -392,7 +394,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetOrganizationRequest()
       );
@@ -423,7 +425,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetOrganizationRequest()
       );
@@ -444,7 +446,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -475,7 +477,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -522,7 +524,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -553,7 +555,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -574,7 +576,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -605,7 +607,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -652,7 +654,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -683,7 +685,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -704,7 +706,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -736,7 +738,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -783,7 +785,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -814,7 +816,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -835,7 +837,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -861,7 +863,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -904,7 +906,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -921,7 +923,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -969,7 +971,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -1006,7 +1008,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -1043,7 +1045,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.SearchOrganizationsRequest()
       );
@@ -1068,7 +1070,7 @@ describe('v3.OrganizationsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folder', () => {
+    describe('folder', async () => {
       const fakePath = '/rendered/path/folder';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1077,7 +1079,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1106,7 +1108,7 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1115,7 +1117,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1144,7 +1146,7 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1153,7 +1155,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1182,7 +1184,7 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
-    describe('tagBinding', () => {
+    describe('tagBinding', async () => {
       const fakePath = '/rendered/path/tagBinding';
       const expectedParameters = {
         tag_binding: 'tagBindingValue',
@@ -1191,7 +1193,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagBindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1220,7 +1222,7 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
-    describe('tagHold', () => {
+    describe('tagHold', async () => {
       const fakePath = '/rendered/path/tagHold';
       const expectedParameters = {
         tag_value: 'tagValueValue',
@@ -1230,7 +1232,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagHoldPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1269,7 +1271,7 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
-    describe('tagKey', () => {
+    describe('tagKey', async () => {
       const fakePath = '/rendered/path/tagKey';
       const expectedParameters = {
         tag_key: 'tagKeyValue',
@@ -1278,7 +1280,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1307,7 +1309,7 @@ describe('v3.OrganizationsClient', () => {
       });
     });
 
-    describe('tagValue', () => {
+    describe('tagValue', async () => {
       const fakePath = '/rendered/path/tagValue';
       const expectedParameters = {
         tag_value: 'tagValueValue',
@@ -1316,7 +1318,7 @@ describe('v3.OrganizationsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tagValuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

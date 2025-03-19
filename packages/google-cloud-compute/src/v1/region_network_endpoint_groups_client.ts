@@ -492,7 +492,9 @@ export class RegionNetworkEndpointGroupsClient {
         region: request.region ?? '',
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('attachNetworkEndpoints request %j', request);
     const wrappedCallback:
       | Callback<
@@ -630,7 +632,9 @@ export class RegionNetworkEndpointGroupsClient {
         region: request.region ?? '',
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -770,7 +774,9 @@ export class RegionNetworkEndpointGroupsClient {
         region: request.region ?? '',
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('detachNetworkEndpoints request %j', request);
     const wrappedCallback:
       | Callback<
@@ -907,7 +913,9 @@ export class RegionNetworkEndpointGroupsClient {
         region: request.region ?? '',
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1038,7 +1046,9 @@ export class RegionNetworkEndpointGroupsClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1180,7 +1190,9 @@ export class RegionNetworkEndpointGroupsClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListRegionNetworkEndpointGroupsRequest,
@@ -1254,7 +1266,9 @@ export class RegionNetworkEndpointGroupsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1310,7 +1324,9 @@ export class RegionNetworkEndpointGroupsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -1424,7 +1440,9 @@ export class RegionNetworkEndpointGroupsClient {
         region: request.region ?? '',
         network_endpoint_group: request.networkEndpointGroup ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListNetworkEndpointsRegionNetworkEndpointGroupsRequest,
@@ -1501,7 +1519,9 @@ export class RegionNetworkEndpointGroupsClient {
       });
     const defaultCallSettings = this._defaults['listNetworkEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworkEndpoints stream %j', request);
     return this.descriptors.page.listNetworkEndpoints.createStream(
       this.innerApiCalls.listNetworkEndpoints as GaxCall,
@@ -1560,7 +1580,9 @@ export class RegionNetworkEndpointGroupsClient {
       });
     const defaultCallSettings = this._defaults['listNetworkEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworkEndpoints iterate %j', request);
     return this.descriptors.page.listNetworkEndpoints.asyncIterate(
       this.innerApiCalls['listNetworkEndpoints'] as GaxCall,
