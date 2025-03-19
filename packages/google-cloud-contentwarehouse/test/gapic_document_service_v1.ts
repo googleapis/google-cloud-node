@@ -255,7 +255,9 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.documentServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentRequest()
       );
@@ -345,7 +347,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentRequest()
       );
@@ -392,7 +394,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentRequest()
       );
@@ -423,7 +425,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.CreateDocumentRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentRequest()
       );
@@ -475,7 +477,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentRequest()
       );
@@ -522,7 +524,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.GetDocumentRequest()
       );
@@ -574,7 +576,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentRequest()
       );
@@ -605,7 +607,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentRequest()
       );
@@ -652,7 +654,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentRequest()
       );
@@ -683,7 +685,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.UpdateDocumentRequest()
       );
@@ -704,7 +706,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentRequest()
       );
@@ -782,7 +784,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentRequest()
       );
@@ -813,7 +815,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.DeleteDocumentRequest()
       );
@@ -834,7 +836,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
       );
@@ -943,7 +945,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.LockDocumentRequest()
       );
@@ -964,7 +966,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.FetchAclRequest()
       );
@@ -995,7 +997,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.FetchAclRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.FetchAclRequest()
       );
@@ -1070,7 +1072,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.FetchAclRequest()
       );
@@ -1091,7 +1093,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SetAclRequest()
       );
@@ -1122,7 +1124,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SetAclRequest()
       );
@@ -1169,7 +1171,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SetAclRequest()
       );
@@ -1197,7 +1199,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SetAclRequest()
       );
@@ -1218,7 +1220,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1257,7 +1259,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1314,7 +1316,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1345,7 +1347,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1408,7 +1410,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1460,7 +1462,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1510,7 +1512,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.SearchDocumentsRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1.DocumentServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('documentLink', () => {
+    describe('documentLink', async () => {
       const fakePath = '/rendered/path/documentLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -1560,7 +1562,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1624,7 +1626,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('documentSchema', () => {
+    describe('documentSchema', async () => {
       const fakePath = '/rendered/path/documentSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -1635,7 +1637,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentSchemaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1689,7 +1691,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocument', () => {
+    describe('projectLocationDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -1700,7 +1702,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1768,7 +1770,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocumentsReferenceId', () => {
+    describe('projectLocationDocumentsReferenceId', async () => {
       const fakePath = '/rendered/path/projectLocationDocumentsReferenceId';
       const expectedParameters = {
         project: 'projectValue',
@@ -1779,7 +1781,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
@@ -1851,7 +1853,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('ruleSet', () => {
+    describe('ruleSet', async () => {
       const fakePath = '/rendered/path/ruleSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1862,7 +1864,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ruleSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1915,7 +1917,7 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('synonymSet', () => {
+    describe('synonymSet', async () => {
       const fakePath = '/rendered/path/synonymSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1926,7 +1928,7 @@ describe('v1.DocumentServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.synonymSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -284,7 +284,9 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionNotificationEndpointsStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
@@ -399,7 +401,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
@@ -459,7 +461,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
@@ -500,7 +502,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
@@ -534,7 +536,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
@@ -577,7 +579,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
@@ -635,7 +637,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
@@ -675,7 +677,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
@@ -709,7 +711,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
@@ -748,7 +750,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
@@ -839,7 +841,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
@@ -914,7 +916,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
@@ -977,7 +979,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
@@ -1012,7 +1014,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
@@ -1081,7 +1083,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
@@ -1141,7 +1143,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
@@ -1198,7 +1200,7 @@ describe('v1.RegionNotificationEndpointsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );

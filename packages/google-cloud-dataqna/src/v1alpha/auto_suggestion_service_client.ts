@@ -542,7 +542,9 @@ export class AutoSuggestionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suggestQueries request %j', request);
     const wrappedCallback:
       | Callback<

@@ -284,7 +284,9 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataFusionStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
       );
@@ -374,7 +376,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
       );
@@ -421,7 +423,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
       );
@@ -452,7 +454,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.GetInstanceRequest()
       );
@@ -473,7 +475,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
       );
@@ -504,7 +506,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
       );
@@ -551,7 +553,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
       );
@@ -582,7 +584,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveIamPolicyRequest()
       );
@@ -603,7 +605,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
       );
@@ -634,7 +636,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
       );
@@ -681,7 +683,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
       );
@@ -712,7 +714,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.AddDnsPeeringRequest()
       );
@@ -733,7 +735,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
       );
@@ -764,7 +766,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
       );
@@ -811,7 +813,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
       );
@@ -842,7 +844,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RemoveDnsPeeringRequest()
       );
@@ -863,7 +865,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
       );
@@ -896,7 +898,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
       );
@@ -950,7 +952,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
       );
@@ -981,7 +983,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.CreateInstanceRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1036,7 +1038,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1057,7 +1059,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
       );
@@ -1090,7 +1092,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
       );
@@ -1144,7 +1146,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.DeleteInstanceRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1230,7 +1232,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1251,7 +1253,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
       );
@@ -1285,7 +1287,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
       );
@@ -1340,7 +1342,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
       );
@@ -1372,7 +1374,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpdateInstanceRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1428,7 +1430,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1449,7 +1451,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
       );
@@ -1482,7 +1484,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
       );
@@ -1536,7 +1538,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
       );
@@ -1567,7 +1569,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.RestartInstanceRequest()
       );
@@ -1600,7 +1602,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1622,7 +1624,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1643,7 +1645,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
       );
@@ -1676,7 +1678,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
       );
@@ -1730,7 +1732,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
       );
@@ -1761,7 +1763,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.UpgradeInstanceRequest()
       );
@@ -1794,7 +1796,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1816,7 +1818,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1837,7 +1839,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -1877,7 +1879,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -1932,7 +1934,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -1966,7 +1968,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -2032,7 +2034,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -2087,7 +2089,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -2140,7 +2142,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListAvailableVersionsRequest()
       );
@@ -2186,7 +2188,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2225,7 +2227,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2311,7 +2313,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2371,7 +2373,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2420,7 +2422,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2469,7 +2471,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListInstancesRequest()
       );
@@ -2512,7 +2514,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2551,7 +2553,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2606,7 +2608,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2637,7 +2639,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2698,7 +2700,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2748,7 +2750,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2797,7 +2799,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListNamespacesRequest()
       );
@@ -2840,7 +2842,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -2879,7 +2881,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -2934,7 +2936,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -2965,7 +2967,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -3026,7 +3028,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -3076,7 +3078,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -3126,7 +3128,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datafusion.v1beta1.ListDnsPeeringsRequest()
       );
@@ -3164,7 +3166,7 @@ describe('v1beta1.DataFusionClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -3176,7 +3178,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3240,7 +3242,7 @@ describe('v1beta1.DataFusionClient', () => {
       });
     });
 
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -3251,7 +3253,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3304,7 +3306,7 @@ describe('v1beta1.DataFusionClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3314,7 +3316,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3353,7 +3355,7 @@ describe('v1beta1.DataFusionClient', () => {
       });
     });
 
-    describe('namespace', () => {
+    describe('namespace', async () => {
       const fakePath = '/rendered/path/namespace';
       const expectedParameters = {
         project: 'projectValue',
@@ -3365,7 +3367,7 @@ describe('v1beta1.DataFusionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.namespacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

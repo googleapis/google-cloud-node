@@ -676,7 +676,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -788,7 +790,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProvider request %j', request);
     const wrappedCallback:
       | Callback<
@@ -900,7 +904,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1021,7 +1027,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectorVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1149,7 +1157,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectionSchemaMetadata request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1270,7 +1280,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRuntimeConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1390,7 +1402,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGlobalSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1528,7 +1542,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1712,7 +1728,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1880,7 +1898,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2049,7 +2069,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2225,7 +2247,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.connectors.v1.IListConnectionsRequest,
@@ -2298,7 +2322,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -2353,7 +2379,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,
@@ -2457,7 +2485,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.connectors.v1.IListProvidersRequest,
@@ -2524,7 +2554,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProviders stream %j', request);
     return this.descriptors.page.listProviders.createStream(
       this.innerApiCalls.listProviders as GaxCall,
@@ -2573,7 +2605,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProviders iterate %j', request);
     return this.descriptors.page.listProviders.asyncIterate(
       this.innerApiCalls['listProviders'] as GaxCall,
@@ -2677,7 +2711,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.connectors.v1.IListConnectorsRequest,
@@ -2744,7 +2780,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectors stream %j', request);
     return this.descriptors.page.listConnectors.createStream(
       this.innerApiCalls.listConnectors as GaxCall,
@@ -2793,7 +2831,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectors iterate %j', request);
     return this.descriptors.page.listConnectors.asyncIterate(
       this.innerApiCalls['listConnectors'] as GaxCall,
@@ -2900,7 +2940,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.connectors.v1.IListConnectorVersionsRequest,
@@ -2970,7 +3012,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectorVersions stream %j', request);
     return this.descriptors.page.listConnectorVersions.createStream(
       this.innerApiCalls.listConnectorVersions as GaxCall,
@@ -3022,7 +3066,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listConnectorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectorVersions iterate %j', request);
     return this.descriptors.page.listConnectorVersions.asyncIterate(
       this.innerApiCalls['listConnectorVersions'] as GaxCall,
@@ -3133,7 +3179,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.connectors.v1.IListRuntimeEntitySchemasRequest,
@@ -3207,7 +3255,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeEntitySchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeEntitySchemas stream %j', request);
     return this.descriptors.page.listRuntimeEntitySchemas.createStream(
       this.innerApiCalls.listRuntimeEntitySchemas as GaxCall,
@@ -3263,7 +3313,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeEntitySchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeEntitySchemas iterate %j', request);
     return this.descriptors.page.listRuntimeEntitySchemas.asyncIterate(
       this.innerApiCalls['listRuntimeEntitySchemas'] as GaxCall,
@@ -3374,7 +3426,9 @@ export class ConnectorsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.connectors.v1.IListRuntimeActionSchemasRequest,
@@ -3448,7 +3502,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeActionSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeActionSchemas stream %j', request);
     return this.descriptors.page.listRuntimeActionSchemas.createStream(
       this.innerApiCalls.listRuntimeActionSchemas as GaxCall,
@@ -3504,7 +3560,9 @@ export class ConnectorsClient {
       });
     const defaultCallSettings = this._defaults['listRuntimeActionSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimeActionSchemas iterate %j', request);
     return this.descriptors.page.listRuntimeActionSchemas.asyncIterate(
       this.innerApiCalls['listRuntimeActionSchemas'] as GaxCall,
@@ -3822,7 +3880,7 @@ export class ConnectorsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -624,7 +624,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -749,7 +751,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -877,7 +881,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'repository.name': request.repository!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1000,7 +1006,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRepository request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1135,7 +1143,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('commitRepositoryChanges request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1266,7 +1276,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('readRepositoryFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1391,7 +1403,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('computeRepositoryAccessTokenStatus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1522,7 +1536,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchRemoteBranches request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1641,7 +1657,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1763,7 +1781,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1882,7 +1902,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2007,7 +2029,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('installNpmPackages request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2132,7 +2156,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pullGitCommits request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2255,7 +2281,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pushGitCommits request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2380,7 +2408,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchFileGitStatuses request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2509,7 +2539,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchGitAheadBehind request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2641,7 +2673,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('commitWorkspaceChanges request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2771,7 +2805,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resetWorkspaceChanges request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2893,7 +2929,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchFileDiff request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3015,7 +3053,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('makeDirectory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3137,7 +3177,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeDirectory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3263,7 +3305,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moveDirectory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3382,7 +3426,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('readFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3501,7 +3547,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3617,7 +3665,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moveFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3731,7 +3781,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('writeFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3847,7 +3899,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3978,7 +4032,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4112,7 +4168,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'release_config.name': request.releaseConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4237,7 +4295,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteReleaseConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4362,7 +4422,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCompilationResult request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4490,7 +4552,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCompilationResult request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4615,7 +4679,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4746,7 +4812,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4880,7 +4948,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'workflow_config.name': request.workflowConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5005,7 +5075,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteWorkflowConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5130,7 +5202,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5258,7 +5332,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5383,7 +5459,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5508,7 +5586,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelWorkflowInvocation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5621,7 +5701,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5745,7 +5827,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'config.name': request.config!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5883,7 +5967,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListRepositoriesRequest,
@@ -5962,7 +6048,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
@@ -6023,7 +6111,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
@@ -6140,7 +6230,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryRepositoryDirectoryContentsRequest,
@@ -6223,7 +6315,9 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryRepositoryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryRepositoryDirectoryContents stream %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.createStream(
       this.innerApiCalls.queryRepositoryDirectoryContents as GaxCall,
@@ -6285,7 +6379,9 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryRepositoryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryRepositoryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryRepositoryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryRepositoryDirectoryContents'] as GaxCall,
@@ -6395,7 +6491,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IFetchRepositoryHistoryRequest,
@@ -6467,7 +6565,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchRepositoryHistory stream %j', request);
     return this.descriptors.page.fetchRepositoryHistory.createStream(
       this.innerApiCalls.fetchRepositoryHistory as GaxCall,
@@ -6521,7 +6621,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchRepositoryHistory iterate %j', request);
     return this.descriptors.page.fetchRepositoryHistory.asyncIterate(
       this.innerApiCalls['fetchRepositoryHistory'] as GaxCall,
@@ -6637,7 +6739,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListWorkspacesRequest,
@@ -6716,7 +6820,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
@@ -6777,7 +6883,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
@@ -6889,7 +6997,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryDirectoryContentsRequest,
@@ -6964,7 +7074,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryDirectoryContents stream %j', request);
     return this.descriptors.page.queryDirectoryContents.createStream(
       this.innerApiCalls.queryDirectoryContents as GaxCall,
@@ -7021,7 +7133,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryDirectoryContents iterate %j', request);
     return this.descriptors.page.queryDirectoryContents.asyncIterate(
       this.innerApiCalls['queryDirectoryContents'] as GaxCall,
@@ -7134,7 +7248,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.ISearchFilesRequest,
@@ -7210,7 +7326,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['searchFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchFiles stream %j', request);
     return this.descriptors.page.searchFiles.createStream(
       this.innerApiCalls.searchFiles as GaxCall,
@@ -7268,7 +7386,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['searchFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchFiles iterate %j', request);
     return this.descriptors.page.searchFiles.asyncIterate(
       this.innerApiCalls['searchFiles'] as GaxCall,
@@ -7378,7 +7498,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListReleaseConfigsRequest,
@@ -7451,7 +7573,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReleaseConfigs stream %j', request);
     return this.descriptors.page.listReleaseConfigs.createStream(
       this.innerApiCalls.listReleaseConfigs as GaxCall,
@@ -7506,7 +7630,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReleaseConfigs iterate %j', request);
     return this.descriptors.page.listReleaseConfigs.asyncIterate(
       this.innerApiCalls['listReleaseConfigs'] as GaxCall,
@@ -7622,7 +7748,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListCompilationResultsRequest,
@@ -7701,7 +7829,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCompilationResults stream %j', request);
     return this.descriptors.page.listCompilationResults.createStream(
       this.innerApiCalls.listCompilationResults as GaxCall,
@@ -7762,7 +7892,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCompilationResults iterate %j', request);
     return this.descriptors.page.listCompilationResults.asyncIterate(
       this.innerApiCalls['listCompilationResults'] as GaxCall,
@@ -7875,7 +8007,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryCompilationResultActionsRequest,
@@ -7951,7 +8085,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryCompilationResultActions stream %j', request);
     return this.descriptors.page.queryCompilationResultActions.createStream(
       this.innerApiCalls.queryCompilationResultActions as GaxCall,
@@ -8009,7 +8145,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryCompilationResultActions iterate %j', request);
     return this.descriptors.page.queryCompilationResultActions.asyncIterate(
       this.innerApiCalls['queryCompilationResultActions'] as GaxCall,
@@ -8119,7 +8257,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListWorkflowConfigsRequest,
@@ -8192,7 +8332,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkflowConfigs stream %j', request);
     return this.descriptors.page.listWorkflowConfigs.createStream(
       this.innerApiCalls.listWorkflowConfigs as GaxCall,
@@ -8247,7 +8389,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkflowConfigs iterate %j', request);
     return this.descriptors.page.listWorkflowConfigs.asyncIterate(
       this.innerApiCalls['listWorkflowConfigs'] as GaxCall,
@@ -8363,7 +8507,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IListWorkflowInvocationsRequest,
@@ -8442,7 +8588,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkflowInvocations stream %j', request);
     return this.descriptors.page.listWorkflowInvocations.createStream(
       this.innerApiCalls.listWorkflowInvocations as GaxCall,
@@ -8503,7 +8651,9 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkflowInvocations iterate %j', request);
     return this.descriptors.page.listWorkflowInvocations.asyncIterate(
       this.innerApiCalls['listWorkflowInvocations'] as GaxCall,
@@ -8613,7 +8763,9 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataform.v1beta1.IQueryWorkflowInvocationActionsRequest,
@@ -8687,7 +8839,9 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryWorkflowInvocationActions stream %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.createStream(
       this.innerApiCalls.queryWorkflowInvocationActions as GaxCall,
@@ -8743,7 +8897,9 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryWorkflowInvocationActions iterate %j', request);
     return this.descriptors.page.queryWorkflowInvocationActions.asyncIterate(
       this.innerApiCalls['queryWorkflowInvocationActions'] as GaxCall,

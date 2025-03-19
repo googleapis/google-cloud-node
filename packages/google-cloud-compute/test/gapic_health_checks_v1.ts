@@ -265,7 +265,9 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.healthChecksStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
@@ -506,7 +508,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
@@ -692,7 +694,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
@@ -826,7 +828,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
@@ -858,7 +860,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
@@ -972,7 +974,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListHealthChecksRequest()
       );
@@ -1091,7 +1093,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListHealthChecksRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
@@ -1167,7 +1169,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
@@ -1214,7 +1216,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
@@ -1241,7 +1243,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
@@ -1295,7 +1297,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
@@ -1346,7 +1348,7 @@ describe('v1.HealthChecksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
@@ -1388,7 +1390,7 @@ describe('v1.HealthChecksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );

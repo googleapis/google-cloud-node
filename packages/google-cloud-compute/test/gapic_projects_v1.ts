@@ -263,7 +263,9 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.projectsStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
@@ -353,7 +355,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
@@ -400,7 +402,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
@@ -431,7 +433,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
@@ -452,7 +454,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
@@ -484,7 +486,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
@@ -562,7 +564,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
@@ -583,7 +585,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
@@ -661,7 +663,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
@@ -692,7 +694,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
@@ -713,7 +715,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
@@ -744,7 +746,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
@@ -791,7 +793,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
@@ -843,7 +845,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
@@ -873,7 +875,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
@@ -918,7 +920,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
@@ -945,7 +947,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
@@ -966,7 +968,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
@@ -1044,7 +1046,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
@@ -1075,7 +1077,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
@@ -1096,7 +1098,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
@@ -1174,7 +1176,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
@@ -1202,7 +1204,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
@@ -1223,7 +1225,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
@@ -1254,7 +1256,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
@@ -1301,7 +1303,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
@@ -1332,7 +1334,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
@@ -1353,7 +1355,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCloudArmorTierProjectRequest()
       );
@@ -1384,7 +1386,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCloudArmorTierProjectRequest()
       );
@@ -1431,7 +1433,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCloudArmorTierProjectRequest()
       );
@@ -1462,7 +1464,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCloudArmorTierProjectRequest()
       );
@@ -1483,7 +1485,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
@@ -1515,7 +1517,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
@@ -1562,7 +1564,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
@@ -1596,7 +1598,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
@@ -1620,7 +1622,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
@@ -1652,7 +1654,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
@@ -1699,7 +1701,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
@@ -1733,7 +1735,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
@@ -1757,7 +1759,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
@@ -1789,7 +1791,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
@@ -1836,7 +1838,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
@@ -1867,7 +1869,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -1927,7 +1929,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -1982,7 +1984,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -2013,7 +2015,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -2073,7 +2075,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -2122,7 +2124,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -2171,7 +2173,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
@@ -2213,7 +2215,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
@@ -2246,7 +2248,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
@@ -2295,7 +2297,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
@@ -2326,7 +2328,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
@@ -2380,7 +2382,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
@@ -2431,7 +2433,7 @@ describe('v1.ProjectsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
@@ -2474,7 +2476,7 @@ describe('v1.ProjectsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );

@@ -303,7 +303,9 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.managedKafkaConnectStub);
       client.close().then(() => {
         done();
@@ -370,7 +372,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectClusterRequest()
       );
@@ -403,7 +405,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectClusterRequest()
       );
@@ -452,7 +454,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectClusterRequest()
       );
@@ -485,7 +487,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectClusterRequest()
       );
@@ -508,7 +510,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectorRequest()
       );
@@ -541,7 +543,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectorRequest()
       );
@@ -590,7 +592,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectorRequest()
       );
@@ -623,7 +625,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.GetConnectorRequest()
       );
@@ -646,7 +648,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectorRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectorRequest()
       );
@@ -728,7 +730,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectorRequest()
       );
@@ -761,7 +763,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectorRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectorRequest()
       );
@@ -818,7 +820,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectorRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectorRequest()
       );
@@ -902,7 +904,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectorRequest()
       );
@@ -926,7 +928,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectorRequest()
       );
@@ -959,7 +961,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectorRequest()
       );
@@ -1008,7 +1010,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectorRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectorRequest()
       );
@@ -1064,7 +1066,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.PauseConnectorRequest()
       );
@@ -1097,7 +1099,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.PauseConnectorRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.PauseConnectorRequest()
       );
@@ -1179,7 +1181,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.PauseConnectorRequest()
       );
@@ -1202,7 +1204,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ResumeConnectorRequest()
       );
@@ -1235,7 +1237,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ResumeConnectorRequest()
       );
@@ -1284,7 +1286,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ResumeConnectorRequest()
       );
@@ -1317,7 +1319,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ResumeConnectorRequest()
       );
@@ -1340,7 +1342,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.RestartConnectorRequest()
       );
@@ -1373,7 +1375,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.RestartConnectorRequest()
       );
@@ -1422,7 +1424,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.RestartConnectorRequest()
       );
@@ -1455,7 +1457,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.RestartConnectorRequest()
       );
@@ -1478,7 +1480,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.StopConnectorRequest()
       );
@@ -1511,7 +1513,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.StopConnectorRequest()
       );
@@ -1560,7 +1562,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.StopConnectorRequest()
       );
@@ -1593,7 +1595,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.StopConnectorRequest()
       );
@@ -1616,7 +1618,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectClusterRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectClusterRequest()
       );
@@ -1707,7 +1709,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectClusterRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.CreateConnectClusterRequest()
       );
@@ -1775,7 +1777,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1799,7 +1801,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1822,7 +1824,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectClusterRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectClusterRequest()
       );
@@ -1915,7 +1917,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectClusterRequest()
       );
@@ -1949,7 +1951,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.UpdateConnectClusterRequest()
       );
@@ -1985,7 +1987,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2009,7 +2011,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2032,7 +2034,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectClusterRequest()
       );
@@ -2067,7 +2069,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectClusterRequest()
       );
@@ -2123,7 +2125,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectClusterRequest()
       );
@@ -2156,7 +2158,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.DeleteConnectClusterRequest()
       );
@@ -2191,7 +2193,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2215,7 +2217,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2238,7 +2240,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2339,7 +2341,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2372,7 +2374,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2435,7 +2437,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2487,7 +2489,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2539,7 +2541,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectClustersRequest()
       );
@@ -2584,7 +2586,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2625,7 +2627,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2682,7 +2684,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2715,7 +2717,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2777,7 +2779,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2828,7 +2830,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2879,7 +2881,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.managedkafka.v1.ListConnectorsRequest()
       );
@@ -2922,7 +2924,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2954,7 +2956,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3000,7 +3002,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3037,7 +3039,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3087,7 +3089,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3130,7 +3132,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3215,7 +3217,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3301,7 +3303,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3403,8 +3405,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3425,7 +3426,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3434,8 +3435,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3451,7 +3451,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cluster', () => {
+    describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -3464,7 +3464,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3517,7 +3517,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       });
     });
 
-    describe('connectCluster', () => {
+    describe('connectCluster', async () => {
       const fakePath = '/rendered/path/connectCluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -3530,7 +3530,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectClusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3584,7 +3584,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       });
     });
 
-    describe('connector', () => {
+    describe('connector', async () => {
       const fakePath = '/rendered/path/connector';
       const expectedParameters = {
         project: 'projectValue',
@@ -3598,7 +3598,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3662,7 +3662,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       });
     });
 
-    describe('consumerGroup', () => {
+    describe('consumerGroup', async () => {
       const fakePath = '/rendered/path/consumerGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -3676,7 +3676,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.consumerGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3740,7 +3740,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3752,7 +3752,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3791,7 +3791,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -3802,7 +3802,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3831,7 +3831,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
       });
     });
 
-    describe('topic', () => {
+    describe('topic', async () => {
       const fakePath = '/rendered/path/topic';
       const expectedParameters = {
         project: 'projectValue',
@@ -3845,7 +3845,7 @@ describe('v1.ManagedKafkaConnectClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.topicPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

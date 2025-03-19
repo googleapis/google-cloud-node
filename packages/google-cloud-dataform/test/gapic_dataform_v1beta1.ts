@@ -250,7 +250,9 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataformStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetRepositoryRequest()
       );
@@ -340,7 +342,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetRepositoryRequest()
       );
@@ -387,7 +389,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetRepositoryRequest()
       );
@@ -418,7 +420,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetRepositoryRequest()
       );
@@ -439,7 +441,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateRepositoryRequest()
       );
@@ -470,7 +472,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateRepositoryRequest()
       );
@@ -517,7 +519,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateRepositoryRequest()
       );
@@ -548,7 +550,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateRepositoryRequest()
       );
@@ -569,7 +571,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateRepositoryRequest()
       );
@@ -601,7 +603,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateRepositoryRequest()
       );
@@ -649,7 +651,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateRepositoryRequest()
       );
@@ -681,7 +683,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateRepositoryRequest()
       );
@@ -703,7 +705,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteRepositoryRequest()
       );
@@ -734,7 +736,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteRepositoryRequest()
       );
@@ -781,7 +783,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteRepositoryRequest()
       );
@@ -812,7 +814,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteRepositoryRequest()
       );
@@ -833,7 +835,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest()
       );
@@ -865,7 +867,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest()
       );
@@ -912,7 +914,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest()
       );
@@ -946,7 +948,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitRepositoryChangesRequest()
       );
@@ -970,7 +972,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadRepositoryFileRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest()
       );
@@ -1134,7 +1136,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest()
       );
@@ -1181,7 +1183,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest()
       );
@@ -1215,7 +1217,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesRequest()
       );
@@ -1318,7 +1320,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesRequest()
       );
@@ -1349,7 +1351,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRemoteBranchesRequest()
       );
@@ -1370,7 +1372,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkspaceRequest()
       );
@@ -1401,7 +1403,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkspaceRequest()
       );
@@ -1448,7 +1450,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkspaceRequest()
       );
@@ -1479,7 +1481,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkspaceRequest()
       );
@@ -1500,7 +1502,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkspaceRequest()
       );
@@ -1531,7 +1533,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkspaceRequest()
       );
@@ -1578,7 +1580,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkspaceRequest()
       );
@@ -1609,7 +1611,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkspaceRequest()
       );
@@ -1630,7 +1632,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkspaceRequest()
       );
@@ -1661,7 +1663,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkspaceRequest()
       );
@@ -1708,7 +1710,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkspaceRequest()
       );
@@ -1739,7 +1741,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkspaceRequest()
       );
@@ -1760,7 +1762,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.InstallNpmPackagesRequest()
       );
@@ -1792,7 +1794,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.InstallNpmPackagesRequest()
       );
@@ -1839,7 +1841,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.InstallNpmPackagesRequest()
       );
@@ -1870,7 +1872,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.InstallNpmPackagesRequest()
       );
@@ -1891,7 +1893,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PullGitCommitsRequest()
       );
@@ -1922,7 +1924,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PullGitCommitsRequest()
       );
@@ -1969,7 +1971,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PullGitCommitsRequest()
       );
@@ -2000,7 +2002,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PullGitCommitsRequest()
       );
@@ -2021,7 +2023,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PushGitCommitsRequest()
       );
@@ -2052,7 +2054,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PushGitCommitsRequest()
       );
@@ -2099,7 +2101,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PushGitCommitsRequest()
       );
@@ -2130,7 +2132,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.PushGitCommitsRequest()
       );
@@ -2151,7 +2153,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesRequest()
       );
@@ -2183,7 +2185,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesRequest()
       );
@@ -2230,7 +2232,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesRequest()
       );
@@ -2261,7 +2263,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileGitStatusesRequest()
       );
@@ -2282,7 +2284,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindRequest()
       );
@@ -2314,7 +2316,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindRequest()
       );
@@ -2361,7 +2363,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindRequest()
       );
@@ -2392,7 +2394,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchGitAheadBehindRequest()
       );
@@ -2413,7 +2415,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesRequest()
       );
@@ -2445,7 +2447,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesRequest()
       );
@@ -2492,7 +2494,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesRequest()
       );
@@ -2526,7 +2528,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CommitWorkspaceChangesRequest()
       );
@@ -2550,7 +2552,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesRequest()
       );
@@ -2582,7 +2584,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesRequest()
       );
@@ -2629,7 +2631,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesRequest()
       );
@@ -2663,7 +2665,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ResetWorkspaceChangesRequest()
       );
@@ -2687,7 +2689,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileDiffRequest()
       );
@@ -2718,7 +2720,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileDiffRequest()
       );
@@ -2765,7 +2767,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileDiffRequest()
       );
@@ -2796,7 +2798,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchFileDiffRequest()
       );
@@ -2817,7 +2819,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MakeDirectoryRequest()
       );
@@ -2848,7 +2850,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MakeDirectoryRequest()
       );
@@ -2895,7 +2897,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MakeDirectoryRequest()
       );
@@ -2926,7 +2928,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MakeDirectoryRequest()
       );
@@ -2947,7 +2949,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveDirectoryRequest()
       );
@@ -2978,7 +2980,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveDirectoryRequest()
       );
@@ -3025,7 +3027,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveDirectoryRequest()
       );
@@ -3056,7 +3058,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveDirectoryRequest()
       );
@@ -3077,7 +3079,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveDirectoryRequest()
       );
@@ -3108,7 +3110,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveDirectoryRequest()
       );
@@ -3155,7 +3157,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveDirectoryRequest()
       );
@@ -3186,7 +3188,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveDirectoryRequest()
       );
@@ -3207,7 +3209,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadFileRequest()
       );
@@ -3238,7 +3240,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadFileRequest()
       );
@@ -3285,7 +3287,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadFileRequest()
       );
@@ -3313,7 +3315,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ReadFileRequest()
       );
@@ -3334,7 +3336,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveFileRequest()
       );
@@ -3365,7 +3367,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveFileRequest()
       );
@@ -3412,7 +3414,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveFileRequest()
       );
@@ -3443,7 +3445,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.RemoveFileRequest()
       );
@@ -3464,7 +3466,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveFileRequest()
       );
@@ -3495,7 +3497,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveFileRequest()
       );
@@ -3542,7 +3544,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveFileRequest()
       );
@@ -3570,7 +3572,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.MoveFileRequest()
       );
@@ -3591,7 +3593,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WriteFileRequest()
       );
@@ -3622,7 +3624,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WriteFileRequest()
       );
@@ -3669,7 +3671,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WriteFileRequest()
       );
@@ -3697,7 +3699,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.WriteFileRequest()
       );
@@ -3718,7 +3720,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetReleaseConfigRequest()
       );
@@ -3749,7 +3751,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetReleaseConfigRequest()
       );
@@ -3796,7 +3798,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetReleaseConfigRequest()
       );
@@ -3827,7 +3829,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetReleaseConfigRequest()
       );
@@ -3848,7 +3850,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest()
       );
@@ -3880,7 +3882,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest()
       );
@@ -3927,7 +3929,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest()
       );
@@ -3958,7 +3960,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateReleaseConfigRequest()
       );
@@ -3979,7 +3981,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest()
       );
@@ -4012,7 +4014,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest()
       );
@@ -4060,7 +4062,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest()
       );
@@ -4092,7 +4094,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateReleaseConfigRequest()
       );
@@ -4114,7 +4116,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest()
       );
@@ -4146,7 +4148,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest()
       );
@@ -4193,7 +4195,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest()
       );
@@ -4224,7 +4226,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteReleaseConfigRequest()
       );
@@ -4245,7 +4247,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetCompilationResultRequest()
       );
@@ -4277,7 +4279,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetCompilationResultRequest()
       );
@@ -4324,7 +4326,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetCompilationResultRequest()
       );
@@ -4355,7 +4357,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetCompilationResultRequest()
       );
@@ -4376,7 +4378,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest()
       );
@@ -4408,7 +4410,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest()
       );
@@ -4455,7 +4457,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest()
       );
@@ -4489,7 +4491,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateCompilationResultRequest()
       );
@@ -4513,7 +4515,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest()
       );
@@ -4544,7 +4546,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest()
       );
@@ -4591,7 +4593,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest()
       );
@@ -4622,7 +4624,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowConfigRequest()
       );
@@ -4643,7 +4645,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest()
       );
@@ -4675,7 +4677,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest()
       );
@@ -4722,7 +4724,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest()
       );
@@ -4753,7 +4755,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowConfigRequest()
       );
@@ -4774,7 +4776,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest()
       );
@@ -4807,7 +4809,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest()
       );
@@ -4855,7 +4857,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest()
       );
@@ -4887,7 +4889,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateWorkflowConfigRequest()
       );
@@ -4909,7 +4911,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest()
       );
@@ -4941,7 +4943,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest()
       );
@@ -4988,7 +4990,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest()
       );
@@ -5019,7 +5021,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowConfigRequest()
       );
@@ -5040,7 +5042,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowInvocationRequest()
       );
@@ -5072,7 +5074,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowInvocationRequest()
       );
@@ -5119,7 +5121,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowInvocationRequest()
       );
@@ -5153,7 +5155,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetWorkflowInvocationRequest()
       );
@@ -5177,7 +5179,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowInvocationRequest()
       );
@@ -5209,7 +5211,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowInvocationRequest()
       );
@@ -5256,7 +5258,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowInvocationRequest()
       );
@@ -5290,7 +5292,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CreateWorkflowInvocationRequest()
       );
@@ -5314,7 +5316,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowInvocationRequest()
       );
@@ -5346,7 +5348,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowInvocationRequest()
       );
@@ -5393,7 +5395,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowInvocationRequest()
       );
@@ -5427,7 +5429,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.DeleteWorkflowInvocationRequest()
       );
@@ -5451,7 +5453,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationRequest()
       );
@@ -5483,7 +5485,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationRequest()
       );
@@ -5530,7 +5532,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationRequest()
       );
@@ -5564,7 +5566,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.CancelWorkflowInvocationRequest()
       );
@@ -5588,7 +5590,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetConfigRequest()
       );
@@ -5619,7 +5621,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetConfigRequest()
       );
@@ -5666,7 +5668,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetConfigRequest()
       );
@@ -5694,7 +5696,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.GetConfigRequest()
       );
@@ -5715,7 +5717,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateConfigRequest()
       );
@@ -5747,7 +5749,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateConfigRequest()
       );
@@ -5795,7 +5797,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateConfigRequest()
       );
@@ -5827,7 +5829,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.UpdateConfigRequest()
       );
@@ -5849,7 +5851,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -5888,7 +5890,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -5943,7 +5945,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -5974,7 +5976,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -6034,7 +6036,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -6083,7 +6085,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -6132,7 +6134,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListRepositoriesRequest()
       );
@@ -6175,7 +6177,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6215,7 +6217,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6272,7 +6274,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6306,7 +6308,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6376,7 +6378,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6435,7 +6437,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6489,7 +6491,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsRequest()
       );
@@ -6536,7 +6538,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6576,7 +6578,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6633,7 +6635,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6667,7 +6669,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6734,7 +6736,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6790,7 +6792,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6844,7 +6846,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.FetchRepositoryHistoryRequest()
       );
@@ -6891,7 +6893,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -6930,7 +6932,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -6985,7 +6987,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -7016,7 +7018,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -7076,7 +7078,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -7125,7 +7127,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -7174,7 +7176,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkspacesRequest()
       );
@@ -7216,7 +7218,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7256,7 +7258,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7313,7 +7315,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7347,7 +7349,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7414,7 +7416,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7470,7 +7472,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7524,7 +7526,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryDirectoryContentsRequest()
       );
@@ -7571,7 +7573,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7610,7 +7612,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7665,7 +7667,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7696,7 +7698,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7757,7 +7759,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7809,7 +7811,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7859,7 +7861,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.SearchFilesRequest()
       );
@@ -7904,7 +7906,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -7944,7 +7946,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -8001,7 +8003,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -8032,7 +8034,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -8093,7 +8095,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -8143,7 +8145,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -8193,7 +8195,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListReleaseConfigsRequest()
       );
@@ -8236,7 +8238,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8276,7 +8278,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8333,7 +8335,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8367,7 +8369,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8436,7 +8438,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8494,7 +8496,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8548,7 +8550,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListCompilationResultsRequest()
       );
@@ -8595,7 +8597,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8635,7 +8637,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8692,7 +8694,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8726,7 +8728,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8798,7 +8800,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8859,7 +8861,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8913,7 +8915,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryCompilationResultActionsRequest()
       );
@@ -8960,7 +8962,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9000,7 +9002,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9057,7 +9059,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9088,7 +9090,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9149,7 +9151,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9199,7 +9201,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9249,7 +9251,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowConfigsRequest()
       );
@@ -9292,7 +9294,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9332,7 +9334,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9389,7 +9391,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9423,7 +9425,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9492,7 +9494,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9550,7 +9552,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9604,7 +9606,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.ListWorkflowInvocationsRequest()
       );
@@ -9651,7 +9653,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -9691,7 +9693,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -9748,7 +9750,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -9782,7 +9784,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -9854,7 +9856,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -9915,7 +9917,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -9969,7 +9971,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsRequest()
       );
@@ -10015,7 +10017,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -10045,7 +10047,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -10089,7 +10091,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -10121,7 +10123,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -10151,7 +10153,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -10195,7 +10197,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -10227,7 +10229,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -10260,7 +10262,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -10304,7 +10306,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -10339,7 +10341,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -10369,7 +10371,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -10413,7 +10415,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -10448,7 +10450,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -10496,7 +10498,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -10533,7 +10535,7 @@ describe('v1beta1.DataformClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('compilationResult', () => {
+    describe('compilationResult', async () => {
       const fakePath = '/rendered/path/compilationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -10545,7 +10547,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.compilationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10626,7 +10628,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('config', () => {
+    describe('config', async () => {
       const fakePath = '/rendered/path/config';
       const expectedParameters = {
         project: 'projectValue',
@@ -10636,7 +10638,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.configPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10675,7 +10677,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -10687,7 +10689,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10751,7 +10753,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -10764,7 +10766,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10843,7 +10845,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -10853,7 +10855,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10892,7 +10894,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('releaseConfig', () => {
+    describe('releaseConfig', async () => {
       const fakePath = '/rendered/path/releaseConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -10904,7 +10906,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.releaseConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10968,7 +10970,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('repository', () => {
+    describe('repository', async () => {
       const fakePath = '/rendered/path/repository';
       const expectedParameters = {
         project: 'projectValue',
@@ -10979,7 +10981,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.repositoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11032,7 +11034,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('secretVersion', () => {
+    describe('secretVersion', async () => {
       const fakePath = '/rendered/path/secretVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -11043,7 +11045,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.secretVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11096,7 +11098,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('workflowConfig', () => {
+    describe('workflowConfig', async () => {
       const fakePath = '/rendered/path/workflowConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -11108,7 +11110,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workflowConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11173,7 +11175,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('workflowInvocation', () => {
+    describe('workflowInvocation', async () => {
       const fakePath = '/rendered/path/workflowInvocation';
       const expectedParameters = {
         project: 'projectValue',
@@ -11185,7 +11187,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workflowInvocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11266,7 +11268,7 @@ describe('v1beta1.DataformClient', () => {
       });
     });
 
-    describe('workspace', () => {
+    describe('workspace', async () => {
       const fakePath = '/rendered/path/workspace';
       const expectedParameters = {
         project: 'projectValue',
@@ -11278,7 +11280,7 @@ describe('v1beta1.DataformClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workspacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

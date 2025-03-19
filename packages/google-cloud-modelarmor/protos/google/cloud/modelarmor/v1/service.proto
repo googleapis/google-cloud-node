@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -749,7 +749,7 @@ message FilterResult {
     MaliciousUriFilterResult malicious_uri_filter_result = 4;
 
     // CSAM filter results.
-    CsamFilterResult csam_filter_result = 5;
+    CsamFilterResult csam_filter_filter_result = 5;
 
     // Virus scan results.
     VirusScanFilterResult virus_scan_filter_result = 6;

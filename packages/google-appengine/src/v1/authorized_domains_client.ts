@@ -482,7 +482,9 @@ export class AuthorizedDomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.appengine.v1.IListAuthorizedDomainsRequest,
@@ -547,7 +549,9 @@ export class AuthorizedDomainsClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizedDomains'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAuthorizedDomains stream %j', request);
     return this.descriptors.page.listAuthorizedDomains.createStream(
       this.innerApiCalls.listAuthorizedDomains as GaxCall,
@@ -594,7 +598,9 @@ export class AuthorizedDomainsClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizedDomains'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAuthorizedDomains iterate %j', request);
     return this.descriptors.page.listAuthorizedDomains.asyncIterate(
       this.innerApiCalls['listAuthorizedDomains'] as GaxCall,

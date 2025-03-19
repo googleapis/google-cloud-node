@@ -489,7 +489,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('disableXpnHost request %j', request);
     const wrappedCallback:
       | Callback<
@@ -623,7 +625,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('disableXpnResource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -755,7 +759,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enableXpnHost request %j', request);
     const wrappedCallback:
       | Callback<
@@ -889,7 +895,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enableXpnResource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1006,7 +1014,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1120,7 +1130,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getXpnHost request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1239,7 +1251,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moveDisk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1373,7 +1387,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('moveInstance request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1507,7 +1523,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setCloudArmorTier request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1641,7 +1659,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setCommonInstanceMetadata request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1775,7 +1795,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setDefaultNetworkTier request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1909,7 +1931,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setUsageExportBucket request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2048,7 +2072,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
@@ -2119,7 +2145,9 @@ export class ProjectsClient {
       });
     const defaultCallSettings = this._defaults['getXpnResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getXpnResources stream %j', request);
     return this.descriptors.page.getXpnResources.createStream(
       this.innerApiCalls.getXpnResources as GaxCall,
@@ -2172,7 +2200,9 @@ export class ProjectsClient {
       });
     const defaultCallSettings = this._defaults['getXpnResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getXpnResources iterate %j', request);
     return this.descriptors.page.getXpnResources.asyncIterate(
       this.innerApiCalls['getXpnResources'] as GaxCall,
@@ -2274,7 +2304,9 @@ export class ProjectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
@@ -2345,7 +2377,9 @@ export class ProjectsClient {
       });
     const defaultCallSettings = this._defaults['listXpnHosts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listXpnHosts stream %j', request);
     return this.descriptors.page.listXpnHosts.createStream(
       this.innerApiCalls.listXpnHosts as GaxCall,
@@ -2400,7 +2434,9 @@ export class ProjectsClient {
       });
     const defaultCallSettings = this._defaults['listXpnHosts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listXpnHosts iterate %j', request);
     return this.descriptors.page.listXpnHosts.asyncIterate(
       this.innerApiCalls['listXpnHosts'] as GaxCall,

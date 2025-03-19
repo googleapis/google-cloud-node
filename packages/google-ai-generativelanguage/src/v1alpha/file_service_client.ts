@@ -494,7 +494,9 @@ export class FileServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -614,7 +616,9 @@ export class FileServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -740,7 +744,9 @@ export class FileServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -862,7 +868,9 @@ export class FileServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ai.generativelanguage.v1alpha.IListFilesRequest,
@@ -922,7 +930,9 @@ export class FileServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFiles stream %j', request);
     return this.descriptors.page.listFiles.createStream(
       this.innerApiCalls.listFiles as GaxCall,
@@ -964,7 +974,9 @@ export class FileServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFiles iterate %j', request);
     return this.descriptors.page.listFiles.asyncIterate(
       this.innerApiCalls['listFiles'] as GaxCall,

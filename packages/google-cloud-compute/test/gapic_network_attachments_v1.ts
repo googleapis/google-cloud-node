@@ -267,7 +267,9 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.networkAttachmentsStub);
       client.close().then(() => {
         done();
@@ -326,7 +328,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkAttachmentRequest()
       );
@@ -367,7 +369,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkAttachmentRequest()
       );
@@ -424,7 +426,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkAttachmentRequest()
       );
@@ -462,7 +464,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkAttachmentRequest()
       );
@@ -493,7 +495,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkAttachmentRequest()
       );
@@ -533,7 +535,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkAttachmentRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkAttachmentRequest()
       );
@@ -625,7 +627,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkAttachmentRequest()
       );
@@ -656,7 +658,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkAttachmentRequest()
       );
@@ -697,7 +699,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkAttachmentRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkAttachmentRequest()
       );
@@ -795,7 +797,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkAttachmentRequest()
       );
@@ -826,7 +828,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkAttachmentRequest()
       );
@@ -862,7 +864,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkAttachmentRequest()
       );
@@ -914,7 +916,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkAttachmentRequest()
       );
@@ -947,7 +949,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkAttachmentRequest()
       );
@@ -973,7 +975,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkAttachmentRequest()
       );
@@ -1013,7 +1015,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkAttachmentRequest()
       );
@@ -1068,7 +1070,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkAttachmentRequest()
       );
@@ -1105,7 +1107,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkAttachmentRequest()
       );
@@ -1136,7 +1138,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkAttachmentRequest()
       );
@@ -1177,7 +1179,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkAttachmentRequest()
       );
@@ -1234,7 +1236,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkAttachmentRequest()
       );
@@ -1275,7 +1277,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkAttachmentRequest()
       );
@@ -1306,7 +1308,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkAttachmentRequest()
       );
@@ -1348,7 +1350,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkAttachmentRequest()
       );
@@ -1405,7 +1407,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkAttachmentRequest()
       );
@@ -1446,7 +1448,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkAttachmentRequest()
       );
@@ -1477,7 +1479,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListNetworkAttachmentsRequest()
       );
@@ -1537,7 +1539,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListNetworkAttachmentsRequest()
       );
@@ -1581,7 +1583,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );
@@ -1624,7 +1626,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );
@@ -1682,7 +1684,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );
@@ -1714,7 +1716,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );
@@ -1780,7 +1782,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );
@@ -1837,7 +1839,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v1.NetworkAttachmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkAttachmentsRequest()
       );

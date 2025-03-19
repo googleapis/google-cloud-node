@@ -308,7 +308,9 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.principalAccessBoundaryPoliciesStub);
       client.close().then(() => {
         done();
@@ -379,7 +381,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest()
       );
@@ -414,7 +416,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest()
       );
@@ -464,7 +466,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest()
       );
@@ -501,7 +503,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.GetPrincipalAccessBoundaryPolicyRequest()
       );
@@ -528,7 +530,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -565,7 +567,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -622,7 +624,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -657,7 +659,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.CreatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -691,7 +693,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -717,7 +719,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -741,7 +743,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -779,7 +781,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -837,7 +839,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -873,7 +875,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.UpdatePrincipalAccessBoundaryPolicyRequest()
       );
@@ -908,7 +910,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -934,7 +936,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -958,7 +960,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest()
       );
@@ -995,7 +997,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest()
       );
@@ -1052,7 +1054,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.DeletePrincipalAccessBoundaryPolicyRequest()
       );
@@ -1121,7 +1123,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1147,7 +1149,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1171,7 +1173,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1215,7 +1217,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1275,7 +1277,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1385,7 +1387,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1447,7 +1449,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1504,7 +1506,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.ListPrincipalAccessBoundaryPoliciesRequest()
       );
@@ -1554,7 +1556,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1648,7 +1650,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1685,7 +1687,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1749,7 +1751,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1808,7 +1810,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1859,7 +1861,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v3.SearchPrincipalAccessBoundaryPolicyBindingsRequest()
       );
@@ -1908,7 +1910,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1941,7 +1943,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1988,7 +1990,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2026,7 +2028,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2077,7 +2079,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2121,7 +2123,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2209,7 +2211,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2298,7 +2300,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2403,8 +2405,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2426,7 +2427,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2435,8 +2436,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2452,7 +2452,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationPolicyBinding', () => {
+    describe('folderLocationPolicyBinding', async () => {
       const fakePath = '/rendered/path/folderLocationPolicyBinding';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2466,7 +2466,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationPolicyBindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationPolicyBindingPathTemplate.match = sinon
@@ -2535,7 +2535,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2547,7 +2547,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2576,7 +2576,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       });
     });
 
-    describe('organizationLocation', () => {
+    describe('organizationLocation', async () => {
       const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2589,7 +2589,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2642,7 +2642,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       });
     });
 
-    describe('organizationLocationPolicyBinding', () => {
+    describe('organizationLocationPolicyBinding', async () => {
       const fakePath = '/rendered/path/organizationLocationPolicyBinding';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2656,7 +2656,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPolicyBindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationPolicyBindingPathTemplate.match =
@@ -2728,7 +2728,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       });
     });
 
-    describe('principalAccessBoundaryPolicy', () => {
+    describe('principalAccessBoundaryPolicy', async () => {
       const fakePath = '/rendered/path/principalAccessBoundaryPolicy';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2742,7 +2742,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.principalAccessBoundaryPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match =
@@ -2812,7 +2812,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
       });
     });
 
-    describe('projectLocationPolicyBinding', () => {
+    describe('projectLocationPolicyBinding', async () => {
       const fakePath = '/rendered/path/projectLocationPolicyBinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -2826,7 +2826,7 @@ describe('v3.PrincipalAccessBoundaryPoliciesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationPolicyBindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationPolicyBindingPathTemplate.match =

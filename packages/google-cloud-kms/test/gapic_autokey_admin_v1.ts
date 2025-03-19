@@ -212,7 +212,9 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.autokeyAdminStub);
       client.close().then(() => {
         done();
@@ -271,7 +273,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
       );
@@ -304,7 +306,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
       );
@@ -352,7 +354,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
       );
@@ -384,7 +386,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateAutokeyConfigRequest()
       );
@@ -406,7 +408,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
       );
@@ -437,7 +439,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
       );
@@ -484,7 +486,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
       );
@@ -515,7 +517,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetAutokeyConfigRequest()
       );
@@ -536,7 +538,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
@@ -568,7 +570,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
@@ -615,7 +617,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
@@ -649,7 +651,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ShowEffectiveAutokeyConfigRequest()
       );
@@ -672,7 +674,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -702,7 +704,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -746,7 +748,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -778,7 +780,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -808,7 +810,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -852,7 +854,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -917,7 +919,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -996,7 +998,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1026,7 +1028,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1070,7 +1072,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1105,7 +1107,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1153,7 +1155,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1190,7 +1192,7 @@ describe('v1.AutokeyAdminClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('autokeyConfig', () => {
+    describe('autokeyConfig', async () => {
       const fakePath = '/rendered/path/autokeyConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -1199,7 +1201,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autokeyConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1228,7 +1230,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -1240,7 +1242,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1304,7 +1306,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -1317,7 +1319,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1396,7 +1398,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('ekmConfig', () => {
+    describe('ekmConfig', async () => {
       const fakePath = '/rendered/path/ekmConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -1406,7 +1408,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1445,7 +1447,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('ekmConnection', () => {
+    describe('ekmConnection', async () => {
       const fakePath = '/rendered/path/ekmConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -1456,7 +1458,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1509,7 +1511,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('importJob', () => {
+    describe('importJob', async () => {
       const fakePath = '/rendered/path/importJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -1521,7 +1523,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.importJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1585,7 +1587,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('keyHandle', () => {
+    describe('keyHandle', async () => {
       const fakePath = '/rendered/path/keyHandle';
       const expectedParameters = {
         project: 'projectValue',
@@ -1596,7 +1598,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyHandlePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1649,7 +1651,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('keyRing', () => {
+    describe('keyRing', async () => {
       const fakePath = '/rendered/path/keyRing';
       const expectedParameters = {
         project: 'projectValue',
@@ -1660,7 +1662,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyRingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1713,7 +1715,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1722,7 +1724,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1751,7 +1753,7 @@ describe('v1.AutokeyAdminClient', () => {
       });
     });
 
-    describe('publicKey', () => {
+    describe('publicKey', async () => {
       const fakePath = '/rendered/path/publicKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -1764,7 +1766,7 @@ describe('v1.AutokeyAdminClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.publicKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

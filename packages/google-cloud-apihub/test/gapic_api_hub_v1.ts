@@ -263,7 +263,9 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.apiHubStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateApiRequest()
       );
@@ -353,7 +355,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateApiRequest()
       );
@@ -400,7 +402,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateApiRequest()
       );
@@ -428,7 +430,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateApiRequest()
       );
@@ -449,7 +451,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiRequest()
       );
@@ -527,7 +529,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiRequest()
       );
@@ -555,7 +557,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiRequest()
       );
@@ -576,7 +578,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateApiRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateApiRequest()
       );
@@ -656,7 +658,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateApiRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateApiRequest()
       );
@@ -707,7 +709,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteApiRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteApiRequest()
       );
@@ -785,7 +787,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteApiRequest()
       );
@@ -813,7 +815,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteApiRequest()
       );
@@ -834,7 +836,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateVersionRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateVersionRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateVersionRequest()
       );
@@ -943,7 +945,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateVersionRequest()
       );
@@ -964,7 +966,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetVersionRequest()
       );
@@ -995,7 +997,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetVersionRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetVersionRequest()
       );
@@ -1073,7 +1075,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetVersionRequest()
       );
@@ -1094,7 +1096,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateVersionRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateVersionRequest()
       );
@@ -1174,7 +1176,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateVersionRequest()
       );
@@ -1206,7 +1208,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateVersionRequest()
       );
@@ -1228,7 +1230,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteVersionRequest()
       );
@@ -1259,7 +1261,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteVersionRequest()
       );
@@ -1306,7 +1308,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteVersionRequest()
       );
@@ -1337,7 +1339,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteVersionRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateSpecRequest()
       );
@@ -1389,7 +1391,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateSpecRequest()
       );
@@ -1436,7 +1438,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateSpecRequest()
       );
@@ -1467,7 +1469,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateSpecRequest()
       );
@@ -1488,7 +1490,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecRequest()
       );
@@ -1566,7 +1568,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecRequest()
       );
@@ -1615,7 +1617,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecContentsRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecContentsRequest()
       );
@@ -1693,7 +1695,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecContentsRequest()
       );
@@ -1724,7 +1726,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetSpecContentsRequest()
       );
@@ -1745,7 +1747,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateSpecRequest()
       );
@@ -1777,7 +1779,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateSpecRequest()
       );
@@ -1825,7 +1827,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateSpecRequest()
       );
@@ -1857,7 +1859,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateSpecRequest()
       );
@@ -1879,7 +1881,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteSpecRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteSpecRequest()
       );
@@ -1957,7 +1959,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteSpecRequest()
       );
@@ -1988,7 +1990,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteSpecRequest()
       );
@@ -2009,7 +2011,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiOperationRequest()
       );
@@ -2040,7 +2042,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiOperationRequest()
       );
@@ -2087,7 +2089,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiOperationRequest()
       );
@@ -2118,7 +2120,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetApiOperationRequest()
       );
@@ -2139,7 +2141,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDefinitionRequest()
       );
@@ -2170,7 +2172,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDefinitionRequest()
       );
@@ -2217,7 +2219,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDefinitionRequest()
       );
@@ -2248,7 +2250,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDefinitionRequest()
       );
@@ -2269,7 +2271,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDeploymentRequest()
       );
@@ -2300,7 +2302,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDeploymentRequest()
       );
@@ -2347,7 +2349,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDeploymentRequest()
       );
@@ -2378,7 +2380,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDeploymentRequest()
       );
@@ -2399,7 +2401,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDeploymentRequest()
       );
@@ -2430,7 +2432,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDeploymentRequest()
       );
@@ -2477,7 +2479,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDeploymentRequest()
       );
@@ -2508,7 +2510,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDeploymentRequest()
       );
@@ -2529,7 +2531,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDeploymentRequest()
       );
@@ -2561,7 +2563,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDeploymentRequest()
       );
@@ -2609,7 +2611,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDeploymentRequest()
       );
@@ -2641,7 +2643,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDeploymentRequest()
       );
@@ -2663,7 +2665,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDeploymentRequest()
       );
@@ -2694,7 +2696,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDeploymentRequest()
       );
@@ -2741,7 +2743,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDeploymentRequest()
       );
@@ -2772,7 +2774,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDeploymentRequest()
       );
@@ -2793,7 +2795,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateAttributeRequest()
       );
@@ -2824,7 +2826,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateAttributeRequest()
       );
@@ -2871,7 +2873,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateAttributeRequest()
       );
@@ -2902,7 +2904,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateAttributeRequest()
       );
@@ -2923,7 +2925,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetAttributeRequest()
       );
@@ -2954,7 +2956,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetAttributeRequest()
       );
@@ -3001,7 +3003,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetAttributeRequest()
       );
@@ -3032,7 +3034,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetAttributeRequest()
       );
@@ -3053,7 +3055,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateAttributeRequest()
       );
@@ -3085,7 +3087,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateAttributeRequest()
       );
@@ -3133,7 +3135,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateAttributeRequest()
       );
@@ -3165,7 +3167,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateAttributeRequest()
       );
@@ -3187,7 +3189,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteAttributeRequest()
       );
@@ -3218,7 +3220,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteAttributeRequest()
       );
@@ -3265,7 +3267,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteAttributeRequest()
       );
@@ -3296,7 +3298,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteAttributeRequest()
       );
@@ -3317,7 +3319,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateExternalApiRequest()
       );
@@ -3348,7 +3350,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateExternalApiRequest()
       );
@@ -3395,7 +3397,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateExternalApiRequest()
       );
@@ -3426,7 +3428,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateExternalApiRequest()
       );
@@ -3447,7 +3449,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetExternalApiRequest()
       );
@@ -3478,7 +3480,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetExternalApiRequest()
       );
@@ -3525,7 +3527,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetExternalApiRequest()
       );
@@ -3556,7 +3558,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetExternalApiRequest()
       );
@@ -3577,7 +3579,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateExternalApiRequest()
       );
@@ -3609,7 +3611,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateExternalApiRequest()
       );
@@ -3657,7 +3659,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateExternalApiRequest()
       );
@@ -3689,7 +3691,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateExternalApiRequest()
       );
@@ -3711,7 +3713,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteExternalApiRequest()
       );
@@ -3742,7 +3744,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteExternalApiRequest()
       );
@@ -3789,7 +3791,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteExternalApiRequest()
       );
@@ -3820,7 +3822,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteExternalApiRequest()
       );
@@ -3841,7 +3843,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -3874,7 +3876,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -3923,7 +3925,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -3951,7 +3953,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -4002,7 +4004,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -4050,7 +4052,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -4092,7 +4094,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApisRequest()
       );
@@ -4135,7 +4137,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4168,7 +4170,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4217,7 +4219,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4248,7 +4250,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4299,7 +4301,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4347,7 +4349,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4390,7 +4392,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListVersionsRequest()
       );
@@ -4432,7 +4434,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4465,7 +4467,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4514,7 +4516,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4542,7 +4544,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4593,7 +4595,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4641,7 +4643,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4683,7 +4685,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListSpecsRequest()
       );
@@ -4726,7 +4728,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -4759,7 +4761,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -4808,7 +4810,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -4839,7 +4841,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -4893,7 +4895,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -4942,7 +4944,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -4985,7 +4987,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListApiOperationsRequest()
       );
@@ -5027,7 +5029,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5060,7 +5062,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5109,7 +5111,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5140,7 +5142,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5194,7 +5196,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5243,7 +5245,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5286,7 +5288,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDeploymentsRequest()
       );
@@ -5328,7 +5330,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5361,7 +5363,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5410,7 +5412,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5441,7 +5443,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5495,7 +5497,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5544,7 +5546,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5587,7 +5589,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListAttributesRequest()
       );
@@ -5629,7 +5631,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5662,7 +5664,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5711,7 +5713,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5742,7 +5744,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5796,7 +5798,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5845,7 +5847,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5888,7 +5890,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.SearchResourcesRequest()
       );
@@ -5930,7 +5932,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -5963,7 +5965,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -6012,7 +6014,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -6043,7 +6045,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -6097,7 +6099,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -6146,7 +6148,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -6189,7 +6191,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListExternalApisRequest()
       );
@@ -6230,7 +6232,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6260,7 +6262,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6304,7 +6306,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6339,7 +6341,7 @@ describe('v1.ApiHubClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6387,7 +6389,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6424,7 +6426,7 @@ describe('v1.ApiHubClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('api', () => {
+    describe('api', async () => {
       const fakePath = '/rendered/path/api';
       const expectedParameters = {
         project: 'projectValue',
@@ -6435,7 +6437,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6488,7 +6490,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('apiHubInstance', () => {
+    describe('apiHubInstance', async () => {
       const fakePath = '/rendered/path/apiHubInstance';
       const expectedParameters = {
         project: 'projectValue',
@@ -6499,7 +6501,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiHubInstancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6553,7 +6555,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('apiOperation', () => {
+    describe('apiOperation', async () => {
       const fakePath = '/rendered/path/apiOperation';
       const expectedParameters = {
         project: 'projectValue',
@@ -6566,7 +6568,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiOperationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6641,7 +6643,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('attribute', () => {
+    describe('attribute', async () => {
       const fakePath = '/rendered/path/attribute';
       const expectedParameters = {
         project: 'projectValue',
@@ -6652,7 +6654,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attributePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6705,7 +6707,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('definition', () => {
+    describe('definition', async () => {
       const fakePath = '/rendered/path/definition';
       const expectedParameters = {
         project: 'projectValue',
@@ -6718,7 +6720,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.definitionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6793,7 +6795,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('dependency', () => {
+    describe('dependency', async () => {
       const fakePath = '/rendered/path/dependency';
       const expectedParameters = {
         project: 'projectValue',
@@ -6804,7 +6806,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dependencyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6857,7 +6859,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -6868,7 +6870,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6921,7 +6923,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('externalApi', () => {
+    describe('externalApi', async () => {
       const fakePath = '/rendered/path/externalApi';
       const expectedParameters = {
         project: 'projectValue',
@@ -6932,7 +6934,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalApiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6985,7 +6987,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('hostProjectRegistration', () => {
+    describe('hostProjectRegistration', async () => {
       const fakePath = '/rendered/path/hostProjectRegistration';
       const expectedParameters = {
         project: 'projectValue',
@@ -6996,7 +6998,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hostProjectRegistrationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7066,7 +7068,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -7076,7 +7078,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7115,7 +7117,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('plugin', () => {
+    describe('plugin', async () => {
       const fakePath = '/rendered/path/plugin';
       const expectedParameters = {
         project: 'projectValue',
@@ -7126,7 +7128,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pluginPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7179,7 +7181,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7188,7 +7190,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7217,7 +7219,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('runtimeProjectAttachment', () => {
+    describe('runtimeProjectAttachment', async () => {
       const fakePath = '/rendered/path/runtimeProjectAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -7228,7 +7230,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.runtimeProjectAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7298,7 +7300,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('spec', () => {
+    describe('spec', async () => {
       const fakePath = '/rendered/path/spec';
       const expectedParameters = {
         project: 'projectValue',
@@ -7311,7 +7313,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.specPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7386,7 +7388,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('styleGuide', () => {
+    describe('styleGuide', async () => {
       const fakePath = '/rendered/path/styleGuide';
       const expectedParameters = {
         project: 'projectValue',
@@ -7397,7 +7399,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.styleGuidePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7450,7 +7452,7 @@ describe('v1.ApiHubClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -7462,7 +7464,7 @@ describe('v1.ApiHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

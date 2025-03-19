@@ -187,7 +187,9 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.placesStub);
       client.close().then(() => {
         done();
@@ -246,7 +248,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchNearbyRequest()
       );
@@ -263,7 +265,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchNearbyRequest()
       );
@@ -296,7 +298,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchNearbyRequest()
       );
@@ -313,7 +315,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchNearbyRequest()
       );
@@ -329,7 +331,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchTextRequest()
       );
@@ -346,7 +348,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchTextRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchTextRequest()
       );
@@ -396,7 +398,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.SearchTextRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPhotoMediaRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPhotoMediaRequest()
       );
@@ -490,7 +492,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPhotoMediaRequest()
       );
@@ -521,7 +523,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPhotoMediaRequest()
       );
@@ -542,7 +544,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPlaceRequest()
       );
@@ -573,7 +575,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPlaceRequest()
       );
@@ -620,7 +622,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPlaceRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.GetPlaceRequest()
       );
@@ -669,7 +671,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.AutocompletePlacesRequest()
       );
@@ -687,7 +689,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.AutocompletePlacesRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.AutocompletePlacesRequest()
       );
@@ -737,7 +739,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.places.v1.AutocompletePlacesRequest()
       );
@@ -748,7 +750,7 @@ describe('v1.PlacesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('photo', () => {
+    describe('photo', async () => {
       const fakePath = '/rendered/path/photo';
       const expectedParameters = {
         place: 'placeValue',
@@ -758,7 +760,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.photoPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -797,7 +799,7 @@ describe('v1.PlacesClient', () => {
       });
     });
 
-    describe('photoMedia', () => {
+    describe('photoMedia', async () => {
       const fakePath = '/rendered/path/photoMedia';
       const expectedParameters = {
         place_id: 'placeIdValue',
@@ -807,7 +809,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.photoMediaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -849,7 +851,7 @@ describe('v1.PlacesClient', () => {
       });
     });
 
-    describe('place', () => {
+    describe('place', async () => {
       const fakePath = '/rendered/path/place';
       const expectedParameters = {
         place_id: 'placeIdValue',
@@ -858,7 +860,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.placePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -887,7 +889,7 @@ describe('v1.PlacesClient', () => {
       });
     });
 
-    describe('review', () => {
+    describe('review', async () => {
       const fakePath = '/rendered/path/review';
       const expectedParameters = {
         place: 'placeValue',
@@ -897,7 +899,7 @@ describe('v1.PlacesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reviewPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

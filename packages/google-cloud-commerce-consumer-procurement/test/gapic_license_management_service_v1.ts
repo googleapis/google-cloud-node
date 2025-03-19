@@ -286,7 +286,9 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.licenseManagementServiceStub);
       client.close().then(() => {
         done();
@@ -349,7 +351,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -381,7 +383,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.GetLicensePoolRequest()
       );
@@ -483,7 +485,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -516,7 +518,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -565,7 +567,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -598,7 +600,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UpdateLicensePoolRequest()
       );
@@ -621,7 +623,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -701,7 +703,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -730,7 +732,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.AssignRequest()
       );
@@ -752,7 +754,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -832,7 +834,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -861,7 +863,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.UnassignRequest()
       );
@@ -883,7 +885,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -924,7 +926,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -982,7 +984,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1017,7 +1019,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1201,7 +1203,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.commerce.consumer.procurement.v1.EnumerateLicensedUsersRequest()
       );
@@ -1243,7 +1245,7 @@ describe('v1.LicenseManagementServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('licensePool', () => {
+    describe('licensePool', async () => {
       const fakePath = '/rendered/path/licensePool';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1254,7 +1256,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.licensePoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1296,7 +1298,7 @@ describe('v1.LicenseManagementServiceClient', () => {
       });
     });
 
-    describe('order', () => {
+    describe('order', async () => {
       const fakePath = '/rendered/path/order';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -1307,7 +1309,7 @@ describe('v1.LicenseManagementServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.orderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

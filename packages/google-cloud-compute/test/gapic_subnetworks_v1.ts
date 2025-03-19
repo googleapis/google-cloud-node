@@ -263,7 +263,9 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.subnetworksStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
@@ -363,7 +365,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
@@ -420,7 +422,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
@@ -458,7 +460,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
@@ -489,7 +491,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
@@ -530,7 +532,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
@@ -628,7 +630,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
@@ -659,7 +661,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
@@ -699,7 +701,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
@@ -791,7 +793,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
@@ -863,7 +865,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
@@ -992,7 +994,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
@@ -1028,7 +1030,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
@@ -1113,7 +1115,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
@@ -1139,7 +1141,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
@@ -1179,7 +1181,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
@@ -1234,7 +1236,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
@@ -1343,7 +1345,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
@@ -1400,7 +1402,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
@@ -1441,7 +1443,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
@@ -1472,7 +1474,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
@@ -1514,7 +1516,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
@@ -1571,7 +1573,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
@@ -1615,7 +1617,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
@@ -1649,7 +1651,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
@@ -1691,7 +1693,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
@@ -1748,7 +1750,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
@@ -1789,7 +1791,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
@@ -1820,7 +1822,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
       );
@@ -1880,7 +1882,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
       );
@@ -1924,7 +1926,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -1961,7 +1963,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -2013,7 +2015,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -2045,7 +2047,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -2104,7 +2106,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -2160,7 +2162,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -2207,7 +2209,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
@@ -2255,7 +2257,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
@@ -2294,7 +2296,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
@@ -2349,7 +2351,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
@@ -2380,7 +2382,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
@@ -2440,7 +2442,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
@@ -2491,7 +2493,7 @@ describe('v1.SubnetworksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
@@ -2540,7 +2542,7 @@ describe('v1.SubnetworksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );

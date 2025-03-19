@@ -738,7 +738,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAuthorizationPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -864,7 +866,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServerTlsPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -990,7 +994,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getClientTlsPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1130,7 +1136,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1303,7 +1311,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         'authorization_policy.name': request.authorizationPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1471,7 +1481,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1646,7 +1658,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1820,7 +1834,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         'server_tls_policy.name': request.serverTlsPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1988,7 +2004,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2163,7 +2181,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2337,7 +2357,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         'client_tls_policy.name': request.clientTlsPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2505,7 +2527,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2672,7 +2696,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networksecurity.v1beta1.IListAuthorizationPoliciesRequest,
@@ -2742,7 +2768,9 @@ export class NetworkSecurityClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAuthorizationPolicies stream %j', request);
     return this.descriptors.page.listAuthorizationPolicies.createStream(
       this.innerApiCalls.listAuthorizationPolicies as GaxCall,
@@ -2794,7 +2822,9 @@ export class NetworkSecurityClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAuthorizationPolicies iterate %j', request);
     return this.descriptors.page.listAuthorizationPolicies.asyncIterate(
       this.innerApiCalls['listAuthorizationPolicies'] as GaxCall,
@@ -2900,7 +2930,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networksecurity.v1beta1.IListServerTlsPoliciesRequest,
@@ -2969,7 +3001,9 @@ export class NetworkSecurityClient {
       });
     const defaultCallSettings = this._defaults['listServerTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServerTlsPolicies stream %j', request);
     return this.descriptors.page.listServerTlsPolicies.createStream(
       this.innerApiCalls.listServerTlsPolicies as GaxCall,
@@ -3020,7 +3054,9 @@ export class NetworkSecurityClient {
       });
     const defaultCallSettings = this._defaults['listServerTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServerTlsPolicies iterate %j', request);
     return this.descriptors.page.listServerTlsPolicies.asyncIterate(
       this.innerApiCalls['listServerTlsPolicies'] as GaxCall,
@@ -3126,7 +3162,9 @@ export class NetworkSecurityClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networksecurity.v1beta1.IListClientTlsPoliciesRequest,
@@ -3195,7 +3233,9 @@ export class NetworkSecurityClient {
       });
     const defaultCallSettings = this._defaults['listClientTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClientTlsPolicies stream %j', request);
     return this.descriptors.page.listClientTlsPolicies.createStream(
       this.innerApiCalls.listClientTlsPolicies as GaxCall,
@@ -3246,7 +3286,9 @@ export class NetworkSecurityClient {
       });
     const defaultCallSettings = this._defaults['listClientTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClientTlsPolicies iterate %j', request);
     return this.descriptors.page.listClientTlsPolicies.asyncIterate(
       this.innerApiCalls['listClientTlsPolicies'] as GaxCall,
@@ -3564,7 +3606,7 @@ export class NetworkSecurityClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

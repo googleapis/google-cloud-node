@@ -522,7 +522,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -647,7 +649,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -789,7 +793,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -921,7 +927,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1046,7 +1054,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lockDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1178,7 +1188,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchAcl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1320,7 +1332,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setAcl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1537,7 +1551,9 @@ export class DocumentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.ISearchDocumentsRequest,
@@ -1692,7 +1708,9 @@ export class DocumentServiceClient {
       });
     const defaultCallSettings = this._defaults['searchDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDocuments stream %j', request);
     return this.descriptors.page.searchDocuments.createStream(
       this.innerApiCalls.searchDocuments as GaxCall,
@@ -1829,7 +1847,9 @@ export class DocumentServiceClient {
       });
     const defaultCallSettings = this._defaults['searchDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchDocuments iterate %j', request);
     return this.descriptors.page.searchDocuments.asyncIterate(
       this.innerApiCalls['searchDocuments'] as GaxCall,

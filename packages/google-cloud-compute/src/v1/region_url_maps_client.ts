@@ -483,7 +483,9 @@ export class RegionUrlMapsClient {
         region: request.region ?? '',
         url_map: request.urlMap ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -608,7 +610,9 @@ export class RegionUrlMapsClient {
         region: request.region ?? '',
         url_map: request.urlMap ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -736,7 +740,9 @@ export class RegionUrlMapsClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -876,7 +882,9 @@ export class RegionUrlMapsClient {
         region: request.region ?? '',
         url_map: request.urlMap ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1016,7 +1024,9 @@ export class RegionUrlMapsClient {
         region: request.region ?? '',
         url_map: request.urlMap ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1149,7 +1159,9 @@ export class RegionUrlMapsClient {
         region: request.region ?? '',
         url_map: request.urlMap ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('validate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1277,7 +1289,9 @@ export class RegionUrlMapsClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListRegionUrlMapsRequest,
@@ -1349,7 +1363,9 @@ export class RegionUrlMapsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1405,7 +1421,9 @@ export class RegionUrlMapsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

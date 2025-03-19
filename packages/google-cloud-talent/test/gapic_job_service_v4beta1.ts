@@ -284,7 +284,9 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.jobServiceStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
@@ -374,7 +376,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
@@ -421,7 +423,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
@@ -449,7 +451,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
@@ -470,7 +472,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
@@ -501,7 +503,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
@@ -548,7 +550,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
@@ -576,7 +578,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
@@ -597,7 +599,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
@@ -629,7 +631,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
@@ -677,7 +679,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
@@ -706,7 +708,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
@@ -728,7 +730,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
@@ -759,7 +761,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
@@ -806,7 +808,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
@@ -834,7 +836,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
@@ -855,7 +857,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
@@ -886,7 +888,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
@@ -933,7 +935,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
@@ -964,7 +966,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
@@ -985,7 +987,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1016,7 +1018,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1063,7 +1065,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1094,7 +1096,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1115,7 +1117,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1147,7 +1149,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1194,7 +1196,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1225,7 +1227,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
@@ -1246,7 +1248,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
@@ -1279,7 +1281,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
@@ -1333,7 +1335,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
@@ -1364,7 +1366,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
@@ -1397,7 +1399,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1419,7 +1421,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1440,7 +1442,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
@@ -1473,7 +1475,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
@@ -1527,7 +1529,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
@@ -1558,7 +1560,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
@@ -1591,7 +1593,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1613,7 +1615,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1634,7 +1636,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1667,7 +1669,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1716,7 +1718,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1744,7 +1746,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1798,7 +1800,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1849,7 +1851,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1891,7 +1893,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
@@ -1933,7 +1935,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2012,7 +2014,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2092,7 +2094,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2188,8 +2190,7 @@ describe('v4beta1.JobServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2208,7 +2209,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2217,8 +2218,7 @@ describe('v4beta1.JobServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2234,7 +2234,7 @@ describe('v4beta1.JobServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2243,7 +2243,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2272,7 +2272,7 @@ describe('v4beta1.JobServiceClient', () => {
       });
     });
 
-    describe('projectCompany', () => {
+    describe('projectCompany', async () => {
       const fakePath = '/rendered/path/projectCompany';
       const expectedParameters = {
         project: 'projectValue',
@@ -2282,7 +2282,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCompanyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2324,7 +2324,7 @@ describe('v4beta1.JobServiceClient', () => {
       });
     });
 
-    describe('projectJob', () => {
+    describe('projectJob', async () => {
       const fakePath = '/rendered/path/projectJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -2334,7 +2334,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2373,7 +2373,7 @@ describe('v4beta1.JobServiceClient', () => {
       });
     });
 
-    describe('projectTenantCompany', () => {
+    describe('projectTenantCompany', async () => {
       const fakePath = '/rendered/path/projectTenantCompany';
       const expectedParameters = {
         project: 'projectValue',
@@ -2384,7 +2384,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTenantCompanyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2451,7 +2451,7 @@ describe('v4beta1.JobServiceClient', () => {
       });
     });
 
-    describe('projectTenantJob', () => {
+    describe('projectTenantJob', async () => {
       const fakePath = '/rendered/path/projectTenantJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -2462,7 +2462,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTenantJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2518,7 +2518,7 @@ describe('v4beta1.JobServiceClient', () => {
       });
     });
 
-    describe('tenant', () => {
+    describe('tenant', async () => {
       const fakePath = '/rendered/path/tenant';
       const expectedParameters = {
         project: 'projectValue',
@@ -2528,7 +2528,7 @@ describe('v4beta1.JobServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tenantPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

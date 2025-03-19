@@ -252,7 +252,9 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.tenantServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
@@ -342,7 +344,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
@@ -389,7 +391,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
@@ -420,7 +422,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
@@ -441,7 +443,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
@@ -472,7 +474,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
@@ -519,7 +521,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
@@ -547,7 +549,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
@@ -568,7 +570,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
@@ -600,7 +602,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
@@ -648,7 +650,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
@@ -680,7 +682,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
@@ -702,7 +704,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
@@ -733,7 +735,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
@@ -780,7 +782,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
@@ -811,7 +813,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
@@ -832,7 +834,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -865,7 +867,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -914,7 +916,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -945,7 +947,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -996,7 +998,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -1044,7 +1046,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v4.TenantServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('company', () => {
+    describe('company', async () => {
       const fakePath = '/rendered/path/company';
       const expectedParameters = {
         project: 'projectValue',
@@ -1137,7 +1139,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.companyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1190,7 +1192,7 @@ describe('v4.TenantServiceClient', () => {
       });
     });
 
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -1201,7 +1203,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1254,7 +1256,7 @@ describe('v4.TenantServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1263,7 +1265,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1292,7 +1294,7 @@ describe('v4.TenantServiceClient', () => {
       });
     });
 
-    describe('tenant', () => {
+    describe('tenant', async () => {
       const fakePath = '/rendered/path/tenant';
       const expectedParameters = {
         project: 'projectValue',
@@ -1302,7 +1304,7 @@ describe('v4.TenantServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tenantPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

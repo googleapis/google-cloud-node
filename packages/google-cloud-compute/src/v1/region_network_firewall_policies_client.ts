@@ -499,7 +499,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addAssociation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -643,7 +645,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -783,7 +787,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cloneRules request %j', request);
     const wrappedCallback:
       | Callback<
@@ -921,7 +927,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1058,7 +1066,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1191,7 +1201,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAssociation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1321,7 +1333,9 @@ export class RegionNetworkFirewallPoliciesClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEffectiveFirewalls request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1454,7 +1468,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1587,7 +1603,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1718,7 +1736,9 @@ export class RegionNetworkFirewallPoliciesClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1858,7 +1878,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2000,7 +2022,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patchRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2140,7 +2164,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeAssociation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2280,7 +2306,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         firewall_policy: request.firewallPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2419,7 +2447,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2552,7 +2582,9 @@ export class RegionNetworkFirewallPoliciesClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2680,7 +2712,9 @@ export class RegionNetworkFirewallPoliciesClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListRegionNetworkFirewallPoliciesRequest,
@@ -2752,7 +2786,9 @@ export class RegionNetworkFirewallPoliciesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -2808,7 +2844,9 @@ export class RegionNetworkFirewallPoliciesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

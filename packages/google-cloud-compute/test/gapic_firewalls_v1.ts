@@ -263,7 +263,9 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.firewallsStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
@@ -410,7 +412,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
@@ -504,7 +506,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
@@ -643,7 +645,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
@@ -718,7 +720,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
@@ -774,7 +776,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
@@ -824,7 +826,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
@@ -856,7 +858,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
@@ -882,7 +884,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
@@ -918,7 +920,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
@@ -970,7 +972,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
@@ -1003,7 +1005,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1.FirewallsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
@@ -1061,7 +1063,7 @@ describe('v1.FirewallsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
@@ -1108,7 +1110,7 @@ describe('v1.FirewallsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1.FirewallsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
@@ -1189,7 +1191,7 @@ describe('v1.FirewallsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
@@ -1240,7 +1242,7 @@ describe('v1.FirewallsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
@@ -1282,7 +1284,7 @@ describe('v1.FirewallsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
