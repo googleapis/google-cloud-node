@@ -640,7 +640,9 @@ export class RankServiceClient {
       this._gaxModule.routingHeader.fromParams({
         ranking_config: request.rankingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rank request %j', request);
     const wrappedCallback:
       | Callback<

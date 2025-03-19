@@ -926,7 +926,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeliveryPipeline request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1057,7 +1059,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('rollbackTarget request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1166,7 +1170,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTarget request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1281,7 +1287,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomTargetType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1390,7 +1398,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRelease request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1499,7 +1509,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('abandonRelease request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1610,7 +1622,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeployPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1726,7 +1740,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('approveRollout request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1842,7 +1858,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('advanceRollout request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1956,7 +1974,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelRollout request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2065,7 +2085,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRollout request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2179,7 +2201,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         rollout: request.rollout ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('ignoreJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2293,7 +2317,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         rollout: request.rollout ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('retryJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2400,7 +2426,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJobRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2512,7 +2540,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('terminateJobRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2620,7 +2650,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2729,7 +2761,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutomation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2840,7 +2874,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutomationRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2960,7 +2996,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelAutomationRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3111,7 +3149,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3304,7 +3344,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         'delivery_pipeline.name': request.deliveryPipeline!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3500,7 +3542,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3690,7 +3734,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3883,7 +3929,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         'target.name': request.target!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4075,7 +4123,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4264,7 +4314,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4457,7 +4509,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_target_type.name': request.customTargetType!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4649,7 +4703,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4842,7 +4898,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5031,7 +5089,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5224,7 +5284,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         'deploy_policy.name': request.deployPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5416,7 +5478,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5612,7 +5676,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5802,7 +5868,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5995,7 +6063,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         'automation.name': request.automation!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6188,7 +6258,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6363,7 +6435,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListDeliveryPipelinesRequest,
@@ -6441,7 +6515,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listDeliveryPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeliveryPipelines stream %j', request);
     return this.descriptors.page.listDeliveryPipelines.createStream(
       this.innerApiCalls.listDeliveryPipelines as GaxCall,
@@ -6501,7 +6577,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listDeliveryPipelines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeliveryPipelines iterate %j', request);
     return this.descriptors.page.listDeliveryPipelines.asyncIterate(
       this.innerApiCalls['listDeliveryPipelines'] as GaxCall,
@@ -6609,7 +6687,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListTargetsRequest,
@@ -6686,7 +6766,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listTargets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTargets stream %j', request);
     return this.descriptors.page.listTargets.createStream(
       this.innerApiCalls.listTargets as GaxCall,
@@ -6747,7 +6829,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listTargets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTargets iterate %j', request);
     return this.descriptors.page.listTargets.asyncIterate(
       this.innerApiCalls['listTargets'] as GaxCall,
@@ -6863,7 +6947,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListCustomTargetTypesRequest,
@@ -6942,7 +7028,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomTargetTypes stream %j', request);
     return this.descriptors.page.listCustomTargetTypes.createStream(
       this.innerApiCalls.listCustomTargetTypes as GaxCall,
@@ -7003,7 +7091,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listCustomTargetTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomTargetTypes iterate %j', request);
     return this.descriptors.page.listCustomTargetTypes.asyncIterate(
       this.innerApiCalls['listCustomTargetTypes'] as GaxCall,
@@ -7113,7 +7203,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListReleasesRequest,
@@ -7192,7 +7284,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReleases stream %j', request);
     return this.descriptors.page.listReleases.createStream(
       this.innerApiCalls.listReleases as GaxCall,
@@ -7253,7 +7347,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReleases iterate %j', request);
     return this.descriptors.page.listReleases.asyncIterate(
       this.innerApiCalls['listReleases'] as GaxCall,
@@ -7368,7 +7464,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListDeployPoliciesRequest,
@@ -7446,7 +7544,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listDeployPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployPolicies stream %j', request);
     return this.descriptors.page.listDeployPolicies.createStream(
       this.innerApiCalls.listDeployPolicies as GaxCall,
@@ -7506,7 +7606,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listDeployPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployPolicies iterate %j', request);
     return this.descriptors.page.listDeployPolicies.asyncIterate(
       this.innerApiCalls['listDeployPolicies'] as GaxCall,
@@ -7615,7 +7717,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListRolloutsRequest,
@@ -7693,7 +7797,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRollouts stream %j', request);
     return this.descriptors.page.listRollouts.createStream(
       this.innerApiCalls.listRollouts as GaxCall,
@@ -7753,7 +7859,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRollouts iterate %j', request);
     return this.descriptors.page.listRollouts.asyncIterate(
       this.innerApiCalls['listRollouts'] as GaxCall,
@@ -7860,7 +7968,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListJobRunsRequest,
@@ -7936,7 +8046,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listJobRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobRuns stream %j', request);
     return this.descriptors.page.listJobRuns.createStream(
       this.innerApiCalls.listJobRuns as GaxCall,
@@ -7996,7 +8108,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listJobRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobRuns iterate %j', request);
     return this.descriptors.page.listJobRuns.asyncIterate(
       this.innerApiCalls['listJobRuns'] as GaxCall,
@@ -8106,7 +8220,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListAutomationsRequest,
@@ -8185,7 +8301,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listAutomations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutomations stream %j', request);
     return this.descriptors.page.listAutomations.createStream(
       this.innerApiCalls.listAutomations as GaxCall,
@@ -8246,7 +8364,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listAutomations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutomations iterate %j', request);
     return this.descriptors.page.listAutomations.asyncIterate(
       this.innerApiCalls['listAutomations'] as GaxCall,
@@ -8362,7 +8482,9 @@ export class CloudDeployClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.deploy.v1.IListAutomationRunsRequest,
@@ -8441,7 +8563,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listAutomationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutomationRuns stream %j', request);
     return this.descriptors.page.listAutomationRuns.createStream(
       this.innerApiCalls.listAutomationRuns as GaxCall,
@@ -8502,7 +8626,9 @@ export class CloudDeployClient {
       });
     const defaultCallSettings = this._defaults['listAutomationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAutomationRuns iterate %j', request);
     return this.descriptors.page.listAutomationRuns.asyncIterate(
       this.innerApiCalls['listAutomationRuns'] as GaxCall,
@@ -8820,7 +8946,7 @@ export class CloudDeployClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

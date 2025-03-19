@@ -274,7 +274,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.recaptchaEnterpriseServiceStub);
       client.close().then(() => {
         done();
@@ -345,7 +347,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -463,7 +465,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -522,7 +524,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -606,7 +608,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
@@ -630,7 +632,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -664,7 +666,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -714,7 +716,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -745,7 +747,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -804,7 +806,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -854,7 +856,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -891,7 +893,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest()
       );
@@ -918,7 +920,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -952,7 +954,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
@@ -1057,7 +1059,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1092,7 +1094,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1143,7 +1145,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
@@ -1200,7 +1202,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1234,7 +1236,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1284,7 +1286,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1315,7 +1317,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1373,7 +1375,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1423,7 +1425,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1457,7 +1459,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
@@ -1481,7 +1483,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1515,7 +1517,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1565,7 +1567,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1599,7 +1601,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideRequest()
       );
@@ -1623,7 +1625,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1657,7 +1659,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1707,7 +1709,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1741,7 +1743,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
       );
@@ -1765,7 +1767,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1799,7 +1801,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1849,7 +1851,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1883,7 +1885,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
@@ -1907,7 +1909,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -1942,7 +1944,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -1992,7 +1994,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -2026,7 +2028,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest()
       );
@@ -2050,7 +2052,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2084,7 +2086,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2134,7 +2136,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2168,7 +2170,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest()
       );
@@ -2192,7 +2194,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2228,7 +2230,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2279,7 +2281,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2314,7 +2316,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest()
       );
@@ -2339,7 +2341,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2374,7 +2376,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2424,7 +2426,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2458,7 +2460,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest()
       );
@@ -2482,7 +2484,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2517,7 +2519,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2567,7 +2569,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2604,7 +2606,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ReorderFirewallPoliciesRequest()
       );
@@ -2631,7 +2633,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2673,7 +2675,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2731,7 +2733,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2762,7 +2764,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2825,7 +2827,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2879,7 +2881,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2930,7 +2932,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
@@ -2976,7 +2978,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3018,7 +3020,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3078,7 +3080,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3112,7 +3114,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3178,7 +3180,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3233,7 +3235,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3286,7 +3288,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
       );
@@ -3332,7 +3334,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3375,7 +3377,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3435,7 +3437,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3469,7 +3471,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3535,7 +3537,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3590,7 +3592,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3643,7 +3645,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest()
       );
@@ -3689,7 +3691,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3732,7 +3734,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3792,7 +3794,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3829,7 +3831,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3901,7 +3903,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -3962,7 +3964,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -4019,7 +4021,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
@@ -4069,7 +4071,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4113,7 +4115,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4173,7 +4175,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4210,7 +4212,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4285,7 +4287,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4349,7 +4351,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4406,7 +4408,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
@@ -4456,7 +4458,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4500,7 +4502,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4560,7 +4562,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4595,7 +4597,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4670,7 +4672,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4734,7 +4736,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4792,7 +4794,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
@@ -4835,7 +4837,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('assessment', () => {
+    describe('assessment', async () => {
       const fakePath = '/rendered/path/assessment';
       const expectedParameters = {
         project: 'projectValue',
@@ -4848,7 +4850,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.assessmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4887,7 +4889,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('firewallPolicy', () => {
+    describe('firewallPolicy', async () => {
       const fakePath = '/rendered/path/firewallPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -4900,7 +4902,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.firewallPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4943,7 +4945,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('key', () => {
+    describe('key', async () => {
       const fakePath = '/rendered/path/key';
       const expectedParameters = {
         project: 'projectValue',
@@ -4956,7 +4958,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4995,7 +4997,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('metrics', () => {
+    describe('metrics', async () => {
       const fakePath = '/rendered/path/metrics';
       const expectedParameters = {
         project: 'projectValue',
@@ -5008,7 +5010,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.metricsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5047,7 +5049,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -5059,7 +5061,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5088,7 +5090,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('relatedAccountGroup', () => {
+    describe('relatedAccountGroup', async () => {
       const fakePath = '/rendered/path/relatedAccountGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -5101,7 +5103,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.relatedAccountGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5153,7 +5155,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       });
     });
 
-    describe('relatedAccountGroupMembership', () => {
+    describe('relatedAccountGroupMembership', async () => {
       const fakePath = '/rendered/path/relatedAccountGroupMembership';
       const expectedParameters = {
         project: 'projectValue',
@@ -5167,7 +5169,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.relatedAccountGroupMembershipPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.relatedAccountGroupMembershipPathTemplate.match =

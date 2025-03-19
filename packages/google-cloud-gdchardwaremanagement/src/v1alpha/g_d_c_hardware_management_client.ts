@@ -830,7 +830,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -956,7 +958,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSite request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1083,7 +1087,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHardwareGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1209,7 +1215,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getHardware request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1336,7 +1344,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getComment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1468,7 +1478,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('recordActionOnComment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1595,7 +1607,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChangeLogEntry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1721,7 +1735,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSku request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1847,7 +1863,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getZone request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1994,7 +2012,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2169,7 +2189,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'order.name': request.order!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2345,7 +2367,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2519,7 +2543,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2701,7 +2727,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2876,7 +2904,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'site.name': request.site!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3047,7 +3077,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3229,7 +3261,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3405,7 +3439,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'hardware_group.name': request.hardwareGroup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3577,7 +3613,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3756,7 +3794,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3931,7 +3971,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'hardware.name': request.hardware!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4102,7 +4144,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4284,7 +4328,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4466,7 +4512,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4641,7 +4689,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         'zone.name': request.zone!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4812,7 +4862,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4989,7 +5041,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5161,7 +5215,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListOrdersRequest,
@@ -5236,7 +5292,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
@@ -5293,7 +5351,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
@@ -5405,7 +5465,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListSitesRequest,
@@ -5480,7 +5542,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSites stream %j', request);
     return this.descriptors.page.listSites.createStream(
       this.innerApiCalls.listSites as GaxCall,
@@ -5537,7 +5601,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSites iterate %j', request);
     return this.descriptors.page.listSites.asyncIterate(
       this.innerApiCalls['listSites'] as GaxCall,
@@ -5645,7 +5711,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareGroupsRequest,
@@ -5716,7 +5784,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardwareGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHardwareGroups stream %j', request);
     return this.descriptors.page.listHardwareGroups.createStream(
       this.innerApiCalls.listHardwareGroups as GaxCall,
@@ -5769,7 +5839,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardwareGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHardwareGroups iterate %j', request);
     return this.descriptors.page.listHardwareGroups.asyncIterate(
       this.innerApiCalls['listHardwareGroups'] as GaxCall,
@@ -5881,7 +5953,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListHardwareRequest,
@@ -5956,7 +6030,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardware'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHardware stream %j', request);
     return this.descriptors.page.listHardware.createStream(
       this.innerApiCalls.listHardware as GaxCall,
@@ -6013,7 +6089,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listHardware'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listHardware iterate %j', request);
     return this.descriptors.page.listHardware.asyncIterate(
       this.innerApiCalls['listHardware'] as GaxCall,
@@ -6121,7 +6199,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListCommentsRequest,
@@ -6192,7 +6272,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listComments stream %j', request);
     return this.descriptors.page.listComments.createStream(
       this.innerApiCalls.listComments as GaxCall,
@@ -6245,7 +6327,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listComments iterate %j', request);
     return this.descriptors.page.listComments.asyncIterate(
       this.innerApiCalls['listComments'] as GaxCall,
@@ -6353,7 +6437,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListChangeLogEntriesRequest,
@@ -6424,7 +6510,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listChangeLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChangeLogEntries stream %j', request);
     return this.descriptors.page.listChangeLogEntries.createStream(
       this.innerApiCalls.listChangeLogEntries as GaxCall,
@@ -6477,7 +6565,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listChangeLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChangeLogEntries iterate %j', request);
     return this.descriptors.page.listChangeLogEntries.asyncIterate(
       this.innerApiCalls['listChangeLogEntries'] as GaxCall,
@@ -6589,7 +6679,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListSkusRequest,
@@ -6664,7 +6756,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSkus stream %j', request);
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as GaxCall,
@@ -6721,7 +6815,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSkus iterate %j', request);
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
@@ -6833,7 +6929,9 @@ export class GDCHardwareManagementClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gdchardwaremanagement.v1alpha.IListZonesRequest,
@@ -6908,7 +7006,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
@@ -6965,7 +7065,9 @@ export class GDCHardwareManagementClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
@@ -7145,7 +7247,7 @@ export class GDCHardwareManagementClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

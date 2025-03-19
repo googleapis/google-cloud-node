@@ -615,7 +615,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getExperiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -739,7 +741,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createExperiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -861,7 +865,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         'experiment.name': request.experiment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateExperiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -983,7 +989,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteExperiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1106,7 +1114,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startExperiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1228,7 +1238,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopExperiment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1359,7 +1371,9 @@ export class ExperimentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListExperimentsRequest,
@@ -1427,7 +1441,9 @@ export class ExperimentsClient {
       });
     const defaultCallSettings = this._defaults['listExperiments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listExperiments stream %j', request);
     return this.descriptors.page.listExperiments.createStream(
       this.innerApiCalls.listExperiments as GaxCall,
@@ -1477,7 +1493,9 @@ export class ExperimentsClient {
       });
     const defaultCallSettings = this._defaults['listExperiments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listExperiments iterate %j', request);
     return this.descriptors.page.listExperiments.asyncIterate(
       this.innerApiCalls['listExperiments'] as GaxCall,
@@ -1657,7 +1675,7 @@ export class ExperimentsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -546,7 +546,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAssessment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -691,7 +693,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('annotateAssessment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -813,7 +817,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -941,7 +947,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         key: request.key ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('retrieveLegacySecretKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1061,7 +1069,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1180,7 +1190,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'key.name': request.key!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1300,7 +1312,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1434,7 +1448,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('migrateKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1565,7 +1581,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addIpOverride request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1697,7 +1715,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeIpOverride request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1818,7 +1838,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMetrics request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1948,7 +1970,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFirewallPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2074,7 +2098,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFirewallPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2202,7 +2228,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'firewall_policy.name': request.firewallPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFirewallPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2328,7 +2356,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFirewallPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2457,7 +2487,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('reorderFirewallPolicies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2587,7 +2619,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest,
@@ -2655,7 +2689,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeys stream %j', request);
     return this.descriptors.page.listKeys.createStream(
       this.innerApiCalls.listKeys as GaxCall,
@@ -2705,7 +2741,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeys iterate %j', request);
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
@@ -2812,7 +2850,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
@@ -2882,7 +2922,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listIpOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIpOverrides stream %j', request);
     return this.descriptors.page.listIpOverrides.createStream(
       this.innerApiCalls.listIpOverrides as GaxCall,
@@ -2934,7 +2976,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listIpOverrides'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIpOverrides iterate %j', request);
     return this.descriptors.page.listIpOverrides.asyncIterate(
       this.innerApiCalls['listIpOverrides'] as GaxCall,
@@ -3039,7 +3083,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
@@ -3107,7 +3153,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirewallPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFirewallPolicies stream %j', request);
     return this.descriptors.page.listFirewallPolicies.createStream(
       this.innerApiCalls.listFirewallPolicies as GaxCall,
@@ -3157,7 +3205,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirewallPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFirewallPolicies iterate %j', request);
     return this.descriptors.page.listFirewallPolicies.asyncIterate(
       this.innerApiCalls['listFirewallPolicies'] as GaxCall,
@@ -3267,7 +3317,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest,
@@ -3340,7 +3392,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRelatedAccountGroups stream %j', request);
     return this.descriptors.page.listRelatedAccountGroups.createStream(
       this.innerApiCalls.listRelatedAccountGroups as GaxCall,
@@ -3395,7 +3449,9 @@ export class RecaptchaEnterpriseServiceClient {
       });
     const defaultCallSettings = this._defaults['listRelatedAccountGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRelatedAccountGroups iterate %j', request);
     return this.descriptors.page.listRelatedAccountGroups.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroups'] as GaxCall,
@@ -3505,7 +3561,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest,
@@ -3585,7 +3643,9 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['listRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRelatedAccountGroupMemberships stream %j', request);
     return this.descriptors.page.listRelatedAccountGroupMemberships.createStream(
       this.innerApiCalls.listRelatedAccountGroupMemberships as GaxCall,
@@ -3641,7 +3701,9 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['listRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRelatedAccountGroupMemberships iterate %j', request);
     return this.descriptors.page.listRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['listRelatedAccountGroupMemberships'] as GaxCall,
@@ -3764,7 +3826,9 @@ export class RecaptchaEnterpriseServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest,
@@ -3857,7 +3921,9 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['searchRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchRelatedAccountGroupMemberships stream %j', request);
     return this.descriptors.page.searchRelatedAccountGroupMemberships.createStream(
       this.innerApiCalls.searchRelatedAccountGroupMemberships as GaxCall,
@@ -3926,7 +3992,9 @@ export class RecaptchaEnterpriseServiceClient {
     const defaultCallSettings =
       this._defaults['searchRelatedAccountGroupMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchRelatedAccountGroupMemberships iterate %j', request);
     return this.descriptors.page.searchRelatedAccountGroupMemberships.asyncIterate(
       this.innerApiCalls['searchRelatedAccountGroupMemberships'] as GaxCall,

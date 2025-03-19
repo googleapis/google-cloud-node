@@ -314,7 +314,9 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.privilegedAccessManagerStub);
       client.close().then(() => {
         done();
@@ -377,7 +379,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
       );
@@ -410,7 +412,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
       );
@@ -458,7 +460,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
       );
@@ -493,7 +495,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CheckOnboardingStatusRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
       );
@@ -550,7 +552,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
       );
@@ -598,7 +600,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
       );
@@ -630,7 +632,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetEntitlementRequest()
       );
@@ -652,7 +654,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
       );
@@ -684,7 +686,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
       );
@@ -732,7 +734,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
       );
@@ -761,7 +763,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.GetGrantRequest()
       );
@@ -783,7 +785,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
       );
@@ -815,7 +817,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
       );
@@ -863,7 +865,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
       );
@@ -895,7 +897,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateGrantRequest()
       );
@@ -917,7 +919,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
       );
@@ -949,7 +951,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ApproveGrantRequest()
       );
@@ -1051,7 +1053,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
       );
@@ -1160,7 +1162,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DenyGrantRequest()
       );
@@ -1182,7 +1184,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
       );
@@ -1216,7 +1218,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
       );
@@ -1303,7 +1305,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.CreateEntitlementRequest()
       );
@@ -1337,7 +1339,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1360,7 +1362,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1382,7 +1384,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
       );
@@ -1471,7 +1473,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
       );
@@ -1503,7 +1505,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.DeleteEntitlementRequest()
       );
@@ -1537,7 +1539,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1560,7 +1562,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1582,7 +1584,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
       );
@@ -1617,7 +1619,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
       );
@@ -1673,7 +1675,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
       );
@@ -1706,7 +1708,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.UpdateEntitlementRequest()
       );
@@ -1741,7 +1743,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1764,7 +1766,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1786,7 +1788,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
       );
@@ -1819,7 +1821,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
       );
@@ -1874,7 +1876,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
       );
@@ -1906,7 +1908,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.RevokeGrantRequest()
       );
@@ -1940,7 +1942,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1963,7 +1965,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1982,7 +1984,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2022,7 +2024,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2080,7 +2082,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2112,7 +2114,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2176,7 +2178,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2229,7 +2231,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2280,7 +2282,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListEntitlementsRequest()
       );
@@ -2324,7 +2326,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2365,7 +2367,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2423,7 +2425,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2455,7 +2457,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2519,7 +2521,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2572,7 +2574,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2623,7 +2625,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchEntitlementsRequest()
       );
@@ -2667,7 +2669,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -2707,7 +2709,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -2765,7 +2767,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -2797,7 +2799,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -2859,7 +2861,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -2912,7 +2914,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -2963,7 +2965,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.ListGrantsRequest()
       );
@@ -3009,7 +3011,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3049,7 +3051,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3107,7 +3109,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3139,7 +3141,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3201,7 +3203,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3254,7 +3256,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3305,7 +3307,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privilegedaccessmanager.v1.SearchGrantsRequest()
       );
@@ -3348,7 +3350,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3379,7 +3381,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3424,7 +3426,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3460,7 +3462,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3509,7 +3511,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -3551,7 +3553,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -3633,7 +3635,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -3716,7 +3718,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -3815,8 +3817,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -3836,7 +3837,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -3845,8 +3846,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -3862,7 +3862,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationEntitlement', () => {
+    describe('folderLocationEntitlement', async () => {
       const fakePath = '/rendered/path/folderLocationEntitlement';
       const expectedParameters = {
         folder: 'folderValue',
@@ -3874,7 +3874,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationEntitlementPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3942,7 +3942,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('folderLocationEntitlementGrant', () => {
+    describe('folderLocationEntitlementGrant', async () => {
       const fakePath = '/rendered/path/folderLocationEntitlementGrant';
       const expectedParameters = {
         folder: 'folderValue',
@@ -3955,7 +3955,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationEntitlementGrantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationEntitlementGrantPathTemplate.match =
@@ -4038,7 +4038,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4049,7 +4049,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4088,7 +4088,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('organizationLocationEntitlement', () => {
+    describe('organizationLocationEntitlement', async () => {
       const fakePath = '/rendered/path/organizationLocationEntitlement';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -4100,7 +4100,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationEntitlementPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationEntitlementPathTemplate.match =
@@ -4170,7 +4170,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('organizationLocationEntitlementGrant', () => {
+    describe('organizationLocationEntitlementGrant', async () => {
       const fakePath = '/rendered/path/organizationLocationEntitlementGrant';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -4183,7 +4183,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationEntitlementGrantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationEntitlementGrantPathTemplate.match =
@@ -4277,7 +4277,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4287,7 +4287,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4316,7 +4316,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('projectLocationEntitlement', () => {
+    describe('projectLocationEntitlement', async () => {
       const fakePath = '/rendered/path/projectLocationEntitlement';
       const expectedParameters = {
         project: 'projectValue',
@@ -4328,7 +4328,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationEntitlementPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4396,7 +4396,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
       });
     });
 
-    describe('projectLocationEntitlementGrant', () => {
+    describe('projectLocationEntitlementGrant', async () => {
       const fakePath = '/rendered/path/projectLocationEntitlementGrant';
       const expectedParameters = {
         project: 'projectValue',
@@ -4409,7 +4409,7 @@ describe('v1.PrivilegedAccessManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationEntitlementGrantPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationEntitlementGrantPathTemplate.match =

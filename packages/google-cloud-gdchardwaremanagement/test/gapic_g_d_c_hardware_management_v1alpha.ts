@@ -305,7 +305,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.gDCHardwareManagementStub);
       client.close().then(() => {
         done();
@@ -368,7 +370,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
       );
@@ -400,7 +402,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
       );
@@ -448,7 +450,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
       );
@@ -477,7 +479,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetOrderRequest()
       );
@@ -499,7 +501,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
       );
@@ -531,7 +533,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
       );
@@ -579,7 +581,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
       );
@@ -608,7 +610,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSiteRequest()
       );
@@ -630,7 +632,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
       );
@@ -662,7 +664,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
       );
@@ -710,7 +712,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
       );
@@ -742,7 +744,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareGroupRequest()
       );
@@ -764,7 +766,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
       );
@@ -796,7 +798,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
       );
@@ -844,7 +846,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
       );
@@ -876,7 +878,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetHardwareRequest()
       );
@@ -898,7 +900,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
       );
@@ -930,7 +932,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
       );
@@ -978,7 +980,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetCommentRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
       );
@@ -1065,7 +1067,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
       );
@@ -1113,7 +1115,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
       );
@@ -1148,7 +1150,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest()
       );
@@ -1173,7 +1175,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
       );
@@ -1205,7 +1207,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
       );
@@ -1253,7 +1255,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
       );
@@ -1285,7 +1287,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetChangeLogEntryRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
       );
@@ -1387,7 +1389,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetSkuRequest()
       );
@@ -1438,7 +1440,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
       );
@@ -1518,7 +1520,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
       );
@@ -1547,7 +1549,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.GetZoneRequest()
       );
@@ -1569,7 +1571,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
       );
@@ -1657,7 +1659,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
       );
@@ -1689,7 +1691,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateOrderRequest()
       );
@@ -1723,7 +1725,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1746,7 +1748,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1765,7 +1767,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
       );
@@ -1799,7 +1801,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
       );
@@ -1855,7 +1857,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateOrderRequest()
       );
@@ -1923,7 +1925,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1946,7 +1948,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1965,7 +1967,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
       );
@@ -1998,7 +2000,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
       );
@@ -2053,7 +2055,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
       );
@@ -2085,7 +2087,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteOrderRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2142,7 +2144,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2161,7 +2163,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
       );
@@ -2194,7 +2196,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
       );
@@ -2249,7 +2251,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
       );
@@ -2281,7 +2283,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest()
       );
@@ -2315,7 +2317,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2338,7 +2340,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2357,7 +2359,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
       );
@@ -2390,7 +2392,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
       );
@@ -2445,7 +2447,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
       );
@@ -2477,7 +2479,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateSiteRequest()
       );
@@ -2511,7 +2513,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2534,7 +2536,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2553,7 +2555,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
       );
@@ -2587,7 +2589,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
       );
@@ -2643,7 +2645,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
       );
@@ -2676,7 +2678,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateSiteRequest()
       );
@@ -2711,7 +2713,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2734,7 +2736,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2753,7 +2755,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
       );
@@ -2786,7 +2788,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
       );
@@ -2841,7 +2843,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
       );
@@ -2873,7 +2875,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest()
       );
@@ -2907,7 +2909,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2930,7 +2932,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2949,7 +2951,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
       );
@@ -2983,7 +2985,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
       );
@@ -3038,7 +3040,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
       );
@@ -3070,7 +3072,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareGroupRequest()
       );
@@ -3104,7 +3106,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3127,7 +3129,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3149,7 +3151,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
       );
@@ -3184,7 +3186,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
       );
@@ -3240,7 +3242,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
       );
@@ -3273,7 +3275,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareGroupRequest()
       );
@@ -3308,7 +3310,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3331,7 +3333,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3353,7 +3355,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
       );
@@ -3387,7 +3389,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
       );
@@ -3442,7 +3444,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
       );
@@ -3474,7 +3476,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareGroupRequest()
       );
@@ -3508,7 +3510,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3531,7 +3533,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3553,7 +3555,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
       );
@@ -3587,7 +3589,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
       );
@@ -3642,7 +3644,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
       );
@@ -3674,7 +3676,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateHardwareRequest()
       );
@@ -3708,7 +3710,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3731,7 +3733,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3753,7 +3755,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
       );
@@ -3788,7 +3790,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
       );
@@ -3844,7 +3846,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
       );
@@ -3877,7 +3879,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateHardwareRequest()
       );
@@ -3912,7 +3914,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3935,7 +3937,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3957,7 +3959,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
       );
@@ -3991,7 +3993,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
       );
@@ -4046,7 +4048,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
       );
@@ -4078,7 +4080,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteHardwareRequest()
       );
@@ -4112,7 +4114,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4135,7 +4137,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4157,7 +4159,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
       );
@@ -4191,7 +4193,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
       );
@@ -4246,7 +4248,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
       );
@@ -4278,7 +4280,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateCommentRequest()
       );
@@ -4312,7 +4314,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4335,7 +4337,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4357,7 +4359,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
       );
@@ -4390,7 +4392,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
       );
@@ -4445,7 +4447,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
       );
@@ -4477,7 +4479,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.CreateZoneRequest()
       );
@@ -4511,7 +4513,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4534,7 +4536,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4553,7 +4555,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
       );
@@ -4587,7 +4589,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
       );
@@ -4643,7 +4645,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
       );
@@ -4676,7 +4678,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.UpdateZoneRequest()
       );
@@ -4711,7 +4713,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4734,7 +4736,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4753,7 +4755,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
       );
@@ -4786,7 +4788,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
       );
@@ -4841,7 +4843,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
       );
@@ -4873,7 +4875,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.DeleteZoneRequest()
       );
@@ -4907,7 +4909,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4930,7 +4932,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4949,7 +4951,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
       );
@@ -4983,7 +4985,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
       );
@@ -5038,7 +5040,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
       );
@@ -5070,7 +5072,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest()
       );
@@ -5104,7 +5106,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5127,7 +5129,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5149,7 +5151,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5189,7 +5191,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5247,7 +5249,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5279,7 +5281,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5343,7 +5345,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5398,7 +5400,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5449,7 +5451,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListOrdersRequest()
       );
@@ -5495,7 +5497,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5535,7 +5537,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5593,7 +5595,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5622,7 +5624,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5686,7 +5688,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5741,7 +5743,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5791,7 +5793,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSitesRequest()
       );
@@ -5836,7 +5838,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -5877,7 +5879,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -5935,7 +5937,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -5967,7 +5969,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -6031,7 +6033,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -6084,7 +6086,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -6135,7 +6137,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsRequest()
       );
@@ -6179,7 +6181,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6219,7 +6221,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6277,7 +6279,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6309,7 +6311,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6373,7 +6375,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6428,7 +6430,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6479,7 +6481,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListHardwareRequest()
       );
@@ -6523,7 +6525,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6563,7 +6565,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6621,7 +6623,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6653,7 +6655,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6717,7 +6719,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6772,7 +6774,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6823,7 +6825,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListCommentsRequest()
       );
@@ -6867,7 +6869,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -6908,7 +6910,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -6966,7 +6968,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -6998,7 +7000,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -7062,7 +7064,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -7115,7 +7117,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -7166,7 +7168,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesRequest()
       );
@@ -7210,7 +7212,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7250,7 +7252,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7308,7 +7310,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7337,7 +7339,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7399,7 +7401,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7452,7 +7454,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7502,7 +7504,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListSkusRequest()
       );
@@ -7547,7 +7549,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7587,7 +7589,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7645,7 +7647,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7674,7 +7676,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7738,7 +7740,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7793,7 +7795,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7843,7 +7845,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gdchardwaremanagement.v1alpha.ListZonesRequest()
       );
@@ -7887,7 +7889,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7918,7 +7920,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7963,7 +7965,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7999,7 +8001,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -8048,7 +8050,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -8090,7 +8092,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -8172,7 +8174,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -8255,7 +8257,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -8354,8 +8356,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -8375,7 +8376,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -8384,8 +8385,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -8401,7 +8401,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('changeLogEntry', () => {
+    describe('changeLogEntry', async () => {
       const fakePath = '/rendered/path/changeLogEntry';
       const expectedParameters = {
         project: 'projectValue',
@@ -8414,7 +8414,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.changeLogEntryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8479,7 +8479,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('comment', () => {
+    describe('comment', async () => {
       const fakePath = '/rendered/path/comment';
       const expectedParameters = {
         project: 'projectValue',
@@ -8492,7 +8492,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.commentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8556,7 +8556,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('hardware', () => {
+    describe('hardware', async () => {
       const fakePath = '/rendered/path/hardware';
       const expectedParameters = {
         project: 'projectValue',
@@ -8568,7 +8568,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hardwarePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8621,7 +8621,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('hardwareGroup', () => {
+    describe('hardwareGroup', async () => {
       const fakePath = '/rendered/path/hardwareGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -8634,7 +8634,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hardwareGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8698,7 +8698,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -8709,7 +8709,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8748,7 +8748,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('order', () => {
+    describe('order', async () => {
       const fakePath = '/rendered/path/order';
       const expectedParameters = {
         project: 'projectValue',
@@ -8760,7 +8760,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.orderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8813,7 +8813,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -8823,7 +8823,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8852,7 +8852,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('site', () => {
+    describe('site', async () => {
       const fakePath = '/rendered/path/site';
       const expectedParameters = {
         project: 'projectValue',
@@ -8864,7 +8864,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sitePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8917,7 +8917,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('sku', () => {
+    describe('sku', async () => {
       const fakePath = '/rendered/path/sku';
       const expectedParameters = {
         project: 'projectValue',
@@ -8929,7 +8929,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.skuPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8982,7 +8982,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       });
     });
 
-    describe('zone', () => {
+    describe('zone', async () => {
       const fakePath = '/rendered/path/zone';
       const expectedParameters = {
         project: 'projectValue',
@@ -8994,7 +8994,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.zonePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

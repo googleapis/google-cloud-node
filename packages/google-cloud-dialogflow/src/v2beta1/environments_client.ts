@@ -629,7 +629,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -761,7 +763,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -904,7 +908,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         'environment.name': request.environment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1033,7 +1039,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1164,7 +1172,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListEnvironmentsRequest,
@@ -1233,7 +1243,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments stream %j', request);
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as GaxCall,
@@ -1284,7 +1296,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments iterate %j', request);
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
@@ -1391,7 +1405,9 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IGetEnvironmentHistoryRequest,
@@ -1461,7 +1477,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['getEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnvironmentHistory stream %j', request);
     return this.descriptors.page.getEnvironmentHistory.createStream(
       this.innerApiCalls.getEnvironmentHistory as GaxCall,
@@ -1513,7 +1531,9 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['getEnvironmentHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnvironmentHistory iterate %j', request);
     return this.descriptors.page.getEnvironmentHistory.asyncIterate(
       this.innerApiCalls['getEnvironmentHistory'] as GaxCall,

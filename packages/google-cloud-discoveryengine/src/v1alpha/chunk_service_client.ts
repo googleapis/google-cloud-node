@@ -625,7 +625,9 @@ export class ChunkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -771,7 +773,9 @@ export class ChunkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1alpha.IListChunksRequest,
@@ -855,7 +859,9 @@ export class ChunkServiceClient {
       });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
@@ -921,7 +927,9 @@ export class ChunkServiceClient {
       });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,

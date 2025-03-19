@@ -624,7 +624,9 @@ export class SipTrunksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSipTrunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -745,7 +747,9 @@ export class SipTrunksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSipTrunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -866,7 +870,9 @@ export class SipTrunksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSipTrunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -988,7 +994,9 @@ export class SipTrunksClient {
       this._gaxModule.routingHeader.fromParams({
         'sip_trunk.name': request.sipTrunk!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSipTrunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1117,7 +1125,9 @@ export class SipTrunksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListSipTrunksRequest,
@@ -1184,7 +1194,9 @@ export class SipTrunksClient {
       });
     const defaultCallSettings = this._defaults['listSipTrunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSipTrunks stream %j', request);
     return this.descriptors.page.listSipTrunks.createStream(
       this.innerApiCalls.listSipTrunks as GaxCall,
@@ -1233,7 +1245,9 @@ export class SipTrunksClient {
       });
     const defaultCallSettings = this._defaults['listSipTrunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSipTrunks iterate %j', request);
     return this.descriptors.page.listSipTrunks.asyncIterate(
       this.innerApiCalls['listSipTrunks'] as GaxCall,

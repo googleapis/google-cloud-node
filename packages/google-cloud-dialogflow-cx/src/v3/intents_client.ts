@@ -646,7 +646,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -779,7 +781,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -912,7 +916,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         'intent.name': request.intent!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1034,7 +1040,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1187,7 +1195,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1384,7 +1394,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1561,7 +1573,9 @@ export class IntentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListIntentsRequest,
@@ -1641,7 +1655,9 @@ export class IntentsClient {
       });
     const defaultCallSettings = this._defaults['listIntents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIntents stream %j', request);
     return this.descriptors.page.listIntents.createStream(
       this.innerApiCalls.listIntents as GaxCall,
@@ -1703,7 +1719,9 @@ export class IntentsClient {
       });
     const defaultCallSettings = this._defaults['listIntents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listIntents iterate %j', request);
     return this.descriptors.page.listIntents.asyncIterate(
       this.innerApiCalls['listIntents'] as GaxCall,
@@ -1883,7 +1901,7 @@ export class IntentsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

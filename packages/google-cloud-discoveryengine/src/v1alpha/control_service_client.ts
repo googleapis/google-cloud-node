@@ -648,7 +648,9 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createControl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -777,7 +779,9 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteControl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -915,7 +919,9 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'control.name': request.control!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateControl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1041,7 +1047,9 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getControl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1180,7 +1188,9 @@ export class ControlServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1alpha.IListControlsRequest,
@@ -1256,7 +1266,9 @@ export class ControlServiceClient {
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listControls stream %j', request);
     return this.descriptors.page.listControls.createStream(
       this.innerApiCalls.listControls as GaxCall,
@@ -1314,7 +1326,9 @@ export class ControlServiceClient {
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listControls iterate %j', request);
     return this.descriptors.page.listControls.asyncIterate(
       this.innerApiCalls['listControls'] as GaxCall,

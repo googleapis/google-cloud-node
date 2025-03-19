@@ -588,7 +588,9 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createExample request %j', request);
     const wrappedCallback:
       | Callback<
@@ -715,7 +717,9 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteExample request %j', request);
     const wrappedCallback:
       | Callback<
@@ -836,7 +840,9 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getExample request %j', request);
     const wrappedCallback:
       | Callback<
@@ -964,7 +970,9 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         'example.name': request.example!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateExample request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1099,7 +1107,9 @@ export class ExamplesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListExamplesRequest,
@@ -1172,7 +1182,9 @@ export class ExamplesClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listExamples stream %j', request);
     return this.descriptors.page.listExamples.createStream(
       this.innerApiCalls.listExamples as GaxCall,
@@ -1227,7 +1239,9 @@ export class ExamplesClient {
       });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listExamples iterate %j', request);
     return this.descriptors.page.listExamples.asyncIterate(
       this.innerApiCalls['listExamples'] as GaxCall,

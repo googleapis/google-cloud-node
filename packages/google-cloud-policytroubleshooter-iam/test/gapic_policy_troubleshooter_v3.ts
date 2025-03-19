@@ -203,7 +203,9 @@ describe('v3.PolicyTroubleshooterClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.policyTroubleshooterStub);
       client.close().then(() => {
         done();
@@ -266,7 +268,7 @@ describe('v3.PolicyTroubleshooterClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest()
       );
@@ -285,7 +287,7 @@ describe('v3.PolicyTroubleshooterClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest()
       );
@@ -319,7 +321,7 @@ describe('v3.PolicyTroubleshooterClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest()
       );
@@ -340,7 +342,7 @@ describe('v3.PolicyTroubleshooterClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest()
       );

@@ -659,7 +659,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLbTrafficExtension request %j', request);
     const wrappedCallback:
       | Callback<
@@ -786,7 +788,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLbRouteExtension request %j', request);
     const wrappedCallback:
       | Callback<
@@ -939,7 +943,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1126,7 +1132,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'lb_traffic_extension.name': request.lbTrafficExtension!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1309,7 +1317,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1496,7 +1506,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1683,7 +1695,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'lb_route_extension.name': request.lbRouteExtension!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1866,7 +1880,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2035,7 +2051,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkservices.v1beta1.IListLbTrafficExtensionsRequest,
@@ -2107,7 +2125,9 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLbTrafficExtensions stream %j', request);
     return this.descriptors.page.listLbTrafficExtensions.createStream(
       this.innerApiCalls.listLbTrafficExtensions as GaxCall,
@@ -2161,7 +2181,9 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbTrafficExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLbTrafficExtensions iterate %j', request);
     return this.descriptors.page.listLbTrafficExtensions.asyncIterate(
       this.innerApiCalls['listLbTrafficExtensions'] as GaxCall,
@@ -2270,7 +2292,9 @@ export class DepServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkservices.v1beta1.IListLbRouteExtensionsRequest,
@@ -2342,7 +2366,9 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLbRouteExtensions stream %j', request);
     return this.descriptors.page.listLbRouteExtensions.createStream(
       this.innerApiCalls.listLbRouteExtensions as GaxCall,
@@ -2396,7 +2422,9 @@ export class DepServiceClient {
       });
     const defaultCallSettings = this._defaults['listLbRouteExtensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLbRouteExtensions iterate %j', request);
     return this.descriptors.page.listLbRouteExtensions.asyncIterate(
       this.innerApiCalls['listLbRouteExtensions'] as GaxCall,

@@ -292,7 +292,9 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.parallelstoreStub);
       client.close().then(() => {
         done();
@@ -351,7 +353,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.GetInstanceRequest()
       );
@@ -382,7 +384,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.GetInstanceRequest()
       );
@@ -429,7 +431,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.GetInstanceRequest()
       );
@@ -460,7 +462,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.GetInstanceRequest()
       );
@@ -481,7 +483,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.CreateInstanceRequest()
       );
@@ -514,7 +516,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.CreateInstanceRequest()
       );
@@ -568,7 +570,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.CreateInstanceRequest()
       );
@@ -599,7 +601,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.CreateInstanceRequest()
       );
@@ -632,7 +634,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -654,7 +656,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -675,7 +677,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.UpdateInstanceRequest()
       );
@@ -709,7 +711,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.UpdateInstanceRequest()
       );
@@ -764,7 +766,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.UpdateInstanceRequest()
       );
@@ -796,7 +798,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.UpdateInstanceRequest()
       );
@@ -830,7 +832,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -852,7 +854,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -873,7 +875,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.DeleteInstanceRequest()
       );
@@ -906,7 +908,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.DeleteInstanceRequest()
       );
@@ -960,7 +962,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.DeleteInstanceRequest()
       );
@@ -991,7 +993,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.DeleteInstanceRequest()
       );
@@ -1024,7 +1026,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1046,7 +1048,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1067,7 +1069,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
       );
@@ -1153,7 +1155,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ImportDataRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1239,7 +1241,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1257,7 +1259,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
       );
@@ -1289,7 +1291,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
       );
@@ -1343,7 +1345,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
       );
@@ -1374,7 +1376,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ExportDataRequest()
       );
@@ -1407,7 +1409,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1429,7 +1431,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1447,7 +1449,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1486,7 +1488,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1541,7 +1543,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1572,7 +1574,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1733,7 +1735,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.parallelstore.v1beta.ListInstancesRequest()
       );
@@ -1775,7 +1777,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1805,7 +1807,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1849,7 +1851,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1884,7 +1886,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1932,7 +1934,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1973,7 +1975,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2052,7 +2054,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2132,7 +2134,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2228,8 +2230,7 @@ describe('v1beta.ParallelstoreClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2248,7 +2249,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2257,8 +2258,7 @@ describe('v1beta.ParallelstoreClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2274,7 +2274,7 @@ describe('v1beta.ParallelstoreClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('address', () => {
+    describe('address', async () => {
       const fakePath = '/rendered/path/address';
       const expectedParameters = {
         project: 'projectValue',
@@ -2285,7 +2285,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.addressPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2338,7 +2338,7 @@ describe('v1beta.ParallelstoreClient', () => {
       });
     });
 
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -2349,7 +2349,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2402,7 +2402,7 @@ describe('v1beta.ParallelstoreClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2412,7 +2412,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2451,7 +2451,7 @@ describe('v1beta.ParallelstoreClient', () => {
       });
     });
 
-    describe('network', () => {
+    describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         project: 'projectValue',
@@ -2461,7 +2461,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2500,7 +2500,7 @@ describe('v1beta.ParallelstoreClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2509,7 +2509,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2538,7 +2538,7 @@ describe('v1beta.ParallelstoreClient', () => {
       });
     });
 
-    describe('serviceAccount', () => {
+    describe('serviceAccount', async () => {
       const fakePath = '/rendered/path/serviceAccount';
       const expectedParameters = {
         project: 'projectValue',
@@ -2548,7 +2548,7 @@ describe('v1beta.ParallelstoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.serviceAccountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

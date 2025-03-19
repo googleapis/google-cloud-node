@@ -477,7 +477,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -595,7 +597,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePosixAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -713,7 +717,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -828,7 +834,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLoginProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -940,7 +948,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1066,7 +1076,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('importSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1189,7 +1201,9 @@ export class OsLoginServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSshPublicKey request %j', request);
     const wrappedCallback:
       | Callback<

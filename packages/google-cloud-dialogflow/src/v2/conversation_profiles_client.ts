@@ -726,7 +726,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversationProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -861,7 +863,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createConversationProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -995,7 +999,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         'conversation_profile.name': request.conversationProfile!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConversationProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1122,7 +1128,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteConversationProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1278,7 +1286,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         conversation_profile: request.conversationProfile ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1462,7 +1472,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         conversation_profile: request.conversationProfile ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1632,7 +1644,9 @@ export class ConversationProfilesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
@@ -1699,7 +1713,9 @@ export class ConversationProfilesClient {
       });
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationProfiles stream %j', request);
     return this.descriptors.page.listConversationProfiles.createStream(
       this.innerApiCalls.listConversationProfiles as GaxCall,
@@ -1748,7 +1764,9 @@ export class ConversationProfilesClient {
       });
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationProfiles iterate %j', request);
     return this.descriptors.page.listConversationProfiles.asyncIterate(
       this.innerApiCalls['listConversationProfiles'] as GaxCall,
@@ -1928,7 +1946,7 @@ export class ConversationProfilesClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

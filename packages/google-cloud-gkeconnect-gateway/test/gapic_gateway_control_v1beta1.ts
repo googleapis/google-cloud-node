@@ -206,7 +206,9 @@ describe('v1beta1.GatewayControlClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.gatewayControlStub);
       client.close().then(() => {
         done();
@@ -265,7 +267,7 @@ describe('v1beta1.GatewayControlClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest()
       );
@@ -297,7 +299,7 @@ describe('v1beta1.GatewayControlClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest()
       );
@@ -344,7 +346,7 @@ describe('v1beta1.GatewayControlClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest()
       );
@@ -375,7 +377,7 @@ describe('v1beta1.GatewayControlClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest()
       );

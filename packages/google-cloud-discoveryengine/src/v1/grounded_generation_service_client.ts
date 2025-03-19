@@ -653,7 +653,9 @@ export class GroundedGenerationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateGroundedContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -798,7 +800,9 @@ export class GroundedGenerationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         grounding_config: request.groundingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('checkGrounding request %j', request);
     const wrappedCallback:
       | Callback<
@@ -846,7 +850,9 @@ export class GroundedGenerationServiceClient {
    * region_tag:discoveryengine_v1_generated_GroundedGenerationService_StreamGenerateGroundedContent_async
    */
   streamGenerateGroundedContent(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamGenerateGroundedContent stream %j', options);
     return this.innerApiCalls.streamGenerateGroundedContent(null, options);
   }

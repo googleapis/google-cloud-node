@@ -799,7 +799,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('processDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -924,7 +926,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchProcessorTypes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1049,7 +1053,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProcessorType request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1168,7 +1174,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProcessor request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1293,7 +1301,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProcessorVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1432,7 +1442,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProcessor request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1553,7 +1565,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1715,7 +1729,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1901,7 +1917,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2069,7 +2087,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2236,7 +2256,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2403,7 +2425,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2571,7 +2595,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2738,7 +2764,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2905,7 +2933,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3083,7 +3113,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         processor: request.processor ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3263,7 +3295,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         human_review_config: request.humanReviewConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3437,7 +3471,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         processor_version: request.processorVersion ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3614,7 +3650,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3779,7 +3817,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.documentai.v1beta3.IListProcessorTypesRequest,
@@ -3847,7 +3887,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcessorTypes stream %j', request);
     return this.descriptors.page.listProcessorTypes.createStream(
       this.innerApiCalls.listProcessorTypes as GaxCall,
@@ -3897,7 +3939,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorTypes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcessorTypes iterate %j', request);
     return this.descriptors.page.listProcessorTypes.asyncIterate(
       this.innerApiCalls['listProcessorTypes'] as GaxCall,
@@ -4003,7 +4047,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.documentai.v1beta3.IListProcessorsRequest,
@@ -4072,7 +4118,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcessors stream %j', request);
     return this.descriptors.page.listProcessors.createStream(
       this.innerApiCalls.listProcessors as GaxCall,
@@ -4123,7 +4171,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcessors iterate %j', request);
     return this.descriptors.page.listProcessors.asyncIterate(
       this.innerApiCalls['listProcessors'] as GaxCall,
@@ -4230,7 +4280,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.documentai.v1beta3.IListProcessorVersionsRequest,
@@ -4300,7 +4352,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcessorVersions stream %j', request);
     return this.descriptors.page.listProcessorVersions.createStream(
       this.innerApiCalls.listProcessorVersions as GaxCall,
@@ -4352,7 +4406,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listProcessorVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProcessorVersions iterate %j', request);
     return this.descriptors.page.listProcessorVersions.asyncIterate(
       this.innerApiCalls['listProcessorVersions'] as GaxCall,
@@ -4460,7 +4516,9 @@ export class DocumentProcessorServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.documentai.v1beta3.IListEvaluationsRequest,
@@ -4531,7 +4589,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
@@ -4584,7 +4644,9 @@ export class DocumentProcessorServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
@@ -4764,7 +4826,7 @@ export class DocumentProcessorServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

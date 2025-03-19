@@ -606,7 +606,9 @@ export class ChangelogsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChangelog request %j', request);
     const wrappedCallback:
       | Callback<
@@ -753,7 +755,9 @@ export class ChangelogsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListChangelogsRequest,
@@ -841,7 +845,9 @@ export class ChangelogsClient {
       });
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChangelogs stream %j', request);
     return this.descriptors.page.listChangelogs.createStream(
       this.innerApiCalls.listChangelogs as GaxCall,
@@ -911,7 +917,9 @@ export class ChangelogsClient {
       });
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChangelogs iterate %j', request);
     return this.descriptors.page.listChangelogs.asyncIterate(
       this.innerApiCalls['listChangelogs'] as GaxCall,
@@ -1091,7 +1099,7 @@ export class ChangelogsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
