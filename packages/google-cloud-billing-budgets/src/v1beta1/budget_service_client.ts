@@ -493,7 +493,9 @@ export class BudgetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createBudget request %j', request);
     const wrappedCallback:
       | Callback<
@@ -630,7 +632,9 @@ export class BudgetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'budget.name': request.budget!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateBudget request %j', request);
     const wrappedCallback:
       | Callback<
@@ -755,7 +759,9 @@ export class BudgetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBudget request %j', request);
     const wrappedCallback:
       | Callback<
@@ -881,7 +887,9 @@ export class BudgetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteBudget request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1024,7 +1032,9 @@ export class BudgetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.billing.budgets.v1beta1.IListBudgetsRequest,
@@ -1100,7 +1110,9 @@ export class BudgetServiceClient {
       });
     const defaultCallSettings = this._defaults['listBudgets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBudgets stream %j', request);
     return this.descriptors.page.listBudgets.createStream(
       this.innerApiCalls.listBudgets as GaxCall,
@@ -1158,7 +1170,9 @@ export class BudgetServiceClient {
       });
     const defaultCallSettings = this._defaults['listBudgets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBudgets iterate %j', request);
     return this.descriptors.page.listBudgets.asyncIterate(
       this.innerApiCalls['listBudgets'] as GaxCall,

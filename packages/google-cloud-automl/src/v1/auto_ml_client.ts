@@ -701,7 +701,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -811,7 +813,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         'dataset.name': request.dataset!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -927,7 +931,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAnnotationSpec request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1035,7 +1041,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getModel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1143,7 +1151,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         'model.name': request.model!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateModel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1257,7 +1267,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getModelEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1388,7 +1400,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1559,7 +1573,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1738,7 +1754,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1909,7 +1927,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2082,7 +2102,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2253,7 +2275,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2434,7 +2458,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2607,7 +2633,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2782,7 +2810,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2950,7 +2980,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.automl.v1.IListDatasetsRequest,
@@ -3027,7 +3059,9 @@ export class AutoMlClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
@@ -3086,7 +3120,9 @@ export class AutoMlClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,
@@ -3193,7 +3229,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.automl.v1.IListModelsRequest,
@@ -3269,7 +3307,9 @@ export class AutoMlClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
@@ -3329,7 +3369,9 @@ export class AutoMlClient {
       });
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
@@ -3448,7 +3490,9 @@ export class AutoMlClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.automl.v1.IListModelEvaluationsRequest,
@@ -3530,7 +3574,9 @@ export class AutoMlClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelEvaluations stream %j', request);
     return this.descriptors.page.listModelEvaluations.createStream(
       this.innerApiCalls.listModelEvaluations as GaxCall,
@@ -3594,7 +3640,9 @@ export class AutoMlClient {
       });
     const defaultCallSettings = this._defaults['listModelEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listModelEvaluations iterate %j', request);
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,

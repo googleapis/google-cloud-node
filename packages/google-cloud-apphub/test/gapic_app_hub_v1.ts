@@ -288,7 +288,9 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.appHubStub);
       client.close().then(() => {
         done();
@@ -347,7 +349,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupServiceProjectAttachmentRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupServiceProjectAttachmentRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupServiceProjectAttachmentRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupServiceProjectAttachmentRequest()
       );
@@ -484,7 +486,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceProjectAttachmentRequest()
       );
@@ -516,7 +518,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceProjectAttachmentRequest()
       );
@@ -563,7 +565,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceProjectAttachmentRequest()
       );
@@ -597,7 +599,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceProjectAttachmentRequest()
       );
@@ -621,7 +623,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DetachServiceProjectAttachmentRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DetachServiceProjectAttachmentRequest()
       );
@@ -700,7 +702,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DetachServiceProjectAttachmentRequest()
       );
@@ -734,7 +736,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DetachServiceProjectAttachmentRequest()
       );
@@ -758,7 +760,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredServiceRequest()
       );
@@ -790,7 +792,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredServiceRequest()
       );
@@ -837,7 +839,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredServiceRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredServiceRequest()
       );
@@ -889,7 +891,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredServiceRequest()
       );
@@ -921,7 +923,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredServiceRequest()
       );
@@ -968,7 +970,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredServiceRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredServiceRequest()
       );
@@ -1026,7 +1028,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceRequest()
       );
@@ -1057,7 +1059,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceRequest()
       );
@@ -1104,7 +1106,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetServiceRequest()
       );
@@ -1156,7 +1158,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredWorkloadRequest()
       );
@@ -1188,7 +1190,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredWorkloadRequest()
       );
@@ -1235,7 +1237,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredWorkloadRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetDiscoveredWorkloadRequest()
       );
@@ -1293,7 +1295,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredWorkloadRequest()
       );
@@ -1325,7 +1327,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredWorkloadRequest()
       );
@@ -1372,7 +1374,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredWorkloadRequest()
       );
@@ -1406,7 +1408,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.LookupDiscoveredWorkloadRequest()
       );
@@ -1430,7 +1432,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetWorkloadRequest()
       );
@@ -1461,7 +1463,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetWorkloadRequest()
       );
@@ -1508,7 +1510,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetWorkloadRequest()
       );
@@ -1539,7 +1541,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetWorkloadRequest()
       );
@@ -1560,7 +1562,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetApplicationRequest()
       );
@@ -1591,7 +1593,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetApplicationRequest()
       );
@@ -1638,7 +1640,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetApplicationRequest()
       );
@@ -1669,7 +1671,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.GetApplicationRequest()
       );
@@ -1690,7 +1692,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceProjectAttachmentRequest()
       );
@@ -1723,7 +1725,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceProjectAttachmentRequest()
       );
@@ -1777,7 +1779,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceProjectAttachmentRequest()
       );
@@ -1811,7 +1813,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceProjectAttachmentRequest()
       );
@@ -1844,7 +1846,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1867,7 +1869,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1888,7 +1890,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceProjectAttachmentRequest()
       );
@@ -1921,7 +1923,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceProjectAttachmentRequest()
       );
@@ -1975,7 +1977,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceProjectAttachmentRequest()
       );
@@ -2009,7 +2011,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceProjectAttachmentRequest()
       );
@@ -2042,7 +2044,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2065,7 +2067,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2086,7 +2088,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceRequest()
       );
@@ -2119,7 +2121,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceRequest()
       );
@@ -2173,7 +2175,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceRequest()
       );
@@ -2204,7 +2206,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateServiceRequest()
       );
@@ -2237,7 +2239,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2259,7 +2261,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2280,7 +2282,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateServiceRequest()
       );
@@ -2314,7 +2316,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateServiceRequest()
       );
@@ -2369,7 +2371,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateServiceRequest()
       );
@@ -2401,7 +2403,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateServiceRequest()
       );
@@ -2435,7 +2437,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2457,7 +2459,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2478,7 +2480,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceRequest()
       );
@@ -2511,7 +2513,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceRequest()
       );
@@ -2565,7 +2567,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceRequest()
       );
@@ -2596,7 +2598,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteServiceRequest()
       );
@@ -2629,7 +2631,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2651,7 +2653,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2672,7 +2674,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateWorkloadRequest()
       );
@@ -2705,7 +2707,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateWorkloadRequest()
       );
@@ -2759,7 +2761,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateWorkloadRequest()
       );
@@ -2790,7 +2792,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateWorkloadRequest()
       );
@@ -2823,7 +2825,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2845,7 +2847,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2866,7 +2868,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateWorkloadRequest()
       );
@@ -2900,7 +2902,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateWorkloadRequest()
       );
@@ -2955,7 +2957,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateWorkloadRequest()
       );
@@ -2987,7 +2989,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateWorkloadRequest()
       );
@@ -3021,7 +3023,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3043,7 +3045,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3064,7 +3066,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteWorkloadRequest()
       );
@@ -3097,7 +3099,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteWorkloadRequest()
       );
@@ -3151,7 +3153,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteWorkloadRequest()
       );
@@ -3182,7 +3184,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteWorkloadRequest()
       );
@@ -3215,7 +3217,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3237,7 +3239,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3258,7 +3260,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateApplicationRequest()
       );
@@ -3291,7 +3293,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateApplicationRequest()
       );
@@ -3345,7 +3347,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateApplicationRequest()
       );
@@ -3376,7 +3378,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.CreateApplicationRequest()
       );
@@ -3409,7 +3411,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3431,7 +3433,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3452,7 +3454,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateApplicationRequest()
       );
@@ -3486,7 +3488,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateApplicationRequest()
       );
@@ -3541,7 +3543,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateApplicationRequest()
       );
@@ -3573,7 +3575,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.UpdateApplicationRequest()
       );
@@ -3607,7 +3609,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3629,7 +3631,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3650,7 +3652,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteApplicationRequest()
       );
@@ -3683,7 +3685,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteApplicationRequest()
       );
@@ -3737,7 +3739,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteApplicationRequest()
       );
@@ -3768,7 +3770,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.DeleteApplicationRequest()
       );
@@ -3801,7 +3803,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3823,7 +3825,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3844,7 +3846,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -3884,7 +3886,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -3941,7 +3943,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -3975,7 +3977,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -4047,7 +4049,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -4108,7 +4110,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -4162,7 +4164,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServiceProjectAttachmentsRequest()
       );
@@ -4209,7 +4211,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4249,7 +4251,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4304,7 +4306,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4338,7 +4340,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4404,7 +4406,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4459,7 +4461,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4512,7 +4514,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredServicesRequest()
       );
@@ -4559,7 +4561,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4592,7 +4594,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4641,7 +4643,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4672,7 +4674,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4723,7 +4725,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4771,7 +4773,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4814,7 +4816,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListServicesRequest()
       );
@@ -4856,7 +4858,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -4896,7 +4898,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -4951,7 +4953,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -4985,7 +4987,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -5052,7 +5054,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -5108,7 +5110,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -5161,7 +5163,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListDiscoveredWorkloadsRequest()
       );
@@ -5208,7 +5210,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5241,7 +5243,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5290,7 +5292,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5321,7 +5323,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5375,7 +5377,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5424,7 +5426,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5467,7 +5469,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListWorkloadsRequest()
       );
@@ -5509,7 +5511,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5542,7 +5544,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5591,7 +5593,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5622,7 +5624,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5676,7 +5678,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5725,7 +5727,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5768,7 +5770,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apphub.v1.ListApplicationsRequest()
       );
@@ -5809,7 +5811,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -5839,7 +5841,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -5883,7 +5885,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -5915,7 +5917,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -5945,7 +5947,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -5989,7 +5991,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6021,7 +6023,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6054,7 +6056,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6098,7 +6100,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6133,7 +6135,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6163,7 +6165,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6207,7 +6209,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6242,7 +6244,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6290,7 +6292,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6331,7 +6333,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -6410,7 +6412,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -6490,7 +6492,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -6586,8 +6588,7 @@ describe('v1.AppHubClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -6606,7 +6607,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -6615,8 +6616,7 @@ describe('v1.AppHubClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -6632,7 +6632,7 @@ describe('v1.AppHubClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('application', () => {
+    describe('application', async () => {
       const fakePath = '/rendered/path/application';
       const expectedParameters = {
         project: 'projectValue',
@@ -6643,7 +6643,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.applicationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6696,7 +6696,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('discoveredService', () => {
+    describe('discoveredService', async () => {
       const fakePath = '/rendered/path/discoveredService';
       const expectedParameters = {
         project: 'projectValue',
@@ -6707,7 +6707,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.discoveredServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6773,7 +6773,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('discoveredWorkload', () => {
+    describe('discoveredWorkload', async () => {
       const fakePath = '/rendered/path/discoveredWorkload';
       const expectedParameters = {
         project: 'projectValue',
@@ -6784,7 +6784,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.discoveredWorkloadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6850,7 +6850,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -6860,7 +6860,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6899,7 +6899,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -6908,7 +6908,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6937,7 +6937,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -6949,7 +6949,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7013,7 +7013,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('serviceProjectAttachment', () => {
+    describe('serviceProjectAttachment', async () => {
       const fakePath = '/rendered/path/serviceProjectAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -7024,7 +7024,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.serviceProjectAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7094,7 +7094,7 @@ describe('v1.AppHubClient', () => {
       });
     });
 
-    describe('workload', () => {
+    describe('workload', async () => {
       const fakePath = '/rendered/path/workload';
       const expectedParameters = {
         project: 'projectValue',
@@ -7106,7 +7106,7 @@ describe('v1.AppHubClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workloadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

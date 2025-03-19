@@ -533,7 +533,9 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -669,7 +671,9 @@ export class AssuredWorkloadsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('restrictAllowedResources request %j', request);
     const wrappedCallback:
       | Callback<
@@ -804,7 +808,9 @@ export class AssuredWorkloadsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -929,7 +935,9 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1069,7 +1077,9 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('analyzeWorkloadMove request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1209,7 +1219,9 @@ export class AssuredWorkloadsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1373,7 +1385,9 @@ export class AssuredWorkloadsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.assuredworkloads.v1beta1.IListWorkloadsRequest,
@@ -1440,7 +1454,9 @@ export class AssuredWorkloadsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
@@ -1489,7 +1505,9 @@ export class AssuredWorkloadsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
@@ -1591,7 +1609,7 @@ export class AssuredWorkloadsServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

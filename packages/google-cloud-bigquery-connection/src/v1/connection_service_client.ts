@@ -501,7 +501,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -627,7 +629,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -758,7 +762,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -884,7 +890,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1001,7 +1009,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1122,7 +1132,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1240,7 +1252,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1363,7 +1377,9 @@ export class ConnectionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.connection.v1.IListConnectionsRequest,
@@ -1429,7 +1445,9 @@ export class ConnectionServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections stream %j', request);
     return this.descriptors.page.listConnections.createStream(
       this.innerApiCalls.listConnections as GaxCall,
@@ -1477,7 +1495,9 @@ export class ConnectionServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnections iterate %j', request);
     return this.descriptors.page.listConnections.asyncIterate(
       this.innerApiCalls['listConnections'] as GaxCall,

@@ -536,7 +536,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -712,7 +714,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTransferConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -885,7 +889,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'transfer_config.name': request.transferConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTransferConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1013,7 +1019,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTransferConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1140,7 +1148,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTransferConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1278,7 +1288,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataTransferService-$ScheduleTransferRuns',
       'ScheduleTransferRuns is deprecated and may be removed in a future version.',
@@ -1423,7 +1435,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startManualTransferRuns request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1551,7 +1565,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTransferRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1679,7 +1695,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTransferRun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1807,7 +1825,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('checkValidCreds request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1943,7 +1963,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enrollDataSources request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2076,7 +2098,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('unenrollDataSources request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2209,7 +2233,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListDataSourcesRequest,
@@ -2280,7 +2306,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataSources stream %j', request);
     return this.descriptors.page.listDataSources.createStream(
       this.innerApiCalls.listDataSources as GaxCall,
@@ -2333,7 +2361,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataSources iterate %j', request);
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,
@@ -2444,7 +2474,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListTransferConfigsRequest,
@@ -2517,7 +2549,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferConfigs stream %j', request);
     return this.descriptors.page.listTransferConfigs.createStream(
       this.innerApiCalls.listTransferConfigs as GaxCall,
@@ -2572,7 +2606,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferConfigs iterate %j', request);
     return this.descriptors.page.listTransferConfigs.asyncIterate(
       this.innerApiCalls['listTransferConfigs'] as GaxCall,
@@ -2685,7 +2721,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListTransferRunsRequest,
@@ -2761,7 +2799,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferRuns stream %j', request);
     return this.descriptors.page.listTransferRuns.createStream(
       this.innerApiCalls.listTransferRuns as GaxCall,
@@ -2819,7 +2859,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferRuns iterate %j', request);
     return this.descriptors.page.listTransferRuns.asyncIterate(
       this.innerApiCalls['listTransferRuns'] as GaxCall,
@@ -2930,7 +2972,9 @@ export class DataTransferServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.datatransfer.v1.IListTransferLogsRequest,
@@ -3004,7 +3048,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferLogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferLogs stream %j', request);
     return this.descriptors.page.listTransferLogs.createStream(
       this.innerApiCalls.listTransferLogs as GaxCall,
@@ -3060,7 +3106,9 @@ export class DataTransferServiceClient {
       });
     const defaultCallSettings = this._defaults['listTransferLogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransferLogs iterate %j', request);
     return this.descriptors.page.listTransferLogs.asyncIterate(
       this.innerApiCalls['listTransferLogs'] as GaxCall,

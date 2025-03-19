@@ -757,7 +757,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupServiceProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -890,7 +892,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServiceProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1019,7 +1023,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('detachServiceProjectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1146,7 +1152,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDiscoveredService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1271,7 +1279,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupDiscoveredService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1384,7 +1394,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1500,7 +1512,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDiscoveredWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1631,7 +1645,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupDiscoveredWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1744,7 +1760,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1854,7 +1872,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getApplication request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2005,7 +2025,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2194,7 +2216,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2390,7 +2414,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2581,7 +2607,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         'service.name': request.service!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2764,7 +2792,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2954,7 +2984,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3145,7 +3177,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         'workload.name': request.workload!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3328,7 +3362,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3517,7 +3553,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3708,7 +3746,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         'application.name': request.application!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3891,7 +3931,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4060,7 +4102,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apphub.v1.IListServiceProjectAttachmentsRequest,
@@ -4132,7 +4176,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listServiceProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServiceProjectAttachments stream %j', request);
     return this.descriptors.page.listServiceProjectAttachments.createStream(
       this.innerApiCalls.listServiceProjectAttachments as GaxCall,
@@ -4186,7 +4232,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listServiceProjectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServiceProjectAttachments iterate %j', request);
     return this.descriptors.page.listServiceProjectAttachments.asyncIterate(
       this.innerApiCalls['listServiceProjectAttachments'] as GaxCall,
@@ -4295,7 +4343,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apphub.v1.IListDiscoveredServicesRequest,
@@ -4366,7 +4416,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listDiscoveredServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDiscoveredServices stream %j', request);
     return this.descriptors.page.listDiscoveredServices.createStream(
       this.innerApiCalls.listDiscoveredServices as GaxCall,
@@ -4419,7 +4471,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listDiscoveredServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDiscoveredServices iterate %j', request);
     return this.descriptors.page.listDiscoveredServices.asyncIterate(
       this.innerApiCalls['listDiscoveredServices'] as GaxCall,
@@ -4522,7 +4576,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apphub.v1.IListServicesRequest,
@@ -4594,7 +4650,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -4648,7 +4706,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -4757,7 +4817,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apphub.v1.IListDiscoveredWorkloadsRequest,
@@ -4828,7 +4890,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listDiscoveredWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDiscoveredWorkloads stream %j', request);
     return this.descriptors.page.listDiscoveredWorkloads.createStream(
       this.innerApiCalls.listDiscoveredWorkloads as GaxCall,
@@ -4881,7 +4945,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listDiscoveredWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDiscoveredWorkloads iterate %j', request);
     return this.descriptors.page.listDiscoveredWorkloads.asyncIterate(
       this.innerApiCalls['listDiscoveredWorkloads'] as GaxCall,
@@ -4984,7 +5050,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apphub.v1.IListWorkloadsRequest,
@@ -5056,7 +5124,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
@@ -5110,7 +5180,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
@@ -5218,7 +5290,9 @@ export class AppHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.apphub.v1.IListApplicationsRequest,
@@ -5289,7 +5363,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listApplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApplications stream %j', request);
     return this.descriptors.page.listApplications.createStream(
       this.innerApiCalls.listApplications as GaxCall,
@@ -5342,7 +5418,9 @@ export class AppHubClient {
       });
     const defaultCallSettings = this._defaults['listApplications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listApplications iterate %j', request);
     return this.descriptors.page.listApplications.asyncIterate(
       this.innerApiCalls['listApplications'] as GaxCall,
@@ -5660,7 +5738,7 @@ export class AppHubClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
