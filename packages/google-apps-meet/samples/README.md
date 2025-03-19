@@ -68,7 +68,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Conference_records_service.get_conference_record
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_conference_record.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_conference_record.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.get_conference_record.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Conference_records_service.get_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.get_participant.js,samples/README.md)
 
@@ -102,7 +102,7 @@ __Usage:__
 
 ### Conference_records_service.get_participant_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_participant_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_participant_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.get_participant_session.js,samples/README.md)
 
@@ -119,7 +119,7 @@ __Usage:__
 
 ### Conference_records_service.get_recording
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_recording.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_recording.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.get_recording.js,samples/README.md)
 
@@ -136,7 +136,7 @@ __Usage:__
 
 ### Conference_records_service.get_transcript
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_transcript.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_transcript.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.get_transcript.js,samples/README.md)
 
@@ -153,7 +153,7 @@ __Usage:__
 
 ### Conference_records_service.get_transcript_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_transcript_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.get_transcript_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.get_transcript_entry.js,samples/README.md)
 
@@ -170,7 +170,7 @@ __Usage:__
 
 ### Conference_records_service.list_conference_records
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_conference_records.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_conference_records.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.list_conference_records.js,samples/README.md)
 
@@ -187,7 +187,7 @@ __Usage:__
 
 ### Conference_records_service.list_participant_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_participant_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_participant_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.list_participant_sessions.js,samples/README.md)
 
@@ -204,7 +204,7 @@ __Usage:__
 
 ### Conference_records_service.list_participants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_participants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_participants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.list_participants.js,samples/README.md)
 
@@ -221,7 +221,7 @@ __Usage:__
 
 ### Conference_records_service.list_recordings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_recordings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_recordings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.list_recordings.js,samples/README.md)
 
@@ -238,7 +238,7 @@ __Usage:__
 
 ### Conference_records_service.list_transcript_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcript_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcript_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcript_entries.js,samples/README.md)
 
@@ -255,7 +255,7 @@ __Usage:__
 
 ### Conference_records_service.list_transcripts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcripts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcripts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/conference_records_service.list_transcripts.js,samples/README.md)
 
@@ -272,7 +272,7 @@ __Usage:__
 
 ### Spaces_service.create_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.create_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/spaces_service.create_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/spaces_service.create_space.js,samples/README.md)
 
@@ -289,7 +289,7 @@ __Usage:__
 
 ### Spaces_service.end_active_conference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.end_active_conference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/spaces_service.end_active_conference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/spaces_service.end_active_conference.js,samples/README.md)
 
@@ -306,7 +306,7 @@ __Usage:__
 
 ### Spaces_service.get_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.get_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/spaces_service.get_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/spaces_service.get_space.js,samples/README.md)
 
@@ -323,7 +323,7 @@ __Usage:__
 
 ### Spaces_service.update_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2/spaces_service.update_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2/spaces_service.update_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2/spaces_service.update_space.js,samples/README.md)
 
@@ -340,7 +340,7 @@ __Usage:__
 
 ### Conference_records_service.get_conference_record
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_conference_record.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_conference_record.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_conference_record.js,samples/README.md)
 
@@ -357,7 +357,7 @@ __Usage:__
 
 ### Conference_records_service.get_participant
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_participant.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_participant.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_participant.js,samples/README.md)
 
@@ -374,7 +374,7 @@ __Usage:__
 
 ### Conference_records_service.get_participant_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_participant_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_participant_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_participant_session.js,samples/README.md)
 
@@ -391,7 +391,7 @@ __Usage:__
 
 ### Conference_records_service.get_recording
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_recording.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_recording.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_recording.js,samples/README.md)
 
@@ -408,7 +408,7 @@ __Usage:__
 
 ### Conference_records_service.get_transcript
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_transcript.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_transcript.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_transcript.js,samples/README.md)
 
@@ -425,7 +425,7 @@ __Usage:__
 
 ### Conference_records_service.get_transcript_entry
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_transcript_entry.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_transcript_entry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.get_transcript_entry.js,samples/README.md)
 
@@ -442,7 +442,7 @@ __Usage:__
 
 ### Conference_records_service.list_conference_records
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_conference_records.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_conference_records.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_conference_records.js,samples/README.md)
 
@@ -459,7 +459,7 @@ __Usage:__
 
 ### Conference_records_service.list_participant_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_participant_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_participant_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_participant_sessions.js,samples/README.md)
 
@@ -476,7 +476,7 @@ __Usage:__
 
 ### Conference_records_service.list_participants
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_participants.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_participants.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_participants.js,samples/README.md)
 
@@ -493,7 +493,7 @@ __Usage:__
 
 ### Conference_records_service.list_recordings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_recordings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_recordings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_recordings.js,samples/README.md)
 
@@ -510,7 +510,7 @@ __Usage:__
 
 ### Conference_records_service.list_transcript_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcript_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcript_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcript_entries.js,samples/README.md)
 
@@ -527,7 +527,7 @@ __Usage:__
 
 ### Conference_records_service.list_transcripts
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcripts.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcripts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/conference_records_service.list_transcripts.js,samples/README.md)
 
@@ -544,7 +544,7 @@ __Usage:__
 
 ### Spaces_service.connect_active_conference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.connect_active_conference.js,samples/README.md)
 
@@ -561,7 +561,7 @@ __Usage:__
 
 ### Spaces_service.create_member
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_member.js,samples/README.md)
 
@@ -578,7 +578,7 @@ __Usage:__
 
 ### Spaces_service.create_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.create_space.js,samples/README.md)
 
@@ -595,7 +595,7 @@ __Usage:__
 
 ### Spaces_service.delete_member
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.delete_member.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.delete_member.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.delete_member.js,samples/README.md)
 
@@ -612,7 +612,7 @@ __Usage:__
 
 ### Spaces_service.end_active_conference
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.end_active_conference.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.end_active_conference.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.end_active_conference.js,samples/README.md)
 
@@ -629,7 +629,7 @@ __Usage:__
 
 ### Spaces_service.get_member
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_member.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_member.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_member.js,samples/README.md)
 
@@ -646,7 +646,7 @@ __Usage:__
 
 ### Spaces_service.get_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.get_space.js,samples/README.md)
 
@@ -663,7 +663,7 @@ __Usage:__
 
 ### Spaces_service.list_members
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.list_members.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.list_members.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.list_members.js,samples/README.md)
 
@@ -680,7 +680,7 @@ __Usage:__
 
 ### Spaces_service.update_space
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/generated/v2beta/spaces_service.update_space.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/generated/v2beta/spaces_service.update_space.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/generated/v2beta/spaces_service.update_space.js,samples/README.md)
 
@@ -697,7 +697,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-apps-meet/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-apps-meet/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-apps-meet/samples/quickstart.js,samples/README.md)
 
