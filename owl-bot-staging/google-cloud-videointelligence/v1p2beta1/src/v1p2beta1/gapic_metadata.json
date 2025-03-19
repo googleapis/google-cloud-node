@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.videointelligence.v1p2beta1",
+  "libraryPackage": "@google-cloud/video-intelligence",
+  "services": {
+    "VideoIntelligenceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VideoIntelligenceServiceClient",
+          "rpcs": {
+            "AnnotateVideo": {
+              "methods": [
+                "annotateVideo"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VideoIntelligenceServiceClient",
+          "rpcs": {
+            "AnnotateVideo": {
+              "methods": [
+                "annotateVideo"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
